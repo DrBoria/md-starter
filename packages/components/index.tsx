@@ -1,14 +1,14 @@
-export { Button } from './components/Button';
-export { Input, TextArea, ShortedText, Checkbox, MultiSelect, Select } from './components/Form';
-export { Icons } from './components/Icons';
-export { Pagination } from './components/Pagination';
-export { Separator } from './components/Separator';
-export { LoadingSpinner } from './components/LoadingSpinner';
-export { Tooltip } from './components/Tooltip';
-export { Logo } from './components/Logo';
-export { Link } from './components/Link';
-export { Tabs } from './components/Tabs';
-export { Toggle } from './components/Toggle';
+export { Button } from './Button';
+export { Input, TextArea, ShortedText, Checkbox, MultiSelect, Select } from './Form';
+export { Icons } from './Icons';
+export { Pagination } from './Pagination';
+export { Separator } from './Separator';
+export { LoadingSpinner } from './LoadingSpinner';
+export { Tooltip } from './Tooltip';
+export { Logo } from './Logo';
+export { Link } from './Link';
+export { Tabs } from './Tabs';
+export { Toggle } from './Toggle';
 export {
     ColumnsContainer,
     DashboardCardsContainer,
@@ -16,7 +16,7 @@ export {
     LinksContainer,
     OneLineContainer,
     MenuItemContainer,
-} from './components/Containers';
+} from './Containers';
 export {
     SubTitle,
     PageTitle,
@@ -24,4 +24,4 @@ export {
     PlainText,
     HeaderText,
     LinkInForm,
-} from './components/Typography';
+} from './Typography';
