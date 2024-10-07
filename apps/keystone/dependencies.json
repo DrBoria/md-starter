@@ -1,0 +1,44 @@
+{
+    "components": [
+        "Button",
+        "Input",
+        "TextArea",
+        "ShortedText",
+        "Checkbox",
+        "MultiSelect",
+        "Select",
+        "Icons",
+        "Pagination",
+        "Separator",
+        "LoadingSpinner",
+        "Tooltip",
+        "Logo",
+        "Link",
+        "Tabs",
+        "Toggle",
+        "ColumnsContainer",
+        "DashboardCardsContainer",
+        "FocusedContainer",
+        "LinksContainer",
+        "OneLineContainer",
+        "MenuItemContainer",
+        "SubTitle",
+        "PageTitle",
+        "DescriptionText",
+        "PlainText",
+        "HeaderText",
+        "LinkInForm"
+    ],
+    "componentDependencies": [
+        "@keystone-ui/fields",
+        "next",
+        "react",
+        "styled-components"
+    ],
+    "utils": [],
+    "utilsDependencies": [],
+    "ignore": [
+        ".keystone",
+        ".env"
+    ]
+}
