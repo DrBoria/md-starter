@@ -1,6 +1,6 @@
 ```jsx
-import { Icons } from "admin/components/Icons";
-import { Tooltip } from "admin/components/Tooltip";
+import { Icons } from "./index";
+import { Tooltip } from "./index";
 
 <div style={{ display: "flex", flexWrap: "wrap" }}>
   <Tooltip text="ActivityIcon">

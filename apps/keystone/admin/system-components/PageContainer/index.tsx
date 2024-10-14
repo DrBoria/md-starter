@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import React from "react";
 import { PageContainer as KeystonePageContainer } from "@keystone-6/core/admin-ui/components";
+import { ThemeProvider } from "../../../../../packages/styles";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -9,7 +10,9 @@ interface PageContainerProps {
 
 const PageContainer: React.FC<PageContainerProps> = ({ children, header }) => {
   return (
-    <KeystonePageContainer header={header}>{children}</KeystonePageContainer>
+    <ThemeProvider>
+      <KeystonePageContainer header={header}>{children}</KeystonePageContainer>
+    </ThemeProvider>
   );
 };
 

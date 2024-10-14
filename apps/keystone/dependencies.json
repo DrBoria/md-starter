@@ -1,16 +1,16 @@
 {
     "components": [
         "Button",
-        "Input",
-        "TextArea",
-        "ShortedText",
-        "Checkbox",
-        "MultiSelect",
-        "Select",
+        "Form/Input",
+        "Form/TextArea",
+        "Form/ShortedText",
+        "Form/Checkbox",
+        "Form/MultiSelect",
+        "Form/Select",
         "Icons",
         "Pagination",
         "Separator",
-        "LoadingSpinner",
+        "Spinner",
         "Tooltip",
         "Logo",
         "Link",
@@ -28,12 +28,6 @@
         "PlainText",
         "HeaderText",
         "LinkInForm"
-    ],
-    "componentDependencies": [
-        "@keystone-ui/fields",
-        "next",
-        "react",
-        "styled-components"
     ],
     "utils": [],
     "utilsDependencies": [],

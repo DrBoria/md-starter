@@ -11,11 +11,11 @@ import {
 
 import type { TModalData, TSideBarModalData } from "../../state";
 import { transformPathToReadableFormat } from "../../../utils/transformPathToReadableFormat";
-import { MenuItemContainer } from "@repo/components";
-import { Icons } from "@repo/components";
-import { CentralModal } from "../../components/Modals/CentralModal";
-import { SideBarModal } from "../../components/Modals/SideBarModal";
-import { Toggle } from "@repo/components";
+import { MenuItemContainer } from "@md/components";
+import { Icons } from "@md/components";
+import { CentralModal } from "../../sections//Modals/CentralModal";
+import { SideBarModal } from "../../sections/Modals/SideBarModal";
+import { Toggle } from "@md/components";
 import { ModalData, SideBarModalData, useGlobalVariable } from "../../state";
 import { NavigationContainerStyled } from "./styles";
 import { useGetSessionData } from "../utils/useGetSessionData";

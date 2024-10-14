@@ -2,7 +2,7 @@ import type { ListMeta } from "@keystone-6/core/types";
 import React from "react";
 
 import type { IGraphQLObject } from "../../../../types";
-import { Link } from "@repo/components";
+import { Link } from "@md/components";
 import { BodyCell } from "../styles";
 
 interface ViewCellProps {

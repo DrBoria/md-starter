@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@keystone-ui/button";
 
 import type { IModalButton, TModalData } from "../../state";
-import { DeleteTemplate } from "../../components/Modals/CentralModal";
+import { DeleteTemplate } from "../../sections/Modals/CentralModal";
 import { ModalData, useGlobalVariable } from "../../state";
 
 interface TButtonGroupProps {

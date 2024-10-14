@@ -1,7 +1,7 @@
 import React from "react";
 import { PageContainer } from "@keystone-6/core/admin-ui/components";
 
-import { Button, ColumnsContainer, Link } from "@repo/components";
+import { Button, ColumnsContainer, Link } from "@md/components";
 import { ItemsList } from "../../system-components/ItemsList";
 import { useRouter } from "next/router";
 

@@ -1,0 +1,1265 @@
+{
+  "data": {
+    "keystone": {
+      "adminMeta": {
+        "lists": [
+          {
+            "key": "Campaign",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "type",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "isActive",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "instructions",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "offer_tags",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "frequencyPerDay",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "frequencyPerWeek",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "frequencyPerMonth",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "CampaignType",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "instructions",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Constant",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Example",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "text",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "file",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "float",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "integer",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "bigInt",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "image",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "json",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "password",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "select",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "calendarDay",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "multiselect",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "checkbox",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "timestamp_updateAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "timestamp_createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "textAreaWithVariablesField",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "shortedTextField",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "shortedTextFieldReadOnly",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "ReceivedEmail",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "user",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "senderEmail",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "recipientEmail",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "subject",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "body",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "reply",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "referenceMails",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization_id",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "received",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "imapID",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "EmailView",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "type",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "targetId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "parent",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "subject",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "body",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "timestamp",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "user",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "EmailTemplate",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "externalId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "provider",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "sentEmails",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "FailedEmail",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "mailId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "imapId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "userId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "senderEmail",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "recipientEmail",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "subject",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "body",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "reply",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "referenceMails",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "receivedAt",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "errorMessage",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organizationId",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "attemptedAt",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Organization",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "isActive",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "slug",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "fromEmail",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "fromEmailName",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "emailSignature",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "apiKey",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "sendgridApiKey",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "team",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "users",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "campaigns",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "offers",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "emailTemplates",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "sentEmails",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "SentEmail",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "subject",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "preheader",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "content",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "status",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "retries",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "error",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "sentAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "updatedAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "template",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "user",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Teammate",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "email",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "password",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "role",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "User",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "email",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "structuredData",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "sentEmails",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Offer",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "isActive",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "slug",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "tags",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "OfferTag",
+            "isHidden": true,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "organization",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "offers",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "campaigns",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "Agent",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "slug",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "generalInstruction",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "updatedAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "isActive",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          },
+          {
+            "key": "DataSource",
+            "isHidden": false,
+            "fields": [
+              {
+                "path": "id",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "name",
+                "createView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              },
+              {
+                "path": "createdAt",
+                "createView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaCreateView"
+                },
+                "__typename": "KeystoneAdminUIFieldMeta"
+              }
+            ],
+            "__typename": "KeystoneAdminUIListMeta"
+          }
+        ],
+        "__typename": "KeystoneAdminMeta"
+      },
+      "__typename": "KeystoneMeta"
+    },
+    "authenticatedItem": {
+      "id": "clwhpim9l0000wry4678uhx1v",
+      "email": "admin@example.com",
+      "__typename": "Teammate"
+    }
+  }
+}

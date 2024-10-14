@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FieldMeta } from "@keystone-6/core/types";
 import { ChevronRightIcon } from "@keystone-ui/icons";
 
-import { Input } from "@repo/components";
+import { Input } from "@md/components";
 import { getFieldType } from "../../../queries/getFieldType";
 import { FilterTitle } from "./styles";
 

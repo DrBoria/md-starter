@@ -1,0 +1,3731 @@
+{
+  "data": {
+    "keystone": {
+      "__typename": "KeystoneMeta",
+      "adminMeta": {
+        "__typename": "KeystoneAdminMeta",
+        "lists": [
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Campaign",
+            "itemQueryName": "Campaign",
+            "listQueryName": "Campaigns",
+            "initialSort": null,
+            "path": "campaigns",
+            "label": "Campaigns",
+            "singular": "Campaign",
+            "plural": "Campaigns",
+            "description": null,
+            "initialColumns": ["name", "type", "isActive"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "type",
+                "label": "Type",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "CampaignType",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "instructions"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "isActive",
+                "label": "Is Active",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": true
+                },
+                "viewsIndex": 3,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "campaigns",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "instructions",
+                "label": "Instructions",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "offer_tags",
+                "label": "Offer Tags",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "campaigns",
+                  "refListKey": "OfferTag",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "cards",
+                  "cardFields": ["name"],
+                  "linkToItem": true,
+                  "removeMode": "disconnect",
+                  "inlineCreate": {
+                    "fields": ["name"]
+                  },
+                  "inlineEdit": {
+                    "fields": ["name"]
+                  },
+                  "inlineConnect": true,
+                  "refLabelField": "name",
+                  "refSearchFields": ["name"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "frequencyPerDay",
+                "label": "Frequency Per Day",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": -2147483648,
+                    "max": 2147483647,
+                    "isRequired": false
+                  },
+                  "defaultValue": 0
+                },
+                "viewsIndex": 5,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "frequencyPerWeek",
+                "label": "Frequency Per Week",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": -2147483648,
+                    "max": 2147483647,
+                    "isRequired": false
+                  },
+                  "defaultValue": 0
+                },
+                "viewsIndex": 5,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "frequencyPerMonth",
+                "label": "Frequency Per Month",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": -2147483648,
+                    "max": 2147483647,
+                    "isRequired": false
+                  },
+                  "defaultValue": 0
+                },
+                "viewsIndex": 5,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "CampaignType",
+            "itemQueryName": "CampaignType",
+            "listQueryName": "CampaignTypes",
+            "initialSort": null,
+            "path": "campaign-types",
+            "label": "Campaign Types",
+            "singular": "Campaign Type",
+            "plural": "Campaign Types",
+            "description": null,
+            "initialColumns": ["name", "organization", "createdAt"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "instructions",
+                "label": "Instructions",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Constant",
+            "itemQueryName": "Constant",
+            "listQueryName": "Constants",
+            "initialSort": null,
+            "path": "constants",
+            "label": "Constant",
+            "singular": "Constant",
+            "plural": "Constants",
+            "description": null,
+            "initialColumns": ["name", "createdAt"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Example",
+            "itemQueryName": "Example",
+            "listQueryName": "Examples",
+            "initialSort": null,
+            "path": "examples",
+            "label": "Example",
+            "singular": "Example",
+            "plural": "Examples",
+            "description": null,
+            "initialColumns": ["id", "text", "file"],
+            "pageSize": 50,
+            "labelField": "id",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "text",
+                "label": "Text",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "file",
+                "label": "File",
+                "description": null,
+                "fieldMeta": null,
+                "viewsIndex": 6,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "float",
+                "label": "Float",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": null,
+                    "max": null,
+                    "isRequired": true
+                  },
+                  "defaultValue": null
+                },
+                "viewsIndex": 7,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "integer",
+                "label": "Integer",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": -2147483648,
+                    "max": 2147483647,
+                    "isRequired": true
+                  },
+                  "defaultValue": null
+                },
+                "viewsIndex": 5,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "bigInt",
+                "label": "Big Int",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": "-9223372036854775808",
+                    "max": "9223372036854775807",
+                    "isRequired": true
+                  },
+                  "defaultValue": "0"
+                },
+                "viewsIndex": 8,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "image",
+                "label": "Image",
+                "description": null,
+                "fieldMeta": null,
+                "viewsIndex": 9,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "json",
+                "label": "Json",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null
+                },
+                "viewsIndex": 10,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "password",
+                "label": "Password",
+                "description": null,
+                "fieldMeta": {
+                  "isNullable": true,
+                  "validation": {
+                    "isRequired": false,
+                    "rejectCommon": false,
+                    "match": null,
+                    "length": {
+                      "min": 8,
+                      "max": null
+                    }
+                  }
+                },
+                "viewsIndex": 11,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "select",
+                "label": "Select",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "label": "Option 1",
+                      "value": "option 1"
+                    },
+                    {
+                      "label": "Option 2",
+                      "value": "option 2"
+                    }
+                  ],
+                  "type": "string",
+                  "displayMode": "select",
+                  "defaultValue": null,
+                  "isRequired": false
+                },
+                "viewsIndex": 12,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "calendarDay",
+                "label": "Calendar Day",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null,
+                  "isRequired": false
+                },
+                "viewsIndex": 13,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "multiselect",
+                "label": "Multiselect",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "label": "Option 1",
+                      "value": "option 1"
+                    },
+                    {
+                      "label": "Option 2",
+                      "value": "option 2"
+                    }
+                  ],
+                  "type": "string",
+                  "defaultValue": []
+                },
+                "viewsIndex": 14,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "checkbox",
+                "label": "Checkbox",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": true
+                },
+                "viewsIndex": 3,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "timestamp_updateAt",
+                "label": "Timestamp Update At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null,
+                  "isRequired": false,
+                  "updatedAt": true
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "timestamp_createdAt",
+                "label": "Timestamp Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "textAreaWithVariablesField",
+                "label": "Text Area With Variables Field",
+                "description": null,
+                "fieldMeta": {},
+                "viewsIndex": 15,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "shortedTextField",
+                "label": "Shorted Text Field",
+                "description": null,
+                "fieldMeta": {
+                  "isReadOnly": false
+                },
+                "viewsIndex": 16,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "shortedTextFieldReadOnly",
+                "label": "Shorted Text Field Read Only",
+                "description": null,
+                "fieldMeta": {
+                  "isReadOnly": true
+                },
+                "viewsIndex": 16,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "ReceivedEmail",
+            "itemQueryName": "ReceivedEmail",
+            "listQueryName": "ReceivedEmails",
+            "initialSort": null,
+            "path": "received-emails",
+            "label": "Received Emails",
+            "singular": "Received Email",
+            "plural": "Received Emails",
+            "description": null,
+            "initialColumns": [
+              "imapID",
+              "user",
+              "senderEmail",
+              "subject",
+              "received"
+            ],
+            "pageSize": 50,
+            "labelField": "id",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "user",
+                "label": "User",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "User",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "email",
+                  "refSearchFields": ["name", "email"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "senderEmail",
+                "label": "Sender Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "recipientEmail",
+                "label": "Recipient Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "subject",
+                "label": "Subject",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "body",
+                "label": "Body",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "reply",
+                "label": "Reply to",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "referenceMails",
+                "label": "Reference emails",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": []
+                },
+                "viewsIndex": 10,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization_id",
+                "label": "Organization Id",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "received",
+                "label": "Received",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "imapID",
+                "label": "Imap ID",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "EmailView",
+            "itemQueryName": "EmailView",
+            "listQueryName": "EmailViews",
+            "initialSort": null,
+            "path": "email-views",
+            "label": "Email Views",
+            "singular": "Email View",
+            "plural": "Email Views",
+            "description": null,
+            "initialColumns": [
+              "organization",
+              "user",
+              "type",
+              "subject",
+              "timestamp"
+            ],
+            "pageSize": 50,
+            "labelField": "id",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "string",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "type",
+                "label": "Type",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "label": "Sent",
+                      "value": "sent"
+                    },
+                    {
+                      "label": "Received",
+                      "value": "received"
+                    }
+                  ],
+                  "type": "enum",
+                  "displayMode": "select",
+                  "defaultValue": null,
+                  "isRequired": true
+                },
+                "viewsIndex": 12,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "targetId",
+                "label": "Target Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "parent",
+                "label": "Parent",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "EmailView",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "id",
+                  "refSearchFields": ["targetId", "subject", "body"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "subject",
+                "label": "Subject",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "body",
+                "label": "Body",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "timestamp",
+                "label": "Timestamp",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "user",
+                "label": "User",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "User",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "email",
+                  "refSearchFields": ["name", "email"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "EmailTemplate",
+            "itemQueryName": "EmailTemplate",
+            "listQueryName": "EmailTemplates",
+            "initialSort": null,
+            "path": "email-templates",
+            "label": "Email Templates",
+            "singular": "Email Template",
+            "plural": "Email Templates",
+            "description": null,
+            "initialColumns": ["name", "createdAt", "externalId"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "externalId",
+                "label": "External Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "provider",
+                "label": "Provider",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "label": "SendGrid",
+                      "value": "sendgrid"
+                    }
+                  ],
+                  "type": "enum",
+                  "displayMode": "select",
+                  "defaultValue": "sendgrid",
+                  "isRequired": true
+                },
+                "viewsIndex": 12,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "emailTemplates",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "sentEmails",
+                "label": "Sent Emails",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "template",
+                  "refListKey": "SentEmail",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "id",
+                  "refSearchFields": [
+                    "subject",
+                    "preheader",
+                    "content",
+                    "error"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "FailedEmail",
+            "itemQueryName": "FailedEmail",
+            "listQueryName": "FailedEmails",
+            "initialSort": null,
+            "path": "failed-emails",
+            "label": "Failed Emails",
+            "singular": "Failed Email",
+            "plural": "Failed Emails",
+            "description": null,
+            "initialColumns": [
+              "imapId",
+              "senderEmail",
+              "subject",
+              "receivedAt",
+              "attemptedAt"
+            ],
+            "pageSize": 50,
+            "labelField": "id",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "autoincrement",
+                  "type": "BigInt"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "mailId",
+                "label": "Mail Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "imapId",
+                "label": "Imap Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "userId",
+                "label": "User Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "senderEmail",
+                "label": "Sender Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "recipientEmail",
+                "label": "Recipient Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "subject",
+                "label": "Subject",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "body",
+                "label": "Body",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "reply",
+                "label": "Reply to",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "referenceMails",
+                "label": "Reference emails",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": []
+                },
+                "viewsIndex": 10,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "receivedAt",
+                "label": "Received At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null,
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "errorMessage",
+                "label": "Error Message",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "textarea",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organizationId",
+                "label": "Organization Id",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isNullable": true
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "attemptedAt",
+                "label": "Attempted At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Organization",
+            "itemQueryName": "Organization",
+            "listQueryName": "Organizations",
+            "initialSort": null,
+            "path": "organizations",
+            "label": "Organizations",
+            "singular": "Organization",
+            "plural": "Organizations",
+            "description": null,
+            "initialColumns": ["name", "slug", "users", "createdAt"],
+            "pageSize": 50,
+            "labelField": "slug",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "isActive",
+                "label": "Is Active",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": true
+                },
+                "viewsIndex": 3,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "slug",
+                "label": "Slug",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "fromEmail",
+                "label": "From Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "fromEmailName",
+                "label": "From Email Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "emailSignature",
+                "label": "Email Signature",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "apiKey",
+                "label": "Api Key",
+                "description": null,
+                "fieldMeta": {
+                  "isReadOnly": true
+                },
+                "viewsIndex": 16,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "sendgridApiKey",
+                "label": "Sendgrid Api Key",
+                "description": null,
+                "fieldMeta": {
+                  "isReadOnly": false
+                },
+                "viewsIndex": 16,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "team",
+                "label": "Team",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "Teammate",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "cards",
+                  "cardFields": ["email", "role"],
+                  "linkToItem": false,
+                  "removeMode": "disconnect",
+                  "inlineCreate": null,
+                  "inlineEdit": null,
+                  "inlineConnect": false,
+                  "refLabelField": "email",
+                  "refSearchFields": ["email", "role"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "users",
+                "label": "Users",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "User",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "email",
+                  "refSearchFields": ["name", "email"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "campaigns",
+                "label": "Campaigns",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "Campaign",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "instructions"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "offers",
+                "label": "Offers",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "Offer",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "slug"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "emailTemplates",
+                "label": "Email Templates",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "EmailTemplate",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "externalId"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "sentEmails",
+                "label": "Sent Emails",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "organization",
+                  "refListKey": "SentEmail",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "id",
+                  "refSearchFields": [
+                    "subject",
+                    "preheader",
+                    "content",
+                    "error"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "SentEmail",
+            "itemQueryName": "SentEmail",
+            "listQueryName": "SentEmails",
+            "initialSort": null,
+            "path": "sent-emails",
+            "label": "Sent Emails",
+            "singular": "Sent Email",
+            "plural": "Sent Emails",
+            "description": null,
+            "initialColumns": [
+              "organization",
+              "status",
+              "createdAt",
+              "subject"
+            ],
+            "pageSize": 50,
+            "labelField": "id",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "subject",
+                "label": "Subject",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "preheader",
+                "label": "Preheader",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "content",
+                "label": "Content",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "status",
+                "label": "Status",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "label": "Queued",
+                      "value": "queued"
+                    },
+                    {
+                      "label": "Processing",
+                      "value": "processing"
+                    },
+                    {
+                      "label": "Success",
+                      "value": "success"
+                    },
+                    {
+                      "label": "Failed",
+                      "value": "failed"
+                    }
+                  ],
+                  "type": "enum",
+                  "displayMode": "select",
+                  "defaultValue": "queued",
+                  "isRequired": true
+                },
+                "viewsIndex": 12,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "retries",
+                "label": "Retries",
+                "description": null,
+                "fieldMeta": {
+                  "validation": {
+                    "min": -2147483648,
+                    "max": 2147483647,
+                    "isRequired": true
+                  },
+                  "defaultValue": 0
+                },
+                "viewsIndex": 5,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "error",
+                "label": "Error",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": false,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": null
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "sentAt",
+                "label": "Sent At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null,
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "updatedAt",
+                "label": "Updated At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "sentEmails",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "template",
+                "label": "Template",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "sentEmails",
+                  "refListKey": "EmailTemplate",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "externalId"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "user",
+                "label": "User",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "sentEmails",
+                  "refListKey": "User",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "email",
+                  "refSearchFields": ["name", "email"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Teammate",
+            "itemQueryName": "Teammate",
+            "listQueryName": "Teammates",
+            "initialSort": null,
+            "path": "teammates",
+            "label": "Team",
+            "singular": "Teammate",
+            "plural": "Teammates",
+            "description": null,
+            "initialColumns": ["email", "password", "role"],
+            "pageSize": 50,
+            "labelField": "email",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "email",
+                "label": "Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "password",
+                "label": "Password",
+                "description": null,
+                "fieldMeta": {
+                  "isNullable": false,
+                  "validation": {
+                    "isRequired": true,
+                    "rejectCommon": false,
+                    "match": null,
+                    "length": {
+                      "min": 8,
+                      "max": null
+                    }
+                  }
+                },
+                "viewsIndex": 11,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "role",
+                "label": "Role",
+                "description": null,
+                "fieldMeta": {
+                  "options": [
+                    {
+                      "value": "admin",
+                      "label": "Admin"
+                    },
+                    {
+                      "value": "editor",
+                      "label": "Editor"
+                    },
+                    {
+                      "value": "viewer",
+                      "label": "Viewer"
+                    },
+                    {
+                      "value": "owner",
+                      "label": "Owner"
+                    }
+                  ],
+                  "type": "string",
+                  "displayMode": "select",
+                  "defaultValue": "admin",
+                  "isRequired": false
+                },
+                "viewsIndex": 12,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "team",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "User",
+            "itemQueryName": "User",
+            "listQueryName": "Users",
+            "initialSort": null,
+            "path": "users",
+            "label": "Users",
+            "singular": "User",
+            "plural": "Users",
+            "description": null,
+            "initialColumns": ["email", "organization", "name"],
+            "pageSize": 50,
+            "labelField": "email",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "users",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "email",
+                "label": "Email",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "structuredData",
+                "label": "Structured Data",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {}
+                },
+                "viewsIndex": 10,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "sentEmails",
+                "label": "Sent Emails",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "user",
+                  "refListKey": "SentEmail",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "count",
+                  "refLabelField": "id",
+                  "refSearchFields": [
+                    "subject",
+                    "preheader",
+                    "content",
+                    "error"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Offer",
+            "itemQueryName": "Offer",
+            "listQueryName": "Offers",
+            "initialSort": null,
+            "path": "offers",
+            "label": "Offers",
+            "singular": "Offer",
+            "plural": "Offers",
+            "description": null,
+            "initialColumns": ["name", "isActive", "createdAt"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "isActive",
+                "label": "Is Active",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": true
+                },
+                "viewsIndex": 3,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "slug",
+                "label": "Slug",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "offers",
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "tags",
+                "label": "Tags",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "offers",
+                  "refListKey": "OfferTag",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "cards",
+                  "cardFields": ["name"],
+                  "linkToItem": true,
+                  "removeMode": "disconnect",
+                  "inlineCreate": {
+                    "fields": ["name"]
+                  },
+                  "inlineEdit": {
+                    "fields": ["name"]
+                  },
+                  "inlineConnect": true,
+                  "refLabelField": "name",
+                  "refSearchFields": ["name"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "OfferTag",
+            "itemQueryName": "OfferTag",
+            "listQueryName": "OfferTags",
+            "initialSort": null,
+            "path": "offer-tags",
+            "label": "Offer Tags",
+            "singular": "Offer Tag",
+            "plural": "Offer Tags",
+            "description": null,
+            "initialColumns": ["name", "organization", "offers"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "organization",
+                "label": "Organization",
+                "description": null,
+                "fieldMeta": {
+                  "refListKey": "Organization",
+                  "many": false,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "slug",
+                  "refSearchFields": [
+                    "slug",
+                    "name",
+                    "fromEmail",
+                    "fromEmailName",
+                    "emailSignature"
+                  ]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "offers",
+                "label": "Offers",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "tags",
+                  "refListKey": "Offer",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "slug"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "campaigns",
+                "label": "Campaigns",
+                "description": null,
+                "fieldMeta": {
+                  "refFieldKey": "offer_tags",
+                  "refListKey": "Campaign",
+                  "many": true,
+                  "hideCreate": false,
+                  "displayMode": "select",
+                  "refLabelField": "name",
+                  "refSearchFields": ["name", "instructions"]
+                },
+                "viewsIndex": 2,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "Agent",
+            "itemQueryName": "Agent",
+            "listQueryName": "Agents",
+            "initialSort": null,
+            "path": "agents",
+            "label": "Agent",
+            "singular": "Agent",
+            "plural": "Agents",
+            "description": null,
+            "initialColumns": ["name", "slug", "generalInstruction"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "slug",
+                "label": "Slug",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "generalInstruction",
+                "label": "General Instruction",
+                "description": null,
+                "fieldMeta": {},
+                "viewsIndex": 15,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "updatedAt",
+                "label": "Updated At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": null,
+                  "isRequired": false,
+                  "updatedAt": true
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "isActive",
+                "label": "Is Active",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": true
+                },
+                "viewsIndex": 3,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          },
+          {
+            "__typename": "KeystoneAdminUIListMeta",
+            "key": "DataSource",
+            "itemQueryName": "DataSource",
+            "listQueryName": "DataSources",
+            "initialSort": null,
+            "path": "data-sources",
+            "label": "Data Source",
+            "singular": "Data Source",
+            "plural": "Data Sources",
+            "description": null,
+            "initialColumns": ["name", "createdAt"],
+            "pageSize": 50,
+            "labelField": "name",
+            "isSingleton": false,
+            "groups": [],
+            "fields": [
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "id",
+                "label": "Id",
+                "description": null,
+                "fieldMeta": {
+                  "kind": "cuid",
+                  "type": "String"
+                },
+                "viewsIndex": 0,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "hidden",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "name",
+                "label": "Name",
+                "description": null,
+                "fieldMeta": {
+                  "displayMode": "input",
+                  "shouldUseModeInsensitive": true,
+                  "validation": {
+                    "isRequired": true,
+                    "match": null,
+                    "length": {
+                      "max": null,
+                      "min": 1
+                    }
+                  },
+                  "defaultValue": "",
+                  "isNullable": false
+                },
+                "viewsIndex": 1,
+                "customViewsIndex": null,
+                "search": "insensitive",
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "edit",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              },
+              {
+                "__typename": "KeystoneAdminUIFieldMeta",
+                "path": "createdAt",
+                "label": "Created At",
+                "description": null,
+                "fieldMeta": {
+                  "defaultValue": {
+                    "kind": "now"
+                  },
+                  "isRequired": false,
+                  "updatedAt": false
+                },
+                "viewsIndex": 4,
+                "customViewsIndex": null,
+                "search": null,
+                "isNonNull": [],
+                "itemView": {
+                  "fieldMode": "read",
+                  "__typename": "KeystoneAdminUIFieldMetaItemView"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

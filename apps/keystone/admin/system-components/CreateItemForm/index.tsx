@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
-import { Button } from "@repo/components";
-
-import "./index.css";
+import { Button } from "@md/components";
 
 import { useRouter } from "next/router";
 

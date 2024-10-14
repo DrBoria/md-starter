@@ -1,6 +1,6 @@
 ```jsx
 import { useState } from "react";
-import { TextArea } from "admin/components/TextArea";
+import { TextArea } from "./index/TextArea";
 
 const [text, setText] = useState("");
 

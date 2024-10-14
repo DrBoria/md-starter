@@ -1,5 +1,5 @@
 ```jsx
-import { Checkbox, Input, MultiSelect, Select } from "admin/components/Form";
+import { Checkbox, Input, MultiSelect, Select } from "./index";
 
 <>
   <h2>Input</h2>

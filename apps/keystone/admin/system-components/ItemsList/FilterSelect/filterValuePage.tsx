@@ -3,7 +3,7 @@ import { FieldMeta } from "@keystone-6/core/types";
 import { Button } from "@keystone-ui/button";
 
 import { IOption } from "../../../../types";
-import { Input, Select } from "@repo/components";
+import { Input, Select } from "@md/components";
 import { getFieldType } from "../../../queries/getFieldType";
 import { useQueryList } from "../../../queries/useQueryList";
 import { toRelationSelect } from "../../utils/data-mapping/toRelationSelect";

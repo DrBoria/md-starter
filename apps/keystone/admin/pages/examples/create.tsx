@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ColumnsContainer } from "@repo/components";
+import { ColumnsContainer } from "@md/components";
 import { CreateItemForm } from "../../system-components/CreateItemForm";
 import { PageContainer } from "../../system-components/PageContainer";
 

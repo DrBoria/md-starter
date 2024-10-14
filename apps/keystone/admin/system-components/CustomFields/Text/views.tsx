@@ -7,10 +7,10 @@ import {
   FieldLabel,
 } from "@keystone-ui/fields";
 
-import { ShortedText } from "@repo/components";
-import { TextArea } from "@repo/components";
+import { ShortedText } from "@md/components";
+import { TextArea } from "@md/components";
 import { controller, DefaultCardValue } from "../utils/viewStarter";
-import { Input } from "@repo/components";
+import { Input } from "@md/components";
 
 function Field({ field, value, onChange }: FieldProps<typeof controller>) {
   const handleChange: React.ChangeEventHandler<

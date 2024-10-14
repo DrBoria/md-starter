@@ -1,5 +1,5 @@
 ```jsx
-import { Text } from "admin/components/Text";
+import { Text } from "./index/Text";
 
 <div style={{ width: "200px" }}>
   <Text text="activesdfsdfjsldkflkjflksdjflaskjf;alskdfjas;ldkfjsl;kdfjsdlkfja;slkdfjafygerwpofhierwofiehf" />

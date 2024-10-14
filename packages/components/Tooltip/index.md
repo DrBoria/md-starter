@@ -1,5 +1,5 @@
 ```jsx
-import { Tooltip } from "admin/components/Tooltip";
+import { Tooltip } from "./index";
 
 <>
   <Tooltip text="tooltip value">

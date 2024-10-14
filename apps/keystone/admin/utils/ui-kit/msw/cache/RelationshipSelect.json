@@ -1,0 +1,22 @@
+{
+  "data": {
+    "items": [
+      {
+        "____id____": "clurbdr970001tkh4d21mdeyp",
+        "____label____": "sdsd",
+        "__typename": "Organization"
+      },
+      {
+        "____id____": "clvxrfzhn000011fbl049rr47",
+        "____label____": "aaaaaa",
+        "__typename": "Organization"
+      },
+      {
+        "____id____": "clvxrhile000010s4dct888gu",
+        "____label____": "bbbb",
+        "__typename": "Organization"
+      }
+    ],
+    "count": 3
+  }
+}

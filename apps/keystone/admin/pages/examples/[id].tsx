@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import { ColumnsContainer } from "@repo/components";
-import { Input } from "@repo/components";
+import { ColumnsContainer } from "@md/components";
+import { Input } from "@md/components";
 import { EditItemForm } from "../../system-components/EditItemForm";
 import { PageContainer } from "../../system-components/PageContainer";
 

@@ -3,7 +3,7 @@ import {
   Button,
   CopyToClipboardButton,
   Duplicate,
-} from "admin/components/Button";
+} from "./index";
 
 <>
   <Button tone="active">active</Button>

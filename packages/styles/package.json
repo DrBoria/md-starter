@@ -1,0 +1,16 @@
+{
+  "name": "@md/styles",
+  "version": "1.0.0",
+  "description": "> Here lies global definition for styles in application and ThemeProviderWrapper > All global/reusable styles should be placed in this folder.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "styled-components": "^6.1.13",
+    "styled-reset": "^4.5.2"
+  }
+}

@@ -48,25 +48,12 @@ var NODE_ENV = process.env.NODE_ENV;
 var DATABASE_URL = process.env.DATABASE_URL;
 var REDIS_URL = process.env.REDIS_URL;
 var SESSION_SECRET = process.env.SESSION_SECRET;
-var JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 var ALLOW_ROLES_MANAGEMENT = process.env.ALLOW_ROLES_MANAGEMENT;
-var HUBSPOT_CLIENT_ID = process.env.KEYSTONE_HUBSPOT_CLIENT_ID;
-var HUBSPOT_CLIENT_SECRET = process.env.KEYSTONE_HUBSPOT_CLIENT_SECRET;
-var HUBSPOT_SCOPE = process.env.HUBSPOT_SCOPE;
 var APP_HOST = process.env.KEYSTONE_APP_HOST;
-var TRANSFER_USERS_URL = process.env.TRANSFER_USERS_URL;
-var SFTP_ACCESS_KEY_ID = process.env.SFTP_ACCESS_KEY_ID;
-var SFTP_SECRET_ACCESS_KEY = process.env.SFTP_SECRET_ACCESS_KEY;
-var SFTP_REGION = process.env.SFTP_REGION;
-var SFTP_ACCOUNT_ID = process.env.SFTP_ACCOUNT_ID;
-var SFTP_SERVER_ID = process.env.SFTP_SERVER_ID;
 var KEYSTONE_ENV = process.env.KEYSTONE_ENV;
 var KEYSTONE_APP_NAME = process.env.KEYSTONE_APP_NAME;
-var SFTP_BUCKET_NAME = process.env.SFTP_BUCKET_NAME;
-var SFTP_HOST = process.env.SFTP_HOST;
 var APP_PORT = 3e3;
 var SITE_URL = APP_HOST === "localhost" ? `http://${APP_HOST}:${APP_PORT}` : `https://${APP_HOST}`;
-var HUBSPOT_REDIRECT_URI = `${SITE_URL}/oauth-hubspot-callback`;
 
 // auth.ts
 var redis = (0, import_client.createClient)({

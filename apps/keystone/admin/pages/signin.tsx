@@ -1,0 +1,196 @@
+import type { FormEvent } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { gql, useMutation } from "@keystone-6/core/admin-ui/apollo";
+import {
+  useRawKeystone,
+  useReinitContext,
+} from "@keystone-6/core/admin-ui/context";
+import { useRouter } from "@keystone-6/core/admin-ui/router";
+import { Button } from "@keystone-ui/button";
+import { H1, Stack, VisuallyHidden } from "@keystone-ui/core";
+import { TextInput } from "@keystone-ui/fields";
+import { Notice } from "@keystone-ui/notice";
+
+import { SigninContainer } from "../sections/SignInContainer";
+import { dark, ThemeProvider } from "../../../../packages/styles";
+
+interface ISigninPageProps {
+  identityField: string;
+  secretField: string;
+  mutationName: string;
+  successTypename: string;
+  failureTypename: string;
+}
+
+// NOTE: if you've changed Teammates table name - update fields in props
+const props = {
+  identityField: "email",
+  secretField: "password",
+  mutationName: "authenticateTeammateWithPassword",
+  successTypename: "TeammateAuthenticationWithPasswordSuccess",
+  failureTypename: "TeammateAuthenticationWithPasswordFailure",
+};
+const getSigninPage = () => <SigninPage {...props} />;
+const useRedirect = () => {
+  return useMemo(() => "/", []);
+};
+
+function SigninPage({
+  identityField,
+  secretField,
+  mutationName,
+  successTypename,
+  failureTypename,
+}: ISigninPageProps) {
+  const mutation = gql`
+    mutation($identity: String!, $secret: String!) {
+      authenticate: ${mutationName}(${identityField}: $identity, ${secretField}: $secret) {
+        ... on ${successTypename} {
+          item {
+            id
+          }
+        }
+        ... on ${failureTypename} {
+          message
+        }
+      }
+    }
+  `;
+
+  const [mode, setMode] = useState<"signin" | "forgot password">("signin");
+  const [state, setState] = useState({ identity: "", secret: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const identityFieldRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    identityFieldRef.current?.focus();
+  }, [mode]);
+
+  const [mutate, { error, loading, data }] = useMutation(mutation);
+  const reinitContext = useReinitContext();
+  const router = useRouter();
+  const rawKeystone = useRawKeystone();
+  const redirect = useRedirect();
+
+  // if we are signed in, redirect immediately
+  useEffect(() => {
+    if (submitted) return;
+    if (rawKeystone.authenticatedItem.state === "authenticated") {
+      void router.push(redirect);
+    }
+  }, [rawKeystone.authenticatedItem, router, redirect, submitted]);
+
+  useEffect(() => {
+    if (!submitted) return;
+
+    // @ts-expect-error
+    if (rawKeystone.adminMeta?.error?.message === "Access denied") {
+      void router.push("/no-access");
+      return;
+    }
+
+    void router.push(redirect);
+  }, [rawKeystone.adminMeta, router, redirect, submitted]);
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    void event.preventDefault();
+
+    if (mode !== "signin") return;
+
+    try {
+      const { data } = await mutate({
+        variables: {
+          identity: state.identity,
+          secret: state.secret,
+        },
+      });
+      if (data.authenticate?.__typename !== successTypename) return;
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+
+    await reinitContext();
+    setSubmitted(true);
+  };
+
+  return (
+    <ThemeProvider theme={dark}>
+      <SigninContainer title="TruAgents - Sign In">
+        <Stack gap="xlarge" as="form" onSubmit={onSubmit}>
+          <H1>Sign In</H1>
+          {error && (
+            <Notice title="Error" tone="negative">
+              {error.message}
+            </Notice>
+          )}
+          {data?.authenticate?.__typename === failureTypename && (
+            <Notice title="Error" tone="negative">
+              {data?.authenticate.message}
+            </Notice>
+          )}
+          <Stack gap="medium">
+            <VisuallyHidden as="label" htmlFor="identity">
+              {identityField}
+            </VisuallyHidden>
+            <TextInput
+              id="identity"
+              name="identity"
+              value={state.identity}
+              onChange={(e) => setState({ ...state, identity: e.target.value })}
+              placeholder={identityField}
+              ref={identityFieldRef}
+            />
+            {mode === "signin" && (
+              <Fragment>
+                <VisuallyHidden as="label" htmlFor="password">
+                  {secretField}
+                </VisuallyHidden>
+                <TextInput
+                  id="password"
+                  name="password"
+                  value={state.secret}
+                  onChange={(e) => setState({ ...state, secret: e.target.value })}
+                  placeholder={secretField}
+                  type="password"
+                />
+              </Fragment>
+            )}
+          </Stack>
+
+          {mode === "forgot password" ? (
+            <Stack gap="medium" across>
+              <Button type="submit" weight="bold" tone="active">
+                Log reset link
+              </Button>
+              <Button
+                weight="none"
+                tone="active"
+                onClick={() => setMode("signin")}
+              >
+                Go back
+              </Button>
+            </Stack>
+          ) : (
+            <Stack gap="medium" across>
+              <Button
+                weight="bold"
+                tone="active"
+                isLoading={
+                  loading ||
+                  // this is for while the page is loading but the mutation has finished successfully
+                  data?.authenticate?.__typename === successTypename
+                }
+                type="submit"
+              >
+                Sign in
+              </Button>
+            </Stack>
+          )}
+        </Stack>
+      </SigninContainer>
+    </ThemeProvider>
+  );
+}
+
+export default getSigninPage;

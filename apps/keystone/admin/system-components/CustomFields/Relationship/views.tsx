@@ -16,8 +16,8 @@ import {
 import type { IOption, TSession } from "../../../../types";
 import type { TSideBarModalData } from "../../../state";
 import { toReadablePascalCase } from "../../../../utils/toReadablePascalCase";
-import { Select } from "@repo/components";
-import { LinkInForm } from "@repo/components";
+import { Select } from "@md/components";
+import { LinkInForm } from "@md/components";
 import { SideBarModalData, useGlobalVariable } from "../../../state";
 import { useQueryList } from "../../../queries/useQueryList";
 import { useQueryListItem } from "../../../queries/useQueryListItem";

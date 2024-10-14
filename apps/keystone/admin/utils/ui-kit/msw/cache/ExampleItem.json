@@ -1,0 +1,209 @@
+{
+  "data": {
+    "example": {
+      "id": "clwhpshr90000qhlzdk5zmkzf",
+      "text": "Text",
+      "file": null,
+      "float": 1233,
+      "integer": 2132,
+      "bigInt": "1232",
+      "image": null,
+      "json": {
+        "mood": "helpful",
+        "name": "Genie",
+        "color": "blue",
+        "power": "granting wishes",
+        "location": "lamp"
+      },
+      "password": {
+        "isSet": true,
+        "__typename": "PasswordState"
+      },
+      "select": "option 1",
+      "calendarDay": "2024-05-22",
+      "multiselect": ["option 1"],
+      "checkbox": true,
+      "timestamp_updateAt": "2024-05-22T11:07:35.892Z",
+      "timestamp_createdAt": "2024-05-22T11:02:05.456Z",
+      "textAreaWithVariablesField": "Text",
+      "shortedTextField": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.Rm8GAuVlKk7KmOSfM7SremWgOh1qFgH4TckyelPTppA",
+      "shortedTextFieldReadOnly": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.Rm8GAuVlKk7KmOSfM7SremWgOh1qFgH4TckyelPTppA",
+      "__typename": "Example"
+    },
+    "keystone": {
+      "adminMeta": {
+        "list": {
+          "hideCreate": false,
+          "hideDelete": false,
+          "fields": [
+            {
+              "path": "id",
+              "itemView": {
+                "fieldMode": "hidden",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "text",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "file",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "float",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "integer",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "bigInt",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "image",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "json",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "password",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "select",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "calendarDay",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "multiselect",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "checkbox",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "timestamp_updateAt",
+              "itemView": {
+                "fieldMode": "read",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "timestamp_createdAt",
+              "itemView": {
+                "fieldMode": "read",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "textAreaWithVariablesField",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "shortedTextField",
+              "itemView": {
+                "fieldMode": "edit",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            },
+            {
+              "path": "shortedTextFieldReadOnly",
+              "itemView": {
+                "fieldMode": "read",
+                "fieldPosition": "form",
+                "__typename": "KeystoneAdminUIFieldMetaItemView"
+              },
+              "__typename": "KeystoneAdminUIFieldMeta"
+            }
+          ],
+          "__typename": "KeystoneAdminUIListMeta"
+        },
+        "__typename": "KeystoneAdminMeta"
+      },
+      "__typename": "KeystoneMeta"
+    }
+  }
+}

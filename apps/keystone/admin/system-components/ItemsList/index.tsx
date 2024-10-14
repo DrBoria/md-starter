@@ -2,8 +2,8 @@ import type { DeserializedValue, Value } from "@keystone-6/core/admin-ui/utils";
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 import { useToasts } from "@keystone-ui/toast";
 
-import { PlainText, Pagination, Checkbox, Input, Select, Button } from "@repo/components";
-import { DeleteTemplate } from "../../components/Modals/CentralModal";
+import { PlainText, Pagination, Checkbox, Input, Select, Button } from "@md/components";
+import { DeleteTemplate } from "../../sections/Modals/CentralModal";
 
 import type { IGraphQLObject, IOption } from "../../../types";
 import { ModalData, TModalData, useGlobalVariable } from "../../state";
@@ -27,7 +27,7 @@ import { EditableCell } from "./EditableCell";
 import { ViewCell } from "./ViewCell";
 
 import { HeaderCell, Row, Table } from "./styles";
-import { OneLineContainer } from "@repo/components";
+import { OneLineContainer } from "@md/components";
 
 interface IItemsList {
   listName: string;

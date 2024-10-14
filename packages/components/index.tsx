@@ -1,5 +1,5 @@
 export { Button } from './Button';
-export { Input, TextArea, ShortedText, Checkbox, MultiSelect, Select } from './Form';
+export { Input, TextArea, ShortedText, Checkbox, Select } from './Form';
 export { Icons } from './Icons';
 export { Pagination } from './Pagination';
 export { Separator } from './Separator';
