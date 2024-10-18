@@ -138,13 +138,13 @@ const ButtonWithArrowContainer = styled.div<{ $disabled?: boolean }>`
     border: 1px solid #111;
 
     ${({ $disabled }) =>
-      $disabled
-        ? `
+    $disabled
+      ? `
     border: 1px solid #eee;
     color: #ccc;
     text-decoration: none;
   `
-        : ""};
+      : ""};
   }
 `;
 

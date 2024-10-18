@@ -1,6 +1,6 @@
 ```jsx
 import { Icons } from ".";
-import { Tooltip } from ".";
+import { Tooltip } from "../../default/Tooltip";
 
 <div style={{ display: "flex", flexWrap: "wrap" }}>
   <Tooltip text="ActivityIcon">
