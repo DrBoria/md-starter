@@ -1,3 +1,4 @@
+import { TTheme } from "@md/styles/baseTheme";
 import React from "react";
 import styled from "styled-components";
 
@@ -10,8 +11,8 @@ const Table = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  background-color: #fff;
-  color: #374151;
+  background-color: ${({ theme }: { theme: TTheme }) => theme.colors.section};
+  color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
 
   & > div {
     flex: 1;
@@ -28,12 +29,14 @@ const Row = styled.div`
       overflow: hidden;
     }
     a {
-      color: #374151;
+      color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+
     }
   }
 
   & > a {
-    color: #374151;
+    color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+
   }
 
   // First child in row
@@ -60,7 +63,8 @@ interface IHeaderCellProps {
 const HeaderCellContainer = styled.div<{ $isSortable: boolean }>`
   font-weight: 600;
   text-transform: capitalize;
-  border-bottom: 1px solid #e1e5e9;
+  border-bottom: 1px solid ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+
   line-height: 2.5rem;
   display: flex;
   align-items: center;

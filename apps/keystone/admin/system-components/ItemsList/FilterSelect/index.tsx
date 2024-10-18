@@ -1,6 +1,5 @@
 import type { FieldMeta } from "@keystone-6/core/types";
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@keystone-ui/button";
 import { ChevronDownIcon } from "@keystone-ui/icons";
 
 import { IOption } from "../../../../types";
@@ -11,6 +10,7 @@ import {
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
 import { FilterDropdown, FilterWrapper } from "./styles";
+import { Button } from "@md/components";
 
 interface IFilterSelectProps {
   fields: FieldMeta[];

@@ -3,11 +3,12 @@ import { FormLabel } from './FormLabel';
 import { Input } from './Input';
 import { Radio } from './Radio';
 import { SearchInput } from './SearchInput';
+import { ShortedText } from './ShortedText';
 import { Select } from './Select';
 import { Submit } from './Submit';
 import { TextCheckbox } from './TextCheckbox';
 
-export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit };
+export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText };
 
 // Types
 export type { TOption } from './Select';

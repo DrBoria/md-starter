@@ -6,12 +6,11 @@ import { useRouter } from "next/router";
 import {
   ListNavItems,
   NavigationContainer,
-  NavItem,
 } from "@keystone-6/core/admin-ui/components";
 
 import type { TModalData, TSideBarModalData } from "../../state";
 import { transformPathToReadableFormat } from "../../../utils/transformPathToReadableFormat";
-import { MenuItemContainer } from "@md/components";
+import { Button, MenuItemContainer } from "@md/components";
 import { Icons } from "@md/components";
 import { CentralModal } from "../../sections//Modals/CentralModal";
 import { SideBarModal } from "../../sections/Modals/SideBarModal";
@@ -20,6 +19,7 @@ import { ModalData, SideBarModalData, useGlobalVariable } from "../../state";
 import { NavigationContainerStyled } from "./styles";
 import { useGetSessionData } from "../utils/useGetSessionData";
 import { useSignOut } from "../utils/useSignOut";
+import { NavItem } from "../NavItem";
 
 const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
@@ -94,9 +94,9 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
         )}
 
         {authenticatedItem.state === "authenticated" && (
-          <button className="button" onClick={() => signOut()}>
+          <Button className="button" onClick={() => signOut()}>
             {"Sign out"}
-          </button>
+          </Button>
         )}
 
         <SideBarModal

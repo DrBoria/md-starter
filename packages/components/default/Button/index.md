@@ -1,6 +1,6 @@
 ```jsx
 import { ThemeProvider } from 'styled-components';
-import Button from '.';
+import { Button } from '.';
 import { dark } from '@md/styles';
 <>
   Light Theme

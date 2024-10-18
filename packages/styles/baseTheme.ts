@@ -142,4 +142,5 @@ declare module 'styled-components' {
   export type TDefaultTheme = TTheme;
 }
 
+export type { TTheme };
 export default base;

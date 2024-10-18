@@ -50,4 +50,4 @@ const Button = styled.button<TButton>`
   ${({ type }) => ButtonTypes(type)}
 `;
 
-export default Button;
+export { Button };

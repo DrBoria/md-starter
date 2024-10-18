@@ -15,7 +15,6 @@ import { DATABASE_URL, NODE_ENV } from "./env";
 // to keep this file tidy, we define our schema in a different file
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
-import { CampaignRunType } from "./schema/CampaignRun";
 
 export default withAuth(
   config({

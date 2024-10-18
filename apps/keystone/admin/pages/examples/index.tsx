@@ -1,11 +1,11 @@
 import React from "react";
-import { PageContainer } from "@keystone-6/core/admin-ui/components";
 
-import { Button, ColumnsContainer, Link } from "@md/components";
+import { Button, ColumnsContainer } from "@md/components";
 import { ItemsList } from "../../system-components/ItemsList";
 import { useRouter } from "next/router";
+import { PageContainer } from "../../system-components/PageContainer";
 
-const CampaignsOverviewPage = () => {
+const ExamplesList = () => {
   const router = useRouter();
   return (
     <PageContainer header="Example List">
@@ -25,4 +25,4 @@ const CampaignsOverviewPage = () => {
   );
 };
 
-export default CampaignsOverviewPage;
+export default ExamplesList;

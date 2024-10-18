@@ -50,9 +50,9 @@ body {
 
 const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
   const [theme] = useState<TDefaultTheme>(themes);
-
+  
   return (
-    <ThemeProvider theme={{ ...theme, ...colorTheme }}>
+    <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>
       <ResetStyle />
       <MediaProvider>{children}</MediaProvider>
     </ThemeProvider>

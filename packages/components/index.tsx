@@ -1,5 +1,6 @@
-export { Button } from './keystone/Button';
-export { TextArea, ShortedText, Checkbox, Select } from './default/Form';
+export { Button } from './default/Button';
+export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText } from './default/Form';
+export { TextArea, Checkbox } from './keystone/Form';
 export { Icons } from './keystone/Icons';
 export { Pagination } from './default/Pagination';
 export { Separator } from './default/Separator';

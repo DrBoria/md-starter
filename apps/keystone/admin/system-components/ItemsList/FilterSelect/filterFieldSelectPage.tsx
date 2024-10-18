@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FieldMeta } from "@keystone-6/core/types";
 import { ChevronRightIcon } from "@keystone-ui/icons";
 
-import { Input } from "@md/components";
+import { Button, Input } from "@md/components";
 import { getFieldType } from "../../../queries/getFieldType";
 import { FilterTitle } from "./styles";
 
@@ -43,7 +43,7 @@ const FilterFieldSelectPage = ({
       {/* Filter options */}
       <div className="divide-y">
         {filteredFields.map((field, index) => (
-          <button
+          <Button
             key={index}
             onClick={() => onFilterFieldSelect(field)}
             className={
@@ -56,7 +56,7 @@ const FilterFieldSelectPage = ({
               {field.label}
             </span>
             <ChevronRightIcon />
-          </button>
+          </Button>
         ))}
       </div>
     </>

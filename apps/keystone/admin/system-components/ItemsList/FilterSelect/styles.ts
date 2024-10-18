@@ -1,10 +1,11 @@
+import { TTheme } from "@md/styles/baseTheme";
 import styled from "styled-components";
 
 // Styled components for filter styling
 export const FilterButton = styled.button`
   padding: 8px 12px;
-  background-color: #007bff;
-  color: white;
+  background-color: ${({ theme }: { theme: TTheme }) => theme.colors.section};
+  color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -21,7 +22,7 @@ export const FilterDropdown = styled.div`
   left: 0;
   min-width: 320px; // same as in keystone
   padding: 16px;
-  background-color: #fff;
+  background-color: ${({ theme }: { theme: TTheme }) => theme.colors.section};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 1;
@@ -35,7 +36,7 @@ export const FilterTitle = styled.h3`
 export const BackButton = styled.button`
   background-color: transparent;
   border: none;
-  color: #007bff;
+  color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
   cursor: pointer;
   font-size: 14px;
   margin-bottom: 16px;
