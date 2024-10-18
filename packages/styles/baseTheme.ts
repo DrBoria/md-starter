@@ -139,7 +139,7 @@ type TTheme = typeof base;
 
 // Fix for typescript basic theme apply
 declare module 'styled-components' {
-  export type TDefaultTheme = TTheme;
+  export interface DefaultTheme extends TTheme {}
 }
 
 export type { TTheme };

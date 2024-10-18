@@ -11,8 +11,8 @@ const Table = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${({ theme }: { theme: TTheme }) => theme.colors.section};
-  color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
 
   & > div {
     flex: 1;
@@ -29,13 +29,13 @@ const Row = styled.div`
       overflow: hidden;
     }
     a {
-      color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+      color: ${({ theme }) => theme.colors.sectionContent};
 
     }
   }
 
   & > a {
-    color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+    color: ${({ theme }) => theme.colors.sectionContent};
 
   }
 
@@ -63,7 +63,7 @@ interface IHeaderCellProps {
 const HeaderCellContainer = styled.div<{ $isSortable: boolean }>`
   font-weight: 600;
   text-transform: capitalize;
-  border-bottom: 1px solid ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.sectionContent};
 
   line-height: 2.5rem;
   display: flex;

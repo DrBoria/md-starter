@@ -6,14 +6,14 @@ import { TTheme } from '@md/styles/baseTheme';
 
 const StyledLink = styled(Link)`
   background: transparent;
-  color: ${({ theme }: { theme: TTheme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme.colors.sectionContent};
   display: block;
   position: relative;
   text-decoration: none;
 
   &:hover {
-    background: ${({ theme }: { theme: TTheme }) => theme.colors.highlighted};
-    color: ${({ theme }: { theme: TTheme }) => theme.colors.highlightedText};
+    background: ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme.colors.highlightedText};
   }
 `
 
