@@ -63,8 +63,25 @@ module.exports = {
   // Sections that is displayed in styleguidelist
   sections: [
     {
-      name: "Components",
-      components: "../../packages/components/*/*.+(tsx|ts)",
+      name: "Default Components",
+      components: "../../packages/components/default/*/*.+(tsx|ts)",
+    },
+    {
+      name: "Keystone Components",
+      components: "../../packages/components/keystone/*/*.+(tsx|ts)",
+    },
+    {
+      name: "Material UI Components",
+      components: "../../packages/components/material-ui/*/*.+(tsx|ts)",
+    },
+    {
+      name: "Next Components",
+      components: "../../packages/components/next/*/*.+(tsx|ts)",
     },
   ],
+
+    // Theme provider
+    styleguideComponents: {
+      Wrapper: path.join(__dirname, '../../packages/styles/ThemeProviderWrapper.tsx'),
+    },
 };

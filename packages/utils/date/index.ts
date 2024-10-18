@@ -1,0 +1,1 @@
+export {getDateFromNow} from './date';

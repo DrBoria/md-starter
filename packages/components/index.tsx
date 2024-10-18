@@ -1,14 +1,14 @@
-export { Button } from './Button';
-export { Input, TextArea, ShortedText, Checkbox, Select } from './Form';
-export { Icons } from './Icons';
-export { Pagination } from './Pagination';
-export { Separator } from './Separator';
+export { Button } from './keystone/Button';
+export { TextArea, ShortedText, Checkbox, Select } from './default/Form';
+export { Icons } from './keystone/Icons';
+export { Pagination } from './default/Pagination';
+export { Separator } from './default/Separator';
 export { LoadingSpinner } from './LoadingSpinner';
-export { Tooltip } from './Tooltip';
-export { Logo } from './Logo';
-export { Link } from './Link';
-export { Tabs } from './Tabs';
-export { Toggle } from './Toggle';
+export { Tooltip } from './default/Tooltip';
+export { Logo } from './default/Logo';
+export { Link } from './next/Link';
+export { Tabs } from './default/Tabs';
+export { Toggle } from './keystone/Toggle';
 export {
     ColumnsContainer,
     DashboardCardsContainer,
@@ -16,7 +16,7 @@ export {
     LinksContainer,
     OneLineContainer,
     MenuItemContainer,
-} from './Containers';
+} from './default/Containers';
 export {
     SubTitle,
     PageTitle,
@@ -24,4 +24,4 @@ export {
     PlainText,
     HeaderText,
     LinkInForm,
-} from './Typography';
+} from './default/Typography';

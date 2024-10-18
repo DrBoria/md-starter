@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SubTitle } from "./Typography";
+import { SubTitle } from "./default/Typography";
 
 const Container = styled.div`
   position: absolute;

@@ -59,4 +59,4 @@ const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: React
   );
 };
 
-export { ThemeProviderWrapper };
+export default ThemeProviderWrapper;
