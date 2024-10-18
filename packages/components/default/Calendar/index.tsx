@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 import styled, { TDefaultTheme } from 'styled-components';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 
 const CalendarContainer = styled.div`
     display: grid;
@@ -55,7 +55,7 @@ const Calendar = () => {
 
     const totalDays = 42; // Render 6 rows (7 days each)
 
-    const calendarCells = [];
+    const calendarCells: JSX.Element[] = [];
     const currentDate = startDate.clone();
 
     // Add date cells for each day in the grid

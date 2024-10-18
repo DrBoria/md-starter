@@ -354,6 +354,10 @@ importers:
       styled-components:
         specifier: ^6.1.13
         version: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.5
+        version: 18.3.11
 
   packages/eslint-config:
     devDependencies:

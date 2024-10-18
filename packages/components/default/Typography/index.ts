@@ -120,6 +120,7 @@ export {
   Label,
   Highlighted,
   SubTitle,
+  SectionTitle,
   PageTitle,
   DescriptionText,
   PlainText,

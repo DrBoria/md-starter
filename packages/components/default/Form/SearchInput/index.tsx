@@ -1,6 +1,6 @@
-import { useCallback, FormEvent, useState } from 'react';
+import React, { useCallback, FormEvent, useState } from 'react';
 
-import { Input } from '@md/components';
+import { Input } from '../Input';
 
 import { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 

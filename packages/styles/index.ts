@@ -5,6 +5,10 @@ export {
     dark
 } from './themes'
 
+export {
+    devices
+} from './baseTheme'
+
 // Helpers
 export {
     withFullWidth,
