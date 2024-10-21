@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { TDefaultTheme } from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 
 type Tab = {
@@ -12,8 +12,8 @@ const TabList = styled.div<TWithBasicElementOffsets & TFullWidth>`
   margin-bottom: ${withOffsetBottom};
 `;
 
-const TabItem = styled.div<{ active: boolean; theme: TDefaultTheme }>`
-  padding: ${({ theme }: {theme: TDefaultTheme}) => theme.offsets.elementContent};
+const TabItem = styled.div<{ active: boolean; theme: DefaultTheme }>`
+  padding: ${({ theme }: {theme: DefaultTheme}) => theme.offsets.elementContent};
 
   background-color: ${({ active, theme }) => (active ?  theme.colors.highlighted : theme.colors.section)};
   color: ${({ active, theme }) => (active ?  theme.colors.highlightedText : theme.colors.sectionContent)};

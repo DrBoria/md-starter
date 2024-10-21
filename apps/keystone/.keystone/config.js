@@ -61,42 +61,10 @@ var redis = (0, import_client.createClient)({
 });
 redis.on("error", (err) => console.log("Redis Client Error", err));
 var sessionMaxAge = 60 * 60 * 24 * 30;
-function redisSessionStrategy() {
-  return (0, import_session.storedSessions)({
-    maxAge: sessionMaxAge,
-    secret: SESSION_SECRET,
-    store: ({ maxAge }) => ({
-      // Session could be TSession or SessionId
-      async get(session2) {
-        let sessionId;
-        if (typeof session2 === "string") {
-          sessionId = session2;
-        } else {
-          sessionId = session2.itemId;
-        }
-        const result = await redis.get(sessionId);
-        console.log(`Redis GET result: ${result}`);
-        if (!result) {
-          console.log("No session found");
-          return;
-        }
-        return JSON.parse(result);
-      },
-      async set(sessionId, data) {
-        await redis.setEx(sessionId, maxAge, JSON.stringify(data));
-        console.log(`Setting session with ID: ${sessionId}`);
-      },
-      async delete(sessionId) {
-        await redis.del(sessionId);
-        console.log(`Deleting session with ID: ${sessionId}`);
-      }
-    })
-  });
-}
-var session = NODE_ENV === "development" ? (0, import_session.statelessSessions)({
+var session = (0, import_session.statelessSessions)({
   maxAge: sessionMaxAge,
   secret: SESSION_SECRET
-}) : redisSessionStrategy();
+});
 var { withAuth } = (0, import_auth.createAuth)({
   listKey: "User",
   identityField: "email",
@@ -410,13 +378,7 @@ var keystone_default = withAuth(
     db: {
       provider: "postgresql",
       url: DATABASE_URL,
-      enableLogging: ["error", "warn"],
-      async onConnect() {
-        if (NODE_ENV !== "development") {
-          console.log("Connected to the database");
-          await redis.connect();
-        }
-      }
+      enableLogging: ["error", "warn"]
     },
     graphql: {
       // Set these fields to false to disable the playground and docs

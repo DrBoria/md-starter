@@ -2,7 +2,8 @@ import type { DeserializedValue, Value } from "@keystone-6/core/admin-ui/utils";
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 import { useToasts } from "@keystone-ui/toast";
 
-import { PlainText, Pagination, Checkbox, Input, Select, Button } from "@md/components";
+import { PlainText, Pagination, Input, Select, Button } from "@md/components";
+import { Checkbox } from "@md/components/keystone";
 import { DeleteTemplate } from "../../sections/Modals/CentralModal";
 
 import type { IGraphQLObject, IOption } from "../../../types";

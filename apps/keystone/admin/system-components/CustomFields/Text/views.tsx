@@ -8,7 +8,7 @@ import {
 } from "@keystone-ui/fields";
 
 import { ShortedText } from "@md/components";
-import { TextArea } from "@md/components";
+import { TextArea } from "@md/components/keystone";
 import { controller, DefaultCardValue } from "../utils/viewStarter";
 import { Input } from "@md/components";
 

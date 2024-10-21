@@ -23,14 +23,27 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
+export type ZIndexName = 'background' | 'animatedElements' | 'content' | 'alert';
+const zIndexes: Record<ZIndexName, number> = {
+  background: -1,
+  animatedElements: 10,
+  content: 100,
+  alert: 1000,
+};
+
+export const getZIndex = (name: ZIndexName) => zIndexes[name];
+
 const basicOffset = 8;
 const base = {
-  zIndex: {
-    navigation: 10,
-    notification: 100,
-    alert: 1000,
+  zIndex: zIndexes,
+  animation: {
+    speed: {
+      container: 2,
+      content: 1,
+      environment: 1,
+      pageClosing: 1,
+    }
   },
-
   font: {
     // font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
     size: `calc(
@@ -142,5 +155,4 @@ declare module 'styled-components' {
   export interface DefaultTheme extends TTheme {}
 }
 
-export type { TTheme };
 export default base;

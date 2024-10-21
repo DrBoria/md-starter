@@ -40,7 +40,7 @@ export const BasicSection = styled.div<TSectionProps>`
   }
   @media ${devices.desktop} {
     height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
-    padding: ${({ theme }) => `${theme.offsets.section} ${theme.offsets.container}`};
+    padding: ${({ theme }) => `${theme.offsets.section} ${theme.offsets.section}`};
   }
 
   ${({ noHeightLimit }) => WithoutHeightLimit(noHeightLimit)}
@@ -50,7 +50,7 @@ export const BasicSection = styled.div<TSectionProps>`
 // Should be used only once per page
 export const PageContainer = styled.div`
   min-height: 100vh;
-  padding: ${({ theme }) => theme.offsets.container};
+  padding: ${({ theme }) => theme.offsets.section};
   padding-top: ${({ theme }) => theme.elements.header.height};
 `;
 
@@ -69,13 +69,17 @@ export const HeadingContainer = styled.div<TWithBasicElementOffsets & TFullWidth
   margin-bottom: ${withOffsetBottom};
 `;
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const ColumnsContainer = styled.div<ColumnsContainerProps>`
   display: grid;
   grid-column-gap: 1rem;
   grid-template-rows: 1fr;
   grid-template-columns: ${({
-  $colsRatio = ["1fr", "1fr"],
+  $colsRatio = ["1fr", "1fr"], // By default 2 columns
 }: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
 `;
 
@@ -128,7 +132,75 @@ const MenuItemContainer = styled.div`
   gap: 1rem;
 `;
 
+type TSection = {
+  $direction: 'horizontal' | 'horizontal-reversed' | 'vertical',
+  $sectionSize: 'full' | 'medium' | 'half' | 'dot-section' | 'footsteps'
+};
+
+
+const Section = styled.section<TSection>`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  ${({ $direction }) => ({
+    'horizontal': `
+        display: flex;
+        align-items: center;
+    `,
+    'horizontal-reversed': `
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    `,
+    'vertical': `
+        display: flex;
+        flex-direction: column
+    `,
+    'top': `
+      display: flex;
+      flex-direction: column
+      justify-content: flex-start;
+    `
+  }[$direction])};
+
+  ${({ $sectionSize }) => ({
+    'full': `
+        height: 100vh;
+        z-index: 10;
+    `,
+    'medium': `
+        height: 75vh;
+    `,
+    'half': `
+        height: 50vh;
+    `,
+    'dot-section': `
+        height: 50vh;
+    `,
+    'footsteps': `
+      position: absolute;
+      height: auto;
+      overflow: initial;
+    `
+  }[$sectionSize])};
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  height: 100%;
+  width: 50vw;
+  margin: 0 auto;
+`
+
 export {
+  TextContainer,
+  Section,
+  Column,
   ColumnsContainer,
   DashboardCardsContainer,
   OneLineContainer,

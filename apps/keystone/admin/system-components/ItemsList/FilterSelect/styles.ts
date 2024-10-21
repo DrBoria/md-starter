@@ -1,4 +1,4 @@
-import { TTheme } from "@md/styles/baseTheme";
+
 import styled from "styled-components";
 
 // Styled components for filter styling

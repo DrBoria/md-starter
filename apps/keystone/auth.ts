@@ -72,13 +72,10 @@ function redisSessionStrategy() {
   });
 }
 
-const session =
-  NODE_ENV === "development"
-    ? statelessSessions<TSession>({
+const session = statelessSessions<TSession>({
         maxAge: sessionMaxAge,
         secret: SESSION_SECRET,
       })
-    : redisSessionStrategy();
 
 // withAuth is a function we can use to wrap our base configuration
 const { withAuth } = createAuth({

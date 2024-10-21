@@ -9,7 +9,7 @@ interface FieldValue {
   fieldName: string;
 }
 
-export interface TConditionalField {
+interface TConditionalField {
   fieldName: string;
   [key: string]: FieldValue[] | string; // TODO: find a way to remove | string type
 }
@@ -53,11 +53,11 @@ const ConditionalField = ({
   }
   const selectedValue = itemId
     ? // @ts-ignore
-      conditionalFieldList.fieldsValue?.[conditionalField.fieldName]?.value
-        ?.value?.value
+    conditionalFieldList.fieldsValue?.[conditionalField.fieldName]?.value
+      ?.value?.value
     : // @ts-ignore - typescript didn't see if on row with "if (!itemId) {"
-      createConditionalItems?.props?.value?.[conditionalField.fieldName]?.value
-        ?.value?.value;
+    createConditionalItems?.props?.value?.[conditionalField.fieldName]?.value
+      ?.value?.value;
 
   // @ts-ignore - TODO: fix after removing string from type
   const subfieldsToRender = conditionalField[selectedValue]?.map(
@@ -158,3 +158,4 @@ const ConditionalField = ({
 };
 
 export { ConditionalField };
+export type { TConditionalField };

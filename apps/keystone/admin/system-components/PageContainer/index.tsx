@@ -4,7 +4,7 @@ import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
 import { dark, ThemeProvider } from "@md/styles";
 import { styled } from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
-import { TTheme } from "@md/styles/baseTheme";
+
 
 interface PageContainerProps {
   children: ReactNode;
@@ -45,7 +45,7 @@ const Sidebar = styled.aside<{ isSidebarOpen: boolean }>`
 `;
 
 const Content = styled.main`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.section};
   box-sizing: border-box;
   min-width: 0;
   padding-left: ${({ theme }) => theme.offsets.elementContent};

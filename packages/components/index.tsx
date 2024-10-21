@@ -1,7 +1,5 @@
 export { Button } from './default/Button';
 export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText } from './default/Form';
-export { TextArea, Checkbox } from './keystone/Form';
-export { Icons } from './keystone/Icons';
 export { Pagination } from './default/Pagination';
 export { Separator } from './default/Separator';
 export { LoadingSpinner } from './LoadingSpinner';
@@ -9,6 +7,9 @@ export { Tooltip } from './default/Tooltip';
 export { Logo } from './default/Logo';
 export { Link } from './next/Link';
 export { Tabs } from './default/Tabs';
+export { Carousel } from './default/Carousel';
+export { Loading } from './default/Loading';
+
 export { Toggle } from './keystone/Toggle';
 export {
     ColumnsContainer,
@@ -17,6 +18,8 @@ export {
     LinksContainer,
     OneLineContainer,
     MenuItemContainer,
+    TextContainer,
+    Section,
 } from './default/Containers';
 export {
     SubTitle,

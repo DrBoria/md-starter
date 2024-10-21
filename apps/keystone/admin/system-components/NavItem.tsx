@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { TTheme } from '@md/styles/baseTheme';
 
 const StyledLink = styled(Link)`
   background: transparent;

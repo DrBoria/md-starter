@@ -1,4 +1,4 @@
-import { css, TDefaultTheme } from 'styled-components';
+import { css, DefaultTheme } from 'styled-components';
 
 export type TWithBasicElementOffsets = {
   /** added offset right by multiplying theme baseOffset variable */
@@ -8,11 +8,11 @@ export type TWithBasicElementOffsets = {
 };
 
 export const withOffsetsRight = css`
-  ${({ offsetRight, theme }: TWithBasicElementOffsets & { theme: TDefaultTheme }) =>
+  ${({ offsetRight, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) =>
     offsetRight && theme.offsets.batweenElements}
 `;
 
 export const withOffsetBottom = css`
-  ${({ offsetBottom, theme }: TWithBasicElementOffsets & { theme: TDefaultTheme }) =>
+  ${({ offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) =>
     offsetBottom && theme.offsets.batweenElements}
 `;

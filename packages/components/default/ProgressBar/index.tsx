@@ -1,21 +1,21 @@
 import React from 'react';
-import styled, { TDefaultTheme } from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 
 const ProgressContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
-    background-color: ${({ theme }: {theme: TDefaultTheme}) => theme.colors.section};
-    border: ${({ theme }: { theme: TDefaultTheme }) => theme.border.size} solid ${({ theme }: { theme: TDefaultTheme }) => theme.colors.sectionContent};
-    height: ${({ theme }: { theme: TDefaultTheme }) => `calc(${theme.border.size} * 8)`};
+    background-color: ${({ theme }: {theme: DefaultTheme}) => theme.colors.section};
+    border: ${({ theme }: { theme: DefaultTheme }) => theme.border.size} solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
+    height: ${({ theme }: { theme: DefaultTheme }) => `calc(${theme.border.size} * 8)`};
     display: flex;
     align-items: center;
-    border-radius: ${({ theme }: { theme: TDefaultTheme }) => theme.border.radius};
+    border-radius: ${({ theme }: { theme: DefaultTheme }) => theme.border.radius};
 
     margin-right: ${withOffsetsRight};
     margin-bottom: ${withOffsetBottom};
 `;
 
 const ProgressBarIndicator = styled.div<{ percentage: number }>`
-    background-color: ${({ theme }: {theme: TDefaultTheme}) => theme.colors.sectionContent};
+    background-color: ${({ theme }: {theme: DefaultTheme}) => theme.colors.sectionContent};
     width: ${(props) => props.percentage}%;
     height: 100%;
 `;

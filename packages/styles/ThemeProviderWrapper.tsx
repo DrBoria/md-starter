@@ -1,5 +1,5 @@
 import React, { useState, ReactNode } from 'react';
-import styled, { createGlobalStyle, TDefaultTheme, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, DefaultTheme, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
 import themes from './baseTheme';
@@ -49,8 +49,8 @@ body {
 `;
 
 const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
-  const [theme] = useState<TDefaultTheme>(themes);
-  
+  const [theme] = useState<DefaultTheme>(themes);
+
   return (
     <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>
       <ResetStyle />

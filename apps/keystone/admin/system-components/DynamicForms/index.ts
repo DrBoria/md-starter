@@ -1,5 +1,7 @@
-import { ConditionalField, TConditionalField } from './ConditionalField';
-import { TabsFields, ITabs } from './TabsFields';
+export { ConditionalField } from './ConditionalField';
+export type { TConditionalField } from './ConditionalField';
+import { TabsFields } from './TabsFields';
+export type { ITabs } from './TabsFields';
 
 import {
     getConditionalSubFieldsdNames,
@@ -9,9 +11,6 @@ import {
 import { getAllTabsFieldsNames } from './TabsFields/utils';
 
 export {
-    TConditionalField,
-    ConditionalField,
-    ITabs,
     TabsFields,
     getAllTabsFieldsNames,
     getConditionalSubFieldsdNames,

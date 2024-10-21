@@ -6,12 +6,12 @@
 //   you can find out more at https://keystonejs.com/docs/apis/config
 
 import path from "path";
-import { config, graphql } from "@keystone-6/core";
+import { config } from "@keystone-6/core";
 
 // authentication is configured separately here too, but you might move this elsewhere
 // when you write your list-level access control functions, as they typically rely on session data
-import { redis, session, withAuth } from "./auth";
-import { DATABASE_URL, NODE_ENV } from "./env";
+import { session, withAuth } from "./auth";
+import { DATABASE_URL } from "./env";
 // to keep this file tidy, we define our schema in a different file
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
@@ -47,12 +47,7 @@ export default withAuth(
       provider: "postgresql",
       url: DATABASE_URL,
       enableLogging: ["error", "warn"],
-      async onConnect() {
-        if (NODE_ENV !== "development") {
-          console.log("Connected to the database");
-          await redis.connect();
-        }
-      },
+      
     },
     graphql: {
       // Set these fields to false to disable the playground and docs

@@ -6,13 +6,15 @@ export {
 } from './themes'
 
 export {
-    devices
-} from './baseTheme'
-
+    devices,
+    getZIndex,
+} from './baseTheme';
+export type { ZIndexName } from './baseTheme';
 // Helpers
 export {
     withFullWidth,
     withOffsetBottom,
     withOffsetsRight,
+    withSpaceBetween,
 } from './helpers';
-export type { TFullWidth, TWithBasicElementOffsets } from './helpers';
+export type { TFullWidth, TWithBasicElementOffsets, TWithSpaceBetween } from './helpers';

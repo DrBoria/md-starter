@@ -2,7 +2,7 @@ import React from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styled from 'styled-components';
 
-import Button from '../Button';
+import { Button } from '../Button';
 
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 

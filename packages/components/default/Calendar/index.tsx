@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { TDefaultTheme } from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 import moment from 'moment';
 
 const CalendarContainer = styled.div`
@@ -23,8 +23,8 @@ const HeaderCell = styled.div`
     align-items: center;
     justify-content: center;
 
-    background-color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.section};
-    color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.sectionContent};
+    background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
+    color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
 `;
 
 const DayCell = styled.div`
@@ -34,12 +34,12 @@ const DayCell = styled.div`
 
     cursor: pointer;
 
-    background-color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.section};
-    color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.sectionContent};
+    background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
+    color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
     
     &:hover {
-        background-color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.sectionContent};
-        color: ${({ theme }: { theme: TDefaultTheme }) => theme.colors.section};
+        background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
+        color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
     }
 `;
 

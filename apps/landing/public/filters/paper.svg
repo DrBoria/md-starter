@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <filter id='roughpaper'>
+        <feTurbulence type="fractalNoise" baseFrequency='0.02' result='noise' numOctaves="5" />
+        <feDiffuseLighting in='noise' lightingColor='white' surfaceScale='2'>
+            <feDistantLight azimuth='45' elevation='60' />
+        </feDiffuseLighting>
+    </filter>
+</svg>
