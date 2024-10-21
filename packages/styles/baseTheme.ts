@@ -25,10 +25,10 @@ export const devices = {
 
 export type ZIndexName = 'background' | 'animatedElements' | 'content' | 'alert';
 const zIndexes: Record<ZIndexName, number> = {
-  background: -1,
-  animatedElements: 10,
-  content: 100,
-  alert: 1000,
+  background: -10,
+  animatedElements: -1,
+  content: 0,
+  alert: 10000,
 };
 
 export const getZIndex = (name: ZIndexName) => zIndexes[name];

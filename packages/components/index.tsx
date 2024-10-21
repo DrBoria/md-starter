@@ -8,7 +8,9 @@ export { Logo } from './default/Logo';
 export { Link } from './next/Link';
 export { Tabs } from './default/Tabs';
 export { Carousel } from './default/Carousel';
+export { Card } from './default/Card';
 export { Loading } from './default/Loading';
+export { Header } from './default/Header';
 
 export { Toggle } from './keystone/Toggle';
 export {
