@@ -4,9 +4,8 @@ import { Paper, PaperContainer, PaperTexture } from '@md/components/textures';
 import { Card, Section } from '@md/components'
 import { useState } from 'react'
 import { TStepCoordinate } from '@/components/footstep'
-import { PageTitle, PlainText } from '@md/components'
-import { Loading } from '@md/components'
-import Link from 'next/link'
+import { useQueryList } from '@md/api/graphql'
+import type { Lists } from '@md/types';
 
 // Starts from center
 const steps: TStepCoordinate[] = [];
@@ -16,6 +15,11 @@ export default function Home() {
     // LOADING
     const [isFirstImageLoaded, setIsFirstImageLoaded] = useState(false);
     const [isAllImagesLoaded, setIsAllImagesLoaded] = useState(false);
+
+    const { data, loading } = useQueryList<{ items: Lists.Post.Item[] }>({
+        listName: "Post",
+        selectedFields: 'id name',
+    });
 
     const handleImageLoaded = () => {
         imagesLoadedCount++;
@@ -57,11 +61,17 @@ export default function Home() {
 
                         {isFirstImageLoaded && (
                             <>
-                                <Card title='Card Name 1' />
-                                <Card title='Card Name 2' />
-                            </>)}
-
-                        <Loading hidden={isAllImagesLoaded} />
+                                {data?.items.map((item) => (
+                                    <Card
+                                        key={item.id}
+                                        title={item.name}
+                                        description="A short description goes here." // Replace with actual description if available
+                                        link={`/blog/${item.id}`}
+                                    />
+                                ))}
+                            </>
+                        )
+                        }
                     </Section>
                 </PaperContainer>
             </main>

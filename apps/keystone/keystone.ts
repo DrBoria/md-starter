@@ -42,11 +42,10 @@ export default withAuth(
         // secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
       },
     },
-
     db: {
       provider: "postgresql",
       url: DATABASE_URL,
-      enableLogging: ["error", "warn"],
+      enableLogging: ["error", "warn", "info", 'query'],
       
     },
     graphql: {
@@ -55,6 +54,16 @@ export default withAuth(
       apolloConfig: {
         introspection: true,
       },
+     cors: {
+      allowedHeaders: '*',
+      origin: '*'
+     }
+    },
+    server: {
+      cors: {
+        origin: '*', // Replace with your frontend URL
+        credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+      }
     },
     ui: {
       isAccessAllowed: (data) => !isLocked(data), // Disable admin view if user is locked

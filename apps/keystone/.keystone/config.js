@@ -34,7 +34,7 @@ __export(keystone_exports, {
 });
 module.exports = __toCommonJS(keystone_exports);
 var import_path = __toESM(require("path"));
-var import_core4 = require("@keystone-6/core");
+var import_core5 = require("@keystone-6/core");
 
 // auth.ts
 var import_auth = require("@keystone-6/auth");
@@ -335,11 +335,47 @@ var Role = (0, import_core3.list)({
   }
 });
 
+// schema/Post.ts
+var import_core4 = require("@keystone-6/core");
+var import_fields7 = require("@keystone-6/core/fields");
+var import_access2 = require("@keystone-6/core/access");
+var Post = (0, import_core4.list)({
+  access: import_access2.allowAll,
+  db: {
+    map: "post"
+  },
+  fields: {
+    name: (0, import_fields7.text)({
+      validation: { isRequired: true },
+      isIndexed: "unique",
+      ui: {
+        views: "./admin/system-components/CustomFields/Text/views"
+      }
+    }),
+    textContent: (0, import_fields7.text)({
+      validation: { isRequired: true },
+      isIndexed: "unique",
+      db: {
+        map: "text_content"
+      },
+      ui: {
+        views: "./admin/system-components/CustomFields/Text/views"
+      }
+    }),
+    updateAt: updatedAt(),
+    createdAt: createdAt()
+  },
+  ui: {
+    label: "Post"
+  }
+});
+
 // schema.ts
 var lists = {
   Example,
   User,
-  Role
+  Role,
+  Post
 };
 
 // schema/access-control/isLocked.ts
@@ -350,7 +386,7 @@ var isLocked = ({ session: session2 }) => {
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core4.config)({
+  (0, import_core5.config)({
     storage: {
       my_file_storage: {
         kind: "local",
@@ -378,13 +414,25 @@ var keystone_default = withAuth(
     db: {
       provider: "postgresql",
       url: DATABASE_URL,
-      enableLogging: ["error", "warn"]
+      enableLogging: ["error", "warn", "info", "query"]
     },
     graphql: {
       // Set these fields to false to disable the playground and docs
       playground: true,
       apolloConfig: {
         introspection: true
+      },
+      cors: {
+        allowedHeaders: "*",
+        origin: "*"
+      }
+    },
+    server: {
+      cors: {
+        origin: "*",
+        // Replace with your frontend URL
+        credentials: true
+        // Allow credentials (cookies, authorization headers, etc.)
       }
     },
     ui: {

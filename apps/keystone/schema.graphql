@@ -250,6 +250,54 @@ input RoleCreateInput {
   name: String
 }
 
+type Post {
+  id: ID!
+  name: String
+  textContent: String
+  updateAt: DateTime
+  createdAt: DateTime
+}
+
+input PostWhereUniqueInput {
+  id: ID
+  name: String
+  textContent: String
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  textContent: StringFilter
+  updateAt: DateTimeNullableFilter
+  createdAt: DateTimeFilter
+}
+
+input PostOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  textContent: OrderDirection
+  updateAt: OrderDirection
+  createdAt: OrderDirection
+}
+
+input PostUpdateInput {
+  name: String
+  textContent: String
+}
+
+input PostUpdateArgs {
+  where: PostWhereUniqueInput!
+  data: PostUpdateInput!
+}
+
+input PostCreateInput {
+  name: String
+  textContent: String
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -274,6 +322,12 @@ type Mutation {
   updateRoles(data: [RoleUpdateArgs!]!): [Role]
   deleteRole(where: RoleWhereUniqueInput!): Role
   deleteRoles(where: [RoleWhereUniqueInput!]!): [Role]
+  createPost(data: PostCreateInput!): Post
+  createPosts(data: [PostCreateInput!]!): [Post]
+  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
+  updatePosts(data: [PostUpdateArgs!]!): [Post]
+  deletePost(where: PostWhereUniqueInput!): Post
+  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -305,6 +359,9 @@ type Query {
   role(where: RoleWhereUniqueInput!): Role
   roles(where: RoleWhereInput! = {}, orderBy: [RoleOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: RoleWhereUniqueInput): [Role!]
   rolesCount(where: RoleWhereInput! = {}): Int
+  post(where: PostWhereUniqueInput!): Post
+  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
+  postsCount(where: PostWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

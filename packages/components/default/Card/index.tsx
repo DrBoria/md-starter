@@ -61,13 +61,14 @@ interface ICard {
     title: string,
     description?: string,
     date?: string,
-    readTime?: string
+    readTime?: string,
+    link: string,
 }
 
-const Card = ({ image, title, description, date, readTime }: ICard) => {
+const Card = ({ image, title, description, date, readTime, link }: ICard) => {
   return (
     <CardContainer>
-      <Image src={image} alt={title} />
+      {image && <Image src={image} alt={title} />}
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>
@@ -75,7 +76,7 @@ const Card = ({ image, title, description, date, readTime }: ICard) => {
       <Footer>
         <span>{date}</span>
         <span>{readTime} min read</span>
-        <ReadMore>Read more →</ReadMore>
+        <ReadMore href={link}>Read more →</ReadMore>
       </Footer>
     </CardContainer>
   );

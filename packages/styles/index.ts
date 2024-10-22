@@ -1,4 +1,5 @@
 export { default as ThemeProvider } from './ThemeProviderWrapper';
+export { default as ThemeProviderNative } from './ThemeProviderNative';
 
 export {
     light,

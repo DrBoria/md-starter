@@ -41,6 +41,7 @@
     "@keystone-ui/toast": "^6.0.2",
     "@md/components": "workspace:*",
     "@md/styles": "workspace:*",
+    "@md/api": "workspace:*",
     "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "5.19.0",
     "@redis/client": "^1.6.0",

@@ -5,7 +5,7 @@ import { Form, Header, Input, Section, Select, TextContainer } from '@md/compone
 import { useState } from 'react'
 import { TStepCoordinate } from '@/components/footstep'
 import { PageTitle, PlainText } from '@md/components'
-import { Loading } from '@md/components'
+import { Loading } from '@md/components';
 
 // Starts from center
 const steps: TStepCoordinate[] = [];
