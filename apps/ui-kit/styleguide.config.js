@@ -94,12 +94,11 @@ module.exports = {
     },
     {
       name: "React Native Components",
-      components: "../../packages/native-components/*/*.+(tsx|ts)",
+      components: "../../packages/native-components/[A-Z]*/*.+(tsx|ts)",
     },
   ],
 
   styleguideComponents: {
     Wrapper: path.join(__dirname, '../../packages/styles/ThemeProviderWrapper.tsx'),
-    NativeWrapper: path.join(__dirname, '../../packages/native-components/ThemeProviderNative.tsx'),
   },
 };

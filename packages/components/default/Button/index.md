@@ -1,7 +1,8 @@
 ```jsx
 import { ThemeProvider } from 'styled-components';
 import { Button } from '.';
-import { dark } from '@md/styles';
+import { dark  } from '@md/styles';
+
 <>
   Light Theme
   <div style={{ width: '100%', padding: '10px' }}>

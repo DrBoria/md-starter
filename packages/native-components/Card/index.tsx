@@ -5,7 +5,7 @@ import { TouchableOpacity, Image as RNImage, Text, View } from 'react-native';
 const CardContainer = styled(TouchableOpacity)`
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 15px;
+  margin-bottom: 15px;  
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
 `;
@@ -19,6 +19,8 @@ const Content = styled(View)`
   padding: 20px;
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
+  padding: ${({ theme }) => theme.offsets.elementContent}px;
+
 `;
 
 interface ICard {
