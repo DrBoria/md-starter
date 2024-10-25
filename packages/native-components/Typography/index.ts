@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
-import styled from "styled-components/native";
-import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from "@md/styles";
+import styled, { css } from "styled-components/native";
+import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from "../helpers";
 
 /**
  * @visibleName Typography
@@ -90,6 +90,10 @@ const LinkInForm = styled(Text)`
   font-size: 14px;
   font-weight: 600;
   text-decoration: underline;
+`;
+
+export const basicFont = css`
+  ${({ theme }) => `500 ${theme.font.size} ${theme.font.family.text}`}
 `;
 
 export {

@@ -25,7 +25,7 @@ import {
   Header,
   LearnMoreLinks,
 } from 'react-native/Libraries/NewAppScreen';
-import { Card, ThemeProvider } from '@md/native-components';
+import { BasicSection, Button, Card, Input, PageTitle, PlainText, ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql'
 import { dark } from '@md/styles/themes';
@@ -58,7 +58,7 @@ function CardBlaBla() {
     );
   }
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={{ colors: dark }}>
       <ContentContainer contentContainerStyle={{ alignItems: 'center' }}>
         <Text>Magic here</Text>
         {data?.items.map((item) => (
@@ -131,7 +131,17 @@ function App(): React.JSX.Element {
         >
           <ApolloProvider client={apolloClient}>
             <Section title="Step One">
-              <CardBlaBla />
+              <ThemeProvider theme={{ colors: dark }}>
+                <BasicSection>
+                  <PageTitle>Well Here is Page Title</PageTitle>
+                  <CardBlaBla />
+                  <Button>
+                    Mega Бутон
+                  </Button>
+                  <Input name='idfd' />
+                  <PlainText>And a plain text...</PlainText>
+                </BasicSection>
+              </ThemeProvider>
               Edit <Text style={styles.highlight}>App.tsx</Text> to change this
               screen and then come back to see your edits.
             </Section>

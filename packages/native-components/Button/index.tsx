@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native';
 
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '../helpers';
 import { ReactNode } from 'react';
+import { PlainText } from '../Typography';
 
 type TButtonTypes = 'navigation' | 'menu';
 
@@ -12,7 +13,7 @@ type TButton = {
   className?: string;
   type?: TButtonTypes;
   children: ReactNode;
-} 
+}
 // & TWithBasicElementOffsets &
 //   TFullWidth;
 
@@ -34,7 +35,7 @@ const ButtonTypes = (type?: TButtonTypes) => {
   }
 };
 
-const StyledButton = styled(TouchableOpacity)<TButton>`
+const StyledButton = styled(TouchableOpacity) <TButton>`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
@@ -51,9 +52,11 @@ const StyledButton = styled(TouchableOpacity)<TButton>`
 
 // Define a functional component that wraps the styled button
 const Button: React.FC<TButton> = ({ onClick, children, type, ...props }) => {
+  const isText = typeof children === "string";
+
   return (
     <StyledButton onPress={onClick} {...props}>
-      {children}
+      {isText ? <PlainText>{children}</PlainText> : children}
     </StyledButton>
   );
 };
