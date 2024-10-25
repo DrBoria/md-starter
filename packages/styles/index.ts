@@ -1,5 +1,4 @@
 export { default as ThemeProvider } from './ThemeProviderWrapper';
-export { default as ThemeProviderNative } from './ThemeProviderNative';
 
 export {
     light,
@@ -7,10 +6,11 @@ export {
 } from './themes'
 
 export {
+    baseTheme,
     devices,
     getZIndex,
-} from './baseTheme';
-export type { ZIndexName } from './baseTheme';
+} from './themes';
+export type { ZIndexName } from './themes';
 // Helpers
 export {
     withFullWidth,

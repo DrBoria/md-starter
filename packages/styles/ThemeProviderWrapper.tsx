@@ -2,8 +2,7 @@ import React, { useState, ReactNode } from 'react';
 import styled, { createGlobalStyle, DefaultTheme, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
-import themes from './baseTheme';
-import { light } from './themes';
+import { light, baseTheme } from './themes';
 type TColorTheme = typeof light;
 
 const MediaProvider = styled.div`
@@ -49,7 +48,7 @@ body {
 `;
 
 const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
-  const [theme] = useState<DefaultTheme>(themes);
+  const [theme] = useState<DefaultTheme>(baseTheme);
 
   return (
     <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>

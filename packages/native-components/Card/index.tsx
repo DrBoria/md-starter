@@ -6,6 +6,8 @@ const CardContainer = styled(TouchableOpacity)`
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 15px;
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
 const Image = styled(RNImage)`
@@ -15,6 +17,8 @@ const Image = styled(RNImage)`
 
 const Content = styled(View)`
   padding: 20px;
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
 interface ICard {

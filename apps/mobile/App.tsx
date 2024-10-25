@@ -25,9 +25,10 @@ import {
   Header,
   LearnMoreLinks,
 } from 'react-native/Libraries/NewAppScreen';
-import { Card } from '@md/components/react-native';
+import { Card, ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
-import  { apolloClient } from '@md/api/graphql'
+import { apolloClient } from '@md/api/graphql'
+import { dark } from '@md/styles/themes';
 
 const ContentContainer = styled(ScrollView)`
   flex-grow: 1;
@@ -57,15 +58,18 @@ function CardBlaBla() {
     );
   }
   return (
-    <ContentContainer contentContainerStyle={{ alignItems: 'center' }}>
-      {data?.items.map((item) => (
-        <Card
-          key={item.id}
-          title={item.name}
-          description="A short description goes here." // Replace with actual description if available
-        />
-      ))}
-    </ContentContainer>
+    <ThemeProvider theme={dark}>
+      <ContentContainer contentContainerStyle={{ alignItems: 'center' }}>
+        <Text>Magic here</Text>
+        {data?.items.map((item) => (
+          <Card
+            key={item.id}
+            title={item.name}
+            description="A short description goes here." // Replace with actual description if available
+          />
+        ))}
+      </ContentContainer>
+    </ThemeProvider>
   );
 }
 

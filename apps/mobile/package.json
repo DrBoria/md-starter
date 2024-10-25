@@ -7,13 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "debug": "react-native start --experimental-debugger",
+    "dev": "react-native start --experimental-debugger",
+    "network-on": "adb -s emulator-5554 reverse tcp:3000 tcp:3000",
     "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.11.5",
     "@md/api": "workspace:*",
-    "@md/components": "workspace:*",
+    "@md/native-components": "workspace:*",
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
     "@react-navigation/native": "^6.1.18",

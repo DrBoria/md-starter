@@ -1,0 +1,19 @@
+{
+  "name": "@md/native-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@md/styles": "workspace:*",
+    "@md/utils": "workspace:*",
+    "react": "^18.3.1",
+    "react-native": "0.75.4",
+    "styled-components": "^6.1.13"
+  }
+}

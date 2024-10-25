@@ -5,6 +5,7 @@ const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const extraNodeModules = new Proxy(
   {
     '@md/utils': path.resolve(__dirname, '../../packages/utils'), // Add your alias here
+    '@md/styles': path.resolve(__dirname, '../../packages/styles'), // Add your alias here
   },
   {
     get: (target, name) =>
@@ -13,10 +14,12 @@ const extraNodeModules = new Proxy(
 );
 
 const watchFolders = [
-  path.resolve(__dirname, '../../node_modules'), // If you're in a monorepo
+  // If you're in a monorepo
+  path.resolve(__dirname, '../../node_modules'),
   path.resolve(__dirname, 'node_modules'),
   path.resolve(__dirname, '../../packages'),
-  path.resolve(__dirname, '../../packages/utils'), // Ensure the utils package is watched
+  path.resolve(__dirname, '../../packages/utils'),
+  path.resolve(__dirname, '../../packages/styles'), 
 ];
 
 const config = {

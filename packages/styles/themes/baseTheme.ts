@@ -1,4 +1,4 @@
-import { light } from './themes';
+import { light } from '.';
 
 const font = {
   sizeMin: 12,
