@@ -4,9 +4,9 @@ const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 // Tell Metro where to look for dependencies and watch folders
 const extraNodeModules = new Proxy(
   {
-    '@md/utils': path.resolve(__dirname, '../../packages/utils'), // Add your alias here
-    '@md/styles': path.resolve(__dirname, '../../packages/styles'), // Add your alias here
-    '@md/native-components': path.resolve(__dirname, '../../packages/native-components'), // Add your alias here
+    '@md/utils': path.resolve(__dirname, '../../packages/utils'),
+    '@md/styles': path.resolve(__dirname, '../../packages/styles'), 
+    '@md/native-components': path.resolve(__dirname, '../../packages/native-components'),
   },
   {
     get: (target, name) =>

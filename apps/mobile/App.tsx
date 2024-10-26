@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Alert } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
@@ -20,14 +20,10 @@ import {
   Image,
 } from 'react-native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
-import {
-  Colors,
-  Header,
-} from 'react-native/Libraries/NewAppScreen';
 import { BasicSection, Button, Card, Input, PageTitle, PlainText, ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql'
-import { dark } from '@md/styles/themes';
+import { dark, light } from '@md/styles/themes';
 
 const ContentContainer = styled(ScrollView)`
   flex-grow: 1;
@@ -39,23 +35,23 @@ function CardBlaBla() {
     selectedFields: 'id name',
   });
   console.log('data id comming', data, error);
-  if (data) {
-    Alert.alert(
-      "Alert Title", // Title
-      JSON.stringify(data),
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ], // Array of button objects
-    );
-  } else {
-    Alert.alert(
-      "No Data", // Title
-      "Ha Ha",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ], // Array of button objects
-    );
-  }
+  // if (data) {
+  //   Alert.alert(
+  //     "Alert Title", // Title
+  //     JSON.stringify(data),
+  //     [
+  //       { text: "OK", onPress: () => console.log("OK Pressed") },
+  //     ], // Array of button objects
+  //   );
+  // } else {
+  //   Alert.alert(
+  //     "No Data", // Title
+  //     "Ha Ha",
+  //     [
+  //       { text: "OK", onPress: () => console.log("OK Pressed") },
+  //     ], // Array of button objects
+  //   );
+  // }
   return (
     <ThemeProvider theme={{ colors: dark }}>
       <ContentContainer contentContainerStyle={{ alignItems: 'center' }}>
@@ -72,42 +68,20 @@ function CardBlaBla() {
   );
 }
 
+const FullWidthImage = styled.Image`
+  width: 100%;
+  resize-mode: cover;
+`;
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({ children, title }: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
@@ -122,39 +96,30 @@ function App(): React.JSX.Element {
         contentContainerStyle={{ alignItems: 'center' }} // Center the content
         style={backgroundStyle}
       >
-        <Header />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
             width: '100%', // Ensure the View takes the full width
           }}
         >
           <ApolloProvider client={apolloClient}>
-            <Section title="Step One">
-              <ThemeProvider theme={{ colors: dark }}>
-                <BasicSection>
-                  <PageTitle>Well Here is Page Title</PageTitle>
-                  <CardBlaBla />
-                  <Button>
-                    Mega Бутон
-                  </Button>
-                  <Input name='idfd' />
-                  <PlainText>And a plain text...</PlainText>
-                </BasicSection>
-              </ThemeProvider>
-              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-              screen and then come back to see your edits.
-            </Section>
-            <Section title="Learn More">
-              Read the docs to discover what to do next:
-            </Section>
+            <ThemeProvider theme={{ colors: isDarkMode ? dark : light }}>
+              <BasicSection>
+                <PageTitle>Well Here is Page Title</PageTitle>
+                <FullWidthImage source={require('./assets/images/monster.png')} />
+                <CardBlaBla />
+                <Button>
+                  Mega Бутон
+                </Button>
+                <Input name='idfd' />
+                <PlainText>And a plain text...</PlainText>
+              </BasicSection>
+            </ThemeProvider>
           </ApolloProvider>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   highlight: {
