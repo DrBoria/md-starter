@@ -13,7 +13,10 @@
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
     "react": "^18.3.1",
-    "react-native": "0.75.4",
+    "react-native": "0.76.0",
     "styled-components": "^6.1.13"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "^15.0.0"
   }
 }

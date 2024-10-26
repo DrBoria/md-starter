@@ -1,1 +1,8 @@
-{}
+{
+    "gc_interval_seconds": 7200,
+    "gc_age_seconds": 7200,
+    "gc_metadata_age_seconds": 86400,
+    "max_recrawl_limit": 300,
+    "ignore_dirs": ["node_modules", "dist", "build", ".git"]
+  }
+  

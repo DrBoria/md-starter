@@ -6,6 +6,7 @@ const extraNodeModules = new Proxy(
   {
     '@md/utils': path.resolve(__dirname, '../../packages/utils'), // Add your alias here
     '@md/styles': path.resolve(__dirname, '../../packages/styles'), // Add your alias here
+    '@md/native-components': path.resolve(__dirname, '../../packages/native-components'), // Add your alias here
   },
   {
     get: (target, name) =>
@@ -18,8 +19,6 @@ const watchFolders = [
   path.resolve(__dirname, '../../node_modules'),
   path.resolve(__dirname, 'node_modules'),
   path.resolve(__dirname, '../../packages'),
-  path.resolve(__dirname, '../../packages/utils'),
-  path.resolve(__dirname, '../../packages/styles'), 
 ];
 
 const config = {

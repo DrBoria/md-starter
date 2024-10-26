@@ -23,7 +23,6 @@ import { useQueryList } from '@md/api/graphql'; // Adjust the import according t
 import {
   Colors,
   Header,
-  LearnMoreLinks,
 } from 'react-native/Libraries/NewAppScreen';
 import { BasicSection, Button, Card, Input, PageTitle, PlainText, ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
@@ -112,6 +111,7 @@ function App(): React.JSX.Element {
   };
 
   return (
+    // Safe area for devices with bangs
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
