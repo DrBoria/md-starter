@@ -1,6 +1,10 @@
 const path = require('path');
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
+
+const defaultConfig = getDefaultConfig(__dirname);
+const {assetExts, sourceExts} = defaultConfig.resolver;
+
 // Tell Metro where to look for dependencies and watch folders
 const extraNodeModules = new Proxy(
   {
@@ -21,8 +25,16 @@ const watchFolders = [
   path.resolve(__dirname, '../../packages'),
 ];
 
+// Define the new resolver configuration
 const config = {
+  transformer: {
+    babelTransformerPath: require.resolve(
+      "react-native-svg-transformer/react-native"
+    )
+  },
   resolver: {
+    assetExts: assetExts.filter((ext) => ext !== "svg"),
+    sourceExts: [...sourceExts, "svg"],
     extraNodeModules,
   },
   watchFolders,

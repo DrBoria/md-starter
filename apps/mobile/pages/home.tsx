@@ -6,10 +6,11 @@ import {
     Text,
     View,
 } from 'react-native';
-import { BasicSection, Button, Input, Card, PageTitle, PlainText, ThemeProvider, Link } from '@md/native-components';
+import { BasicSection, Button, Input, Card, PageTitle, PlainText, ThemeProvider, Link, LoadingSpinner } from '@md/native-components';
 import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
 import { dark, light } from '@md/styles/themes';
+import Ouroboros from '../assets/images/ouroboros.svg';
 
 const ContentContainer = styled(ScrollView)`
   flex-grow: 1;
@@ -74,6 +75,9 @@ const HomeScreen = ({ navigation }) => {
                 >
 
                     <BasicSection>
+                        <LoadingSpinner>
+                            <Ouroboros width={120} height={120} />
+                        </LoadingSpinner>
                         <FullWidthImage source={require('../assets/images/monster.png')} />
                         <CardBlaBla />
                         <Button>
