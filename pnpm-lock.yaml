@@ -342,10 +342,10 @@ importers:
         version: 14.2.15(eslint@9.13.0(jiti@1.21.6))(typescript@5.6.3)
       next-bundle-analyzer:
         specifier: ^0.6.8
-        version: 0.6.8(next@14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 0.6.8(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       next-image-export-optimizer:
         specifier: ^1.15.1
-        version: 1.15.1(next@14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.15.1(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       raw-loader:
         specifier: ^4.0.2
         version: 4.0.2(webpack@5.95.0)
@@ -370,6 +370,12 @@ importers:
       '@md/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@react-native/codegen':
+        specifier: ^0.76.0
+        version: 0.76.0(@babel/preset-env@7.26.0(@babel/core@7.26.0))
+      '@react-native/gradle-plugin':
+        specifier: ^0.76.0
+        version: 0.76.0
       '@react-navigation/native':
         specifier: ^6.1.18
         version: 6.1.18(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.0.0)(@types/react@18.3.12)(react@18.3.1))(react@18.3.1)
@@ -385,9 +391,15 @@ importers:
       react-native-safe-area-context:
         specifier: ^4.12.0
         version: 4.12.0(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.0.0)(@types/react@18.3.12)(react@18.3.1))(react@18.3.1)
+      react-native-screens:
+        specifier: ^3.35.0
+        version: 3.35.0(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.0.0)(@types/react@18.3.12)(react@18.3.1))(react@18.3.1)
       react-native-svg:
         specifier: ^15.8.0
         version: 15.8.0(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.0.0)(@types/react@18.3.12)(react@18.3.1))(react@18.3.1)
+      styled-components:
+        specifier: ^6.1.13
+        version: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.25.2
@@ -545,7 +557,7 @@ importers:
         version: 14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-image-export-optimizer:
         specifier: ^1.12.2
-        version: 1.15.1(next@14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.15.1(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -10842,7 +10854,7 @@ snapshots:
       '@babel/helper-compilation-targets': 7.25.7
       '@babel/helper-module-transforms': 7.25.7(@babel/core@7.25.8)
       '@babel/helpers': 7.25.7
-      '@babel/parser': 7.25.8
+      '@babel/parser': 7.26.1
       '@babel/template': 7.25.9
       '@babel/traverse': 7.25.7
       '@babel/types': 7.25.8
@@ -11797,7 +11809,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.25.7
       '@babel/generator': 7.25.7
-      '@babel/parser': 7.25.8
+      '@babel/parser': 7.26.1
       '@babel/template': 7.25.9
       '@babel/types': 7.25.8
       debug: 4.3.7
@@ -13443,9 +13455,7 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - '@babel/preset-env'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-colors@0.74.88': {}
 
@@ -18838,7 +18848,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-bundle-analyzer@0.6.8(next@14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  next-bundle-analyzer@0.6.8(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       next: 14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       open: 8.4.2
@@ -18847,7 +18857,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  next-image-export-optimizer@1.15.1(next@14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  next-image-export-optimizer@1.15.1(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       next: 14.2.15(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1

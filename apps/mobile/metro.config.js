@@ -23,6 +23,7 @@ const watchFolders = [
   path.resolve(__dirname, '../../node_modules'),
   path.resolve(__dirname, 'node_modules'),
   path.resolve(__dirname, '../../packages'),
+  path.resolve(__dirname, '../../'),
 ];
 
 // Define the new resolver configuration
