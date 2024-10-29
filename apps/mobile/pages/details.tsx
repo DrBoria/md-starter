@@ -1,6 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { useAuthenticate, useQueryList } from '@md/api/graphql';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+
+
+GoogleSignin.configure({
+  webClientId: '219402392863-2ubujlpcrff41p54oh3641ei13kj05tf.apps.googleusercontent.com', // From Google Console
+  offlineAccess: true, // If you want serverAuthCode
+});
+
+const signIn = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    console.log('userInfo', userInfo); // Handle the logged-in user information
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      console.log("User cancelled the sign-in.");
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      console.log("Sign-in is in progress.");
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      console.log("Play services not available or outdated.");
+    } else {
+      console.log("Some other error happened:", error);
+    }
+  }
+};
+
+const signOut = async () => {
+  try {
+    await GoogleSignin.revokeAccess(); // Clear cached token
+    await GoogleSignin.signOut();
+    console.log("User signed out.");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const SigninPage = () => {
   const [state, setState] = useState({ identity: '', secret: '' });
@@ -22,13 +60,6 @@ const SigninPage = () => {
   useEffect(() => {
     identityFieldRef.current?.focus();
   }, []);
-
-  useEffect(() => {
-    if (submitted) return;
-    // if (rawKeystone.authenticatedItem.state === 'authenticated') {
-    //   // router.push('/');
-    // }
-  }, [submitted]);
 
   const onSubmit = async () => {
     if (!state.identity || !state.secret) return;
@@ -81,7 +112,8 @@ const SigninPage = () => {
       <Button title="Sign In" onPress={onSubmit} disabled={loading} />
 
       <Button title="GetPosts" onPress={onPosts} disabled={loading} />
-
+      <Button title="Google" onPress={signIn} />
+      <Button title="Sign Out" onPress={signOut} />
     </View>
   );
 };
