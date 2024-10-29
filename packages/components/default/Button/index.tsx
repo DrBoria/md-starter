@@ -4,7 +4,7 @@ import { basicFont } from '../Typography';
 
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 
-type TButtonTypes = 'navigation' | 'menu';
+type TButtonTypes = 'navigation' | 'menu' | 'submit';
 
 type TButton = {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -16,6 +16,13 @@ type TButton = {
 const ButtonTypes = (type?: TButtonTypes) => {
   switch (type) {
     case 'menu':
+      return css`
+        color: ${({ theme }) => theme.colors.sectionContent};
+        text-transform: uppercase;
+
+        border: none;
+      `;
+    case 'submit':
       return css`
         color: ${({ theme }) => theme.colors.sectionContent};
         text-transform: uppercase;

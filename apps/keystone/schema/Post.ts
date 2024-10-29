@@ -7,9 +7,10 @@ import type { Lists } from ".keystone/types";
 import { createdAt } from "./fields/createdAt";
 import { updatedAt } from "./fields/updatedAt";
 import { allowAll } from "@keystone-6/core/access";
+import { isAdmin } from "./access-control/roles";
 
 export const Post = list<Lists.Post.TypeInfo>({
-  access: allowAll,
+  access: isAdmin,
   db: {
     map: "post",
   },

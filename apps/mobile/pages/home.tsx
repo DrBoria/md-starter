@@ -12,6 +12,7 @@ import { useQueryList } from '@md/api/graphql'; // Adjust the import according t
 import { dark, light } from '@md/styles/themes';
 import Ouroboros from '../assets/images/ouroboros.svg';
 
+
 const ContentContainer = styled(ScrollView)`
   flex-grow: 1;
 `;
@@ -80,14 +81,14 @@ const HomeScreen = ({ navigation }) => {
                         </LoadingSpinner>
                         <FullWidthImage source={require('../assets/images/monster.png')} />
                         <CardBlaBla />
-                        <Button>
-                            Mega Бутон
-                        </Button>
-                        <Input name='idfd' />
-                        <PlainText>And a plain text...</PlainText>
                         <Link onPress={() => navigation.navigate('Details')}>
                             Go to Details
                         </Link>
+                        <Input name='idfd' />
+                        <Button>
+                            Mega Бутон
+                        </Button>
+                        <PlainText>And a plain text...</PlainText>
                     </BasicSection>
 
                 </View>

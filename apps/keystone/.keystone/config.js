@@ -338,9 +338,8 @@ var Role = (0, import_core3.list)({
 // schema/Post.ts
 var import_core4 = require("@keystone-6/core");
 var import_fields7 = require("@keystone-6/core/fields");
-var import_access2 = require("@keystone-6/core/access");
 var Post = (0, import_core4.list)({
-  access: import_access2.allowAll,
+  access: isAdmin,
   db: {
     map: "post"
   },
@@ -424,13 +423,12 @@ var keystone_default = withAuth(
       },
       cors: {
         allowedHeaders: "*",
-        origin: "*"
+        origin: true
       }
     },
     server: {
       cors: {
-        origin: "*",
-        // Replace with your frontend URL
+        origin: true,
         credentials: true
         // Allow credentials (cookies, authorization headers, etc.)
       }
@@ -454,7 +452,7 @@ var keystone_default = withAuth(
     },
     lists,
     session,
-    telemetry: false
+    telemetry: true
   })
 );
 //# sourceMappingURL=config.js.map

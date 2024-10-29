@@ -1,12 +1,115 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { useAuthenticate, useQueryList } from '@md/api/graphql';
 
-const DetailsScreen = () => {
+const SigninPage = () => {
+  const [state, setState] = useState({ identity: '', secret: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const { data: dataPosts, error: errorPosts, refetch } = useQueryList({
+    listName: "Post",
+    selectedFields: 'id name',
+  });
+
+  const { authenticateMutation, error, loading, data } = useAuthenticate({
+    identityField: 'email',
+    secretField: 'password',
+    failureTypename: 'UserAuthenticationWithPasswordFailure',
+    successTypename: 'UserAuthenticationWithPasswordSuccess'
+  });
+
+  const identityFieldRef = useRef(null);
+
+  useEffect(() => {
+    identityFieldRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (submitted) return;
+    // if (rawKeystone.authenticatedItem.state === 'authenticated') {
+    //   // router.push('/');
+    // }
+  }, [submitted]);
+
+  const onSubmit = async () => {
+    if (!state.identity || !state.secret) return;
+
+    try {
+      const { data } = await authenticateMutation({
+        email: state.identity,
+        password: state.secret
+      });
+      console.log('response what about ....', data);
+
+      // UserAuthenticationWithPasswordSuccess means authentication successfull. If you choose users table - change mitation name
+      if (data?.item?.__typename !== 'UserAuthenticationWithPasswordSuccess') return;
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+
+    setSubmitted(true);
+  };
+
+  const onPosts = async () => {
+    await refetch();
+    console.log('data: ', dataPosts, 'error: ', errorPosts);
+  }
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details Screen</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Sign In</Text>
+      {error && <Text style={styles.error}>{error.message}</Text>}
+      {data?.item?.__typename === 'UserAuthenticationWithPasswordFailure' && (
+        <Text style={styles.error}>{data?.item.message}</Text>
+      )}
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={state.identity}
+        onChangeText={(text) => setState({ ...state, identity: text })}
+        ref={identityFieldRef}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={state.secret}
+        onChangeText={(text) => setState({ ...state, secret: text })}
+        secureTextEntry
+      />
+
+      <Button title="Sign In" onPress={onSubmit} disabled={loading} />
+
+      <Button title="GetPosts" onPress={onPosts} disabled={loading} />
+
     </View>
   );
 };
 
-export default DetailsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 20,
+    borderRadius: 5,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+});
+
+export default SigninPage;

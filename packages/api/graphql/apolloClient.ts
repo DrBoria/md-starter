@@ -7,15 +7,11 @@ const client = new ApolloClient({
     // Check this for more info https://stackoverflow.com/questions/33704130/react-native-android-fetch-failing-on-connection-to-local-api
     // This is the fix for android developer tools
     uri: 'http://localhost:3000/api/graphql',
-    headers: {
-      'Content-Type': 'application/json', // Specify Content-Type here
-    },
-    fetchOptions: {
-      mode: 'cors'
-    }
-}),
+    credentials: 'include', // Allows cookies to be sent with each request
+
+  }),
 });
 
 export {
-    client
+  client
 };

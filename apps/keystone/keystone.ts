@@ -56,12 +56,12 @@ export default withAuth(
       },
      cors: {
       allowedHeaders: '*',
-      origin: '*'
+      origin: true,
      }
     },
     server: {
       cors: {
-        origin: '*', // Replace with your frontend URL
+        origin: true,
         credentials: true, // Allow credentials (cookies, authorization headers, etc.)
       }
     },
@@ -81,6 +81,6 @@ export default withAuth(
     },
     lists,
     session,
-    telemetry: false,
+    telemetry: true,
   }),
 );

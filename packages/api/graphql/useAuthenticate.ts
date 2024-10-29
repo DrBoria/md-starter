@@ -20,10 +20,11 @@ const useAuthenticate = ({
     successTypename,
     failureTypename,
 }: IUseAuthenticateMutation) => {
+
     const [
         authenticateFunciton,
         { loading, error: errorMutation, data: dataMutation },
-    ] = useMutation<{ item: Lists.User.Item }, TCreateVariables>(
+    ] = useMutation<{ item: { item: Lists.User.Item, __typename: string } }, TCreateVariables>(
         gql`
         mutation($${identityField}: String!, $${secretField}: String!) {
             item: ${mutationName}(${identityField}: $${identityField}, ${secretField}: $${secretField}) {
@@ -53,6 +54,7 @@ const useAuthenticate = ({
         loading,
         data: dataMutation,
     };
+
 };
 
 export { useAuthenticate };

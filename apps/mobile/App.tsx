@@ -20,26 +20,24 @@ import {
 } from 'react-native';
 import { BasicSection, Button, Card, Input, Link, PageTitle, PlainText, ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
-import { apolloClient } from '@md/api/graphql'
 import { dark, light } from '@md/styles/themes';
 import HomeScreen from './pages/home';
 import DetailsScreen from './pages/details';
+import { client } from './apolloClient';
 
-
-
+// Debug for reactotron
+if (__DEV__) {
+  require("./ReactotronConfig");
+}
 
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    // backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <NavigationContainer>
-      <ApolloProvider client={apolloClient}>
+      <ApolloProvider client={client}>
         <ThemeProvider theme={{ colors: isDarkMode ? dark : light }}>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
@@ -50,24 +48,5 @@ function App(): React.JSX.Element {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  highlight: {
-    fontWeight: '700',
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-});
 
 export default App;

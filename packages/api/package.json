@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@md/utils": "workspace:*",
+    "@apollo/client": "^3.11.5",
+    "@apollo/react-hooks": "^4.0.0",
     "@md/types": "workspace:*",
-    "@apollo/client": "^3.11.5"
+    "@md/utils": "workspace:*"
   }
 }
