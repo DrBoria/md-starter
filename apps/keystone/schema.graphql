@@ -170,9 +170,14 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: IDFilter
   email: StringFilter
+  password: PasswordFilter
   locked: BooleanFilter
   role: RoleWhereInput
   createdAt: DateTimeFilter
+}
+
+input PasswordFilter {
+  isSet: Boolean!
 }
 
 input UserOrderByInput {

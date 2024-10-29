@@ -18,9 +18,14 @@ import { createAuth } from "@keystone-6/auth";
 // see https://keystonejs.com/docs/apis/session for the session docs
 import { statelessSessions, storedSessions } from "@keystone-6/core/session";
 import { createClient } from "@redis/client";
-
 import type { TSession } from "./types";
-import { NODE_ENV, REDIS_URL, SESSION_SECRET } from "./env";
+import { REDIS_URL, SESSION_SECRET } from "./env";
+import type { Context } from '.keystone/types';
+
+const { OAuth2Client } = require('google-auth-library');
+const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';
+const googleClient = new OAuth2Client(WebClientId);
+
 
 export const redis = createClient({
   url: REDIS_URL,
@@ -72,10 +77,54 @@ function redisSessionStrategy() {
   });
 }
 
-const session = statelessSessions<TSession>({
-        maxAge: sessionMaxAge,
-        secret: SESSION_SECRET,
-      })
+const stateless = statelessSessions<TSession>({
+  maxAge: sessionMaxAge,
+  secret: SESSION_SECRET,
+});
+
+
+const session = {
+  async get({ context }: { context: Context }) {
+    if (!context.req) return;
+
+    const { idtoken } = context.req.headers;
+
+    if (!idtoken) {
+      return stateless.get({ context });
+    }
+
+    try {
+      // Verify the ID token with Google
+      const ticket = await googleClient.verifyIdToken({
+        idToken: idtoken,
+        audience: WebClientId,
+      });
+
+      const payload = ticket.getPayload();
+      const userEmail = payload?.email;
+
+      // Check if the user exists in the Keystone database
+      let user = await context.db.User.findOne({ where: { email: userEmail } });
+
+      if (!user) {
+        // Optionally, create a new user if they don't exist
+        user = await context.db.User.createOne({ data: { email: userEmail } });
+      }
+
+      console.log("User authenticated:", user);
+      return {
+        id: user.id,
+        admin: user.admin,
+      };
+    } catch (error) {
+      console.error("Error verifying ID token:", error);
+      return null;
+    }
+  },
+
+  start: stateless.start,
+  end: stateless.end,
+};
 
 // withAuth is a function we can use to wrap our base configuration
 const { withAuth } = createAuth({

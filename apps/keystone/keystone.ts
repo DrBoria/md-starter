@@ -46,7 +46,7 @@ export default withAuth(
       provider: "postgresql",
       url: DATABASE_URL,
       enableLogging: ["error", "warn", "info", 'query'],
-      
+
     },
     graphql: {
       // Set these fields to false to disable the playground and docs
@@ -54,10 +54,10 @@ export default withAuth(
       apolloConfig: {
         introspection: true,
       },
-     cors: {
-      allowedHeaders: '*',
-      origin: true,
-     }
+      cors: {
+        allowedHeaders: '*',
+        origin: true,
+      }
     },
     server: {
       cors: {
