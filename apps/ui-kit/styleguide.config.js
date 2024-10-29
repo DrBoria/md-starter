@@ -85,10 +85,6 @@ module.exports = {
       components: "../../packages/components/keystone/*/*.+(tsx|ts)",
     },
     {
-      name: "Material UI Components",
-      components: "../../packages/components/material-ui/*/*.+(tsx|ts)",
-    },
-    {
       name: "Next Components",
       components: "../../packages/components/next/*/*.+(tsx|ts)",
     },

@@ -36,4 +36,13 @@ const ThemeProviderNative = ({ children, theme={} }) => {
   return <ThemeProvider theme={mergedTheme}>{children}</ThemeProvider>;
 };
 
+type TTheme = typeof baseTheme;
+
+// Fix for typescript basic theme apply
+declare module 'styled-components/native' {
+  export interface DefaultTheme extends TTheme {}
+}
+
 export default ThemeProviderNative;
+
+

@@ -1,6 +1,6 @@
 export default {
-  highlightedText: '#ffffff',
-  highlighted:     '#6e3ed2',
-  disabled:        '#818181',
-  warning: ''
+  highlightedText: '#222f31',
+  highlighted: '#7d9b99',
+  disabled: '#5A5A5A',
+  warning: '#CC3300',
 };

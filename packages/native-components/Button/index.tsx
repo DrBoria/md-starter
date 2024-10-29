@@ -40,14 +40,21 @@ const StyledButton = styled(TouchableOpacity) <TButton>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
   padding: ${({ theme }) => theme.offsets.elementContent}px;
-  
+  font-family: ${({theme}) => theme.font.family.text};
 
   background: transparent;
   border-radius: ${({ theme }) => theme.border.radius}px;
   outline: inherit;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   ${({ type }) => ButtonTypes(type)}
+
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.overlay};
+    color: ${({ theme }) => theme.colors.sectionContent};
+  }
 `;
 
 // Define a functional component that wraps the styled button

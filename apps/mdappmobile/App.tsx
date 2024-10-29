@@ -5,20 +5,13 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
   useColorScheme,
-  View,
-  Image,
 } from 'react-native';
-import { BasicSection, Button, Card, Input, Link, PageTitle, PlainText, ThemeProvider } from '@md/native-components';
+import { ThemeProvider } from '@md/native-components';
 import { ApolloProvider } from '@apollo/client';
 import { dark, light } from '@md/styles/themes';
 import HomeScreen from './pages/home';

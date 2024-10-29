@@ -9,6 +9,7 @@ type TInputProps = TextInputProps & {
   TFullWidth;
 
 const Input = styled.TextInput<TInputProps>`
+  font-family: ${({ theme }) => theme.font.family.text};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   height: ${({ theme }) => theme.elements.form.height}px;
   margin-right: ${withOffsetsRight};

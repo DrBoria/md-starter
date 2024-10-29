@@ -1,8 +1,8 @@
 import { light } from '.';
 
 const font = {
-  sizeMin: 12,
-  sizeMax: 16,
+  sizeMin: 14,
+  sizeMax: 18,
 };
 
 const screens = {
@@ -51,8 +51,8 @@ const base = {
         ((100vw - ${screens.mobileWidth}px) / ${screens.desktopWidth - screens.mobileWidth})
     )`,
     family: {
-      text: '"Comic Sans MS", "Comic Sans"',
-      title: '"Roboto", Arial',
+      text: 'Norse',  // Rugged, Norse-inspired text font
+      title: 'Norse',     // Ancient and strong title font
     },
   },
 
@@ -118,7 +118,7 @@ const base = {
   variables: {
     border: {
       size: 1,
-      radius: basicOffset * 2,
+      radius: basicOffset / 2,
     },
 
     header: {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { useAuthenticate, useQueryList } from '@md/api/graphql';
 import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { GoogleSignin } from '../oauth';
+import { BasicSection, Button, Input, PageContainer, PageTitle, SectionTitle, SubTitle } from '@md/native-components';
 
 const signIn = async () => {
   try {
@@ -40,7 +41,6 @@ const signOut = async () => {
 
 const SigninPage = () => {
   const [state, setState] = useState({ identity: '', secret: '' });
-  const [submitted, setSubmitted] = useState(false);
   const { data: dataPosts, error: errorPosts, refetch } = useQueryList({
     listName: "Post",
     selectedFields: 'id name',
@@ -75,8 +75,6 @@ const SigninPage = () => {
       console.error(e);
       return;
     }
-
-    setSubmitted(true);
   };
 
   const onPosts = async () => {
@@ -85,56 +83,39 @@ const SigninPage = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
-      {error && <Text style={styles.error}>{error.message}</Text>}
-      {data?.item?.__typename === 'UserAuthenticationWithPasswordFailure' && (
-        <Text style={styles.error}>{data?.item.message}</Text>
-      )}
+    <PageContainer>
+      <BasicSection>
+        <PageTitle>Sign In</PageTitle>
+        {error && <SubTitle style={styles.error}>{error.message}</SubTitle>}
+        {data?.item?.__typename === 'UserAuthenticationWithPasswordFailure' && (
+          <SubTitle style={styles.error}>{data?.item.message}</SubTitle>
+        )}
+      </BasicSection>
+      <BasicSection>
+        <Input
+          placeholder="Email"
+          value={state.identity}
+          onChangeText={(text) => setState({ ...state, identity: text })}
+          ref={identityFieldRef}
+        />
+        <Input
+          placeholder="Password"
+          value={state.secret}
+          onChangeText={(text) => setState({ ...state, secret: text })}
+          secureTextEntry
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={state.identity}
-        onChangeText={(text) => setState({ ...state, identity: text })}
-        ref={identityFieldRef}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={state.secret}
-        onChangeText={(text) => setState({ ...state, secret: text })}
-        secureTextEntry
-      />
+        <Button onClick={onSubmit} disabled={loading}>Sign In</Button>
 
-      <Button title="Sign In" onPress={onSubmit} disabled={loading} />
-
-      <Button title="GetPosts" onPress={onPosts} disabled={loading} />
-      <Button title="Google" onPress={signIn} />
-      <Button title="Sign Out" onPress={signOut} />
-    </View>
+        <Button onClick={onPosts} disabled={loading}>GetPosts</Button>
+        <Button onClick={signIn}>Google</Button>
+        <Button onClick={signOut} >Sign Out</Button>
+      </BasicSection>
+    </PageContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 5,
-  },
   error: {
     color: 'red',
     marginBottom: 20,

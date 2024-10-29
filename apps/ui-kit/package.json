@@ -28,6 +28,7 @@
     "webpack": "^5.95.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.25.0",
     "react-native": "0.76.0",
     "react-native-web": "^0.19.13"
   }

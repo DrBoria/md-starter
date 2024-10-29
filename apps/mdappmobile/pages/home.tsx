@@ -9,7 +9,7 @@ import {
 import { BasicSection, Button, Input, Card, PageTitle, PlainText, ThemeProvider, Link, LoadingSpinner } from '@md/native-components';
 import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
-import { dark, light } from '@md/styles/themes';
+import { dark } from '@md/styles/themes';
 import Ouroboros from '../assets/images/ouroboros.svg';
 
 
@@ -18,7 +18,7 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 function CardBlaBla() {
-    const { data, loading, error } = useQueryList({
+    const { data, error } = useQueryList({
         listName: "Post",
         selectedFields: 'id name',
     });
@@ -86,7 +86,7 @@ const HomeScreen = ({ navigation }) => {
                         </Link>
                         <Input name='idfd' />
                         <Button>
-                            Mega Бутон
+                            Mega
                         </Button>
                         <PlainText>And a plain text...</PlainText>
                     </BasicSection>

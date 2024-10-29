@@ -11,6 +11,8 @@
     "clean": "cd ./android && ./gradlew clean && cd ..",
     "pods-install": "arch -x86_64 pod install --repo-update",
     "dev-ios": "react-native run-ios --simulator='iPhone 16 pro'",
+    "dark-mode": "adb shell \"cmd uimode night yes\"",
+    "light-mode": "adb shell \"cmd uimode night no\"",
     "network": "adb -s emulator-5554 reverse tcp:3000 tcp:3000",
     "test": "jest"
   },

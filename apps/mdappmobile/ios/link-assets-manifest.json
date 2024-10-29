@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Norse-Bold.otf",
+      "sha1": "18e1354454375de843a79af18d0208077528f70e"
+    },
+    {
+      "path": "assets/fonts/Norse.otf",
+      "sha1": "c488dbee96ee8bf0dcfaa782b84d7c6c2e67c6e6"
+    }
+  ]
+}

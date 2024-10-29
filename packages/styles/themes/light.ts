@@ -4,19 +4,19 @@ export default {
   theme: 'light',
 
   ...basic,
-  section:        '#ffffff',
-  sectionContent: '#000000',
-  overlay:        '#f6f6f6',
-  overlayActive:  '#ebebeb',
-  label:          '#aaaaaa',
+  section:        '#f5f5f5',       // Light gray, soft on the eyes
+  sectionContent: '#202020',       // Dark gray for main content
+  overlay:        '#e6e6e6',       // Light overlay
+  overlayActive:  '#dcdcdc',       // Slightly darker active overlay
+  label:          '#777777',       // Muted gray for labels
 
   // Info
-  warningBackground: '#FFF3CD',
-  warningText: '#856404',
+  warningBackground: '#FFE69C',    // Pale amber background
+  warningText: '#8C6D00',          // Dark amber for text
 
-  errorBackground: '#F8D7DA',
-  errorText: '#721C24',
+  errorBackground: '#F3B3B5',      // Light red background
+  errorText: '#9C2326',            // Dark red for error text
 
-  successBackground: '#D4EDDA',
-  successText: '#155724',
+  successBackground: '#BDE8C2',    // Light green for success background
+  successText: '#155724',          // Dark green for text
 };

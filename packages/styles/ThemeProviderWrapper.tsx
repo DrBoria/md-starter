@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from 'react';
-import styled, { createGlobalStyle, DefaultTheme, ThemeProvider } from 'styled-components';
+import React, { useState } from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
 import { light, baseTheme } from './themes';
@@ -40,18 +40,20 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font: ${({ theme }) => `500 ${theme.font.size} ${theme.font.family.text}`}
 }
 
 * {
   box-sizing: border-box;
-}
+  letter-spacing: 1.5px;}
 `;
 
-const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
-  const [theme] = useState<DefaultTheme>(baseTheme);
+const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children, theme?: TColorTheme }) => {
+  const [theme] = useState(baseTheme);
 
   return (
     <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>
+      <link href="https://fonts.cdnfonts.com/css/norse" rel="stylesheet" />
       <ResetStyle />
       <MediaProvider>{children}</MediaProvider>
     </ThemeProvider>

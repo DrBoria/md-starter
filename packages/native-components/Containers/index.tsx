@@ -27,6 +27,7 @@ const WithoutHeightLimit = (noHeightLimit?: boolean) =>
   } : {};
 
 export const BasicSection = styled(View)<TSectionProps>`
+  font-family: ${({theme}) => theme.font.family.text};
   height: ${({ theme }) => `calc(${theme.screens.mobile.height}px - ${theme.elements.header.height})`};
   max-height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
   padding: ${({ theme: { offsets } }) => offsets.section}px;
@@ -37,6 +38,7 @@ export const BasicSection = styled(View)<TSectionProps>`
 `;
 
 export const PageContainer = styled(View)`
+  font-family: ${({theme}) => theme.font.family.text};
   min-height: 100vh;
   padding: ${({ theme }) => theme.offsets.section}px;
   padding-top: ${({ theme }) => theme.elements.header.height};
