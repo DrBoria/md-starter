@@ -1,6 +1,8 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { MMKV } from 'react-native-mmkv';
+import { GoogleSignin } from './oauth';
+
 let setCookieHeader: string | null;
 const storage = new MMKV();
 const domain = 'http://localhost:3000';
@@ -23,10 +25,13 @@ const httpLink = new HttpLink({ uri: 'http://localhost:3000/api/graphql', fetch:
 
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
-    const cookie = await storage.getString(domain)
+    const cookie = await storage.getString(domain);
+    const tokens = await GoogleSignin.getTokens();
+
     return {
         headers: {
             ...headers,
+            ...(tokens || {}), // add google tokens to response if exists
             cookie
         },
     };

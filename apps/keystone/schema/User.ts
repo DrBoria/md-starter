@@ -60,7 +60,6 @@ export const User = list<Lists.User.TypeInfo>({
     }),
 
     password: password({
-      validation: { isRequired: true },
       ui: {
         itemView: {
           fieldMode: (data) =>

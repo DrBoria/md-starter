@@ -1,1 +1,0 @@
-export { default } from "../../../../admin/pages/examples/[id]"

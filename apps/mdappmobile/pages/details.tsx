@@ -2,15 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { useAuthenticate, useQueryList } from '@md/api/graphql';
 import {
-  GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-
-
-GoogleSignin.configure({
-  webClientId: '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com', // From Google Console
-  offlineAccess: true, // If you want serverAuthCode
-});
+import { GoogleSignin } from '../oauth';
 
 const signIn = async () => {
   try {
