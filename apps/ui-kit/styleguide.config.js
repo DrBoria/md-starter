@@ -21,7 +21,7 @@ module.exports = {
     components: path.resolve(__dirname, "../../packages/components"),
   },
 
- webpackConfig: {
+  webpackConfig: {
     resolve: {
       alias: {
         "react-native$": "react-native-web",
@@ -77,6 +77,10 @@ module.exports = {
 
   sections: [
     {
+      name: "Theme Editor",
+      components: "../../packages/components/theme-editor/*.+(tsx|ts)",
+    },
+    {
       name: "Default Components",
       components: "../../packages/components/default/*/*.+(tsx|ts)",
     },
@@ -95,6 +99,9 @@ module.exports = {
   ],
 
   styleguideComponents: {
-    Wrapper: path.join(__dirname, '../../packages/styles/ThemeProviderWrapper.tsx'),
+    Wrapper: path.join(
+      __dirname,
+      "../../packages/styles/ThemeProviderWrapper.tsx"
+    ),
   },
 };

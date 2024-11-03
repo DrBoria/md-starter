@@ -4,6 +4,7 @@
   "main": "styleguide.config.js",
   "scripts": {
     "dev": "styleguidist server",
+    "server": "ts-node themeServer.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -29,7 +30,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.25.0",
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "fs": "0.0.1-security",
     "react-native": "0.76.0",
-    "react-native-web": "^0.19.13"
+    "react-native-web": "^0.19.13",
+    "ts-node": "^10.9.2"
   }
 }

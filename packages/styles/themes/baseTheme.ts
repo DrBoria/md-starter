@@ -150,11 +150,4 @@ const base = {
   },
 };
 
-type TTheme = typeof base;
-
-// Fix for typescript basic theme apply
-declare module 'styled-components' {
-  export interface DefaultTheme extends TTheme {}
-}
-
 export default base;
