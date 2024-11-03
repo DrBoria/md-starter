@@ -51,7 +51,7 @@ const LoadingWrapper = styled.div<{$hidden: boolean}>`
     right: 0;
     bottom: 0;
     opacity: 0;
-    z-index: 1000; // Ensure the loader is above other content (adjust as necessary)
+    z-index: ${({theme}) => theme.zIndex.animatedElements};
 
     ${({$hidden}) => $hidden ? 
         css`

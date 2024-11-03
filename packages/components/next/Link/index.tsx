@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const LinkStyled = styled(Link)`
   &:hover {
-    color: #2563eb;
+    color: ${({theme}) => theme.colors.sectionContent};
     text-decoration: underline;
   }
 `;

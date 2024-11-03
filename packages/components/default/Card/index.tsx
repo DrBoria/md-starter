@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from '../../next';
+import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets } from '@md/styles';
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<TWithBasicElementOffsets>`
+  margin-right: ${withOffsetsRight};
+  margin-bottom: ${withOffsetBottom};
   background-color: ${({ theme }) => theme.colors.section};
   border-radius: 10px;
   box-shadow: 0 4px 6px ${({ theme }) => theme.colors.sectionContent};
@@ -46,7 +50,7 @@ const Footer = styled.div`
   color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
-const ReadMore = styled.a`
+const ReadMore = styled(Link)`
   color: ${({ theme }) => theme.colors.highlighted};
   font-weight: bold;
   cursor: pointer;
@@ -56,7 +60,7 @@ const ReadMore = styled.a`
   }
 `;
 
-interface ICard {
+interface ICard extends TWithBasicElementOffsets {
     image?: string,
     title: string,
     description?: string,
@@ -65,9 +69,9 @@ interface ICard {
     link: string,
 }
 
-const Card = ({ image, title, description, date, readTime, link }: ICard) => {
+const Card = ({ image, title, description, date, readTime, link, ...rest }: ICard) => {
   return (
-    <CardContainer>
+    <CardContainer {...rest}>
       {image && <Image src={image} alt={title} />}
       <Content>
         <Title>{title}</Title>
@@ -75,7 +79,6 @@ const Card = ({ image, title, description, date, readTime, link }: ICard) => {
       </Content>
       <Footer>
         <span>{date}</span>
-        <span>{readTime} min read</span>
         <ReadMore href={link}>Read more →</ReadMore>
       </Footer>
     </CardContainer>

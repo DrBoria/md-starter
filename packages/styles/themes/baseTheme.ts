@@ -23,11 +23,13 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
-export type ZIndexName = 'background' | 'animatedElements' | 'content' | 'alert';
+export type ZIndexName = 'background' | 'animatedElements' | 'content' | 'overlay' | 'navigationElement' | 'alert';
 const zIndexes: Record<ZIndexName, number> = {
   background: -10,
   animatedElements: -1,
   content: 0,
+  overlay: 100,
+  navigationElement: 1000,
   alert: 10000,
 };
 

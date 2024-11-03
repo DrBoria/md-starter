@@ -1,13 +1,5 @@
 import { list } from "@keystone-6/core";
 import {
-  calendarDay,
-  file,
-  float,
-  image,
-  integer,
-  json,
-  multiselect,
-  password,
   relationship,
   select,
   text,

@@ -4,7 +4,7 @@ export default {
   theme: 'light',
 
   ...basic,
-  section:        '#f5f5f5',       // Light gray, soft on the eyes
+  section:        '#d3d8da',       // Light gray, soft on the eyes
   sectionContent: '#202020',       // Dark gray for main content
   overlay:        '#e6e6e6',       // Light overlay
   overlayActive:  '#dcdcdc',       // Slightly darker active overlay

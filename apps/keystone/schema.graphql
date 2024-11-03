@@ -258,6 +258,7 @@ input RoleCreateInput {
 type Post {
   id: ID!
   name: String
+  premium: Boolean
   textContent: String
   updateAt: DateTime
   createdAt: DateTime
@@ -275,6 +276,7 @@ input PostWhereInput {
   NOT: [PostWhereInput!]
   id: IDFilter
   name: StringFilter
+  premium: BooleanFilter
   textContent: StringFilter
   updateAt: DateTimeNullableFilter
   createdAt: DateTimeFilter
@@ -283,6 +285,7 @@ input PostWhereInput {
 input PostOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  premium: OrderDirection
   textContent: OrderDirection
   updateAt: OrderDirection
   createdAt: OrderDirection
@@ -290,6 +293,7 @@ input PostOrderByInput {
 
 input PostUpdateInput {
   name: String
+  premium: Boolean
   textContent: String
 }
 
@@ -300,6 +304,7 @@ input PostUpdateArgs {
 
 input PostCreateInput {
   name: String
+  premium: Boolean
   textContent: String
 }
 

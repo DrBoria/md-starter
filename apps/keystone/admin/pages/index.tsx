@@ -15,12 +15,8 @@ interface TAdminMeta {
 }
 
 export const DashboardSubPages = [
-  "Contact",
-  "Campaign",
-  "AgentReviewer",
-  "AgentWriter",
-  "Offer",
-  "Email",
+  "Users",
+  "Posts",
 ];
 
 const DashboardPage = () => {
@@ -30,35 +26,18 @@ const DashboardPage = () => {
     <PageContainer header={<h1>Header</h1>}>
       <DashboardCardsContainer>
         <DashboardCard
-          title="Agents"
-          link="agents"
+          title="Posts"
+          link="posts"
           itemCount={
             (adminMeta?.AgentReviewer || 0) + (adminMeta?.AgentWriter || 0)
           }
           noCreate
         />
         <DashboardCard
-          title="Campaigns"
-          link="campaigns"
+          title="Users"
+          link="users"
           itemCount={adminMeta?.Campaign}
         />
-        <DashboardCard
-          title="Contacts"
-          link="contacts"
-          itemCount={adminMeta?.Contact}
-        />
-        <DashboardCard
-          title="Emails"
-          link="emails"
-          noCreate
-          itemCount={adminMeta?.Email}
-        />
-
-        {/* <DashboardCard
-          title="Offers"
-          link="offers"
-          itemCount={adminMeta?.Offer}
-        /> */}
       </DashboardCardsContainer>
     </PageContainer>
   );

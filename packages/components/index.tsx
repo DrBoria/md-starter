@@ -1,3 +1,5 @@
+import { baseTheme } from '@md/styles/themes';
+
 export { Button } from './default/Button';
 export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText } from './default/Form';
 export { Pagination } from './default/Pagination';
@@ -11,6 +13,7 @@ export { Carousel } from './default/Carousel';
 export { Card } from './default/Card';
 export { Loading } from './default/Loading';
 export { Header } from './default/Header';
+export { HamburgerMenu } from './default/HamburgerMenu';
 
 export { Toggle } from './keystone/Toggle';
 export {
@@ -31,3 +34,9 @@ export {
     HeaderText,
     LinkInForm,
 } from './default/Typography';
+
+
+type TTheme = typeof baseTheme;
+declare module 'styled-components' {
+    export interface DefaultTheme extends TTheme {}
+  }
