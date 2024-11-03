@@ -24,16 +24,58 @@ const loadThemeFiles = async () => {
 
   for (const file of themeFiles) {
     const themePath = path.join(__dirname, themesPath, file);
+
     try {
-      delete require.cache[require.resolve(themePath)];
-      const themeModule = await import(themePath);
-      themes[file.replace('.ts', '')] = themeModule.default;
+      // Read the file content as text
+      const fileContent = await fs.readFile(themePath, 'utf-8');
+      
+      // Match and extract the default export object without imported spreads like "...basic"
+      const themeData = extractThemeData(fileContent);
+      
+      if (themeData) {
+        themes[file.replace('.ts', '')] = themeData;
+      }
     } catch (err) {
       console.error(`Error loading theme file: ${file}`, err);
     }
   }
+
   return themes;
 };
+
+// Helper function to extract only the local properties from the default export object
+const extractThemeData = (fileContent: string) => {
+  // Match the object inside `export default {...}` while ignoring spread imports
+  const match = fileContent.match(/export\s+default\s+\{([^]+?)\};?/);
+  
+  if (!match) return null;
+
+  const objectBody = match[1]
+    .split('\n')
+    .filter(line => !line.includes('...'))  // Exclude spread syntax
+    .join('\n');
+
+  // Parse the extracted object body as JSON-like data
+  try {
+    const themeObject = eval(`({${objectBody}})`);
+    return themeObject;
+  } catch (error) {
+    console.error('Failed to parse theme object:', error);
+    return null;
+  }
+};
+
+// Endpoint to get all theme variables
+app.get('/themes', async (req: Request, res: Response) => {
+  try {
+    const themes = await loadThemeFiles();
+    console.log(themes);
+    res.json(themes);
+  } catch (error) {
+    console.error('Error loading themes:', error);
+    res.status(500).json({ error: 'Failed to load themes' });
+  }
+});
 
 // Utility function to update specific lines in the file content
 async function updateThemeFile(filePath: string, updates: Record<string, string>) {
@@ -54,18 +96,6 @@ async function updateThemeFile(filePath: string, updates: Record<string, string>
     throw error;
   }
 }
-
-// Endpoint to get all theme variables
-app.get('/themes', async (req: Request, res: Response) => {
-  try {
-    const themes = await loadThemeFiles();
-    console.log(themes);
-    res.json(themes);
-  } catch (error) {
-    console.error('Error loading themes:', error);
-    res.status(500).json({ error: 'Failed to load themes' });
-  }
-});
 
 // Endpoint to update all theme variables at once
 app.post('/themes', async (req: Request, res: Response) => {
