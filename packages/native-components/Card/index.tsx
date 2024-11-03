@@ -21,7 +21,8 @@ const CardContainer = styled(TouchableOpacity)`
 
 const Title = styled(PlainText)`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
+  font-family: ${({ theme }) => theme.font.family.title};
 `;
 
 const Footer = styled(View)`
@@ -32,8 +33,9 @@ const Footer = styled(View)`
 `;
 
 const ReadMore = styled(PlainText)`
+  font-family: ${({ theme }) => theme.font.family.title};
   color: ${({ theme }) => theme.colors.highlighted};
-  font-weight: bold;
+  font-weight: 600;
 `;
 
 interface ICard {

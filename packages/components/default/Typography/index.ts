@@ -41,7 +41,7 @@ const PageTitle = styled.h1<TWithBasicElementOffsets>`
   font: ${basicFont};
   font-weight: 700;
   font-size: ${sizes.PageTitle.fontSize};
-  font-family: ${({ theme }) => theme.font.family.title};
+  font-family: ${({ theme }) => theme.font.family.text};
   line-height: ${sizes.PageTitle.lineHeight};
   text-transform: capitalize;
 `;

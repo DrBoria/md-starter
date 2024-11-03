@@ -31,7 +31,7 @@ const PageTitle = styled(Text)<TWithBasicElementOffsets>`
   font-family: ${({ theme }) => theme.font.family.title};
   font-size: ${sizes.PageTitle.fontSize}px;
   line-height: ${sizes.PageTitle.lineHeight}px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: capitalize;
   margin-right: ${withOffsetsRight}px;
   margin-bottom: ${withOffsetBottom}px;
@@ -51,7 +51,7 @@ const SectionTitle = styled(Text)<TWithBasicElementOffsets>`
   font-family: ${({ theme }) => theme.font.family.title};
   font-size: ${sizes.SectionTitle.fontSize}px;
   line-height: ${sizes.SectionTitle.lineHeight}px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: capitalize;
   margin-right: ${withOffsetsRight}px;
   margin-bottom: ${withOffsetBottom}px;
@@ -88,13 +88,13 @@ const DescriptionText = styled(Text)`
 
 const HeaderText = styled(Text)`
   font-family: ${({ theme }) => theme.font.family.title};
-  font-weight: 700;
+  font-weight: 600;
   font-size: 20px; // same as in keystone
   color: #111827; // same as in keystone
 `;
 
 const LinkInForm = styled(Text)`
-  font-family: ${({ theme }) => theme.font.family.text};
+  font-family: ${({ theme }) => theme.font.family.title};
   color: #374151;
   font-size: 14px;
   font-weight: 600;

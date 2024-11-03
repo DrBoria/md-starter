@@ -34,11 +34,13 @@ const Content = styled.div`
 const Title = styled.h3`
   font-size: 1.2rem;
   margin-bottom: 10px;
+  font-family: ${({ theme }) => theme.font.family.text};
 `;
 
 const Description = styled.p`
   font-size: 0.95rem;
   color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.font.family.text};
   line-height: 1.5;
 `;
 
@@ -52,6 +54,7 @@ const Footer = styled.div`
 `;
 
 const ReadMore = styled(Link)`
+  font-family: ${({ theme }) => theme.font.family.text};
   color: ${({ theme }) => theme.colors.highlighted};
   font-weight: bold;
   cursor: pointer;
