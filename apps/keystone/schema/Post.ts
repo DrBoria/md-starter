@@ -19,6 +19,7 @@ export const Post = list<Lists.Post.TypeInfo>({
     },
     filter: {
       query: ({ session }) => {
+        console.log(session, 'isAdmin: ', isAdmin({session}));
         if (isAdmin({ session })) {
           // Admins can see all posts, including premium ones
           return true;

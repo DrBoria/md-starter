@@ -12,8 +12,8 @@ const Input = styled.TextInput<TInputProps>`
   font-family: ${({ theme }) => theme.font.family.text};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   height: ${({ theme }) => theme.elements.form.height}px;
-  margin-right: ${withOffsetsRight};
-  margin-bottom: ${withOffsetBottom};
+  margin-right: ${withOffsetsRight}px;
+  margin-bottom: ${withOffsetBottom}px;
   padding: ${({ theme }) => theme.offsets.elementContent}px;
 
   color: ${({ theme }) => theme.colors.sectionContent};

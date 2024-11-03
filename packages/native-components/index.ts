@@ -5,7 +5,8 @@ export { Card } from './Card';
 export { Button } from './Button';
 export { Link } from './Link';
 export { LoadingSpinner } from './LoadingSpinner';
-export { PageContainer, BasicSection, HeadingContainer } from './Containers';
+export { HamburgerMenu } from './HamburgerMenu';
+export { PageContainer, BasicSection, HeadingContainer, Section, TextContainer } from './Containers';
 export {
     PageTitle,
     Highlighted,

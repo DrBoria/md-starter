@@ -41,7 +41,10 @@ export const Role = list<Lists.Role.TypeInfo>({
     map: "role",
   },
   fields: {
-    name: text(),
+    name: text({
+      validation: { isRequired: true },
+      isIndexed: "unique",
+    }),
     createdAt: createdAt(),
   },
   ui: {

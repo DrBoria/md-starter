@@ -21,6 +21,7 @@ import { createClient } from "@redis/client";
 import type { TSession } from "./types";
 import { REDIS_URL, SESSION_SECRET } from "./env";
 import type { Context } from '.keystone/types';
+import { createdAt } from "./schema/fields/createdAt";
 
 const { OAuth2Client } = require('google-auth-library');
 const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';
@@ -105,16 +106,22 @@ const session = {
 
       // Check if the user exists in the Keystone database
       let user = await context.db.User.findOne({ where: { email: userEmail } });
+      let role = await context.db.Role.findOne({ where: { id: user?.roleId } });
 
       if (!user) {
         // Optionally, create a new user if they don't exist
+        // let defaultRole = await context.db.Role.findOne({ where: { name: 'Viewer' } });
         user = await context.db.User.createOne({ data: { email: userEmail } });
       }
 
-      console.log("User authenticated:", user);
       return {
-        id: user.id,
-        admin: user.admin,
+        listKey: 'User',
+        itemId: user.id,
+        data: {
+          id: user.id,
+          createdAt: user.createdAt,
+          role: role,
+        }
       };
     } catch (error) {
       console.error("Error verifying ID token:", error);

@@ -111,51 +111,77 @@ const MenuItemContainer = styled(View)`
 type TSection = {
   $direction: 'horizontal' | 'horizontal-reversed' | 'vertical';
   $sectionSize: 'full' | 'medium' | 'half' | 'dot-section' | 'footsteps';
-};
+} & TWithBasicElementOffsets;
 
-const Section = styled(View)<TSection>`
+
+const Section = styled.View<TSection>`
   position: relative;
   width: 100%;
   overflow: hidden;
+  margin-right: ${withOffsetsRight}px;
+  margin-bottom: ${withOffsetBottom}px;
 
-  ${({ $direction }) => ({
-    horizontal: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    'horizontal-reversed': {
-      display: 'flex',
-      flexDirection: 'row-reverse',
-      alignItems: 'center',
-    },
-    vertical: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-  }[$direction])};
+  ${({ $direction }) => {
+    switch ($direction) {
+      case 'horizontal':
+        return `
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+        `;
+      case 'horizontal-reversed':
+        return `
+          display: flex;
+          align-items: center;
+          flex-direction: row-reverse;
+        `;
+      case 'vertical':
+        return `
+          display: flex;
+          flex-direction: column;
+        `;
+      case 'top':
+        return `
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+        `;
+      default:
+        return '';
+    }
+  }};
 
-  ${({ $sectionSize }) => ({
-    full: {
-      height: '100vh',
-      zIndex: 10,
-    },
-    medium: {
-      height: '75vh',
-    },
-    half: {
-      height: '50vh',
-    },
-    'dot-section': {
-      height: '50vh',
-    },
-    footsteps: {
-      position: 'absolute',
-      height: 'auto',
-      overflow: 'initial',
-    },
-  }[$sectionSize])};
+  ${({ $sectionSize }) => {
+    switch ($sectionSize) {
+      case 'full':
+        return `
+          height: 100vh;
+          z-index: 10;
+        `;
+      case 'medium':
+        return `
+          height: 75vh;
+        `;
+      case 'half':
+        return `
+          height: 50vh;
+        `;
+      case 'dot-section':
+        return `
+          height: 50vh;
+        `;
+      case 'footsteps':
+        return `
+          position: absolute;
+          height: auto;
+          overflow: visible; // Use 'visible' instead of 'initial'
+        `;
+      default:
+        return '';
+    }
+  }};
 `;
+
 
 const TextContainer = styled(View)`
   flex-direction: column;

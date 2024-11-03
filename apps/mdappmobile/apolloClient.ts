@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { MMKV } from 'react-native-mmkv';
-import { GoogleSignin } from './oauth';
+import { GoogleSignin } from './authentication/oauth';
 
 let setCookieHeader: string | null;
-const storage = new MMKV();
+export const storage = new MMKV();
 const domain = 'http://localhost:3000';
 
 // Custom fetch function to handle 'Set-Cookie' headers
@@ -20,18 +20,48 @@ const customFetch: typeof fetch = async (uri, options) => {
     return response;
 };
 
+
+// Function to check if token has expired
+const hasTokenExpired = (tokens) => {
+    const { expirationTime } = tokens; // Assume tokens have an expiration time
+    return expirationTime < Date.now(); // Compare with current time
+};
+
+// Function to refresh tokens
+const refreshTokens = async () => {
+    const { idToken, accessToken } = await GoogleSignin.signInSilently();
+    return {
+        idToken,
+        accessToken,
+        expirationTime: Date.now() + 60 * 60 * 1000, // Example: 1 hour expiration
+    };
+};
+
 // Define the HTTP link with the custom fetch
-const httpLink = new HttpLink({ uri: 'http://localhost:3000/api/graphql', fetch: customFetch });
+const httpLink = new HttpLink({ uri: `${domain}/api/graphql`, fetch: customFetch });
 
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
     const cookie = await storage.getString(domain);
-    const tokens = await GoogleSignin.getTokens();
+    let tokens = await GoogleSignin.getTokens();
+    console.log(tokens, 'hasTokenExpired? : ', hasTokenExpired(tokens))
+    if (!tokens || hasTokenExpired(tokens)) {
+        // Token is expired or doesn't exist, try to refresh
+        try {
+            tokens = await refreshTokens(); // Your custom function to refresh tokens
+            console.error("GOT NEW TOKENS", tokens);
+        } catch (error) {
+            console.error("Error refreshing tokens:", error);
+            // Handle token refresh error (e.g., sign out the user)
+            await GoogleSignin.signOut();
+            tokens = null; // Ensure no tokens are sent if refresh fails
+        }
+    }
 
     return {
         headers: {
             ...headers,
-            ...(tokens || {}), // add google tokens to response if exists
+            // ...(tokens || {}), // add google tokens to response if exists
             cookie
         },
     };

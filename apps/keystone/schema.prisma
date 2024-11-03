@@ -41,7 +41,7 @@ model User {
 
 model Role {
   id             String   @id @default(cuid())
-  name           String   @default("")
+  name           String   @unique @default("")
   createdAt      DateTime @default(now()) @map("created_at")
   from_User_role User[]   @relation("User_role")
 
