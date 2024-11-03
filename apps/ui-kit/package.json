@@ -4,7 +4,7 @@
   "main": "styleguide.config.js",
   "scripts": {
     "dev": "styleguidist server",
-    "server": "ts-node themeServer.ts",
+    "server": "node --inspect-brk -r ts-node/register themeServer.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -39,6 +39,7 @@
     "fs": "0.0.1-security",
     "react-native": "0.76.0",
     "react-native-web": "^0.19.13",
+    "ts-morph": "^24.0.0",
     "ts-node": "^10.9.2"
   }
 }

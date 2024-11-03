@@ -1,9 +1,9 @@
 import { light } from '.';
-
-const font = {
-  sizeMin: 14,
-  sizeMax: 18,
-};
+import border from './border';
+import elements from './elements';
+import font from './font';
+import offsets from './offsets';
+import zIndexes, { ZIndexName } from './zIndexes';
 
 const screens = {
   // Width
@@ -23,19 +23,8 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
-export type ZIndexName = 'background' | 'animatedElements' | 'content' | 'overlay' | 'navigationElement' | 'alert';
-const zIndexes: Record<ZIndexName, number> = {
-  background: -10,
-  animatedElements: -1,
-  content: 0,
-  overlay: 100,
-  navigationElement: 1000,
-  alert: 10000,
-};
-
 export const getZIndex = (name: ZIndexName) => zIndexes[name];
 
-const basicOffset = 8;
 const base = {
   zIndex: zIndexes,
   animation: {
@@ -52,25 +41,10 @@ const base = {
       ${font.sizeMin}px + ${font.sizeMax - font.sizeMin} *
         ((100vw - ${screens.mobileWidth}px) / ${screens.desktopWidth - screens.mobileWidth})
     )`,
-    family: {
-      text: 'Norse',  // Rugged, Norse-inspired text font
-      title: 'Norse',     // Ancient and strong title font
-    },
+    family: font.family
   },
 
-  elements: {
-    header: {
-      height: 'var(--height-header)',
-    },
-    form: {
-      height: '50px',
-    },
-    icons: {
-      height: '20px',
-      width: '20px',
-      radius: '10px',
-    },
-  },
+  elements,
 
   border: {
     radius: 'var(--border-radius)',
@@ -118,11 +92,7 @@ const base = {
   /* ******************************************************* */
 
   variables: {
-    border: {
-      size: 1,
-      radius: basicOffset / 2,
-    },
-
+    border,
     header: {
       height: {
         mobile: 75,
@@ -130,23 +100,7 @@ const base = {
         desktop: 150,
       },
     },
-    offsets: {
-      section: {
-        mobile: basicOffset * 3,
-        tablet: basicOffset * 6,
-        desktop: basicOffset * 12,
-      },
-      betweenElements: {
-        mobile: basicOffset,
-        tablet: basicOffset,
-        desktop: basicOffset * 2,
-      },
-      elementContent: {
-        mobile: basicOffset,
-        tablet: basicOffset * 2,
-        desktop: basicOffset * 2,
-      },
-    },
+    offsets,
   },
 };
 

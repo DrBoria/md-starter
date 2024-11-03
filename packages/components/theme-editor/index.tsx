@@ -120,7 +120,6 @@ const ThemeEditor: React.FC = () => {
     console.log('Changed Values:', changedValues); // Debug output
   
     if (Object.keys(changedValues).length === 0) {
-      alert('No changes to save');
       return;
     }
   
@@ -132,7 +131,6 @@ const ThemeEditor: React.FC = () => {
         },
         body: JSON.stringify(changedValues),
       });
-      alert('Theme updated successfully!');
     } catch (error) {
       console.error('Error saving theme:', error);
       alert('Error saving theme');
@@ -163,7 +161,7 @@ const ThemeEditor: React.FC = () => {
             <>
               <SectionHeader onClick={() => toggleSection(key)}>
                 {key}
-                {collapsedSections.has(key) ? '▼' : '►'}
+                {collapsedSections.has(key) ? '►' : '▼'}
               </SectionHeader>
               {!collapsedSections.has(key) && (
                 <InputGroup>{renderInputs(value, newKeyPath)}</InputGroup>
