@@ -89,7 +89,7 @@ const Wrapper = styled(ResponsiveContainer)<TComponentProps>`
   background-color: ${({ theme }) => theme.colors.section};
 
   .recharts-surface {
-    padding: ${({ theme }) => theme.offsets.batweenElements};
+    padding: ${({ theme }) => theme.offsets.betweenElements};
   }
 
   .recharts-cartesian-axis-line {

@@ -31,7 +31,8 @@ export const BasicSection = styled(View)<TSectionProps>`
   height: ${({ theme }) => `calc(${theme.screens.mobile.height}px - ${theme.elements.header.height})`};
   max-height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
   padding: ${({ theme: { offsets } }) => offsets.section}px;
-
+  width: 100%;
+  
   background-color: ${({ theme }) => theme.colors.section};
 
   ${({ noHeightLimit }) => WithoutHeightLimit(noHeightLimit)}
@@ -189,8 +190,6 @@ const TextContainer = styled(View)`
   justify-content: center;
 
   height: 100%;
-  width: 50vw;
-  margin: 0 auto;
 `;
 
 export {

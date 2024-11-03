@@ -31,7 +31,7 @@ export const Percentage = styled.div<{ trend?: boolean }>`
   align-items: center;
   justify-content: flex-end;
   ${PlainText} {
-    margin-left: ${({ theme }) => theme.offsets.batweenElements};
+    margin-left: ${({ theme }) => theme.offsets.betweenElements};
 
     color: ${({ trend, theme }) => (trend ? theme.colors.disabled : theme.colors.highlighted)};
   }

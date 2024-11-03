@@ -85,7 +85,7 @@ const base = {
     // Padding inside section (between border of the section and content) and between sections
     section: 'var(--offset-section)',
     // Padding between elements inside section
-    batweenElements: 'var(--offset-between-elements)',
+    betweenElements: 'var(--offset-between-elements)',
     // Padding inside elements - between element content and border of elements
     elementContent: 'var(--offset-element-content)',
   },

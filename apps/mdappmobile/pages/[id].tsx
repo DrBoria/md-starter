@@ -31,7 +31,7 @@ const PostPage = () => {
                 contentContainerStyle={{ alignItems: 'center' }}
             >
                 <Section $sectionSize='full' $direction='vertical'>
-                    <ScrollView contentContainerStyle={{ padding: 20 }}>
+                    <ScrollView>
                         {data?.post && (
                             <TextContainer>
                                 <PageTitle>{data.post.name}</PageTitle>

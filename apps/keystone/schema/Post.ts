@@ -44,7 +44,6 @@ export const Post = list<Lists.Post.TypeInfo>({
     premium: checkbox({}),
     textContent: text({
       validation: { isRequired: true },
-      isIndexed: "unique",
       db: {
         map: "text_content",
       },

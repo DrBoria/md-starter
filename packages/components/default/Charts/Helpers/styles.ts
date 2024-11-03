@@ -9,7 +9,7 @@ export const YAxisContainer = styled.div`
   justify-content: space-between;
   width: ${({ theme }) => theme.elements.icons.width};
   height: 100%;
-  padding: ${({ theme }) => theme.offsets.batweenElements};
+  padding: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 export const Container = styled.div`
@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   width: 100%;
   height: 100%;
-  padding: ${({ theme }) => theme.offsets.batweenElements};
+  padding: ${({ theme }) => theme.offsets.betweenElements};
 
   background-color: ${({ theme }) => theme.colors.overlay};
 `;

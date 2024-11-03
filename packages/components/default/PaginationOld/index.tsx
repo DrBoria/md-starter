@@ -15,7 +15,7 @@ type TPaginationProps = {
 
 const Container = styled.div<TFullWidth>`
   display: flex;
-  grid-gap: ${({ theme }) => theme.offsets.batweenElements};
+  grid-gap: ${({ theme }) => theme.offsets.betweenElements};
   align-items: center;
   justify-content: center;
   width: ${({ fullWidth }) => fullWidth && '100%'};

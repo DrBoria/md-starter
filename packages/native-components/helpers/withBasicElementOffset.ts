@@ -9,10 +9,10 @@ export type TWithBasicElementOffsets = {
 
 export const withOffsetsRight = css`
   ${({ offsetRight, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) =>
-    offsetRight && theme.offsets.batweenElements}
+    offsetRight && theme.offsets.betweenElements}
 `;
 
 export const withOffsetBottom = css`
-  ${({ offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) =>
-    offsetBottom && theme.offsets.batweenElements}
-`;
+  ${
+    ({ offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => offsetBottom && theme.offsets.betweenElements
+  }`

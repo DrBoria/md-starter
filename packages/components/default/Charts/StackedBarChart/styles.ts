@@ -9,16 +9,16 @@ export const NameContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: ${({ theme }) => theme.offsets.batweenElements};
+  margin-right: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 export const ColoredDot = styled.div`
   ${({ theme: { border, offsets, colors } }) => `
     background: ${colors.section};
     border-radius: ${border.circle};
-    width: ${offsets.batweenElements};
-    height: ${offsets.batweenElements};
-    margin-right: ${offsets.batweenElements};
+    width: ${offsets.betweenElements};
+    height: ${offsets.betweenElements};
+    margin-right: ${offsets.betweenElements};
   `}
 `;
 
@@ -31,7 +31,7 @@ export const Wrapper = styled(ResponsiveContainer)<TComponentProps>`
     background: ${colors.section};
 
     .recharts-surface {
-      padding: ${offsets.batweenElements};
+      padding: ${offsets.betweenElements};
     }
 
     .recharts-cartesian-axis-line {

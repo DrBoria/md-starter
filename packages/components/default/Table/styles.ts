@@ -7,7 +7,7 @@ export const PaginationContainer = styled.div`
 
 export const Grid = styled.div`
   display: grid;
-  grid-column-gap: ${({ theme }) => theme.offsets.batweenElements};
+  grid-column-gap: ${({ theme }) => theme.offsets.betweenElements};
   grid-template-rows: 1fr;
   grid-template-columns: ${({ colsTemplate }: { colsTemplate: string }) => colsTemplate};
   align-items: center;
