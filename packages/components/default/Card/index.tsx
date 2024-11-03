@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from '../../next';
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets } from '@md/styles';
+import { PlainText } from '../Typography';
 
 const CardContainer = styled.div<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
@@ -78,7 +79,7 @@ const Card = ({ image, title, description, date, readTime, link, ...rest }: ICar
         <Description>{description}</Description>
       </Content>
       <Footer>
-        <span>{date}</span>
+        <PlainText>{date}</PlainText>
         <ReadMore href={link}>Read more →</ReadMore>
       </Footer>
     </CardContainer>

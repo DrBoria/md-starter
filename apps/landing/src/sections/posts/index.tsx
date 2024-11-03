@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const Posts = () => {
     const { data, refetch } = useQueryList<{ items: Lists.Post.Item[] }>({
         listName: "Post",
-        selectedFields: 'id name',
+        selectedFields: 'id name createdAt',
     });
 
     useEffect(() => {
@@ -21,6 +21,7 @@ const Posts = () => {
                     offsetRight 
                     key={item.id}
                     title={item.name}
+                    date={new Date(item.createdAt)?.toLocaleTimeString()}
                     description="A short description goes here." // Replace with actual description if available
                     link={`/${item.id}`}
                 />
