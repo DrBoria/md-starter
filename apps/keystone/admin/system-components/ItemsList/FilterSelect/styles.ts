@@ -2,8 +2,7 @@
 import styled from "styled-components";
 
 // Styled components for filter styling
-export const FilterButton = styled.button`
-  padding: 8px 12px;
+export const FilterButton = styled.div`
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
   border: none;
@@ -28,11 +27,6 @@ export const FilterDropdown = styled.div`
   z-index: 1;
 `;
 
-export const FilterTitle = styled.h3`
-  font-size: 16px;
-  font-weight: 600;
-`;
-
 export const BackButton = styled.button`
   background-color: transparent;
   border: none;
@@ -42,3 +36,4 @@ export const BackButton = styled.button`
   margin-bottom: 16px;
   margin-bottom: 16px;
 `;
+

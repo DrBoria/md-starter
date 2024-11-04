@@ -1,7 +1,7 @@
 // Sidebar.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from '../../next/Link';
+import { MenuItem } from '../../next';
 
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
@@ -16,18 +16,6 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   padding-top: ${({ theme }) => theme.offsets.elementContent};
   z-index: ${({ theme }) => theme.zIndex.overlay};
-`;
-
-const SidebarItem = styled(Link)`
-  padding: ${({ theme }) => theme.offsets.elementContent};
-  display: block;
-  transition: 0.3s;
-  color: ${({ theme }) => theme.colors.sectionContent};
-  font-size: ${({ theme }) => theme.elements.icons.height};
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.highlighted};
-    color: ${({ theme }) => theme.colors.highlightedText};
-  }
 `;
 
 const HamburgerButton = styled.button`
@@ -67,8 +55,8 @@ const HamburgerMenu: React.FC = () => {
       <Overlay isOpen={isOpen} onClick={toggleSidebar} />
 
       <SidebarContainer isOpen={isOpen}>
-        <SidebarItem href="/" onClick={toggleSidebar}>Home</SidebarItem>
-        <SidebarItem href="login" onClick={toggleSidebar}>Login</SidebarItem>
+        <MenuItem href="/" onClick={toggleSidebar}>Home</MenuItem>
+        <MenuItem href="login" onClick={toggleSidebar}>Login</MenuItem>
       </SidebarContainer>
     </>
   );

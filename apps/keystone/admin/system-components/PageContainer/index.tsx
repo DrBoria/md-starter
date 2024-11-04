@@ -48,6 +48,8 @@ const Content = styled.main`
   background-color: ${({ theme }) => theme.colors.section};
   box-sizing: border-box;
   min-width: 0;
+  
+  padding-top: calc(${({ theme }) => theme.elements.header.height});
   padding-left: ${({ theme }) => theme.offsets.elementContent};
   padding-right: ${({ theme }) => theme.offsets.elementContent};
   position: relative;

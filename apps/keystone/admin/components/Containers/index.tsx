@@ -16,8 +16,7 @@ const ColumnsContainer = styled.div<ColumnsContainerProps>`
 const DashboardCardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  padding: 24px 0;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 const FocusedContainer = styled.div`

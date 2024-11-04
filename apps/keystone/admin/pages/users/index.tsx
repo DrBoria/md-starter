@@ -13,6 +13,7 @@ const ExamplesList = () => {
       <ColumnsContainer $colsRatio={["2fr", "1fr"]} className="py-4">
         <ItemsList
           listName="User"
+          displayedFields={['email', 'role', 'locked']}
           withFullSupport
           withFilter
           withPagination

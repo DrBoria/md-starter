@@ -4,7 +4,7 @@ export default {
   theme: 'dark',
 
   ...basic,
-  section:        '#08090b',       // Dark blue-black, atmospheric
+  section:        '#1f232b',       // Dark blue-black, atmospheric
   sectionContent: '#f0f0f0',       // Soft off-white for contrast
   overlay:        '#38494e',       // Deep, shadowy overlay
   overlayActive:  '#172123',       // Even darker active overlay

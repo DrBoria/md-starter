@@ -4,6 +4,7 @@ import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "../components/Containers";
 import { PageContainer } from "../system-components/PageContainer";
 import { useQueryAdminMeta } from "../utils/queries/useQueryAdminMeta";
+import { PageTitle } from "@md/components";
 
 interface TAdminMeta {
   Contact: number;
@@ -23,7 +24,7 @@ const DashboardPage = () => {
   const { data: adminMeta } = useQueryAdminMeta<TAdminMeta>(DashboardSubPages);
 
   return (
-    <PageContainer header={<h1>Header</h1>}>
+    <PageContainer header={<PageTitle>Header</PageTitle>}>
       <DashboardCardsContainer>
         <DashboardCard
           title="Posts"

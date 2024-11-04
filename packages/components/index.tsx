@@ -38,5 +38,5 @@ export {
 
 type TTheme = typeof baseTheme;
 declare module 'styled-components' {
-    export interface DefaultTheme extends TTheme {}
-  }
+    export interface DefaultTheme extends TTheme { }
+}

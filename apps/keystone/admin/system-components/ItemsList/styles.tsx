@@ -20,13 +20,13 @@ const Row = styled.div`
 
     // Make context fit in 1 line and cut words with ...
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
 
     & > * {
       width: 100%;
       text-overflow: ellipsis;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     a {
       color: ${({ theme }) => theme.colors.sectionContent};

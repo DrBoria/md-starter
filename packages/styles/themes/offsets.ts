@@ -12,7 +12,7 @@ export default {
     },
     elementContent: {
         mobile: basicOffset,
-        tablet: basicOffset * 2,
-        desktop: basicOffset * 2,
+        tablet: basicOffset,
+        desktop: basicOffset,
     },
 }

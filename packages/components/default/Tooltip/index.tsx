@@ -1,5 +1,5 @@
 // Import the necessary modules
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const ToolTipContainer = styled.div`
@@ -7,7 +7,7 @@ const ToolTipContainer = styled.div`
   display: inline-block;
 `;
 
-const ToolTipText = styled.span`
+const ToolTipText = styled.span<{ position: string }>`
   visibility: hidden;
   min-width: 120px;
   background-color: black;
@@ -16,12 +16,12 @@ const ToolTipText = styled.span`
   border-radius: 6px;
   padding: 5px 0;
 
-  /* Position the tooltip */
+  /* Position the tooltip based on the dynamic 'position' prop */
   position: absolute;
   z-index: 1000;
-  bottom: 100%;
   left: 50%;
   margin-left: -60px;
+  ${({ position }) => (position === "top" ? "bottom: 100%;" : "top: 100%;")}
 
   /* Fade in tooltip */
   opacity: 0;
@@ -33,18 +33,38 @@ const ToolTipText = styled.span`
   }
 `;
 
-// Define the properties your component will receive
 interface TooltipProps {
   children: React.ReactNode;
-  text: string;
+  text?: string;
+  className?: string;
 }
 
-// Create a functional component for the tooltip
-const Tooltip: React.FC<TooltipProps> = ({ children, text }) => {
+const Tooltip: React.FC<TooltipProps> = ({ children, text, className }) => {
+  const [position, setPosition] = useState("top");
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (tooltipRef.current) {
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // If the tooltip is too close to the bottom, position it on top
+      if (tooltipRect.bottom > viewportHeight) {
+        setPosition("top");
+      }
+      // If the tooltip is too close to the top, position it at the bottom
+      else if (tooltipRect.top < 100) {
+        setPosition("bottom");
+      } else {
+        setPosition("top");
+      }
+    }
+  }, []); // Only run on mount
+
   return (
-    <ToolTipContainer>
+    <ToolTipContainer ref={tooltipRef} className={className}>
       {children}
-      <ToolTipText>{text}</ToolTipText>
+      {text && <ToolTipText position={position}>{text}</ToolTipText>}
     </ToolTipContainer>
   );
 };

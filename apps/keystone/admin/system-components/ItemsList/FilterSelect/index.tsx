@@ -9,7 +9,7 @@ import {
 } from "../../utils/data-mapping/toWhereParameters";
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
-import { FilterDropdown, FilterWrapper } from "./styles";
+import { FilterButton, FilterDropdown, FilterWrapper } from "./styles";
 import { Button } from "@md/components";
 
 interface IFilterSelectProps {
@@ -89,11 +89,11 @@ const FilterSelect = ({
 
   return (
     <FilterWrapper ref={filterRef}>
-      <Button tone="active" onClick={() => setIsFilterOpen(!isFilterOpen)}>
+      <Button onClick={() => setIsFilterOpen(!isFilterOpen)}>
         {/* Same width as in keystone */}
-        <div className="flex items-center gap-2">
+        <FilterButton>
           Filter List <ChevronDownIcon style={{ width: "16px" }} />
-        </div>
+        </FilterButton>
       </Button>
 
       {isFilterOpen && (

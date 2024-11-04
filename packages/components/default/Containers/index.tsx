@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
 import { devices, TFullWidth, TWithBasicElementOffsets, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
 
-interface ColumnsContainerProps {
-  $colsRatio?: string[];
-}
-
 type TContainersProps = {
   className?: string;
   style?: any;
@@ -74,13 +70,21 @@ const Column = styled.div`
   flex-direction: column;
 `
 
-const ColumnsContainer = styled.div<ColumnsContainerProps>`
+
+interface ColumnsContainerProps {
+  $colsRatio?: string[];
+}
+
+const ColumnsContainer = styled.div<ColumnsContainerProps & TWithBasicElementOffsets>`
   display: grid;
   grid-column-gap: 1rem;
   grid-template-rows: 1fr;
   grid-template-columns: ${({
-  $colsRatio = ["1fr", "1fr"], // By default 2 columns
-}: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
+    $colsRatio = ["1fr", "1fr"], // By default 2 columns
+  }: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
+
+  margin-right: ${withOffsetsRight};
+  margin-bottom: ${withOffsetBottom};
 `;
 
 const DashboardCardsContainer = styled.div`
@@ -127,9 +131,11 @@ const LinksContainer = styled.div`
   }
 `;
 
-const MenuItemContainer = styled.div`
+const MenuItemContainer = styled.div<TWithBasicElementOffsets>`
   display: flex;
   gap: 1rem;
+  margin-right: ${withOffsetsRight};
+  margin-bottom: ${withOffsetBottom};
 `;
 
 type TSection = {

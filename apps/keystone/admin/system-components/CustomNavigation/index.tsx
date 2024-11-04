@@ -11,6 +11,7 @@ import {
 import type { TModalData, TSideBarModalData } from "../../state";
 import { transformPathToReadableFormat } from "../../../utils/transformPathToReadableFormat";
 import { Button, MenuItemContainer, Toggle } from "@md/components";
+import { MenuItem } from "@md/components/next";
 import { Icons } from "@md/components/keystone";
 import { CentralModal } from "../../sections//Modals/CentralModal";
 import { SideBarModal } from "../../sections/Modals/SideBarModal";
@@ -24,25 +25,19 @@ const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
     return (
       <>
-        <NavItem href="/">
-          <MenuItemContainer>
-            <Icons.HomeIcon />
-            Dashboard
-          </MenuItemContainer>
-        </NavItem>
-        <NavItem href="/examples">
-          <MenuItemContainer>
-            <Icons.SettingsIcon />
-            Examples
-          </MenuItemContainer>
-        </NavItem>
+        <MenuItem href="/" offsetBottom>
+          <Icons.HomeIcon />
+          Dashboard
+        </MenuItem>
+        <MenuItem href="/examples" offsetBottom>
+          <Icons.SettingsIcon />
+          Examples
+        </MenuItem>
         {/* Show only for admin and owner */}
         {isAdminOwner && (
           <NavItem href="/users">
-            <MenuItemContainer>
-              <Icons.UsersIcon />
-              Users
-            </MenuItemContainer>
+            <Icons.UsersIcon />
+            Users
           </NavItem>
         )}
       </>
@@ -93,7 +88,7 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
         )}
 
         {authenticatedItem.state === "authenticated" && (
-          <Button className="button" onClick={() => signOut()}>
+          <Button type="menu" onClick={() => signOut()}>
             {"Sign out"}
           </Button>
         )}

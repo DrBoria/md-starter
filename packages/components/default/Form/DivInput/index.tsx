@@ -18,21 +18,21 @@ const InputWrapper = styled.div`
 
 const StyledInputContainer = styled.div<{ isFocused: boolean }>`
   position: absolute;
-  overflow: hidden;
+  overflow-x: hidden;
   width: 100%;
   padding: 7px;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid ${({ theme }) => theme.colors.sectionContent};
   font-size: 16px;
   box-sizing: border-box;
-  background-color: #f9fafb;
-  color: #374151;
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
   outline: none;
   transition: border-color 0.3s ease;
   cursor: text;
   white-space: nowrap;
 
-  ${({ isFocused }) => isFocused && `border-color: #d1d5db;`}
+  ${({ isFocused }) => isFocused && `border-color: ${({ theme }) => theme.colors.highlightedContent};`}
 
   &:empty:before {
     content: attr(data-placeholder);

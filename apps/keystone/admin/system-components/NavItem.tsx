@@ -1,14 +1,17 @@
 import React, { ReactNode } from 'react';
-import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import { Link } from '@md/components';
+import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from '@md/styles';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<TWithBasicElementOffsets>`
   background: transparent;
   color: ${({ theme }) => theme.colors.sectionContent};
   display: block;
   position: relative;
   text-decoration: none;
+  margin-right: ${withOffsetsRight};
+  margin-bottom: ${withOffsetBottom};
 
   &:hover {
     background: ${({ theme }) => theme.colors.highlighted};

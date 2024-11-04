@@ -12,7 +12,9 @@
   "dependencies": {
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
+    "@types/react": "^18.3.12",
     "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-native": "0.76.0",
     "react-router-native": "^6.27.0",
     "styled-components": "^6.1.13"

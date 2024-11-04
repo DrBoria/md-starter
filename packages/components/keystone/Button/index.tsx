@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Button } from "@keystone-ui/button";
 import { ClipboardIcon, FilePlusIcon } from "@keystone-ui/icons";
 import { useToasts } from "@keystone-ui/toast";
 import styled from "styled-components";
 
 import { FocusedContainer } from "../../default/Containers";
 import { Tooltip } from "../../default/Tooltip";
+import { Button } from "../../default/Button";
 
 interface TCopyToClipboardButtonProps {
   value?: string | null;

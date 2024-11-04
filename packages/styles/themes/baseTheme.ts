@@ -97,7 +97,7 @@ const base = {
       height: {
         mobile: 75,
         tablet: 100,
-        desktop: 150,
+        desktop: 100,
       },
     },
     offsets,

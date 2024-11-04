@@ -1,20 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import { SectionTitle } from "@md/components/default/Typography";
 
 const DashboardCardContainer = styled.div`
-  border-color: #e1e5e9;
-  border-radius: 8px;
-  border-width: 1px;
   min-width: 280px;
-  padding: 16px;
   text-decoration: none;
   width: fit-content;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};;
+  border-radius: ${({ theme }) => theme.border.radius};
 
   // Fix to not display hover on create link
   &:hover:not(:has(svg:hover)) {
     cursor: pointer;
-    border-color: #3b82f6;
+    border-color: ${({ theme }) => theme.colors.highlighted};
 
     a {
       text-decoration: underline;
@@ -28,19 +28,19 @@ const LinksContainer = styled.div`
 `;
 
 const TitleLink = styled(Link)`
-  color: #3b82f6;
   text-decoration: none;
+  color: ${({ theme }) => theme.colors.highlighted};
 `;
 
 const CreateLink = styled(Link)`
-  background-color: #ccd1d5;
+  background-color: ${({ theme }) => theme.colors.section};
   border-radius: 4px;
-  color: white;
+  color: ${({ theme }) => theme.colors.sectionContent};
   transition: background-color 80ms linear;
 
   &:hover {
-    color: white;
-    background-color: #16a34a;
+    color: ${({ theme }) => theme.colors.highlightedText};
+    background-color: ${({ theme }) => theme.colors.highlighted};
   }
   svg {
     fill: none;
@@ -52,7 +52,7 @@ const CreateLink = styled(Link)`
 `;
 
 const CountText = styled.span`
-  color: #374151;
+  color: ${({ theme }) => theme.colors.sectionContent};
   text-decoration: none;
 `;
 
@@ -66,7 +66,7 @@ const DashboardCard: React.FC<{
   <DashboardCardContainer>
     <LinksContainer>
       <TitleLink title={`List ${title}`} href={`${link}`}>
-        <h3>{title}</h3>
+        <SectionTitle>{title}</SectionTitle>
       </TitleLink>
       {!noCreate && (
         <CreateLink title={`Create ${title}`} href={`${link}/create`}>

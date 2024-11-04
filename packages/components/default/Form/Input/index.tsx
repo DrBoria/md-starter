@@ -22,8 +22,8 @@ const Input = styled.input<TInputProps>`
   color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
 
-  background: ${({ theme }) => theme.colors.overlay};
-  border: none;
+  background: ${({ theme }) => theme.colors.section};
+  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
   border-radius: ${({ theme }) => theme.border.radius};
 `;
 

@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "@keystone-ui/button";
 
 import type { IModalButton, TModalData } from "../../state";
 import { DeleteTemplate } from "../../sections/Modals/CentralModal";
 import { ModalData, useGlobalVariable } from "../../state";
+import { Button, ColumnsContainer } from "@md/components";
 
 interface TButtonGroupProps {
   listName: string;
@@ -32,34 +32,34 @@ const ButtonGroup = ({
   };
 
   return (
-    <div className="flex justify-between">
+    <ColumnsContainer>
       {!buttons && (
         <>
-          <Button
-            weight="bold"
-            tone={"active"}
-            isDisabled={isPristine}
-            onClick={() => onUpdate()}
-          >
-            Save changes
-          </Button>
-          <div className="flex gap-4">
+          <div>
+            <Button
+              type='submit'
+              isDisabled={isPristine}
+              onClick={() => onUpdate()}
+            >
+              Save changes
+            </Button>
+          </div>
+          <ColumnsContainer>
             {isPristine ? (
               <Button
-                weight="none"
                 isDisabled={true}
                 onClick={() => onUpdate()}
               >
                 No changes
               </Button>
             ) : (
-              <Button weight="none" onClick={() => onReset()}>
+              <Button onClick={() => onReset()}>
                 Reset changes
               </Button>
             )}
 
             <Button
-              tone={"negative"}
+              type='delete'
               onClick={() => {
                 setModalData({
                   content: (
@@ -74,7 +74,7 @@ const ButtonGroup = ({
             >
               Delete
             </Button>
-          </div>
+          </ColumnsContainer>
         </>
       )}
 
@@ -91,7 +91,7 @@ const ButtonGroup = ({
         }
         return button.view?.();
       })}
-    </div>
+    </ColumnsContainer>
   );
 };
 

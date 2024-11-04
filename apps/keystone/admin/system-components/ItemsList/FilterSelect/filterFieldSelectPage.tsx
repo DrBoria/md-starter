@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FieldMeta } from "@keystone-6/core/types";
 import { ChevronRightIcon } from "@keystone-ui/icons";
 
-import { Button, Input } from "@md/components";
+import { Button, ColumnsContainer, Input } from "@md/components";
 import { getFieldType } from "../../../queries/getFieldType";
-import { FilterTitle } from "./styles";
+import { SectionTitle } from "@md/components/default/Typography";
 
 interface IFilterFieldSelectPageProps {
   fields: FieldMeta[];
@@ -30,25 +30,23 @@ const FilterFieldSelectPage = ({
 
   return (
     <>
-      <FilterTitle className="text-center">Filter</FilterTitle>
+      <SectionTitle offsetBottom>Filter</SectionTitle>
       {/* Filter Bar at the top */}
-      <div className="p-2">
+      <ColumnsContainer $colsRatio={['1fr']} offsetBottom>
         <Input
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
           placeholder="Select..."
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
+      </ColumnsContainer>
       {/* Filter options */}
-      <div className="divide-y">
+      <ColumnsContainer $colsRatio={['1fr']}>
         {filteredFields.map((field, index) => (
           <Button
             key={index}
             onClick={() => onFilterFieldSelect(field)}
-            className={
-              "w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-100"
-            }
+            offsetBottom
           >
             <span
               className={`${inputValues[field.label] ? "text-blue-500" : ""}`}
@@ -58,7 +56,7 @@ const FilterFieldSelectPage = ({
             <ChevronRightIcon />
           </Button>
         ))}
-      </div>
+      </ColumnsContainer>
     </>
   );
 };
