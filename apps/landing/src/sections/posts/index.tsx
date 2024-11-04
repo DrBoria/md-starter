@@ -14,7 +14,7 @@ const Posts = () => {
     }, []);
 
     return (
-        <Section $sectionSize='full' $direction='horizontal' style={{justifyContent: 'center'}}>
+        <Section $sectionSize='full' $direction='horizontal' style={{justifyContent: 'center', flexWrap: 'wrap'}}>
             {data?.items.map((item) => (
                 <Card
                     offsetBottom

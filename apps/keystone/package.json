@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "keystone dev",
+    "dev": "node clearKeystoneDev.js",
     "db:push": "keystone prisma db push --skip-generate",
     "db:reset": "keystone prisma db push --force-reset",
     "db:makemigration": "ci/check-db-migrations --fix",

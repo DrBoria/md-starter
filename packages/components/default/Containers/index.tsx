@@ -141,7 +141,6 @@ type TSection = {
 const Section = styled.section<TSection>`
   position: relative;
   width: 100%;
-  overflow: hidden;
 
   ${({ $direction }) => ({
     'horizontal': `
