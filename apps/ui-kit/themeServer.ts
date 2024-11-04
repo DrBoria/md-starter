@@ -129,23 +129,30 @@ async function updateThemeFile(filePath: string, updates: Record<string, any>) {
           // If the update is nested, recurse deeper
           applyUpdates(value, currentPath);
         } else {
-          // Locate the corresponding AST node and apply the update
-          const matchingNode = sourceFile.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
-            .find(node => {
-              const name = node.getName();
-              return currentPath.endsWith(name);
-            });
+          // Locate the exact node by traversing path segments
+          const pathSegments = currentPath.split('.');
+          let matchingNode = sourceFile;
 
-            if (matchingNode) {
-              const shouldQuote =
-                typeof value === 'string' &&
-                !/^\d+(\.\d+)?$/.test(value) &&    // Ignore pure numeric values
-                !value.includes("basicOffset");    // Ignore strings containing "basicOffset"
+          for (const segment of pathSegments) {
+            // @ts-ignore
+            matchingNode = matchingNode.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
+              .find(node => node.getName() === segment);
             
-              // Set the initializer, adding quotes only if necessary
-              const newValue = shouldQuote ? `'${value}'` : value;
-              matchingNode.setInitializer(newValue);
-            }
+            if (!matchingNode) break;
+          }
+
+          // If the node is found, apply the update
+          if (matchingNode) {
+            const shouldQuote =
+              typeof value === 'string' &&
+              !/^\d+(\.\d+)?$/.test(value) &&    // Ignore pure numeric values
+              !value.includes("basicOffset");    // Ignore strings containing "basicOffset"
+
+            // Set the initializer, adding quotes only if necessary
+            const newValue = shouldQuote ? `'${value}'` : value;
+            // @ts-ignore
+            matchingNode.setInitializer(newValue);
+          }
         }
       }
     };
