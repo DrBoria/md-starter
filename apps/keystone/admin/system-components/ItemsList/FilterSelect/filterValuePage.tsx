@@ -7,7 +7,7 @@ import { getFieldType } from "../../../queries/getFieldType";
 import { useQueryList } from "../../../queries/useQueryList";
 import { toRelationSelect } from "../../utils/data-mapping/toRelationSelect";
 import { Condition } from "../../utils/data-mapping/toWhereParameters";
-import { BackButton, FilterTitle } from "./styles";
+import { BackButton } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 
 interface IRelationFieldController {
@@ -66,7 +66,6 @@ const FilterValuePage = ({
     <>
       <BackButton onClick={() => onBackClick()}>← Back</BackButton>
       <div className="flex flex-col gap-2 justify-start">
-        <FilterTitle>Filter by {field.label}</FilterTitle>
         <Select
           // For relations field there could be only one option - 'Matches'
           value={fieldType === "relation" ? options[0] : filterConditionValue}

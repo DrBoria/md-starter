@@ -1,0 +1,27 @@
+# Ignore all node_modules directories recursively
+**/node_modules
+node_modules
+
+# Ignore temporary and cache files
+*.log
+*.tmp
+npm-debug.log*
+
+# Ignore build outputs
+build
+dist
+
+# Ignore environment files (if sensitive)
+.env
+*.env
+.env.local
+.env.production
+.env.development
+*.env.development
+.env.example
+*.env.example
+
+# Ignore Docker-specific files (optional if you want a clean build context)
+.dockerignore
+Dockerfile
+docker-compose*
