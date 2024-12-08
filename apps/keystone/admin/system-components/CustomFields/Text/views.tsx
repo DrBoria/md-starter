@@ -11,6 +11,7 @@ import { ShortedText } from "@md/components";
 import { TextArea } from "@md/components/keystone";
 import { controller, DefaultCardValue } from "../utils/viewStarter";
 import { Input } from "@md/components";
+import { ThemeProvider } from "@md/styles";
 
 function Field({ field, value, onChange }: FieldProps<typeof controller>) {
   const handleChange: React.ChangeEventHandler<
@@ -21,29 +22,31 @@ function Field({ field, value, onChange }: FieldProps<typeof controller>) {
   };
 
   return (
-    <FieldContainer as="fieldset">
-      <FieldLabel>{field.label}</FieldLabel>
-      <FieldDescription id={`${field.path}-description`}>
-        {field.description}
-      </FieldDescription>
-      {field.displayMode === "textarea" ? (
-        <div>
-          <TextArea
-            onChange={handleChange}
-            disabled={field.isReadOnly || !onChange} // If on change not passed - permissions do not allow this user change this value
-            value={value ?? ""}
-          />
-        </div>
-      ) : (
-        <div>
-          {field.isReadOnly ? (
-            <ShortedText text={value ?? ""} withCopy />
-          ) : (
-            <Input value={value ?? ""} onChange={handleChange} />
-          )}
-        </div>
-      )}
-    </FieldContainer>
+    <ThemeProvider>
+      <FieldContainer as="fieldset">
+        <FieldLabel>{field.label}</FieldLabel>
+        <FieldDescription id={`${field.path}-description`}>
+          {field.description}
+        </FieldDescription>
+        {field.displayMode === "textarea" ? (
+          <div>
+            <TextArea
+              onChange={handleChange}
+              disabled={field.isReadOnly || !onChange} // If on change not passed - permissions do not allow this user change this value
+              value={value ?? ""}
+            />
+          </div>
+        ) : (
+          <div>
+            {field.isReadOnly ? (
+              <ShortedText text={value ?? ""} withCopy />
+            ) : (
+              <Input value={value ?? ""} onChange={handleChange} />
+            )}
+          </div>
+        )}
+      </FieldContainer>
+    </ThemeProvider>
   );
 }
 

@@ -22,6 +22,7 @@ import { SideBarModalData, useGlobalVariable } from "../../../state";
 import { useQueryList } from "../../../queries/useQueryList";
 import { useQueryListItem } from "../../../queries/useQueryListItem";
 import { getWhereParameters } from "./utils";
+import { ThemeProvider } from "styled-components";
 
 export interface IListName {
   listName: string;
@@ -167,6 +168,7 @@ const Field = ({
   };
 
   return (
+    <ThemeProvider>
     <FieldContainer as="fieldset">
       <FieldLabel>{field.label}</FieldLabel>
       <FieldDescription id={`${field.path}-description`}>
@@ -194,6 +196,7 @@ const Field = ({
         )}
       </div>
     </FieldContainer>
+    </ThemeProvider>
   );
 };
 
