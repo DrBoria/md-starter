@@ -2,6 +2,7 @@
 FROM node:18-alpine AS base
 RUN npm install -g pnpm
 RUN npm install -g turbo
+RUN apk add --no-cache openssl
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
@@ -13,14 +14,6 @@ RUN apk add --no-cache libc6-compat
 # Set working directory
 WORKDIR /app
 COPY . .
-
-# Inject environment variables from Docker Compose into the build process
-ARG DATABASE_URL
-ARG REDIS_URL
-ARG SESSION_SECRET
-ENV DATABASE_URL=${DATABASE_URL}
-ENV REDIS_URL=${REDIS_URL}
-ENV SESSION_SECRET=${SESSION_SECRET}
 
 RUN turbo prune keystone --docker
 

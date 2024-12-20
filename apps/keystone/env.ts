@@ -12,6 +12,12 @@ const APP_HOST = process.env.KEYSTONE_APP_HOST;
 const KEYSTONE_ENV = process.env.KEYSTONE_ENV;
 const KEYSTONE_APP_NAME = process.env.KEYSTONE_APP_NAME;
 
+console.log("Current Environment Variables:");
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+console.log("REDIS_URL:", process.env.REDIS_URL);
+console.log("SESSION_SECRET:", process.env.SESSION_SECRET);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
 // Calculate constants
 const APP_PORT = 3000;
 const SITE_URL =

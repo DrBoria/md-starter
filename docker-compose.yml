@@ -1,34 +1,13 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: pgdb
-    networks:
-      - app-network
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
   keystone:
     build:
       context: .
-      dockerfile: Dockerfile
+    env_file:
+      - path: envs/compose/keystone.env
     networks:
       - app-network
-    environment:
-      DATABASE_URL: postgres://user:pass@postgres:5432/pgdb
-      REDIS_URL: redis://localhost:6379
-      SESSION_SECRET: secretsecretsecretsecretsecretsecretsecretsecretsecret
-      ALLOW_ROLES_MANAGEMENT: allow
-      NODE_ENV: production
-    depends_on:
-      - postgres
     ports:
       - "3000:3000"
-volumes:
-  pgdata:
 networks:
   app-network: {}
