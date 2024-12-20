@@ -3,11 +3,14 @@ services:
   keystone:
     build:
       context: .
+      dockerfile: Dockerfile  # Ensure you're using the correct Dockerfile
+    image: turbo:latest  # Tagging the image here directly
     env_file:
       - path: envs/compose/keystone.env
     networks:
       - app-network
     ports:
       - "3000:3000"
+
 networks:
   app-network: {}

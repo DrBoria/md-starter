@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "deploy": "cdk deploy",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk"
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.173.1",
-    "constructs": "^10.4.2"
+    "constructs": "^10.4.2",
+    "dotenv": "^16.4.5"
   }
 }
