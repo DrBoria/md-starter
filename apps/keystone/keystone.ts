@@ -15,6 +15,8 @@ import { DATABASE_URL } from "./env";
 // to keep this file tidy, we define our schema in a different file
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
+import express from "express";
+import { BaseKeystoneTypeInfo, KeystoneContext } from "@keystone-6/core/types";
 
 export default withAuth(
   config({
@@ -46,7 +48,6 @@ export default withAuth(
       provider: "postgresql",
       url: DATABASE_URL,
       enableLogging: ["error", "warn", "info", 'query'],
-
     },
     graphql: {
       // Set these fields to false to disable the playground and docs
@@ -60,6 +61,23 @@ export default withAuth(
       }
     },
     server: {
+      extendExpressApp: (
+        app,
+        context: any,
+      ) => {
+        app.use(express.json());
+        // Define the /health endpoint
+        app.get('/health', async (req, res) => {
+          try {
+            // Optionally perform checks, e.g., database connection
+            await context.prisma.$queryRaw`SELECT 1`; // Example for Prisma
+            res.status(200).json({ status: 'ok', message: 'Service is healthy' });
+          } catch (error: any) {
+            console.error('Health check failed:', error);
+            res.status(500).json({ status: 'error', message: 'Service is unhealthy', error: error.message });
+          }
+        });
+      },
       cors: {
         origin: true,
         credentials: true, // Allow credentials (cookies, authorization headers, etc.)

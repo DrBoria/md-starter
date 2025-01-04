@@ -13,7 +13,7 @@ export class DatabaseStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // Create a VPC for RDS
+    // Создание VPC для RDS
     this.vpc = new ec2.Vpc(this, 'TurboVpc', {
       maxAzs: 2,
     });
@@ -30,7 +30,7 @@ export class DatabaseStack extends Stack {
     // });
 
 
-    // Create the RDS PostgreSQL instance
+    // Создание экземпляра PostgreSQL
     const database = new rds.DatabaseInstance(this, 'TurboPostgresInstance', {
       engine: rds.DatabaseInstanceEngine.postgres({ version: rds.PostgresEngineVersion.VER_15 }),
       vpc: this.vpc,
@@ -49,23 +49,44 @@ export class DatabaseStack extends Stack {
     });
 
     this.rdsSecurityGroupId = database.connections.securityGroups[0].securityGroupId;
+    
+    const databaseEndpoint = database.dbInstanceEndpointAddress;
+    const vpcId = this.vpc.vpcId;
+    const rdsSecurityGroupId = this.rdsSecurityGroupId;
 
-    new cdk.CfnOutput(this, 'DatabaseEndpoint', { value: database.dbInstanceEndpointAddress });
+    // Создаем CfnOutput для извлечения значений после деплоя
+    const databaseEndpointValue = new cdk.CfnOutput(this, 'DatabaseEndpoint', { value: databaseEndpoint });
+    const VpcIdValue = new cdk.CfnOutput(this, 'VpcId', { value: vpcId });
+    const RdsSecurityGroupIdValue = new cdk.CfnOutput(this, 'RdsSecurityGroupId', { value: rdsSecurityGroupId });
 
-    const databaseUrl = `postgres://postgres:password123sjkdflkj!${database.dbInstanceEndpointAddress}:5432/pgdb`;
+    // Записываем строку подключения и идентификаторы в файл .env
+    const databaseUrl = `postgres://postgres:password123sjkdflkj!@${databaseEndpointValue}:5432/pgdb`;
     const envFilePath = path.join(__dirname, '../../envs/compose/keystone.env');
-
-    this.updateEnvFile(envFilePath, databaseUrl);
+    this.updateEnvFile(envFilePath, { databaseUrl, vpcId, rdsSecurityGroupId });
   }
 
-  private async updateEnvFile(envFilePath: string, databaseUrl: string): Promise<void> {
+  private async updateEnvFile(envFilePath: string, envVars: { databaseUrl: string; vpcId: string; rdsSecurityGroupId: string }): Promise<void> {
     try {
-      const envFileContent = await fs.readFile(envFilePath, 'utf8');
-      const updatedContent = envFileContent.replace(/DATABASE_URL=.*/, `DATABASE_URL=${databaseUrl}`);
-      await fs.writeFile(envFilePath, updatedContent, 'utf8');
-      console.log('.env file updated with DATABASE_URL');
+      let envFileContent = await fs.readFile(envFilePath, 'utf8');
+
+      // Обновляем или добавляем переменные окружения
+      envFileContent = this.updateEnvVariable(envFileContent, 'DATABASE_URL', envVars.databaseUrl);
+      envFileContent = this.updateEnvVariable(envFileContent, 'VPC_ID', envVars.vpcId);
+      envFileContent = this.updateEnvVariable(envFileContent, 'RDS_SECURITY_GROUP_ID', envVars.rdsSecurityGroupId);
+
+      await fs.writeFile(envFilePath, envFileContent, 'utf8');
+      console.log('.env file updated with DATABASE_URL, VPC_ID, and RDS_SECURITY_GROUP_ID');
     } catch (error) {
       console.error('Error updating .env file:', error);
+    }
+  }
+
+  private updateEnvVariable(content: string, key: string, value: string): string {
+    const regex = new RegExp(`^${key}=.*`, 'm');
+    if (regex.test(content)) {
+      return content.replace(regex, `${key}=${value}`);
+    } else {
+      return `${content}\n${key}=${value}`;
     }
   }
 }

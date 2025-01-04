@@ -1,5 +1,5 @@
 # Use the base image
-FROM node:18-alpine AS base
+FROM --platform=linux/amd64 node:lts-alpine AS base
 RUN npm install -g pnpm
 RUN npm install -g turbo
 RUN apk add --no-cache openssl

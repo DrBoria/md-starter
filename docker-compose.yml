@@ -3,14 +3,30 @@ services:
   keystone:
     build:
       context: .
-      dockerfile: Dockerfile  # Ensure you're using the correct Dockerfile
-    image: turbo:latest  # Tagging the image here directly
-    env_file:
-      - path: envs/compose/keystone.env
-    networks:
-      - app-network
+      dockerfile: Dockerfile # Ensure you're using the correct Dockerfile
+    image: drboria/turbo:latest # Tagging the image here directly
+    secrets:
+      - DB_PASSWORD
+    environment:
+      DATABASE_URL: "${DATABASE_URL}"
+      DB_USER: "${DB_USER}"
+      DB_PORT: "${DB_PORT}"
+      DB_ENDPOINT: "${DB_ENDPOINT}"
+      DB_NAME: "${DB_NAME}"
+      DB_PASSWORD_2: "${DB_PASSWORD}"
+      DB_PASSWORD_3: "${DB_PASSWORD_3}"
     ports:
-      - "3000:3000"
+      - "80:3000"
+      - "443:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+        reservations:
+          cpus: "0.25"
+          memory: "256M"
 
-networks:
-  app-network: {}
+secrets:
+  DB_PASSWORD:
+    external: true

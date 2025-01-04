@@ -1,15 +1,37 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["DATABASE_URL", "REDIS_URL", "SESSION_SECRET", "ALLOW_ROLES_MANAGEMENT"],
+  "globalEnv": [
+    "DATABASE_URL",
+    "DB_PASSWORD_2",
+    "DB_PASSWORD_3",
+    "DB_USER",
+    "DB_PORT",
+    "DB_ENDPOINT",
+    "DB_NAME",
+    "DB_PASSWORD",
+    "REDIS_URL",
+    "SESSION_SECRET",
+    "ALLOW_ROLES_MANAGEMENT"
+  ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "start": {
       "cache": true,

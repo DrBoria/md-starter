@@ -1,44 +1,37 @@
 import * as cdk from 'aws-cdk-lib';
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Stack } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
-import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as path from 'path';
 import * as fs from 'fs';
 
-interface EcsStackProps extends StackProps {
-  rdsSecurityGroupId: string; // Pass the security group ID of the RDS instance
-  vpc: ec2.Vpc; // VPC is passed from the DatabaseStack
-}
 
-export class EcsStack extends Stack {
-  constructor(scope: Construct, id: string, props: EcsStackProps) {
-    super(scope, id, props);
-
-    const { vpc, rdsSecurityGroupId } = props;
+export class DeployDockerFromHubStack extends Stack {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
 
     // Read and parse the keystone.env file
-    const envFilePath = path.resolve(__dirname, '../../env/composed/keystone.env');
+    const envFilePath = path.resolve(__dirname, '../../envs/compose/keystone.env');
     const envFileContent = fs.readFileSync(envFilePath, 'utf-8');
 
     // Parse the env file content into key-value pairs
     const envVariables = this.parseEnvFile(envFileContent);
 
-    // Extract and parse DATABASE_URL from the environment variables
     const databaseUrl = envVariables['DATABASE_URL'];
+    const redisUrl = envVariables['REDIS_URL'];
+    const sessionSecret = envVariables['SESSION_SECRET'];
+    const allowRolesManagement = envVariables['ALLOW_ROLES_MANAGEMENT'];
+    const nodeEnv = envVariables['NODE_ENV'];
+    const vpcId = envVariables['VPC_ID'];
+    const rdsSecurityGroupId = envVariables['RDS_SECURITY_GROUP_ID'];
+
     if (!databaseUrl) {
-      throw new Error('DATABASE_URL not found in keystone.env');
+      throw new Error('Required environment variables are missing in keystone.env');
     }
 
-    // Parse the database URL
-    const urlPattern = /postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/([^?]+)/;
-    const urlMatch = databaseUrl.match(urlPattern);
-    if (!urlMatch) {
-      throw new Error('DATABASE_URL is not in the expected format');
-    }
-
-    const [_, username, password, host, port, dbName] = urlMatch;
+    // Import existing VPC
+    const vpc = ec2.Vpc.fromLookup(this, 'ImportedVPC', { vpcId });
 
     // Create ECS Cluster
     const cluster = new ecs.Cluster(this, 'TurboCluster', {
@@ -48,15 +41,15 @@ export class EcsStack extends Stack {
     // Add EC2 instances to the cluster using an Auto Scaling group
     cluster.addCapacity('ExtraCapacityGroup', {
       instanceType: new ec2.InstanceType('t2.micro'),
-      minCapacity: 1,  // Minimum number of instances
-      maxCapacity: 1,  // Maximum number of instances
-      desiredCapacity: 1,  // Desired number of instances
-      machineImage: new ec2.AmazonLinuxImage(), // Use a standard AMI
+      minCapacity: 1,
+      maxCapacity: 1,
+      desiredCapacity: 1,
+      machineImage: new ec2.AmazonLinuxImage(),
     });
 
     // Create ECS task definition for EC2
     const taskDefinition = new ecs.Ec2TaskDefinition(this, 'TurboTaskDef', {
-      networkMode: ecs.NetworkMode.BRIDGE, // Network mode for EC2
+      networkMode: ecs.NetworkMode.BRIDGE,
     });
 
     // Add container to the task definition with environment variables
@@ -64,11 +57,11 @@ export class EcsStack extends Stack {
       image: ecs.ContainerImage.fromRegistry('drboria/turbo:latest'),
       memoryLimitMiB: 1024,
       environment: {
-        DATABASE_HOST: host,
-        DATABASE_PORT: port,
-        DATABASE_NAME: dbName,
-        DATABASE_USER: username,
-        DATABASE_PASSWORD: password,
+        DATABASE_URL: databaseUrl,
+        REDIS_URL: redisUrl,
+        SESSION_SECRET: sessionSecret,
+        ALLOW_ROLES_MANAGEMENT: allowRolesManagement,
+        NODE_ENV: nodeEnv,
       },
     });
 
@@ -76,7 +69,7 @@ export class EcsStack extends Stack {
     new ecs.Ec2Service(this, 'TurboEc2Service', {
       cluster,
       taskDefinition,
-      desiredCount: 1, // Only one EC2 instance
+      desiredCount: 1,
     });
 
     // Allow the EC2 instances to connect to the RDS instance

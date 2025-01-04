@@ -8,7 +8,7 @@ export class DockerStack extends cdk.Stack {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const dockerComposeFilePath = path.resolve(__dirname, '../../docker-compose.yml');
+    const dockerComposeFilePath = path.resolve(__dirname, '../../../docker-compose.yml');
 
     // Add the DATABASE_URL to the environment file or pass it as needed
     this.runDockerCommand(['compose', '-f', dockerComposeFilePath, 'build', '--no-cache'], 'Failed to build Docker image');
