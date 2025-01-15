@@ -42,7 +42,8 @@ export class EcsStack extends Stack {
       maxCapacity: 1,
       securityGroup: ec2SecurityGroup,
       role: instanceRole,
-      keyPair: existingKeyPair
+      keyPair: existingKeyPair,
+      associatePublicIpAddress: true,
     });
 
     // Привязываем Auto Scaling Group к кластеру ECS
@@ -90,10 +91,6 @@ export class EcsStack extends Stack {
           containerPort: 80, // The container's internal port
           protocol: ecs.Protocol.TCP,
         },
-        {
-          containerPort: 443, // The container's internal port
-          protocol: ecs.Protocol.TCP,
-        },
       ],
     });
 
@@ -105,10 +102,55 @@ export class EcsStack extends Stack {
       securityGroups: [ec2SecurityGroup],
     });
 
-    // const nlb = new elbv2.NetworkLoadBalancer(this, 'MyNLB', {
-    //   vpc, // VPC для NLB
-    //   internetFacing: true, // Делаем NLB доступным из интернета
+    // // Создаем ALB (Application Load Balancer)
+    // const alb = new elbv2.ApplicationLoadBalancer(this, 'TurboALB', {
+    //   vpc,
+    //   internetFacing: true,
     // });
+
+    // // Добавляем HTTP Listener
+    // const httpListener = alb.addListener('HTTPListener', {
+    //   port: 80,
+    // });
+
+    // // Конфигурация Health Check (по умолчанию или из props)
+    // const defaultHealthCheckConfig = {
+    //   path: '/health',
+    //   interval: cdk.Duration.seconds(30),
+    //   timeout: cdk.Duration.seconds(5),
+    //   healthyThreshold: 2,
+    //   unhealthyThreshold: 2,
+    // };
+
+    // const finalHealthCheckConfig = defaultHealthCheckConfig;
+
+    // // Добавляем целевую группу с Health Check
+    // httpListener.addTargets('TargetGroup', {
+    //   port: 80,
+    //   targets: [service],
+    //   healthCheck: {
+    //     path: finalHealthCheckConfig.path,
+    //     interval: finalHealthCheckConfig.interval,
+    //     timeout: finalHealthCheckConfig.timeout,
+    //     healthyThresholdCount: finalHealthCheckConfig.healthyThreshold,
+    //     unhealthyThresholdCount: finalHealthCheckConfig.unhealthyThreshold,
+    //     protocol: elbv2.Protocol.HTTP,
+    //   },
+    // });
+
+    // // Выводим DNS имя ALB
+    // new cdk.CfnOutput(this, 'LoadBalancerDNS', {
+    //   value: alb.loadBalancerDnsName,
+    // });
+
+    /******************************************/
+    /************** VERSION 2 *****************/
+    /******************************************/
+
+    const nlb = new elbv2.NetworkLoadBalancer(this, 'MyNLB', {
+      vpc, // VPC для NLB
+      internetFacing: true, // Делаем NLB доступным из интернета
+    });
 
     // // Добавляем Listener
     // const listener = nlb.addListener('TCPListener443', {
@@ -130,29 +172,28 @@ export class EcsStack extends Stack {
     //   },
     // });
 
-    // // Добавляем Listener
-    // const listenerHttp = nlb.addListener('TCPListener80', {
-    //   port: 80, // Открываем TCP порт 443
-    // });
+    // Добавляем Listener
+    const listenerHttp = nlb.addListener('TCPListener80', {
+      port: 80, // Открываем TCP порт 443
+    });
 
-    // // Добавляем целевой ресурс
-    // listenerHttp.addTargets('TurboTargetGroup80', {
-    //   port: 80, // Контейнерный порт
-    //   targets: [service],
-    //   healthCheck: {
-    //     path: '/health', // The health check endpoint defined in your Keystone app
-    //     interval: cdk.Duration.seconds(30), // How often to run the health check
-    //     timeout: cdk.Duration.seconds(5), // How long to wait for a response
-    //     healthyThresholdCount: 2, // Number of consecutive successes required to mark the target healthy
-    //     unhealthyThresholdCount: 2, // Number of consecutive failures required to mark the target unhealthy
-    //     protocol: elbv2.Protocol.HTTP, // Protocol used for the health check
-    //     port: '80', // Internal port used for the health check
-    //   },
-    // });
+    // Добавляем целевой ресурс
+    listenerHttp.addTargets('TurboTargetGroup80', {
+      port: 80, // Контейнерный порт
+      targets: [service],
+      healthCheck: {
+        path: '/health', // The health check endpoint defined in your Keystone app
+        interval: cdk.Duration.seconds(30), // How often to run the health check
+        timeout: cdk.Duration.seconds(5), // How long to wait for a response
+        healthyThresholdCount: 2, // Number of consecutive successes required to mark the target healthy
+        unhealthyThresholdCount: 2, // Number of consecutive failures required to mark the target unhealthy
+        protocol: elbv2.Protocol.HTTP, // Protocol used for the health check
+        port: '80', // Internal port used for the health check
+      },
+    });
 
-
-    // new cdk.CfnOutput(this, 'LoadBalancerDNS', {
-    //   value: nlb.loadBalancerDnsName,
-    // });
+    new cdk.CfnOutput(this, 'LoadBalancerDNS', {
+      value: nlb.loadBalancerDnsName,
+    });
   }
 }

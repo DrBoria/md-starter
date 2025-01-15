@@ -29,7 +29,7 @@ export default withAuth(
         /* Local storage configuration */
         /*******************************/
         generateUrl: (path: string) => {
-          return `http://localhost:3000/files${path}`;
+          return `http://localhost:80/files${path}`;
         },
         serverRoute: { path: "/files" },
         storagePath: "public/files", // Path where files will be stored locally
@@ -61,6 +61,7 @@ export default withAuth(
       }
     },
     server: {
+      port: 80,
       extendExpressApp: (
         app,
         context: any,

@@ -2,6 +2,7 @@
 FROM --platform=linux/amd64 node:lts-alpine AS base
 RUN npm install -g pnpm
 RUN npm install -g turbo
+RUN npm install -g prisma
 RUN apk add --no-cache openssl
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.

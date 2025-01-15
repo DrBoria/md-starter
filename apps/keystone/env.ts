@@ -27,7 +27,7 @@ console.log("DATABASE_URL:", process.env.DATABASE_URL);
 console.log("NODE_ENV:", process.env.NODE_ENV);
 
 // Calculate constants
-const APP_PORT = 3000;
+const APP_PORT = 80;
 const SITE_URL =
   APP_HOST === "localhost"
     ? `http://${APP_HOST}:${APP_PORT}`
