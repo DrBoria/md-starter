@@ -1,6 +1,6 @@
-import { FieldMeta } from "@keystone-6/core/types";
+import type { FieldMeta } from "@keystone-6/core/types";
 
-import { getFieldType } from "../../../queries/getFieldType";
+import { getFieldType } from "../../../utils/queries/getFieldType";
 
 const getOptionsByFilterType = (selectedField: FieldMeta) => {
   const fieldType = getFieldType(selectedField); // Determine field type
@@ -22,6 +22,11 @@ const getOptionsByFilterType = (selectedField: FieldMeta) => {
     options = [
       { label: "Is", value: "is" },
       { label: "Is Not", value: "is-not" },
+    ];
+  } else if (fieldType === "select") {
+    options = [
+      { label: "Matches", value: "in" },
+      { label: "Does not Match", value: "notIn" },
     ];
   } else if (fieldType === "relation") {
     options = [{ label: "Matches", value: "matches" }];

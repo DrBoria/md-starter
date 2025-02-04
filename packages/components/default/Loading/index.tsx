@@ -41,7 +41,7 @@ export const fadeOutAnimation = css`
 
 
 // Create a Wrapper div with animation and absolute positioning
-const LoadingWrapper = styled.div<{$hidden: boolean}>`
+const LoadingWrapper = styled.div<{ $hidden: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,30 +51,31 @@ const LoadingWrapper = styled.div<{$hidden: boolean}>`
     right: 0;
     bottom: 0;
     opacity: 0;
-    z-index: ${({theme}) => theme.zIndex.animatedElements};
+    z-index: ${({ theme }) => theme.zIndex.animatedElements};
 
-    ${({$hidden}) => $hidden ? 
-        css`
+    ${({ $hidden }) => $hidden ?
+    css`
             animation: ${fadeOutAnimation};
         `
-    :         
-        css`
+    :
+    css`
             animation: ${fadeInAnimation};
         `}
 `;
 
 // Style the image with the animation
-const RotatingImage = styled(Image)`
+export const LoaderImage = styled(Image)`
   animation: ${rotate} 2s linear infinite; // Rotate every 2 seconds indefinitely
   height: 35vw; // Set the size of the image as required
   width: 35vw;
 `;
 
 // The actual loading indicator component
-const Loading = ({hidden}: {hidden: boolean}) => (
+const Loading = ({ hidden }: { hidden: boolean }) => (
   <LoadingWrapper $hidden={hidden}>
-    <RotatingImage src="/ouroboros.svg" alt="Loading..." priority width={700} height={700}/>
+    <LoaderImage src="/ouroboros.svg" alt="Loading..." priority width={700} height={700} />
   </LoadingWrapper>
 );
 
 export { Loading };
+

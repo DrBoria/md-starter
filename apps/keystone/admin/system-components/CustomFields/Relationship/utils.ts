@@ -1,11 +1,11 @@
+import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 import type { ListMeta } from "@keystone-6/core/types";
 import { useRouter } from "next/router";
-import { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 
 import type { TSession } from "../../../../types";
 
 interface IWhereParams {
-  AND?: Array<{ agentType: { equals: "writer" | "reviewer" } }>;
+  AND?: Array<{ agentType: { equals: "writer" | "reviewer" | "extractor" } }>;
   OR: Array<
     { organization: { id: { in: string[] } } } | { organization: null }
   >;
@@ -48,12 +48,6 @@ const getWhereParameters = (
     whereParams.OR.push({ organization: null });
   }
 
-  // Logic for filtering by agentType (writer or reviewer)
-  if (pathname.includes("agent-writers")) {
-    whereParams.AND = [{ agentType: { equals: "writer" } }];
-  } else if (pathname.includes("agent-reviewers")) {
-    whereParams.AND = [{ agentType: { equals: "reviewer" } }];
-  }
 
   return whereParams;
 };

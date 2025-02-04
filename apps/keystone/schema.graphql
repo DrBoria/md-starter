@@ -9,9 +9,24 @@ type Example {
   checkbox: Boolean
   timestamp_updateAt: DateTime
   timestamp_createdAt: DateTime
+  DynamicStatusLabel: ExampleDynamicStatusLabelType
+  EquasionTextArea: String
+  HiddenInput: String
+  LongText: String
+  TimeNotUTC: DateTime
+  TimeZone: String
+  Title: String
 }
 
 scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+enum ExampleDynamicStatusLabelType {
+  not_calculated
+  queued
+  processing
+  failed
+  success
+}
 
 input ExampleWhereUniqueInput {
   id: ID
@@ -28,6 +43,13 @@ input ExampleWhereInput {
   checkbox: BooleanFilter
   timestamp_updateAt: DateTimeNullableFilter
   timestamp_createdAt: DateTimeFilter
+  DynamicStatusLabel: ExampleDynamicStatusLabelTypeNullableFilter
+  EquasionTextArea: StringFilter
+  HiddenInput: StringFilter
+  LongText: StringFilter
+  TimeNotUTC: DateTimeNullableFilter
+  TimeZone: StringFilter
+  Title: StringFilter
 }
 
 input IDFilter {
@@ -102,6 +124,13 @@ input DateTimeFilter {
   not: DateTimeFilter
 }
 
+input ExampleDynamicStatusLabelTypeNullableFilter {
+  equals: ExampleDynamicStatusLabelType
+  in: [ExampleDynamicStatusLabelType!]
+  notIn: [ExampleDynamicStatusLabelType!]
+  not: ExampleDynamicStatusLabelTypeNullableFilter
+}
+
 input ExampleOrderByInput {
   id: OrderDirection
   shortedText: OrderDirection
@@ -109,6 +138,13 @@ input ExampleOrderByInput {
   checkbox: OrderDirection
   timestamp_updateAt: OrderDirection
   timestamp_createdAt: OrderDirection
+  DynamicStatusLabel: OrderDirection
+  EquasionTextArea: OrderDirection
+  HiddenInput: OrderDirection
+  LongText: OrderDirection
+  TimeNotUTC: OrderDirection
+  TimeZone: OrderDirection
+  Title: OrderDirection
 }
 
 enum OrderDirection {
@@ -121,6 +157,13 @@ input ExampleUpdateInput {
   exampleType: String
   customRelationship: UserRelateToOneForUpdateInput
   checkbox: Boolean
+  DynamicStatusLabel: ExampleDynamicStatusLabelType
+  EquasionTextArea: String
+  HiddenInput: String
+  LongText: String
+  TimeNotUTC: DateTime
+  TimeZone: String
+  Title: String
 }
 
 input UserRelateToOneForUpdateInput {
@@ -139,6 +182,13 @@ input ExampleCreateInput {
   exampleType: String
   customRelationship: UserRelateToOneForCreateInput
   checkbox: Boolean
+  DynamicStatusLabel: ExampleDynamicStatusLabelType
+  EquasionTextArea: String
+  HiddenInput: String
+  LongText: String
+  TimeNotUTC: DateTime
+  TimeZone: String
+  Title: String
 }
 
 input UserRelateToOneForCreateInput {

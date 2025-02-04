@@ -12,14 +12,21 @@ generator client {
 }
 
 model Example {
-  id                   String    @id @default(cuid())
-  shortedText          String    @default("") @map("shorted_text")
+  id                   String                        @id @default(cuid())
+  shortedText          String                        @default("") @map("shorted_text")
   exampleType          String
-  customRelationship   User?     @relation("Example_customRelationship", fields: [customRelationshipId], references: [id])
-  customRelationshipId String?   @map("user_id")
-  checkbox             Boolean   @default(true) @map("is_active")
-  timestamp_updateAt   DateTime? @updatedAt @map("updated_at")
-  timestamp_createdAt  DateTime  @default(now()) @map("created_at")
+  customRelationship   User?                         @relation("Example_customRelationship", fields: [customRelationshipId], references: [id])
+  customRelationshipId String?                       @map("user_id")
+  checkbox             Boolean                       @default(true) @map("is_active")
+  timestamp_updateAt   DateTime?                     @updatedAt @map("updated_at")
+  timestamp_createdAt  DateTime                      @default(now()) @map("created_at")
+  DynamicStatusLabel   ExampleDynamicStatusLabelType @default(queued)
+  EquasionTextArea     String                        @default("")
+  HiddenInput          String                        @default("") @map("sendgrid_api_key")
+  LongText             String                        @default("") @map("drafter_instructions")
+  TimeNotUTC           DateTime?                     @map("send_at")
+  TimeZone             String                        @default("") @map("timezone")
+  Title                String                        @default("")
 
   @@index([customRelationshipId])
   @@map("example")
@@ -57,4 +64,12 @@ model Post {
   createdAt   DateTime  @default(now()) @map("created_at")
 
   @@map("post")
+}
+
+enum ExampleDynamicStatusLabelType {
+  not_calculated
+  queued
+  processing
+  failed
+  success
 }

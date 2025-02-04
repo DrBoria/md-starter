@@ -76,7 +76,6 @@ const ModalContainer = styled.div<{ $isClosing?: boolean }>`
   left: 50%;
   width: 440px;
   max-height: 90%;
-  overflow-y: auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   transform: translate(-50%, -50%);
@@ -135,7 +134,10 @@ const CentralModal: FC<ModalProps> = ({ modalData, hide }) => {
   return ReactDOM.createPortal(
     <>
       <Overlay onClick={onHide} $isClosing={$isClosing} />
-      <ModalContainer $isClosing={$isClosing}>
+      <ModalContainer
+        data-test-id="cental-modal-container"
+        $isClosing={$isClosing}
+      >
         <StyledModal>
           <ModalContentContainer>{modalData.content}</ModalContentContainer>
         </StyledModal>

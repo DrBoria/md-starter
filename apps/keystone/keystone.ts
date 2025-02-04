@@ -61,7 +61,7 @@ export default withAuth(
       }
     },
     server: {
-      port: 80,
+      port: 3000,
       extendExpressApp: (
         app,
         context: any,

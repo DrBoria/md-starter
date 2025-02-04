@@ -4,6 +4,7 @@ import { Fields } from "@keystone-6/core/admin-ui/utils";
 import { TValue } from "../../../../types";
 import { CreateItemHookResult, useCreateItem } from "../../utils/useCreateItem";
 import { useFieldsData } from "../../utils/useFieldsData";
+import { ThemeProvider } from "@md/styles";
 
 interface FieldValue {
   fieldName: string;
@@ -140,7 +141,7 @@ const ConditionalField = ({
 
   // Create Form
   return (
-    <>
+    <ThemeProvider>
       <Fields
         // @ts-ignore typescript didn't see if on row above with 'if (itemId)'
         {...createConditionalItems.props}
@@ -153,7 +154,7 @@ const ConditionalField = ({
           onChange={handleOnChangeSlaveField}
         />
       ) : null}
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -5,6 +5,7 @@ import { TValue } from "../../../../types";
 import { Tabs } from "@md/components";
 import { useCreateItem } from "../../utils/useCreateItem";
 import { useFieldsData } from "../../utils/useFieldsData";
+import { ThemeProvider } from "@md/styles";
 
 export interface ITabs {
   // Names / Buttons that will be displayed to switch tabs
@@ -76,48 +77,50 @@ const TabsFields = ({
 
   const handleOnChange =
     (changeFunction: TOnChangeTabValue) =>
-    (newValue: (newValue: TValue) => void) => {
-      changeFunction(newValue);
-      // Pass the form value to the parent for future usage in update
-      onTabsFieldChange(newValue);
-    };
+      (newValue: (newValue: TValue) => void) => {
+        changeFunction(newValue);
+        // Pass the form value to the parent for future usage in update
+        onTabsFieldChange(newValue);
+      };
 
   if (!listFormGroups?.length) return null;
 
   return (
-    <Tabs
-      onTabChange={onTabChange}
-      tabs={listFormGroups.map((fieldGroup, index) => ({
-        label: fieldGroup.list,
-        content:
-          itemId && fieldsData ? (
-            // Edit Form
-            <Fields
-              {...fieldsData[index].list}
-              fieldModes={fieldGroup.fieldModes}
-              key={`${fieldGroup.list} edit-tab`}
-              value={fieldGroup.fieldsValue as TValue}
-              forceValidation={fieldGroup.forceValidation as boolean}
-              invalidFields={fieldGroup.invalidFields as ReadonlySet<string>}
-              onChange={handleOnChange(
-                fieldsData[index].onFieldChange as TOnChangeTabValue,
-              )}
-            />
-          ) : (
-            // Create Form
-            fieldGroup?.createItem && (
+    <ThemeProvider>
+      <Tabs
+        onTabChange={onTabChange}
+        tabs={listFormGroups.map((fieldGroup, index) => ({
+          label: fieldGroup.list,
+          content:
+            itemId && fieldsData ? (
+              // Edit Form
               <Fields
-                // @ts-ignore - ts(2339) - props exists, error happens cause createItems could be with and without useCreateItem depending on passed or not itemId
-                {...fieldGroup.createItem.props}
+                {...fieldsData[index].list}
+                fieldModes={fieldGroup.fieldModes}
+                key={`${fieldGroup.list} edit-tab`}
+                value={fieldGroup.fieldsValue as TValue}
+                forceValidation={fieldGroup.forceValidation as boolean}
+                invalidFields={fieldGroup.invalidFields as ReadonlySet<string>}
                 onChange={handleOnChange(
-                  // @ts-ignore same here
-                  fieldGroup?.createItem?.props.onChange,
+                  fieldsData[index].onFieldChange as TOnChangeTabValue,
                 )}
               />
-            )
-          ),
-      }))}
-    />
+            ) : (
+              // Create Form
+              fieldGroup?.createItem && (
+                <Fields
+                  // @ts-ignore - ts(2339) - props exists, error happens cause createItems could be with and without useCreateItem depending on passed or not itemId
+                  {...fieldGroup.createItem.props}
+                  onChange={handleOnChange(
+                    // @ts-ignore same here
+                    fieldGroup?.createItem?.props.onChange,
+                  )}
+                />
+              )
+            ),
+        }))}
+      />
+    </ThemeProvider>
   );
 };
 

@@ -5,16 +5,16 @@ import type {
   ReactiveVar,
 } from "@apollo/client";
 import type React from "react";
-import { JSXElementConstructor, ReactElement } from "react";
+import type { JSXElementConstructor, ReactElement } from "react";
 import { gql, makeVar, useApolloClient, useReactiveVar } from "@apollo/client";
 
-import { TConditionalField } from "./system-components/DynamicForms";
-import { ITabs } from "./system-components/DynamicForms";
+import type { TConditionalField } from "./system-components/ConditionalField";
+import type { ITabs } from "./system-components/TabsFields";
 
 /**
  * Add variable name here to display it in queries
  */
-type TGlobalVariableNames = "SideBarModalData" | "ModalData";
+type TGlobalVariableNames = "SideBarModalData" | "ModalData" | "FullScreenData";
 
 /**
  *
@@ -88,17 +88,18 @@ export interface IModalButton {
 }
 
 export type TSideBarModalData = {
+  type: "edit" | "dataSource" | "create" | "custom";
+  headerText: string;
   listName?: string;
   id?: string;
   fieldsToRender?: string[];
   notToRenderFields?: string[];
-  type: "edit" | "dataSource" | "create";
-  headerText: string;
   tabs?: ITabs;
   // TODO: make default value visible for users
   defaultValues?: Record<string, unknown>;
   conditionalFields?: TConditionalField[];
   buttons?: IModalButton[];
+  children?: ReactElement;
 } | null;
 const SideBarModalData = makeVar<TSideBarModalData>(null);
 
@@ -107,4 +108,9 @@ export type TModalData = {
 } | null;
 const ModalData = makeVar<TModalData>(null);
 
-export { SideBarModalData, ModalData, useGlobalVariable };
+export type TFullScreenData = {
+  content: React.ReactNode;
+} | null;
+const FullScreenData = makeVar<TModalData>(null);
+
+export { SideBarModalData, ModalData, FullScreenData, useGlobalVariable };

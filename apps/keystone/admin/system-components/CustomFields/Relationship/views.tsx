@@ -5,7 +5,7 @@ import type {
 } from "@keystone-6/core/types";
 import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
-import { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
+import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 import { Button } from "@keystone-ui/button";
 import {
   FieldContainer,
@@ -22,7 +22,7 @@ import { SideBarModalData, useGlobalVariable } from "../../../state";
 import { useQueryList } from "../../../queries/useQueryList";
 import { useQueryListItem } from "../../../queries/useQueryListItem";
 import { getWhereParameters } from "./utils";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "@md/styles";
 
 export interface IListName {
   listName: string;
@@ -129,24 +129,22 @@ const Field = ({
     const localValue = value as ISelectValue;
 
     if (newVal === null) {
-      onChange &&
-        onChange({
-          ...localValue,
-          value: null,
-        }); // Set the value to null
+      onChange?.({
+        ...localValue,
+        value: null,
+      }); // Set the value to null
       return;
     }
 
     if (!newVal) return;
 
-    onChange &&
-      onChange({
-        ...localValue,
-        value: {
-          ...newVal,
-          id: newVal.value as string,
-        },
-      });
+    onChange?.({
+      ...localValue,
+      value: {
+        ...newVal,
+        id: newVal.value as string,
+      },
+    });
   };
 
   const currentValue = fullValueItem?.agentWriter
@@ -169,33 +167,34 @@ const Field = ({
 
   return (
     <ThemeProvider>
-    <FieldContainer as="fieldset">
-      <FieldLabel>{field.label}</FieldLabel>
-      <FieldDescription id={`${field.path}-description`}>
-        {field.description}
-      </FieldDescription>
-      <div>
-        <Select
-          options={items.map(mapToOutput) as IOption[]}
-          value={currentValue}
-          onChange={handleChange}
-          isClearable={!!value?.value}
-          placeholder="Select..."
-        />
-        {!field.hideCreate && (
-          <div className="flex items-center gap-5 mt-4">
-            <Button onClick={handleCreateItemClick}>
-              Create related {itemReadableName}
-            </Button>
-            {value?.value?.id && (
-              <LinkInForm href={`/${list?.path}/${value.value.id}`}>
-                View {itemReadableName} details
-              </LinkInForm>
-            )}
-          </div>
-        )}
-      </div>
-    </FieldContainer>
+      <FieldContainer as="fieldset">
+        <FieldLabel>{field.label}</FieldLabel>
+        <FieldDescription id={`${field.path}-description`}>
+          {field.description}
+        </FieldDescription>
+        <div>
+          <Select
+            options={items.map(mapToOutput) as IOption[]}
+            value={currentValue}
+            onChange={handleChange}
+            isClearable={!!value?.value}
+            readOnly={!onChange}
+            placeholder="Select..."
+          />
+          {!field.hideCreate && (
+            <div className="flex items-center gap-5 mt-4">
+              <Button onClick={handleCreateItemClick}>
+                Create related {itemReadableName}
+              </Button>
+              {value?.value?.id && (
+                <LinkInForm href={`/${list?.path}/${value.value.id}`}>
+                  View {itemReadableName} details
+                </LinkInForm>
+              )}
+            </div>
+          )}
+        </div>
+      </FieldContainer>
     </ThemeProvider>
   );
 };

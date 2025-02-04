@@ -23,12 +23,14 @@ const DefaultField = ({
         autoFocus={autoFocus}
         type="number"
         onChange={(event) => {
-          onChange(event.target.value.replace(/[^\d-]/g, ""));
+          onChange({
+            inner: { value: event.target.value.replace(/[^\d-]/g, "") },
+          });
         }}
-        value={value}
+        value={value?.inner?.value}
       />
     ) : (
-      value
+      value?.inner?.value
     )}
   </FieldContainer>
 );
@@ -54,7 +56,7 @@ const DefaultCardValue: CardValueComponent = ({ item, field }) => {
 
 function controller(
   config: FieldControllerConfig<{ isReadOnly: boolean }>,
-): FieldController<string, string> & {
+): FieldController<{ inner: { value: string }; initial?: string }, string> & {
   displayMode?: "input" | "textarea";
   isReadOnly: boolean;
 } {
@@ -63,12 +65,12 @@ function controller(
     label: config.label,
     description: config.description,
     graphqlSelection: config.path,
-    defaultValue: "",
+    defaultValue: { inner: { value: "" } },
     deserialize: (data) => {
       const value = (data[config.path] as string) || "";
-      return value;
+      return { inner: { value } };
     },
-    serialize: (value) => ({ [config.path]: value }),
+    serialize: (value) => ({ [config.path]: { inner: { value } } }),
     ...config.fieldMeta,
     isReadOnly: config.fieldMeta?.isReadOnly || false,
   };

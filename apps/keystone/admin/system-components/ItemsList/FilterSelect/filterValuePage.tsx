@@ -1,13 +1,15 @@
+import type { FieldMeta } from "@keystone-6/core/types";
 import React from "react";
-import { FieldMeta } from "@keystone-6/core/types";
+import { Button } from "@keystone-ui/button";
 
-import { IOption } from "../../../../types";
-import { Button, Input, Select } from "@md/components";
-import { getFieldType } from "../../../queries/getFieldType";
-import { useQueryList } from "../../../queries/useQueryList";
+import type { IOption } from "../../../../types";
+import type { TCondition } from "../../utils/data-mapping/mapFilterParameters";
+import { upperCaseFirstLetter } from "../../../../utils/upperCaseFirstLetter";
+import { Input, Select } from "@md/components";
+import { getFieldType } from "../../../utils/queries/getFieldType";
+import { useQueryList } from "../../../utils/queries/useQueryList";
 import { toRelationSelect } from "../../utils/data-mapping/toRelationSelect";
-import { Condition } from "../../utils/data-mapping/toWhereParameters";
-import { BackButton } from "./styles";
+import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 
 interface IRelationFieldController {
@@ -18,7 +20,7 @@ interface IRelationFieldController {
 interface IFilterSelectProps {
   field: FieldMeta;
   inputValues: Record<string, string | undefined | null>;
-  filterConditions: Condition;
+  filterConditions: TCondition;
   onBackClick: () => void;
   onSelect: (value: IOption | null) => void;
   onChange: (value: string | IOption) => void;
@@ -39,10 +41,14 @@ const FilterValuePage = ({
   if (!field) return null; // Safety check
   let relationsOptions;
   let relationsValue;
+  let selectOptions;
+  let selectValue;
 
   const options = getOptionsByFilterType(field);
   const fieldType = getFieldType(field);
   const controller = field.controller as unknown as IRelationFieldController;
+  const fieldLabel = field.label;
+  const fieldPath = upperCaseFirstLetter(field.path);
 
   // For relation field we need to display all existing objects to make user see readable fields, not Id's
   if (fieldType === "relation") {
@@ -53,19 +59,34 @@ const FilterValuePage = ({
       selectedFields: `id ${controller.refLabelField}`,
     });
     relationsOptions = response.data?.items.map(toRelationSelect);
-    relationsValue = relationsOptions?.filter(
-      (option) => option.value === inputValues[field.label],
+
+    relationsValue = relationsOptions?.find(
+      (option) => option.value === inputValues[fieldPath],
+    );
+  }
+
+  if (fieldType === "select") {
+    // @ts-ignore - FieldMeta got options property, which is not listed in keystone-6 types
+    selectOptions = field.fieldMeta?.options;
+    selectValue = selectOptions?.filter(
+      (option: IOption) => option.value === inputValues[fieldPath],
     )[0];
   }
 
-  const filterConditionValue = options.filter(
-    (option) => option.value === filterConditions[field.label],
-  )[0];
+  const filterConditionValue = options.find(
+    (option) => option.value === filterConditions[fieldPath],
+  );
+
+  const handleRelationsChange = (value: IOption | string) => {
+    onSelect(options[0]); // User don't need to select option, relations got only matches option
+    onChange(value);
+  };
 
   return (
     <>
       <BackButton onClick={() => onBackClick()}>← Back</BackButton>
       <div className="flex flex-col gap-2 justify-start">
+        <FilterTitle>Filter by {field.label}</FilterTitle>
         <Select
           // For relations field there could be only one option - 'Matches'
           value={fieldType === "relation" ? options[0] : filterConditionValue}
@@ -74,8 +95,8 @@ const FilterValuePage = ({
         />
         {(fieldType === "string" || fieldType === "number") && (
           <Input
-            placeholder={`Enter ${field.label}`}
-            value={inputValues[field.label]!}
+            placeholder={`Enter ${fieldLabel}`}
+            value={inputValues[fieldPath]!}
             onChange={(e) => onChange(e.target.value)}
           />
         )}
@@ -83,13 +104,22 @@ const FilterValuePage = ({
           <Select
             value={relationsValue as IOption}
             // @ts-ignore - StyledSelect expects (option: IOption) => void, and not string | IOption
-            onChange={onChange}
+            onChange={handleRelationsChange}
             options={relationsOptions}
+          />
+        )}
+        {fieldType === "select" && (
+          <Select
+            value={selectValue as IOption}
+            // @ts-ignore - StyledSelect expects (option: IOption) => void, and not string | IOption
+            onChange={onChange}
+            // @ts-ignore - FieldMeta got options property, which is not listed in keystone-6 types
+            options={field.fieldMeta?.options || []}
           />
         )}
         <div className="flex justify-between pt-2">
           <Button onClick={() => onCancel()}>Cancel</Button>
-          <Button weight="bold" tone="active" onClick={onSubmit}>
+          <Button weight="bold" tone="active" onClick={() => onSubmit()}>
             Apply
           </Button>
         </div>

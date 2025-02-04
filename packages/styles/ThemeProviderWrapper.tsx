@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
-import { light, baseTheme } from './themes';
+import { light, baseTheme, dark } from './themes';
 type TColorTheme = typeof light;
 
 const MediaProvider = styled.div`
@@ -52,7 +52,7 @@ const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children, theme
   const [theme] = useState(baseTheme);
 
   return (
-    <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>
+    <ThemeProvider theme={{ ...theme, colors: colorTheme || dark }}>
       <link href="https://fonts.cdnfonts.com/css/norse" rel="stylesheet" />
       <ResetStyle />
       <MediaProvider>{children}</MediaProvider>

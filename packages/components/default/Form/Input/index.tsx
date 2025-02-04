@@ -5,9 +5,11 @@ import { basicFont } from '../../Typography';
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 
 type TInputProps = {
-  name: string;
+  name?: string;
   id?: string;
   type?: string;
+  value?: unknown;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & TWithBasicElementOffsets &
   TFullWidth;
 

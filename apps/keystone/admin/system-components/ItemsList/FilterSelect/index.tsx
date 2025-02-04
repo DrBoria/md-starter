@@ -1,41 +1,71 @@
 import type { FieldMeta } from "@keystone-6/core/types";
 import React, { useEffect, useRef, useState } from "react";
+import { Button } from "@keystone-ui/button";
 import { ChevronDownIcon } from "@keystone-ui/icons";
 
-import { IOption } from "../../../../types";
-import {
-  Condition,
+import type { IOption } from "../../../../types";
+import type {
   ConditionType,
-} from "../../utils/data-mapping/toWhereParameters";
+  TCondition,
+} from "../../utils/data-mapping/mapFilterParameters";
+import { upperCaseFirstLetter } from "../../../../utils/upperCaseFirstLetter";
+import {
+  whereParameterToCondition,
+  whereParameterToInput,
+} from "../../utils/data-mapping/mapFilterParameters";
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
-import { FilterButton, FilterDropdown, FilterWrapper } from "./styles";
-import { Button } from "@md/components";
+import { FilterDropdown, FilterWrapper } from "./styles";
 
 interface IFilterSelectProps {
   fields: FieldMeta[];
-  inputValues: Record<string, string | undefined | null>;
-  filterConditions: Condition;
-  onChange: (value: Record<string, string | undefined | null>) => void;
-  onSelect: (value: Condition) => void;
-  onSubmit: () => void;
+  whereParameters: Record<string, unknown>;
+  onSubmit: (value: {
+    forcedQuery?: Record<string, string>;
+    inputValues?: Record<string, string | null | undefined>;
+    filterConditions?: TCondition;
+  }) => void;
 }
 
 const FilterSelect = ({
   fields,
-  onChange,
-  onSelect,
   onSubmit,
-  inputValues,
-  filterConditions,
+  whereParameters,
 }: IFilterSelectProps) => {
+  const defaultInputValues = whereParameterToInput(
+    whereParameters as TCondition,
+  );
+  const [inputValues, setInputValues] = useState<
+    Record<string, string | undefined | null>
+  >(defaultInputValues || {});
+  const defaultFilterConditions = whereParameterToCondition(
+    whereParameters as TCondition,
+  );
+  const [filterConditions, setFilterConditions] = useState<TCondition>(
+    defaultFilterConditions || {},
+  );
+
   const [isFilterOpen, setIsFilterOpen] = useState(false); // Open/close the dropdown
   const [selectedField, setSelectedField] = useState<FieldMeta | null>(null); // Selected filter type (field)
   const filterRef = useRef<HTMLDivElement | null>(null); // Reference for click outside
 
-  const cancelFiltering = () => {
+  const selectedPath = upperCaseFirstLetter(selectedField?.path);
+
+  const closeFilter = () => {
     setSelectedField(null);
     setIsFilterOpen(false);
+  };
+
+  const clearFilter = () => {
+    closeFilter();
+    onSubmit({ forcedQuery: {} });
+  };
+
+  const handleSubmit = () => {
+    onSubmit({
+      inputValues,
+      filterConditions,
+    });
   };
 
   // Click outside filter box logic
@@ -45,7 +75,7 @@ const FilterSelect = ({
         filterRef.current &&
         !filterRef.current.contains(event.target as Node)
       ) {
-        cancelFiltering();
+        closeFilter();
       }
     };
 
@@ -58,6 +88,12 @@ const FilterSelect = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isFilterOpen]);
 
+  // Update inputValues and filterConditions when external values change
+  useEffect(() => {
+    setInputValues(defaultInputValues || {});
+    setFilterConditions(defaultFilterConditions || {});
+  }, [whereParameters]);
+
   // Handle going to second page
   const handleFilterTypeSelect = (field: FieldMeta) => {
     setSelectedField(field);
@@ -65,46 +101,51 @@ const FilterSelect = ({
 
   const handleFilterConditionChange = (option: IOption | null) => {
     if (!selectedField) return;
-    onSelect({
+    setFilterConditions({
       ...filterConditions, // Previouslty added
-      [selectedField.label]: option?.value as ConditionType, // New condition
+      [selectedPath]: option?.value as ConditionType, // New condition
     });
   };
 
   const handleFilterValueChange = (value: string | IOption) => {
     // Relations field
     if (typeof value === "object") {
-      onChange({
+      setInputValues({
         ...inputValues,
-        [selectedField?.label as string]: value.value as string,
+        [selectedPath]: value.value as string,
       });
     } else {
       // Non relations field
-      onChange({
+      setInputValues({
         ...inputValues,
-        [selectedField?.label as string]: value,
+        [selectedPath]: value,
       });
     }
   };
 
   return (
     <FilterWrapper ref={filterRef}>
-      <Button onClick={() => setIsFilterOpen(!isFilterOpen)}>
-        {/* Same width as in keystone */}
-        <FilterButton>
+      <Button tone="active" onClick={() => setIsFilterOpen(!isFilterOpen)}>
+        <div className="flex items-center gap-2">
+          {/* Same width as in keystone */}
           Filter List <ChevronDownIcon style={{ width: "16px" }} />
-        </FilterButton>
+        </div>
       </Button>
 
       {isFilterOpen && (
         <FilterDropdown>
           {!selectedField ? (
             // First page with selection column in table to filter for
-            <FilterFieldSelectPage
-              fields={fields}
-              inputValues={inputValues}
-              onFilterFieldSelect={handleFilterTypeSelect}
-            />
+            <>
+              <FilterFieldSelectPage
+                fields={fields}
+                inputValues={inputValues}
+                onFilterFieldSelect={handleFilterTypeSelect}
+              />
+              <Button className="w-full" onClick={clearFilter}>
+                Clear
+              </Button>
+            </>
           ) : (
             // Second page with selection filter properties and vilter value
             <FilterValuePage
@@ -114,8 +155,8 @@ const FilterSelect = ({
               filterConditions={filterConditions}
               onSelect={handleFilterConditionChange}
               onChange={handleFilterValueChange}
-              onCancel={cancelFiltering}
-              onSubmit={onSubmit}
+              onCancel={closeFilter}
+              onSubmit={handleSubmit}
             />
           )}
         </FilterDropdown>

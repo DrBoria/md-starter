@@ -11,9 +11,13 @@ export { Link } from './next/Link';
 export { Tabs } from './default/Tabs';
 export { Carousel } from './default/Carousel';
 export { Card } from './default/Card';
-export { Loading } from './default/Loading';
+export { Loading, LoaderImage } from './default/Loading';
 export { Header } from './default/Header';
 export { HamburgerMenu } from './default/HamburgerMenu';
+export { StatusLabel } from './default/StatusLabel';
+export { ProgressBar } from './default/ProgressBar';
+export { Label } from './keystone/Label';
+export { ErrorValidationMessage, ErrorValidationContainer } from './default/Validation';
 
 export { Toggle } from './keystone/Toggle';
 export {
@@ -29,6 +33,7 @@ export {
 export {
     SubTitle,
     PageTitle,
+    SectionTitle,
     DescriptionText,
     PlainText,
     HeaderText,

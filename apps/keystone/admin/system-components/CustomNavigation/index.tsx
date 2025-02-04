@@ -20,6 +20,7 @@ import { NavigationContainerStyled } from "./styles";
 import { useGetSessionData } from "../utils/useGetSessionData";
 import { useSignOut } from "../utils/useSignOut";
 import { NavItem } from "../NavItem";
+import { ThemeProvider } from "@md/styles";
 
 const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
@@ -63,44 +64,46 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
 
   const readablePath = transformPathToReadableFormat(router.pathname);
   return (
-    <NavigationContainer>
-      <Head>
-        <title>Keystone {readablePath ? `| ${readablePath}` : ""}</title>
-      </Head>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Head>
+          <title>Keystone {readablePath ? `| ${readablePath}` : ""}</title>
+        </Head>
 
-      <NavigationContainerStyled>
-        {isAdmin ? (
-          // Admin Navigation
-          <>
-            <Toggle title="SuperAdmin Pages">
-              <ListNavItems lists={lists} />
-            </Toggle>
-            <Toggle title="Client Pages">
-              <ClientNavigation
-                lists={lists}
-                isAdminOwner={isAdmin || isOwner}
-              />
-            </Toggle>
-          </>
-        ) : (
-          // Contact Navigation
-          <ClientNavigation lists={lists} isAdminOwner={isAdmin || isOwner} />
-        )}
+        <NavigationContainerStyled>
+          {isAdmin ? (
+            // Admin Navigation
+            <>
+              <Toggle title="SuperAdmin Pages">
+                <ListNavItems lists={lists} />
+              </Toggle>
+              <Toggle title="Client Pages">
+                <ClientNavigation
+                  lists={lists}
+                  isAdminOwner={isAdmin || isOwner}
+                />
+              </Toggle>
+            </>
+          ) : (
+            // Contact Navigation
+            <ClientNavigation lists={lists} isAdminOwner={isAdmin || isOwner} />
+          )}
 
-        {authenticatedItem.state === "authenticated" && (
-          <Button type="menu" onClick={() => signOut()}>
-            {"Sign out"}
-          </Button>
-        )}
+          {authenticatedItem.state === "authenticated" && (
+            <Button type="menu" onClick={() => signOut()}>
+              {"Sign out"}
+            </Button>
+          )}
 
-        <SideBarModal
-          modalData={sideBarModalData}
-          hide={() => setSideBarModalData(null)}
-        />
+          <SideBarModal
+            modalData={sideBarModalData}
+            hide={() => setSideBarModalData(null)}
+          />
 
-        <CentralModal modalData={modalData} hide={() => setModalData(null)} />
-      </NavigationContainerStyled>
-    </NavigationContainer>
+          <CentralModal modalData={modalData} hide={() => setModalData(null)} />
+        </NavigationContainerStyled>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 

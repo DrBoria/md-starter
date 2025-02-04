@@ -2,7 +2,7 @@ import type { ListMeta } from "@keystone-6/core/types";
 import React from "react";
 
 import type { IGraphQLObject } from "../../../../types";
-import { Link } from "@md/components";
+import { Link } from "@md/components/next";
 import { BodyCell } from "../styles";
 
 interface ViewCellProps {
@@ -26,7 +26,7 @@ const ViewCell: React.FC<ViewCellProps> = ({
   return (
     <BodyCell>
       {linkTo ? (
-        <Link href={linkTo}>
+        <Link href={linkTo} className="text-blue-500 hover:text-blue-600">
           <Cell field={field.controller} item={element} linkTo={undefined} />
         </Link>
       ) : (

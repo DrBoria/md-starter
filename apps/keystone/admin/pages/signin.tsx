@@ -11,7 +11,7 @@ import { TextInput } from "@keystone-ui/fields";
 import { Notice } from "@keystone-ui/notice";
 
 import { SigninContainer } from "../sections/SignInContainer";
-import { dark, ThemeProvider } from "@md/styles";
+import { ThemeProvider } from "@md/styles";
 import { useAuthenticate } from "@md/api/graphql";
 
 const useRedirect = () => {
@@ -86,7 +86,7 @@ function SigninPage() {
   };
 
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider>
       <SigninContainer title="TruAgents - Sign In">
         <Stack gap="xlarge" as="form" onSubmit={onSubmit}>
           <H1>Sign In</H1>

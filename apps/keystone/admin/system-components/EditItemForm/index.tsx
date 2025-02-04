@@ -23,6 +23,7 @@ import {
   ISerealizedValue,
 } from "../utils/data-mapping/getDeserializedValue";
 import { ButtonGroup } from "./buttonGroup";
+import { ThemeProvider } from "@md/styles";
 
 interface IEditItemForm {
   listName: string;
@@ -214,49 +215,51 @@ const EditItemForm = ({
     !subFieldList &&
     !createConditionalItems;
   return (
-    <div className="w-full flex flex-col gap-4">
-      <Fields
-        {...list}
-        fieldModes={fieldModes}
-        key={list.key}
-        value={fieldsValue}
-        forceValidation={forceValidation}
-        invalidFields={invalidFields}
-        onChange={onFieldChange}
-      />
-
-      {/* Conditional / Master-Slave fields */}
-      {conditionalFields?.map((conditionalField) => (
-        <ConditionalField
-          itemId={itemId}
-          listName={listName}
-          setResetStates={setResetStatesConditional}
-          conditionalField={conditionalField}
-          onSubFieldListChange={setSubFieldList} // Pass callback for subFieldList / Slave fields
-          onCreateConditionalItemsChange={setCreateConditionalItems} // Pass callback for conditional field / Master field
+    <ThemeProvider>
+      <div className="w-full flex flex-col gap-4">
+        <Fields
+          {...list}
+          fieldModes={fieldModes}
+          key={list.key}
+          value={fieldsValue}
+          forceValidation={forceValidation}
+          invalidFields={invalidFields}
+          onChange={onFieldChange}
         />
-      ))}
 
-      {/* Tabs */}
-      {tabs && (
-        <TabsFields
-          itemId={itemId}
-          setResetStates={setResetStatesTabs}
-          onTabsFieldChange={setTabsList}
+        {/* Conditional / Master-Slave fields */}
+        {conditionalFields?.map((conditionalField) => (
+          <ConditionalField
+            itemId={itemId}
+            listName={listName}
+            setResetStates={setResetStatesConditional}
+            conditionalField={conditionalField}
+            onSubFieldListChange={setSubFieldList} // Pass callback for subFieldList / Slave fields
+            onCreateConditionalItemsChange={setCreateConditionalItems} // Pass callback for conditional field / Master field
+          />
+        ))}
+
+        {/* Tabs */}
+        {tabs && (
+          <TabsFields
+            itemId={itemId}
+            setResetStates={setResetStatesTabs}
+            onTabsFieldChange={setTabsList}
+            listName={listName}
+            tabs={tabs}
+          />
+        )}
+
+        <ButtonGroup
+          isPristine={isPristine}
           listName={listName}
-          tabs={tabs}
+          onUpdate={hadnleOnUpdate}
+          onReset={resetAllState}
+          onDelete={handleDeleteItem}
+          buttons={buttons}
         />
-      )}
-
-      <ButtonGroup
-        isPristine={isPristine}
-        listName={listName}
-        onUpdate={hadnleOnUpdate}
-        onReset={resetAllState}
-        onDelete={handleDeleteItem}
-        buttons={buttons}
-      />
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 

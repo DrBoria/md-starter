@@ -177,6 +177,11 @@ export const SideBarModal: FC<SideBarModalProps> = ({ modalData, hide }) => {
                   {modalData.buttons?.map((button) => button.view?.())}
                 </SideBarModalContentContainer>
               ),
+              custom: (
+                <SideBarModalContentContainer>
+                  {modalData.children}
+                </SideBarModalContentContainer>
+              ),
             }[modalData.type]
           }
         </StyledSideBarModal>

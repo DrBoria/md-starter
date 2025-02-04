@@ -2,10 +2,62 @@ import React, { useState } from "react";
 import { ClipboardIcon, FilePlusIcon } from "@keystone-ui/icons";
 import { useToasts } from "@keystone-ui/toast";
 import styled from "styled-components";
+import { Button as KeystoneButton, ToneKey, WeightKey } from "@keystone-ui/button";
 
 import { FocusedContainer } from "../../default/Containers";
 import { Tooltip } from "../../default/Tooltip";
-import { Button } from "../../default/Button";
+import { LoaderImage } from "../../default/Loading";
+import Link from "next/link";
+import { Icons } from "../Icons";
+
+
+const ButtonContent: React.FC<ButtonProps> = ({
+  icon,
+  iconPosition = "right",
+  text,
+  weight = "bold",
+  tone = "active",
+  isLoading,
+  children,
+  disabled,
+  ...props
+}) => {
+  const IconComponent = icon ? Icons[icon] : null;
+  const iconChild = IconComponent && <IconComponent size="small" />;
+  return (
+    <KeystoneButton
+      {...props}
+      weight={weight}
+      tone={disabled || isLoading ? "passive" : tone}
+      disabled={disabled || isLoading}
+    >
+      <div>
+        {text}
+        {children}
+        {isLoading ? <LoaderImage src="/ouroboros.svg" alt="Loading..." priority width={40} height={40} /> : iconChild}
+      </div>
+    </KeystoneButton>
+  );
+};
+
+const Button = styled(ButtonContent)`
+  border-radius: calc(var(--border-radius) / 2);
+
+  ${({ $fullWidth }) => ($fullWidth ? "width: 100%;" : "")}
+  ${({ weight }) =>
+    weight === "none" ? "border: 1px solid var(--color-border);" : ""}
+  ${({ tone }) =>
+    tone === "negative"
+      ? `
+    border: 1px solid #dc2626;
+    color: #dc2626;
+    background: transparent;
+    &:hover {
+      color: #fff;
+    }
+  `
+      : ""}
+`;
 
 interface TCopyToClipboardButtonProps {
   value?: string | null;
@@ -183,6 +235,9 @@ interface IActionsMenuButtonProps {
   onEdit: () => void;
 }
 
+/**
+ * @visibleName Buttons
+ */
 const ActionsMenuButton: React.FC<IActionsMenuButtonProps> = ({
   onDuplicate,
   onEdit,
@@ -211,13 +266,122 @@ const ActionsMenuButton: React.FC<IActionsMenuButtonProps> = ({
   );
 };
 
+export interface ButtonProps
+  extends Omit<React.ComponentProps<typeof KeystoneButton>, "children"> {
+  $fullWidth?: boolean;
+  icon?: keyof typeof Icons;
+  iconPosition?: "left" | "right";
+  text?: string;
+  isLoading?: boolean;
+  children?: React.ReactNode;
+  tone?: ToneKey;
+  weight?: WeightKey;
+}
+
+
+interface ButtonLinkProps extends Omit<ButtonProps, "onClick"> {
+  href: string;
+}
+
+const StyledLink = styled(Link) <{ $fullWidth?: boolean }>`
+  display: inline-block;
+  text-decoration: none;
+  ${({ $fullWidth }) => ($fullWidth ? "width: 100%;" : "")}
+`;
+
+const ButtonWrapper = styled.span<{ $fullWidth?: boolean }>`
+  & > button {
+    width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+  }
+`;
+
+const ButtonLink: React.FC<ButtonLinkProps> = ({
+  href,
+  text,
+  children,
+  $fullWidth,
+  ...buttonProps
+}) => (
+  <StyledLink href={href} $fullWidth={$fullWidth}>
+    <ButtonWrapper $fullWidth={$fullWidth}>
+      <Button $fullWidth={$fullWidth} {...buttonProps}>
+        {text}
+        {children}
+      </Button>
+    </ButtonWrapper>
+  </StyledLink>
+);
+
+interface IDeleteButtonProps {
+  onDelete: () => void;
+  isVertical?: boolean;
+}
+
+const DeleteButton = ({ isVertical, onDelete }: IDeleteButtonProps) => (
+  <Button
+    tone="negative"
+    $fullWidth={isVertical}
+    onClick={onDelete}
+    icon="TrashIcon"
+  >
+    Delete
+  </Button>
+);
+
+
+interface IResetButtonProps {
+  onReset: () => void;
+  isVertical?: boolean;
+}
+
+const ResetButton = ({ isVertical, onReset }: IResetButtonProps) => (
+  <Button
+    weight="none"
+    onClick={onReset}
+    $fullWidth={isVertical}
+    icon="RotateCcwIcon"
+  >
+    Reset changes
+  </Button>
+);
+
+interface IUpdateButtonProps {
+  isPristine: boolean;
+  onUpdate: () => void;
+  isVertical?: boolean;
+}
+
+const UpdateButton = ({
+  isPristine,
+  onUpdate,
+  isVertical,
+}: IUpdateButtonProps) => (
+  <Button
+    weight="bold"
+    tone="active"
+    isDisabled={isPristine}
+    onClick={onUpdate}
+    className="save-button"
+    $fullWidth={isVertical}
+    icon="SaveIcon"
+  >
+    Save changes
+  </Button>
+);
+
+export type { IDeleteButtonProps, IResetButtonProps, IUpdateButtonProps };
+
 export {
-  Button,
-  Copy,
-  Duplicate,
   ActionsMenuButton,
-  MenuButton,
-  CreateButton,
-  ButtonWithArrow,
   AdminButton,
+  Button,
+  ButtonWithArrow,
+  Copy,
+  CreateButton,
+  DeleteButton,
+  Duplicate,
+  MenuButton,
+  ResetButton,
+  UpdateButton,
+  ButtonLink,
 };
