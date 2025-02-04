@@ -1,5 +1,16 @@
 const { ProvidePlugin, DefinePlugin } = require("webpack");
 const path = require("path");
+const fs = require("fs");
+
+function getComponentPathPatterns(basePath) {
+  return fs
+    .readdirSync(basePath)
+    .filter((folder) => {
+      const docPath = path.join(basePath, folder, "index.md");
+      return fs.existsSync(docPath); // Leave just folders with index.md
+    })
+    .map((folder) => path.join(basePath, folder, "*.{tsx,ts}"));
+}
 
 module.exports = {
   styles: {
@@ -22,6 +33,17 @@ module.exports = {
   },
 
   webpackConfig: {
+    devServer: {
+      proxy: {
+        "/api/graphql": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+          pathRewrite: {
+            "^/api/graphql": "/api/graphql",
+          },
+        },
+      },
+    },
     resolve: {
       alias: {
         "react-native$": "react-native-web",
@@ -52,7 +74,18 @@ module.exports = {
         },
         {
           test: /\.css$/i,
-          use: ["style-loader", "css-loader"],
+          use: [
+            "style-loader",
+            "css-loader",
+            {
+              loader: "postcss-loader",
+              options: {
+                postcssOptions: {
+                  plugins: [require("tailwindcss"), require("autoprefixer")],
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.(jpg|jpeg|png|gif|mp3)$/,
@@ -73,24 +106,38 @@ module.exports = {
         process: { env: {} },
       }),
     ],
+
   },
+
+  // Add if you ned tailwind
+  // require: [
+  //   path.join(__dirname, "node_modules/tailwindcss/tailwind.css"),
+  // ],
 
   sections: [
     {
       name: "Theme Editor",
-      components: "../../packages/components/theme-editor/*.+(tsx|ts)",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/components/theme-editor"),
+      ),
     },
     {
       name: "Default Components",
-      components: "../../packages/components/default/*/*.+(tsx|ts)",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/components/default"),
+      ),
     },
     {
       name: "Keystone Components",
-      components: "../../packages/components/keystone/*/*.+(tsx|ts)",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/components/keystone"),
+      ),
     },
     {
       name: "Next Components",
-      components: "../../packages/components/next/*/*.+(tsx|ts)",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/components/next"),
+      ),
     },
     {
       name: "React Native Components",
