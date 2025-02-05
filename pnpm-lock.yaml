@@ -454,7 +454,7 @@ importers:
         version: link:../../packages/api
       '@md/native-components':
         specifier: workspace:*
-        version: link:../../packages/native-components
+        version: link:../../packages/native
       '@md/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -594,12 +594,21 @@ importers:
       fs:
         specifier: 0.0.1-security
         version: 0.0.1-security
+      react:
+        specifier: '18'
+        version: 18.3.1
+      react-dom:
+        specifier: '18'
+        version: 18.3.1(react@18.3.1)
       react-native:
         specifier: 0.76.0
         version: 0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.1.3)(@types/react@18.3.18)(react@18.3.1)
       react-native-web:
         specifier: ^0.19.13
         version: 0.19.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      styled-components:
+        specifier: ^6.1.13
+        version: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ts-morph:
         specifier: ^24.0.0
         version: 24.0.0
@@ -660,10 +669,10 @@ importers:
     dependencies:
       '@apollo/client':
         specifier: ^3.11.5
-        version: 3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
       '@apollo/react-hooks':
         specifier: ^4.0.0
-        version: 4.0.0(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.0.0(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
       '@md/types':
         specifier: workspace:*
         version: link:../types
@@ -749,6 +758,40 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.7.2
+
+  packages/native:
+    dependencies:
+      '@md/styles':
+        specifier: workspace:*
+        version: link:../styles
+      '@md/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@types/react':
+        specifier: ^18.3.12
+        version: 18.3.18
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-native:
+        specifier: 0.76.0
+        version: 0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.1.3)(@types/react@18.3.18)(react@18.3.1)
+      react-router-native:
+        specifier: ^6.27.0
+        version: 6.28.1(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.1.3)(@types/react@18.3.18)(react@18.3.1))(react@18.3.1)
+      styled-components:
+        specifier: ^6.1.13
+        version: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@react-native-community/cli':
+        specifier: ^15.0.0
+        version: 15.1.3(typescript@5.7.2)
+      react-native-svg-transformer:
+        specifier: ^1.5.0
+        version: 1.5.0(react-native-svg@15.10.1(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.1.3)(@types/react@18.3.18)(react@18.3.1))(react@18.3.1))(react-native@0.76.0(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@15.1.3)(@types/react@18.3.18)(react@18.3.1))(typescript@5.7.2)
 
   packages/native-components:
     dependencies:
@@ -8964,6 +9007,10 @@ packages:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
+  react@19.0.0:
+    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
+    engines: {node: '>=0.10.0'}
+
   reactcss@1.2.3:
     resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
     peerDependencies:
@@ -10703,6 +10750,29 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
+  '@apollo/client@3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
+      '@wry/caches': 1.0.1
+      '@wry/equality': 0.5.7
+      '@wry/trie': 0.5.0
+      graphql: 16.10.0
+      graphql-tag: 2.12.6(graphql@16.10.0)
+      hoist-non-react-statics: 3.3.2
+      optimism: 0.18.1
+      prop-types: 15.8.1
+      rehackt: 0.1.0(@types/react@18.3.18)(react@19.0.0)
+      response-iterator: 0.2.6
+      symbol-observable: 4.0.0
+      ts-invariant: 0.10.3
+      tslib: 2.8.1
+      zen-observable-ts: 1.2.5
+    optionalDependencies:
+      react: 19.0.0
+      react-dom: 18.3.1(react@19.0.0)
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@apollo/client@3.12.9(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
@@ -10725,6 +10795,28 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
+  '@apollo/client@3.12.9(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
+      '@wry/caches': 1.0.1
+      '@wry/equality': 0.5.7
+      '@wry/trie': 0.5.0
+      graphql: 16.10.0
+      graphql-tag: 2.12.6(graphql@16.10.0)
+      hoist-non-react-statics: 3.3.2
+      optimism: 0.18.1
+      prop-types: 15.8.1
+      rehackt: 0.1.0(@types/react@18.3.18)(react@19.0.0)
+      symbol-observable: 4.0.0
+      ts-invariant: 0.10.3
+      tslib: 2.8.1
+      zen-observable-ts: 1.2.5
+    optionalDependencies:
+      react: 19.0.0
+      react-dom: 18.3.1(react@19.0.0)
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@apollo/protobufjs@1.2.7':
     dependencies:
       '@protobufjs/aspromise': 1.1.2
@@ -10743,6 +10835,17 @@ snapshots:
   '@apollo/react-hooks@4.0.0(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@apollo/client': 3.12.9(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - graphql
+      - graphql-ws
+      - react
+      - react-dom
+      - subscriptions-transport-ws
+
+  '@apollo/react-hooks@4.0.0(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@apollo/client': 3.12.9(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
     transitivePeerDependencies:
       - '@types/react'
       - graphql
@@ -13967,7 +14070,7 @@ snapshots:
       '@prisma/internals': 5.19.0
       '@prisma/migrate': 5.19.0(@prisma/generator-helper@5.19.0)(@prisma/internals@5.19.0)
       '@sindresorhus/slugify': 1.1.2
-      apollo-upload-client: 17.0.0(@apollo/client@3.12.4(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0)
+      apollo-upload-client: 17.0.0(@apollo/client@3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0)
       bcryptjs: 2.4.3
       body-parser: 1.20.3
       bytes: 3.1.2
@@ -14049,7 +14152,7 @@ snapshots:
       '@prisma/internals': 5.19.0
       '@prisma/migrate': 5.19.0(@prisma/generator-helper@5.19.0)(@prisma/internals@5.19.0)
       '@sindresorhus/slugify': 1.1.2
-      apollo-upload-client: 17.0.0(@apollo/client@3.12.4(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0)
+      apollo-upload-client: 17.0.0(@apollo/client@3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0)
       bcryptjs: 2.4.3
       body-parser: 1.20.3
       bytes: 3.1.2
@@ -16728,7 +16831,7 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  apollo-upload-client@17.0.0(@apollo/client@3.12.4(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0):
+  apollo-upload-client@17.0.0(@apollo/client@3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.10.0):
     dependencies:
       '@apollo/client': 3.12.4(@types/react@18.3.18)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       extract-files: 11.0.0
@@ -21797,6 +21900,13 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
+  react-dom@18.3.1(react@19.0.0):
+    dependencies:
+      loose-envify: 1.4.0
+      react: 19.0.0
+      scheduler: 0.23.2
+    optional: true
+
   react-dropzone@14.3.5(react@18.3.1):
     dependencies:
       attr-accept: 2.2.5
@@ -22155,6 +22265,9 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
+  react@19.0.0:
+    optional: true
+
   reactcss@1.2.3(react@18.3.1):
     dependencies:
       lodash: 4.17.21
@@ -22334,6 +22447,11 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.18
       react: 18.3.1
+
+  rehackt@0.1.0(@types/react@18.3.18)(react@19.0.0):
+    optionalDependencies:
+      '@types/react': 18.3.18
+      react: 19.0.0
 
   rehype-parse@9.0.1:
     dependencies:

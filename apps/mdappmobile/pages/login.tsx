@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { useAuthenticate } from '@md/api/graphql';
-import { BasicSection, Button, Input, PageTitle, SubTitle } from '@md/native-components';
+import { BasicSection, Button, Input, PageTitle, SubTitle } from '../../../packages/native';
 import { useNavigate } from 'react-router-native';
 
 const ContentContainer = styled(ScrollView)`
@@ -69,14 +69,14 @@ const SigninPage = () => {
         </BasicSection>
         <BasicSection>
           <Input
-            offsetBottom
+            $offsetBottom
             placeholder="Email"
             value={state.identity}
             onChangeText={(text) => setState({ ...state, identity: text })}
             ref={identityFieldRef}
           />
           <Input
-            offsetBottom
+            $offsetBottom
             placeholder="Password"
             value={state.secret}
             onChangeText={(text) => setState({ ...state, secret: text })}

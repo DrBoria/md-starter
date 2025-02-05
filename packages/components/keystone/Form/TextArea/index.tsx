@@ -62,8 +62,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
       variables,
       isCodeEditor,
       rows,
-      offsetBottom,
-      offsetRight,
+      $offsetBottom,
+      $offsetRight,
     },
     ref,
   ) => {
@@ -123,7 +123,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
     };
 
     return (
-      <Container offsetBottom={offsetBottom} offsetRight={offsetRight}>
+      <Container $offsetBottom={$offsetBottom} $offsetRight={$offsetRight}>
         {isCodeEditor ? (
           <CodeEditorContainer ref={editorContainerRef}>
             <CodeEditor

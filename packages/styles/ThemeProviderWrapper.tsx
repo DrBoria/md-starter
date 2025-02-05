@@ -52,7 +52,7 @@ const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children, theme
   const [theme] = useState(baseTheme);
 
   return (
-    <ThemeProvider theme={{ ...theme, colors: colorTheme || dark }}>
+    <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>
       <link href="https://fonts.cdnfonts.com/css/norse" rel="stylesheet" />
       <ResetStyle />
       <MediaProvider>{children}</MediaProvider>

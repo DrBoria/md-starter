@@ -1,6 +1,6 @@
 // GoogleAuthButton.tsx
 import React from 'react';
-import { Button } from '@md/native-components';
+import { Button } from '../../../packages/native';
 import { useGoogleAuth } from './useGoogleAuth';
 
 const GoogleAuthButton: React.FC = () => {

@@ -17,8 +17,8 @@ const Posts = () => {
         <Section $sectionSize='full' $direction='horizontal' style={{justifyContent: 'center', flexWrap: 'wrap'}}>
             {data?.items.map((item) => (
                 <Card
-                    offsetBottom
-                    offsetRight 
+                    $offsetBottom
+                    $offsetRight 
                     key={item.id}
                     title={item.name}
                     date={new Date(item.createdAt)?.toLocaleTimeString()}

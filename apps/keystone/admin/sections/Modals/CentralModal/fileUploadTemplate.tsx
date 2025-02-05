@@ -226,12 +226,12 @@ const FileUpload = ({
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter Name"
-            offsetBottom
+            $offsetBottom
           />
         )}
         {withDescription && (
           <TextArea
-            offsetBottom
+            $offsetBottom
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter Description"

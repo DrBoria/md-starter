@@ -14,15 +14,15 @@ const PaginationContainer = styled.div`
   padding: 10px 0;
 `;
 
-const PageNumber = styled.button<{ active: boolean }>`
-  background-color: ${({ active }) => (active ? "#007bff" : "#f9fafb")};
-  color: ${({ active }) => (active ? "#fff" : "#000")};
+const PageNumber = styled.button<{ $active: boolean }>`
+  background-color: ${({ $active }) => ($active ? "#007bff" : "#f9fafb")};
+  color: ${({ $active }) => (active ? "#fff" : "#000")};
   border: 1px solid #ccc;
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
-  font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  font-weight: ${({ $active }) => (active ? "bold" : "normal")};
 
   &:hover {
     background-color: #007bff;
@@ -69,7 +69,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pages.push(
           <PageNumber
             key={i}
-            active={i === currentPage}
+            $active={i === currentPage}
             onClick={() => onPageChange(i)}
           >
             {i}
@@ -97,7 +97,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pages.push(
           <PageNumber
             key={1}
-            active={1 === currentPage}
+            $active={1 === currentPage}
             onClick={() => onPageChange(1)}
           >
             1
@@ -110,7 +110,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pages.push(
           <PageNumber
             key={i}
-            active={i === currentPage}
+            $active={i === currentPage}
             onClick={() => onPageChange(i)}
           >
             {i}
@@ -124,7 +124,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pages.push(
           <PageNumber
             key={totalPages}
-            active={totalPages === currentPage}
+            $active={totalPages === currentPage}
             onClick={() => onPageChange(totalPages)}
           >
             {totalPages}

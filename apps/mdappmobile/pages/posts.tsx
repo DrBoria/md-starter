@@ -3,10 +3,10 @@ import {
     SafeAreaView,
     ScrollView,
 } from 'react-native';
-import { Card } from '@md/native-components';
+import { Card } from '../../../packages/native';
 import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
-import { Section } from '@md/native-components/Containers';
+import { Section } from '../../../packages/native/components/Containers';
 import { useNavigate } from 'react-router-native';
 
 // Styled components

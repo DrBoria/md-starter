@@ -39,7 +39,7 @@ const AutoComplete: React.FC<TAutoComplete> = ({
   variables = [],
   onSelect,
 }) => {
-  const [isOpenSuggestions, setIsOpenSuggestions] = useState(false);
+  const [$isOpenSuggestions, setIsOpenSuggestions] = useState(false);
   const [lastEnteredWord, setLastEnteredWord] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [suggestionsPosition, setSuggestionsPosition] = useState<TPosition>({
@@ -130,7 +130,7 @@ const AutoComplete: React.FC<TAutoComplete> = ({
       };
 
       const handleInput = () => {
-        if (isOpenSuggestions) updateSuggestions();
+        if ($isOpenSuggestions) updateSuggestions();
       };
 
       textArea.addEventListener("keydown", handleKeyDown);

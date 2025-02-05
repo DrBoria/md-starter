@@ -26,7 +26,7 @@ const handleSubmit = (e) => {
 <Form onSubmit={handleSubmit}>
   {/* Name */}
   <BasicSection>
-    <SubTitle offsetBottom>Radio Button</SubTitle>
+    <SubTitle $offsetBottom>Radio Button</SubTitle>
     <FormLabel htmlFor='first'>Radio Label 1</FormLabel>
     <Radio id='first' name='radio' value='1' />
     <FormLabel htmlFor='second'>Radio Label 2</FormLabel>
@@ -34,24 +34,24 @@ const handleSubmit = (e) => {
   </BasicSection>
 
   <BasicSection>
-    <SubTitle offsetBottom>Text Checkbox Section</SubTitle>
-    <TextCheckbox id='textCheckbox1' name='TextCheckbox1' offsetRight />
-    <TextCheckbox id='textCheckbox2' name='TextCheckbox2' offsetRight />
-    <TextCheckbox id='textCheckbox3' name='TextCheckbox3' offsetRight />
+    <SubTitle $offsetBottom>Text Checkbox Section</SubTitle>
+    <TextCheckbox id='textCheckbox1' name='TextCheckbox1' $offsetRight />
+    <TextCheckbox id='textCheckbox2' name='TextCheckbox2' $offsetRight />
+    <TextCheckbox id='textCheckbox3' name='TextCheckbox3' $offsetRight />
     <TextCheckbox id='textCheckbox4' name='TextCheckbox4' />
   </BasicSection>
 
   <BasicSection>
-    <SubTitle offsetBottom>Input Section</SubTitle>
+    <SubTitle $offsetBottom>Input Section</SubTitle>
     <FormLabel htmlFor='Input1'>Input1</FormLabel>
-    <Input id='Input1' name='Input1' offsetBottom />
+    <Input id='Input1' name='Input1' $offsetBottom />
 
     <FormLabel htmlFor='Input2'>Input2</FormLabel>
-    <Input id='Input2' name='Input2' offsetBottom />
+    <Input id='Input2' name='Input2' $offsetBottom />
   </BasicSection>
 
   <BasicSection>
-    <SubTitle offsetBottom>Select Section</SubTitle>
+    <SubTitle $offsetBottom>Select Section</SubTitle>
     <Select
       id='select'
       name='select'

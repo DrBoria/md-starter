@@ -27,7 +27,7 @@ module.exports = {
       },
     },
   },
-
+  tocMode: 'collapse',
   moduleAliases: {
     components: path.resolve(__dirname, "../../packages/components"),
   },
@@ -106,7 +106,6 @@ module.exports = {
         process: { env: {} },
       }),
     ],
-
   },
 
   // Add if you ned tailwind
@@ -118,30 +117,30 @@ module.exports = {
     {
       name: "Theme Editor",
       components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/theme-editor"),
+        path.resolve(__dirname, "./components")
       ),
     },
     {
       name: "Default Components",
       components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/default"),
+        path.resolve(__dirname, "../../packages/components/default")
       ),
     },
     {
       name: "Keystone Components",
       components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/keystone"),
+        path.resolve(__dirname, "../../packages/components/keystone")
       ),
     },
     {
       name: "Next Components",
       components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/next"),
+        path.resolve(__dirname, "../../packages/components/next")
       ),
     },
     {
       name: "React Native Components",
-      components: "../../packages/native-components/[A-Z]*/*.+(tsx|ts)",
+      components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
     },
   ],
 

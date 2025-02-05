@@ -26,11 +26,11 @@ const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
     return (
       <>
-        <MenuItem href="/" offsetBottom>
+        <MenuItem href="/" $offsetBottom>
           <Icons.HomeIcon />
           Dashboard
         </MenuItem>
-        <MenuItem href="/examples" offsetBottom>
+        <MenuItem href="/examples" $offsetBottom>
           <Icons.SettingsIcon />
           Examples
         </MenuItem>

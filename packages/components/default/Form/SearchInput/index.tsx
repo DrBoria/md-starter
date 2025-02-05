@@ -32,7 +32,7 @@ const SearchInput = ({ id, name, value, onChangeValue, ...props }: TSearchInputP
   };
 
   return (
-    <Container isOpen={isSearchOpen} {...props}>
+    <Container $isOpen={isSearchOpen} {...props}>
       {isSearchOpen && (
         <Input placeholder='Search for an order' id={id} name={name} autoFocus value={value} onChange={handleChange} />
       )}

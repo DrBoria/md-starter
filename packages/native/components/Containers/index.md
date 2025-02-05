@@ -1,5 +1,5 @@
 ```jsx
-import ThemeProvider from "../ThemeProviderNative";
+import ThemeProvider from "../../ThemeProviderNative";
 
 import { PageContainer, BasicSection, HeadingContainer } from ".";
 import { PlainText, SectionTitle } from "../Typography";
@@ -21,7 +21,7 @@ import { dark } from "@md/styles/themes";
         <PlainText>Basic Section Dark</PlainText>
         <HeadingContainer>
           <PlainText>Heading Container Dark</PlainText>
-          <SectionTitle offsetBottom>Section Title Dark</SectionTitle>
+          <SectionTitle $offsetBottom>Section Title Dark</SectionTitle>
           <PlainText>Plain Text</PlainText>
         </HeadingContainer>
       </BasicSection>

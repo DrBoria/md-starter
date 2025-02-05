@@ -34,10 +34,10 @@ export default function Login() {
     return (
         <Section $sectionSize='full' $direction='vertical'>
             <TextContainer>
-                <PageTitle offsetBottom>Login</PageTitle>
+                <PageTitle $offsetBottom>Login</PageTitle>
                 <Form onSubmit={handleSubmit}>
-                    <Input name='email' offsetBottom />
-                    <Input name='password' type='password' offsetBottom />
+                    <Input name='email' $offsetBottom />
+                    <Input name='password' type='password' $offsetBottom />
                     <Button type='submit'>Login</Button>
                 </Form>
             </TextContainer>

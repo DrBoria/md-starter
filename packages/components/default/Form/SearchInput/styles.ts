@@ -20,7 +20,7 @@ export const CrossIcon = styled(FiX)`
   display: none;
 `;
 
-export const Container = styled.div<TWithBasicElementOffsets & { isOpen: boolean }>`
+export const Container = styled.div<TWithBasicElementOffsets & { $isOpen: boolean }>`
   position: relative;
 
   display: flex;
@@ -39,12 +39,12 @@ export const Container = styled.div<TWithBasicElementOffsets & { isOpen: boolean
   transition: all 0.5s ease;
 
   & {
-    width: ${({ isOpen }) => isOpen && '100%'};
+    width: ${({ $isOpen }) => $isOpen && '100%'};
   }
   ${CrossIcon} {
-    display: ${({ isOpen }) => isOpen && 'block'};
+    display: ${({ $isOpen }) => $isOpen && 'block'};
   }
   ${SearchIcon} {
-    display: ${({ isOpen }) => isOpen && 'none'};
+    display: ${({ $isOpen }) => $isOpen && 'none'};
   }
 `;

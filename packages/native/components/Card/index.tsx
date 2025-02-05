@@ -49,7 +49,7 @@ interface ICard {
 
 const Card = ({ title, description, date, onPress }: ICard) => (
   <CardContainer onPress={onPress}>
-    <Title offsetBottom>{title}</Title>
+    <Title $offsetBottom>{title}</Title>
     <Footer>
       {date && <PlainText>{date}</PlainText>}
       <ReadMore>Read more...</ReadMore>

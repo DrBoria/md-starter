@@ -18,7 +18,7 @@ import { dark } from '@md/styles';
       <PlainText>Basic Section Dark</PlainText>
       <HeadingContainer>
         <PlainText>Heading Container Dark</PlainText>
-        <SectionTitle offsetBottom>Section Title Dark</SectionTitle>
+        <SectionTitle $offsetBottom>Section Title Dark</SectionTitle>
         <PlainText>Plain Text</PlainText>
       </HeadingContainer>
     </BasicSection>

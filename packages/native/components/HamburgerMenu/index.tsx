@@ -7,7 +7,7 @@ import { SubTitle } from '../Typography';
 
 const { width, height } = Dimensions.get('window'); // Get screen dimensions
 
-const SidebarContainer = styled(Animated.View) <{ isOpen: boolean }>`
+const SidebarContainer = styled(Animated.View) <{ $isOpen: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -27,7 +27,7 @@ const HamburgerButton = styled(TouchableOpacity)`
 
 const HamburgerMenu: React.FC = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [$isOpen, setIsOpen] = useState(false);
   const slideAnim = useRef(new Animated.Value(width)).current; // Start off-screen
 
   const toggleSidebar = () => {
@@ -36,11 +36,11 @@ const HamburgerMenu: React.FC = () => {
 
   useEffect(() => {
     Animated.timing(slideAnim, {
-      toValue: isOpen ? 0 : width, // Slide in/out based on isOpen
+      toValue: $isOpen ? 0 : width, // Slide in/out based on $isOpen
       duration: 300,
       useNativeDriver: true,
     }).start();
-  }, [isOpen]);
+  }, [$isOpen]);
 
   const handleNavigate = (endpoint: string) => {
     setIsOpen(false);
@@ -50,7 +50,7 @@ const HamburgerMenu: React.FC = () => {
   return (
     <>
       <HamburgerButton onPress={toggleSidebar} accessible>
-        <SubTitle>{isOpen ? '✕' : '☰'}</SubTitle>
+        <SubTitle>{$isOpen ? '✕' : '☰'}</SubTitle>
       </HamburgerButton>
 
       <SidebarContainer style={{ transform: [{ translateX: slideAnim }] }}>

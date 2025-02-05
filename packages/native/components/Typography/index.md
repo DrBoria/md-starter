@@ -1,7 +1,7 @@
 ### Typography:
 
 ```jsx
-import ThemeProvider from "../ThemeProviderNative";
+import ThemeProvider from "../../ThemeProviderNative";
 import { PageContainer, BasicSection } from "../Containers";
 import {
   PageTitle,

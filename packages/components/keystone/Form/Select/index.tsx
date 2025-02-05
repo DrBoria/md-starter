@@ -99,12 +99,12 @@ const Select: React.FC<SelectProps> = ({
   isClearable = false,
   placeholder = "Select an option",
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [$isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!$isOpen);
   };
 
   const handleSelectOption = (option: IOption) => {
@@ -122,7 +122,7 @@ const Select: React.FC<SelectProps> = ({
         setHighlightedIndex((prev) => Math.max(prev - 1, 0));
         break;
       case "Enter":
-        if (isOpen && options[highlightedIndex]) {
+        if ($isOpen && options[highlightedIndex]) {
           handleSelectOption(options[highlightedIndex]);
         }
         break;
@@ -171,10 +171,10 @@ const Select: React.FC<SelectProps> = ({
             </ClearButton>
           )}
           <Separator />
-          <span>{isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}</span>
+          <span>{$isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}</span>
         </IconsContainer>
       </SelectedValueWrapper>
-      {isOpen && (
+      {$isOpen && (
         <Dropdown>
           {options?.length ? (
             options.map((option, index) => (

@@ -37,8 +37,11 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "fs": "0.0.1-security",
+    "react": "18",
+    "react-dom": "18",
     "react-native": "0.76.0",
     "react-native-web": "^0.19.13",
+    "styled-components": "^6.1.13",
     "ts-morph": "^24.0.0",
     "ts-node": "^10.9.2"
   }

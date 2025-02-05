@@ -3,7 +3,7 @@ import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useQueryListItem } from '@md/api/graphql'; // Adjust the import based on your project structure
 import { useParams } from 'react-router-native'; // Use useParams to get URL parameters
 import type { Lists } from '@md/types';
-import { PageTitle, PlainText, Section, TextContainer } from '@md/native-components';
+import { PageTitle, PlainText, Section, TextContainer } from '../../../packages/native';
 import styled from 'styled-components/native';
 
 // Styled components
