@@ -1,5 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
-import { Lists } from "@md/types";
+import { gql } from "@apollo/client";
 
 // Define the variables interface for the mutation
 interface TCreateVariables {
@@ -11,6 +10,10 @@ interface IUseAuthenticateMutation {
     secretField: string;
     successTypename: string;
     failureTypename: string;
+    useMutation: (
+        mutation: ReturnType<typeof gql>,
+        options?: any
+      ) => any
 }
 
 const mutationName = "authenticateUserWithPassword";
@@ -19,12 +22,13 @@ const useAuthenticate = ({
     secretField,
     successTypename,
     failureTypename,
+    useMutation
 }: IUseAuthenticateMutation) => {
 
     const [
         authenticateFunciton,
         { loading, error: errorMutation, data: dataMutation },
-    ] = useMutation<{ item: { item: Lists.User.Item, __typename: string } }, TCreateVariables>(
+    ] = useMutation(
         gql`
         mutation($${identityField}: String!, $${secretField}: String!) {
             item: ${mutationName}(${identityField}: $${identityField}, ${secretField}: $${secretField}) {

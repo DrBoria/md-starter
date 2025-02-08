@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { useAuthenticate } from '@md/api/graphql';
 import { BasicSection, Button, Input, PageTitle, SubTitle } from '@md/native/components';
 import { useNavigate } from 'react-router-native';
+import { useMutation } from '@apollo/client';
 
 const ContentContainer = styled(ScrollView)`
   min-height: 100%;
@@ -26,7 +27,8 @@ const SigninPage = () => {
     identityField: 'email',
     secretField: 'password',
     failureTypename: 'UserAuthenticationWithPasswordFailure',
-    successTypename: 'UserAuthenticationWithPasswordSuccess'
+    successTypename: 'UserAuthenticationWithPasswordSuccess',
+    useMutation
   });
 
   const identityFieldRef = useRef(null);
