@@ -27,11 +27,10 @@ module.exports = {
       },
     },
   },
-  tocMode: 'collapse',
+  tocMode: "collapse",
   moduleAliases: {
     components: path.resolve(__dirname, "../../packages/components"),
   },
-
   webpackConfig: {
     devServer: {
       proxy: {
@@ -57,6 +56,8 @@ module.exports = {
       extensions: [".web.js", ".js", ".jsx", ".ts", ".tsx", ".json"],
       fallback: {
         crypto: false,
+        fs: false,
+        zlib: require.resolve("browserify-zlib"),
       },
     },
     module: {
@@ -71,7 +72,7 @@ module.exports = {
                 "@babel/preset-react",
                 "@babel/preset-env",
                 "@babel/preset-flow",
-                '@babel/preset-typescript',
+                "@babel/preset-typescript",
               ],
               plugins: ["@babel/plugin-transform-runtime"],
             },
@@ -82,14 +83,6 @@ module.exports = {
           use: [
             "style-loader",
             "css-loader",
-            {
-              loader: "postcss-loader",
-              options: {
-                postcssOptions: {
-                  plugins: [require("tailwindcss"), require("autoprefixer")],
-                },
-              },
-            },
           ],
         },
         {
@@ -111,27 +104,14 @@ module.exports = {
         process: { env: {} },
       }),
     ],
-    resolve: {
-      fallback: {
-        path: require.resolve("path-browserify"),
-        os: require.resolve("os-browserify/browser"),
-        fs: false,
-        stream: require.resolve("stream-browserify"),
-        zlib: require.resolve("browserify-zlib"),
-        crypto: require.resolve("crypto-browserify"),
-        vm: require.resolve("vm-browserify"),
-      },
-      extensions: [".js", "jsx", ".ts", ".tsx", ".json"],
-    },
   },
-
   sections: [
-    // {
-    //   name: "Theme Editor",
-    //   components: getComponentPathPatterns(
-    //     path.resolve(__dirname, "./components")
-    //   ),
-    // },
+    {
+      name: "Theme Editor",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "./components")
+      ),
+    },
     {
       name: "@md/components",
       components: getComponentPathPatterns(
@@ -156,16 +136,15 @@ module.exports = {
         path.resolve(__dirname, "../../packages/sections/keystone")
       ),
     },
-    // {
-    //   name: "@md/native/components",
-    //   components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
-    // },
+    {
+      name: "@md/native/components",
+      components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
+    },
     // {
     //   name: "@md/native/sections",
     //   components: "../../packages/native/sections/[A-Z]*/*.+(tsx|ts)",
     // },
   ],
-
   styleguideComponents: {
     Wrapper: path.join(
       __dirname,
