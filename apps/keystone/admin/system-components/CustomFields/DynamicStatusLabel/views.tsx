@@ -1,11 +1,11 @@
-import type { QueryResult } from "@apollo/client";
+import { useQuery, type QueryResult } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FieldContainer, FieldLabel } from "@keystone-ui/fields";
 
 import { StatusLabel } from "@md/components";
-import { useQueryListItem } from "../../../utils/queries/useQueryListItem";
 import { ThemeProvider } from "@md/styles";
+import { useQueryListItem } from "@md/api/graphql";
 
 interface IErrorMapping {
   regex: RegExp;
@@ -78,6 +78,7 @@ const Field: React.FC<IFieldProps> = ({ value, field }) => {
     listName: "Segment",
     selectedFields: "status calculationError contacts { id }",
     itemId: id as string,
+    useQuery
   });
 
   // Update current status when value prop changes

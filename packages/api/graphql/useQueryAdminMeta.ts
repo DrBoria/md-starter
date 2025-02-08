@@ -1,6 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { TUseQuery } from ".";
 
-const useQueryAdminMeta = <TData>(list: string[]) => {
+const useQueryAdminMeta = <TData>(list: string[], useQuery: TUseQuery<TData>) => {
   let resultString = "";
   for (const item of list) {
     const firstLetterLower = item.charAt(0).toLowerCase();
@@ -8,7 +9,7 @@ const useQueryAdminMeta = <TData>(list: string[]) => {
     resultString += `${item}: ${firstLetterLower}${remainingItem}sCount\n`;
   }
 
-  const query = useQuery<TData>(
+  const query = useQuery(
     gql`
       query AdminMetaQuery {
         keystone {

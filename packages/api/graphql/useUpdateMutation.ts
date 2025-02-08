@@ -1,20 +1,24 @@
 import type { ListMeta } from "@md/types";
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 const useUpdateMutation = <TData, TVariables>(
   list: ListMeta,
   selectedFields: string,
+  useMutation: (
+    mutation: ReturnType<typeof gql>,
+    options?: any
+  ) => any
 ) => {
   const [
     updateFunction,
     { loading, error: errorMutation, data: dataMutation },
-  ] = useMutation<TData, TVariables>(
+  ] = useMutation(
     gql`mutation UpdateItem($data: ${list.gqlNames.updateInputName}!, $id: ID!) {
       item: ${list.gqlNames.updateMutationName}(where: { id: $id }, data: $data) {
         ${selectedFields}
       }
     }`,
-    { errorPolicy: "all" },
+    { errorPolicy: "all" }
   );
 
   // Returning the states and mutation function

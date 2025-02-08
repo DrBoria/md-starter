@@ -67,7 +67,12 @@ module.exports = {
           use: {
             loader: "babel-loader",
             options: {
-              presets: ["@babel/preset-react", "@babel/preset-env"],
+              presets: [
+                "@babel/preset-react",
+                "@babel/preset-env",
+                "@babel/preset-flow",
+                '@babel/preset-typescript',
+              ],
               plugins: ["@babel/plugin-transform-runtime"],
             },
           },
@@ -106,42 +111,59 @@ module.exports = {
         process: { env: {} },
       }),
     ],
+    resolve: {
+      fallback: {
+        path: require.resolve("path-browserify"),
+        os: require.resolve("os-browserify/browser"),
+        fs: false,
+        stream: require.resolve("stream-browserify"),
+        zlib: require.resolve("browserify-zlib"),
+        crypto: require.resolve("crypto-browserify"),
+        vm: require.resolve("vm-browserify"),
+      },
+      extensions: [".js", "jsx", ".ts", ".tsx", ".json"],
+    },
   },
 
-  // Add if you ned tailwind
-  // require: [
-  //   path.join(__dirname, "node_modules/tailwindcss/tailwind.css"),
-  // ],
-
   sections: [
+    // {
+    //   name: "Theme Editor",
+    //   components: getComponentPathPatterns(
+    //     path.resolve(__dirname, "./components")
+    //   ),
+    // },
     {
-      name: "Theme Editor",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "./components")
-      ),
-    },
-    {
-      name: "Default Components",
+      name: "@md/components",
       components: getComponentPathPatterns(
         path.resolve(__dirname, "../../packages/components/default")
       ),
     },
     {
-      name: "Keystone Components",
+      name: "@md/sections",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/components/default")
+      ),
+    },
+    {
+      name: "@md/components/keystone",
       components: getComponentPathPatterns(
         path.resolve(__dirname, "../../packages/components/keystone")
       ),
     },
     {
-      name: "Next Components",
+      name: "@md/sections/keystone",
       components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/next")
+        path.resolve(__dirname, "../../packages/sections/keystone")
       ),
     },
-    {
-      name: "React Native Components",
-      components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
-    },
+    // {
+    //   name: "@md/native/components",
+    //   components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
+    // },
+    // {
+    //   name: "@md/native/sections",
+    //   components: "../../packages/native/sections/[A-Z]*/*.+(tsx|ts)",
+    // },
   ],
 
   styleguideComponents: {

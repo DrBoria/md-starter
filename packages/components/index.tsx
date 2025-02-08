@@ -7,16 +7,13 @@ export { Separator } from './default/Separator';
 export { LoadingSpinner } from './LoadingSpinner';
 export { Tooltip } from './default/Tooltip';
 export { Logo } from './default/Logo';
-export { Link } from './next/Link';
 export { Tabs } from './default/Tabs';
 export { Carousel } from './default/Carousel';
 export { Card } from './default/Card';
 export { Loading, LoaderImage } from './default/Loading';
 export { Header } from './default/Header';
-export { HamburgerMenu } from './default/HamburgerMenu';
 export { StatusLabel } from './default/StatusLabel';
 export { ProgressBar } from './default/ProgressBar';
-export { Label } from './keystone/Label';
 export { ErrorValidationMessage, ErrorValidationContainer } from './default/Validation';
 
 export { Toggle } from './keystone/Toggle';
@@ -39,6 +36,9 @@ export {
     HeaderText,
     LinkInForm,
 } from './default/Typography';
+export { CircleImage, WideImage } from './default/Images';
+export { Link } from './default/Link';
+export { MenuItem } from './default/MenuItem';
 
 
 type TTheme = typeof baseTheme;

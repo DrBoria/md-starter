@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { useAuthenticate } from '@md/api/graphql';
-import { BasicSection, Button, Input, PageTitle, SubTitle } from '../../../packages/native';
+import { BasicSection, Button, Input, PageTitle, SubTitle } from '@md/native/components';
 import { useNavigate } from 'react-router-native';
 
 const ContentContainer = styled(ScrollView)`

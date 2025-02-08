@@ -14,5 +14,9 @@
   "devDependencies": {
     "@keystone-6/core": "6.3.0",
     "types": "link:@keystone-6/core/types"
+  },
+  "dependencies": {
+    "graphql": "^16.9.0",
+    "http-status-codes": "^2.3.0"
   }
 }

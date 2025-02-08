@@ -8,19 +8,15 @@ import {
   NavigationContainer,
 } from "@keystone-6/core/admin-ui/components";
 
-import type { TModalData, TSideBarModalData } from "../../state";
-import { transformPathToReadableFormat } from "../../../utils/transformPathToReadableFormat";
-import { Button, MenuItemContainer, Toggle } from "@md/components";
-import { MenuItem } from "@md/components/next";
+import { GlobalVars } from "../../state";
+import { transformPathToReadableFormat } from "@md/utils";
+import { Button, Toggle } from "@md/components";
+import { MenuItem } from "@md/components";
 import { Icons } from "@md/components/keystone";
-import { CentralModal } from "../../sections//Modals/CentralModal";
-import { SideBarModal } from "../../sections/Modals/SideBarModal";
-import { ModalData, SideBarModalData, useGlobalVariable } from "../../state";
 import { NavigationContainerStyled } from "./styles";
-import { useGetSessionData } from "../utils/useGetSessionData";
-import { useSignOut } from "../utils/useSignOut";
-import { NavItem } from "../NavItem";
+import { NavItem } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
+import { SideBarModal, CentralModal, useSignOut, useGetSessionData } from "@md/sections/keystone";
 
 const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
@@ -52,12 +48,6 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
   // Define access rights
   const sessionData = useGetSessionData(authenticatedItem);
   const session = sessionData?.length ? sessionData[0] : null;
-  const [sideBarModalData, setSideBarModalData] =
-    useGlobalVariable<TSideBarModalData>(SideBarModalData, "SideBarModalData");
-  const [modalData, setModalData] = useGlobalVariable<TModalData>(
-    ModalData,
-    "ModalData",
-  );
 
   const isAdmin = session?.role?.name === "Admin";
   const isOwner = session?.role?.name === "Owner";
@@ -96,11 +86,11 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
           )}
 
           <SideBarModal
-            modalData={sideBarModalData}
-            hide={() => setSideBarModalData(null)}
+            modalData={GlobalVars.SideBarModalData}
+            hide={() => GlobalVars.SideBarModalData = null}
           />
 
-          <CentralModal modalData={modalData} hide={() => setModalData(null)} />
+          <CentralModal modalData={GlobalVars.ModalData} hide={() => GlobalVars.ModalData = null} />
         </NavigationContainerStyled>
       </NavigationContainer>
     </ThemeProvider>

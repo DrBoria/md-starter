@@ -1,20 +1,21 @@
-import type { OperationVariables, QueryResult } from "@apollo/client";
-import { gql, useQuery } from "@apollo/client";
-
+import { gql } from "@apollo/client";
 import { lowerCaseFirstLetter } from "@md/utils";
+import { TUseQuery } from ".";
 
-interface IUseQueryList {
+interface IUseQueryList<TData> {
   listName: string;
   selectedFields: string;
   itemId?: string;
+  useQuery: TUseQuery<TData>
 }
 
 const useQueryListItem = <TData>({
   listName,
   selectedFields,
   itemId,
-}: IUseQueryList): QueryResult<TData, OperationVariables> => {
-  const query = useQuery<TData>(
+  useQuery
+}: IUseQueryList<TData>): TData => {
+  const query = useQuery(
     gql`
       query ${listName}Item($id: ID!) {
           ${lowerCaseFirstLetter(listName)} (where: {id: $id}) {

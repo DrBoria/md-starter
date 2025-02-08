@@ -3,11 +3,13 @@ import {
     SafeAreaView,
     ScrollView,
 } from 'react-native';
-import { Card } from '../../../packages/native';
+import { Card } from '@md/native/components';
 import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
 import { Section } from '../../../packages/native/components/Containers';
 import { useNavigate } from 'react-router-native';
+import { QueryResult, useQuery } from '@apollo/client';
+import type { Lists } from '@md/types';
 
 // Styled components
 const ContentContainer = styled(ScrollView)`
@@ -18,9 +20,10 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 function Posts() {
-    const { data, refetch } = useQueryList({
+    const { data, refetch } = useQueryList<QueryResult<{ items: Lists.Post.Item[] }>>({
         listName: "Post",
         selectedFields: 'id name createdAt',
+        useQuery
     });
 
     const navigate = useNavigate();

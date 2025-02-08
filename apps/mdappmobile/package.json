@@ -21,7 +21,7 @@
     "@apollo/react-hooks": "^4.0.0",
     "@keystone-6/core": "6.3.0",
     "@md/api": "workspace:*",
-    "@md/native-components": "workspace:*",
+    "@md/native": "workspace:*",
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
     "@react-native-community/async-storage": "^1.12.1",

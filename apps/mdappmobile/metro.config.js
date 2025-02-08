@@ -10,7 +10,7 @@ const extraNodeModules = new Proxy(
   {
     '@md/utils': path.resolve(__dirname, '../../packages/utils'),
     '@md/styles': path.resolve(__dirname, '../../packages/styles'), 
-    '@md/native-components': path.resolve(__dirname, '../../packages/native-components'),
+    '@md/native': path.resolve(__dirname, '../../packages/native'),
   },
   {
     get: (target, name) =>

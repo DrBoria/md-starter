@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '../../next';
+import { Link } from '../Link';
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets } from '@md/styles';
 import { PlainText } from '../Typography';
 

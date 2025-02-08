@@ -2,10 +2,11 @@ import React from "react";
 
 import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "../components/Containers";
-import { PageContainer } from "../system-components/PageContainer";
-import { useQueryAdminMeta } from "../utils/queries/useQueryAdminMeta";
 import { PageTitle } from "@md/components";
 import { ThemeProvider } from "@md/styles";
+import { PageContainer } from "@md/sections/keystone";
+import { useQueryAdminMeta } from "@md/api/graphql";
+import { QueryResult, useQuery } from "@apollo/client";
 
 interface TAdminMeta {
   Contact: number;
@@ -22,7 +23,7 @@ export const DashboardSubPages = [
 ];
 
 const DashboardPage = () => {
-  const { data: adminMeta } = useQueryAdminMeta<TAdminMeta>(DashboardSubPages);
+  const { data: adminMeta } = useQueryAdminMeta<QueryResult<TAdminMeta>>(DashboardSubPages, useQuery);
 
   return (
     <ThemeProvider>

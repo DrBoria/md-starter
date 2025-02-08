@@ -10,6 +10,7 @@ export {
 } from './Button';
 export { Icons } from './Icons';
 export { Label } from './Label';
+export { NavItem } from './NavItem';
 export { DateTimePicker } from './DateTimePicker';
 export {
     Checkbox,

@@ -7,7 +7,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
-import { HamburgerMenu, LoadingSpinner, ThemeProvider } from '../../packages/native';
+import { HamburgerMenu, LoadingSpinner, ThemeProvider } from '@md/native/components';
 import { ApolloProvider } from '@apollo/client';
 import { dark, light } from '@md/styles/themes';
 import { NativeRouter, Route, Routes } from 'react-router-native';

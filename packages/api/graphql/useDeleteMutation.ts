@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { upperCaseFirstLetter } from "@md/utils";
 
@@ -7,12 +7,15 @@ interface TDeleteVariables {
   where: { id: string }[];
 }
 
-const useDeleteMutation = <TData>(listName: string) => {
+const useDeleteMutation = (listName: string, useMutation: (
+  mutation: ReturnType<typeof gql>,
+  options?: any
+) => any) => {
   // Use the useMutation hook
   const [
     deleteFunction,
     { loading, error: errorMutation, data: dataMutation },
-  ] = useMutation<TData, TDeleteVariables>(
+  ] = useMutation(
     gql`
       mutation Delete($where: [${upperCaseFirstLetter(listName)}WhereUniqueInput!]!) {
         items: delete${upperCaseFirstLetter(listName)}s(where: $where) {

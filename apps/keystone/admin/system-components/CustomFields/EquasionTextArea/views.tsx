@@ -1,4 +1,4 @@
-import type { QueryResult } from "@apollo/client";
+import { useQuery, type QueryResult } from "@apollo/client";
 import type {
   CellComponent,
   FieldController,
@@ -18,7 +18,6 @@ import type { TTextAreaPlugins } from "@md/components/keystone";
 import type { Lists } from ".keystone/types";
 import { ShortedText } from "@md/components";
 import { TextArea } from "@md/components/keystone";
-import { useQueryList } from "../../../utils/queries/useQueryList";
 import {
   addTextOnClick,
   comparisonOperators,
@@ -26,6 +25,7 @@ import {
   mathOperators,
 } from "./utils";
 import { ThemeProvider } from "@md/styles";
+import { useQueryList } from "@md/api/graphql";
 
 const FormulaEditor = styled.div`
   width: 100%;
@@ -107,9 +107,10 @@ const Field = ({
     onChange?.({ inner: { value: newValue } });
   };
   const { data: listItemData }: QueryResult<IConstantsQuery> =
-    useQueryList<IConstantsQuery>({
+    useQueryList<QueryResult<IConstantsQuery>>({
       listName: "DslVariable",
       selectedFields: "name",
+      useQuery
     });
 
   const variables =

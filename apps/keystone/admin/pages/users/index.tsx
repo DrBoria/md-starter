@@ -1,9 +1,8 @@
 import React from "react";
 
 import { Button, ColumnsContainer } from "@md/components";
-import { ItemsList } from "../../system-components/ItemsList";
 import { useRouter } from "next/router";
-import { PageContainer } from "../../system-components/PageContainer";
+import { ItemsList, PageContainer } from "@md/sections/keystone";
 
 const ExamplesList = () => {
   const router = useRouter();
@@ -13,7 +12,7 @@ const ExamplesList = () => {
       <ColumnsContainer $colsRatio={["2fr", "1fr"]} className="py-4">
         <ItemsList
           listName="User"
-          displayedFields={['email', 'role', 'locked']}
+          fieldsToRender={['email', 'role', 'locked']}
           withFullSupport
           withFilter
           withPagination

@@ -4,17 +4,8 @@ import type {
   OperationVariables,
   ReactiveVar,
 } from "@apollo/client";
-import type React from "react";
-import type { JSXElementConstructor, ReactElement } from "react";
-import { gql, makeVar, useApolloClient, useReactiveVar } from "@apollo/client";
-
-import type { TConditionalField } from "./system-components/ConditionalField";
-import type { ITabs } from "./system-components/TabsFields";
-
-/**
- * Add variable name here to display it in queries
- */
-type TGlobalVariableNames = "SideBarModalData" | "ModalData" | "FullScreenData";
+import { gql, makeVar, useApolloClient } from "@apollo/client";
+import { ITabs, TConditionalField } from "@md/sections/keystone";
 
 /**
  *
@@ -33,46 +24,24 @@ const updateAndLog =
       mutation: DocumentNode;
     },
   ) =>
-  async (payload: unknown) => {
-    if (!clientVar)
-      throw new Error("mutateInCache: clientVar parameter required.");
-    if (payload === undefined)
-      throw new Error("mutateInCache: payload parameter required.");
+    async (payload: unknown) => {
+      if (!clientVar)
+        throw new Error("mutateInCache: clientVar parameter required.");
+      if (payload === undefined)
+        throw new Error("mutateInCache: payload parameter required.");
 
-    clientVar.variable(payload as T); // Reactive Variable changes
-    await client.mutate({
-      mutation: clientVar.mutation,
-      variables: payload as OperationVariables,
-    }); // Mutation runs ( in dev tools )
+      clientVar.variable(payload as T); // Reactive Variable changes
+      await client.mutate({
+        mutation: clientVar.mutation,
+        variables: payload as OperationVariables,
+      }); // Mutation runs ( in dev tools )
 
-    // Writing to Cache variable with new data
-    client.writeQuery({
-      query: clientVar.query,
-      data: payload,
-    });
-  };
-
-const useGlobalVariable = <T>(
-  variable: ReactiveVar<T>,
-  name?: TGlobalVariableNames,
-): [T, (payload: T) => void] => {
-  const client = useApolloClient();
-
-  const setSideBarModalDataClientVar = {
-    variable: variable,
-    query: gql`
-    query Get${name} {
-      ${name} @client
-    }`,
-    mutation: gql`
-    mutation Variable_Update_${name}($input: modalDataInput!) {
-      update${name}(input: $input) @client
-    }`,
-  };
-
-  const reactiveVar = useReactiveVar(variable);
-  return [reactiveVar, updateAndLog<T>(client, setSideBarModalDataClientVar)];
-};
+      // Writing to Cache variable with new data
+      client.writeQuery({
+        query: clientVar.query,
+        data: payload,
+      });
+    };
 
 /**
  * Here is the list of available variables
@@ -84,7 +53,7 @@ export interface IModalButton {
     // Onclick will have action that should be used by default - create item, save edited item, delete item and so on
     onClick?: () => unknown,
     isDisabled?: boolean,
-  ) => ReactElement<unknown, string | JSXElementConstructor<unknown>>;
+  ) => React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>;
 }
 
 export type TSideBarModalData = {
@@ -99,18 +68,85 @@ export type TSideBarModalData = {
   defaultValues?: Record<string, unknown>;
   conditionalFields?: TConditionalField[];
   buttons?: IModalButton[];
-  children?: ReactElement;
+  children?: React.ReactElement;
 } | null;
+
 const SideBarModalData = makeVar<TSideBarModalData>(null);
 
 export type TModalData = {
   content: React.ReactNode;
 } | null;
+
 const ModalData = makeVar<TModalData>(null);
 
 export type TFullScreenData = {
   content: React.ReactNode;
 } | null;
+
 const FullScreenData = makeVar<TModalData>(null);
 
-export { SideBarModalData, ModalData, FullScreenData, useGlobalVariable };
+const GlobalVars = {
+  get SideBarModalData() {
+    return SideBarModalData();
+  },
+  set SideBarModalData(value: TSideBarModalData) {
+    const client = useApolloClient();
+    updateAndLog(client, {
+      variable: SideBarModalData,
+      query: gql`
+        query GetSideBarModalData {
+          SideBarModalData @client
+        }
+      `,
+      mutation: gql`
+        mutation Variable_Update_SideBarModalData($input: modalDataInput!) {
+          updateSideBarModalData(input: $input) @client
+        }
+      `,
+    })(value);
+  },
+
+  get ModalData() {
+    return ModalData();
+  },
+  set ModalData(value: TModalData) {
+    const client = useApolloClient();
+
+    updateAndLog(client, {
+      variable: ModalData,
+      query: gql`
+        query GetModalData {
+          ModalData @client
+        }
+      `,
+      mutation: gql`
+        mutation Variable_Update_ModalData($input: modalDataInput!) {
+          updateModalData(input: $input) @client
+        }
+      `,
+    })(value);
+  },
+
+  get FullScreenData() {
+    return FullScreenData();
+  },
+  set FullScreenData(value: TFullScreenData) {
+    const client = useApolloClient();
+
+    updateAndLog(client, {
+      variable: FullScreenData,
+      query: gql`
+        query GetFullScreenData {
+          FullScreenData @client
+        }
+      `,
+      mutation: gql`
+        mutation Variable_Update_FullScreenData($input: modalDataInput!) {
+          updateFullScreenData(input: $input) @client
+        }
+      `,
+    })(value);
+  },
+};
+
+export { GlobalVars };

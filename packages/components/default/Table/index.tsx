@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { Select, TOption } from '../Form';
 import Pagination from '../PaginationOld';

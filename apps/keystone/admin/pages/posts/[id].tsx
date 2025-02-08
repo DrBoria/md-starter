@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 
 import { ColumnsContainer } from "@md/components";
 import { Input } from "@md/components";
-import { EditItemForm } from "../../system-components/EditItemForm";
-import { PageContainer } from "../../system-components/PageContainer";
+import { EditItemForm, PageContainer } from "@md/sections/keystone";
 
 const UpdateAgentTemplatePage = () => {
   const router = useRouter();

@@ -9,5 +9,6 @@ export {
     toPlural,
     toReadablePascalCase,
     transformPathToReadableFormat,
+    transformToReadableFormat,
     upperCaseFirstLetter,
 } from './text';

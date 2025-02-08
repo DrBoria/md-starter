@@ -14,15 +14,14 @@ import {
 } from "@keystone-ui/fields";
 
 import type { IOption, TSession } from "../../../../types";
-import type { TSideBarModalData } from "../../../state";
-import { toReadablePascalCase } from "../../../../utils/toReadablePascalCase";
+import { GlobalVars, type TSideBarModalData } from "../../../state";
 import { Select } from "@md/components";
 import { LinkInForm } from "@md/components";
-import { SideBarModalData, useGlobalVariable } from "../../../state";
-import { useQueryList } from "../../../queries/useQueryList";
-import { useQueryListItem } from "../../../queries/useQueryListItem";
 import { getWhereParameters } from "./utils";
 import { ThemeProvider } from "@md/styles";
+import { useQueryList, useQueryListItem } from "@md/api/graphql";
+import { QueryResult, useQuery } from "@apollo/client";
+import { toReadablePascalCase } from "@md/utils";
 
 export interface IListName {
   listName: string;
@@ -79,20 +78,20 @@ const Field = ({
       })
       .join(" ");
 
-  const { data, refetch } = useQueryList<{
+  const { data, refetch } = useQueryList<QueryResult<{
     items: [IField];
-  }>({
+  }>>({
     listName: field?.refListKey,
     selectedFields,
     where: getWhereParameters(list, itemValue, session),
+    useQuery
   });
 
-  const { data: fullValueItem } = useQueryListItem<{
-    agentWriter: IField;
-  }>({
+  const { data: fullValueItem } = useQueryListItem<QueryResult<{ agentWriter: IField }>>({
     listName: field?.refListKey,
     selectedFields,
     itemId: value?.value?.id,
+    useQuery
   });
 
   const items = data?.items || [];
@@ -150,19 +149,15 @@ const Field = ({
   const currentValue = fullValueItem?.agentWriter
     ? mapToOutput(fullValueItem?.agentWriter)
     : mapToValue(value?.value);
-  const [_, setSideBarModalData] = useGlobalVariable<TSideBarModalData>(
-    SideBarModalData,
-    "SideBarModalData",
-  );
 
   const itemReadableName = toReadablePascalCase(field?.refListKey);
 
   const handleCreateItemClick = () => {
-    setSideBarModalData({
+    GlobalVars.SideBarModalData = {
       listName: field?.refListKey,
       headerText: `Create ${itemReadableName}`,
       type: "create",
-    });
+    };
   };
 
   return (
