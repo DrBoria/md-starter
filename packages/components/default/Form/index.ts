@@ -7,7 +7,7 @@ import { Select } from './Select';
 import { Submit } from './Submit';
 import { TextCheckbox } from './TextCheckbox';
 
-export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText };
+export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit };
 
 // Types
 export type { TOption } from './Select';
