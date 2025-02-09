@@ -3,6 +3,10 @@ const path = require("path");
 const fs = require("fs");
 
 function getComponentPathPatterns(basePath) {
+  if (!fs.existsSync(basePath)) {
+    return []; // If folder not exists - return empty array
+  }
+
   return fs
     .readdirSync(basePath)
     .filter((folder) => {
@@ -138,7 +142,9 @@ module.exports = {
     },
     {
       name: "@md/native/components",
-      components: "../../packages/native/components/[A-Z]*/*.+(tsx|ts)",
+      components: getComponentPathPatterns(
+        path.resolve(__dirname, "../../packages/native/components")
+      ),
     },
     // {
     //   name: "@md/native/sections",
