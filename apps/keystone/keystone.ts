@@ -11,7 +11,7 @@ import { config } from "@keystone-6/core";
 // authentication is configured separately here too, but you might move this elsewhere
 // when you write your list-level access control functions, as they typically rely on session data
 import { session, withAuth } from "./auth";
-import { DATABASE_URL } from "./env";
+import { APP_PORT, DATABASE_URL } from "./env";
 // to keep this file tidy, we define our schema in a different file
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
@@ -29,7 +29,7 @@ export default withAuth(
         /* Local storage configuration */
         /*******************************/
         generateUrl: (path: string) => {
-          return `http://localhost:80/files${path}`;
+          return `http://${APP_HOST}:${APP_PORT}/files${path}`;
         },
         serverRoute: { path: "/files" },
         storagePath: "public/files", // Path where files will be stored locally
@@ -61,7 +61,7 @@ export default withAuth(
       }
     },
     server: {
-      port: 3000,
+      port: Number(APP_PORT),
       extendExpressApp: (
         app,
         context: any,
