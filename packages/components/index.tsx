@@ -4,7 +4,7 @@ export { Button } from './default/Button';
 export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText } from './default/Form';
 export { Pagination } from './default/Pagination';
 export { Separator } from './default/Separator';
-export { LoadingSpinner } from './LoadingSpinner';
+export { LoadingSpinner } from './default/LoadingSpinner';
 export { Tooltip } from './default/Tooltip';
 export { Logo } from './default/Logo';
 export { Tabs } from './default/Tabs';
