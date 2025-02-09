@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "styleguide.config.js",
   "scripts": {
-    "dev": "styleguidist server",
-    "server": "node --inspect-brk -r ts-node/register themeServer.ts",
+    "dev": "concurrently \"pnpm run dev:styleguidist\" \"pnpm run dev:server\"",
+    "dev:styleguidist": "styleguidist server",
+    "dev:server": "ts-node themeServer.ts",
+    "dev:server:debug": "node --inspect-brk -r ts-node/register themeServer.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,6 +24,7 @@
     "@svgr/webpack": "^8.1.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-styled-components": "^2.1.4",
+    "concurrently": "^9.1.2",
     "css-loader": "^7.1.2",
     "postcss-loader": "^8.1.1",
     "react-styleguidist": "^13.1.3",

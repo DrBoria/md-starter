@@ -2,6 +2,11 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Getting Started
 
+# check, that /apps/mdappmobile/android/local.propertie contains string
+```
+   sdk.dir=/Users/[YOUR_USER]/Library/Android/sdk
+```
+
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
