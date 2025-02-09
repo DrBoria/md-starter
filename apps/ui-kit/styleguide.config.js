@@ -4,17 +4,53 @@ const fs = require("fs");
 
 function getComponentPathPatterns(basePath) {
   if (!fs.existsSync(basePath)) {
-    return []; // If folder not exists - return empty array
+    return null; // Если папка не существует, возвращаем null
   }
 
-  return fs
+  const components = fs
     .readdirSync(basePath)
-    .filter((folder) => {
-      const docPath = path.join(basePath, folder, "index.md");
-      return fs.existsSync(docPath); // Leave just folders with index.md
-    })
+    .filter((folder) => fs.existsSync(path.join(basePath, folder, "index.md")))
     .map((folder) => path.join(basePath, folder, "*.{tsx,ts}"));
+
+  return components.length > 0 ? components : null;
 }
+
+const sections = [
+  {
+    name: "Theme Editor",
+    components: getComponentPathPatterns(path.resolve(__dirname, "./components")),
+  },
+  {
+    name: "@md/components",
+    components: getComponentPathPatterns(
+      path.resolve(__dirname, "../../packages/components/default")
+    ),
+  },
+  {
+    name: "@md/sections",
+    components: getComponentPathPatterns(
+      path.resolve(__dirname, "../../packages/components/default")
+    ),
+  },
+  {
+    name: "@md/components/keystone",
+    components: getComponentPathPatterns(
+      path.resolve(__dirname, "../../packages/components/keystone")
+    ),
+  },
+  {
+    name: "@md/sections/keystone",
+    components: getComponentPathPatterns(
+      path.resolve(__dirname, "../../packages/sections/keystone")
+    ),
+  },
+  {
+    name: "@md/native/components",
+    components: getComponentPathPatterns(
+      path.resolve(__dirname, "../../packages/native/components")
+    ),
+  },
+].filter((section) => section.components !== null); // Удаляем секции без компонентов
 
 module.exports = {
   styles: {
@@ -41,9 +77,7 @@ module.exports = {
         "/api/graphql": {
           target: "http://localhost:3000",
           changeOrigin: true,
-          pathRewrite: {
-            "^/api/graphql": "/api/graphql",
-          },
+          pathRewrite: { "^/api/graphql": "/api/graphql" },
         },
       },
     },
@@ -53,9 +87,9 @@ module.exports = {
         components: path.resolve(__dirname, "../../packages/components"),
       },
       modules: [
-        path.resolve(__dirname, "../../node_modules"), // Root-level node_modules
-        path.resolve(__dirname, "node_modules"), // Local node_modules in styleguidist
-        "node_modules", // Fallback to default node_modules
+        path.resolve(__dirname, "../../node_modules"),
+        path.resolve(__dirname, "node_modules"),
+        "node_modules",
       ],
       extensions: [".web.js", ".js", ".jsx", ".ts", ".tsx", ".json"],
       fallback: {
@@ -84,10 +118,7 @@ module.exports = {
         },
         {
           test: /\.css$/i,
-          use: [
-            "style-loader",
-            "css-loader",
-          ],
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.(jpg|jpeg|png|gif|mp3)$/,
@@ -109,52 +140,8 @@ module.exports = {
       }),
     ],
   },
-  sections: [
-    {
-      name: "Theme Editor",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "./components")
-      ),
-    },
-    {
-      name: "@md/components",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/default")
-      ),
-    },
-    {
-      name: "@md/sections",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/default")
-      ),
-    },
-    {
-      name: "@md/components/keystone",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/components/keystone")
-      ),
-    },
-    {
-      name: "@md/sections/keystone",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/sections/keystone")
-      ),
-    },
-    {
-      name: "@md/native/components",
-      components: getComponentPathPatterns(
-        path.resolve(__dirname, "../../packages/native/components")
-      ),
-    },
-    // {
-    //   name: "@md/native/sections",
-    //   components: "../../packages/native/sections/[A-Z]*/*.+(tsx|ts)",
-    // },
-  ],
+  sections,
   styleguideComponents: {
-    Wrapper: path.join(
-      __dirname,
-      "../../packages/styles/ThemeProviderWrapper.tsx"
-    ),
+    Wrapper: path.join(__dirname, "../../packages/styles/ThemeProviderWrapper.tsx"),
   },
 };
