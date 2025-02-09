@@ -16,7 +16,6 @@ export { StatusLabel } from './default/StatusLabel';
 export { ProgressBar } from './default/ProgressBar';
 export { ErrorValidationMessage, ErrorValidationContainer } from './default/Validation';
 
-export { Toggle } from './keystone/Toggle';
 export {
     ColumnsContainer,
     DashboardCardsContainer,

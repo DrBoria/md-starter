@@ -18,5 +18,6 @@ export {
     Select,
     TextArea
 } from './Form';
+export { Toggle } from './Toggle';
 
 export type { TTextAreaPlugins } from './Form'

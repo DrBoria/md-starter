@@ -10,9 +10,8 @@ import {
 
 import { GlobalVars } from "../../state";
 import { transformPathToReadableFormat } from "@md/utils";
-import { Button, Toggle } from "@md/components";
-import { MenuItem } from "@md/components";
-import { Icons } from "@md/components/keystone";
+import { Button, MenuItem } from "@md/components";
+import { Icons, Toggle } from "@md/components/keystone";
 import { NavigationContainerStyled } from "./styles";
 import { NavItem } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
