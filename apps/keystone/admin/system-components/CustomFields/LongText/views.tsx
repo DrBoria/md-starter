@@ -8,7 +8,7 @@ import {
 } from "@keystone-ui/fields";
 
 import type { controller } from "../utils/viewStarter";
-import { ShortedText } from "@md/components";
+import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
 

@@ -1,7 +1,7 @@
 import { baseTheme } from '@md/styles/themes';
 
 export { Button } from './default/Button';
-export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, ShortedText } from './default/Form';
+export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit } from './default/Form';
 export { Pagination } from './default/Pagination';
 export { Separator } from './default/Separator';
 export { LoadingSpinner } from './default/LoadingSpinner';

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Copy } from "../../../keystone/Button";
-import { ColumnsContainer } from "../../Containers";
+import { Copy } from "../../Button";
+import { ColumnsContainer } from "../../../default/Containers";
 
 interface TShortedTextProps {
   text: string | null;

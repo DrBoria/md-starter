@@ -9,7 +9,7 @@ import {
 
 import type { Value } from "../utils/validate";
 import type { controller } from "../utils/viewStarter";
-import { ShortedText, Input } from "@md/components";
+import { ShortedText, Input } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import {
   ErrorValidationContainer,

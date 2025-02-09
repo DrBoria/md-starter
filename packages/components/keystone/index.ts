@@ -13,6 +13,7 @@ export { Label } from './Label';
 export { NavItem } from './NavItem';
 export { DateTimePicker } from './DateTimePicker';
 export {
+    ShortedText,
     Checkbox,
     Select,
     TextArea

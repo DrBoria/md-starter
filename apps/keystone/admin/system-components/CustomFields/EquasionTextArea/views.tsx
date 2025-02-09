@@ -16,7 +16,7 @@ import styled from "styled-components";
 
 import type { TTextAreaPlugins } from "@md/components/keystone";
 import type { Lists } from ".keystone/types";
-import { ShortedText } from "@md/components";
+import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import {
   addTextOnClick,

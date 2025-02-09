@@ -12,8 +12,9 @@ import type { controller } from "../utils/viewStarter";
 import {
   ErrorValidationContainer,
   ErrorValidationMessage,
-  Tooltip, ShortedText, Input
+  Tooltip, Input
 } from "@md/components";
+import { ShortedText } from "@md/components/keystone";
 import { validate } from "../utils/validate";
 import { ThemeProvider } from "@md/styles";
 
