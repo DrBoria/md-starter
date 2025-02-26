@@ -1,3 +1,4 @@
+"use client";
 // Import the necessary modules
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";

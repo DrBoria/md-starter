@@ -1,3 +1,5 @@
+'use client'
+
 import styled, { css } from 'styled-components';
 import { basicFont } from '../Typography';
 import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';

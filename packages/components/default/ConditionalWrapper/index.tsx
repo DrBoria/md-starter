@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, ReactElement, ElementType } from 'react';
 
 type TConditionalWrapperProps = {

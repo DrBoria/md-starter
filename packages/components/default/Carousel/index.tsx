@@ -1,3 +1,5 @@
+"use client";
+
 import styled from 'styled-components';
 import React, { FC, ReactNode, useRef, useState } from 'react';
 import { Column, ColumnsContainer } from '../Containers';

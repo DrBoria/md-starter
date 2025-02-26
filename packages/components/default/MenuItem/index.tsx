@@ -1,3 +1,4 @@
+"use client";
 // WebSidebarItem.tsx
 import React, { ReactNode } from 'react';
 import { useRouter } from "next/router";

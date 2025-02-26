@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC, forwardRef, ForwardedRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import cloudFilter from './clouds.svg'

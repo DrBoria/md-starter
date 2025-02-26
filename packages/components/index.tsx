@@ -1,3 +1,5 @@
+'use client'
+
 import { baseTheme } from '@md/styles/themes';
 
 export { Button } from './default/Button';

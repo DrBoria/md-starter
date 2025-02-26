@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, FormEvent, useState } from 'react';
 
 import { Input } from '../Input';

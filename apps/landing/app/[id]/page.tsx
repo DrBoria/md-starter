@@ -1,3 +1,5 @@
+"use client";
+
 import { useQueryListItem } from '@md/api/graphql'; // Import your hook here
 import { useRouter } from 'next/router'; // Import useRouter
 import type { Lists } from '@md/types';

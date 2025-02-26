@@ -1,3 +1,4 @@
+"use client";
 import type { CSSProperties } from "react";
 import React, { useState } from "react";
 import styled from "styled-components";

@@ -1,3 +1,5 @@
+'use client'
+
 import styled, { css } from "styled-components";
 import { devices, TFullWidth, TWithBasicElementOffsets, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
 

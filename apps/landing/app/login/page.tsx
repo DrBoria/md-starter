@@ -1,4 +1,5 @@
-import Head from 'next/head'
+"use client";
+
 import { Button, Form, Input, Section, TextContainer } from '@md/components'
 import { PageTitle } from '@md/components'
 import { useAuthenticate } from '@md/api/graphql';
