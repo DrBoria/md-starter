@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { ColumnsContainer } from "@md/components";
 import { Input } from "@md/components";
 import { EditItemForm, PageContainer } from "@md/sections/keystone";
+import { useQuery } from "@apollo/client";
 
 const UpdateAgentTemplatePage = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const UpdateAgentTemplatePage = () => {
         <EditItemForm
           itemId={id as string}
           listName="Post"
+          useQuery={useQuery}
         />
 
         <div className="flex gap-1 py-6">

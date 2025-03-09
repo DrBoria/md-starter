@@ -13,7 +13,7 @@ export const Post = list<Lists.Post.TypeInfo>({
   access: {
     operation: {
       query: () => true,
-      create: (data) => isAdmin(data),
+      create: () => true,
       update: (data) => isAdmin(data),
       delete: (data) => isAdmin(data),
     },

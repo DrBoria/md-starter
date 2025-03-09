@@ -12,6 +12,7 @@
     "@apollo/client": "^3.11.5",
     "@md/api": "workspace:*",
     "@md/components": "workspace:*",
+    "@md/sections": "workspace:*",
     "@md/styles": "workspace:*",
     "@md/types": "workspace:*",
     "@md/utils": "workspace:*",

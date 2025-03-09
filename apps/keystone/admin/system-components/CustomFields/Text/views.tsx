@@ -9,11 +9,12 @@ import {
 
 import type { Value } from "../utils/validate";
 import type { controller } from "../utils/viewStarter";
-import { ShortedText, Input } from "@md/components/keystone";
+import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import {
   ErrorValidationContainer,
   ErrorValidationMessage,
+  Input,
 } from "@md/components";
 import { validate } from "../utils/validate";
 import { ThemeProvider } from "@md/styles";

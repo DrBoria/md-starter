@@ -3,6 +3,7 @@ import { Button, Form, Input, Section, TextContainer } from '@md/components'
 import { PageTitle } from '@md/components'
 import { useAuthenticate } from '@md/api/graphql';
 import { useRouter } from 'next/router';
+import { useMutation } from '@apollo/client';
 
 export default function Login() {
     // LOADING
@@ -12,7 +13,8 @@ export default function Login() {
         identityField: 'email',
         secretField: 'password',
         failureTypename: 'UserAuthenticationWithPasswordFailure',
-        successTypename: 'UserAuthenticationWithPasswordSuccess'
+        successTypename: 'UserAuthenticationWithPasswordSuccess',
+        useMutation
     });
 
     const handleSubmit = async (e) => {
