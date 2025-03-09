@@ -13,6 +13,7 @@
     "@apollo/client": "^3.11.5",
     "@apollo/react-hooks": "^4.0.0",
     "@md/types": "workspace:*",
-    "@md/utils": "workspace:*"
+    "@md/utils": "workspace:*",
+    "styled-components": "5.3.11"
   }
 }

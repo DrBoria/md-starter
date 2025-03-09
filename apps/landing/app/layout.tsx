@@ -1,30 +1,28 @@
+// layout.jsx
 import { Paper, PaperContainer, PaperTexture } from '@md/components/textures';
 import { Metadata } from 'next';
-import StyledThemeProvider from './StyledThemeProvider';
+import StyledComponentsRegistry from './StyledComponentsRegistry';
 
 export const metadata: Metadata = {
     title: 'My Page Title',
 };
 
 export default function RootLayout({
-    // Layouts must accept a children prop.
-    // This will be populated with nested layouts or pages
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
     return (
         <html lang="en">
             <body>
-                <StyledThemeProvider>
+                <StyledComponentsRegistry>
                     <PaperContainer>
-                        {/* PAPER */}
                         <PaperTexture />
                         <Paper />
                         {children}
                     </PaperContainer>
-                </StyledThemeProvider>
+                </StyledComponentsRegistry>
             </body>
         </html>
-    )
+    );
 }

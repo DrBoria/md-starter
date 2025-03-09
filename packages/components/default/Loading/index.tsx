@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from "next-image-export-optimizer";
 import styled, { css, keyframes } from 'styled-components';
+import { ThemeProvider } from '@md/styles';
 
 // Define the animation
 const rotate = keyframes`

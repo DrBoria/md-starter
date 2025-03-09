@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "graphql": "^16.9.0",
-    "http-status-codes": "^2.3.0"
+    "http-status-codes": "^2.3.0",
+    "styled-components": "5.3.11"
   }
 }

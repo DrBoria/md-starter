@@ -34,7 +34,6 @@ const MediaProvider = styled.div`
   `}
 `;
 
-// Глобальный сброс стилей
 const ResetStyle = createGlobalStyle`
   ${StyledReset}
   

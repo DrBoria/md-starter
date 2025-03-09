@@ -52,7 +52,7 @@
     "react-native": "0.76.0",
     "react-native-web": "^0.19.13",
     "stream-browserify": "^3.0.0",
-    "styled-components": "^6.1.13",
+    "styled-components": "^5.3.11",
     "ts-morph": "^24.0.0",
     "ts-node": "^10.9.2",
     "vm-browserify": "^1.1.2"

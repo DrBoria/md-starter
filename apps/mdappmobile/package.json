@@ -37,13 +37,13 @@
     "react-native-screens": "^3.35.0",
     "react-native-svg": "^15.8.0",
     "react-router-native": "^6.27.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
-    "@md/types": "workspace:*",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
+    "@md/types": "workspace:*",
     "@react-native-community/cli": "15.0.0-alpha.2",
     "@react-native-community/cli-platform-android": "15.0.0-alpha.2",
     "@react-native-community/cli-platform-ios": "15.0.0-alpha.2",

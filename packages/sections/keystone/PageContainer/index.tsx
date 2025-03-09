@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import React, { useState } from "react";
 import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
-import { dark, ThemeProvider } from "@md/styles";
-import { styled } from 'styled-components';
+import { ThemeProvider } from "@md/styles";
+import styled from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
 
 
@@ -82,7 +82,7 @@ const PageContainer: React.FC<PageContainerProps> = ({ children, header }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider>
       <PageWrapper>
         <Header>
           <Logo />

@@ -3,7 +3,7 @@ import React from "react";
 import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "../components/Containers";
 import { PageTitle } from "@md/components";
-import { ThemeProvider } from "@md/styles";
+import { dark, ThemeProvider } from "@md/styles";
 import { PageContainer } from "@md/sections/keystone";
 import { useQueryAdminMeta } from "@md/api/graphql";
 import { QueryResult, useQuery } from "@apollo/client";
