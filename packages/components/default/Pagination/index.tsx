@@ -16,13 +16,13 @@ const PaginationContainer = styled.div`
 
 const PageNumber = styled.button<{ $active: boolean }>`
   background-color: ${({ $active }) => ($active ? "#007bff" : "#f9fafb")};
-  color: ${({ $active }) => (active ? "#fff" : "#000")};
+  color: ${({ $active }) => ($active ? "#fff" : "#000")};
   border: 1px solid #ccc;
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
-  font-weight: ${({ $active }) => (active ? "bold" : "normal")};
+  font-weight: ${({ $active }) => ($active ? "bold" : "normal")};
 
   &:hover {
     background-color: #007bff;

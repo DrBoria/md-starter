@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
-import { light, baseTheme, dark } from './themes';
+import { light, baseTheme } from './themes';
 type TColorTheme = typeof light;
 
 const MediaProvider = styled.div`
@@ -48,7 +48,7 @@ body {
   letter-spacing: 1.5px;}
 `;
 
-const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children, theme?: TColorTheme }) => {
+const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
   const [theme] = useState(baseTheme);
 
   return (

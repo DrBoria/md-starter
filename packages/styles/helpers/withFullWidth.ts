@@ -5,6 +5,6 @@ export type TFullWidth = {
   fullWidth?: boolean;
 };
 
-export const withFullWidth = css`
-  ${({ fullWidth }: TFullWidth) => (fullWidth ? 'width: 100%' : '')}
+export const withFullWidth = css<TFullWidth>`
+  ${({ fullWidth }) => (fullWidth ? 'width: 100%' : '')}
 `;

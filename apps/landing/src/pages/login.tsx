@@ -4,6 +4,7 @@ import { PageTitle } from '@md/components'
 import { useAuthenticate } from '@md/api/graphql';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
+import { FormEvent } from 'react';
 
 export default function Login() {
     // LOADING
@@ -17,10 +18,11 @@ export default function Login() {
         useMutation
     });
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        // @ts-ignore
         const email = e.target.elements.email.value;
+        // @ts-ignore
         const password = e.target.elements.password.value;
 
         const { data } = await authenticateMutation({
