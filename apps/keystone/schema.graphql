@@ -14,7 +14,7 @@ type Example {
   HiddenInput: String
   LongText: String
   TimeNotUTC: DateTime
-  TimeZone: String
+  TimeZone: DateTime
   Title: String
 }
 
@@ -48,7 +48,7 @@ input ExampleWhereInput {
   HiddenInput: StringFilter
   LongText: StringFilter
   TimeNotUTC: DateTimeNullableFilter
-  TimeZone: StringFilter
+  TimeZone: DateTimeFilter
   Title: StringFilter
 }
 
@@ -162,7 +162,7 @@ input ExampleUpdateInput {
   HiddenInput: String
   LongText: String
   TimeNotUTC: DateTime
-  TimeZone: String
+  TimeZone: DateTime
   Title: String
 }
 
@@ -187,7 +187,7 @@ input ExampleCreateInput {
   HiddenInput: String
   LongText: String
   TimeNotUTC: DateTime
-  TimeZone: String
+  TimeZone: DateTime
   Title: String
 }
 

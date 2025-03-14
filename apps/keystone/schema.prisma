@@ -25,7 +25,7 @@ model Example {
   HiddenInput          String                        @default("") @map("sendgrid_api_key")
   LongText             String                        @default("") @map("drafter_instructions")
   TimeNotUTC           DateTime?                     @map("send_at")
-  TimeZone             String                        @default("") @map("timezone")
+  TimeZone             DateTime                      @map("timezone")
   Title                String                        @default("")
 
   @@index([customRelationshipId])

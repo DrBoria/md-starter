@@ -1,9 +1,6 @@
 import { list } from "@keystone-6/core";
 import {
-  relationship,
   select,
-  text,
-  timestamp,
 } from "@keystone-6/core/fields";
 
 import type { Lists } from ".keystone/types";
@@ -11,6 +8,15 @@ import { isAdmin } from "./access-control/roles";
 import { createdAt } from "./fields/createdAt";
 import { isActive } from "./fields/isActive";
 import { updatedAt } from "./fields/updatedAt";
+import { DynamicStatusLabel } from "../admin/system-components/CustomFields/DynamicStatusLabel";
+import { HiddenInput } from "../admin/system-components/CustomFields/HiddenInput";
+import { TimeNotUTC } from "../admin/system-components/CustomFields/TimeNotUTC";
+import { TimeZone } from "../admin/system-components/CustomFields/TimeZone";
+import { Title } from "../admin/system-components/CustomFields/Title";
+import { LongText } from "../admin/system-components/CustomFields/LongText";
+import { Relationship } from "../admin/system-components/CustomFields/Relationship";
+import { EquasionTextArea } from "../admin/system-components/CustomFields/EquasionTextArea";
+import { Text } from "../admin/system-components/CustomFields/Text";
 
 export const Example = list<Lists.Example.TypeInfo>({
   access: isAdmin,
@@ -18,13 +24,12 @@ export const Example = list<Lists.Example.TypeInfo>({
     map: "example",
   },
   fields: {
-    shortedText: text({
+    shortedText: Text({
       label: "ShortedText",
       ui: {
         createView: { fieldMode: "edit" },
         itemView: { fieldMode: "edit" },
         description: "This input field will have ... at the end of the line in list view",
-        views: "./admin/system-components/CustomFields/Text/views",
       },
       defaultValue: "",
       db: { map: "shorted_text", isNullable: false },
@@ -36,21 +41,19 @@ export const Example = list<Lists.Example.TypeInfo>({
         isNullable: false,
       },
     }),
-    customRelationship: relationship({
+    customRelationship: Relationship({
       label: "Custom Relationship",
       ref: "User",
       db: { foreignKey: { map: "user_id" } },
       ui: {
         displayMode: "select",
         description: "This is relationship with customizeable fieltr - filter by multiple fields or it's specific values",
-        views:
-          "./admin/system-components/CustomFields/Relationship/views",
       },
     }),
     checkbox: isActive(),
     timestamp_updateAt: updatedAt(),
     timestamp_createdAt: createdAt(),
-    DynamicStatusLabel: select({
+    DynamicStatusLabel: DynamicStatusLabel({
       label: "Contacts Matching Criteria",
       type: "enum",
       defaultValue: "queued",
@@ -64,63 +67,52 @@ export const Example = list<Lists.Example.TypeInfo>({
       validation: { isRequired: true },
       ui: {
         displayMode: "select",
-        views:
-          "./admin/system-components/CustomFields/DynamicStatusLabel/views",
       },
     }),
-    EquasionTextArea: text({
+    EquasionTextArea: EquasionTextArea({
       defaultValue: "",
       db: { isNullable: false },
       validation: { isRequired: false },
       ui: {
         displayMode: "textarea",
         description: "Press 'Shift + Enter' to see available variables",
-        views: "./admin/system-components/CustomFields/EquasionTextArea/views",
       },
     }),
-    HiddenInput: text({
+    HiddenInput: HiddenInput({
       defaultValue: "",
       db: { map: "sendgrid_api_key", isNullable: false },
       ui: {
-        views: "./admin/system-components/CustomFields/HiddenInput/views",
         createView: { fieldMode: "edit" },
         itemView: { fieldMode: "edit" },
         description: "Sendgrid API key to send emails using Sendgrid.",
       },
     }),
-    LongText: text({
+    LongText: LongText({
       defaultValue: "",
       db: { map: "drafter_instructions", isNullable: false },
       ui: {
         displayMode: "textarea",
-        views: "./admin/system-components/CustomFields/LongText/views",
         description:
           "Your agent will follow these instructions when creating new campaign drafts.",
       },
     }),
-    TimeNotUTC: timestamp({
+    TimeNotUTC: TimeNotUTC({
       db: {
         map: "send_at",
         isNullable: true,
       },
       ui: {
-        views: "./admin/system-components/CustomFields/TimeNotUTC/views",
         description:
           "Contact local time at which campaign emails is scheduled to be sent.",
       },
     }),
-    TimeZone: text({
+    TimeZone: TimeZone({
       db: { map: "timezone", isNullable: false },
       ui: {
         description: "This part of Campaign is run only inside this timezone",
-        views: "./admin/system-components/CustomFields/TimeZone/views",
       },
     }),
-    Title: text({
-      ui: {
-        views: "./admin/system-components/CustomFields/Title/views",
-      },
-    }),
+    Title: Title({}),
   },
   ui: {
     label: "Example",

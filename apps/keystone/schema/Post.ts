@@ -8,6 +8,7 @@ import type { Lists, PostWhereInput } from ".keystone/types";
 import { createdAt } from "./fields/createdAt";
 import { updatedAt } from "./fields/updatedAt";
 import { isAdmin } from "./access-control/roles";
+import { Text } from "../admin/system-components/CustomFields/Text";
 
 export const Post = list<Lists.Post.TypeInfo>({
   access: {
@@ -34,12 +35,9 @@ export const Post = list<Lists.Post.TypeInfo>({
     map: "post",
   },
   fields: {
-    name: text({
+    name: Text({
       validation: { isRequired: true },
       isIndexed: "unique",
-      ui: {
-        views: "./admin/system-components/CustomFields/Text/views",
-      }
     }),
     premium: checkbox({}),
     textContent: text({
@@ -47,9 +45,6 @@ export const Post = list<Lists.Post.TypeInfo>({
       db: {
         map: "text_content",
       },
-      ui: {
-        views: "./admin/system-components/CustomFields/Text/views",
-      }
     }),
     updateAt: updatedAt(),
     createdAt: createdAt(),
