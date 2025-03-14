@@ -2,9 +2,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const ToolTipContainer = styled.div`
+const ToolTipContainer = styled.div<{ $fullWidth?: boolean }>`
   position: relative;
   display: inline-block;
+  ${({ $fullWidth }) => ($fullWidth ? "width: 100%;" : "")}
 `;
 
 const ToolTipText = styled.span<{ position: string }>`
@@ -14,7 +15,7 @@ const ToolTipText = styled.span<{ position: string }>`
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: var(--basic-padding);
 
   /* Position the tooltip based on the dynamic 'position' prop */
   position: absolute;
@@ -37,9 +38,15 @@ interface TooltipProps {
   children: React.ReactNode;
   text?: string;
   className?: string;
+  $fullWidth?: boolean;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, text, className }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  children,
+  text,
+  className,
+  $fullWidth,
+}) => {
   const [position, setPosition] = useState("top");
   const tooltipRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +69,11 @@ const Tooltip: React.FC<TooltipProps> = ({ children, text, className }) => {
   }, []); // Only run on mount
 
   return (
-    <ToolTipContainer ref={tooltipRef} className={className}>
+    <ToolTipContainer
+      ref={tooltipRef}
+      className={className}
+      $fullWidth={$fullWidth}
+    >
       {children}
       {text && <ToolTipText position={position}>{text}</ToolTipText>}
     </ToolTipContainer>

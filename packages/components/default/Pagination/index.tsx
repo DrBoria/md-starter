@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface PaginationProps {
@@ -15,7 +15,8 @@ const PaginationContainer = styled.div`
 `;
 
 const PageNumber = styled.button<{ $active: boolean }>`
-  background-color: ${({ $active }) => ($active ? "#007bff" : "#f9fafb")};
+  background-color: ${({ $active }) =>
+    $active ? "#007bff" : "var(--color-bg-secondary)"};
   color: ${({ $active }) => ($active ? "#fff" : "#000")};
   border: 1px solid #ccc;
   margin: 0 5px;
@@ -59,9 +60,17 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const renderPageNumbers = () => {
     const pages = [];
-    const maxPagesToShow = 8;
+    const maxPagesToShow = isMobile ? 3 : 8;
 
     if (totalPages <= maxPagesToShow) {
       // If total pages are less than or equal to maxPagesToShow, show all pages

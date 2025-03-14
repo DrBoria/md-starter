@@ -46,6 +46,8 @@ const handleSubmit = (e) => {
     <FormLabel htmlFor='Input1'>Input1</FormLabel>
     <Input id='Input1' name='Input1' $offsetBottom />
 
+    <FormLabel htmlFor='Checkbox1'>Checkbox</FormLabel>
+
     <FormLabel htmlFor='Input2'>Input2</FormLabel>
     <Input id='Input2' name='Input2' $offsetBottom />
   </BasicSection>

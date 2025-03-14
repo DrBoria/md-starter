@@ -54,3 +54,12 @@ export type TValue = Record<
 
 export type { Lists } from '../../apps/keystone/node_modules/.keystone/types';
 export type { FieldMeta, ListMeta } from "@keystone-6/core/types";
+
+
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | readonly JSONValue[]
+  | { [key: string]: JSONValue }

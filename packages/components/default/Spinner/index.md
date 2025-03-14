@@ -1,17 +1,25 @@
 ```jsx
-import { ThemeProvider } from 'styled-components';
-import Spinner from '.';
-import { dark } from '@md/styles';
+import { Loader } from ".";
+
 <>
-  Light Theme
-  <div style={{ width: '100%', padding: '10px' }}>
-    <Spinner />
+  <div>
+    <h2>Small Loader</h2>
+    <Loader size="small" />
   </div>
-  Dark theme
-  <ThemeProvider theme={{ colors: dark }}>
-    <div style={{ width: '100%', padding: '10px', background: 'black' }}>
-      <Spinner />
-    </div>
-  </ThemeProvider>
+
+  <div>
+    <h2>Medium Loader</h2>
+    <Loader size="medium" />
+  </div>
+
+  <div>
+    <h2>Large Loader</h2>
+    <Loader size="large" />
+  </div>
+
+  <div>
+    <h2>Custom Styled Loader</h2>
+    <Loader size="medium" className="text-blue-500" />
+  </div>
 </>;
 ```

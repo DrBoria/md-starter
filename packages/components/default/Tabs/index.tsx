@@ -11,11 +11,11 @@ interface TabsProps {
   tabs: TabProps[];
   onTabChange?: (tabNumber: number) => void;
   containerStyle?: CSSProperties;
+  className?: string;
 }
 
 const TabsContainer = styled.div`
   width: 100%;
-  margin: 0 auto;
 `;
 
 const TabList = styled.div`
@@ -24,23 +24,21 @@ const TabList = styled.div`
   role: tablist;
 `;
 
-const Tab = styled.button<{ active: boolean }>`
+const Tab = styled.button`
   padding: 10px 20px;
-  background-color: ${({ active }) => (active ? "#eff6ff" : "transparent")};
-  color: ${({ active }) => (active ? "#2563eb" : "#6b7280")};
+  background-color: var(--tab-bg, #eff6ff);
+  color: var(--tab-color, #2563eb);
   border: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-bottom: var(--tab-border-bottom, 1px solid #ccc);
   margin-right: 5px;
   top: 1px;
   position: relative;
   cursor: pointer;
-  font-size: ${({ theme }) => theme.font.size};
+  font-size: var(--size-label);
   font-weight: 500;
 
-  border-top-right-radius:  ${({ theme }) => theme.border.radius};
-  border-top-left-radius: ${({ theme }) => theme.border.radius};
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
 
   &[type="button"] {
     border-bottom-right-radius: 0;
@@ -55,7 +53,8 @@ const Tab = styled.button<{ active: boolean }>`
   }
 
   &:hover {
-    background-color: white;
+    background-color: ${({ "aria-selected": selected }) =>
+      selected ? "white" : "#fff"};
     color: #222;
   }
 
@@ -86,7 +85,12 @@ const TabPanel = styled.div`
   border-top-left-radius: 0;
 `;
 
-const Tabs: React.FC<TabsProps> = ({ tabs, onTabChange, containerStyle }) => {
+const Tabs: React.FC<TabsProps> = ({
+  tabs,
+  onTabChange,
+  containerStyle,
+  className,
+}) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
@@ -107,14 +111,14 @@ const Tabs: React.FC<TabsProps> = ({ tabs, onTabChange, containerStyle }) => {
   };
 
   return (
-    <TabsContainer>
+    <TabsContainer className={className}>
       <TabList role="tablist">
         {tabs.map((tab, index) => (
           <Tab
             className="squared"
             key={index}
             role="tab"
-            active={index === activeTab}
+            data-active={index === activeTab}
             onClick={() => handleTabClick(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             id={`tab-${index}`}
