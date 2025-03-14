@@ -8,22 +8,26 @@ import React, {
 } from "react";
 import styled from "styled-components";
 
-// Input height, input wrapper and absolute position for input - is fix for bug, when div got content more, than width of viewport.
-const INPUT_HEIGHT = 38;
+// Высота из темы через CSS-переменную или напрямую
+const INPUT_HEIGHT = "var(--height-form)"; // Предполагается, что тема задает --height-form как 50px
+
+// Обертка для инпута
 const InputWrapper = styled.div`
   width: 100%;
-  height: ${INPUT_HEIGHT}px;
+  height: ${INPUT_HEIGHT};
   position: relative;
 `;
 
+// Контейнер для редактируемого инпута
 const StyledInputContainer = styled.div<{ isFocused: boolean }>`
   position: absolute;
   overflow-x: hidden;
   width: 100%;
-  padding: 7px;
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.sectionContent};
-  font-size: 16px;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
+  font-size: ${({ theme }) => theme.font.size};
+  font-family: ${({ theme }) => theme.font.family.text};
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
@@ -32,14 +36,17 @@ const StyledInputContainer = styled.div<{ isFocused: boolean }>`
   cursor: text;
   white-space: nowrap;
 
-  ${({ isFocused }) => isFocused && `border-color: ${({ theme }) => theme.colors.highlightedContent};`}
+  // Стили при фокусе
+  ${({ isFocused, theme }) =>
+    isFocused && `border-color: ${theme.colors.highlighted};`}
 
+  // Стили плейсхолдера
   &:empty:before {
     content: attr(data-placeholder);
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.label};
   }
 
-  // Make symbols looks like dots
+  // Маскировка пароля
   &.password {
     -webkit-text-security: disc;
     -webkit-appearance: textfield;
@@ -113,7 +120,7 @@ const InputField: React.FC<InputFieldProps> = ({
         contentEditable={!readOnly}
         suppressContentEditableWarning
         data-placeholder={placeholder}
-        spellCheck={false} // We need it to remove red underline for password field (with dots)
+        spellCheck={false} // Отключаем проверку орфографии для пароля
         className={type === "password" ? "password" : ""}
         onInput={handleInput}
         onFocus={handleFocus}

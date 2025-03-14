@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-
 import { LucideIcon } from "../../Icons";
 import { Input } from "../Input";
 
 export type TOption = {
   label: string;
   value: string | number;
-}
+};
 
-// Styled components
+// Styled components с использованием темы
 const Container = styled.div`
   position: relative;
 `;
@@ -18,20 +17,21 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 6px;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
+  border-radius: ${({ theme }) => theme.variables.border.radius};
   border-style: solid;
-  border-width: 1px;
-  color: #374151;
-  background-color: var(--color-bg-secondary);
+  border-width: ${({ theme }) => theme.variables.border.size};
+  border-color: ${({ theme }) => theme.colors.label};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
   cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
 
-  ${({ readOnly }) =>
+  ${({ readOnly, theme }) =>
     readOnly &&
     `
-    background-color: #fafbfc;
-    border-color: #fafbfc;
-    color: var(--color-placeholder);
+    background-color: ${theme.colors.section};
+    border-color: ${theme.colors.section};
+    color: ${theme.colors.label};
   `}
 `;
 
@@ -39,43 +39,44 @@ const Dropdown = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
-  border: 1px solid #ccc;
+  border: ${({ theme }) => theme.variables.border.size} solid ${({ theme }) => theme.colors.label};
   max-height: 200px;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.section};
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-top: 8px;
-  border-radius: 8px;
+  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
+  border-radius: ${({ theme }) => theme.variables.border.radius};
   z-index: 100;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.shadows?.dropdown || "0px 4px 8px rgba(0, 0, 0, 0.1)"};
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`
-  padding: 10px 15px;
-  background-color: ${({ $highlighted }) =>
-    $highlighted ? "#007bff" : "#fff"};
-  color: ${({ $highlighted }) => ($highlighted ? "#fff" : "#000")};
-  font-size: 14px;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
+  background-color: ${({ $highlighted, theme }) =>
+    $highlighted ? theme.colors.highlighted : theme.colors.section};
+  color: ${({ $highlighted, theme }) =>
+    $highlighted ? theme.colors.highlightedText : theme.colors.sectionContent};
+  font-size: ${({ theme }) => theme.font.size};
   cursor: pointer;
 
   &:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme.colors.highlightedText};
   }
 `;
 
 const IconsContainer = styled.div`
-  color: #b1b5b9;
+  color: ${({ theme }) => theme.colors.label};
   display: flex;
-  gap: 0.5rem;
-  padding-left: 0.5rem;
+  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
+  padding-left: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
 `;
 
 const NoOptions = styled.li`
-  padding: 10px;
-  color: #999;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
+  color: ${({ theme }) => theme.colors.label};
 `;
 
 const ClearButton = styled.button<{ readOnly: boolean }>`
@@ -84,19 +85,19 @@ const ClearButton = styled.button<{ readOnly: boolean }>`
   cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
   margin-left: 5px;
   font-size: 16px;
-  color: ${({ readOnly }) => (readOnly ? "#b1b5b9" : "inherit")};
+  color: ${({ readOnly, theme }) => (readOnly ? theme.colors.label : "inherit")};
 `;
 
 const Separator = styled.div`
   width: 1px;
-  background-color: hsl(0, 0%, 80%);
-  margin-bottom: 4px;
-  margin-top: 4px;
+  background-color: ${({ theme }) => theme.colors.label};
+  margin-bottom: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
+  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
   box-sizing: border-box;
 `;
 
 const Placeholder = styled.span`
-  color: #b4b8bc;
+  color: ${({ theme }) => theme.colors.label};
 `;
 
 interface SelectProps {
@@ -125,20 +126,18 @@ const Select: React.FC<SelectProps> = ({
 
   const handleToggleDropdown = () => {
     if (readOnly) return;
-
     setIsOpen(!isOpen);
-    setSearchTerm(""); // Clear search term when opening/closing dropdown
+    setSearchTerm("");
   };
 
   const handleSelectOption = (option: TOption) => {
     if (readOnly) return;
-
     onChange(option);
     setIsOpen(false);
   };
 
   const handleClear = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent click from bubbling to open dropdown
+    e.stopPropagation();
     if (!readOnly) {
       onChange(null);
       setIsOpen(false);
@@ -147,12 +146,9 @@ const Select: React.FC<SelectProps> = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (readOnly) return;
-
     switch (e.key) {
       case "ArrowDown":
-        setHighlightedIndex((prev) =>
-          Math.min(prev + 1, filteredOptions.length - 1),
-        );
+        setHighlightedIndex((prev) => Math.min(prev + 1, filteredOptions.length - 1));
         break;
       case "ArrowUp":
         setHighlightedIndex((prev) => Math.max(prev - 1, 0));
@@ -171,19 +167,15 @@ const Select: React.FC<SelectProps> = ({
   };
 
   const filteredOptions = options.filter((option) =>
-    option.label?.toLowerCase()?.includes(searchTerm?.toLowerCase()),
+    option.label?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -205,11 +197,7 @@ const Select: React.FC<SelectProps> = ({
           )}
           <Separator />
           <span>
-            {isOpen ? (
-              <LucideIcon name="ChevronUp" />
-            ) : (
-              <LucideIcon name="ChevronDown" />
-            )}
+            {isOpen ? <LucideIcon name="ChevronUp" /> : <LucideIcon name="ChevronDown" />}
           </span>
         </IconsContainer>
       </SelectedValueWrapper>

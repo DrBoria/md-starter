@@ -5,24 +5,18 @@ import styled from "styled-components";
 import "prism-themes/themes/prism-one-light.css";
 import "prismjs/components/prism-json";
 
-interface RawTabProps {
-  rawValue?: string | object;
-  className?: string;
-}
-
+// Styled component for the code block
 export const CodeBlock = styled.pre`
   margin: 0;
-  background: #fafafa;
+  background: ${({ theme }) => theme.colors.section}; // Use theme's section background color
   height: 100%;
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
 
   code {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
-    font-size: 0.875rem;
+    font-family: ${({ theme }) => theme.font.family.text}; // Use theme's text font family
+    font-size: ${({ theme }) => theme.font.size}; // Use theme's font size
     line-height: 1.5;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
@@ -34,7 +28,8 @@ export const CodeBlock = styled.pre`
   }
 `;
 
-export const CodePreview: React.FC<RawTabProps> = ({ rawValue, className }) => {
+// CodePreview component
+export const CodePreview: React.FC<{ rawValue?: string | object; className?: string }> = ({ rawValue, className }) => {
   if (!rawValue) return null;
 
   useEffect(() => {
@@ -42,11 +37,9 @@ export const CodePreview: React.FC<RawTabProps> = ({ rawValue, className }) => {
   }, [rawValue]);
 
   return (
-    <CodeBlock>
+    <CodeBlock className={className}>
       <code className="language-json">
-        {typeof rawValue === "string"
-          ? rawValue
-          : JSON.stringify(rawValue, null, 2)}
+        {typeof rawValue === "string" ? rawValue : JSON.stringify(rawValue, null, 2)}
       </code>
     </CodeBlock>
   );

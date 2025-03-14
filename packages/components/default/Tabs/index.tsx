@@ -1,18 +1,5 @@
-import type { CSSProperties } from "react";
 import React, { useState } from "react";
 import styled from "styled-components";
-
-interface TabProps {
-  label: string;
-  content: React.ReactNode;
-}
-
-interface TabsProps {
-  tabs: TabProps[];
-  onTabChange?: (tabNumber: number) => void;
-  containerStyle?: CSSProperties;
-  className?: string;
-}
 
 const TabsContainer = styled.div`
   width: 100%;
@@ -25,20 +12,19 @@ const TabList = styled.div`
 `;
 
 const Tab = styled.button`
-  padding: 10px 20px;
-  background-color: var(--tab-bg, #eff6ff);
-  color: var(--tab-color, #2563eb);
-  border: 1px solid #ccc;
-  border-bottom: var(--tab-border-bottom, 1px solid #ccc);
-  margin-right: 5px;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px ${({ theme }) => 2 * theme.variables.offsets.elementContent.mobile}px;
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.highlighted};
+  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
+  border-bottom: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
+  margin-right: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
   top: 1px;
   position: relative;
   cursor: pointer;
-  font-size: var(--size-label);
+  font-size: ${({ theme }) => theme.font.size};
   font-weight: 500;
-
-  border-top-right-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border-top-left-radius: ${({ theme }) => theme.variables.border.radius}px;
 
   &[type="button"] {
     border-bottom-right-radius: 0;
@@ -46,24 +32,21 @@ const Tab = styled.button`
   }
 
   &[aria-selected="true"] {
-    --tab-bg: white;
-    color: #222;
-    --tab-border-bottom: none;
+    background-color: ${({ theme }) => theme.colors.sectionContent};
+    color: ${({ theme }) => theme.colors.highlightedText};
+    border-bottom: none;
     z-index: 1;
   }
 
   &:hover {
-    background-color: ${({ "aria-selected": selected }) =>
-      selected ? "white" : "#fff"};
-    color: #222;
+    background-color: ${({ theme }) => theme.colors.sectionContent};
+    color: ${({ theme }) => theme.colors.highlightedText};
   }
 
   &:focus {
-    outline: 2px solid #2563eb;
+    outline: 2px solid ${({ theme }) => theme.colors.highlighted};
     outline-offset: -2px;
 
-    // Add a white (or your background color) border at the bottom
-    // that covers the outline
     &::after {
       content: "";
       position: absolute;
@@ -72,25 +55,25 @@ const Tab = styled.button`
       right: -2px;
       height: 3px;
       margin: 0px 3px;
-      background-color: var(--background-color, white);
+      background-color: ${({ theme }) => theme.colors.sectionContent};
     }
   }
 `;
 
 const TabPanel = styled.div`
-  padding: 20px;
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
   margin-top: 0 !important;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
+  border-radius: ${({ theme }) => theme.variables.border.radius}px;
   border-top-left-radius: 0;
 `;
 
-const Tabs: React.FC<TabsProps> = ({
-  tabs,
-  onTabChange,
-  containerStyle,
-  className,
-}) => {
+const Tabs: React.FC<{
+  tabs: { label: string; content: React.ReactNode }[];
+  onTabChange?: (tabNumber: number) => void;
+  containerStyle?: React.CSSProperties;
+  className?: string;
+}> = ({ tabs, onTabChange, containerStyle, className }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleTabClick = (index: number) => {

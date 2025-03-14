@@ -1,74 +1,225 @@
-import styled, { css } from 'styled-components';
-import { basicFont } from '../Typography';
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import React from "react";
+import styled from "styled-components";
+import type { IconName } from "../Icons";
+import { LucideIcon } from "../Icons";
+import { Loader } from "../Spinner";
 
-type TButtonTypes = 'navigation' | 'menu' | 'submit' | 'delete';
+// Определяем типы для свойств кнопки
+export type ButtonSize = "small" | "medium" | "large" | "icon";
+export type ButtonWeight =
+  | "bold"
+  | "hollow"
+  | "outline"
+  | "light"
+  | "none"
+  | "link";
+export type ButtonTone =
+  | "active"
+  | "passive"
+  | "negative"
+  | "neutral"
+  | "positive"
+  | "warning"
+  | "help";
 
-type TButton = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  className?: string;
-  isDisabled?: boolean;
-  type?: TButtonTypes;
-} & TWithBasicElementOffsets &
-  TFullWidth;
+// Интерфейс пропсов кнопки
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  $fullWidth?: boolean;
+  icon?: IconName;
+  iconPosition?: "left" | "right";
+  text?: string;
+  isLoading?: boolean;
+  children?: React.ReactNode;
+  tone?: ButtonTone;
+  weight?: ButtonWeight;
+  size?: ButtonSize;
+}
 
-const ButtonTypes = (type?: TButtonTypes, isDisabled?: boolean) => {
-  switch (type) {
-    case 'menu':
-      return css`
-        color: ${({ theme }) => theme.colors.sectionContent}; // Fiery text color for highlight
-        text-transform: uppercase;
-        border: none;
-      `;
-    case 'submit':
-      return css`
-        color: ${({ theme }) => theme.colors.highlightedText}; // Fiery text color for highlight
-        background: ${({ theme }) => theme.colors.highlighted}; // Fiery text color for highlight
-        text-transform: uppercase;
-        border: ${({ theme }) => theme.border.size} solid ${({ theme }) => isDisabled ? theme.colors.disabled : theme.colors.highlightedText};
-      `;
-    case 'delete':
-      return css`
-        color: ${({ theme }) => theme.colors.errorText}; // Fiery text color for highlight
-        background: ${({ theme }) => theme.colors.errorBackground}; // Fiery text color for highlight
-        text-transform: uppercase;
-        border: none;
-      `;
-    case 'navigation':
-    default:
-      return css`
-        color: ${({ theme }) => theme.colors.sectionContent};
-        text-transform: uppercase;
-        border: ${({ theme }) => `${theme.border.size} solid ${isDisabled ? theme.colors.disabled : theme.colors.highlightedText}`}; // Bold, dark purple border
-      `;
-  }
-};
+// Стилизованная кнопка с динамическими стилями из темы
+const StyledButton = styled.button<{
+  tone: ButtonTone;
+  weight: ButtonWeight;
+  size: ButtonSize;
+  $fullWidth?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  width: ${(props) => (props.$fullWidth ? "100%" : "auto")};
+  gap: ${(props) =>
+    props.size !== "icon"
+      ? `${props.theme.variables.offsets.betweenElements.mobile}px`
+      : "0"};
+  border-radius: ${({ theme }) => theme.variables.border.radius}px;
 
-const Button = styled.button<TButton & { isDisabled?: boolean }>`
-  width: ${({ fullWidth }) => fullWidth && '100%'};
-  height: ${({ theme }) => theme.elements.form.height};
-  margin-right: ${withOffsetsRight};
-  margin-bottom: ${withOffsetBottom};
-  padding: ${({ theme }) => theme.offsets.elementContent};
-  font: ${basicFont};
-  background: ${({ theme, isDisabled }) => isDisabled ? theme.colors.disabled : theme.colors.section};
-  color: ${({ theme }) => theme.colors.sectionContent};
-  border-radius: ${({ theme }) => theme.border.radius};
-  outline: inherit;
-  cursor: ${({ isDisabled }) => isDisabled ? 'not-allowed' : 'pointer'};
-  transition: all 0.3s ease;
-
-  ${({ type, isDisabled }) => ButtonTypes(type, isDisabled)}
-
-  &:hover {
-    background: ${({ theme, isDisabled }) => !isDisabled && theme.colors.overlay}; 
-    color: ${({ theme, isDisabled }) => !isDisabled && theme.colors.sectionContent}; 
-  }
-  
   &:disabled {
-    pointer-events: none; // Ensure the button is not clickable when disabled
+    opacity: 0.5;
+    cursor: not-allowed;
   }
+
+  ${(props) => {
+    const { theme, tone, weight } = props;
+
+    // Определяем цвет на основе тона
+    const color = (() => {
+      switch (tone) {
+        case "active":
+          return theme.colors.highlighted;
+        case "passive":
+          return theme.colors.sectionContent;
+        case "negative":
+          return theme.colors.errorText;
+        case "neutral":
+          return theme.colors.label;
+        case "positive":
+          return theme.colors.successText;
+        case "warning":
+          return theme.colors.warningText;
+        case "help":
+          return theme.colors.overlayActive;
+        default:
+          return theme.colors.highlighted;
+      }
+    })();
+
+    // Стили для веса кнопки
+    let weightStyles = "";
+    switch (weight) {
+      case "bold":
+        weightStyles = `
+          background-color: ${color};
+          color: white;
+        `;
+        break;
+      case "outline":
+      case "hollow":
+        weightStyles = `
+          border: ${theme.variables.border.size}px solid ${color};
+          background-color: transparent;
+          color: ${color};
+        `;
+        break;
+      case "light":
+        weightStyles = `
+          background-color: transparent;
+          color: ${color};
+        `;
+        break;
+      case "link":
+        weightStyles = `
+          background-color: transparent;
+          color: ${color};
+          text-decoration: underline;
+        `;
+        break;
+      case "none":
+        weightStyles = `
+          background-color: transparent;
+          color: inherit;
+        `;
+        break;
+      default:
+        weightStyles = `
+          background-color: ${color};
+          color: white;
+        `;
+    }
+
+    // Стили для размера кнопки
+    let sizeStyles = "";
+    switch (props.size) {
+      case "small":
+        sizeStyles = `
+          padding: ${theme.variables.offsets.elementContent.mobile / 2}px ${
+          theme.variables.offsets.elementContent.mobile
+        }px;
+          font-size: 12px; /* Можно заменить на theme.font.size с модификатором */
+        `;
+        break;
+      case "medium":
+        sizeStyles = `
+          padding: ${theme.variables.offsets.elementContent.mobile}px ${
+          theme.variables.offsets.elementContent.mobile * 2
+        }px;
+          font-size: 14px; /* Можно заменить на theme.font.size */
+        `;
+        break;
+      case "large":
+        sizeStyles = `
+          padding: ${theme.variables.offsets.elementContent.mobile * 1.5}px ${
+          theme.variables.offsets.elementContent.mobile * 3
+        }px;
+          font-size: 16px; /* Можно заменить на theme.font.size с модификатором */
+        `;
+        break;
+      case "icon":
+        sizeStyles = `
+          padding: ${theme.variables.offsets.elementContent.mobile}px;
+          width: 32px;
+          height: 32px;
+        `;
+        break;
+      default:
+        sizeStyles = `
+          padding: ${theme.variables.offsets.elementContent.mobile}px ${
+          theme.variables.offsets.elementContent.mobile * 2
+        }px;
+          font-size: 14px;
+        `;
+    }
+
+    return `
+      ${weightStyles}
+      ${sizeStyles}
+    `;
+  }}
 `;
 
+// Компонент кнопки
+export const Button: React.FC<ButtonProps> = ({
+  icon,
+  iconPosition = "left",
+  text,
+  isLoading = false,
+  children,
+  disabled = false,
+  className,
+  size = "medium",
+  tone = "active",
+  weight = "bold",
+  $fullWidth = false,
+  ...props
+}) => {
+  const hasContent = Boolean(text || children);
+  const isIconOnly = icon && !hasContent && !isLoading;
+  const effectiveSize = isIconOnly ? "icon" : size;
 
-export { Button };
+  return (
+    <StyledButton
+      className={className}
+      tone={tone}
+      weight={weight}
+      size={effectiveSize}
+      $fullWidth={$fullWidth}
+      disabled={disabled || isLoading}
+      {...props}
+    >
+      {isLoading && <Loader size="small" />}
+      {!isLoading && icon && iconPosition === "left" && (
+        <LucideIcon name={icon} />
+      )}
+      {hasContent && (
+        <span>
+          {text}
+          {children}
+        </span>
+      )}
+      {!isLoading && icon && iconPosition === "right" && (
+        <LucideIcon name={icon} />
+      )}
+    </StyledButton>
+  );
+};
