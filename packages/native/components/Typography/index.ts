@@ -1,6 +1,5 @@
-import React from "react";
 import { Text, View } from "react-native";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from "../helpers";
 
 /**

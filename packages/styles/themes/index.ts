@@ -1,5 +1,4 @@
-export { default as dark } from './dark';
+export * from './colors';
 
-export { default as light } from './light';
 export { default as baseTheme, getZIndex, devices } from './baseTheme';
 export type { ZIndexName } from './zIndexes';

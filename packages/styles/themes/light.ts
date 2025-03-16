@@ -1,9 +1,11 @@
-import basic from './basic';
-
 export default {
   theme: 'light',
 
-  ...basic,
+
+  highlightedText: '#222f31',
+  highlighted: '#7d9b99',
+  disabled: '#5A5A5A',
+  warning: '#CC3300',
   section:        '#eff1f6',       // Light gray, soft on the eyes
   sectionContent: '#202020',       // Dark gray for main content
   overlay:        '#e6e6e6',       // Light overlay

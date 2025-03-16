@@ -71,8 +71,18 @@ module.exports = {
   moduleAliases: {
     components: path.resolve(__dirname, "../../packages/components"),
   },
+  dangerouslyUpdateWebpackConfig(webpackConfig) {
+    webpackConfig.stats = {
+      warnings: false,
+      errors: false,
+    };
+    return webpackConfig;
+  },
   webpackConfig: {
     devServer: {
+      client: {
+        overlay: false, // Turn off ERRORS overlay
+      },
       proxy: {
         "/api/graphql": {
           target: "http://localhost:3000",

@@ -23,6 +23,7 @@ export * from './default/Typography';
 export * from './default/Images';
 export * from './default/Link';
 export * from './default/MenuItem';
+export * from './default/Icons';
 
 type TTheme = typeof baseTheme;
 declare module 'styled-components' {

@@ -1,6 +1,5 @@
 ```jsx
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import { BasicSection } from '../Containers';
 import { Form, Submit, FormLabel, Radio, TextCheckbox, Select, Input, SearchInput } from '.';
