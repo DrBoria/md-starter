@@ -6,14 +6,14 @@ import { Icons } from "../Icons";
 const LabelContainer = styled.div`
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-label);
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
-  border-radius: 9999px; /* Pill shape */
-  background-color: #e1e5e9; /* Customize as needed */
+  border-radius: 9999px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: ${({ theme }) => theme.colors.highlighted};
+  color: ${({ theme }) => theme.colors.highlightedText};
 `;
 
 const IconWrapper = styled.div`

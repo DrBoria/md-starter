@@ -21,6 +21,7 @@
     "@md/components": "workspace:*",
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
+    "@md/sections": "workspace:*",
     "@svgr/webpack": "^8.1.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-styled-components": "^2.1.4",

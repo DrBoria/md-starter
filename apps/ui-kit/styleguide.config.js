@@ -142,6 +142,6 @@ module.exports = {
   },
   sections,
   styleguideComponents: {
-    Wrapper: path.join(__dirname, "../../packages/styles/ThemeProviderWrapper.tsx"),
+    Wrapper: path.join(__dirname, "./Wrapper.tsx"),
   },
 };

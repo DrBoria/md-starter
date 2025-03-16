@@ -1,7 +1,7 @@
 # AdminButton
 
 ```jsx
-import { AdminButton } from "admin/components/ui/buttons";
+import { AdminButton } from "..";
 
 <div>
   {/* Basic Examples */}

@@ -1,7 +1,7 @@
 # ActionButtons
 
 ```jsx
-import { ActionButtons } from "admin/components/ui/buttons";
+import { ActionButtons } from "..";
 
 <>
   {/* Basic Action Buttons */}

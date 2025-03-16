@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+
+import React, { useState } from "react";
 import { ModalContext } from "./useModal";
 
 export interface IModalButton {

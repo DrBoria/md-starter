@@ -2,8 +2,8 @@ import React from "react";
 
 import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "../components/Containers";
-import { Button, CopyButton, PageTitle, useModal } from "@md/components";
-import { DeleteTemplate, PageContainer } from "@md/sections/keystone";
+import {PageTitle } from "@md/components";
+import { PageContainer } from "@md/sections/keystone";
 import { useQueryAdminMeta } from "@md/api/graphql";
 import { QueryResult, useQuery } from "@apollo/client";
 
@@ -22,7 +22,6 @@ export const DashboardSubPages = [
 ];
 
 const DashboardPage = () => {
-  const { setModalData, setSideBarModalData } = useModal();
   const { data: adminMeta } = useQueryAdminMeta<QueryResult<TAdminMeta>>(DashboardSubPages, useQuery);
 
   return (
