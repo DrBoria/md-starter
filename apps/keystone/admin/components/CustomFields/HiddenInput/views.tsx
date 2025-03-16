@@ -2,9 +2,8 @@ import type { FieldProps } from "@keystone-6/core/types";
 import React, { useState } from "react";
 
 import type { controller } from "../utils/viewStarter";
-import { FieldContainer, FieldDescription, FieldLabel } from "@keystone-ui/fields";
 import styled from "styled-components";
-import { Button, Input } from "@md/components";
+import { BasicSection, Button, DescriptionText, Input, Label } from "@md/components";
 
 const FlexContainer = styled.div`
   display: flex;
@@ -27,11 +26,11 @@ const Field: React.FC<FieldProps<typeof controller>> = ({
 
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <FlexContainer>
           <Input
             name={`${field.path}-input`}
@@ -52,7 +51,7 @@ const Field: React.FC<FieldProps<typeof controller>> = ({
             {showSecret ? "Hide" : "Show"}
           </Button>
         </FlexContainer>
-      </FieldContainer>
+      </BasicSection>
   );
 };
 

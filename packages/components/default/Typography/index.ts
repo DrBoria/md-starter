@@ -84,7 +84,7 @@ const Highlighted = styled.span<TWithBasicElementOffsets>`
   color: ${({ theme }) => theme.colors.highlighted};
 `;
 
-const Label = styled.span<TWithBasicElementOffsets>`
+const Label = styled.label<TWithBasicElementOffsets>`
   display: inline-block;
   padding: ${({ theme }) => `calc(${theme.offsets.elementContent} / 2)`};
 

@@ -1,14 +1,10 @@
 import type { FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 import TimezoneSelect from "react-timezone-select";
 import styled from "styled-components";
 
 import type { controller } from "../utils/viewStarter";
+import { BasicSection, DescriptionText, Label } from "@md/components";
 
 const StyledTimezoneSelect = styled(TimezoneSelect)`
   [class*="-control"] {
@@ -61,11 +57,11 @@ function Field({
   }, [forceValidation]);
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <div>
           <StyledTimezoneSelect
             value={currentValue}
@@ -79,7 +75,7 @@ function Field({
             {validationMessage}
           </div>
         )}
-      </FieldContainer>
+      </BasicSection>
   );
 }
 

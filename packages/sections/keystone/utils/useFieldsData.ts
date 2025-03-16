@@ -13,7 +13,6 @@ import {
   useChangedFieldsAndDataForUpdate,
   useInvalidFields,
 } from "@keystone-6/core/admin-ui/utils";
-import { useToasts } from "@keystone-ui/toast";
 
 import type { TValue } from "../../../types";
 import type { FlexibleItemData } from "./data-mapping/useItemDataGetter";
@@ -23,6 +22,7 @@ import { useItemDataGetter } from "./data-mapping/useItemDataGetter";
 import { filterAllowedKeys, filterNotAllowedKeys } from "./filterKeys";
 import { useQueryList, useQueryListItem, useUpdateMutation } from "@md/api/graphql";
 import { QueryResult, useMutation, useQuery } from "@apollo/client";
+import { useLogger } from "@md/components";
 
 interface TState {
   value: DeserializedValue;
@@ -75,7 +75,7 @@ const useFieldsData = <T extends FlexibleItemData>({
   limit,
   skip,
 }: IFieldsDataParams) => {
-  const toasts = useToasts();
+  const logger = useLogger();
   // Fields requred for keystone fields
   const [forceValidation, setForceValidation] = useState(false);
   const list = { ...useList(listName) }; // This requires for filtering fields on the next lines
@@ -199,12 +199,12 @@ const useFieldsData = <T extends FlexibleItemData>({
           (x) => !x.path || x.path.length === 1,
         );
         if (error) {
-          toasts.addToast({
+          logger.add({
             tone: "negative",
             title: "Failed to Save",
           });
         } else {
-          toasts.addToast({
+          logger.add({
             tone: "positive",
             title: "Saved Successfully",
           });
@@ -213,8 +213,7 @@ const useFieldsData = <T extends FlexibleItemData>({
           return response?.data?.item;
         }
       } catch (err) {
-        console.log("Error on update field data", err);
-        toasts.addToast({
+        logger.add({
           tone: "negative",
           title: "Failed to Save",
         });

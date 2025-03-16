@@ -6,15 +6,9 @@ import type {
 import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
 import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
-import { Button } from "@keystone-ui/button";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 
 import type { IOption, TSession } from "../../../../../../packages/types";
-import { Select, useModal } from "@md/components";
+import { BasicSection, DescriptionText, Label, Select, useModal } from "@md/components";
 import { LinkInForm } from "@md/components";
 import { getWhereParameters } from "./utils";
 import { useQueryList, useQueryListItem } from "@md/api/graphql";
@@ -160,11 +154,11 @@ const Field = ({
   };
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <div>
           <Select
             options={items.map(mapToOutput) as IOption[]}
@@ -187,7 +181,7 @@ const Field = ({
             </div>
           )}
         </div>
-      </FieldContainer>
+      </BasicSection>
   );
 };
 

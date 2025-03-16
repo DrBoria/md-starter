@@ -6,7 +6,6 @@ import { useFieldsData } from "../utils/useFieldsData";
 import "./index.css";
 
 import { useRouter } from "next/router";
-import { useToasts } from "@keystone-ui/toast";
 
 import type { TValue } from "../../../types";
 import type { TConditionalField } from "../ConditionalField";
@@ -22,9 +21,9 @@ import {
 import { TabsFields } from "../DynamicForms/TabsFields";
 import { getDeserializedValue } from "../utils/data-mapping/getDeserializedValue";
 import { ButtonGroup } from "./buttonGroup";
-import { IModalButton } from "../Modals/types";
 import { getAllTabsFieldsNames } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
+import { IModalButton, useLogger } from "@md/components";
 
 interface IEditItemForm {
   listName: string;
@@ -77,7 +76,7 @@ const EditItemForm = ({
   const { deleteMutation } = useDeleteMutation(listName, useMutation);
 
   const router = useRouter();
-  const toasts = useToasts();
+  const logger = useLogger();
 
   const allTabFieldNames = getAllTabsFieldsNames(tabs);
   const allConditionalFieldsNames =
@@ -233,14 +232,14 @@ const EditItemForm = ({
 
       // @ts-ignore items exists
       if (data?.items.length) {
-        toasts.addToast({
+        logger.add({
           tone: "positive",
           title: "Deleted Successfully",
         });
         return await router.push(`/${toKebabCase(listName)}s`);
       }
     } catch (error) {
-      toasts.addToast({
+      logger.add({
         tone: "negative",
         title: "Failed Update",
       });

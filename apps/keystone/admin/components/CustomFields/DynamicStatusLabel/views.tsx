@@ -1,9 +1,8 @@
 import { useQuery, type QueryResult } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FieldContainer, FieldLabel } from "@keystone-ui/fields";
 
-import { StatusLabel } from "@md/components";
+import { BasicSection, Label, StatusLabel } from "@md/components";
 import { useQueryListItem } from "@md/api/graphql";
 
 interface IErrorMapping {
@@ -107,8 +106,8 @@ const Field: React.FC<IFieldProps> = ({ value, field }) => {
   const calculationError = segmentData?.segment?.calculationError;
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
+      <BasicSection as="fieldset">
+        <Label>{field.label}</Label>
 
         {
           {
@@ -137,7 +136,7 @@ const Field: React.FC<IFieldProps> = ({ value, field }) => {
             ),
           }[currentStatus]
         }
-      </FieldContainer>
+      </BasicSection>
   );
 };
 

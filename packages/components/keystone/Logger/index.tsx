@@ -29,6 +29,7 @@ export const LoggerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     // Display toast using Keystone's useToasts
     toasts.addToast({
       ...toastData,
+      message: toastData.description,
       tone: toastData.tone || "positive"
     });
 

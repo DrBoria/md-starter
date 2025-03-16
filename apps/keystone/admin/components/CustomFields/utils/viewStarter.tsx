@@ -7,7 +7,7 @@ import type {
 } from "@keystone-6/core/types";
 import React from "react";
 import { CellContainer } from "@keystone-6/core/admin-ui/components";
-import { FieldContainer, FieldLabel, TextInput } from "@keystone-ui/fields";
+import { BasicSection, Input, Label } from "@md/components";
 
 const DefaultField = ({
   field,
@@ -15,10 +15,10 @@ const DefaultField = ({
   onChange,
   autoFocus,
 }: FieldProps<typeof controller>) => (
-  <FieldContainer>
-    <FieldLabel htmlFor={field.path}>{field.label}</FieldLabel>
+  <BasicSection>
+    <Label htmlFor={field.path}>{field.label}</Label>
     {onChange ? (
-      <TextInput
+      <Input
         id={field.path}
         autoFocus={autoFocus}
         type="number"
@@ -32,7 +32,7 @@ const DefaultField = ({
     ) : (
       value?.inner?.value
     )}
-  </FieldContainer>
+  </BasicSection>
 );
 
 const DefaultCell: CellComponent = ({ item, field, linkTo }) => {
@@ -47,10 +47,10 @@ const DefaultCell: CellComponent = ({ item, field, linkTo }) => {
 const DefaultCardValue: CardValueComponent = ({ item, field }) => {
   const value = (item[field.path] as string) || "";
   return (
-    <FieldContainer>
-      <FieldLabel>{field.label}</FieldLabel>
+    <BasicSection>
+      <Label>{field.label}</Label>
       <div>{value}</div>
-    </FieldContainer>
+    </BasicSection>
   );
 };
 

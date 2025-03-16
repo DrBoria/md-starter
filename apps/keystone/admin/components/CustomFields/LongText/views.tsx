@@ -1,23 +1,19 @@
 import type { CellComponent, FieldProps } from "@keystone-6/core/types";
 import React from "react";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 
 import type { controller } from "../utils/viewStarter";
 import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
+import { BasicSection, DescriptionText, Label } from "@md/components";
 
 function Field({ field, value, onChange }: FieldProps<typeof controller>) {
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <div>
           {onChange ? (
             <TextArea
@@ -34,7 +30,7 @@ function Field({ field, value, onChange }: FieldProps<typeof controller>) {
             <ShortedText text={value?.inner?.value ?? ""} withCopy />
           )}
         </div>
-      </FieldContainer>
+      </BasicSection>
   );
 }
 

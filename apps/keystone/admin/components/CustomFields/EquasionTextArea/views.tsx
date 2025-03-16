@@ -6,12 +6,7 @@ import type {
 } from "@keystone-6/core/types";
 import React, { useRef } from "react";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
-import { Button } from "@keystone-ui/button";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
+import { BasicSection, Button, DescriptionText, Label } from "@md/components";
 import styled from "styled-components";
 
 import type { TTextAreaPlugins } from "@md/components/keystone";
@@ -131,11 +126,11 @@ const Field = ({
   };
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
 
         <FormulaEditor>
           <ButtonGroupsContainer>
@@ -227,7 +222,7 @@ const Field = ({
             variables={variables}
           />
         </FormulaEditor>
-      </FieldContainer>
+      </BasicSection>
   );
 };
 

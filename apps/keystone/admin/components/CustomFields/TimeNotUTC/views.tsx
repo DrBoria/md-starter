@@ -1,24 +1,20 @@
 import type { FieldProps } from "@keystone-6/core/types";
 import React from "react";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 import moment from "moment";
 
 import type { controller } from "../utils/viewStarter";
 import { DateTimePicker } from "@md/components/keystone";
+import { BasicSection, DescriptionText, Label } from "@md/components";
 
 function Field({ field, value, onChange }: FieldProps<typeof controller>) {
   // Parse current value from props
   const currentValue = value?.initial || "";
   return (
-    <FieldContainer as="fieldset">
-      <FieldLabel>{field.label}</FieldLabel>
-      <FieldDescription id={`${field.path}-description`}>
+    <BasicSection>
+      <Label>{field.label}</Label>
+      <DescriptionText id={`${field.path}-description`}>
         {field.description}
-      </FieldDescription>
+      </DescriptionText>
 
       {/* onChange passed for editable / create view */}
       {onChange ? (
@@ -40,7 +36,7 @@ function Field({ field, value, onChange }: FieldProps<typeof controller>) {
       ) : (
         moment.utc(currentValue).format("M/D/YYYY, h:mm:ss A")
       )}
-    </FieldContainer>
+    </BasicSection>
   );
 }
 

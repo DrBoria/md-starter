@@ -1,14 +1,9 @@
 import type { FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 
 import type { Value } from "../utils/validate";
 import type { controller } from "../utils/viewStarter";
-import { Input } from "@md/components";
+import { BasicSection, DescriptionText, Input, Label } from "@md/components";
 import {
   ErrorValidationContainer,
   ErrorValidationMessage,
@@ -57,11 +52,11 @@ function Field({
   }, [forceValidation]);
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <div>
           <ErrorValidationContainer $isError={!!validationMessage}>
             <Input
@@ -78,7 +73,7 @@ function Field({
             <ErrorValidationMessage>{validationMessage}</ErrorValidationMessage>
           )}
         </div>
-      </FieldContainer>
+      </BasicSection>
   );
 }
 

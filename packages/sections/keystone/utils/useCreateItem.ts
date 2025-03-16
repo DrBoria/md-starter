@@ -5,10 +5,10 @@ import type { ComponentProps } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useKeystone } from "@keystone-6/core/admin-ui/context";
-import { useToasts } from "@keystone-ui/toast";
 import isDeepEqual from "fast-deep-equal";
 
 import { usePreventNavigation } from "./usePreventNavigation";
+import { useLogger } from "@md/components";
 
 type IValueWithoutServerSideErrors = Record<
   string,
@@ -31,7 +31,7 @@ export function useCreateItem(
   noPreventNavigation?: boolean,
   defaultValue?: Record<string, unknown>,
 ): CreateItemHookResult {
-  const toasts = useToasts();
+  const logger = useLogger();
   const { createViewFieldModes } = useKeystone();
 
   const [createItem, { loading, error, data: returnedData }] = useMutation(
@@ -172,7 +172,7 @@ export function useCreateItem(
           message = "Please use unique item name";
         }
 
-        toasts.addToast({
+        logger.add({
           title: "Failed to Create",
           tone: "negative",
           message,
@@ -181,7 +181,7 @@ export function useCreateItem(
       }
       shouldPreventNavigationRef.current = false;
       const label = outputData.item.label || outputData.item.id;
-      toasts.addToast({
+      logger.add({
         title: label,
         message: "Created Successfully",
         tone: "positive",

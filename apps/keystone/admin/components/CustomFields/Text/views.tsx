@@ -1,20 +1,18 @@
 import type { CellComponent, FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
 
 import type { Value } from "../utils/validate";
 import type { controller } from "../utils/viewStarter";
 import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import {
+  BasicSection,
+  DescriptionText,
   ErrorValidationContainer,
   ErrorValidationMessage,
   Input,
+  Label,
 } from "@md/components";
 import { validate } from "../utils/validate";
 
@@ -53,11 +51,11 @@ function Field({
   }, [forceValidation]);
 
   return (
-    <FieldContainer as="fieldset">
-      <FieldLabel>{field.label}</FieldLabel>
-      <FieldDescription id={`${field.path}-description`}>
+    <BasicSection>
+      <Label>{field.label}</Label>
+      <DescriptionText id={`${field.path}-description`}>
         {field.description}
-      </FieldDescription>
+      </DescriptionText>
       {field.displayMode === "textarea" ? (
         <div>
           <ErrorValidationContainer $isError={!!validationMessage}>
@@ -96,7 +94,7 @@ function Field({
           )}
         </div>
       )}
-    </FieldContainer>
+    </BasicSection>
   );
 }
 

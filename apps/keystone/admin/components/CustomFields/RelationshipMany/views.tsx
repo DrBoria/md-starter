@@ -6,20 +6,15 @@ import type {
 } from "@keystone-6/core/types";
 import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
-import { Button } from "@keystone-ui/button";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
+import { BasicSection, Button, DescriptionText, Label } from "@md/components";
 
 import type { TSession } from "../../../../types";
-import { MultiSelect } from "@keystone-ui/fields";
 import { getWhereParameters } from "./utils";
 import { useQueryList } from "@md/api/graphql";
 import { QueryResult, useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 import { useModal } from "@md/components";
+import { MultiSelect } from "@keystone-ui/fields";
 
 export interface IListName {
   listName: string;
@@ -161,11 +156,11 @@ const Field = ({
   };
 
   return (
-      <FieldContainer as="fieldset">
-        <FieldLabel>{field.label}</FieldLabel>
-        <FieldDescription id={`${field.path}-description`}>
+      <BasicSection>
+        <Label>{field.label}</Label>
+        <DescriptionText id={`${field.path}-description`}>
           {field.description}
-        </FieldDescription>
+        </DescriptionText>
         <div>
           <MultiSelect
             options={items.map(mapToOutput) as IOptionMultiSelect[]}
@@ -185,7 +180,7 @@ const Field = ({
             </div>
           )}
         </div>
-      </FieldContainer>
+      </BasicSection>
   );
 };
 
