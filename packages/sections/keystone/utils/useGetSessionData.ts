@@ -7,7 +7,7 @@ import { QueryResult, useQuery } from "@apollo/client";
 
 let isSessionSet = false;
 const sessionData =
-  "id createdAt role { id name } organization { id }";
+  "id createdAt role { id name }";
 const useGetSessionData = (
   authenticatedItem: AuthenticatedItem,
 ): unknown => {

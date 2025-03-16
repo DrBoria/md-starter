@@ -4,8 +4,7 @@ export { CreateItemForm } from './CreateItemForm';
 export { EditItemForm } from './EditItemForm';
 export { ItemsList } from './ItemsList';
 
-export { CentralModal } from './Modals/CentralModal';
-export { FullScreenModal } from './Modals/FullScreenModal';
+export { DeleteTemplate, FileUpload, SubmitTemplate } from './Modals/templates';
 export { SideBarModal } from './Modals/SideBarModal';
 
 export { NotFoundSection } from './NotFoundSection';

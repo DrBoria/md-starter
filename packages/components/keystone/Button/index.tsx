@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { ClipboardIcon, FilePlusIcon } from "@keystone-ui/icons";
 import { useToasts } from "@keystone-ui/toast";
 import styled from "styled-components";
-import { Button as KeystoneButton, ToneKey, WeightKey } from "@keystone-ui/button";
+import { ToneKey, WeightKey } from "@keystone-ui/button";
+import { Button as DefaultButton } from "../../default/Button";
 
 import { FocusedContainer } from "../../default/Containers";
 import { Tooltip } from "../../default/Tooltip";
@@ -25,7 +26,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
   const IconComponent = icon ? Icons[icon] : null;
   const iconChild = IconComponent && <IconComponent size="small" />;
   return (
-    <KeystoneButton
+    <DefaultButton
       {...props}
       weight={weight}
       tone={disabled || isLoading ? "passive" : tone}
@@ -36,7 +37,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
         {children}
         {isLoading ? <LoaderImage src="/ouroboros.svg" alt="Loading..." priority width={40} height={40} /> : iconChild}
       </div>
-    </KeystoneButton>
+    </DefaultButton>
   );
 };
 
@@ -267,7 +268,7 @@ const ActionsMenuButton: React.FC<IActionsMenuButtonProps> = ({
 };
 
 export interface ButtonProps
-  extends Omit<React.ComponentProps<typeof KeystoneButton>, "children"> {
+  extends Omit<React.ComponentProps<typeof DefaultButton>, "children"> {
   $fullWidth?: boolean;
   icon?: keyof typeof Icons;
   iconPosition?: "left" | "right";

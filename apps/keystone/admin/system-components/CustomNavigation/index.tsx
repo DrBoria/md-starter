@@ -8,14 +8,14 @@ import {
   NavigationContainer,
 } from "@keystone-6/core/admin-ui/components";
 
-import { GlobalVars } from "../../state";
 import { transformPathToReadableFormat } from "@md/utils";
-import { Button, MenuItem } from "@md/components";
+import { Button, CentralModal, MenuItem } from "@md/components";
 import { Icons, Toggle } from "@md/components/keystone";
 import { NavigationContainerStyled } from "./styles";
 import { NavItem } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
-import { SideBarModal, CentralModal, useSignOut, useGetSessionData } from "@md/sections/keystone";
+import { SideBarModal, useSignOut, useGetSessionData } from "@md/sections/keystone";
+
 
 const ClientNavigation = React.memo(
   ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
@@ -79,17 +79,14 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
           )}
 
           {authenticatedItem.state === "authenticated" && (
-            <Button type="menu" onClick={() => signOut()}>
+            <Button type="button" onClick={() => signOut()}>
               {"Sign out"}
             </Button>
           )}
 
-          <SideBarModal
-            modalData={GlobalVars.SideBarModalData}
-            hide={() => GlobalVars.SideBarModalData = null}
-          />
+          <SideBarModal />
 
-          <CentralModal modalData={GlobalVars.ModalData} hide={() => GlobalVars.ModalData = null} />
+          <CentralModal />
         </NavigationContainerStyled>
       </NavigationContainer>
     </ThemeProvider>

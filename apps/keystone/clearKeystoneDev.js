@@ -11,6 +11,7 @@ function deleteDuplicateJsFiles(dir) {
       deleteDuplicateJsFiles(filePath); // Recursive for nested folders
     } else if (file.isFile() && file.name.endsWith('.js')) {
       const tsxFilePath = filePath.replace(/\.js$/, '.tsx');
+      if (filePath.includes('_app')) return;
       if (fs.existsSync(tsxFilePath)) {
         fs.unlinkSync(filePath);
         console.log(`Deleted duplicate JS file: ${filePath}`);

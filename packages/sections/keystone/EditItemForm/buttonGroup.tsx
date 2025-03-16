@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DeleteTemplate } from "../Modals/CentralModal";
+import { DeleteTemplate } from "../Modals/templates";
 import { Button, ColumnsContainer } from "@md/components";
 import { IModalButton } from "../Modals/types";
 

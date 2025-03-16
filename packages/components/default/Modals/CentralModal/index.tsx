@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
-import { DeleteTemplate } from "./deleteTemplate";
-import { SubmitTemplate } from "./submitTemplate";
-import { TModalData } from "../types";
+import { useModal } from "..";
 
 // Define the centerZoomIn animation
 const centerZoomInAnimation = css`
@@ -74,7 +72,7 @@ const ModalContainer = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 440px;
+  min-width: 440px;
   max-height: 90%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -114,22 +112,20 @@ const ModalContentContainer = styled.div`
 `;
 
 // ModalProps interface
-interface ModalProps {
-  hide: () => void;
-  modalData: TModalData | null;
-}
 
-const CentralModal: FC<ModalProps> = ({ modalData, hide }) => {
-  if (!modalData) return null;
+export const CentralModal: FC = () => {
+  const {modalData, setModalData} = useModal();
   const [$isClosing, setIsClosing] = useState(false);
 
   const onHide = () => {
     setIsClosing(true);
     setTimeout(() => {
-      hide();
+      setModalData(null);
       setIsClosing(false);
     }, 200);
   };
+
+  if (!modalData) return null;
 
   return ReactDOM.createPortal(
     <>
@@ -146,5 +142,3 @@ const CentralModal: FC<ModalProps> = ({ modalData, hide }) => {
     document.body,
   );
 };
-
-export { CentralModal, DeleteTemplate, SubmitTemplate };

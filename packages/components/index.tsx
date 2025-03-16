@@ -15,6 +15,9 @@ export { Header } from './default/Header';
 export { StatusLabel } from './default/StatusLabel';
 export { ProgressBar } from './default/ProgressBar';
 export { ErrorValidationMessage, ErrorValidationContainer } from './default/Validation';
+export { useLogger, LoggerProvider } from './default/Logger';
+export { useModal, ModalProvider, CentralModal, FullScreenModal } from './default/Modals';
+export type { TSideBarModalData, IModalButton } from './default/Modals';
 
 export {
     ColumnsContainer,

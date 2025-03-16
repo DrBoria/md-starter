@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import React, { useState } from "react";
 import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
-import { dark, ThemeProvider } from "@md/styles";
 import { styled } from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
 
@@ -29,7 +28,7 @@ const PageWrapper = styled.div`
 const Sidebar = styled.aside<{ isSidebarOpen: boolean }>`
   grid-column: 1/2;
   grid-row: 2/4;
-  display: ${({isSidebarOpen}) => isSidebarOpen ? 'block' : 'none'};
+  display: ${({ isSidebarOpen }) => isSidebarOpen ? 'block' : 'none'};
   height: 100vh;
 
   background-color: ${({ theme }) => theme.colors.section};
@@ -82,20 +81,18 @@ const PageContainer: React.FC<PageContainerProps> = ({ children, header }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <ThemeProvider theme={dark}>
-      <PageWrapper>
-        <Header>
-          <Logo />
-          <HeaderToggle onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-            {isSidebarOpen ? <XCircleIcon /> : <MenuIcon />}
-          </HeaderToggle>
-        </Header>
-        <Sidebar isSidebarOpen={isSidebarOpen}>
-          <Navigation />
-        </Sidebar>
-        <Content>{children}</Content>
-      </PageWrapper>
-    </ThemeProvider>
+    <PageWrapper>
+      <Header>
+        <Logo />
+        <HeaderToggle onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          {isSidebarOpen ? <XCircleIcon /> : <MenuIcon />}
+        </HeaderToggle>
+      </Header>
+      <Sidebar isSidebarOpen={isSidebarOpen}>
+        <Navigation />
+      </Sidebar>
+      <Content>{children}</Content>
+    </PageWrapper>
   );
 };
 

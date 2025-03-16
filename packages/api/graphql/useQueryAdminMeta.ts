@@ -6,7 +6,7 @@ const useQueryAdminMeta = <TData>(list: string[], useQuery: TUseQuery<TData>) =>
   for (const item of list) {
     const firstLetterLower = item.charAt(0).toLowerCase();
     const remainingItem = item.slice(1);
-    resultString += `${item}: ${firstLetterLower}${remainingItem}sCount\n`;
+    resultString += `${item}: ${firstLetterLower}${remainingItem}Count\n`;
   }
 
   const query = useQuery(

@@ -36,7 +36,7 @@ import {
   TableHeader,
 } from "./styles";
 import { ViewCell } from "./ViewCell";
-import { DeleteTemplate } from "../Modals/CentralModal";
+import { DeleteTemplate } from "../Modals/templates";
 import { NotFoundSection } from "../NotFoundSection";
 import { useMutation } from "@apollo/client";
 

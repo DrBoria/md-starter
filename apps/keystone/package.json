@@ -24,7 +24,7 @@
     "ci:check:db": "bash ci/check-db-migrations"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.5",
+    "@apollo/client": "^3.13.4",
     "@aws-sdk/client-s3": "^3.637.0",
     "@aws-sdk/client-transfer": "^3.637.0",
     "@aws-sdk/lib-storage": "^3.637.0",

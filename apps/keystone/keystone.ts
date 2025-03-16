@@ -16,7 +16,6 @@ import { APP_PORT, DATABASE_URL } from "./env";
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
 import express from "express";
-import { BaseKeystoneTypeInfo, KeystoneContext } from "@keystone-6/core/types";
 
 export default withAuth(
   config({
@@ -50,14 +49,8 @@ export default withAuth(
       enableLogging: ["error", "warn", "info", 'query'],
     },
     graphql: {
-      // Set these fields to false to disable the playground and docs
-      playground: true,
       apolloConfig: {
-        introspection: true,
-      },
-      cors: {
-        allowedHeaders: '*',
-        origin: true,
+        allowBatchedHttpRequests: true,
       }
     },
     server: {

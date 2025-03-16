@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styled, { css, keyframes } from "styled-components";
 
-import { Icons } from "@md/components/keystone";
+import { LucideIcon } from "../../Icons";
+import { useModal } from "../useModal";
 
 const expandAnimation = keyframes`
   0% {
@@ -93,28 +94,28 @@ const CloseButton = styled.div`
   }
 `;
 
-
-const FullScreenModal: React.FC<{ GlobalVars: { FullScreenData: { content: React.ReactNode } | null } }> = ({ GlobalVars }) => {
+const FullScreenModal: React.FC = () => {
+  const {fullScreenData, setFullScreenData} = useModal();
   const [isClosing, setIsClosing] = useState(false);
 
   const closeFullScreen = () => {
     setIsClosing(true);
     setTimeout(() => {
-      GlobalVars.FullScreenData = null; // Reset the global state after animation
+      setFullScreenData(null); // Reset the global state after animation
       setIsClosing(false);
     }, 300);
   };
 
-  if (!GlobalVars.FullScreenData) return null;
+  if (!fullScreenData) return null;
 
   return ReactDOM.createPortal(
     <>
       <FullScreenOverlay onClick={closeFullScreen} />
       <FullScreenWrapper $isClosing={isClosing}>
         <CloseButton onClick={closeFullScreen}>
-          <Icons.Minimize2Icon />
+          <LucideIcon name="Minimize2" />
         </CloseButton>
-        {GlobalVars.FullScreenData.content}
+        {fullScreenData.content}
       </FullScreenWrapper>
     </>,
     document.body,

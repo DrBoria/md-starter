@@ -15,7 +15,7 @@ import { ITabs, TConditionalField } from "@md/sections/keystone";
  *
  * Main Idea of the funciton is to uptade passed variable and store information about it in Apollo dev tools
  */
-const updateAndLog =
+export const updateAndLog =
   <T>(
     client: ApolloClient<object>,
     clientVar: {

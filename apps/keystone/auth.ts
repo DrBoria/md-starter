@@ -142,7 +142,7 @@ const { withAuth } = createAuth({
   //   this can be helpful for when you are writing your access control functions
   //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
   sessionData:
-    "id createdAt role { id name } locked",
+    "id createdAt role { id name }",
   secretField: "password",
 
   // WARNING: remove initFirstItem functionality in production

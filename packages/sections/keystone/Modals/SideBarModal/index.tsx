@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
-import { PageTitle, SubTitle } from "@md/components";
-import { TSideBarModalData } from "../types";
+import { PageTitle, SubTitle, useModal } from "@md/components";
 import { CreateItemForm } from "../../CreateItemForm";
 import { EditItemForm } from "../../EditItemForm";
 
@@ -111,19 +110,17 @@ const TitleContainer = styled.div`
   padding: 7px 20px; // Alignment to the height of keystone header
 `;
 
-interface SideBarModalProps {
-  hide: () => void;
-  modalData: TSideBarModalData | null;
-}
-
-export const SideBarModal: FC<SideBarModalProps> = ({ modalData, hide }) => {
-  if (!modalData) return null;
+export const SideBarModal = () => {
+  const { sideBarModalData, setSideBarModalData } = useModal();
   const [$isClosing, setIsClosing] = useState(false);
+
+  if (!sideBarModalData) return null;
+
 
   const onHide = () => {
     setIsClosing(true);
     setTimeout(() => {
-      hide();
+      setSideBarModalData(null);
       setIsClosing(false);
     }, 200);
   };
@@ -134,36 +131,36 @@ export const SideBarModal: FC<SideBarModalProps> = ({ modalData, hide }) => {
       <SideBarModalContainer $isClosing={$isClosing}>
         <StyledSideBarModal>
           <TitleContainer>
-            <PageTitle>{modalData.headerText}</PageTitle>
+            <PageTitle>{sideBarModalData.headerText}</PageTitle>
           </TitleContainer>
           {
             {
               create: (
                 <SideBarModalContentContainer>
-                  {modalData.listName && (
+                  {sideBarModalData.listName && (
                     <CreateItemForm
-                      listName={modalData.listName}
-                      fieldsToRender={modalData.fieldsToRender}
-                      defaultValues={modalData.defaultValues}
-                      notToRenderFields={modalData.notToRenderFields}
-                      conditionalFields={modalData.conditionalFields}
-                      tabs={modalData.tabs}
-                      buttons={modalData.buttons}
+                      listName={sideBarModalData.listName}
+                      fieldsToRender={sideBarModalData.fieldsToRender}
+                      defaultValues={sideBarModalData.defaultValues}
+                      notToRenderFields={sideBarModalData.notToRenderFields}
+                      conditionalFields={sideBarModalData.conditionalFields}
+                      tabs={sideBarModalData.tabs}
+                      buttons={sideBarModalData.buttons}
                     />
                   )}
                 </SideBarModalContentContainer>
               ),
               edit: (
                 <SideBarModalContentContainer>
-                  {modalData.listName && (
+                  {sideBarModalData.listName && (
                     <EditItemForm
-                      listName={modalData.listName}
-                      itemId={modalData.id!}
-                      fieldsToRender={modalData.fieldsToRender}
-                      notToRenderFields={modalData.notToRenderFields}
-                      conditionalFields={modalData.conditionalFields}
-                      buttons={modalData.buttons}
-                      tabs={modalData.tabs}
+                      listName={sideBarModalData.listName}
+                      itemId={sideBarModalData.id!}
+                      fieldsToRender={sideBarModalData.fieldsToRender}
+                      notToRenderFields={sideBarModalData.notToRenderFields}
+                      conditionalFields={sideBarModalData.conditionalFields}
+                      buttons={sideBarModalData.buttons}
+                      tabs={sideBarModalData.tabs}
                     />
                   )}
                 </SideBarModalContentContainer>
@@ -174,15 +171,15 @@ export const SideBarModal: FC<SideBarModalProps> = ({ modalData, hide }) => {
                   <span>
                     Choose where you want to import your contacts from.
                   </span>
-                  {modalData.buttons?.map((button) => button.view?.())}
+                  {sideBarModalData.buttons?.map((button) => button.view?.())}
                 </SideBarModalContentContainer>
               ),
               custom: (
                 <SideBarModalContentContainer>
-                  {modalData.children}
+                  {sideBarModalData.children}
                 </SideBarModalContentContainer>
               ),
-            }[modalData.type]
+            }[sideBarModalData.type]
           }
         </StyledSideBarModal>
       </SideBarModalContainer>

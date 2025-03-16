@@ -4,7 +4,6 @@ import type { IconName } from "../Icons";
 import { LucideIcon } from "../Icons";
 import { Loader } from "../Spinner";
 
-// Определяем типы для свойств кнопки
 export type ButtonSize = "small" | "medium" | "large" | "icon";
 export type ButtonWeight =
   | "bold"
@@ -22,7 +21,6 @@ export type ButtonTone =
   | "warning"
   | "help";
 
-// Интерфейс пропсов кнопки
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $fullWidth?: boolean;
@@ -36,7 +34,6 @@ export interface ButtonProps
   size?: ButtonSize;
 }
 
-// Стилизованная кнопка с динамическими стилями из темы
 const StyledButton = styled.button<{
   tone: ButtonTone;
   weight: ButtonWeight;
@@ -63,7 +60,6 @@ const StyledButton = styled.button<{
   ${(props) => {
     const { theme, tone, weight } = props;
 
-    // Определяем цвет на основе тона
     const color = (() => {
       switch (tone) {
         case "active":
@@ -128,30 +124,26 @@ const StyledButton = styled.button<{
         `;
     }
 
-    // Стили для размера кнопки
     let sizeStyles = "";
     switch (props.size) {
       case "small":
         sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile / 2}px ${
-          theme.variables.offsets.elementContent.mobile
-        }px;
+          padding: ${theme.variables.offsets.elementContent.mobile / 2}px ${theme.variables.offsets.elementContent.mobile
+          }px;
           font-size: 12px; /* Можно заменить на theme.font.size с модификатором */
         `;
         break;
       case "medium":
         sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile}px ${
-          theme.variables.offsets.elementContent.mobile * 2
-        }px;
+          padding: ${theme.variables.offsets.elementContent.mobile}px ${theme.variables.offsets.elementContent.mobile * 2
+          }px;
           font-size: 14px; /* Можно заменить на theme.font.size */
         `;
         break;
       case "large":
         sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile * 1.5}px ${
-          theme.variables.offsets.elementContent.mobile * 3
-        }px;
+          padding: ${theme.variables.offsets.elementContent.mobile * 1.5}px ${theme.variables.offsets.elementContent.mobile * 3
+          }px;
           font-size: 16px; /* Можно заменить на theme.font.size с модификатором */
         `;
         break;
@@ -164,9 +156,8 @@ const StyledButton = styled.button<{
         break;
       default:
         sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile}px ${
-          theme.variables.offsets.elementContent.mobile * 2
-        }px;
+          padding: ${theme.variables.offsets.elementContent.mobile}px ${theme.variables.offsets.elementContent.mobile * 2
+          }px;
           font-size: 14px;
         `;
     }
@@ -178,8 +169,7 @@ const StyledButton = styled.button<{
   }}
 `;
 
-// Компонент кнопки
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   icon,
   iconPosition = "left",
   text,
@@ -223,3 +213,5 @@ export const Button: React.FC<ButtonProps> = ({
     </StyledButton>
   );
 };
+
+export { Button };
