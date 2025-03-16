@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@keystone-ui/button";
+import { Button } from "@md/components";
 
 import { DeleteTemplate } from "../Modals/templates";
 import { ThemeProvider } from "@md/styles";

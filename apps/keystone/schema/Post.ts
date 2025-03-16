@@ -8,7 +8,7 @@ import type { Lists, PostWhereInput } from ".keystone/types";
 import { createdAt } from "./fields/createdAt";
 import { updatedAt } from "./fields/updatedAt";
 import { isAdmin } from "./access-control/roles";
-import { Text } from "../admin/system-components/CustomFields/Text";
+import { Text } from "../admin/components/CustomFields/Text";
 
 export const Post = list<Lists.Post.TypeInfo>({
   access: {

@@ -1,9 +1,8 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Button } from "@keystone-ui/button";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 
-import { Input } from "@md/components";
+import { Button, Input } from "@md/components";
 import { ProgressBar } from "@md/components";
 import { TextArea } from "@md/components/keystone";
 import { HeaderText, PlainText } from "@md/components";
@@ -267,7 +266,7 @@ const FileUpload = ({
           className="mr-4"
           weight="bold"
           tone="active"
-          isDisabled={!files?.length || !!uploadProgress}
+          disabled={!files?.length || !!uploadProgress}
         >
           Upload
         </Button>

@@ -1,10 +1,9 @@
 import type { FieldMeta } from "@keystone-6/core/types";
 import React from "react";
-import { Button } from "@keystone-ui/button";
 
 import type { IOption } from "../../../../types";
 import type { TCondition } from "../../utils/data-mapping/mapFilterParameters";
-import { Input, Select } from "@md/components";
+import { Button, Input, Select } from "@md/components";
 import { toRelationSelect } from "../../utils/data-mapping/toRelationSelect";
 import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";

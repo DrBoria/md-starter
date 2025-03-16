@@ -16,8 +16,8 @@ import { getNotDisplayedDefaultValues } from "../utils/data-mapping/getNonDispla
 import { useCreateItem } from "../utils/useCreateItem";
 import { useFieldsData } from "../utils/useFieldsData";
 import { ButtonGroup } from "./buttonGroup";
-import { IModalButton } from "../Modals/types";
 import { getAllTabsFieldsNames, ITabs, TabsFields } from "../DynamicForms";
+import { IModalButton } from "@md/components";
 
 export interface ICreateItemForm {
   listName: string;

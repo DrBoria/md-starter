@@ -13,6 +13,8 @@ export const TableHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  background-color: ${({theme}) => theme.colors.section};
+  color: ${({theme}) => theme.colors.sectionContent};
   gap: calc(var(--basic-padding) * 2);
 `;
 
@@ -35,8 +37,8 @@ export const Table = styled.div`
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   border-collapse: separate;
-  background-color: #fff;
-  overflow-x: auto;
+  background-color: ${({theme}) => theme.colors.section};
+  color: ${({theme}) => theme.colors.sectionContent};
 `;
 
 export const Row = styled.div<{ withFullSupport?: boolean }>`
@@ -49,6 +51,8 @@ export const Row = styled.div<{ withFullSupport?: boolean }>`
   align-items: center;
   border-bottom: 1px solid var(--color-border);
   min-width: fit-content;
+  background-color: ${({theme}) => theme.colors.section};
+  color: ${({theme}) => theme.colors.sectionContent};
 
   &:first-child {
     grid-template-rows: calc(var(--basic-padding) * 6);

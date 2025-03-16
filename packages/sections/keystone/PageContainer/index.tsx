@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import React, { useState } from "react";
+import { PageContainer as MDPageContainer } from "@md/components";
 import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
 import { styled } from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
@@ -14,7 +15,6 @@ const PageWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(300px, 1fr);
   grid-template-rows: repeat(2, ${({ theme }) => theme.elements.header.height}) auto;
-  height: 100vh;
   isolation: isolate;
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
@@ -81,18 +81,20 @@ const PageContainer: React.FC<PageContainerProps> = ({ children, header }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <PageWrapper>
-      <Header>
-        <Logo />
-        <HeaderToggle onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-          {isSidebarOpen ? <XCircleIcon /> : <MenuIcon />}
-        </HeaderToggle>
-      </Header>
-      <Sidebar isSidebarOpen={isSidebarOpen}>
-        <Navigation />
-      </Sidebar>
-      <Content>{children}</Content>
-    </PageWrapper>
+    <MDPageContainer>
+      <PageWrapper>
+        <Header>
+          <Logo />
+          <HeaderToggle onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            {isSidebarOpen ? <XCircleIcon /> : <MenuIcon />}
+          </HeaderToggle>
+        </Header>
+        <Sidebar isSidebarOpen={isSidebarOpen}>
+          <Navigation />
+        </Sidebar>
+        <Content>{children}</Content>
+      </PageWrapper>
+    </MDPageContainer>
   );
 };
 

@@ -1,18 +1,16 @@
 import type { FormEvent } from "react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { gql, useMutation } from "@keystone-6/core/admin-ui/apollo";
+import { useMutation } from '@apollo/client';
 import {
   useRawKeystone,
   useReinitContext,
 } from "@keystone-6/core/admin-ui/context";
 import { useRouter } from "@keystone-6/core/admin-ui/router";
-import { Button } from "@keystone-ui/button";
-import { H1, Stack, VisuallyHidden } from "@keystone-ui/core";
-import { TextInput } from "@keystone-ui/fields";
-import { Notice } from "@keystone-ui/notice";
+import { VisuallyHidden } from "@keystone-ui/core";
 import { SignInContainer } from "@md/sections/keystone";
-import { dark, ThemeProvider } from "@md/styles";
+import { BasicSection, Button, Form, Input, PageTitle, PlainText } from "@md/components";
+import { useAuthenticate } from "@md/api/graphql";
 
 // TODO: use after approve and design update
 // import { GoogleSignInButton } from "../components/GoogleSignInButton";
@@ -38,24 +36,9 @@ const useRedirect = () => useMemo(() => "/", []);
 function SigninPage({
   identityField,
   secretField,
-  mutationName,
   successTypename,
   failureTypename,
 }: ISigninPageProps) {
-  const mutation = gql`
-    mutation($identity: String!, $secret: String!) {
-      authenticate: ${mutationName}(${identityField}: $identity, ${secretField}: $secret) {
-        ... on ${successTypename} {
-          item {
-            id
-          }
-        }
-        ... on ${failureTypename} {
-          message
-        }
-      }
-    }
-  `;
 
   const [mode, setMode] = useState<"signin" | "forgot password">("signin");
   const [state, setState] = useState({ identity: "", secret: "" });
@@ -70,7 +53,14 @@ function SigninPage({
     identityFieldRef.current?.focus();
   }, [mode]);
 
-  const [mutate, { error, loading, data }] = useMutation(mutation);
+  const { authenticateMutation: mutate, error, loading, data } = useAuthenticate({
+    identityField: 'email',
+    secretField: 'password',
+    failureTypename: 'UserAuthenticationWithPasswordFailure',
+    successTypename: 'UserAuthenticationWithPasswordSuccess',
+    useMutation
+  });
+
   const reinitContext = useReinitContext();
   const router = useRouter();
   const rawKeystone = useRawKeystone();
@@ -122,12 +112,10 @@ function SigninPage({
 
     try {
       const { data } = await mutate({
-        variables: {
-          identity: state.identity,
-          secret: state.secret,
-        },
+        email: state.identity,
+        password: state.secret,
       });
-      if (data.authenticate?.__typename !== successTypename) return;
+      if (data.item?.__typename !== successTypename) return;
     } catch (e) {
       console.error(e);
       return;
@@ -139,23 +127,23 @@ function SigninPage({
 
   return (
     <SignInContainer title="Md App - Sign In">
-      <Stack gap="xlarge" as="form" onSubmit={onSubmit}>
-        <H1>Sign In</H1>
+      <Form onSubmit={onSubmit}>
+        <PageTitle>Sign In</PageTitle>
         {error && (
-          <Notice title="Error" tone="negative">
+          <PlainText>
             {error.message}
-          </Notice>
+          </PlainText>
         )}
         {data?.authenticate?.__typename === failureTypename && (
-          <Notice title="Error" tone="negative">
+          <PlainText>
             {data?.authenticate.message}
-          </Notice>
+          </PlainText>
         )}
-        <Stack gap="medium">
+        <BasicSection>
           <VisuallyHidden as="label" htmlFor="identity">
             {identityField}
           </VisuallyHidden>
-          <TextInput
+          <Input
             id="identity"
             name="identity"
             value={state.identity}
@@ -168,7 +156,7 @@ function SigninPage({
               <VisuallyHidden as="label" htmlFor="password">
                 {secretField}
               </VisuallyHidden>
-              <TextInput
+              <Input
                 id="password"
                 name="password"
                 value={state.secret}
@@ -178,10 +166,10 @@ function SigninPage({
               />
             </>
           )}
-        </Stack>
+        </BasicSection>
 
         {mode === "forgot password" ? (
-          <Stack gap="medium" across>
+          <BasicSection>
             <Button type="submit" weight="bold" tone="active">
               Log reset link
             </Button>
@@ -192,9 +180,9 @@ function SigninPage({
             >
               Go back
             </Button>
-          </Stack>
+          </BasicSection>
         ) : (
-          <Stack gap="medium" across>
+          <BasicSection>
             <Button
               weight="bold"
               tone="active"
@@ -221,9 +209,9 @@ function SigninPage({
             </Button>
             {/* Google Sign-In Button */}
             {/* <div id="google-signin-button" /> */}
-          </Stack>
+          </BasicSection>
         )}
-      </Stack>
+      </Form>
     </SignInContainer>
   );
 }

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-// Styled components for filter styling
 export const FilterButton = styled.button`
-  padding: 8px 12px;
-  background-color: #007bff;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  background-color: ${({ theme }) => theme.colors.highlighted};
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.border.radius};
   cursor: pointer;
 `;
 
@@ -19,25 +18,25 @@ export const FilterDropdown = styled.div`
   position: absolute;
   top: 40px;
   right: 0;
-  min-width: 320px; // same as in keystone
-  padding: 16px;
-  background-color: #fff;
+  min-width: ${({ theme }) => theme.screens.mobile.width}px;
+  padding: ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
+  background-color: ${({ theme }) => theme.colors.section};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  z-index: 1;
+  border-radius: ${({ theme }) => `calc(2 * ${theme.border.radius})`};
+  z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 
 export const FilterTitle = styled.h3`
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.font.size};
   font-weight: 600;
+  font-family: ${({ theme }) => theme.font.family.title};
 `;
 
 export const BackButton = styled.button`
   background-color: transparent;
   border: none;
-  color: #007bff;
+  color: ${({ theme }) => theme.colors.highlighted};
   cursor: pointer;
-  font-size: 14px;
-  margin-bottom: 16px;
-  margin-bottom: 16px;
+  font-size: ${({ theme }) => theme.font.size};
+  margin-bottom: ${({ theme }) => theme.offsets.betweenElements};
 `;

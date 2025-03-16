@@ -8,15 +8,15 @@ import { isAdmin } from "./access-control/roles";
 import { createdAt } from "./fields/createdAt";
 import { isActive } from "./fields/isActive";
 import { updatedAt } from "./fields/updatedAt";
-import { DynamicStatusLabel } from "../admin/system-components/CustomFields/DynamicStatusLabel";
-import { HiddenInput } from "../admin/system-components/CustomFields/HiddenInput";
-import { TimeNotUTC } from "../admin/system-components/CustomFields/TimeNotUTC";
-import { TimeZone } from "../admin/system-components/CustomFields/TimeZone";
-import { Title } from "../admin/system-components/CustomFields/Title";
-import { LongText } from "../admin/system-components/CustomFields/LongText";
-import { Relationship } from "../admin/system-components/CustomFields/Relationship";
-import { EquasionTextArea } from "../admin/system-components/CustomFields/EquasionTextArea";
-import { Text } from "../admin/system-components/CustomFields/Text";
+import { DynamicStatusLabel } from "../admin/components/CustomFields/DynamicStatusLabel";
+import { HiddenInput } from "../admin/components/CustomFields/HiddenInput";
+import { TimeNotUTC } from "../admin/components/CustomFields/TimeNotUTC";
+import { TimeZone } from "../admin/components/CustomFields/TimeZone";
+import { Title } from "../admin/components/CustomFields/Title";
+import { LongText } from "../admin/components/CustomFields/LongText";
+import { Relationship } from "../admin/components/CustomFields/Relationship";
+import { EquasionTextArea } from "../admin/components/CustomFields/EquasionTextArea";
+import { Text } from "../admin/components/CustomFields/Text";
 
 export const Example = list<Lists.Example.TypeInfo>({
   access: isAdmin,

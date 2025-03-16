@@ -1,7 +1,6 @@
 import React from "react";
-import { Button } from "@keystone-ui/button";
 
-import { HeaderText } from "@md/components";
+import { Button, HeaderText } from "@md/components";
 
 interface TDeleteTemplateProps {
   item: string;

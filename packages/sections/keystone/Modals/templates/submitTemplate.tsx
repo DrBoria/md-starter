@@ -1,8 +1,8 @@
 import React from "react";
 
 import { HeaderText } from "@md/components";
-import { Button,  ButtonProps } from "@md/components/keystone/Button";
 import { upperCaseFirstLetter } from "@md/utils";
+import { Button, ButtonProps } from "@md/components";
 
 interface TSubmitTemplateProps {
   actionName: string;

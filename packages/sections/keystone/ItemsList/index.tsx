@@ -3,9 +3,8 @@ import type { KeyboardEvent } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { Button } from "@keystone-ui/button";
+import { Button, useLogger } from "@md/components";
 import { ArrowRightIcon } from "@keystone-ui/icons";
-import { useToasts } from "@keystone-ui/toast";
 
 import type { IGraphQLObject, IOption } from "../../../types";
 import type { TCondition } from "../utils/data-mapping/mapFilterParameters";
@@ -92,7 +91,7 @@ export const ItemsList = ({
 }: ItemsTableProps) => {
   const { query, push, pathname } = useRouter();
   const searchParams = useSearchParams();
-  const toasts = useToasts();
+  const logger = useLogger();
   const prevFieldsValueRef = useRef<DeserializedValue>();
 
   // This values will be passed to queries
@@ -333,7 +332,7 @@ export const ItemsList = ({
     }
 
     await deleteMutation(selectedForDelete);
-    toasts.addToast({
+    logger.add({
       tone: "positive",
       title: `Deleted ${selectedForDelete.length} ${listName}s`,
     });

@@ -1,9 +1,8 @@
 import React from "react";
 
-import { OneLineContainer } from "@md/components";
-import { Button, Icons } from "@md/components/keystone";
+import { Button, IModalButton, OneLineContainer } from "@md/components";
+import { Icons } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
-import { IModalButton } from "../Modals/types";
 
 interface TButtonGroupProps {
   singular: string;

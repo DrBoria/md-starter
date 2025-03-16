@@ -28,7 +28,6 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
     return <KeystoneApp Component={Wrapped} pageProps={pageProps} {...otherProps} />;
 }
 
-
 // NOTE: Option 2, our wrapper above keystone wrapper
 // // @ts-ignore
 // function WrappedApp(props) {

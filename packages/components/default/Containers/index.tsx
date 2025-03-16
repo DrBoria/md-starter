@@ -48,6 +48,7 @@ export const PageContainer = styled.div`
   min-height: 100vh;
   padding: ${({ theme }) => theme.offsets.section};
   padding-top: ${({ theme }) => theme.elements.header.height};
+  background-color: ${({theme}) => theme.colors.section};
 `;
 
 

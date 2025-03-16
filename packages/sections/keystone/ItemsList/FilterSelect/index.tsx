@@ -1,6 +1,6 @@
 import type { FieldMeta } from "@keystone-6/core/types";
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@keystone-ui/button";
+import { Button } from "@md/components";
 import { ChevronDownIcon } from "@keystone-ui/icons";
 
 import type { IOption } from "../../../../types";

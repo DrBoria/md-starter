@@ -55,7 +55,7 @@ export const User = list<Lists.User.TypeInfo>({
       // by adding isIndexed: 'unique', we're saying that no user can have the same email as another user
       isIndexed: "unique",
       ui: {
-        views: "./admin/system-components/CustomFields/Text/views",
+        views: "./admin/components/CustomFields/Text/views",
       },
     }),
 
