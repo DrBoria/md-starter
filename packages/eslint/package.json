@@ -1,0 +1,37 @@
+{
+  "name": "@md/eslint",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "base.js",
+    "node.js",
+    "next.js",
+    "react-native.js",
+    "browser.js"
+  ],
+  "exports": {
+    "./base": "./base.js",
+    "./node": "./node.js",
+    "./next": "./next.js",
+    "./react-native": "./react-native.js",
+    "./browser": "./browser.js"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.9.1",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vercel/style-guide": "^5.2.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^2.0.0",
+    "eslint-plugin-anti-trojan-source": "^1.1.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-security": "^3.0.1",
+    "globals": "^15.9.0",
+    "typescript": "^5.3.3"
+  }
+}

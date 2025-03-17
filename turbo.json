@@ -33,6 +33,11 @@
         "^lint"
       ]
     },
+    "lint:fix": {
+      "dependsOn": [
+        "^lint:fix"
+      ]
+    },
     "start": {
       "cache": true,
       "persistent": true

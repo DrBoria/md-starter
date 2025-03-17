@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import * as colorThemes from '@md/styles/themes/colors';
 import { ModalProvider, LoggerProvider, PageTitle } from '@md/components';
 import { ThemeProvider } from '@md/styles';

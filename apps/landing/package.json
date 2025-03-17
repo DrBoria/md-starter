@@ -2,11 +2,13 @@
   "name": "landing",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "[ -e .env ] && set -a && . ./.env; next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.11.5",
@@ -32,6 +34,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@types/styled-components": "^5.1.34",
+    "@md/eslint": "workspace:*",
     "dotenv": "^16.4.5",
     "eslint": "^9.13.0",
     "eslint-config-next": "14.2.15",

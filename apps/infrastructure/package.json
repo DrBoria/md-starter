@@ -19,6 +19,7 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "@md/eslint": "workspace:*",
     "typescript": "~5.6.3"
   },
   "dependencies": {

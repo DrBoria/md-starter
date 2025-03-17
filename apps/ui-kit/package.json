@@ -2,12 +2,15 @@
   "name": "@md/ui-kit",
   "version": "1.0.0",
   "main": "styleguide.config.js",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"pnpm run dev:styleguidist\" \"pnpm run dev:server\"",
     "dev:styleguidist": "styleguidist server",
     "dev:server": "ts-node themeServer.ts",
     "dev:server:debug": "node --inspect-brk -r ts-node/register themeServer.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "author": "",
   "license": "ISC",
