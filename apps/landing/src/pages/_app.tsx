@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { ThemeProvider } from '@md/styles'
 import { ApolloClient, ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql'
@@ -6,6 +8,7 @@ import { Paper, PaperContainer, PaperTexture } from '@md/components/textures';
 import { HamburgerMenu } from '@md/sections';
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log('ThemeProviderЖ Ж', ThemeProvider);
   return (
     <ApolloProvider client={apolloClient as unknown as ApolloClient<any>}>
       <ThemeProvider>

@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import React from 'react'
 import { Button, Form, Input, Section, TextContainer } from '@md/components'
 import { PageTitle } from '@md/components'
 import { useAuthenticate } from '@md/api/graphql';

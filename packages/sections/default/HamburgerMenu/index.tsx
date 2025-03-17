@@ -20,7 +20,7 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
 
 const HamburgerButton = styled.button`
   position: fixed;
-  top: calc(${({ theme }) => theme.offsets.elementContent} / 2 + ${({ theme }) => theme.elements.icons.height});
+  top: ${({ theme }) => `calc(${theme.offsets.elementContent} / 2 + ${theme.elements.icons.height})`} ;
   right: ${({ theme }) => theme.offsets.elementContent};
   font-size: ${({ theme }) => theme.elements.icons.height};
   background: none;
