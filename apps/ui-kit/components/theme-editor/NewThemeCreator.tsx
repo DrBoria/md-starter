@@ -10,13 +10,15 @@ const NewThemeCreator: React.FC<{
   palettes: any[];
 }> = ({ newThemeName, onNewThemeNameChange, onSave, palettes }) => (
   <div style={{ overflow: 'auto', width: '100%' }}>
-    <SectionTitle>Create New Color Theme: </SectionTitle>
-    <input
-      type="text"
-      value={newThemeName}
-      onChange={(e) => onNewThemeNameChange(e.target.value)}
-      placeholder="Color Theme Name"
-    />
+    <BasicSection style={{background: 'transparent'}}>
+      <SectionTitle>Create New Color Theme: </SectionTitle>
+      <input
+        type="text"
+        value={newThemeName}
+        onChange={(e) => onNewThemeNameChange(e.target.value)}
+        placeholder="Color Theme Name"
+      />
+    </BasicSection>
     {palettes.length > 0 && (
       <OneLineContainer>
         {palettes.map((palette, index) => (

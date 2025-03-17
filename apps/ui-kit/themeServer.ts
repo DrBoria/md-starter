@@ -11,7 +11,7 @@ const themesPath = "../../packages/styles/themes";
 app.use(cors({ origin: "http://localhost:6060", methods: ["GET", "POST"], credentials: true }));
 app.use(express.json());
 
-// Получение списка цветовых тем из colors.ts
+// Retrieve the list of color themes from colors.ts
 const getColorThemes = async (): Promise<string[]> => {
   const colorsPath = path.join(__dirname, themesPath, "colors.ts");
   const colorsContent = await fs.readFile(colorsPath, "utf-8");
@@ -23,11 +23,11 @@ const getColorThemes = async (): Promise<string[]> => {
   return themeNames;
 };
 
-// Загрузка всех тем и общих секций
+// Load all themes and shared sections
 const loadThemeFiles = async () => {
   const themes: Record<string, any> = {};
 
-  // Загрузка цветовых тем в "colors"
+  // Load color themes into "colors"
   const colorThemeNames = await getColorThemes();
   themes["colors"] = {};
   for (const themeName of colorThemeNames) {
@@ -40,11 +40,11 @@ const loadThemeFiles = async () => {
         themes["colors"][themeName] = themeData;
       }
     } catch (err) {
-      console.error(`Ошибка при загрузке файла темы: ${themeFile}`, err);
+      console.error(`Error loading theme file: ${themeFile}`, err);
     }
   }
 
-  // Загрузка общих секций
+  // Load shared sections
   const sharedFiles = ["offsets.ts", "border.ts", "elements.ts", "font.ts", "zIndexes.ts"];
   for (const file of sharedFiles) {
     const filePath = path.join(__dirname, themesPath, file);
@@ -56,14 +56,14 @@ const loadThemeFiles = async () => {
         themes[sectionName] = data;
       }
     } catch (err) {
-      console.error(`Ошибка при загрузке общего файла: ${file}`, err);
+      console.error(`Error loading shared file: ${file}`, err);
     }
   }
 
   return themes;
 };
 
-// Извлечение данных из файла темы
+// Extract theme data from file content
 const extractThemeData = (fileContent: string) => {
   const match = fileContent.match(/export\s+default\s+\{([\s\S]*)/);
   if (!match) return null;
@@ -95,12 +95,12 @@ const extractThemeData = (fileContent: string) => {
     };
     return parseObject(objectBody);
   } catch (error) {
-    console.error("Не удалось разобрать объект темы:", error);
+    console.error("Failed to parse theme object:", error);
     return null;
   }
 };
 
-// Обновление файла темы
+// Update theme file
 async function updateThemeFile(filePath: string, updates: Record<string, any>) {
   try {
     const project = new Project();
@@ -133,23 +133,23 @@ async function updateThemeFile(filePath: string, updates: Record<string, any>) {
     applyUpdates(updates);
     await fs.writeFile(filePath, sourceFile.getFullText(), "utf-8");
   } catch (error) {
-    console.error(`Не удалось обновить ${filePath}:`, error);
+    console.error(`Failed to update ${filePath}:`, error);
     throw error;
   }
 }
 
-// GET-запрос для получения тем
+// GET request to retrieve themes
 app.get("/themes", async (req: Request, res: Response) => {
   try {
     const themes = await loadThemeFiles();
     res.json(themes);
   } catch (error) {
-    console.error("Ошибка при загрузке тем:", error);
-    res.status(500).json({ error: "Не удалось загрузить темы" });
+    console.error("Error loading themes:", error);
+    res.status(500).json({ error: "Failed to load themes" });
   }
 });
 
-// POST-запрос для обновления тем
+// POST request to update themes
 app.post("/themes", async (req: Request, res: Response) => {
   const updatedData = req.body;
   try {
@@ -166,17 +166,17 @@ app.post("/themes", async (req: Request, res: Response) => {
         await updateThemeFile(sectionPath, updates as Record<string, any>);
       }
     }
-    res.send("Темы успешно обновлены");
+    res.send("Themes updated successfully");
   } catch (error) {
-    res.status(500).json({ error: "Не удалось обновить темы" });
+    res.status(500).json({ error: "Failed to update themes" });
   }
 });
 
-// POST-запрос для создания новой темы
+// POST request to create a new theme
 app.post("/themes/new", async (req: Request, res: Response) => {
   const { name: nameToParse, data } = req.body;
   if (!nameToParse || !data) {
-    return res.status(400).json({ error: "Требуются имя темы и данные" });
+    return res.status(400).json({ error: "Theme name and data are required" });
   }
   const name = nameToParse
     .replace(/\s+/g, "_")
@@ -187,7 +187,8 @@ app.post("/themes/new", async (req: Request, res: Response) => {
   const indexPath = path.join(__dirname, themesPath, "colors.ts");
 
   try {
-    const themeContent = `export default {\n ${Object.entries(data)
+    // Include the theme name in the exported object
+    const themeContent = `export default {\n  theme: '${name}',\n${Object.entries(data)
       .map(([key, value]) => `  ${key}: '${value}',`)
       .join("\n")}\n};\n`;
     await fs.writeFile(newThemePath, themeContent, "utf-8");
@@ -198,13 +199,13 @@ app.post("/themes/new", async (req: Request, res: Response) => {
       await fs.writeFile(indexPath, indexContent, "utf-8");
     }
 
-    res.send("Новая тема успешно создана");
+    res.send("New theme successfully created");
   } catch (error) {
-    console.error("Ошибка при создании новой темы:", error);
-    res.status(500).json({ error: "Ошибка при создании темы" });
+    console.error("Error creating new theme:", error);
+    res.status(500).json({ error: "Error during theme creation" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Сервер запущен на http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

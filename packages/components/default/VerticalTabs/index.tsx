@@ -38,7 +38,7 @@ export const VerticalTabsList = styled.div`
     background: ${({ theme }) => theme.colors.section}; // Section color for scrollbar track
   }
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.label}; // Label color for scrollbar thumb
+    background: ${({ theme }) => theme.colors.labelBackground}; // Label color for scrollbar thumb
     border-radius: ${({ theme }) => theme.variables.border.radius}px; // Border radius from theme
   }
   &::-webkit-scrollbar-thumb:hover {
@@ -72,11 +72,11 @@ export const VerticalTab = styled.div<{ $isSelected: boolean }>`
   }
 
   .metadata {
-    color: ${({ theme }) => theme.colors.label}; // Label color from theme
+    color: ${({ theme }) => theme.colors.labelBackground}; // Label color from theme
   }
 
   .preheader {
-    color: ${({ theme }) => theme.colors.label}; // Label color from theme
+    color: ${({ theme }) => theme.colors.labelBackground}; // Label color from theme
   }
 
   &:hover {

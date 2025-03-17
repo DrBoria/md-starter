@@ -10,7 +10,7 @@ export default {
   sectionContent: '#202020',       // Dark gray for main content
   overlay:        '#e6e6e6',       // Light overlay
   overlayActive:  '#dcdcdc',       // Slightly darker active overlay
-  label:          '#777777',       // Muted gray for labels
+  labelBackground:          '#777777',       // Muted gray for labels
   labelText:          '#202020', 
 
   // Info

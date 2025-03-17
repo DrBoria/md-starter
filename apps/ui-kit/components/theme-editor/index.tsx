@@ -221,24 +221,30 @@ const ThemeEditor: React.FC = () => {
 
 // Palette generation functions (unchanged)
 const generatePalette1 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean) => {
+  // Section is the base background color
   const section = color.toHexString();
-  const sectionContentHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
-  const sectionContent = tinycolor(sectionContentHsl).toHexString();
-  const overlayHsl = { ...baseHsl, l: isDark ? 0.85 : 0.15 };
-  const overlay = tinycolor(overlayHsl).toHexString();
-  const overlayActiveHsl = { ...baseHsl, l: isDark ? 0.75 : 0.25 };
-  const overlayActive = tinycolor(overlayActiveHsl).toHexString();
-  const labelHsl = { ...baseHsl, l: isDark ? 0.15 : 0.85 };
-  const label = tinycolor(labelHsl).toHexString();
-  const highlighted = tinycolor(section).complement().toHexString();
-  const highlightedHsl = tinycolor(highlighted).toHsl();
-  const isHighlightedDark = highlightedHsl.l < 0.5;
-  const highlightedTextHsl = { ...highlightedHsl, l: isHighlightedDark ? 0.95 : 0.05 };
-  const highlightedText = tinycolor(highlightedTextHsl).toHexString();
+  const isSectionDark = tinycolor(section).isDark();
 
-  const warningBackground = tinycolor.mix(color, tinycolor('yellow'), 50).toHexString();
-  const errorBackground = tinycolor.mix(color, tinycolor('red'), 50).toHexString();
-  const successBackground = tinycolor.mix(color, tinycolor('green'), 50).toHexString();
+  // SectionContent is the main text color, contrasting with section
+  const sectionContentHsl = { ...baseHsl, l: isSectionDark ? 0.95 : 0.05 };
+  const sectionContent = tinycolor(sectionContentHsl).toHexString();
+
+  // Overlay: lighter than base if base is dark, darker if base is light
+  const overlay = isDark ? tinycolor(section).darken(10).toHexString() : tinycolor(section).lighten(10).toHexString();
+  const overlayActive = tinycolor(overlay).darken(5).toHexString();
+
+  // Label as background, using sectionContent per spec (though adjusted for clarity)
+  const labelBackground = sectionContent;
+  const labelText = generateTextColor(labelBackground);
+
+  // Highlighted: complementary color for attention
+  const highlighted = tinycolor(section).complement().toHexString();
+  const highlightedText = generateTextColor(highlighted);
+
+  // Warning, Error, Success: 70% mix with target color for vibrancy
+  const warningBackground = tinycolor.mix(color, tinycolor('yellow'), 70).toHexString();
+  const errorBackground = tinycolor.mix(color, tinycolor('red'), 70).toHexString();
+  const successBackground = tinycolor.mix(color, tinycolor('green'), 70).toHexString();
 
   const warningText = generateTextColor(warningBackground);
   const errorText = generateTextColor(errorBackground);
@@ -249,7 +255,8 @@ const generatePalette1 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
     sectionContent,
     overlay,
     overlayActive,
-    label,
+    labelBackground,  // Renamed for clarity
+    labelText,       // Added per spec
     highlighted,
     highlightedText,
     warningBackground,
@@ -265,59 +272,16 @@ const generatePalette2 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
   const sectionContent = color.toHexString();
   const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
   const section = tinycolor(sectionHsl).toHexString();
-  const overlayHsl = { ...baseHsl, l: isDark ? 0.85 : 0.15 };
-  const overlay = tinycolor(overlayHsl).toHexString();
-  const overlayActiveHsl = { ...baseHsl, l: isDark ? 0.75 : 0.25 };
-  const overlayActive = tinycolor(overlayActiveHsl).toHexString();
-  const labelHsl = { ...baseHsl, l: isDark ? 0.15 : 0.85 };
-  const label = tinycolor(labelHsl).toHexString();
+  const isSectionDark = tinycolor(section).isDark();
+
+  const overlay = isSectionDark ? tinycolor(section).lighten(10).toHexString() : tinycolor(section).darken(10).toHexString();
+  const overlayActive = tinycolor(overlay).darken(5).toHexString();
+
+  const labelBackground = sectionContent;
+  const labelText = generateTextColor(labelBackground);
+
   const highlighted = tinycolor(section).complement().toHexString();
-  const highlightedHsl = tinycolor(highlighted).toHsl();
-  const isHighlightedDark = highlightedHsl.l < 0.5;
-  const highlightedTextHsl = { ...highlightedHsl, l: isHighlightedDark ? 0.95 : 0.05 };
-  const highlightedText = tinycolor(highlightedTextHsl).toHexString();
-
-  const warningBackground = tinycolor.mix(color, tinycolor('yellow'), 50).toHexString();
-  const errorBackground = tinycolor.mix(color, tinycolor('red'), 50).toHexString();
-  const successBackground = tinycolor.mix(color, tinycolor('green'), 50).toHexString();
-
-  const warningText = generateTextColor(warningBackground);
-  const errorText = generateTextColor(errorBackground);
-  const successText = generateTextColor(successBackground);
-
-  return {
-    section,
-    sectionContent,
-    overlay,
-    overlayActive,
-    label,
-    highlighted,
-    highlightedText,
-    warningBackground,
-    warningText,
-    errorBackground,
-    errorText,
-    successBackground,
-    successText,
-  };
-};
-
-const generatePalette3 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean) => {
-  const highlighted = color.toHexString();
-  const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
-  const section = tinycolor(sectionHsl).toHexString();
-  const sectionContentHsl = { ...baseHsl, l: isDark ? 0.05 : 0.95 };
-  const sectionContent = tinycolor(sectionContentHsl).toHexString();
-  const overlayHsl = { ...baseHsl, l: isDark ? 0.85 : 0.15 };
-  const overlay = tinycolor(overlayHsl).toHexString();
-  const overlayActiveHsl = { ...baseHsl, l: isDark ? 0.75 : 0.25 };
-  const overlayActive = tinycolor(overlayActiveHsl).toHexString();
-  const labelHsl = { ...baseHsl, l: isDark ? 0.15 : 0.85 };
-  const label = tinycolor(labelHsl).toHexString();
-  const highlightedHsl = baseHsl;
-  const isHighlightedDark = isDark;
-  const highlightedTextHsl = { ...highlightedHsl, l: isHighlightedDark ? 0.95 : 0.05 };
-  const highlightedText = tinycolor(highlightedTextHsl).toHexString();
+  const highlightedText = generateTextColor(highlighted);
 
   const warningBackground = tinycolor.mix(color, tinycolor('yellow'), 70).toHexString();
   const errorBackground = tinycolor.mix(color, tinycolor('red'), 70).toHexString();
@@ -332,7 +296,50 @@ const generatePalette3 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
     sectionContent,
     overlay,
     overlayActive,
-    label,
+    labelBackground,
+    labelText,
+    highlighted,
+    highlightedText,
+    warningBackground,
+    warningText,
+    errorBackground,
+    errorText,
+    successBackground,
+    successText,
+  };
+};
+
+const generatePalette3 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean)  => {
+  const highlighted = color.toHexString();
+  const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
+  const section = tinycolor(sectionHsl).toHexString();
+  const sectionContentHsl = { ...baseHsl, l: isDark ? 0.05 : 0.95 };
+  const sectionContent = tinycolor(sectionContentHsl).toHexString();
+  const isSectionDark = tinycolor(section).isDark();
+
+  const overlay = isSectionDark ? tinycolor(section).lighten(10).toHexString() : tinycolor(section).darken(10).toHexString();
+  const overlayActive = tinycolor(overlay).darken(5).toHexString();
+
+  const labelBackground = sectionContent;
+  const labelText = generateTextColor(labelBackground);
+
+  const highlightedText = generateTextColor(highlighted);
+
+  const warningBackground = tinycolor.mix(color, tinycolor('yellow'), 70).toHexString();
+  const errorBackground = tinycolor.mix(color, tinycolor('red'), 70).toHexString();
+  const successBackground = tinycolor.mix(color, tinycolor('green'), 70).toHexString();
+
+  const warningText = generateTextColor(warningBackground);
+  const errorText = generateTextColor(errorBackground);
+  const successText = generateTextColor(successBackground);
+
+  return {
+    section,
+    sectionContent,
+    overlay,
+    overlayActive,
+    labelBackground,
+    labelText,
     highlighted,
     highlightedText,
     warningBackground,

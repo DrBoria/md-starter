@@ -25,7 +25,7 @@ const StyledInputContainer = styled.div<{ isFocused: boolean }>`
   width: 100%;
   padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
   border-radius: ${({ theme }) => theme.variables.border.radius}px;
-  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
+  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.labelBackground};
   font-size: ${({ theme }) => theme.font.size};
   font-family: ${({ theme }) => theme.font.family.text};
   box-sizing: border-box;
@@ -43,7 +43,7 @@ const StyledInputContainer = styled.div<{ isFocused: boolean }>`
   // Стили плейсхолдера
   &:empty:before {
     content: attr(data-placeholder);
-    color: ${({ theme }) => theme.colors.label};
+    color: ${({ theme }) => theme.colors.labelBackground};
   }
 
   // Маскировка пароля

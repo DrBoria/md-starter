@@ -40,8 +40,8 @@ export const Loader = styled.div<
   border-width: ${({ size }) => (size === "small" ? "0.25rem" : "0.5rem")}; // Size-specific border width
   border-style: solid;
   border-color: ${({ color, theme }) =>
-    `${color || theme.colors.label} ${color || theme.colors.label} ${color || theme.colors.label} ${
-      theme.colors.label
+    `${color || theme.colors.labelBackground} ${color || theme.colors.labelBackground} ${color || theme.colors.labelBackground} ${
+      theme.colors.labelBackground
     }33`}; // Theme-based color with transparency
   width: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")}; // Size-specific width
   height: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")}; // Size-specific height

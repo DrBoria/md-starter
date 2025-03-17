@@ -21,7 +21,7 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
   border-radius: ${({ theme }) => theme.variables.border.radius};
   border-style: solid;
   border-width: ${({ theme }) => theme.variables.border.size};
-  border-color: ${({ theme }) => theme.colors.label};
+  border-color: ${({ theme }) => theme.colors.labelBackground};
   color: ${({ theme }) => theme.colors.sectionContent};
   background-color: ${({ theme }) => theme.colors.section};
   cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
@@ -31,7 +31,7 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
     `
     background-color: ${theme.colors.section};
     border-color: ${theme.colors.section};
-    color: ${theme.colors.label};
+    color: ${theme.colors.labelBackground};
   `}
 `;
 
@@ -39,7 +39,7 @@ const Dropdown = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
-  border: ${({ theme }) => theme.variables.border.size} solid ${({ theme }) => theme.colors.label};
+  border: ${({ theme }) => theme.variables.border.size} solid ${({ theme }) => theme.colors.labelBackground};
   max-height: 200px;
   overflow-y: auto;
   background-color: ${({ theme }) => theme.colors.section};
@@ -68,7 +68,7 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
 `;
 
 const IconsContainer = styled.div`
-  color: ${({ theme }) => theme.colors.label};
+  color: ${({ theme }) => theme.colors.labelBackground};
   display: flex;
   gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
   padding-left: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
@@ -76,7 +76,7 @@ const IconsContainer = styled.div`
 
 const NoOptions = styled.li`
   padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
-  color: ${({ theme }) => theme.colors.label};
+  color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
 const ClearButton = styled.button<{ readOnly: boolean }>`
@@ -85,19 +85,19 @@ const ClearButton = styled.button<{ readOnly: boolean }>`
   cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
   margin-left: 5px;
   font-size: 16px;
-  color: ${({ readOnly, theme }) => (readOnly ? theme.colors.label : "inherit")};
+  color: ${({ readOnly, theme }) => (readOnly ? theme.colors.labelBackground : "inherit")};
 `;
 
 const Separator = styled.div`
   width: 1px;
-  background-color: ${({ theme }) => theme.colors.label};
+  background-color: ${({ theme }) => theme.colors.labelBackground};
   margin-bottom: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
   margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
   box-sizing: border-box;
 `;
 
 const Placeholder = styled.span`
-  color: ${({ theme }) => theme.colors.label};
+  color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
 interface SelectProps {

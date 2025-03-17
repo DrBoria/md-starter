@@ -73,7 +73,7 @@ const SwitchContainer = styled.div`
 // Стили для меток (leftLabel, rightLabel)
 const Label = styled.span`
   font-size: ${({ theme }) => theme.font.size}; // calc(14px + 4 * ((100vw - 320px) / 1280))
-  color: ${({ theme }) => theme.colors.label}; // #777777
+  color: ${({ theme }) => theme.colors.labelBackground}; // #777777
 `;
 
 interface SwitchProps {

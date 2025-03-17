@@ -14,7 +14,7 @@ const BreadcrumbContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: ${({ theme }) => theme.font.size}; // Default font size from theme
-  color: ${({ theme }) => theme.colors.label}; // Default text color from theme
+  color: ${({ theme }) => theme.colors.labelBackground}; // Default text color from theme
   gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile + "px"}; // Space between elements
 
   // Responsive gap adjustments

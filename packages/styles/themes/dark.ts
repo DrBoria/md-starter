@@ -10,7 +10,7 @@ export default {
   sectionContent: '#f0f0f0',       // Soft off-white for contrast
   overlay:        '#38494e',       // Deep, shadowy overlay
   overlayActive:  '#172123',       // Even darker active overlay
-  label:          '#888888',       // Muted gray for secondary text
+  labelBackground:          '#888888',       // Muted gray for secondary text
   labelText:          '#f0f0f0', 
 
   // Info

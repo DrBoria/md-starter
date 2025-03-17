@@ -69,7 +69,7 @@ const StyledButton = styled.button<{
         case "negative":
           return theme.colors.errorBackground;
         case "neutral":
-          return theme.colors.label;
+          return theme.colors.labelBackground;
         case "positive":
           return theme.colors.successBackground;
         case "warning":

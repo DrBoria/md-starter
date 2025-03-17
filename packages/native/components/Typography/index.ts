@@ -74,7 +74,7 @@ const Label = styled(View)<TWithBasicElementOffsets>`
 font-family: ${({ theme }) => theme.font.family.text};
   padding: ${({ theme }) => theme.offsets.elementContent / 2}px;
   color: ${({ theme }) => theme.colors.sectionContent};
-  background-color: ${({ theme }) => theme.colors.label};
+  background-color: ${({ theme }) => theme.colors.labelBackground};
   border-radius: ${({ theme }) => theme.border.radius}px;
 `;
 
