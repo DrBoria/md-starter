@@ -1,6 +1,6 @@
-import nextConfig from "@md/eslint/next";
+const nextConfig = require("@md/eslint/next");
 
-export default [
+module.exports = [
   ...nextConfig,
   {
     files: ["**/*.ts", "**/*.tsx"],

@@ -2,7 +2,6 @@
   "name": "@md/eslint",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "files": [
     "base.js",
     "node.js",

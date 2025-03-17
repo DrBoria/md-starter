@@ -8,7 +8,8 @@ import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
 import { Section } from '../../../packages/native/components/Containers';
 import { useNavigate } from 'react-router-native';
-import { QueryResult, useQuery } from '@apollo/client';
+import type { QueryResult} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import type { Lists } from '@md/types';
 
 // Styled components

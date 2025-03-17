@@ -1,23 +1,21 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import _import from "eslint-plugin-import";
-import pluginSecurity from "eslint-plugin-security";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+const { FlatCompat } = require("@eslint/eslintrc");
+const js = require("@eslint/js");
+const typescriptEslint = require("@typescript-eslint/eslint-plugin");
+const tsParser = require("@typescript-eslint/parser");
+const _import = require("eslint-plugin-import");
+const pluginSecurity = require("eslint-plugin-security");
+const path = require("node:path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// In CommonJS, __dirname is already available, so no need to import fileURLToPath or define __filename
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
   allConfig: js.configs.all,
 });
 
-export default [
+module.exports = [
   {
-    // Игнорируемые файлы и директории
+    // Ignored files and directories
     ignores: [
       "**/hubspot/**/*.js",
       "**/*.config.js",
@@ -29,7 +27,7 @@ export default [
       "**/yanm-lock.yaml",
     ],
   },
-  // Расширяем рекомендуемые настройки
+  // Extend recommended configurations
   ...compat
     .extends(
       "eslint:recommended",
@@ -56,7 +54,7 @@ export default [
       ecmaVersion: 2022,
       sourceType: "module",
       parserOptions: {
-        project: true, // Включаем проверку типов через tsconfig
+        project: true, // Enable type checking via tsconfig
       },
     },
     rules: {

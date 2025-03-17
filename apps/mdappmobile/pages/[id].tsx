@@ -5,7 +5,8 @@ import { useParams } from 'react-router-native'; // Use useParams to get URL par
 import type { Lists } from '@md/types';
 import { PageTitle, PlainText, Section, TextContainer } from '@md/native/components';
 import styled from 'styled-components/native';
-import { QueryResult, useQuery } from '@apollo/client';
+import type { QueryResult} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 // Styled components
 const ContentContainer = styled(ScrollView)`

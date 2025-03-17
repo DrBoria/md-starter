@@ -1,6 +1,6 @@
-import nativeConfig from "@md/eslint/react-native";
+const nativeConfig = require("@md/eslint/react-native");
 
-export default [
+module.exports = [
   ...nativeConfig,
   {
     files: ["**/*.ts", "**/*.tsx"],

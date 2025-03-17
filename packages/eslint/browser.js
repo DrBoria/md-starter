@@ -1,7 +1,7 @@
-import baseConfig from "./base.js";
-import globals from "globals";
+const baseConfig = require("./base.js");
+const globals = require("globals");
 
-export default [
+module.exports = [
   ...baseConfig,
   {
     files: ["**/*.ts", "**/*.tsx"],
