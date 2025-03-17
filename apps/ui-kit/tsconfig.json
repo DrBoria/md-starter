@@ -1,12 +1,14 @@
 {
-    "compilerOptions": {
-      "jsx": "react",
-      "esModuleInterop": true,
-      "strict": true,
-      "moduleResolution": "node",
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "./dist"
-    }
-  }
-  
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "**/*.js", ".keystone"]
+}

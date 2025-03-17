@@ -12,19 +12,19 @@ const TabList = styled.div`
 `;
 
 const Tab = styled.button`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px ${({ theme }) => 2 * theme.variables.offsets.elementContent.mobile}px;
-  background-color: ${({ theme }) => theme.colors.section};
-  color: ${({ theme }) => theme.colors.highlighted};
-  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
-  border-bottom: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
-  margin-right: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  padding: ${({ theme }) => theme.offsets.elementContent} ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
+  background-color: ${({ theme }) => theme.colors.overlay};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
+  border-bottom: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
+  margin-right: ${({ theme }) => theme.offsets.betweenElements};
   top: 1px;
   position: relative;
   cursor: pointer;
   font-size: ${({ theme }) => theme.font.size};
   font-weight: 500;
-  border-top-right-radius: ${({ theme }) => theme.variables.border.radius}px;
-  border-top-left-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border-top-right-radius: ${({ theme }) => theme.border.radius};
+  border-top-left-radius: ${({ theme }) => theme.border.radius};
 
   &[type="button"] {
     border-bottom-right-radius: 0;
@@ -32,15 +32,15 @@ const Tab = styled.button`
   }
 
   &[aria-selected="true"] {
-    background-color: ${({ theme }) => theme.colors.sectionContent};
-    color: ${({ theme }) => theme.colors.highlightedText};
+    background-color: ${({ theme }) => theme.colors.section};
+    color: ${({ theme }) => theme.colors.sectionContent};
     border-bottom: none;
     z-index: 1;
   }
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.sectionContent};
-    color: ${({ theme }) => theme.colors.highlightedText};
+    color: ${({ theme }) => theme.colors.section};
   }
 
   &:focus {
@@ -55,16 +55,16 @@ const Tab = styled.button`
       right: -2px;
       height: 3px;
       margin: 0px 3px;
-      background-color: ${({ theme }) => theme.colors.sectionContent};
+      background-color: ${({ theme }) => theme.colors.highlightedText};
     }
   }
 `;
 
 const TabPanel = styled.div`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
   margin-top: 0 !important;
-  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.label};
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
+  border-radius: ${({ theme }) => theme.border.radius};
   border-top-left-radius: 0;
 `;
 

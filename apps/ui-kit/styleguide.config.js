@@ -1,10 +1,11 @@
-const { ProvidePlugin, DefinePlugin } = require("webpack");
+const { ProvidePlugin, DefinePlugin, HotModuleReplacementPlugin } = require("webpack");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const path = require("path");
 const fs = require("fs");
 
 function getComponentPathPatterns(basePath) {
   if (!fs.existsSync(basePath)) {
-    return null; // Если папка не существует, возвращаем null
+    return null; // If folder doesn’t exist, return null
   }
 
   const components = fs
@@ -29,7 +30,7 @@ const sections = [
   {
     name: "@md/sections",
     components: getComponentPathPatterns(
-      path.resolve(__dirname, "../../packages/components/default")
+      path.resolve(__dirname, "../../packages/sections/default") // Corrected to point to sections
     ),
   },
   {
@@ -50,7 +51,7 @@ const sections = [
       path.resolve(__dirname, "../../packages/native/components")
     ),
   },
-].filter((section) => section.components !== null); // Удаляем секции без компонентов
+].filter((section) => section.components !== null);
 
 module.exports = {
   styles: {
@@ -76,12 +77,17 @@ module.exports = {
       warnings: false,
       errors: false,
     };
+    // Removed HotModuleReplacementPlugin to avoid duplication
     return webpackConfig;
   },
   webpackConfig: {
+    devtool: 'eval-source-map',
     devServer: {
+      hot: true, // Enable HMR
+      port: 6060,
+      webSocketServer: 'ws',
       client: {
-        overlay: false, // Turn off ERRORS overlay
+        overlay: false, // Disable error overlay
       },
       proxy: {
         "/api/graphql": {
@@ -122,7 +128,7 @@ module.exports = {
                 "@babel/preset-flow",
                 "@babel/preset-typescript",
               ],
-              plugins: ["@babel/plugin-transform-runtime"],
+              plugins: ["react-refresh/babel"],
             },
           },
         },
@@ -148,6 +154,8 @@ module.exports = {
       new DefinePlugin({
         process: { env: {} },
       }),
+      new HotModuleReplacementPlugin(), // Enable HMR
+      new ReactRefreshWebpackPlugin(),  // Enable React Fast Refresh
     ],
   },
   sections,

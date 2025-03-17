@@ -11,6 +11,7 @@ export default {
   overlay:        '#e6e6e6',       // Light overlay
   overlayActive:  '#dcdcdc',       // Slightly darker active overlay
   label:          '#777777',       // Muted gray for labels
+  labelText:          '#202020', 
 
   // Info
   warningBackground: '#FFE69C',    // Pale amber background

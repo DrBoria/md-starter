@@ -88,7 +88,7 @@ const Label = styled.label<TWithBasicElementOffsets>`
   display: inline-block;
   padding: ${({ theme }) => `calc(${theme.offsets.elementContent} / 2)`};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme.colors.labelText};
 
   background-color: ${({ theme }) => theme.colors.label};
   border-radius: ${({ theme }) => theme.border.radius};

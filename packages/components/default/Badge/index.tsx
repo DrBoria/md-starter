@@ -8,28 +8,18 @@ interface BadgeProps {
   isLoading?: boolean;
 }
 
-// Компонент BadgeContainer с использованием значений из темы
 export const BadgeContainer = styled.div<BadgeProps>`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile + "px"} ${({ theme }) =>
-    2 * theme.variables.offsets.elementContent.mobile + "px"};
-  border-radius: ${({ theme }) => theme.variables.border.radius + "px"};
+  padding: ${({ theme }) => theme.offsets.elementContent} ${({ theme }) =>
+    2 * theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius};
   font-weight: 500;
   text-transform: capitalize;
   height: fit-content;
   display: flex;
   align-items: center;
   font-family: ${({ theme }) => theme.font.family.text};
-  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile + "px"};
-  
-  /* Адаптивный gap для разных экранов */
-  @media ${({ theme }) => theme.screens.tablet.device} {
-    gap: ${({ theme }) => theme.variables.offsets.betweenElements.tablet + "px"};
-  }
-  @media ${({ theme }) => theme.screens.desktop.device} {
-    gap: ${({ theme }) => theme.variables.offsets.betweenElements.desktop + "px"};
-  }
+  gap: ${({ theme }) => theme.offsets.betweenElements.mobile};
 
-  /* Цвет фона в зависимости от статуса */
   background-color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
@@ -43,7 +33,6 @@ export const BadgeContainer = styled.div<BadgeProps>`
     }
   }};
 
-  /* Цвет текста в зависимости от статуса */
   color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
@@ -58,7 +47,6 @@ export const BadgeContainer = styled.div<BadgeProps>`
   }};
 `;
 
-// Компонент Badge
 export const Badge: React.FC<BadgeProps & { children?: React.ReactNode }> = ({
   $status,
   isLoading,

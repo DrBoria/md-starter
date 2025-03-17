@@ -60,6 +60,7 @@ const resolveIconSize = (
 export const LucideIcon: React.FC<LucideIconProps> = ({
   name,
   size,
+  color,
   ...props
 }) => {
   if (!name) {
@@ -79,6 +80,7 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
       IconComponent as React.ComponentType<LucideProps>,
       {
         size: resolveIconSize(size),
+        color,
         ...props,
       },
     );

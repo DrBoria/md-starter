@@ -25,8 +25,6 @@ const WithoutHeightLimit = (noHeightLimit?: boolean) =>
 // Use this conteiner for wrapping any section on page
 // No usage restrictions
 export const BasicSection = styled.div<TSectionProps>`
-  height: ${({ theme }) => `calc(${theme.screens.mobile.height}px - ${theme.elements.header.height})`};
-  max-height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
   padding: ${({ theme: { offsets } }) => offsets.section};
 
   background-color: ${({ theme }) => theme.colors.section};

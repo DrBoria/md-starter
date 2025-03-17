@@ -48,9 +48,9 @@ const StyledButton = styled.button<{
   width: ${(props) => (props.$fullWidth ? "100%" : "auto")};
   gap: ${(props) =>
     props.size !== "icon"
-      ? `${props.theme.variables.offsets.betweenElements.mobile}px`
+      ? `${props.theme.variables.offsets.betweenElements}px`
       : "0"};
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border-radius: ${({ theme }) => theme.border.radius}px;
 
   &:disabled {
     opacity: 0.5;
@@ -65,19 +65,40 @@ const StyledButton = styled.button<{
         case "active":
           return theme.colors.highlighted;
         case "passive":
+          return theme.colors.section;
+        case "negative":
+          return theme.colors.errorBackground;
+        case "neutral":
+          return theme.colors.label;
+        case "positive":
+          return theme.colors.successBackground;
+        case "warning":
+          return theme.colors.warningBackground;
+        case "help":
+          return theme.colors.overlayActive;
+        default:
+          return theme.colors.section;
+      }
+    })();
+
+    const colorText = (() => {
+      switch (tone) {
+        case "active":
+          return theme.colors.highlightedText;
+        case "passive":
           return theme.colors.sectionContent;
         case "negative":
           return theme.colors.errorText;
         case "neutral":
-          return theme.colors.label;
+          return theme.colors.sectionContent;
         case "positive":
           return theme.colors.successText;
         case "warning":
           return theme.colors.warningText;
         case "help":
-          return theme.colors.overlayActive;
+          return theme.colors.sectionContent;
         default:
-          return theme.colors.highlighted;
+          return theme.colors.sectionContent;
       }
     })();
 
@@ -87,27 +108,27 @@ const StyledButton = styled.button<{
       case "bold":
         weightStyles = `
           background-color: ${color};
-          color: white;
+          color: ${colorText};
         `;
         break;
       case "outline":
       case "hollow":
         weightStyles = `
-          border: ${theme.variables.border.size}px solid ${color};
+          border: ${theme.variables.border.size}px solid ${colorText};
           background-color: transparent;
-          color: ${color};
+          color: ${colorText};
         `;
         break;
       case "light":
         weightStyles = `
           background-color: transparent;
-          color: ${color};
+          color: ${colorText};
         `;
         break;
       case "link":
         weightStyles = `
           background-color: transparent;
-          color: ${color};
+          color: ${colorText};
           text-decoration: underline;
         `;
         break;
@@ -120,7 +141,7 @@ const StyledButton = styled.button<{
       default:
         weightStyles = `
           background-color: ${color};
-          color: white;
+          color: ${colorText};
         `;
     }
 

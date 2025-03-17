@@ -11,6 +11,7 @@ export default {
   overlay:        '#38494e',       // Deep, shadowy overlay
   overlayActive:  '#172123',       // Even darker active overlay
   label:          '#888888',       // Muted gray for secondary text
+  labelText:          '#f0f0f0', 
 
   // Info
   warningBackground: '#4a4200',    // Deep amber background
