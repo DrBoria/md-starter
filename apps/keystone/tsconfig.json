@@ -1,14 +1,12 @@
 {
+  "extends": "@md/types/node.json",
   "compilerOptions": {
-    "jsx": "react",
-    "target": "esnext",
-    "module": "commonjs",
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "exclude": ["node_modules", "**/*.js", ".keystone"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

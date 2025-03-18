@@ -85,6 +85,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.9.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
+    "@md/types": "workspace:*",
     "@md/eslint": "workspace:*",
     "@svgr/webpack": "^8.1.0",
     "@types/express": "^4.17.21",

@@ -8,7 +8,6 @@ import { Paper, PaperContainer, PaperTexture } from '@md/components/textures';
 import { HamburgerMenu } from '@md/sections';
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log('ThemeProviderЖ Ж', ThemeProvider);
   return (
     <ApolloProvider client={apolloClient as unknown as ApolloClient<any>}>
       <ThemeProvider>
