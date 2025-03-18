@@ -3,7 +3,8 @@ import { Card, Section } from '@md/components'
 import { useQueryList } from '@md/api/graphql'
 import type { Lists } from '@md/types';
 import { useEffect } from 'react';
-import { QueryResult, useQuery } from '@apollo/client';
+import type { QueryResult} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 const Posts = () => {
     const { data, refetch } = useQueryList<QueryResult<{ items: Lists.Post.Item[] }>>({

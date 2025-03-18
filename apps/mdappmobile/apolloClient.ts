@@ -10,13 +10,10 @@ const domain = 'http://localhost:3000';
 // Custom fetch function to handle 'Set-Cookie' headers
 const customFetch: typeof fetch = async (uri, options) => {
     const response = await fetch(uri, options);
-
-    // Check for 'Set-Cookie' headers
-    setCookieHeader = response.headers.get('set-cookie');
-    if (setCookieHeader) {
-        await storage.set(`${domain}`, setCookieHeader);
+    const cookieHeader = response.headers.get('set-cookie');
+    if (cookieHeader) {
+        storage.set(`${domain}`, cookieHeader);
     }
-
     return response;
 };
 
@@ -42,7 +39,7 @@ const httpLink = new HttpLink({ uri: `${domain}/api/graphql`, fetch: customFetch
 
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
-    const cookie = await storage.getString(domain);
+    const cookie = storage.getString(domain);
     let tokens = await GoogleSignin.getTokens();
     console.log(tokens, 'hasTokenExpired? : ', hasTokenExpired(tokens))
     if (!tokens || hasTokenExpired(tokens)) {

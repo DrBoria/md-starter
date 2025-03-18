@@ -9,6 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 6061;
 const themesPath = "../../packages/styles/themes";
 
+const safePath = path.join(process.cwd(), 'themes');
+
 app.use(cors({ origin: "http://localhost:6060", methods: ["GET", "POST"], credentials: true }));
 app.use(express.json());
 
@@ -35,7 +37,7 @@ const loadThemeFiles = async () => {
     const themeFile = `${themeName}.ts`;
     const themePath = path.join(__dirname, themesPath, themeFile);
     try {
-      const fileContent = await fs.readFile(themePath, "utf-8");
+      const fileContent = await fs.readFile(path.join(safePath, themeFile), "utf-8");
       const themeData = extractThemeData(fileContent);
       if (themeData) {
         themes["colors"][themeName] = themeData;
@@ -50,7 +52,7 @@ const loadThemeFiles = async () => {
   for (const file of sharedFiles) {
     const filePath = path.join(__dirname, themesPath, file);
     try {
-      const fileContent = await fs.readFile(filePath, "utf-8");
+      const fileContent = await fs.readFile(path.join(safePath, file), "utf-8");
       const data = extractThemeData(fileContent);
       if (data) {
         const sectionName = path.basename(file, ".ts");
@@ -192,12 +194,12 @@ app.post("/themes/new", async (req: Request, res: Response) => {
     const themeContent = `export default {\n  theme: '${name}',\n${Object.entries(data)
       .map(([key, value]) => `  ${key}: '${value}',`)
       .join("\n")}\n};\n`;
-    await fs.writeFile(newThemePath, themeContent, "utf-8");
+    await fs.writeFile(path.join(safePath, newThemeFile), themeContent, "utf-8");
 
-    let indexContent = await fs.readFile(indexPath, "utf-8");
+    let indexContent = await fs.readFile(path.join(safePath, "colors.ts"), "utf-8");
     if (!indexContent.includes(`export { default as ${name} } from './${name}';`)) {
       indexContent += `export { default as ${name} } from './${name}';\n`;
-      await fs.writeFile(indexPath, indexContent, "utf-8");
+      await fs.writeFile(path.join(safePath, "colors.ts"), indexContent, "utf-8");
     }
 
     res.send("New theme successfully created");

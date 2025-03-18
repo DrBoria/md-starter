@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, SafeAreaView } from 'react-native';
+import { ScrollView, SafeAreaView } from 'react-native';
 import { useQueryListItem } from '@md/api/graphql'; // Adjust the import based on your project structure
 import { useParams } from 'react-router-native'; // Use useParams to get URL parameters
 import type { Lists } from '@md/types';

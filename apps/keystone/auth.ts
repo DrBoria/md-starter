@@ -21,12 +21,10 @@ import { createClient } from "@redis/client";
 import type { TSession } from "./types";
 import { REDIS_URL, SESSION_SECRET } from "./env";
 import type { Context } from '.keystone/types';
-import { createdAt } from "./schema/fields/createdAt";
+import { OAuth2Client } from 'google-auth-library';
 
-const { OAuth2Client } = require('google-auth-library');
 const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';
 const googleClient = new OAuth2Client(WebClientId);
-
 
 export const redis = createClient({
   url: REDIS_URL,
@@ -37,52 +35,6 @@ redis.on("error", (err) => console.log("Redis Client Error", err));
 // these cookies have an expiry, in seconds
 // we use an expiry of 30 days for this starter
 const sessionMaxAge = 60 * 60 * 24 * 30;
-
-function redisSessionStrategy() {
-  // you can find out more at https://keystonejs.com/docs/apis/session#session-api
-  return storedSessions<TSession>({
-    maxAge: sessionMaxAge,
-    secret: SESSION_SECRET,
-
-    store: ({ maxAge }) => ({
-      // Session could be TSession or SessionId
-      async get(session: string | TSession) {
-        let sessionId: string;
-        if (typeof session === "string") {
-          sessionId = session;
-        } else {
-          sessionId = session.itemId;
-        }
-
-        const result = await redis.get(sessionId);
-        console.log(`Redis GET result: ${result}`);
-        if (!result) {
-          console.log("No session found");
-          return;
-        }
-
-        return JSON.parse(result) as TSession;
-      },
-
-      async set(sessionId, data) {
-        // we use redis for our Session data, in JSON
-        await redis.setEx(sessionId, maxAge, JSON.stringify(data));
-        console.log(`Setting session with ID: ${sessionId}`);
-      },
-
-      async delete(sessionId) {
-        await redis.del(sessionId);
-        console.log(`Deleting session with ID: ${sessionId}`);
-      },
-    }),
-  });
-}
-
-const stateless = statelessSessions<TSession>({
-  maxAge: sessionMaxAge,
-  secret: SESSION_SECRET,
-});
-
 
 const session = {
   async get({ context }: { context: Context }) {
@@ -106,7 +58,7 @@ const session = {
 
       // Check if the user exists in the Keystone database
       let user = await context.db.User.findOne({ where: { email: userEmail } });
-      let role = await context.db.Role.findOne({ where: { id: user?.roleId } });
+      const role = await context.db.Role.findOne({ where: { id: user?.roleId } });
 
       if (!user) {
         // Optionally, create a new user if they don't exist

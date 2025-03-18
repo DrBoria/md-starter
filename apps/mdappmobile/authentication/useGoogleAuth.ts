@@ -3,6 +3,18 @@ import { useCallback } from 'react';
 import { statusCodes } from '@react-native-google-signin/google-signin';
 import { GoogleSignin } from './oauth';
 
+interface GoogleUser {
+  id: string;
+  email: string;
+  name?: string;
+  photoUrl?: string;
+}
+
+interface GoogleError {
+  code: string;
+  message: string;
+}
+
 const useGoogleAuth = () => {
   const signIn = useCallback(async (): Promise<void> => {
     try {
@@ -11,8 +23,10 @@ const useGoogleAuth = () => {
         const userInfo = await GoogleSignin.signIn();
         console.log(JSON.stringify(userInfo));
       }
-    } catch (error: any) {
-      handleSignInError(error);
+    } catch (error) {
+      if (error instanceof Error) {
+        handleSignInError(error);
+      }
     }
   }, []);
 

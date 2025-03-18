@@ -12,7 +12,8 @@ import { BasicSection, DescriptionText, Label, Select, useModal } from "@md/comp
 import { LinkInForm } from "@md/components";
 import { getWhereParameters } from "./utils";
 import { useQueryList, useQueryListItem } from "@md/api/graphql";
-import { QueryResult, useQuery } from "@apollo/client";
+import type { QueryResult} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 
 export interface IListName {

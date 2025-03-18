@@ -1,5 +1,6 @@
-import { relationship, RelationshipFieldConfig } from "@keystone-6/core/fields";
-import { BaseListTypeInfo } from "@keystone-6/core/types";
+import type { RelationshipFieldConfig } from "@keystone-6/core/fields";
+import { relationship } from "@keystone-6/core/fields";
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 
 export function RelationshipMany<T extends BaseListTypeInfo>(config: RelationshipFieldConfig<T>) {
     const ui = {

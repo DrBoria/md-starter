@@ -5,7 +5,8 @@ import { DashboardCardsContainer } from "../components/Containers";
 import {PageTitle } from "@md/components";
 import { PageContainer } from "@md/sections/keystone";
 import { useQueryAdminMeta } from "@md/api/graphql";
-import { QueryResult, useQuery } from "@apollo/client";
+import type { QueryResult} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 interface TAdminMeta {
   Contact: number;

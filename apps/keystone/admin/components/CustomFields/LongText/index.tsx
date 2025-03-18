@@ -1,5 +1,6 @@
-import { text, TextFieldConfig } from "@keystone-6/core/fields";
-import { BaseListTypeInfo } from "@keystone-6/core/types";
+import type { TextFieldConfig } from "@keystone-6/core/fields";
+import { text } from "@keystone-6/core/fields";
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 
 export function LongText<T extends BaseListTypeInfo>(config: TextFieldConfig<T>) {
     const ui = {

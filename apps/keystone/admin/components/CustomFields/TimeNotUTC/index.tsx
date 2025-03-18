@@ -1,5 +1,6 @@
-import { timestamp, TimestampFieldConfig } from "@keystone-6/core/fields";
-import { BaseListTypeInfo } from "@keystone-6/core/types";
+import type { TimestampFieldConfig } from "@keystone-6/core/fields";
+import { timestamp } from "@keystone-6/core/fields";
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 
 export function TimeNotUTC<T extends BaseListTypeInfo>(config: TimestampFieldConfig<T>) {
     const ui = {

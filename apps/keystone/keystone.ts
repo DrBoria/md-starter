@@ -7,6 +7,7 @@
 
 import path from "path";
 import { config } from "@keystone-6/core";
+import type { KeystoneContext } from '@keystone-6/core/types';
 
 // authentication is configured separately here too, but you might move this elsewhere
 // when you write your list-level access control functions, as they typically rely on session data
@@ -16,6 +17,17 @@ import { APP_PORT, DATABASE_URL } from "./env";
 import { lists } from "./schema";
 import { isLocked } from "./schema/access-control/isLocked";
 import express from "express";
+
+interface Config {
+  db: {
+    provider: string;
+    url: string;
+    enableLogging: Array<'error' | 'warn' | 'info' | 'query'>;
+  };
+  prisma: {
+    $queryRaw: <T = unknown>(query: TemplateStringsArray, ...values: unknown[]) => Promise<T>;
+  };
+}
 
 export default withAuth(
   config({
@@ -55,20 +67,19 @@ export default withAuth(
     },
     server: {
       port: Number(APP_PORT),
-      extendExpressApp: (
-        app,
-        context: any,
-      ) => {
+      extendExpressApp: (app, context: KeystoneContext) => {
         app.use(express.json());
-        // Define the /health endpoint
         app.get('/health', async (req, res) => {
           try {
-            // Optionally perform checks, e.g., database connection
-            await context.prisma.$queryRaw`SELECT 1`; // Example for Prisma
+            await context.prisma.$queryRaw`SELECT 1`;
             res.status(200).json({ status: 'ok', message: 'Service is healthy' });
-          } catch (error: any) {
+          } catch (error) {
             console.error('Health check failed:', error);
-            res.status(500).json({ status: 'error', message: 'Service is unhealthy', error: error.message });
+            res.status(500).json({ 
+              status: 'error', 
+              message: 'Service is unhealthy', 
+              error: error instanceof Error ? error.message : 'Unknown error'
+            });
           }
         });
       },

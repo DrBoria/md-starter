@@ -1,4 +1,5 @@
-import { useQuery, type QueryResult } from "@apollo/client";
+import { useQuery  } from "@apollo/client";
+import type {QueryResult} from "@apollo/client";
 import type {
   CellComponent,
   FieldController,

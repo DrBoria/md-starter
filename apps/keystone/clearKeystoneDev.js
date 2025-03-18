@@ -2,18 +2,28 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const safeReadDir = (dirPath) => {
+  const safePath = path.join(__dirname, dirPath);
+  return fs.readdirSync(safePath);
+};
+
+const safeUnlink = (filePath) => {
+  const safePath = path.join(__dirname, filePath);
+  if (fs.existsSync(safePath)) {
+    fs.unlinkSync(safePath);
+  }
+};
+
 function deleteDuplicateJsFiles(dir) {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
+  const files = safeReadDir(dir);
 
   files.forEach(file => {
-    const filePath = path.join(dir, file.name);
-    if (file.isDirectory()) {
-      deleteDuplicateJsFiles(filePath); // Recursive for nested folders
-    } else if (file.isFile() && file.name.endsWith('.js')) {
+    const filePath = path.join(dir, file);
+    if (path.extname(filePath) === '.js') {
       const tsxFilePath = filePath.replace(/\.js$/, '.tsx');
       if (filePath.includes('_app')) return;
       if (fs.existsSync(tsxFilePath)) {
-        fs.unlinkSync(filePath);
+        safeUnlink(filePath);
         console.log(`Deleted duplicate JS file: ${filePath}`);
       }
     }

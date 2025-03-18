@@ -1,8 +1,8 @@
 import { allowAll, denyAll } from "@keystone-6/core/access";
-import { BaseAccessArgs } from "@keystone-6/core/dist/declarations/src/types/config/access-control";
-import { BaseListTypeInfo, MaybePromise } from "@keystone-6/core/types";
+import type { BaseAccessArgs } from "@keystone-6/core/dist/declarations/src/types/config/access-control";
+import type { BaseListTypeInfo, MaybePromise } from "@keystone-6/core/types";
 
-import { TOperation } from "../../types";
+import type { TOperation } from "../../types";
 import { isAdmin, isOwner, isViewer } from "./roles";
 
 export const readOnlyFieldProps = {

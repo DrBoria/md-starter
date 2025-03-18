@@ -3,12 +3,28 @@ import { BasicSection, Button, OneLineContainer, SectionTitle } from "@md/compon
 import { ThemeProvider } from "@md/styles";
 import { PalettePreview } from "./PalettePreview";
 
-const NewThemeCreator: React.FC<{
+interface ThemeData {
+  name: string;
+  colors: Record<string, string>;
+  typography?: Record<string, string>;
+  spacing?: Record<string, string | number>;
+}
+
+interface Palette {
+  colors: Record<string, string>;
+  name: string;
+}
+
+interface NewThemeCreatorProps {
   newThemeName: string;
   onNewThemeNameChange: (name: string) => void;
-  onSave: (palette: any) => void;
-  palettes: any[];
-}> = ({ newThemeName, onNewThemeNameChange, onSave, palettes }) => (
+  onSave: (palette: Palette) => void;
+  palettes: Palette[];
+}
+
+type OnSubmit = (data: ThemeData) => void;
+
+const NewThemeCreator: React.FC<NewThemeCreatorProps> = ({ newThemeName, onNewThemeNameChange, onSave, palettes }) => (
   <div style={{ overflow: 'auto', width: '100%' }}>
     <BasicSection style={{background: 'transparent'}}>
       <SectionTitle>Create New Color Theme: </SectionTitle>

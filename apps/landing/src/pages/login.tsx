@@ -4,7 +4,7 @@ import { PageTitle } from '@md/components'
 import { useAuthenticate } from '@md/api/graphql';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
 
 export default function Login() {
     // LOADING
@@ -31,7 +31,7 @@ export default function Login() {
         });
         // UserAuthenticationWithPasswordSuccess means authentication successfull. If you choose users table - change mitation name
         if (data?.item?.__typename === 'UserAuthenticationWithPasswordSuccess') {
-            router.push('/');
+            await router.push('/');
         };
     };
 

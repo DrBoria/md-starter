@@ -7,7 +7,6 @@ import {
 } from "@keystone-6/core/fields";
 
 import type { Lists } from ".keystone/types";
-import { isOnlyAdminCanSee } from "./access-control/isOnlyAdminCanSee";
 import {
   isAdmin,
   isOwner,

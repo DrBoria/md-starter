@@ -5,7 +5,7 @@ import type {
   ReactiveVar,
 } from "@apollo/client";
 import { gql, makeVar, useApolloClient } from "@apollo/client";
-import { ITabs, TConditionalField } from "@md/sections/keystone";
+import type { ITabs, TConditionalField } from "@md/sections/keystone";
 
 /**
  *
@@ -91,7 +91,7 @@ const GlobalVars = {
   },
   set SideBarModalData(value: TSideBarModalData) {
     const client = useApolloClient();
-    updateAndLog(client, {
+    void updateAndLog(client, {
       variable: SideBarModalData,
       query: gql`
         query GetSideBarModalData {
@@ -112,7 +112,7 @@ const GlobalVars = {
   set ModalData(value: TModalData) {
     const client = useApolloClient();
 
-    updateAndLog(client, {
+    void updateAndLog(client, {
       variable: ModalData,
       query: gql`
         query GetModalData {
@@ -133,7 +133,7 @@ const GlobalVars = {
   set FullScreenData(value: TFullScreenData) {
     const client = useApolloClient();
 
-    updateAndLog(client, {
+    void updateAndLog(client, {
       variable: FullScreenData,
       query: gql`
         query GetFullScreenData {

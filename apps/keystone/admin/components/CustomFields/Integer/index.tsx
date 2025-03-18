@@ -1,5 +1,6 @@
-import { integer, IntegerFieldConfig } from "@keystone-6/core/fields";
-import { BaseListTypeInfo } from "@keystone-6/core/types";
+import type { IntegerFieldConfig } from "@keystone-6/core/fields";
+import { integer } from "@keystone-6/core/fields";
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 
 export function Integer<T extends BaseListTypeInfo>(config: IntegerFieldConfig<T>) {
     const ui = {

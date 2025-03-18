@@ -1,4 +1,5 @@
-import { useQuery, type QueryResult } from "@apollo/client";
+import { useQuery  } from "@apollo/client";
+import type {QueryResult} from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
