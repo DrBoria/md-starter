@@ -1,8 +1,9 @@
-import React, { useCallback, FormEvent, useState } from 'react';
+import type { FormEvent} from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Input } from '../Input';
 
-import { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 
 import { Container, SearchIcon, CrossIcon, ButtonWrapper } from './styles';
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, { FC, ReactNode, useRef, useState } from 'react';
+import type { FC, ReactNode} from 'react';
+import React, { useRef, useState } from 'react';
 import { Column, ColumnsContainer } from '../Containers';
 import { CircleImage } from '../Images';
 import { PlainText, SectionTitle } from '../Typography';

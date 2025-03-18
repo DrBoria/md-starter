@@ -1,8 +1,10 @@
 // WebSidebarItem.tsx
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from '@md/styles';
+import type { TWithBasicElementOffsets} from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 import { Link } from '../Link';
 
 const StyledLink = styled(Link)<TWithBasicElementOffsets>`

@@ -1,4 +1,4 @@
-import { baseTheme } from '@md/styles/themes';
+import { baseTheme } from '@md/styles';
 
 export * from './default/Button';
 export * from './default/Buttons';
@@ -28,7 +28,9 @@ export * from './default/Link';
 export * from './default/MenuItem';
 export * from './default/Icons';
 
+
 type TTheme = typeof baseTheme;
 declare module 'styled-components' {
     export interface DefaultTheme extends TTheme { }
 }
+

@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import moment from 'moment';
 
 const CalendarContainer = styled.div`
@@ -8,38 +9,26 @@ const CalendarContainer = styled.div`
     gap: 8px;
 `;
 
-const Header = styled.div`
-  /* Your desired styles for the calendar header */
-`;
 
-const Weekdays = styled.div`
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-`;
-
-const HeaderCell = styled.div`
+const HeaderCell = styled.div<{ theme: DefaultTheme }>`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
-    color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
+    background-color: ${({ theme }) => theme.colors.section};
+    color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
-const DayCell = styled.div`
+const DayCell = styled.div<{ theme: DefaultTheme }>`
     display: flex;
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
-    background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
-    color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
+    background-color: ${({ theme }) => theme.colors.section};
+    color: ${({ theme }) => theme.colors.sectionContent};
     
     &:hover {
-        background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.sectionContent};
-        color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};
+        background-color: ${({ theme }) => theme.colors.sectionContent};
+        color: ${({ theme }) => theme.colors.section};
     }
 `;
 

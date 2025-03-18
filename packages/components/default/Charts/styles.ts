@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { withOffsetsRight, withOffsetBottom, TWithBasicElementOffsets } from '@md/styles';
+import type { TWithBasicElementOffsets } from '@md/styles';
+import { withOffsetsRight, withOffsetBottom } from '@md/styles';
 
 /* **************************************************************** */
 /* ************************** GRAPHICS **************************** */

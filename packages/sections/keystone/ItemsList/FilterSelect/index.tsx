@@ -49,7 +49,7 @@ const FilterSelect = ({
   const [selectedField, setSelectedField] = useState<FieldMeta | null>(null); // Selected filter type (field)
   const filterRef = useRef<HTMLDivElement | null>(null); // Reference for click outside
 
-  const selectedPath = upperCaseFirstLetter(selectedField?.path!);
+  const selectedPath = upperCaseFirstLetter(selectedField?.path ?? "");
 
   const closeFilter = () => {
     setSelectedField(null);

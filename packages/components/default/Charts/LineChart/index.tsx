@@ -6,7 +6,7 @@ import { SubTitle } from '../../Typography';
 
 import { Container } from '../Helpers/styles';
 import { Wrapper } from './styles';
-import { TProps } from './types';
+import type { TProps } from './types';
 
 const LineGraphic = ({ data, referenceLine, variant, title, ...props }: TProps) => {
   return (

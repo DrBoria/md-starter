@@ -1,11 +1,11 @@
 import { StyledTextCell } from './styles';
 
-type TBoldTextCellProps = {
-  text: any;
-  align?: 'center' | 'left' | 'right';
-};
+interface CellProps {
+  text: string;
+  align?: 'left' | 'center' | 'right';
+}
 
-const BoldTextCell = ({ text, align = 'left', ...props }: TBoldTextCellProps) => {
+const BoldTextCell: React.FC<CellProps> = ({ text, align = 'left', ...props }: CellProps) => {
   return (
     <StyledTextCell align={align} {...props}>
       <b>{text}</b>

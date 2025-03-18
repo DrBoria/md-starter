@@ -1,6 +1,4 @@
 import React from "react";
-import { useToasts } from "@keystone-ui/toast";
-
 import type { ButtonSize } from "../../Button";
 import { Button } from "../../Button";
 import { Tooltip } from "../../Tooltip";

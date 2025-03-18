@@ -1,5 +1,12 @@
+interface ChartDataPoint {
+  date: string;
+  value: number;
+  xAxis?: string;
+  yAxis?: number;
+}
+
 export type TProps = {
-  data: any[];
+  data: ChartDataPoint[];
   referenceLine?: number;
   variant?: 'green' | 'red' | 'yellow';
   hideAxisX?: boolean;

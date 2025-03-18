@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Button, IModalButton, OneLineContainer } from "@md/components";
+import type { IModalButton} from "@md/components";
+import { Button, OneLineContainer } from "@md/components";
 import { Icons } from "@md/components/keystone";
 import { ThemeProvider } from "@md/styles";
 

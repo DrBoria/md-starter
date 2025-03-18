@@ -1,7 +1,8 @@
-import { FormEventHandler } from 'react';
+import type { FormEventHandler } from 'react';
 import styled from 'styled-components';
 
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 type TFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement>;

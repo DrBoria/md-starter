@@ -1,7 +1,7 @@
 import { ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
 
-import { TComponentProps } from './types';
+import type { TComponentProps } from './types';
 
 export const Wrapper = styled(ResponsiveContainer)<TComponentProps>`
   ${({ theme: { colors } }) => `

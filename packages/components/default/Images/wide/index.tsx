@@ -1,6 +1,7 @@
-import { ZIndexName, getZIndex } from '@md/styles';
+import type { ZIndexName} from '@md/styles';
+import { getZIndex } from '@md/styles';
 import Image from "next-image-export-optimizer";
-import React, { FC, forwardRef } from 'react';
+import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 type IWideImageProps = {
@@ -152,7 +153,7 @@ const ImageWrapper = styled(Image).attrs<{ $layer?: 'back'| 'front'; $zIndex?: Z
         )};
 `
 
-const WideImage = forwardRef<HTMLImageElement, IWideImageProps>(({ src, alt = 'huge image of landscape on background', layer, hidden, width = 2040, height = 1152, priority = true, zIndex, alignment, blured, onLoad }, ref) => (
+const WideImage = React.forwardRef<HTMLImageElement, IWideImageProps>(({ src, alt = 'huge image of landscape on background', layer, hidden, width = 2040, height = 1152, priority = true, zIndex, alignment, blured, onLoad }, ref) => (
     <ImageWrapper
         src={src}
         alt={alt}

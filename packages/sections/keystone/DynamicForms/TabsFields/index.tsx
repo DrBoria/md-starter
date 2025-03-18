@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useMemo } from "react";
+import type { Dispatch, SetStateAction} from "react";
+import React, { useEffect, useMemo } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
-import { TValue } from "../../../../types";
+import type { TValue } from "../../../../types";
 import { Tabs } from "@md/components";
 import { useCreateItem } from "../../utils/useCreateItem";
 import { useFieldsData } from "../../utils/useFieldsData";

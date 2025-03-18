@@ -2,7 +2,7 @@ import React from 'react';
 import { Section } from '@md/components';
 import { useEffect, useState } from 'react';
 import { Loading } from '@md/components';
-import { Posts } from '@/sections/posts';
+import { Posts } from '../sections/posts';
 
 // Starts from center
 export default function Home() {

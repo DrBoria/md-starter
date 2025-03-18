@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import { Button } from '../Button';
 
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
-type TPaginationProps = {
+type PaginationProps = {
   pagesCount: number;
   currentPage: number;
-  onChangePage: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, page: number) => void;
+  onChangePage: (event: React.MouseEvent<HTMLButtonElement>, page: number) => void;
 } & TWithBasicElementOffsets &
   TFullWidth;
 
@@ -24,24 +25,25 @@ const Container = styled.div<TFullWidth>`
   margin-bottom: ${withOffsetBottom};
 `;
 
-const Number = styled<any>(Button)`
+const Number = styled(Button)<{ active: boolean }>`
   font-weight: 700;
 
   background: ${({ active, theme }) => (active ? theme.colors.overlayActive : theme.colors.overlay)};
   border: none;
 `;
 
-const Pagination = ({ pagesCount, currentPage, onChangePage }: TPaginationProps) => (
+const Pagination = ({ pagesCount, currentPage, onChangePage }: PaginationProps) => (
   <Container>
     <IoIosArrowBack />
-    {[...new Array(pagesCount).keys()].map((pageNumber) => (
+    {Array.from({ length: pagesCount }, (_, i) => (
       <Number
+        key={i}
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          onChangePage(event, pageNumber);
+          onChangePage(event, i);
         }}
-        active={currentPage === pageNumber}
+        active={currentPage === i}
       >
-        {pageNumber}
+        {i + 1}
       </Number>
     ))}
     <IoIosArrowForward />

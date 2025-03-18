@@ -1,17 +1,9 @@
-import React, { FC, forwardRef, ForwardedRef } from 'react';
+import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import cloudFilter from './clouds.svg'
 
 const encodedFilter = encodeURIComponent(cloudFilter).replace(/'/g, '%27').replace(/"/g, '%22');
 
-const moveLeftFromCurrentPosition = keyframes`
-    from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100vw);
-  }
-`
 // Keyframes for animations
 const moveLeft = keyframes`
   from {
@@ -69,7 +61,7 @@ const moveRightInitialAnimationRule = css`
 `
 
 // Main Cloud component using styled-components
-export const CloudContainer = styled.div<ICloudProps>`
+const CloudContainer = styled.div<ICloudProps>`
   position: absolute;
   z-index: ${({ theme }) => theme.zIndex.animatedElements};
   width: 35vw;
@@ -128,7 +120,7 @@ const cloudLayerBaseCSS = `
   border-radius: 50%;
 `;
 
-export const CloudBase = styled.div`
+const CloudBase = styled.div`
   ${cloudLayerBaseCSS}
   width: 100%;
   height: 100%;
@@ -136,7 +128,7 @@ export const CloudBase = styled.div`
   box-shadow: 200px 170px 19px 40px #66797f70;
 `;
 
-export const CloudBack = styled.div`
+const CloudBack = styled.div`
   ${cloudLayerBaseCSS}
   margin-top: -90px;
   height: 35%;
@@ -145,7 +137,7 @@ export const CloudBack = styled.div`
   box-shadow: 200px 200px 10px 40px #66797f10;
 `;
 
-export const CloudMid = styled.div`
+const CloudMid = styled.div`
   ${cloudLayerBaseCSS}
   margin-top: -80px;
   width: 90%;
@@ -154,7 +146,7 @@ export const CloudMid = styled.div`
   box-shadow: 210px 250px 28px 30px #667d8320;
 `;
 
-export const CloudFront = styled.div`
+const CloudFront = styled.div`
   ${cloudLayerBaseCSS}
   margin-top: -75px;
   left: -20px;
@@ -166,15 +158,16 @@ export const CloudFront = styled.div`
 
 export type ICloudProps = { size?: 'small' | 'big' | 'medium', position?: ('top' | 'left' | 'bottom' | 'right')[], $isinitial?: boolean, top?: number, left?: number, $manual?: boolean, direction?: 'left' | 'right' };
 
-const Cloud = forwardRef<HTMLDivElement, ICloudProps>(
-  ({ size, position, $isinitial, top, left, $manual, direction }, ref) =>(
-    <CloudContainer ref={ref} size={size} position={position} $isinitial={$isinitial} $manual={$manual} direction={direction} top={top} left={left}>
-        <CloudBase />
-        <CloudBack />
-        <CloudMid />
-        <CloudFront />
+const Cloud = ({ size, position, $isinitial, top, left, $manual, direction }: ICloudProps) => {
+  return (
+    <CloudContainer size={size} position={position} $isinitial={$isinitial} $manual={$manual} direction={direction} top={top} left={left}>
+      <CloudBase />
+      <CloudBack />
+      <CloudMid />
+      <CloudFront />
     </CloudContainer>
-));
+  );
+};
 
 Cloud.displayName = 'Cloud';
-export { Cloud };
+export default Cloud;

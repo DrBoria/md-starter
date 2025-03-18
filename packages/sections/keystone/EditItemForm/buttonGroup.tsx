@@ -2,7 +2,7 @@ import React from "react";
 
 import { DeleteTemplate } from "../Modals/templates";
 import { Button, ColumnsContainer } from "@md/components";
-import { IModalButton } from "../Modals/types";
+import type { IModalButton } from "../Modals/types";
 
 interface TButtonGroupProps {
   listName: string;

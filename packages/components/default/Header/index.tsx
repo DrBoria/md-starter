@@ -1,4 +1,5 @@
-import { getZIndex, ZIndexName } from '@md/styles';
+import type { ZIndexName } from '@md/styles';
+import { getZIndex } from '@md/styles';
 import styled from 'styled-components';
 
 const Header = styled.div<{ $zIndex?: ZIndexName}>`

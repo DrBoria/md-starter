@@ -1,6 +1,8 @@
 import React from 'react';
-import styled, { DefaultTheme } from "styled-components";
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { DefaultTheme } from "styled-components";
+import styled from "styled-components";
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 const ProgressContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
     background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.section};

@@ -21,7 +21,8 @@ import { fieldsToGQL } from "./data-mapping/fieldsToGQL";
 import { useItemDataGetter } from "./data-mapping/useItemDataGetter";
 import { filterAllowedKeys, filterNotAllowedKeys } from "./filterKeys";
 import { useQueryList, useQueryListItem, useUpdateMutation } from "@md/api/graphql";
-import { QueryResult, useMutation, useQuery } from "@apollo/client";
+import type { QueryResult} from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useLogger } from "@md/components";
 
 interface TState {

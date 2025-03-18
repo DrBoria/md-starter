@@ -1,4 +1,5 @@
-import { ZIndexName, getZIndex } from '@md/styles';
+import type { ZIndexName} from '@md/styles';
+import { getZIndex } from '@md/styles';
 import Image from "next-image-export-optimizer";
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';

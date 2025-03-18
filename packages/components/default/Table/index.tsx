@@ -1,11 +1,20 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 
-import { Select, TOption } from '../Form';
+import type { TOption } from '../Form';
+import { Select } from '../Form';
 import Pagination from '../PaginationOld';
 import { SubTitle } from '../../default/Typography';
 
 import { StyledHeaderCell } from './TableCels/styles';
 import { Grid, PaginationContainer } from './styles';
+
+interface HeaderColumn {
+  text: string;
+  align?: 'left' | 'center' | 'right';
+  sort?: () => void;
+  isSortable?: boolean;
+}
 
 type TTableContainerProps = {
   pagination?: {
@@ -18,12 +27,7 @@ type TTableContainerProps = {
     current: number;
     changeElementsPerPage: (elementsPerPage: number) => void;
   };
-  headerCols?: {
-    text: string;
-    align?: string;
-    sort?: () => any;
-    isSortable?: boolean;
-  }[];
+  headerCols?: HeaderColumn[];
   colsTemplate: string;
   children: ReactNode;
 };

@@ -1,8 +1,8 @@
 export { HamburgerMenu } from './default';
 
-import { baseTheme } from '@md/styles/themes';
+import type { baseTheme } from '@md/styles/themes';
 
 type TTheme = typeof baseTheme;
 declare module 'styled-components' {
-    export interface DefaultTheme extends TTheme { }
+    export type DefaultTheme = TTheme
 }

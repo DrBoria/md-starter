@@ -2,13 +2,12 @@ import { memo } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Area, AreaChart, ReferenceLine, Label } from 'recharts';
 
 import Wrapper from './styles';
-import { TProps } from './types';
+import type { TProps } from './types';
 
 const LineGraphic = ({
   data,
   referenceLine,
   variant,
-  isMoney,
   hideAxisX = false,
   yAxisTooltipName,
   ...props
@@ -22,7 +21,7 @@ const LineGraphic = ({
 
         <CartesianGrid vertical={false} stroke='#EDEDEF' />
 
-        <Tooltip formatter={(value: any) => [value, yAxisTooltipName]} />
+        <Tooltip formatter={(value: number | string) => [value, yAxisTooltipName]} />
 
         {referenceLine && <ReferenceLine y={referenceLine} label={<Label value={referenceLine} position='left' />} />}
 

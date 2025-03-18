@@ -5,7 +5,8 @@ import {
   makeVar,
   useReactiveVar,
 } from "@apollo/client";
-import { ModalContext, ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "../../default/Modals";
+import type { ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "../../default/Modals";
+import { ModalContext } from "../../default/Modals";
 import { updateAndLog } from "./updateAndLog";
 
 // Define reactive variables with initial null values
@@ -23,57 +24,57 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const fullScreenData = useReactiveVar(fullScreenDataVar);
 
   // Setter for sidebar modal data
-  const setSideBarModalData = (data: TSideBarModalData) => {
-    updateAndLog(client, {
-      variable: sideBarModalDataVar,
-      query: gql`
-        query GetSideBarModalData {
-          SideBarModalData @client
-        }
-      `,
-      mutation: gql`
-        mutation Variable_Update_SideBarModalData($input: TSideBarModalData!) {
+  const setSideBarModalData = async (data: TSideBarModalData) => {
+    try {
+      await updateAndLog(client, {
+        variable: sideBarModalDataVar,
+        query: gql`query GetSideBarModalData { SideBarModalData @client }`,
+        mutation: gql`mutation Variable_Update_SideBarModalData($input: TSideBarModalData!) {
           updateSideBarModalData(input: $input) @client
-        }
-      `,
-      fieldName: "SideBarModalData",
-    })(data);
+        }`,
+        fieldName: "SideBarModalData",
+      })(data);
+    } catch (error) {
+      console.error('Failed to update sidebar modal:', error);
+    }
   };
 
   // Setter for regular modal data
-  const setModalData = (data: TModalData) => {
-    updateAndLog(client, {
-      variable: modalDataVar,
-      query: gql`
-        query GetModalData {
-          ModalData @client
-        }
-      `,
-      mutation: gql`
-        mutation Variable_Update_ModalData($input: TModalData!) {
+  const setModalData = async (data: TModalData) => {
+    try {
+      await updateAndLog(client, {
+        variable: modalDataVar,
+        query: gql`query GetModalData { ModalData @client }`,
+        mutation: gql`mutation Variable_Update_ModalData($input: TModalData!) {
           updateModalData(input: $input) @client
-        }
-      `,
-      fieldName: "ModalData",
-    })(data);
+        }`,
+        fieldName: "ModalData",
+      })(data);
+    } catch (error) {
+      console.error('Failed to update modal data:', error);
+    }
   };
 
   // Setter for fullscreen modal data
-  const setFullScreenData = (data: TFullScreenData) => {
-    updateAndLog(client, {
-      variable: fullScreenDataVar,
-      query: gql`
-        query GetFullScreenData {
-          FullScreenData @client
-        }
-      `,
-      mutation: gql`
-        mutation Variable_Update_FullScreenData($input: TFullScreenData!) {
-          updateFullScreenData(input: $input) @client
-        }
-      `,
-      fieldName: "FullScreenData",
-    })(data);
+  const setFullScreenData = async (data: TFullScreenData) => {
+    try {
+      await updateAndLog(client, {
+        variable: fullScreenDataVar,
+        query: gql`
+          query GetFullScreenData {
+            FullScreenData @client
+          }
+        `,
+        mutation: gql`
+          mutation Variable_Update_FullScreenData($input: TFullScreenData!) {
+            updateFullScreenData(input: $input) @client
+          }
+        `,
+        fieldName: "FullScreenData",
+      })(data);
+    } catch (error) {
+      console.error('Failed to update fullscreen data:', error);
+    }
   };
 
   // Context value with data and setters

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '../Link';
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets } from '@md/styles';
+import type { TWithBasicElementOffsets } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 import { PlainText } from '../Typography';
 
 const CardContainer = styled.div<TWithBasicElementOffsets>`
@@ -69,11 +70,10 @@ interface ICard extends TWithBasicElementOffsets {
     title: string,
     description?: string,
     date?: string,
-    readTime?: string,
     link: string,
 }
 
-const Card = ({ image, title, description, date, readTime, link, ...rest }: ICard) => {
+const Card = ({ image, title, description, date, link, ...rest }: ICard) => {
   return (
     <CardContainer {...rest}>
       {image && <Image src={image} alt={title} />}

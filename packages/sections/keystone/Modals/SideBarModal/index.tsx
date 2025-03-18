@@ -1,5 +1,4 @@
-import type { FC } from "react";
-import React, { useState } from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
@@ -112,7 +111,7 @@ const TitleContainer = styled.div`
 
 export const SideBarModal = () => {
   const { sideBarModalData, setSideBarModalData } = useModal();
-  const [$isClosing, setIsClosing] = useState(false);
+  const [$isClosing, setIsClosing] = React.useState(false);
 
   if (!sideBarModalData) return null;
 

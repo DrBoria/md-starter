@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { basicFont } from '../../Typography';
 
-import { TComponentProps } from './types';
+import type { TComponentProps } from './types';
 
 export const NameContainer = styled.div`
   display: flex;

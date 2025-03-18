@@ -9,7 +9,8 @@ import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 import { upperCaseFirstLetter } from "@md/utils";
 import { getFieldType, useQueryList } from "@md/api/graphql";
-import { QueryResult, useQuery } from "@apollo/client";
+import type { QueryResult} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 interface IRelationFieldController {
   refListKey: string;

@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis } from 'recharts';
 
 import { Wrapper } from './styles';
-import { TProps } from './types';
+import type { TProps } from './types';
 
 const StackedBarChart = ({ data, variant, referenceLine, ...props }: TProps) => {
   return (

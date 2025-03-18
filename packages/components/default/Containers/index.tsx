@@ -1,14 +1,16 @@
 import styled, { css } from "styled-components";
-import { devices, TFullWidth, TWithBasicElementOffsets, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
+import type { TFullWidth, TWithBasicElementOffsets} from '@md/styles';
+import { devices, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
 
-type TContainersProps = {
+interface ContainerProps {
+  children: React.ReactNode;
   className?: string;
-  style?: any;
-};
+  style?: React.CSSProperties;
+}
 
 type TSectionProps = {
   noHeightLimit?: boolean;
-} & TContainersProps;
+} & ContainerProps;
 
 /**
  * @visibleName Containers

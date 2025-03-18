@@ -5,12 +5,6 @@ import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
 import { styled } from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
 
-
-interface PageContainerProps {
-  children: ReactNode;
-  header: string | ReactNode;
-}
-
 const PageWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(300px, 1fr);
@@ -77,7 +71,7 @@ const HeaderToggle = styled.div`
   }
 `;
 
-const PageContainer: React.FC<PageContainerProps> = ({ children, header }) => {
+const PageContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
-import { TValue } from "../../../../types";
-import { CreateItemHookResult, useCreateItem } from "../../utils/useCreateItem";
+import type { TValue } from "../../../../types";
+import type { CreateItemHookResult} from "../../utils/useCreateItem";
+import { useCreateItem } from "../../utils/useCreateItem";
 import { useFieldsData } from "../../utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
 

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { basicFont } from '../../Typography';
 
-import { TComponentProps, TProps } from './types';
+import type { TComponentProps, TProps } from './types';
 
 const Variants = (variant: TProps['variant']) => {
   switch (variant) {

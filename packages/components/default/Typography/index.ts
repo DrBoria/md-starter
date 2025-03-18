@@ -1,7 +1,8 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
-import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from '@md/styles';
+import type { TWithBasicElementOffsets} from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 export const basicFont = css`
   ${({ theme }) => `500 ${theme.font.size} ${theme.font.family.text}`}

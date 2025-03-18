@@ -2,17 +2,17 @@ import { PlainText } from '../../Typography';
 
 import { StyledTextCell } from './styles';
 
-type TTextDisplayCellProps = {
-  text: any;
-  align?: 'center' | 'left' | 'right';
-};
+interface TextCellProps {
+  text: string | number;
+  align?: 'left' | 'center' | 'right';
+}
 
-const TextDisplayCell = ({ text, align, ...props }: TTextDisplayCellProps) => {
+const TextCell: React.FC<TextCellProps> = ({ text, align }) => {
   return (
-    <StyledTextCell align={align} {...props}>
+    <StyledTextCell align={align}>
       <PlainText>{text}</PlainText>
     </StyledTextCell>
   );
 };
 
-export default TextDisplayCell;
+export default TextCell;

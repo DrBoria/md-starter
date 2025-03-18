@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon, XIcon } from "@keystone-ui/icons";
 import styled from "styled-components";
 
-import { IOption } from "../../../../types";
+import type { IOption } from "../../../../types";
 
 interface SelectProps {
   options: IOption[];

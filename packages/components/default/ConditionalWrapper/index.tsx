@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ElementType } from 'react';
+import type { FC, ReactElement, ElementType } from 'react';
 
 type TConditionalWrapperProps = {
   Wrapper?: ElementType;

@@ -1,4 +1,4 @@
-import { ITabs } from ".";
+import type { ITabs } from ".";
 
 const getAllTabsFieldsNames = (
   tabs?: ITabs & { checkboxFieldName?: string },

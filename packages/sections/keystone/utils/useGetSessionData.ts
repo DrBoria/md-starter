@@ -3,7 +3,8 @@ import { useEffect } from "react";
 
 import type { TSession } from "../../../types";
 import { useQueryListItem } from "@md/api/graphql";
-import { QueryResult, useQuery } from "@apollo/client";
+import type { QueryResult} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 let isSessionSet = false;
 const sessionData =

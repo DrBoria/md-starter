@@ -4,7 +4,7 @@ import { GraphicsContainer, LegendContainer, LegendRowContainer } from '../style
 import { PlainText } from '../../Typography';
 
 import { NameContainer, ColoredDot } from './styles';
-import { TProps } from './types';
+import type { TProps } from './types';
 
 const PieChart = ({ data }: TProps) => {
   const COLORS = ['#FF7664', '#3DC694', '#FFAD4F', '#754A89', '#498DF2'];

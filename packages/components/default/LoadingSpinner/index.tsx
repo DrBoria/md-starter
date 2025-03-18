@@ -1,8 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { SubTitle } from "../Typography";
+import type {
+  TWithBasicElementOffsets} from "@md/styles";
 import {
-  TWithBasicElementOffsets,
   withOffsetBottom,
   withOffsetsRight,
 } from "@md/styles";

@@ -1,6 +1,6 @@
-import { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
+import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 
-import { TConditionalField } from ".";
+import type { TConditionalField } from ".";
 
 const getConditionalSubFieldsdNames = (
   conditionalField?: TConditionalField,

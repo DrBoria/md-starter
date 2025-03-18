@@ -23,7 +23,8 @@ import { getDeserializedValue } from "../utils/data-mapping/getDeserializedValue
 import { ButtonGroup } from "./buttonGroup";
 import { getAllTabsFieldsNames } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
-import { IModalButton, useLogger } from "@md/components";
+import type { IModalButton} from "@md/components";
+import { useLogger } from "@md/components";
 
 interface IEditItemForm {
   listName: string;

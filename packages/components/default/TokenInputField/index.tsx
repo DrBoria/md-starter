@@ -1,11 +1,12 @@
-import React, { ReactElement, ServerContextJSONValue, useState } from "react";
+import type { ReactElement} from "react";
+import React, { useState } from "react";
 import {
   FieldContainer,
   FieldDescription,
   FieldLabel,
 } from "@keystone-ui/fields";
 import styled from "styled-components";
-import { JSONValue } from "@md/types";
+import type { JSONValue } from "@md/types";
 import { Input } from "../Form";
 import { Button } from "../Button";
 
@@ -27,12 +28,12 @@ export type FieldController<FormState, FilterValue extends JSONValue = never> = 
   description: string | null
   graphqlSelection: string
   defaultValue: FormState
-  deserialize: (item: any) => FormState
-  serialize: (formState: FormState) => any
+  deserialize: (item: unknown) => FormState
+  serialize: (formState: FormState) => unknown
   validate?: (formState: FormState) => boolean
   filter?: {
     types: Record<string, FilterTypeDeclaration<FilterValue>>
-    graphql(type: { type: string, value: FilterValue }): Record<string, any>
+    graphql(type: { type: string, value: FilterValue }): Record<string, unknown>
     Label(type: FilterTypeToFormat<FilterValue>): string | ReactElement | null
     Filter(props: {
       type: string
@@ -44,11 +45,6 @@ export type FieldController<FormState, FilterValue extends JSONValue = never> = 
 }
 
 
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 interface TokenInputFieldProps {
   field: FieldController<{ inner: { value: string } }, string>;
   value?: string;
@@ -56,6 +52,11 @@ interface TokenInputFieldProps {
   autoFocus?: boolean;
   readOnly?: boolean;
 }
+
+const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const TokenInputField: React.FC<TokenInputFieldProps> = ({
   field,

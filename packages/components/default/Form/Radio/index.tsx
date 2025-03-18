@@ -1,14 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { basicFont } from '../../Typography';
 
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 type TRadioProps = {
   name: string;
   id?: string;
-  value: any;
+  value: string | number;
   type: 'radio';
 } & TWithBasicElementOffsets &
   TFullWidth;

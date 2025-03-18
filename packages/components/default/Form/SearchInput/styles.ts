@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import { Button } from '../../Button';
 
-import { TWithBasicElementOffsets, withOffsetBottom, withOffsetsRight } from '@md/styles';
+import type { TWithBasicElementOffsets} from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 export const ButtonWrapper = styled(Button)`
   border: none;

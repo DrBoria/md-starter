@@ -1,5 +1,5 @@
-import React, { createContext, useContext } from "react";
-import { ModalContextType } from ".";
+import { createContext, useContext } from 'react';
+import type { ModalContextType } from ".";
 
 export const ModalContext = createContext<ModalContextType | undefined>(undefined);
 

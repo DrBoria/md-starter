@@ -3,7 +3,8 @@ import border from './border';
 import elements from './elements';
 import font from './font';
 import offsets from './offsets';
-import zIndexes, { ZIndexName } from './zIndexes';
+import type { ZIndexName } from './zIndexes';
+import zIndexes from './zIndexes';
 
 const screens = {
   // Width

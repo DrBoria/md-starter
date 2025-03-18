@@ -11,8 +11,9 @@ interface TButtonGroupProps {
   onReset: () => void;
   onDelete: () => void;
   lessButtons?: boolean;
-  setModalData: (modalTemplate: any) => void;
+  setModalData: (modalTemplate: React.ReactNode | null) => void;
 }
+
 const ButtonGroup = ({
   isPristine,
   onUpdate,

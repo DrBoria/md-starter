@@ -1,4 +1,4 @@
-import { ApolloClient, DocumentNode, ReactiveVar } from "@apollo/client";
+import type { ApolloClient, DocumentNode, ReactiveVar } from "@apollo/client";
 
 /**
  *
@@ -10,7 +10,7 @@ import { ApolloClient, DocumentNode, ReactiveVar } from "@apollo/client";
  */
 export const updateAndLog =
   <T>(
-    client: ApolloClient<any>,
+    client: ApolloClient<unknown>,
     clientVar: {
       variable: ReactiveVar<T>;
       query: DocumentNode;

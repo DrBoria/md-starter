@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 type TFormLabelProps = {
   htmlFor: string;

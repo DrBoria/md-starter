@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 import { AutoComplete } from "./AutoComplete";
 import { Variables } from "./Variables";
+import type {
+  TWithBasicElementOffsets} from "@md/styles";
 import {
-  TWithBasicElementOffsets,
   withOffsetBottom,
   withOffsetsRight,
 } from "@md/styles";

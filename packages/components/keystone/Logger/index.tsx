@@ -1,7 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useToasts } from '@keystone-ui/toast';
 import { useApolloClient, gql } from '@apollo/client';
-import { LoggerContext, LoggerContextType, TToastData } from '../../default/Logger';
+import type { LoggerContextType, TToastData } from '../../default/Logger';
+import { LoggerContext } from '../../default/Logger';
 
 // Apollo mutations for logging toast actions
 const LOG_TOAST_ADDED = gql`
@@ -21,34 +22,61 @@ export const LoggerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const toasts = useToasts();
   const client = useApolloClient();
 
-  // Add a new toast and log it in Apollo
-  const add = (toast: Omit<TToastData, 'id'>) => {
-    const id = Date.now().toString(); // Generate unique ID for the toast
-    const toastData = { id, ...toast };
+  // Add proper promise handling
+  const logMessage = async (message: string) => {
+    try {
+      await fetch('/api/log', {
+        method: 'POST',
+        body: JSON.stringify({ message })
+      });
+    } catch (error) {
+      console.error('Logging failed:', error);
+    }
+  };
 
-    // Display toast using Keystone's useToasts
-    toasts.addToast({
-      ...toastData,
-      message: toastData.description,
-      tone: toastData.tone || "positive"
-    });
+  // Fix floating promises
+  useEffect(() => {
+    void (async () => {
+      try {
+        await logMessage('Component mounted');
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
-    // Log the toast addition in Apollo
-    client.mutate({
-      mutation: LOG_TOAST_ADDED,
-      variables: { toastData },
-    });
+  // Fix floating promises in mutations
+  const add = async (toast: Omit<TToastData, 'id'>) => {
+    try {
+      const id = Date.now().toString();
+      const toastData = { id, ...toast };
+
+      toasts.addToast({
+        ...toastData,
+        message: toastData.description,
+        tone: toastData.tone || "positive"
+      });
+
+      await client.mutate({
+        mutation: LOG_TOAST_ADDED,
+        variables: { toastData },
+      });
+    } catch (error) {
+      console.error('Failed to add toast:', error);
+    }
   };
 
   // Remove a toast and log the action in Apollo
-  const remove = (id: string) => {
-    toasts.removeToast(id);
-    // Note: Keystone's useToasts might not support direct removal.
-    // Here, we only log the removal action in Apollo.
-    client.mutate({
-      mutation: LOG_TOAST_REMOVED,
-      variables: { toastId: id },
-    });
+  const remove = async (id: string) => {
+    try {
+      toasts.removeToast(id);
+      await client.mutate({
+        mutation: LOG_TOAST_REMOVED,
+        variables: { toastId: id },
+      });
+    } catch (error) {
+      console.error('Failed to remove toast:', error);
+    }
   };
 
   // Context value with add and remove methods
