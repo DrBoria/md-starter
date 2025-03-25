@@ -14,20 +14,20 @@
   "license": "ISC",
   "dependencies": {
     "react": "^18.3.1",
-    "styled-components": "^6.1.13",
+    "styled-components": "^5.3.11",
     "styled-reset": "^4.5.2"
   },
   "devDependencies": {
-    "@md/types": "workspace:*",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.9.1",
     "@md/eslint": "workspace:*",
+    "@md/types": "workspace:*",
     "@types/node": "22.13.10",
-    "typescript": "^5.5.4",
-    "eslint": "^9.9.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "@eslint/js": "^9.9.1",
-    "@eslint/eslintrc": "^3.3.0",
+    "eslint": "^9.9.1",
     "eslint-plugin-import": "^2.30.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
   }
 }

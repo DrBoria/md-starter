@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import React, { useState } from "react";
 import { PageContainer as MDPageContainer } from "@md/components";
 import { Logo, Navigation } from "@keystone-6/core/admin-ui/components";
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { MenuIcon, XCircleIcon } from '@keystone-ui/icons';
 
 const PageWrapper = styled.div`

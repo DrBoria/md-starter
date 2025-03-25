@@ -3,5 +3,6 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "CodeGPT.apiKey": "grok"
 }
