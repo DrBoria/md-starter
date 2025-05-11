@@ -17,6 +17,7 @@ import { StorageBucket } from "@cdktf/provider-google/lib/storage-bucket";
 // Azure file upload
 import { StorageBlob } from "@cdktf/provider-azurerm/lib/storage-blob";
 import { StorageAccount } from "@cdktf/provider-azurerm/lib/storage-account";
+import { StorageContainer } from "@cdktf/provider-azurerm/lib/storage-container";
 
 export function uploadFilesToAws(
   scope: Construct,
@@ -65,7 +66,8 @@ export function uploadFilesToGcp(
 export function uploadFilesToAzure(
   scope: Construct,
   storageAccount: StorageAccount,
-  sourcePath: string
+  sourcePath: string,
+  webContainerResource: StorageContainer[]
 ): void {
   const files = glob.sync(`${sourcePath}/**/*`, { nodir: true });
 
@@ -80,6 +82,7 @@ export function uploadFilesToAzure(
       type: "Block",
       source: path.resolve(file),
       contentType,
+      dependsOn: webContainerResource,
     });
   }
 } 

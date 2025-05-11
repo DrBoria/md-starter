@@ -1,13 +1,14 @@
 import { Construct } from "constructs";
-import { TerraformStack, TerraformOutput } from "cdktf";
+import { TerraformStack, TerraformOutput, ITerraformDependable } from "cdktf";
 import { AzurermProvider } from "@cdktf/provider-azurerm/lib/provider";
 import { ResourceGroup } from "@cdktf/provider-azurerm/lib/resource-group";
 import { StorageAccount } from "@cdktf/provider-azurerm/lib/storage-account";
 import { StorageContainer } from "@cdktf/provider-azurerm/lib/storage-container";
-import { CdnProfile } from "@cdktf/provider-azurerm/lib/cdn-profile";
-import { CdnEndpoint } from "@cdktf/provider-azurerm/lib/cdn-endpoint";
+import { StorageBlob } from "@cdktf/provider-azurerm/lib/storage-blob";
 import { uploadFilesToAzure } from "./static-upload";
 import * as path from "path";
+import * as glob from "glob";
+import { getContentType } from "../utils";
 
 export interface AzureStaticDeployProps {
   location: string;
@@ -22,6 +23,7 @@ export class AzureStaticDeploy extends TerraformStack {
 
     new AzurermProvider(this, "azure", {
       features: {},
+      skipProviderRegistration: true,
     });
 
     // Create Resource Group
@@ -42,48 +44,65 @@ export class AzureStaticDeploy extends TerraformStack {
         indexDocument: "index.html",
         error404Document: "404.html",
       },
+      accessTier: "Hot",
     });
 
-    // Create Container for public access
-    const container = new StorageContainer(this, "web-container", {
-      name: "$web",
+    // Create a dependency container with a unique name
+    // The files will be uploaded to $web, but we need a dependency for Terraform to track
+    const dependencyContainer = new StorageContainer(this, "dependency-container", {
+      // Use a unique name with timestamp to avoid conflicts
+      name: `dep${Math.floor(Date.now() / 1000)}`,
       storageAccountName: storageAccount.name,
-      containerAccessType: "blob",
+      containerAccessType: "private",
     });
 
-    // Create CDN Profile for better performance
-    const cdnProfile = new CdnProfile(this, "cdn-profile", {
-      name: `${props.siteName}-cdn-profile`,
-      location: resourceGroup.location,
-      resourceGroupName: resourceGroup.name,
-      sku: "Standard_Microsoft",
-    });
-
-    // Create CDN Endpoint
-    const cdnEndpoint = new CdnEndpoint(this, "cdn-endpoint", {
-      name: `${props.siteName}-cdn-endpoint`,
-      profileName: cdnProfile.name,
-      location: resourceGroup.location,
-      resourceGroupName: resourceGroup.name,
-      originHostHeader: storageAccount.primaryWebHost,
-      origin: [{
-        name: "storageOrigin",
-        hostName: storageAccount.primaryWebHost,
-      }],
-    });
-
-    // Upload static files to the storage account
-    uploadFilesToAzure(this, storageAccount, props.sourcePath);
+    // Use custom upload function to ensure files are updated on each deployment
+    this.uploadFilesWithForcedUpdate(
+      props.sourcePath, 
+      storageAccount, 
+      [dependencyContainer]
+    );
     
-    // Output the website URLs
+    // Output the website URL
     new TerraformOutput(this, "storage_website_url", {
       value: storageAccount.primaryWebEndpoint,
       description: "URL of the Azure Storage static website",
     });
+  }
+
+  // Custom function that forces blob updates by using deployment timestamp in resource IDs
+  private uploadFilesWithForcedUpdate(
+    sourcePath: string,
+    storageAccount: StorageAccount,
+    dependencies: ITerraformDependable[]
+  ): void {
+    const files = glob.sync(`${sourcePath}/**/*`, { nodir: true });
     
-    new TerraformOutput(this, "cdn_endpoint_url", {
-      value: `https://${cdnEndpoint.name}.azureedge.net`,
-      description: "URL of the Azure CDN endpoint",
-    });
+    // Generate a unique deployment ID
+    const deploymentId = Date.now().toString();
+    
+    for (const file of files) {
+      const relativePath = path.relative(sourcePath, file);
+      const contentType = getContentType(file);
+      const blobPath = relativePath.replace(/\\/g, "/");
+      
+      // Create a unique resource ID for each blob that changes with each deployment
+      // This forces Terraform to recreate the blob on each deployment
+      const resourceId = `azure-blob-${deploymentId}-${blobPath}`;
+      
+      new StorageBlob(this, resourceId, {
+        name: blobPath,
+        storageAccountName: storageAccount.name,
+        storageContainerName: "$web",
+        type: "Block",
+        source: path.resolve(file),
+        contentType,
+        dependsOn: dependencies,
+        // Fix metadata key to use all lowercase format per Azure requirements
+        metadata: {
+          deployment_id: deploymentId,
+        },
+      });
+    }
   }
 } 

@@ -9,3 +9,4 @@ cdk.out
 cloud-config.json
 cdktf.out
 terraform.**
+.terraform.**

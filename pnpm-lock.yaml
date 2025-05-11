@@ -84,6 +84,9 @@ importers:
       glob:
         specifier: ^10.3.10
         version: 10.3.10
+      provider-null:
+        specifier: link:@cdktf/provider-null
+        version: link:@cdktf/provider-null
     devDependencies:
       '@md/eslint':
         specifier: workspace:*

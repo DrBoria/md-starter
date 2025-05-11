@@ -47,6 +47,7 @@
     "client-ecs": "link:@types/@aws-sdk/client-ecs",
     "constructs": "^10.4.2",
     "dotenv": "^16.4.7",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "provider-null": "link:@cdktf/provider-null"
   }
 }
