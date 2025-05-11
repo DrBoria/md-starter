@@ -1,0 +1,15 @@
+{
+  "provider": "aws",
+  "siteName": "md-static-site",
+  
+  "/* AWS Configuration */": null,
+  "awsRegion": "us-east-1",
+  
+  "/* GCP Configuration */": null,
+  "gcpProject": "your-gcp-project-id",
+  "gcpRegion": "us-central1",
+  
+  "/* Azure Configuration */": null,
+  "azureLocation": "East US",
+  "azureResourceGroup": "md-static-site-rg"
+} 

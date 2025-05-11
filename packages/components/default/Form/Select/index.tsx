@@ -49,7 +49,6 @@ const Dropdown = styled.ul`
   margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
   border-radius: ${({ theme }) => theme.variables.border.radius};
   z-index: 100;
-  box-shadow: ${({ theme }) => theme.shadows?.dropdown || "0px 4px 8px rgba(0, 0, 0, 0.1)"};
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`

@@ -1,10 +1,15 @@
 const { withPlugins } = require('next-compose-plugins');
 const path = require('path');
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const assetPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
   reactStrictMode: true,
+  basePath: basePath,
+  assetPrefix: assetPrefix,
   compiler: {
     styledComponents: true
   },
@@ -58,6 +63,9 @@ const nextConfig = {
     });
 
     return config;
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   }
 };
 

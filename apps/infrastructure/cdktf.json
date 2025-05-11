@@ -1,0 +1,16 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node bin/cdktf-infrastructure.ts",
+  "projectId": "md-static-deploy",
+  "sendCrashReports": false,
+  "terraformProviders": [
+    "aws@~> 5.0",
+    "google@~> 5.0",
+    "azurerm@~> 3.0"
+  ],
+  "terraformModules": [],
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+} 

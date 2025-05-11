@@ -6,3 +6,6 @@ node_modules
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+cloud-config.json
+cdktf.out
+terraform.**
