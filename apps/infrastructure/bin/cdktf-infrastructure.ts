@@ -24,8 +24,8 @@ switch (config.provider) {
     break;
     
   case "gcp":
-    if (!config.gcpProject || !config.gcpRegion) {
-      throw new Error("GCP project and region are required when deploying to GCP");
+    if (!config.gcpProject || !config.gcpRegion || !config.gcpProjectNumber) {
+      throw new Error("GCP project, region, and project number are required when deploying to GCP");
     }
     
     new GcpStaticDeploy(app, "gcp-static-deploy", {
@@ -33,6 +33,7 @@ switch (config.provider) {
       region: config.gcpRegion,
       siteName: config.siteName,
       sourcePath,
+      projectNumber: config.gcpProjectNumber,
     });
     break;
     

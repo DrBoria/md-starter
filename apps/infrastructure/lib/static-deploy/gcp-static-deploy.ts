@@ -9,12 +9,15 @@ import { ComputeGlobalForwardingRule } from "@cdktf/provider-google/lib/compute-
 import { ComputeTargetHttpProxy } from "@cdktf/provider-google/lib/compute-target-http-proxy";
 import { ComputeUrlMap } from "@cdktf/provider-google/lib/compute-url-map";
 import { uploadFilesToGcp } from "./static-upload";
+import { DataGoogleStorageProjectServiceAccount } from "@cdktf/provider-google/lib/data-google-storage-project-service-account";
+import { StorageBucketIamBinding } from "@cdktf/provider-google/lib/storage-bucket-iam-binding";
 
 export interface GcpStaticDeployProps {
   project: string;
   region: string;
   siteName: string;
   sourcePath: string;
+  projectNumber: string;
 }
 
 export class GcpStaticDeploy extends TerraformStack {
@@ -80,6 +83,14 @@ export class GcpStaticDeploy extends TerraformStack {
       project: props.project,
       // Ensure proxy exists before creating rule
       dependsOn: [httpProxy],
+    });
+
+    // --- Add conditional access - only through Load Balancer ---
+    new StorageBucketIamBinding(this, "conditional-public-access", {
+      bucket: websiteBucket.name,
+      role: "roles/storage.objectViewer",
+      members: ["allUsers"],
+      dependsOn: [websiteBucket, backendBucket],
     });
 
     // Upload static files to the bucket

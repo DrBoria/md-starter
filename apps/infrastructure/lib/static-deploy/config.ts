@@ -14,6 +14,7 @@ export interface CloudConfig {
   // GCP specific
   gcpProject?: string;
   gcpRegion?: string;
+  gcpProjectNumber?: string;
   
   // Azure specific
   azureLocation?: string;
@@ -39,6 +40,7 @@ export function getConfig(): CloudConfig {
     // GCP specific
     gcpProject: process.env.GCP_PROJECT || "",
     gcpRegion: process.env.GCP_REGION || "us-central1",
+    gcpProjectNumber: process.env.GCP_PROJECT_NUMBER || "",
     
     // Azure specific
     azureLocation: process.env.AZURE_LOCATION || "East US",
