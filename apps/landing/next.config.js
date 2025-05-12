@@ -6,6 +6,7 @@ const assetPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  trailingSlash: true,
   output: 'export',
   reactStrictMode: true,
   basePath: basePath,
