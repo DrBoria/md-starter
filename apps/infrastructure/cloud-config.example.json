@@ -1,5 +1,6 @@
 {
-  "provider": "aws",
+  "/* provider coult be */": "aws|gcp|azure",
+  "provider": "gcp",
   "siteName": "md-static-site",
   
   "/* AWS Configuration */": null,

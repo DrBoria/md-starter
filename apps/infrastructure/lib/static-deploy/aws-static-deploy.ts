@@ -18,37 +18,38 @@ export class AwsStaticDeploy extends TerraformStack {
       region: props.region,
     });
 
-    // Create S3 bucket without conditional logic
-    const s3BucketResource = new aws.s3Bucket.S3Bucket(this, 'static_site_s3_bucket', {
+    // Use a data source to get information about the existing bucket
+    // This change means Terraform will no longer try to create this bucket.
+    // If a bucket with the name props.siteName does not exist, cdktf deploy will error out.
+    const s3BucketData = new aws.dataAwsS3Bucket.DataAwsS3Bucket(this, 'static_site_s3_bucket_data', {
       bucket: props.siteName,
-      forceDestroy: true,
     });
 
     // Configure bucket ownership
     const ownershipControls = new aws.s3BucketOwnershipControls.S3BucketOwnershipControls(this, 'ownership_controls', {
-      bucket: s3BucketResource.id,
+      bucket: s3BucketData.id, // Use ID from bucket data
       rule: {
         objectOwnership: 'BucketOwnerPreferred',
       },
-      dependsOn: [s3BucketResource],
+      // dependsOn: [s3BucketData], // Not required for data source in dependsOn here
     });
 
     // Configure public access
     const publicAccessBlock = new aws.s3BucketPublicAccessBlock.S3BucketPublicAccessBlock(this, 'public_access_block', {
-      bucket: s3BucketResource.id,
+      bucket: s3BucketData.id, // Use ID from bucket data
       blockPublicAcls: false,
       blockPublicPolicy: false,
       ignorePublicAcls: false,
       restrictPublicBuckets: false,
-      dependsOn: [s3BucketResource, ownershipControls],
+      dependsOn: [ownershipControls],
     });
 
     // Configure website settings
     const websiteConfig = new aws.s3BucketWebsiteConfiguration.S3BucketWebsiteConfiguration(this, 'website_configuration', {
-      bucket: s3BucketResource.id,
+      bucket: s3BucketData.id, // Use ID from bucket data
       indexDocument: { suffix: "index.html" },
       errorDocument: { key: "404.html" },
-      dependsOn: [s3BucketResource, publicAccessBlock],
+      dependsOn: [publicAccessBlock],
     });
 
     // Create bucket policy for public read access
@@ -63,17 +64,17 @@ export class AwsStaticDeploy extends TerraformStack {
             },
           ],
           actions: ['s3:GetObject'],
-          resources: [`${s3BucketResource.arn}/*`],
+          resources: [`${s3BucketData.arn}/*`], // Use ARN from bucket data
         },
       ],
-      dependsOn: [s3BucketResource],
+      // dependsOn: [s3BucketData], // Not required
     });
 
     // Apply bucket policy
     const bucketPolicy = new aws.s3BucketPolicy.S3BucketPolicy(this, 's3_bucket_policy', {
-      bucket: s3BucketResource.id,
+      bucket: s3BucketData.id, // Use ID from bucket data
       policy: policyDocument.json,
-      dependsOn: [s3BucketResource, policyDocument, websiteConfig],
+      dependsOn: [policyDocument, websiteConfig],
     });
 
     // Create CloudFront distribution for proper client-side routing
@@ -83,7 +84,7 @@ export class AwsStaticDeploy extends TerraformStack {
       defaultRootObject: 'index.html',
       origin: [
         {
-          domainName: `${s3BucketResource.id}.s3-website-${props.region}.amazonaws.com`,
+          domainName: s3BucketData.websiteEndpoint, // Use websiteEndpoint from bucket data
           originId: 'S3Origin',
           customOriginConfig: {
             httpPort: 80,
@@ -113,14 +114,14 @@ export class AwsStaticDeploy extends TerraformStack {
       ],
       restrictions: { geoRestriction: { restrictionType: 'none' } },
       viewerCertificate: { cloudfrontDefaultCertificate: true },
-      dependsOn: [s3BucketResource, websiteConfig, bucketPolicy],
+      dependsOn: [websiteConfig, bucketPolicy], // Ensure s3BucketData is resolved before websiteConfig
     });
 
     // Wait for all dependencies before uploading files
-    uploadFilesToAws(this, s3BucketResource.id, props.sourcePath);
+    uploadFilesToAws(this, s3BucketData.id, props.sourcePath); // Use ID (bucket name) from data
 
     // Output S3 website URL
-    const websiteUrl = `http://${s3BucketResource.id}.s3-website-${props.region}.amazonaws.com`;
+    const websiteUrl = `http://${s3BucketData.websiteEndpoint}`; // Use websiteEndpoint from bucket data
     new TerraformOutput(this, 'website_url_output', {
       value: websiteUrl,
       description: 'The S3 website URL',
@@ -128,7 +129,7 @@ export class AwsStaticDeploy extends TerraformStack {
 
     // Output bucket name
     new TerraformOutput(this, 'bucket_name_output', {
-      value: s3BucketResource.id,
+      value: s3BucketData.id, // Use ID (bucket name) from data
       description: 'The name of the S3 bucket',
     });
 
