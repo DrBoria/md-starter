@@ -1,4 +1,5 @@
 {
+  "language": "typescript",
   "app": "npx ts-node bin/cdktf-infrastructure.ts",
   "projectId": "md-static-deploy",
   "sendCrashReports": false,
@@ -12,4 +13,4 @@
     "excludeStackIdFromLogicalIds": "true",
     "allowSepCharsInLogicalIds": "true"
   }
-}
+} 

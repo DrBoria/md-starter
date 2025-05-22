@@ -13,6 +13,7 @@
     "cdk": "cdk",
     "cdktf:init": "cdktf init",
     "cdktf:get": "cdktf get",
+    "cdktf:synth": "cdktf synth",
     "cdktf:deploy": "cdktf deploy",
     "cdktf:destroy": "cdktf destroy"
   },
