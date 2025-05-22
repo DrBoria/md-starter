@@ -1,105 +1,111 @@
-# Infrastructure for Static Website Deployment
+# Static Website Infrastructure Deployment
 
-This project contains infrastructure code to deploy static websites to different cloud providers.
+This project provides infrastructure code for deploying static websites to AWS, Azure, and GCP using Terraform CDK (CDKTF).
 
-## CDK for AWS
+---
 
-The `cdk.json` file tells the CDK Toolkit how to execute the AWS CDK app.
+## AWS – Static Site
 
-### AWS CDK Commands
+**Prerequisites:**  
+- Your app is built in the `landing` project  
+- Docker Engine is running
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+**Steps:**
+1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+3. [Create an IAM user](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/users) in AWS Management Console:
+    - Go to IAM → Users → Add user or select your user
+    - Go to "Security credentials" tab
+    - In "Access keys", click "Create access key"
+    - Save the Access key ID and Secret access key
+4. Configure AWS CLI:
+    - `aws configure`
+    - Or set environment variables:
+      ```
+      export AWS_ACCESS_KEY_ID=your-access-key-id
+      export AWS_SECRET_ACCESS_KEY=your-secret-access-key
+      export AWS_DEFAULT_REGION=your-region
+      ```
+5. Deploy:
+    ```
+    pnpm cdktf:deploy
+    ```
 
-## Terraform CDK for Multi-Cloud Deployment
+---
 
-This project also uses Terraform CDK (CDKTF) to deploy static website files to various cloud providers (AWS, GCP, Azure).
+## Azure – Static Site
 
-### Prerequisites
+**Prerequisites:**  
+- Your app is built in the `landing` project  
+- Docker Engine is running
 
-- Node.js (v18 or later)
-- Terraform CLI installed (v1.0.0 or later)
-- AWS, GCP, or Azure accounts with appropriate permissions
-- Configured provider-specific CLI tools:
-  - AWS: AWS CLI configured with credentials
-  - GCP: Google Cloud SDK installed and configured
-  - Azure: Azure CLI installed and logged in
+**Steps:**
+1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+2. Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
+3. Login:
+    ```
+    az login
+    ```
+4. Deploy:
+    ```
+    pnpm cdktf:deploy
+    ```
 
-### Setup
+---
 
-1. Install dependencies:
+## GCP – Static Site
 
-```bash
-npm install
+**Prerequisites:**  
+- Your app is built in the `landing` project  
+- Docker Engine is running
+
+**Steps:**
+1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+2. Create a GCP project and set its ID in your config
+3. Enable billing for your project ([link](https://console.cloud.google.com/billing?hl=en&inv=1&invt=AbxAhA&organizationId=0)) and link it to your project
+4. Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) and login:
+    ```
+    gcloud auth login
+    ```
+    - To switch accounts:  
+      `gcloud auth login` or `gcloud auth application-default login`
+    - Ensure you have permissions:
+      ```
+      gcloud projects add-iam-policy-binding YOUR_PROJECT_ID --member=user:YOUR_EMAIL --role=roles/storage.admin
+      ```
+5. Enable Compute Engine API ([link](https://console.cloud.google.com/apis/library/compute.googleapis.com?project=static-site-459410&inv=1&invt=AbxL-Q))
+6. Deploy (first deployment may take several minutes):
+    ```
+    pnpm cdktf:deploy
+    ```
+    - After deployment, wait 5–10 minutes for all roles and load balancer to be fully enabled
+
+---
+
+## Destroying Infrastructure
+
+To remove all created resources, use:
+
+```
+pnpm cdktf:destroy
 ```
 
-2. Create a configuration file:
+---
 
-Create a file named `cloud-config.json` in the project root, based on the `cloud-config.example.json` template:
+## Notes
 
-```json
-{
-  "provider": "aws",
-  "siteName": "your-site-name",
-  
-  "awsRegion": "us-east-1",
-  
-  "gcpProject": "your-gcp-project-id",
-  "gcpRegion": "us-central1",
-  
-  "azureLocation": "East US",
-  "azureResourceGroup": "your-resource-group"
-}
-```
+- Project info and number can be found in GCP dashboard → Project info
+- Storage buckets require active billing, even on free tier
+- For pricing, see GCP pricing dashboard
 
-3. Build the Landing site:
+---
 
-```bash
-cd ../landing
-npm run build
-```
+## Project Structure
 
-### Deployment
-
-Deploy to your selected cloud provider:
-
-```bash
-npm run cdktf:deploy
-```
-
-The provider is selected in the `cloud-config.json` file or through the `CLOUD_PROVIDER` environment variable.
-
-### Switching Cloud Providers
-
-To switch between cloud providers, either:
-
-1. Edit the `cloud-config.json` file and change the `provider` value to `aws`, `gcp`, or `azure`.
-2. Use an environment variable:
-
-```bash
-CLOUD_PROVIDER=aws npm run cdktf:deploy
-CLOUD_PROVIDER=gcp npm run cdktf:deploy
-CLOUD_PROVIDER=azure npm run cdktf:deploy
-```
-
-### Clean Up
-
-To destroy resources:
-
-```bash
-npm run cdktf:destroy
-```
-
-### CDKTF Structure
-
-- `bin/cdktf-infrastructure.ts`: Main entry point for CDKTF
-- `lib/aws-static-deploy.ts`: AWS S3 static site deployment
-- `lib/gcp-static-deploy.ts`: GCP Storage static site deployment
-- `lib/azure-static-deploy.ts`: Azure Storage static site deployment
-- `lib/static-upload.ts`: File upload utilities for each cloud provider
+- `bin/cdktf-infrastructure.ts`: CDKTF entry point
+- `lib/aws-static-deploy.ts`: AWS S3 deployment
+- `lib/gcp-static-deploy.ts`: GCP Storage deployment
+- `lib/azure-static-deploy.ts`: Azure Storage deployment
+- `lib/static-upload.ts`: File upload utilities
 - `lib/config.ts`: Configuration management
-- `lib/utils.ts`: Utility functions
+- `lib/utils.ts`: Utilities
