@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { TerraformStack, TerraformOutput } from "cdktf";
+import { TerraformStack, TerraformOutput, GcsBackend } from "cdktf";
 import { GoogleProvider } from "@cdktf/provider-google/lib/provider";
 import { StorageBucket } from "@cdktf/provider-google/lib/storage-bucket";
 import { StorageBucketIamMember } from "@cdktf/provider-google/lib/storage-bucket-iam-member";
@@ -12,17 +12,32 @@ import { uploadFilesToGcp } from "./static-upload";
 import { DataGoogleStorageProjectServiceAccount } from "@cdktf/provider-google/lib/data-google-storage-project-service-account";
 import { StorageBucketIamBinding } from "@cdktf/provider-google/lib/storage-bucket-iam-binding";
 
-export interface GcpStaticDeployProps {
+interface GcpStaticDeployProps {
   project: string;
   region: string;
   siteName: string;
   sourcePath: string;
   projectNumber: string;
+  backendType?: string;
+  gcpBackend?: {
+    bucket: string;
+    prefix?: string;
+  };
 }
 
 export class GcpStaticDeploy extends TerraformStack {
   constructor(scope: Construct, id: string, props: GcpStaticDeployProps) {
     super(scope, id);
+
+    if (props.backendType === "remote") {
+      if (!props.gcpBackend) {
+        throw new Error("gcpBackend config is required when backendType is remote");
+      }
+      new GcsBackend(this, {
+        bucket: props.gcpBackend.bucket,
+        prefix: props.gcpBackend.prefix || `${props.siteName}/`,
+      });
+    }
 
     new GoogleProvider(this, "google", {
       project: props.project,

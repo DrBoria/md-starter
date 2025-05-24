@@ -1,17 +1,31 @@
 {
-  "/* provider coult be */": "aws|gcp|azure",
-  "provider": "gcp",
-  "siteName": "md-static-site",
-  
-  "/* AWS Configuration */": null,
-  "awsRegion": "us-east-1",
-  
-  "/* GCP Configuration */": null,
-  "gcpProject": "your-gcp-project-id",
-  "gcpProjectNumber": "your-gcp-project-number-about-11-digits",
-  "gcpRegion": "us-central1",
-  
-  "/* Azure Configuration */": null,
-  "azureLocation": "East US",
-  "azureResourceGroup": "md-static-site-rg"
+  "// AWS Example": {
+    "provider": "aws",
+    "siteName": "my-aws-site",
+    "backendType": "remote",
+    "region": "eu-central-1"
+  },
+
+  "// GCP Example": {
+    "provider": "gcp",
+    "siteName": "my-gcp-site", 
+    "backendType": "remote",
+    "region": "europe-west3",
+    "gcpProject": "my-project-123456",
+    "gcpProjectNumber": "123456789012"
+  },
+
+  "// Azure Example": {
+    "provider": "azure",
+    "siteName": "my-azure-site",
+    "backendType": "remote", 
+    "region": "East US"
+  },
+
+  "// Local Development": {
+    "provider": "aws",
+    "siteName": "my-dev-site",
+    "backendType": "local",
+    "region": "eu-central-1"
+  }
 } 

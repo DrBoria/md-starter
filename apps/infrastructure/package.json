@@ -7,15 +7,19 @@
   },
   "scripts": {
     "build": "tsc",
-    "deploy": "cdk deploy",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk",
-    "cdktf:init": "cdktf init",
-    "cdktf:get": "cdktf get",
-    "cdktf:synth": "cdktf synth",
-    "cdktf:deploy": "cdktf deploy",
-    "cdktf:destroy": "cdktf destroy"
+
+    "init": "cdktf init",
+    "gen": "cdktf get",
+    "synth": "cdktf synth",
+    "deploy": "cdktf deploy",
+    "destroy": "cdktf destroy",
+
+    "deploy:backend": "cdktf deploy remote-backend",
+    "destroy:backend": "cdktf destroy remote-backend",
+    "deploy:landing": "cdktf deploy static-hosting",
+    "destroy:landing": "cdktf destroy static-hosting"
   },
   "devDependencies": {
     "@md/eslint": "workspace:*",

@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { TerraformStack, TerraformOutput, ITerraformDependable } from "cdktf";
+import { TerraformStack, TerraformOutput, ITerraformDependable, AzurermBackend } from "cdktf";
 import { AzurermProvider } from "@cdktf/provider-azurerm/lib/provider";
 import { ResourceGroup } from "@cdktf/provider-azurerm/lib/resource-group";
 import { StorageAccount } from "@cdktf/provider-azurerm/lib/storage-account";
@@ -8,35 +8,56 @@ import { StorageBlob } from "@cdktf/provider-azurerm/lib/storage-blob";
 import { uploadFilesToAzure } from "./static-upload";
 import * as path from "path";
 import * as glob from "glob";
-import { getContentType } from "../utils";
+import { getContentType } from "../keystone/utils";
 
-export interface AzureStaticDeployProps {
+interface AzureStaticDeployProps {
   location: string;
   resourceGroupName: string;
   siteName: string;
   sourcePath: string;
+  backendType?: string;
+  azureBackend?: {
+    storageAccountName: string;
+    containerName: string;
+    key?: string;
+  };
 }
 
 export class AzureStaticDeploy extends TerraformStack {
   constructor(scope: Construct, id: string, props: AzureStaticDeployProps) {
     super(scope, id);
 
+    if (props.backendType === "remote") {
+      if (!props.azureBackend) {
+        throw new Error("azureBackend config is required when backendType is remote");
+      }
+      new AzurermBackend(this, {
+        storageAccountName: props.azureBackend.storageAccountName,
+        containerName: props.azureBackend.containerName,
+        key: props.azureBackend.key || `${props.siteName}/terraform.tfstate`,
+        resourceGroupName: props.resourceGroupName,
+      });
+    }
+
     new AzurermProvider(this, "azure", {
       features: {},
       skipProviderRegistration: true,
     });
 
-    // Create Resource Group
-    const resourceGroup = new ResourceGroup(this, "resource-group", {
-      name: props.resourceGroupName,
-      location: props.location,
-    });
+    let resourceGroupName = props.resourceGroupName;
+    if (props.backendType !== "remote") {
+      const resourceGroup = new ResourceGroup(this, "resource-group", {
+        name: props.resourceGroupName,
+        location: props.location,
+      });
+      resourceGroupName = resourceGroup.name;
+    }
 
     // Create Storage Account for static website
     const storageAccount = new StorageAccount(this, "storage-account", {
       name: props.siteName.replace(/-/g, "").toLowerCase(),
-      resourceGroupName: resourceGroup.name,
-      location: resourceGroup.location,
+      resourceGroupName: resourceGroupName,
+      location: props.location,
       accountTier: "Standard",
       accountReplicationType: "LRS",
       allowNestedItemsToBePublic: true,

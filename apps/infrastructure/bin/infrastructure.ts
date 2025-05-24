@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { RdsStack } from '../lib/database-stack-iam';
-import { EcsStack } from '../lib/deploy-stack-iam';
+import { RdsStack } from '../lib/keystone/database-stack-iam';
+import { EcsStack } from '../lib/keystone/deploy-stack-iam';
 
 // async function main() {
   const app = new cdk.App();

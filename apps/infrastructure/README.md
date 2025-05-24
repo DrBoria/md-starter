@@ -1,111 +1,197 @@
-# Static Website Infrastructure Deployment
+# Multi-Cloud Static Website Infrastructure
 
-This project provides infrastructure code for deploying static websites to AWS, Azure, and GCP using Terraform CDK (CDKTF).
+This infrastructure project supports deploying static websites (Next.js static exports) to AWS, GCP, and Azure using CDK for Terraform (CDKTF).
 
----
+## Features
 
-## AWS – Static Site
+- **Multi-cloud support**: AWS, GCP, Azure
+- **Remote state management**: Optional remote backend for Terraform state
+- **Next.js routing support**: Proper handling of client-side routing
+- **Unified configuration**: Single config file for all providers
+- **Separate deployment**: Backend and static hosting can be deployed independently
 
-**Prerequisites:**  
-- Your app is built in the `landing` project  
-- Docker Engine is running
+## Configuration
 
-**Steps:**
-1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-3. [Create an IAM user](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/users) in AWS Management Console:
-    - Go to IAM → Users → Add user or select your user
-    - Go to "Security credentials" tab
-    - In "Access keys", click "Create access key"
-    - Save the Access key ID and Secret access key
-4. Configure AWS CLI:
-    - `aws configure`
-    - Or set environment variables:
-      ```
-      export AWS_ACCESS_KEY_ID=your-access-key-id
-      export AWS_SECRET_ACCESS_KEY=your-secret-access-key
-      export AWS_DEFAULT_REGION=your-region
-      ```
-5. Deploy:
-    ```
-    pnpm cdktf:deploy
-    ```
+Configure your deployment using `cloud-config.json`:
 
----
-
-## Azure – Static Site
-
-**Prerequisites:**  
-- Your app is built in the `landing` project  
-- Docker Engine is running
-
-**Steps:**
-1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-2. Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
-3. Login:
-    ```
-    az login
-    ```
-4. Deploy:
-    ```
-    pnpm cdktf:deploy
-    ```
-
----
-
-## GCP – Static Site
-
-**Prerequisites:**  
-- Your app is built in the `landing` project  
-- Docker Engine is running
-
-**Steps:**
-1. Install [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-2. Create a GCP project and set its ID in your config
-3. Enable billing for your project ([link](https://console.cloud.google.com/billing?hl=en&inv=1&invt=AbxAhA&organizationId=0)) and link it to your project
-4. Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) and login:
-    ```
-    gcloud auth login
-    ```
-    - To switch accounts:  
-      `gcloud auth login` or `gcloud auth application-default login`
-    - Ensure you have permissions:
-      ```
-      gcloud projects add-iam-policy-binding YOUR_PROJECT_ID --member=user:YOUR_EMAIL --role=roles/storage.admin
-      ```
-5. Enable Compute Engine API ([link](https://console.cloud.google.com/apis/library/compute.googleapis.com?project=static-site-459410&inv=1&invt=AbxL-Q))
-6. Deploy (first deployment may take several minutes):
-    ```
-    pnpm cdktf:deploy
-    ```
-    - After deployment, wait 5–10 minutes for all roles and load balancer to be fully enabled
-
----
-
-## Destroying Infrastructure
-
-To remove all created resources, use:
-
-```
-pnpm cdktf:destroy
+```json
+{
+  "provider": "aws",
+  "siteName": "my-static-site",
+  "backendType": "remote",
+  "region": "eu-central-1",
+  
+  "gcpProject": "my-gcp-project",
+  "gcpProjectNumber": "123456789"
+}
 ```
 
----
+### Configuration Options
 
-## Notes
+- `provider`: Cloud provider (`"aws"`, `"gcp"`, or `"azure"`)
+- `siteName`: Name for your site (used to generate resource names)
+- `backendType`: `"local"` or `"remote"` for Terraform state storage
+- `region`: Region for deployment
+- `gcpProject`: GCP project ID (required for GCP)
+- `gcpProjectNumber`: GCP project number (required for GCP)
 
-- Project info and number can be found in GCP dashboard → Project info
-- Storage buckets require active billing, even on free tier
-- For pricing, see GCP pricing dashboard
+### Auto-generated Resources
 
----
+When `backendType` is `"remote"`, the following resources are auto-generated based on `siteName`:
 
-## Project Structure
+**AWS:**
+- S3 bucket: `tfstate-{siteName}`
+- DynamoDB table: `tflock-{siteName}`
 
-- `bin/cdktf-infrastructure.ts`: CDKTF entry point
-- `lib/aws-static-deploy.ts`: AWS S3 deployment
-- `lib/gcp-static-deploy.ts`: GCP Storage deployment
-- `lib/azure-static-deploy.ts`: Azure Storage deployment
-- `lib/static-upload.ts`: File upload utilities
-- `lib/config.ts`: Configuration management
-- `lib/utils.ts`: Utilities
+**GCP:**
+- Storage bucket: `tfstate-{siteName}`
+
+**Azure:**
+- Resource group: `{siteName}-rg`
+- Storage account: `tfstate{siteName}` (sanitized)
+- Container: `tfstate`
+
+## Scripts
+
+### Build and Synthesis
+```bash
+pnpm build                # Build TypeScript
+pnpm synth                # Synthesize all stacks
+```
+
+### Deployment
+```bash
+pnpm deploy:backend      # Deploy remote backend only
+pnpm deploy:landing      # Deploy next.js landing only
+```
+
+### Destruction
+```bash
+pnpm destroy:backend     # Destroy remote backend only
+pnpm destroy:landing     # Deploy next.js landing stack only
+```
+
+## Deployment Workflow
+
+### 1. Initial Setup (with Remote Backend)
+
+1. Configure `cloud-config.json` with `"backendType": "remote"`
+2. Deploy the backend infrastructure first:
+   ```bash
+   pnpm deploy:backend
+   ```
+3. Deploy the static hosting:
+   ```bash
+   pnpm deploy:static
+   ```
+
+### 2. Subsequent Deployments
+
+For updates to your static site, you only need to redeploy the static hosting stack:
+```bash
+pnpm deploy:static
+```
+
+### 3. Local State (Development)
+
+For development, you can use local state:
+```json
+{
+  "backendType": "local"
+}
+```
+
+Then deploy directly:
+```bash
+pnpm cdktf:deploy
+```
+
+## Cloud Provider Features
+
+### AWS
+- **S3 Static Website Hosting**: Optimized for static sites
+- **CloudFront CDN**: Global content delivery with HTTPS
+- **Client-side Routing**: 403/404 errors redirect to index.html/404.html
+- **Remote State**: S3 + DynamoDB for state locking
+
+### GCP
+- **Cloud Storage**: Static website hosting
+- **Load Balancer + Cloud CDN**: Global distribution with CDN
+- **Client-side Routing**: Proper index.html/404.html handling
+- **Remote State**: Cloud Storage backend
+
+### Azure
+- **Storage Account Static Websites**: Built-in static hosting
+- **Client-side Routing**: Automatic index.html/404.html handling
+- **Remote State**: Storage Account backend
+- **Auto-generated Resource Groups**: Based on siteName
+
+## Next.js Static Export
+
+This infrastructure is designed to work with Next.js static exports. Make sure your Next.js app is configured for static export:
+
+```javascript
+// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  }
+}
+
+module.exports = nextConfig
+```
+
+Build your static site:
+```bash
+# In your Next.js app
+npm run build
+```
+
+The generated `out/` directory will be uploaded to your cloud provider.
+
+## Environment Variables
+
+You can also configure via environment variables:
+
+```bash
+export CLOUD_PROVIDER=aws
+export SITE_NAME=my-site
+export BACKEND_TYPE=remote
+export REGION=eu-central-1
+export GCP_PROJECT=my-gcp-project
+export GCP_PROJECT_NUMBER=123456789
+export SOURCE_PATH=../landing/out
+```
+
+## Troubleshooting
+
+### Build Errors
+If you encounter TypeScript errors from node_modules, they are likely from library type conflicts. The build should still succeed with `skipLibCheck: true` in tsconfig.json.
+
+### Deployment Errors
+- Ensure you have valid cloud credentials configured
+- Check that required fields are set in cloud-config.json
+- For GCP, ensure `GOOGLE_CREDENTIALS` environment variable is set
+
+### State Management
+- Backend stack must be deployed before static hosting when using remote state
+- If you change `backendType`, you may need to migrate state manually
+- Remote backends are created automatically based on siteName
+
+## Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐
+│  remote-backend │    │ static-hosting  │
+│     stack       │    │     stack       │
+├─────────────────┤    ├─────────────────┤
+│ • State storage │    │ • Static files  │
+│ • State locking │    │ • CDN/LB setup  │
+│ • Auto-named    │    │ • DNS/SSL       │
+└─────────────────┘    └─────────────────┘
+```
+
+Both stacks are independent and can be managed separately, enabling flexible deployment workflows.

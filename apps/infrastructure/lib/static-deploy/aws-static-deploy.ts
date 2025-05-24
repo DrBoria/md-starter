@@ -1,18 +1,36 @@
 import { Construct } from 'constructs';
-import { TerraformStack, TerraformOutput } from 'cdktf';
+import { TerraformStack, TerraformOutput, S3Backend } from 'cdktf';
 import * as aws from '@cdktf/provider-aws';
-import { ExternalProvider } from '@cdktf/provider-external/lib/provider';
 import { uploadFilesToAws } from './static-upload';
 
 interface AwsStaticDeployProps {
   region: string;
   siteName: string;
   sourcePath: string;
+  backendType?: string;
+  awsBackend?: {
+    bucket: string;
+    key?: string;
+    region: string;
+    dynamodbTable: string;
+  };
 }
 
 export class AwsStaticDeploy extends TerraformStack {
   constructor(scope: Construct, id: string, props: AwsStaticDeployProps) {
     super(scope, id);
+
+    if (props.backendType === "remote") {
+      if (!props.awsBackend) {
+        throw new Error("awsBackend config is required when backendType is remote");
+      }
+      new S3Backend(this, {
+        bucket: props.awsBackend.bucket,
+        key: props.awsBackend.key || `${props.siteName}/terraform.tfstate`,
+        region: props.awsBackend.region,
+        dynamodbTable: props.awsBackend.dynamodbTable,
+      });
+    }
 
     new aws.provider.AwsProvider(this, 'aws_provider', {
       region: props.region,
@@ -83,7 +101,7 @@ export class AwsStaticDeploy extends TerraformStack {
       defaultRootObject: 'index.html',
       origin: [
         {
-          domainName: `${s3BucketResource.id}.s3-website-${props.region}.amazonaws.com`,
+          domainName: `${s3BucketResource.id}.s3-website.${props.region}.amazonaws.com`,
           originId: 'S3Origin',
           customOriginConfig: {
             httpPort: 80,
@@ -94,17 +112,19 @@ export class AwsStaticDeploy extends TerraformStack {
         },
       ],
       defaultCacheBehavior: {
-        allowedMethods: ['GET', 'HEAD'],
+        allowedMethods: ['GET', 'HEAD', 'OPTIONS'],
         cachedMethods: ['GET', 'HEAD'],
         targetOriginId: 'S3Origin',
         forwardedValues: {
-          queryString: false,
+          queryString: true,
           cookies: { forward: 'none' },
+          headers: ["Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers"],
         },
         viewerProtocolPolicy: 'redirect-to-https',
         minTtl: 0,
         defaultTtl: 3600,
         maxTtl: 86400,
+        compress: true,
       },
       // Route 403/404 errors to index.html to support client-side routing
       customErrorResponse: [
@@ -120,7 +140,7 @@ export class AwsStaticDeploy extends TerraformStack {
     uploadFilesToAws(this, s3BucketResource.id, props.sourcePath);
 
     // Output S3 website URL
-    const websiteUrl = `http://${s3BucketResource.id}.s3-website-${props.region}.amazonaws.com`;
+    const websiteUrl = `http://${s3BucketResource.id}.s3-website.${props.region}.amazonaws.com`;
     new TerraformOutput(this, 'website_url_output', {
       value: websiteUrl,
       description: 'The S3 website URL',
