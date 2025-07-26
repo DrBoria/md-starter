@@ -27,5 +27,15 @@
     "siteName": "my-dev-site",
     "backendType": "local",
     "region": "eu-central-1"
+  },
+
+  "// Raspberry Pi Example": {
+    "provider": "raspberry",
+    "siteName": "my-raspberry-site",
+    "backendType": "local",
+    "hostIp": "192.168.1.100",
+    "sshUser": "borisbritva",
+    "sshKeyPath": "~/.ssh/id_rsa",
+    "nginxPort": 80
   }
 } 

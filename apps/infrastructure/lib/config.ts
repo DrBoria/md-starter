@@ -5,12 +5,16 @@ import * as fs from "fs";
 dotenv.config();
 
 export interface Config {
-  provider: "aws" | "gcp" | "azure";
+  provider: "aws" | "gcp" | "azure" | "raspberry";
   backendType?: "local" | "remote";
   siteName: string;
   region?: string;
   gcpProject?: string;
   gcpProjectNumber?: string;
+  hostIp?: string;
+  sshUser?: string;
+  sshKeyPath?: string;
+  nginxPort?: number;
   awsBackend?: {
     bucket: string;
     key?: string;
@@ -79,7 +83,7 @@ export function getConfig(): Config {
     return configFile;
   }
   
-  const provider = process.env.CLOUD_PROVIDER as "aws" | "gcp" | "azure" || "aws";
+  const provider = process.env.CLOUD_PROVIDER as "aws" | "gcp" | "azure" | "raspberry" || "aws";
   const siteName = process.env.SITE_NAME || "my-site";
   const backendType = process.env.BACKEND_TYPE as "local" | "remote" || "local";
   
@@ -90,6 +94,10 @@ export function getConfig(): Config {
     region: process.env.REGION,
     gcpProject: process.env.GCP_PROJECT,
     gcpProjectNumber: process.env.GCP_PROJECT_NUMBER,
+    hostIp: process.env.HOST_IP,
+    sshUser: process.env.SSH_USER,
+    sshKeyPath: process.env.SSH_KEY_PATH,
+    nginxPort: process.env.NGINX_PORT ? parseInt(process.env.NGINX_PORT) : undefined,
   };
   
   if (backendType === "remote") {

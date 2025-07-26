@@ -4,6 +4,7 @@ import { App } from "cdktf";
 import { AwsStaticDeploy } from "../lib/static-deploy/aws-static-deploy";
 import { GcpStaticDeploy } from "../lib/static-deploy/gcp-static-deploy";
 import { AzureStaticDeploy } from "../lib/static-deploy/azure-static-deploy";
+import { RaspberryStaticDeploy } from "../lib/static-deploy/raspberry-static-deploy";
 import { AwsBackendStack } from "../lib/state-deploy/aws-backend-stack";
 import { getConfig, getSourcePath } from "../lib/config";
 import { GcpBackendStack } from "../lib/state-deploy/gcp-backend-stack";
@@ -25,6 +26,8 @@ function main() {
   if (config.provider === "azure" && !config.region) {
     throw new Error("Azure region is required when deploying to Azure");
   }
+
+
 
   if (config.backendType === "remote") {
     if (config.provider === "aws") {
@@ -73,6 +76,23 @@ function main() {
         sourcePath,
         backendType: config.backendType,
         azureBackend: config.azureBackend,
+      });
+      break;
+
+    case "raspberry":
+      if (!config.hostIp) {
+        throw new Error("Host IP is required for Raspberry Pi deployment");
+      }
+      if (!config.sshUser) {
+        throw new Error("SSH User is required for Raspberry Pi deployment");
+      }
+      new RaspberryStaticDeploy(app, "static-hosting", {
+        siteName: config.siteName,
+        sourcePath,
+        hostIp: config.hostIp,
+        sshUser: config.sshUser,
+        sshKeyPath: config.sshKeyPath,
+        nginxPort: config.nginxPort,
       });
       break;
       

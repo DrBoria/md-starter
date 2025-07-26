@@ -19,7 +19,9 @@
     "deploy:backend": "cdktf deploy remote-backend",
     "destroy:backend": "cdktf destroy remote-backend",
     "deploy:landing": "cdktf deploy static-hosting",
-    "destroy:landing": "cdktf destroy static-hosting"
+    "destroy:landing": "cdktf destroy static-hosting",
+    "deploy:raspberry": "cdktf deploy static-hosting",
+    "destroy:raspberry": "cdktf destroy static-hosting"
   },
   "devDependencies": {
     "@md/eslint": "workspace:*",

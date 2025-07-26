@@ -1,4 +1,5 @@
 import { Construct } from "constructs";
+import { ITerraformDependable } from "cdktf";
 // TerraformStack and fs are not used in this version of the file, can be removed if not used by other functions.
 // import { TerraformStack } from "cdktf"; 
 // import * as fs from "fs";
@@ -18,6 +19,12 @@ import { StorageBucket } from "@cdktf/provider-google/lib/storage-bucket";
 import { StorageBlob } from "@cdktf/provider-azurerm/lib/storage-blob";
 import { StorageAccount } from "@cdktf/provider-azurerm/lib/storage-account";
 import { StorageContainer } from "@cdktf/provider-azurerm/lib/storage-container";
+
+// Raspberry Pi file upload
+import { NullProvider } from "@cdktf/provider-null/lib/provider";
+import { Resource } from "@cdktf/provider-null/lib/resource";
+
+
 
 export function uploadFilesToAws(
   scope: Construct,
@@ -114,4 +121,26 @@ export function uploadFilesToAzure(
       },
     });
   }
+}
+
+export function uploadFilesToRaspberry(
+  scope: Construct,
+  sshCmd: string,
+  sshUser: string,
+  hostIp: string,
+  sourcePath: string,
+  siteDir: string,
+  dependencies: ITerraformDependable[]
+): Resource {
+  // Generate a unique deployment ID
+  const deploymentId = Date.now().toString();
+  
+  return new Resource(scope, `raspberry-upload-${deploymentId}`, {
+    triggers: {
+      source_path: sourcePath,
+      files_hash: glob.sync(`${sourcePath}/**/*`, { nodir: true }).join(','),
+      deployment_id: deploymentId,
+    },
+    dependsOn: dependencies
+  });
 }
