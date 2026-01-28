@@ -17,6 +17,7 @@
         "dev": "tsc -w",
         "bundle:templates": "ts-node scripts/bundle-templates.ts",
         "prepublishOnly": "npm run build && npm run bundle:templates",
+        "publish": "npm publish --access public",
         "postpublish": "rm -rf templates"
     },
     "dependencies": {
