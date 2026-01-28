@@ -17,9 +17,9 @@ async function bundle() {
     await fs.ensureDir(DEST_TEMPLATES);
 
     const appTemplates = [
-        { source: 'apps/landing', dest: '_template-landing' },
-        { source: 'apps/keystone', dest: '_template-keystone' },
-        { source: 'apps/mdappmobile', dest: '_template-native' },
+        { source: 'apps/_template-landing', dest: '_template-landing' },
+        { source: 'apps/_template-keystone', dest: '_template-keystone' },
+        { source: 'apps/_template-native', dest: '_template-native' },
         { source: 'apps/_template-styleguide', dest: '_template-styleguide' }
     ];
 

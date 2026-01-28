@@ -4,7 +4,8 @@
     "description": "CLI generator for MD Starter using the Sculptor approach",
     "main": "dist/index.js",
     "bin": {
-        "md-starter": "./bin/cli.js"
+        "md-starter": "./bin/cli.js",
+        "create-md-stack": "./bin/cli.js"
     },
     "files": [
         "dist",

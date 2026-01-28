@@ -1,5 +1,5 @@
 {
-  "name": "md-turborepo-main",
+  "name": "md-starter",
   "private": true,
   "scripts": {
     "build": "turbo build",
