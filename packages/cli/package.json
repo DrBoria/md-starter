@@ -1,0 +1,34 @@
+{
+    "name": "md-starter",
+    "version": "1.0.0",
+    "description": "CLI generator for MD Starter using the Sculptor approach",
+    "main": "dist/index.js",
+    "bin": {
+        "md-starter": "./bin/cli.js"
+    },
+    "files": [
+        "dist",
+        "bin",
+        "templates"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc -w",
+        "bundle:templates": "ts-node scripts/bundle-templates.ts",
+        "prepublishOnly": "npm run build && npm run bundle:templates",
+        "postpublish": "rm -rf templates"
+    },
+    "dependencies": {
+        "@clack/prompts": "^0.7.0",
+        "chalk": "^4.1.2",
+        "commander": "^11.1.0",
+        "fs-extra": "^11.2.0",
+        "ts-morph": "^21.0.1"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/node": "^20.11.17",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
+    }
+}

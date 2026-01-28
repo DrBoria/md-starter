@@ -24,6 +24,6 @@ export type { TFullWidth, TWithBasicElementOffsets, TWithSpaceBetween } from './
 
 type TTheme = typeof baseTheme;
 declare module 'styled-components' {
-    export interface DefaultTheme extends TTheme { }
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    export interface Theme extends DefaultTheme { }
 }
-

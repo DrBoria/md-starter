@@ -1,8 +1,6 @@
 // Sidebar.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { MenuItem } from '@md/components';
-
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
@@ -55,8 +53,8 @@ const HamburgerMenu: React.FC = () => {
       <Overlay $isOpen={$isOpen} onClick={toggleSidebar} />
 
       <SidebarContainer $isOpen={$isOpen}>
-        <MenuItem href="/" onClick={toggleSidebar}>Home</MenuItem>
-        <MenuItem href="login" onClick={toggleSidebar}>Login</MenuItem>
+        
+        
       </SidebarContainer>
     </>
   );

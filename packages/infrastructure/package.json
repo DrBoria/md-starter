@@ -1,0 +1,23 @@
+{
+    "name": "@md/infrastructure",
+    "version": "0.0.1",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc -w"
+    },
+    "dependencies": {
+        "cdktf": "^0.20.0",
+        "constructs": "^10.3.0",
+        "@cdktf/provider-aws": "^19.0.0",
+        "@cdktf/provider-google": "^13.0.0",
+        "@cdktf/provider-azurerm": "^12.0.0",
+        "@cdktf/provider-docker": "^10.0.0",
+        "@cdktf/provider-cloudflare": "^11.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3",
+        "@types/node": "^20.11.17"
+    }
+}
