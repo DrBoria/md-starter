@@ -6,12 +6,12 @@ import packageJson from '../package.json';
 const program = new Command();
 
 program
-    .name('md-starter')
+    .name('create-md-stack')
     .version(packageJson.version)
     .description(packageJson.description);
 
 program
-    .command('init')
+    .command('init [project-name]')
     .description('Initialize a new Monorepo')
     .action(init);
 

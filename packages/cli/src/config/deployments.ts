@@ -14,23 +14,19 @@ export interface DeployConfig {
 export const DEPLOYMENT_REGISTRY: Record<string, Record<string, DeployConfig>> = {
 
     // Strategy: STATIC (S3, GCS, Vercel)
+    // Strategy: STATIC (S3, GCS, Vercel)
     static: {
         aws: {
             label: 'AWS S3 + CloudFront',
             type: 'cdktf',
-            importPath: '@md/infrastructure/dist/constructs/aws-static',
+            importPath: '@md/infrastructure/dist/aws/aws-static',
             className: 'AwsStaticSite',
             filesToRemove: ['Dockerfile', 'nginx.conf']
         },
         gcp: {
             label: 'GCP Cloud Storage',
             type: 'cdktf',
-            importPath: '@md/infrastructure/dist/constructs/gcp-static', // Example, assuming I might need to create this later or reuse logic? user snippet had it.
-            // Wait, I only implemented 'aws-static' in previous step. 
-            // I should stick to what I have available or stub them.
-            // User snippet had 'gcp-static'. I haven't implemented GcpStaticSite in infra yet. 
-            // I will restrict registry to what I have implemented: AWS Static, GCP CloudRun, AWS Container, RPi.
-            // And add Vercel as requested example of config-only.
+            importPath: '@md/infrastructure/dist/gcp/gcp-static',
             className: 'GcpStaticSite',
             filesToRemove: ['Dockerfile', 'nginx.conf']
         },
@@ -49,22 +45,40 @@ export const DEPLOYMENT_REGISTRY: Record<string, Record<string, DeployConfig>> =
         aws: {
             label: 'AWS Fargate',
             type: 'cdktf',
-            importPath: '@md/infrastructure/dist/constructs/aws-container',
+            importPath: '@md/infrastructure/dist/aws/aws-container',
             className: 'AwsContainerApp',
             filesToRemove: []
         },
         gcp: {
             label: 'GCP Cloud Run',
             type: 'cdktf',
-            importPath: '@md/infrastructure/dist/constructs/gcp-cloudrun',
-            className: 'GcpApp',
+            importPath: '@md/infrastructure/dist/gcp/gcp-container',
+            className: 'GcpCloudRunApp',
             filesToRemove: []
         },
         rpi: {
             label: 'Raspberry Pi (Home Lab)',
             type: 'cdktf',
-            importPath: '@md/infrastructure/dist/constructs/rpi-docker',
-            className: 'RpiApp',
+            importPath: '@md/infrastructure/dist/custom/rpi-docker',
+            className: 'CustomDockerApp',
+            filesToRemove: []
+        }
+    },
+
+    // Strategy: VM (Virtual Machine / Bare Metal)
+    vm: {
+        aws: {
+            label: 'AWS EC2',
+            type: 'cdktf',
+            importPath: '@md/infrastructure/dist/aws/aws-vm',
+            className: 'AwsEc2App',
+            filesToRemove: []
+        },
+        gcp: {
+            label: 'GCP Compute Engine',
+            type: 'cdktf',
+            importPath: '@md/infrastructure/dist/gcp/gcp-vm',
+            className: 'GcpVmApp',
             filesToRemove: []
         }
     }
