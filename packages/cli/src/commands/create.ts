@@ -8,40 +8,34 @@ import { configureInfrastructure } from '../transformers/infra';
 import { pruneUiKitConfig } from '../transformers/ui-kit';
 import { DEPLOYMENT_REGISTRY, DeployConfig } from '../config/deployments';
 
-export async function create() {
-    // ... (Project Name, Template, Components logic remains same) ...
-    // NOTE: This replace block targets imports and the body up to infra prompt. 
-    // I need to be careful to match context.
-
-    // Let's assume I'm replacing the whole file imports + start of function relative to previous `create.ts`.
-    // Actually, I should use `replace_file_content` targeting specific blocks if possible, but the imports change too.
-    // I'll try to target the imports first, then the infra block.
-    // Wait, I can do it in one go if I match enough context.
-
-    // RE-READING instruction: "Replace Infra Prompt section".
-    // I will replace imports at top, then the infra logic block.
-    // Since `replace_file_content` handles one contiguous block, I might need 2 calls or `multi_replace`.
-    // Let's use `multi_replace`.
+export async function create(initialProjectName?: string, initialTemplateKey?: TemplateKey) {
+    console.log(chalk.bold.cyan('MD Starter - Create New App'));
 
     // 1. PROJECT NAME
-    const projectName = await text({
-        message: 'What is the name of your new project?',
-        placeholder: 'my-super-site',
-        validate: (value) => {
-            if (!value) return 'Name is required';
-            if (!/^[a-z0-9-]+$/.test(value)) return 'Name must be lowercase, numbers, and hyphens only';
-        }
-    }) as string;
-    if (typeof projectName !== 'string') return;
+    let projectName = initialProjectName;
+    if (!projectName) {
+        projectName = await text({
+            message: 'What is the name of your new project?',
+            placeholder: 'my-super-site',
+            validate: (value) => {
+                if (!value) return 'Name is required';
+                if (!/^[a-z0-9-]+$/.test(value)) return 'Name must be lowercase, numbers, and hyphens only';
+            }
+        }) as string;
+        if (typeof projectName !== 'string') return;
+    }
 
     // 2. TEMPLATE SELECTION
-    const templateKey = await select({
-        message: 'Select a template:',
-        options: Object.entries(TEMPLATES).map(([key, config]) => ({
-            value: key,
-            label: config.label
-        })) as any
-    }) as TemplateKey;
+    let templateKey = initialTemplateKey;
+    if (!templateKey) {
+        templateKey = await select({
+            message: 'Select a template:',
+            options: Object.entries(TEMPLATES).map(([key, config]) => ({
+                value: key,
+                label: config.label
+            })) as any
+        }) as TemplateKey;
+    }
 
     if (!templateKey) return;
     const templateConfig = TEMPLATES[templateKey];

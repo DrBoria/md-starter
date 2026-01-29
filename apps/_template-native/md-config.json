@@ -1,0 +1,9 @@
+{
+    "allowedGroups": [],
+    "allowedFeatures": [
+        "native",
+        "eslint",
+        "api",
+        "utils"
+    ]
+}

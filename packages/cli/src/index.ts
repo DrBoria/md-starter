@@ -6,7 +6,7 @@ import packageJson from '../package.json';
 const program = new Command();
 
 program
-    .name('create-md-stack')
+    .name('md-starter')
     .version(packageJson.version)
     .description(packageJson.description);
 

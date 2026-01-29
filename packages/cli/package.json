@@ -14,7 +14,9 @@
         "README.md"
     ],
     "scripts": {
-        "build": "tsc",
+        "clean": "rm -rf dist",
+        "generate:registry": "ts-node scripts/generate-registry.ts",
+        "build": "npm run generate:registry && tsc",
         "dev": "tsc -w",
         "bundle:templates": "ts-node scripts/bundle-templates.ts",
         "prepublishOnly": "npm run build && npm run bundle:templates",

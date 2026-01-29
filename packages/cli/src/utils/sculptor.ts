@@ -62,11 +62,15 @@ export async function pruneComponents(targetDir: string, componentPkg: string, k
                         }
                     });
 
+                    // Sort nodes by position (descending) to avoid invalidating indices when removing from the same file
+                    nodesToRemove.sort((a, b) => b.getStart() - a.getStart());
+
                     for (const node of nodesToRemove) {
                         try {
                             if (!node.wasForgotten()) {
-                                console.log(`Removing node: ${node.getKindName()} - ${node.getText().substring(0, 20)}...`);
+                                // console.log(`Removing node: ${node.getKindName()}`);
                                 // Replace with 'null' to keep valid JSX syntax (return null, {null}, etc.)
+                                // Ensure we are not removing the same node twice or a node that has become invalid
                                 node.replaceWithText('null');
                             }
                         } catch (e) {

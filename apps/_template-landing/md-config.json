@@ -1,0 +1,12 @@
+{
+    "allowedGroups": [
+        "default"
+    ],
+    "allowedFeatures": [
+        "eslint",
+        "api",
+        "utils",
+        "components",
+        "sections"
+    ]
+}

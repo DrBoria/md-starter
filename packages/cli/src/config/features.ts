@@ -59,30 +59,27 @@ export const FEATURES: FeatureDef[] = [
         category: 'ui',
         packageJsonKeys: ['@md/components'],
         filesToRemove: ['packages/components'], // Entire package
-        // If kept, we will further prune INSIDE it based on sub-selection (handled in init flow)
-    }
-];
-
-// --- COMPONENT REGISTRY (Granular) ---
-// This maps individual components inside packages/components to their files.
-// We only use this if 'components' feature is selected.
-export interface ComponentDef {
-    id: string;
-    label: string;
-    // Files relative to packages/components/src/
-    files: string[];
-    dependencies: string[];
-}
-
-export const COMPONENTS: ComponentDef[] = [
-    { id: 'Charts', label: 'Charts (Recharts)', files: ['components/default/Charts'], dependencies: ['recharts', 'd3-scale'] },
-    { id: 'Editor', label: 'Rich Text Editor', files: ['components/default/HtmlEditor'], dependencies: ['@tiptap/react', '@tiptap/starter-kit'] },
-    { id: 'Maps', label: 'Maps', files: ['components/default/Maps'], dependencies: ['react-map-gl'] },
-    // Base UI is usually kept by default or selected as a group
+    },
     {
-        id: 'BaseUI', label: 'Base UI (Buttons, Inputs, etc.)', files: [
-            'components/default/Button', 'components/default/Card', 'components/default/Input',
-            'components/default/Typography', 'components/default/Modals'
-        ], dependencies: []
+        id: 'sections',
+        label: 'Sections Library (@md/sections)',
+        category: 'ui',
+        packageJsonKeys: ['@md/sections'],
+        filesToRemove: ['packages/sections'], // Entire package
     }
 ];
+
+// Interface is imported from registry.generated
+
+// -------------------------------------------------------------------------
+// RE-EXPORT GENERATED REGISTRIES
+// -------------------------------------------------------------------------
+import { GENERATED_COMPONENTS, GENERATED_SECTIONS, ComponentDef as GenComponentDef } from './registry.generated';
+
+export type ComponentDef = GenComponentDef;
+
+export const COMPONENTS: ComponentDef[] = GENERATED_COMPONENTS;
+
+export const SECTIONS: ComponentDef[] = GENERATED_SECTIONS;
+
+// TEMPLATE_CONFIG removed. Configuration is now loaded from md-starter.json in the template directory.

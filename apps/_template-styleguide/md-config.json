@@ -1,0 +1,15 @@
+{
+    "allowedGroups": [
+        "default",
+        "keystone",
+        "textures"
+    ],
+    "allowedFeatures": [
+        "eslint",
+        "api",
+        "utils",
+        "components",
+        "sections",
+        "native"
+    ]
+}
