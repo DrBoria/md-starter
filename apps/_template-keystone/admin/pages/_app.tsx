@@ -3,17 +3,18 @@ import KeystoneApp from '../../.keystone/admin/pages/_app.js';
 import { LoggerProvider, ModalProvider } from '@md/components/keystone';
 import { CentralModal, FullScreenModal } from '@md/components';
 import { SideBarModal } from '@md/sections/keystone';
-import { dark, ThemeProvider } from '@md/styles';
+import { dark, ThemeProvider, GlobalStyles } from '@md/styles';
 import type { ApolloClient } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql';
-import type {AppProps} from 'next/app';
+import type { AppProps } from 'next/app';
 
 function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
     // @ts-ignore
     const Wrapped = (props) => (
         <ApolloProvider client={apolloClient as unknown as ApolloClient<object>}>
             <ThemeProvider theme={dark}>
+                <GlobalStyles />
                 <LoggerProvider>
                     <ModalProvider>
                         <FullScreenModal />

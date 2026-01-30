@@ -27,3 +27,5 @@ declare module 'styled-components' {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     export interface Theme extends DefaultTheme { }
 }
+// GlobalStyles
+export { GlobalStyles } from './GlobalStyles';

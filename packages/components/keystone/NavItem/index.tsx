@@ -2,11 +2,11 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Link } from '../..';
-import type { TWithBasicElementOffsets} from '@md/styles';
+import { Link } from '../../default/Link';
+import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
-const StyledLink = styled(Link)<TWithBasicElementOffsets>`
+const StyledLink = styled(Link) <TWithBasicElementOffsets>`
   background: transparent;
   color: ${({ theme }) => theme.colors.sectionContent};
   display: block;

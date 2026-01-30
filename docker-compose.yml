@@ -1,26 +1,18 @@
-version: "3.8"
+version: '3.8'
+
 services:
-  keystone:
-    build:
-      context: .
-      dockerfile: Dockerfile # Ensure you're using the correct Dockerfile
-    image: drboria/turbo:latest # Tagging the image here directly
+  db:
+    image: postgres:15-alpine
+    container_name: md_starter_postgres
+    restart: always
     environment:
-      DATABASE_URL: "${DATABASE_URL}"
-      DB_USER: "${DB_USER}"
-      DB_PORT: "${DB_PORT}"
-      DB_ENDPOINT: "${DB_ENDPOINT}"
-      DB_NAME: "${DB_NAME}"
-      DB_PASSWORD: "${DB_PASSWORD}"
-      DB_PASSWORD_2: "${DB_PASSWORD}"
-      DB_PASSWORD_3: "${DB_PASSWORD_3}"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: keystonedb
     ports:
-      - "80:80"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "512M"
-        reservations:
-          cpus: "0.25"
-          memory: "256M"
+      - '5438:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

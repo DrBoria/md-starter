@@ -2,8 +2,8 @@
   "name": "@md/components",
   "version": "0.0.0",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
