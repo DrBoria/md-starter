@@ -4,7 +4,9 @@ export { default as ThemeProvider } from './ThemeProviderWrapper';
 
 export {
     light,
-    dark
+    dark,
+    viking,
+    liquidGlass
 } from './themes'
 
 export {

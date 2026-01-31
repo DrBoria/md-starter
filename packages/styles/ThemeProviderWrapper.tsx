@@ -1,15 +1,17 @@
-import type { ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import React, { useState } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import StyledReset from 'styled-reset';
 
-import { light, baseTheme } from './themes';
+import { light } from './themes';
+import baseTheme from './themes/baseTheme';
 type TColorTheme = typeof light;
 
 const MediaProvider = styled.div`
-  ${({ theme: { variables, screens, offsets } }) => `
-    --border-radius: ${variables.border.radius}px;
+  ${({ theme: { variables, screens, offsets, colors } }) => `
+    --border-radius: ${colors.borderRadius || `${variables.border.radius}px`};
     --border-size: ${variables.border.size}px;
+    --glass-effect: ${colors.glassEffect || 'none'};
 
     --page-offset: calc((100% - ${screens.desktop.width}px - ${offsets.section}) / 2);
 
@@ -41,7 +43,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font: ${({ theme }) => `500 ${theme.font.size} ${theme.font.family.text}`}
+  font: ${({ theme }) => `500 ${theme.font.size} ${theme.colors.fontFamily || theme.font.family.text}`};
+  background-color: ${({ theme }) => theme.colors.background || theme.colors.section};
 }
 
 * {
@@ -51,6 +54,8 @@ body {
 
 const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
   const [theme] = useState(baseTheme);
+  console.log('ThemeProviderWrapper baseTheme:', baseTheme);
+  console.log('ThemeProviderWrapper merged theme:', { ...theme, colors: colorTheme || light });
 
   return (
     <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>

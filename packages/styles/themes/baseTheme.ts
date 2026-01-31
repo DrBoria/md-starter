@@ -1,4 +1,4 @@
-import { light } from '.';
+import light from './light';
 import border from './border';
 import elements from './elements';
 import font from './font';

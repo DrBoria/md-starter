@@ -2,7 +2,14 @@
     "allowedGroups": [
         "default",
         "keystone",
-        "textures"
+        "textures",
+        "forms",
+        "navigation",
+        "data-display",
+        "feedback",
+        "layout",
+        "overlays",
+        "common"
     ],
     "allowedFeatures": [
         "eslint",

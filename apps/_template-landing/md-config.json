@@ -1,6 +1,13 @@
 {
     "allowedGroups": [
-        "default"
+        "default",
+        "forms",
+        "navigation",
+        "data-display",
+        "feedback",
+        "layout",
+        "overlays",
+        "common"
     ],
     "allowedFeatures": [
         "eslint",

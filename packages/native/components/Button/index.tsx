@@ -39,8 +39,12 @@ const StyledButton = styled(TouchableOpacity) <TButton>`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  padding: ${({ theme }) => theme.offsets.elementContent}px;
-  font-family: ${({theme}) => theme.font.family.text};
+  margin-bottom: ${withOffsetBottom};
+  padding: ${({ theme }) => {
+    if (!theme || !theme.offsets) console.error('Button theme missing offsets:', theme);
+    return theme.offsets ? theme.offsets.elementContent : 0;
+  }}px;
+  font-family: ${({ theme }) => theme.font.family.text};
 
   background: transparent;
   border-radius: ${({ theme }) => theme.border.radius}px;

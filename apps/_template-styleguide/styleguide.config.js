@@ -23,27 +23,107 @@ const sections = [
   },
   {
     name: "@md/components",
-    components: getComponentPathPatterns(
-      path.resolve(__dirname, "../../packages/components/default")
-    ),
+    sections: [
+      {
+        name: "Forms",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/forms")),
+      },
+      {
+        name: "Navigation",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/navigation")),
+      },
+      {
+        name: "Data Display",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/data-display")),
+      },
+      {
+        name: "Feedback",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/feedback")),
+      },
+      {
+        name: "Overlays",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/overlays")),
+      },
+      {
+        name: "Layout",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/layout")),
+      },
+      {
+        name: "Common",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/default/common")),
+      },
+    ],
   },
   {
     name: "@md/sections",
-    components: getComponentPathPatterns(
-      path.resolve(__dirname, "../../packages/sections/default") // Corrected to point to sections
-    ),
+    sections: [
+      {
+        name: "Feedback",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/default/feedback")),
+      },
+      {
+        name: "Navigation",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/default/navigation")),
+      },
+    ],
   },
   {
     name: "@md/components/keystone",
-    components: getComponentPathPatterns(
-      path.resolve(__dirname, "../../packages/components/keystone")
-    ),
+    sections: [
+      {
+        name: "Forms",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/forms")),
+      },
+      {
+        name: "Navigation",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/navigation")),
+      },
+      {
+        name: "Data Display",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/data-display")),
+      },
+      {
+        name: "Feedback",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/feedback")),
+      },
+      {
+        name: "Overlays",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/overlays")),
+      },
+      {
+        name: "Common",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/components/keystone/common")),
+      },
+    ],
   },
   {
     name: "@md/sections/keystone",
-    components: getComponentPathPatterns(
-      path.resolve(__dirname, "../../packages/sections/keystone")
-    ),
+    sections: [
+      {
+        name: "Forms",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/forms")),
+      },
+      {
+        name: "Data Display",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/data-display")),
+      },
+      {
+        name: "Feedback",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/feedback")),
+      },
+      {
+        name: "Overlays",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/overlays")),
+      },
+      {
+        name: "Layout",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/layout")),
+      },
+      {
+        name: "Common",
+        components: getComponentPathPatterns(path.resolve(__dirname, "../../packages/sections/keystone/common")),
+      },
+    ],
   },
   {
     name: "@md/native/components",
@@ -51,7 +131,7 @@ const sections = [
       path.resolve(__dirname, "../../packages/native/components")
     ),
   },
-].filter((section) => section.components !== null);
+].filter((section) => section.components !== null || (section.sections && section.sections.length > 0));
 
 module.exports = {
   styles: {
@@ -100,6 +180,7 @@ module.exports = {
     resolve: {
       alias: {
         "react-native$": "react-native-web",
+        "styled-components/native": "styled-components",
         components: path.resolve(__dirname, "../../packages/components"),
       },
       modules: [

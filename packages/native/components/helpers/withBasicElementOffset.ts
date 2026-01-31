@@ -8,11 +8,19 @@ export type TWithBasicElementOffsets = {
 };
 
 export const withOffsetsRight = css`
-  ${({ $offsetRight, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) =>
-    $offsetRight && theme.offsets.betweenElements}
+  ${({ $offsetRight, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => {
+    if (!theme || !theme.offsets) {
+      console.error('Theme or theme.offsets is missing in withOffsetsRight:', theme);
+    }
+    return $offsetRight && theme.offsets && theme.offsets.betweenElements;
+  }}
 `;
 
 export const withOffsetBottom = css`
-  ${
-    ({ $offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => $offsetBottom && theme.offsets.betweenElements
+  ${({ $offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => {
+    if (!theme || !theme.offsets) {
+      console.error('Theme or theme.offsets is missing in withOffsetBottom:', theme);
+    }
+    return $offsetBottom && theme.offsets && theme.offsets.betweenElements;
+  }
   }`

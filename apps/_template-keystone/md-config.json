@@ -1,7 +1,14 @@
 {
     "allowedGroups": [
         "default",
-        "keystone"
+        "keystone",
+        "forms",
+        "navigation",
+        "data-display",
+        "feedback",
+        "layout",
+        "overlays",
+        "common"
     ],
     "allowedFeatures": [
         "eslint",

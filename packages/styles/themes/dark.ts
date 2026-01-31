@@ -6,12 +6,12 @@ export default {
   disabled: '#5A5A5A',
   warning: '#CC3300',
 
-  section:        '#1f232b',       // Dark blue-black, atmospheric
+  section: '#1f232b',       // Dark blue-black, atmospheric
   sectionContent: '#f0f0f0',       // Soft off-white for contrast
-  overlay:        '#38494e',       // Deep, shadowy overlay
-  overlayActive:  '#172123',       // Even darker active overlay
-  labelBackground:          '#888888',       // Muted gray for secondary text
-  labelText:          '#f0f0f0', 
+  overlay: '#38494e',       // Deep, shadowy overlay
+  overlayActive: '#172123',       // Even darker active overlay
+  labelBackground: '#888888',       // Muted gray for secondary text
+  labelText: '#f0f0f0',
 
   // Info
   warningBackground: '#4a4200',    // Deep amber background
@@ -20,6 +20,11 @@ export default {
   errorBackground: '#4f1a1a',      // Dark maroon for errors
   errorText: '#FF6666',            // Fiery red for error text
 
-  successBackground: '#0d3920',    // Deep green for success backgrounds
-  successText: '#4CAF50',          // Vibrant green text
+  successBackground: '#1B5E20', // Green 900
+  successText: '#69F0AE', // Green A200
+
+  // Special Properties
+  glassEffect: 'none',
+  fontFamily: 'inherit',
+  borderRadius: '4px',
 };

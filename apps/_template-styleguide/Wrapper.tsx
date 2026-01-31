@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import * as colorThemes from '@md/styles/themes/colors';
 import { ModalProvider, LoggerProvider, PageTitle } from '@md/components';
-import { ThemeProvider } from '@md/styles';
+import { ThemeProvider, baseTheme } from '@md/styles';
 
 const Wrapper: FC = ({ children }) => {
     const childrenArray = React.Children.toArray(children);

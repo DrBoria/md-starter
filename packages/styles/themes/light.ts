@@ -6,12 +6,12 @@ export default {
   highlighted: '#7d9b99',
   disabled: '#5A5A5A',
   warning: '#CC3300',
-  section:        '#eff1f6',       // Light gray, soft on the eyes
+  section: '#eff1f6',       // Light gray, soft on the eyes
   sectionContent: '#202020',       // Dark gray for main content
-  overlay:        '#e6e6e6',       // Light overlay
-  overlayActive:  '#dcdcdc',       // Slightly darker active overlay
-  labelBackground:          '#777777',       // Muted gray for labels
-  labelText:          '#202020', 
+  overlay: '#e6e6e6',       // Light overlay
+  overlayActive: '#dcdcdc',       // Slightly darker active overlay
+  labelBackground: '#777777',       // Muted gray for labels
+  labelText: '#202020',
 
   // Info
   warningBackground: '#FFE69C',    // Pale amber background
@@ -22,4 +22,9 @@ export default {
 
   successBackground: '#BDE8C2',    // Light green for success background
   successText: '#155724',          // Dark green for text
+
+  // Special Properties
+  glassEffect: 'none',
+  fontFamily: 'inherit',
+  borderRadius: '4px',
 };
