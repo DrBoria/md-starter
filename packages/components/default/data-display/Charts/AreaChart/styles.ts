@@ -80,7 +80,7 @@ const Variants = (variant: TProps['variant']) => {
   }
 };
 
-const Wrapper = styled(ResponsiveContainer)<TComponentProps>`
+const Wrapper = styled(ResponsiveContainer) <TComponentProps>`
   display: flex;
   align-items: center;
   justify-content: center;

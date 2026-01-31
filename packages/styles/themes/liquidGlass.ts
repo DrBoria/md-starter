@@ -1,34 +1,67 @@
+import { css } from 'styled-components';
+import light from './light';
 
+// The mixin (keep generic export for direct usage)
+export const liquidGlassMixin = css`
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+// The Theme Object (for Styleguide/ThemeProvider)
 export default {
-    theme: 'liquidGlass',
+  ...light,
+  theme: 'liquidGlass',
 
-    highlightedText: '#000000',
-    highlighted: 'rgba(0, 122, 255, 0.2)', // iOS Blue tint
-    disabled: 'rgba(142, 142, 147, 0.3)',
-    warning: '#FF9500',
+  // Override colors for glass look
+  section: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  sectionContent: '#ffffff',
 
-    // Apple-like Glass Palette
-    section: 'rgba(255, 255, 255, 0.4)', // More transparent white
-    sectionContent: '#000000',
+  overlay: 'rgba(255, 255, 255, 0.15)',
+  overlayActive: 'rgba(255, 255, 255, 0.25)',
 
-    overlay: 'rgba(255, 255, 255, 0.3)',
-    overlayActive: 'rgba(255, 255, 255, 0.6)',
+  // --- PHYSICS & EFFECTS (Glassy) ---
+  effects: {
+    ...light.effects,
+    texture: 'none',
+    glow: {
+      soft: '0 0 10px rgba(255,255,255,0.2)',
+      medium: '0 0 20px rgba(255,255,255,0.4)',
+      strong: '0 0 30px rgba(255,255,255,0.6)',
+    },
+    depth: {
+      engraved: 'inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.1)',
+      floating: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+      inner: {
+        soft: 'inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.1)',
+        medium: 'inset 0 2px 2px rgba(255,255,255,0.2), inset 0 -2px 2px rgba(0,0,0,0.1)',
+        strong: 'inset 0 4px 4px rgba(255,255,255,0.2), inset 0 -4px 4px rgba(0,0,0,0.1)',
+      },
+      outer: {
+        soft: '0 4px 16px 0 rgba(31, 38, 135, 0.37)',
+        medium: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        strong: '0 12px 48px 0 rgba(31, 38, 135, 0.37)',
+      },
+    },
+    // Keep interaction from light if needed, or override
+    interaction: light.effects.interaction
+  },
 
-    labelBackground: 'rgba(0, 0, 0, 0.05)', // Very light fill
-    labelText: '#3C3C43',
+  // Special properties
+  glassEffect: 'blur(10px)',
 
-    // Info
-    warningBackground: 'rgba(255, 204, 0, 0.2)',
-    warningText: '#9A6700',
+  geometry: {
+    radius: '12px',
+    ragged: 'none',
+    cut: 'none',
+  },
 
-    errorBackground: 'rgba(255, 59, 48, 0.15)',
-    errorText: '#D70015',
+  assets: {
+    knotPattern: 'none',
+  },
 
-    successBackground: 'rgba(52, 199, 89, 0.15)',
-    successText: '#007D35',
-
-    // Special Properties
-    glassEffect: 'blur(20px) saturate(180%)',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-    borderRadius: '20px', // More rounded
+  // Legacy
+  borderRadius: '12px',
 };

@@ -1,5 +1,7 @@
 import type { FC } from "react";
 import React, { useState } from "react";
+import type { TWithBasicElementOffsets } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight, withSpaceBetween } from '@md/styles';
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
@@ -74,47 +76,64 @@ const ModalContainer = styled.div<{ $isClosing?: boolean }>`
   left: 50%;
   min-width: 440px;
   max-height: 90%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.section}; // Use theme background
+  color: ${({ theme }) => theme.colors.sectionContent};
+
+  border-radius: 20px;
+  /* Stone-like shadow */
+  box-shadow: ${({ theme }) => theme.colors.effects?.depth?.outer?.medium || '0 10px 30px rgba(0,0,0,0.5)'};
+  
+  /* Remove border, let shadow define shape */
+  border: none;
+  
+  padding: ${withSpaceBetween};
+  
+  /* Cut corners logic if desired, but for modal usually rounded */
+  ${({ theme }) => theme.colors.geometry?.cut && `
+    border-radius: 0;
+    clip-path: ${theme.colors.geometry.cut};
+  `}
+
   ${(props) =>
-    props.$isClosing ? centerZoomOutAnimation : centerZoomInAnimation};
+    props.$isClosing ? centerZoomOutAnimation : centerZoomInAnimation
+  };
 `;
 
 // Overlay styled component
 const Overlay = styled.div<{ $isClosing?: boolean }>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+background - color: rgba(0, 0, 0, 0.5);
+cursor: pointer;
   ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
 `;
 
 // Styled modal component
 const StyledModal = styled.div`
-  background: white;
-  border-radius: 8px;
-  width: 100%;
-  min-height: 100%;
+background: transparent; // Let container background show through
+border - radius: inherit;
+width: 100 %;
+min - height: 100 %;
 `;
 
 // Modal content container styled component
 const ModalContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 24px; // same as in keystone
+display: flex;
+flex - direction: column;
+align - items: flex - start;
+gap: 1rem;
+padding: 24px; // same as in keystone
 `;
 
 // ModalProps interface
 
 export const CentralModal: FC = () => {
-  const {modalData, setModalData} = useModal();
+  const { modalData, setModalData } = useModal();
   const [$isClosing, setIsClosing] = useState(false);
 
   const onHide = () => {

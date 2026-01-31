@@ -5,11 +5,13 @@ import { PlainText, SectionTitle } from '../../data-display/Typography';
 import { dark } from '@md/styles';
 
 <PageContainer>
-  Page Container. Got offset equal to header height
-  <BasicSection>
-    Basic Section
-    <SectionTitle>Section Title</SectionTitle>
-    <PlainText>Plain text. Page container got offset from top for header</PlainText>
+  Page Container (Viking Background)
+  <BasicSection style={{ marginTop: 20 }}>
+    <SectionTitle>Basic Section (Stone Slab)</SectionTitle>
+    <PlainText>This section should have an inner shadow and stone borders in Viking theme.</PlainText>
+    <div style={{ padding: 20, border: '1px solid rgba(255,255,255,0.1)', marginTop: 10 }}>
+        Content inside section
+    </div>
   </BasicSection>
 </PageContainer>;
 ```

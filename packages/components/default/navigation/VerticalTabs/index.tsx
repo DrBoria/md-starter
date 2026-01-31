@@ -83,13 +83,13 @@ export const VerticalTab = styled.div<{ $isSelected: boolean }>`
     background-color: ${({ theme }) => theme.colors.overlayActive}; // Overlay active color on hover
   }
 
-  ${({ $isSelected }) =>
+  ${({ $isSelected, theme }) =>
     $isSelected &&
     `
-    background-color: ${({ theme }) => theme.colors.section}; // Section background when selected
-    border-left: ${({ theme }) => `${theme.variables.border.size * 3}px solid ${theme.colors.highlighted}`}; // Triple border size with highlighted color
+    background-color: ${theme.colors.section}; // Section background when selected
+    border-left: ${theme.variables.border.size * 3}px solid ${theme.colors.highlighted}; // Triple border size with highlighted color
     &:hover {
-      background-color: ${({ theme }) => theme.colors.section}; // Section background on hover when selected
+      background-color: ${theme.colors.section}; // Section background on hover when selected
     }
   `}
 `;

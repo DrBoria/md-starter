@@ -5,7 +5,7 @@ import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 export const basicFont = css`
-  ${({ theme }) => `500 ${theme.font.size} ${theme.colors.fontFamily || theme.font.family.text}`}
+  ${({ theme }) => `500 ${theme.font.size} ${theme.fontFamily || theme.font.family.text}`}
 `;
 
 /**
@@ -42,7 +42,7 @@ const PageTitle = styled.h1<TWithBasicElementOffsets>`
   font: ${basicFont};
   font-weight: 700;
   font-size: ${sizes.PageTitle.fontSize};
-  font-family: ${({ theme }) => theme.colors.fontFamily || theme.font.family.text};
+  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.text};
   line-height: ${sizes.PageTitle.lineHeight};
   text-transform: capitalize;
 `;
@@ -54,7 +54,7 @@ const SubTitle = styled.h2<TWithBasicElementOffsets>`
   color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
   font-size: ${sizes.SubTitle.fontSize};
-  font-family: ${({ theme }) => theme.colors.fontFamily || theme.font.family.title};
+  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.title};
   line-height: ${sizes.SubTitle.lineHeight};
 `;
 
@@ -66,7 +66,7 @@ const SectionTitle = styled.h3<TWithBasicElementOffsets>`
   font: ${basicFont};
   font-weight: 700;
   font-size: ${sizes.SectionTitle.fontSize};
-  font-family: ${({ theme }) => theme.colors.fontFamily || theme.font.family.title};
+  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.title};
   line-height: ${sizes.SectionTitle.lineHeight};
   text-transform: capitalize;
 `;
@@ -92,7 +92,7 @@ const Label = styled.label<TWithBasicElementOffsets>`
   color: ${({ theme }) => theme.colors.labelText};
 
   background-color: ${({ theme }) => theme.colors.labelBackground};
-  border-radius: ${({ theme }) => theme.colors.borderRadius || theme.border.radius};
+  border-radius: ${({ theme }) => theme.borderRadius || theme.border.radius};
 `;
 
 const DescriptionText = styled.h3`

@@ -54,8 +54,6 @@ body {
 
 const ThemeProviderWrapper = ({ children, theme: colorTheme }: { children: ReactNode, theme?: TColorTheme }) => {
   const [theme] = useState(baseTheme);
-  console.log('ThemeProviderWrapper baseTheme:', baseTheme);
-  console.log('ThemeProviderWrapper merged theme:', { ...theme, colors: colorTheme || light });
 
   return (
     <ThemeProvider theme={{ ...theme, colors: colorTheme || light }}>

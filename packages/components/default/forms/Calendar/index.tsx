@@ -33,10 +33,10 @@ const DayCell = styled.div<{ theme: DefaultTheme }>`
 `;
 
 const Calendar = () => {
-//   const [currentDate, setCurrentDate] = useState<Moment>(moment());
+  //   const [currentDate, setCurrentDate] = useState<Moment>(moment());
 
   const daysOfWeek = moment.weekdaysShort();
-//   const currentDateFormatted = currentDate.format('MMMM YYYY');
+  //   const currentDateFormatted = currentDate.format('MMMM YYYY');
 
   const getCalendarGrid = () => {
     const today = moment(); // Get current date using moment.js

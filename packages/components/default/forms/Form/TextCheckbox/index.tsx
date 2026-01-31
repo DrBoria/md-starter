@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { basicFont } from '../../../data-display/Typography';
 
@@ -24,27 +24,74 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   display: none;
   width: ${({ fullWidth }) => fullWidth && '100%'};
 
+  /* Default Theme Logic */
   &:checked + label {
     color: ${({ theme }) => theme.colors.highlightedText};
-
     background: ${({ theme }) => theme.colors.highlighted};
   }
 
   & + label {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     height: ${({ theme }) => theme.elements.form.height};
-    padding: ${({ theme }) => theme.offsets.elementContent};
-
+    padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
     font: ${basicFont};
-
+    
     background: ${({ theme }) => theme.colors.overlay};
-    border-radius: ${({ theme }) => theme.border.radius};
+    border-radius: ${({ theme }) => theme.variables.border.radius}px;
     cursor: pointer;
   }
 
   & + label:hover {
     background: ${({ theme }) => theme.colors.overlayActive};
   }
+
+  /* VIKING THEME OVERRIDE (Runes) */
+  ${({ theme }) => theme.theme === 'viking' && css`
+      /* Hide default background change, use rune tick instead */
+      &:checked + label {
+         color: ${theme.colors.highlighted};
+         background: transparent;
+         text-shadow: ${theme.colors.effects?.glow?.soft};
+
+         &::before {
+             /* Active Rune */
+             content: 'ᚷ'; /* Gebo (Gift) */
+             font-size: 18px;
+             color: ${theme.colors.highlightedText};
+             background-color: ${theme.colors.highlighted};
+             box-shadow: ${theme.colors.effects?.glow?.medium};
+             border-color: ${theme.colors.highlighted};
+         }
+      }
+
+      & + label {
+         background-color: transparent;
+         color: ${theme.colors.sectionContent};
+         
+         /* Create pseudo-element for the box */
+         &::before {
+             content: '';
+             display: grid;
+             place-items: center;
+             width: 24px;
+             height: 24px;
+             
+             /* Material */
+             background-color: ${theme.colors.overlay}; /* Dark Stone */
+             box-shadow: ${theme.colors.effects?.depth?.inner?.medium}; /* Engraved */
+             border: 1px solid ${theme.colors.disabled};
+             
+             transition: all 0.2s ease;
+         }
+      }
+
+      & + label:hover {
+        background: transparent;
+        color: ${theme.colors.highlighted};
+      }
+  `}
 `;
 
 const TextCheckbox = ({ name, id, ...props }: TTextCheckboxProps) => (

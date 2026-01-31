@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { LucideIcon } from "../../../common/Icons";
 import { Input } from "../Input";
 
@@ -17,10 +17,10 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
-  border-radius: ${({ theme }) => theme.variables.border.radius};
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+  border-radius: ${({ theme }) => theme.variables.border.radius}px;
   border-style: solid;
-  border-width: ${({ theme }) => theme.variables.border.size};
+  border-width: ${({ theme }) => theme.variables.border.size}px;
   border-color: ${({ theme }) => theme.colors.labelBackground};
   color: ${({ theme }) => theme.colors.sectionContent};
   background-color: ${({ theme }) => theme.colors.section};
@@ -33,26 +33,71 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
     border-color: ${theme.colors.section};
     color: ${theme.colors.labelBackground};
   `}
+
+  /* VIKING THEME OVERRIDE */
+  ${({ theme }) => theme.theme === 'viking' && css`
+    background-color: ${theme.colors.section}; /* Stone lighter */
+    background-image: ${theme.colors.effects?.texture};
+    color: ${theme.colors.sectionContent};
+    
+    /* Cut corners */
+    clip-path: ${theme.colors.geometry?.cut}; 
+    
+    /* Border implied by inset shadow */
+    box-shadow: inset 0 0 0 1px ${theme.colors.disabled};
+    
+    border: none;
+
+    &:hover {
+      /* Glow on hover */
+      box-shadow: inset 0 0 0 1px ${theme.colors.highlighted}, ${theme.colors.effects?.glow?.soft};
+      color: ${theme.colors.highlighted};
+    }
+  `}
 `;
 
 const Dropdown = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
-  border: ${({ theme }) => theme.variables.border.size} solid ${({ theme }) => theme.colors.labelBackground};
+  width: 100%; /* Ensure full width */
+  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.labelBackground};
   max-height: 200px;
   overflow-y: auto;
   background-color: ${({ theme }) => theme.colors.section};
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
-  border-radius: ${({ theme }) => theme.variables.border.radius};
+  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  border-radius: ${({ theme }) => theme.variables.border.radius}px;
   z-index: 100;
+
+  /* VIKING THEME OVERRIDE */
+  ${({ theme }) => theme.theme === 'viking' && css`
+    background-color: ${theme.colors.section};
+    background-image: ${theme.colors.effects?.texture};
+    border: 1px solid ${theme.colors.disabled};
+    border-top: none;
+    
+    /* Floating effect */
+    box-shadow: ${theme.colors.effects?.depth?.outer?.medium};
+    
+    /* Decorative Knot Pattern Top */
+    &::before {
+        content: '';
+        display: block;
+        height: 6px;
+        width: 100%;
+        background-image: ${theme.colors.assets?.knotPattern};
+        background-repeat: repeat-x;
+        opacity: 0.5;
+        margin-bottom: 4px;
+    }
+  `}
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
   background-color: ${({ $highlighted, theme }) =>
     $highlighted ? theme.colors.highlighted : theme.colors.section};
   color: ${({ $highlighted, theme }) =>
@@ -64,17 +109,29 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
     background-color: ${({ theme }) => theme.colors.highlighted};
     color: ${({ theme }) => theme.colors.highlightedText};
   }
+
+  /* VIKING THEME ITEM */
+  ${({ theme, $highlighted }) => theme.theme === 'viking' && css`
+    color: ${$highlighted ? theme.colors.highlightedText : theme.colors.sectionContent};
+    background-color: ${$highlighted ? theme.colors.highlighted : 'transparent'};
+    
+    &:hover {
+      background-color: ${theme.colors.highlighted};
+      color: ${theme.colors.highlightedText};
+      box-shadow: ${theme.colors.effects?.glow?.medium};
+    }
+  `}
 `;
 
 const IconsContainer = styled.div`
   color: ${({ theme }) => theme.colors.labelBackground};
   display: flex;
-  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
-  padding-left: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
+  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  padding-left: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
 `;
 
 const NoOptions = styled.li`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile};
+  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
   color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
@@ -90,8 +147,8 @@ const ClearButton = styled.button<{ readOnly: boolean }>`
 const Separator = styled.div`
   width: 1px;
   background-color: ${({ theme }) => theme.colors.labelBackground};
-  margin-bottom: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
-  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile};
+  margin-bottom: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
   box-sizing: border-box;
 `;
 

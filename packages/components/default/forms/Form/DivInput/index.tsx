@@ -1,7 +1,8 @@
 import type {
   ChangeEvent,
   CSSProperties,
-  KeyboardEvent} from "react";
+  KeyboardEvent
+} from "react";
 import React, {
   useEffect,
   useRef,

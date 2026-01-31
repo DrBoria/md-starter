@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import type { IconName } from "../../common/Icons";
 import { LucideIcon } from "../../common/Icons";
 import { Loader } from "../../feedback/Spinner";
@@ -35,9 +35,9 @@ export interface ButtonProps
 }
 
 const StyledButton = styled.button<{
-  tone: ButtonTone;
-  weight: ButtonWeight;
-  size: ButtonSize;
+  $tone: ButtonTone;
+  $weight: ButtonWeight;
+  $size: ButtonSize;
   $fullWidth?: boolean;
 }>`
   display: flex;
@@ -47,8 +47,8 @@ const StyledButton = styled.button<{
   cursor: pointer;
   width: ${(props) => (props.$fullWidth ? "100%" : "auto")};
   gap: ${(props) =>
-    props.size !== "icon"
-      ? `${props.theme.variables.offsets.betweenElements}px`
+    props.$size !== "icon"
+      ? `${props.theme.variables.offsets.betweenElements.mobile}px`
       : "0"};
   border-radius: ${({ theme }) => theme.border.radius}px;
 
@@ -58,7 +58,7 @@ const StyledButton = styled.button<{
   }
 
   ${(props) => {
-    const { theme, tone, weight } = props;
+    const { theme, $tone: tone, $weight: weight } = props;
 
     const color = (() => {
       switch (tone) {
@@ -146,7 +146,7 @@ const StyledButton = styled.button<{
     }
 
     let sizeStyles = "";
-    switch (props.size) {
+    switch (props.$size) {
       case "small":
         sizeStyles = `
           padding: ${theme.variables.offsets.elementContent.mobile / 2}px ${theme.variables.offsets.elementContent.mobile
@@ -186,6 +186,92 @@ const StyledButton = styled.button<{
     return `
       ${weightStyles}
       ${sizeStyles}
+
+      /* Viking Theme Overrides */
+      /* Viking Theme Overrides */
+      ${({ theme, $tone }) => theme.theme === 'viking' && css`
+        /* VIKING THEME AUGMENTATION (North UI) */
+        /* 1. Geometry (Runes) */
+        border-radius: 0;
+        ${theme.colors.geometry?.cut && `clip-path: ${theme.colors.geometry.cut};`}
+        
+        /* 2. Typography (Cinzel) */
+        font-family: ${theme.colors.fontFamily || 'serif'};
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 700;
+        
+        /* 3. Material (Etched Metal) */
+        /* Base: "Active" Gold (highlighted) or "Passive" Steel (labelBackground) */
+        background: linear-gradient(
+            180deg, 
+            ${theme.colors.highlighted} 0%, 
+            color-mix(in srgb, ${theme.colors.highlighted}, black 20%) 100%
+        );
+        color: ${theme.colors.highlightedText};
+        border: none; 
+
+        /* 4. Volume (Highlight top, Shadow bottom) */
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 0 rgba(0,0,0,0.3);
+
+        /* Tone Overrides */
+        ${$tone === 'passive' && css`
+          background: linear-gradient(
+            180deg, 
+            ${theme.colors.labelBackground} 0%, 
+            color-mix(in srgb, ${theme.colors.labelBackground}, black 30%) 100%
+          );
+          color: ${theme.colors.sectionContent}; 
+        `}
+
+        ${$tone === 'warning' && css`
+          background: linear-gradient(
+            180deg, 
+            ${theme.colors.warning} 0%, 
+            color-mix(in srgb, ${theme.colors.warning}, black 20%) 100%
+          );
+          color: ${theme.colors.warningText};
+        `}
+
+        /* Interaction Physics */
+        &:hover {
+          filter: brightness(1.1);
+          transform: translateY(-1px);
+          box-shadow: ${theme.colors.effects?.glow?.medium || `0 0 15px ${theme.colors.highlighted}60`};
+        }
+
+        &:active {
+          transform: translateY(2px);
+          box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); 
+          filter: brightness(0.95);
+        }
+
+        /* 5. Decorative Frame (Knotwork) */
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            
+            /* Frame */
+            border: 2px solid ${theme.colors.highlighted};
+            opacity: 0.3;
+            
+            /* Cut corners for frame */
+            clip-path: polygon(
+                0 8px, 8px 0, 
+                calc(100% - 8px) 0, 100% 8px, 
+                100% calc(100% - 8px), calc(100% - 8px) 100%, 
+                8px 100%, 0 calc(100% - 8px)
+            );
+        }
+
+        /* HOVER Frame */
+        &:hover::after {
+            opacity: 1;
+            box-shadow: ${theme.colors.effects?.glow?.medium}; 
+        }
+      `}
     `;
   }}
 `;
@@ -211,9 +297,9 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       className={className}
-      tone={tone}
-      weight={weight}
-      size={effectiveSize}
+      $tone={tone}
+      $weight={weight}
+      $size={effectiveSize}
       $fullWidth={$fullWidth}
       disabled={disabled || isLoading}
       {...props}

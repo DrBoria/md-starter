@@ -180,7 +180,6 @@ module.exports = {
     resolve: {
       alias: {
         "react-native$": "react-native-web",
-        "styled-components/native": "styled-components",
         components: path.resolve(__dirname, "../../packages/components"),
       },
       modules: [

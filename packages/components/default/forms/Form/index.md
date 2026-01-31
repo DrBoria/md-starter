@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 
 import { BasicSection } from "../../layout/Containers";
 import { Form, Submit, FormLabel, Radio, TextCheckbox, Select, Input, SearchInput } from '.';
+import { Button } from "../Button";
 import { SubTitle } from "../../data-display/Typography";
 import { dark } from '@md/styles';
 
-const [value, setValue] = useState();
+const [value, setValue] = useState('');
 const handleSubmit = (e) => {
   e.preventDefault();
   data;
@@ -49,6 +50,10 @@ const handleSubmit = (e) => {
 
     <FormLabel htmlFor='Input2'>Input2</FormLabel>
     <Input id='Input2' name='Input2' $offsetBottom />
+
+    <FormLabel htmlFor='Textarea1'>Description (Viking Textarea)</FormLabel>
+    <p style={{ marginBottom: 8, fontSize: 12, opacity: 0.7 }}>Inspect styles to see engraved effect</p>
+    <Input as="textarea" rows={4} id='Textarea_as' name='Textarea_as' placeholder='Using Input as="textarea"...' $offsetBottom style={{ height: 'auto', paddingTop: 10 }} />
   </BasicSection>
 
   <BasicSection>
@@ -62,6 +67,7 @@ const handleSubmit = (e) => {
       ]}
     />
   </BasicSection>
+
   <Submit value='Next Step' />
 
   <BasicSection>

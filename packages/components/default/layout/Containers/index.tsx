@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import type { TFullWidth, TWithBasicElementOffsets} from '@md/styles';
+import type { TFullWidth, TWithBasicElementOffsets } from '@md/styles';
 import { devices, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 interface ContainerProps {
@@ -39,6 +39,12 @@ export const BasicSection = styled.div<TSectionProps>`
     padding: ${({ theme }) => `${theme.offsets.section} ${theme.offsets.section}`};
   }
 
+  ${({ theme }) => theme.shadows?.outer && `
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5); // Inner shadow for "cave" or "stone" feel
+      border-top: 1px solid ${theme.colors.disabled}; // Cold steel separator
+      border-bottom: 1px solid ${theme.colors.disabled};
+  `}
+
   ${({ noHeightLimit }) => WithoutHeightLimit(noHeightLimit)}
 `;
 
@@ -48,7 +54,7 @@ export const PageContainer = styled.div`
   min-height: 100vh;
   padding: ${({ theme }) => theme.offsets.section};
   padding-top: ${({ theme }) => theme.elements.header.height};
-  background-color: ${({theme}) => theme.colors.section};
+  background-color: ${({ theme }) => theme.colors.section};
 `;
 
 
@@ -81,8 +87,8 @@ const ColumnsContainer = styled.div<ColumnsContainerProps & TWithBasicElementOff
   grid-column-gap: 1rem;
   grid-template-rows: 1fr;
   grid-template-columns: ${({
-    $colsRatio = ["1fr", "1fr"], // By default 2 columns
-  }: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
+  $colsRatio = ["1fr", "1fr"], // By default 2 columns
+}: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
 
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
