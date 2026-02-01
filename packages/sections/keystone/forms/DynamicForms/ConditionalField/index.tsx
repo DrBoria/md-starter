@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
-import type { TValue } from "../../../../types";
+import type { TValue } from "@md/types";
 import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
 import { useCreateItem } from "../../../common/utils/useCreateItem";
 import { useFieldsData } from "../../../common/utils/useFieldsData";
@@ -37,8 +37,7 @@ const ConditionalField = ({
   itemId,
   setResetStates,
 }: IConditionalFieldProps) => {
-  let createConditionalItems: CreateItemHookResult,
-    subFieldsCreateList: CreateItemHookResult;
+  let createConditionalItems: CreateItemHookResult;
   /**
    * Logic for master fields
    */
@@ -51,7 +50,7 @@ const ConditionalField = ({
 
   if (!itemId) {
     // useCreateItem is only for Create Form
-    createConditionalItems = useCreateItem(conditionalFieldList.list, true);
+    createConditionalItems = useCreateItem(conditionalFieldList.list as any, true);
   }
   const selectedValue = itemId
     ? // @ts-ignore
@@ -76,9 +75,9 @@ const ConditionalField = ({
     itemId,
   });
 
-  if (!itemId) {
-    // useCreateItem is only for Create Form
-    subFieldsCreateList = useCreateItem(subFieldsList?.list, true);
+  let subFieldsCreateList: any;
+  if (subFieldsList?.list) {
+    subFieldsCreateList = useCreateItem(subFieldsList?.list as any, true);
   }
 
   const handleOnChangeMasterField = (newValue: (value: TValue) => TValue) => {

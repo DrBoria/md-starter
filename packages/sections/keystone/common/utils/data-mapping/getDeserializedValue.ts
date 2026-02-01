@@ -29,4 +29,5 @@ const getDeserializedValue = (serializedValue: ISerializedValue | null) => {
   return value;
 };
 
-export { getDeserializedValue, ISerializedValue };
+export { getDeserializedValue };
+export type { ISerializedValue };

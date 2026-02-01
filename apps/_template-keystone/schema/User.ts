@@ -6,7 +6,7 @@ import {
   text,
 } from "@keystone-6/core/fields";
 
-import type { Lists } from ".keystone/types";
+type Lists = any;
 import {
   isAdmin,
   isOwner,
@@ -17,7 +17,7 @@ import { createdAt } from "./fields/createdAt";
 import { ALLOW_ROLES_MANAGEMENT } from "../env";
 
 // NOTE: If you change title of this table - change title in signin page - admin/pages/signin.tsx
-export const User = list<Lists.User.TypeInfo>({
+export const User = list<any>({
   access: {
     operation: {
       query: () => true,
@@ -35,7 +35,7 @@ export const User = list<Lists.User.TypeInfo>({
       update: ({ session }) => {
         // Flag/Env variable to set first admin
         if (ALLOW_ROLES_MANAGEMENT === "allow") return true;
-        
+
         return isAdmin({ session }) || isOwner({ session });
       },
       delete: ({ session }) => {
@@ -53,9 +53,9 @@ export const User = list<Lists.User.TypeInfo>({
       validation: { isRequired: true },
       // by adding isIndexed: 'unique', we're saying that no user can have the same email as another user
       isIndexed: "unique",
-      ui: {
-        views: "./admin/components/CustomFields/Text/views",
-      },
+      /* ui: {
+        views: "@md/sections/keystone/CustomFields/Text/views",
+      }, */
     }),
 
     password: password({

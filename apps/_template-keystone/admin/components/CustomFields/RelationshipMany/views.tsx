@@ -14,7 +14,7 @@ import { useQueryList } from "@md/api/graphql";
 import type { QueryResult} from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
-import { useModal } from "@md/components";
+import { useModal } from "@md/components/keystone";
 import { MultiSelect } from "@keystone-ui/fields";
 
 export interface IListName {

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@md/components";
 import { ChevronDownIcon } from "@keystone-ui/icons";
 
-import type { IOption } from "../../../../types";
+import type { IOption } from "@md/types";
 import type {
   ConditionType,
   TCondition,

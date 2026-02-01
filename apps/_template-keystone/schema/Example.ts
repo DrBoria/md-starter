@@ -1,30 +1,25 @@
 import { list } from "@keystone-6/core";
 import {
   select,
+  text,
+  relationship,
+  checkbox,
+  timestamp,
 } from "@keystone-6/core/fields";
 
-import type { Lists } from ".keystone/types";
+type Lists = any;
 import { isAdmin } from "./access-control/roles";
 import { createdAt } from "./fields/createdAt";
 import { isActive } from "./fields/isActive";
 import { updatedAt } from "./fields/updatedAt";
-import { DynamicStatusLabel } from "../admin/components/CustomFields/DynamicStatusLabel";
-import { HiddenInput } from "../admin/components/CustomFields/HiddenInput";
-import { TimeNotUTC } from "../admin/components/CustomFields/TimeNotUTC";
-import { TimeZone } from "../admin/components/CustomFields/TimeZone";
-import { Title } from "../admin/components/CustomFields/Title";
-import { LongText } from "../admin/components/CustomFields/LongText";
-import { Relationship } from "../admin/components/CustomFields/Relationship";
-import { EquasionTextArea } from "../admin/components/CustomFields/EquasionTextArea";
-import { Text } from "../admin/components/CustomFields/Text";
 
-export const Example = list<Lists.Example.TypeInfo>({
+export const Example = list<any>({
   access: isAdmin,
   db: {
     map: "example",
   },
   fields: {
-    shortedText: Text({
+    shortedText: text({
       label: "ShortedText",
       ui: {
         createView: { fieldMode: "edit" },
@@ -41,7 +36,7 @@ export const Example = list<Lists.Example.TypeInfo>({
         isNullable: false,
       },
     }),
-    customRelationship: Relationship({
+    customRelationship: relationship({
       label: "Custom Relationship",
       ref: "User",
       db: { foreignKey: { map: "user_id" } },
@@ -53,9 +48,8 @@ export const Example = list<Lists.Example.TypeInfo>({
     checkbox: isActive(),
     timestamp_updateAt: updatedAt(),
     timestamp_createdAt: createdAt(),
-    DynamicStatusLabel: DynamicStatusLabel({
+    DynamicStatusLabel: select({
       label: "Contacts Matching Criteria",
-      type: "enum",
       defaultValue: "queued",
       options: [
         { label: "Not Calculated", value: "not_calculated" },
@@ -68,8 +62,9 @@ export const Example = list<Lists.Example.TypeInfo>({
       ui: {
         displayMode: "select",
       },
+      db: { isNullable: false },
     }),
-    EquasionTextArea: EquasionTextArea({
+    EquasionTextArea: text({
       defaultValue: "",
       db: { isNullable: false },
       validation: { isRequired: false },
@@ -78,7 +73,7 @@ export const Example = list<Lists.Example.TypeInfo>({
         description: "Press 'Shift + Enter' to see available variables",
       },
     }),
-    HiddenInput: HiddenInput({
+    HiddenInput: text({
       defaultValue: "",
       db: { map: "sendgrid_api_key", isNullable: false },
       ui: {
@@ -87,7 +82,7 @@ export const Example = list<Lists.Example.TypeInfo>({
         description: "Sendgrid API key to send emails using Sendgrid.",
       },
     }),
-    LongText: LongText({
+    LongText: text({
       defaultValue: "",
       db: { map: "drafter_instructions", isNullable: false },
       ui: {
@@ -96,7 +91,7 @@ export const Example = list<Lists.Example.TypeInfo>({
           "Your agent will follow these instructions when creating new campaign drafts.",
       },
     }),
-    TimeNotUTC: TimeNotUTC({
+    TimeNotUTC: timestamp({
       db: {
         map: "send_at",
         isNullable: true,
@@ -106,13 +101,13 @@ export const Example = list<Lists.Example.TypeInfo>({
           "Contact local time at which campaign emails is scheduled to be sent.",
       },
     }),
-    TimeZone: TimeZone({
+    TimeZone: text({
       db: { map: "timezone", isNullable: false },
       ui: {
         description: "This part of Campaign is run only inside this timezone",
       },
     }),
-    Title: Title({}),
+    Title: text({}),
   },
   ui: {
     label: "Example",

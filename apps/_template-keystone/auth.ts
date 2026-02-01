@@ -20,7 +20,8 @@ import { statelessSessions, storedSessions } from "@keystone-6/core/session";
 import { createClient } from "@redis/client";
 import type { TSession } from "./types";
 import { REDIS_URL, SESSION_SECRET } from "./env";
-import type { Context } from '.keystone/types';
+// import type { Context } from '.keystone/types';
+type Context = any;
 
 const { OAuth2Client } = require('google-auth-library');
 const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';

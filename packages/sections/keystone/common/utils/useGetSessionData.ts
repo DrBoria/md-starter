@@ -1,7 +1,7 @@
 import type { AuthenticatedItem } from "@keystone-6/core/types";
 import { useEffect } from "react";
 
-import type { TSession } from "../../../types";
+import type { TSession } from "@md/types";
 import { useQueryListItem } from "@md/api/graphql";
 import type { QueryResult} from "@apollo/client";
 import { useQuery } from "@apollo/client";

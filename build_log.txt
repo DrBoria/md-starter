@@ -1,0 +1,9 @@
+Summoning the swift constructs.
+
+> keystone@1.0.0 build /Users/mikita_dusmikeev/Documents/Work/fun/md-starter/apps/_template-keystone
+> keystone build
+
+🚨 keystone build has not been run
+/Users/mikita_dusmikeev/Documents/Work/fun/md-starter/apps/_template-keystone:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  keystone@1.0.0 build: `keystone build`
+Exit status 1

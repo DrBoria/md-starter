@@ -1,0 +1,1 @@
+import { text, select, relationship, timestamp } from '@keystone-6/core/fields'; export function Text(config) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/Text/views' }; return text({ ...config, ui }); }

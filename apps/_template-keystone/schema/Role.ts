@@ -1,12 +1,12 @@
 import { list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 
-import type { Lists } from ".keystone/types";
+type Lists = any;
 import { ALLOW_ROLES_MANAGEMENT } from "../env";
 import { isAdmin, isOwner } from "./access-control/roles";
 import { createdAt } from "./fields/createdAt";
 
-export const Role = list<Lists.Role.TypeInfo>({
+export const Role = list<any>({
   access: {
     operation: {
       query: () => true,

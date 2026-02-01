@@ -36,7 +36,7 @@ const ButtonGroup = ({
           <div>
             <Button
               type='submit'
-              isDisabled={isPristine}
+              disabled={isPristine}
               onClick={() => onUpdate()}
             >
               Save changes
@@ -45,7 +45,7 @@ const ButtonGroup = ({
           <ColumnsContainer>
             {isPristine ? (
               <Button
-                isDisabled={true}
+                disabled={true}
                 onClick={() => onUpdate()}
               >
                 No changes
@@ -57,7 +57,8 @@ const ButtonGroup = ({
             )}
 
             <Button
-              type='delete'
+              type='button'
+              tone='negative'
               onClick={() => {
                 if (GlobalVars) {
                   GlobalVars.ModalData = {

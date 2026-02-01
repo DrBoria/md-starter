@@ -47,12 +47,19 @@ const CloseButton = styled.button`
   }
 `;
 
+interface ILabelProps {
+  icon?: any;
+  children: React.ReactNode;
+  className?: string;
+  onClose?: () => void;
+}
+
 export const Label = ({
   icon,
   children,
   className,
   onClose,
-}) => {
+}: ILabelProps) => {
   return (
     <LabelContainer className={className}>
       {icon && (

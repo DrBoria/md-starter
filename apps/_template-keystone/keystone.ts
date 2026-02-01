@@ -1,33 +1,12 @@
-// Welcome to Keystone!
-//
-// This file is what Keystone uses as the entry-point to your headless backend
-//
-// Keystone imports the default export of this file, expecting a Keystone configuration object
-//   you can find out more at https://keystonejs.com/docs/apis/config
-
 import path from "path";
-import { config } from "@keystone-6/core";
+import { config, list } from "@keystone-6/core";
+import { text } from "@keystone-6/core/fields";
 import type { KeystoneContext } from '@keystone-6/core/types';
-
-// authentication is configured separately here too, but you might move this elsewhere
-// when you write your list-level access control functions, as they typically rely on session data
 import { session, withAuth } from "./auth";
-import { APP_PORT, DATABASE_URL } from "./env";
-// to keep this file tidy, we define our schema in a different file
+import { APP_PORT, DATABASE_URL, APP_HOST } from "./env";
 import { lists } from "./schema";
-import { isLocked } from "./schema/access-control/isLocked";
 import express from "express";
-
-interface Config {
-  db: {
-    provider: string;
-    url: string;
-    enableLogging: Array<'error' | 'warn' | 'info' | 'query'>;
-  };
-  prisma: {
-    $queryRaw: <T = unknown>(query: TemplateStringsArray, ...values: unknown[]) => Promise<T>;
-  };
-}
+import { isLocked } from "./schema/access-control/isLocked";
 
 export default withAuth(
   config({
@@ -44,15 +23,6 @@ export default withAuth(
         },
         serverRoute: { path: "/files" },
         storagePath: "public/files", // Path where files will be stored locally
-
-        /****************************/
-        /* S3 storage configuration */
-        /****************************/
-
-        // bucketName: process.env.S3_BUCKET_NAME,
-        // region: process.env.S3_REGION,
-        // accessKeyId: process.env.S3_ACCESS_KEY_ID,
-        // secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
       },
     },
     db: {
@@ -75,9 +45,9 @@ export default withAuth(
             res.status(200).json({ status: 'ok', message: 'Service is healthy' });
           } catch (error) {
             console.error('Health check failed:', error);
-            res.status(500).json({ 
-              status: 'error', 
-              message: 'Service is unhealthy', 
+            res.status(500).json({
+              status: 'error',
+              message: 'Service is unhealthy',
               error: error instanceof Error ? error.message : 'Unknown error'
             });
           }
@@ -89,7 +59,7 @@ export default withAuth(
       }
     },
     ui: {
-      isAccessAllowed: (data) => !isLocked(data), // Disable admin view if user is locked
+      isAccessAllowed: (context) => !isLocked(context), // Disable admin view if user is locked
       getAdditionalFiles: [
         () => {
           return [

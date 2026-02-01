@@ -19,7 +19,18 @@ import { getDeserializedValue } from "../../common/utils/data-mapping/getDeseria
 import { ButtonGroup } from "./buttonGroup";
 import { getAllTabsFieldsNames } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
-import { useLogger } from "@md/components";
+import { useLogger } from "@md/components/keystone";
+
+interface IEditItemFormProps {
+  listName: string;
+  itemId: string;
+  fieldsToRender?: string[] | string[][];
+  tabs?: any;
+  conditionalFields?: any;
+  notToRenderFields?: string[];
+  ignoreValueFields?: string[];
+  buttons?: any;
+}
 
 const EditItemForm = ({
   listName,
@@ -30,9 +41,9 @@ const EditItemForm = ({
   notToRenderFields = [],
   ignoreValueFields = [],
   buttons,
-}) => {
-  const [resetStatesConditional, setResetStatesConditional] = useState([]);
-  const [resetStatesTabs, setResetStatesTabs] = useState();
+}: IEditItemFormProps) => {
+  const [resetStatesConditional, setResetStatesConditional] = useState<(() => void)[]>([]);
+  const [resetStatesTabs, setResetStatesTabs] = useState<(() => void)[]>();
   /**
    * State for Conditional Fields
    * Use it for create operation
@@ -81,12 +92,12 @@ const EditItemForm = ({
             listName,
             itemId,
             notToRenderFields: [
-              ...allConditionalFieldsNames,
-              ...allTabFieldNames,
-              ...notToRenderFields,
-              ...ignoreValueFields,
-              ...excludedFields,
-            ],
+            ...(allConditionalFieldsNames as any),
+            ...(allTabFieldNames as any),
+            ...(notToRenderFields as any),
+            ...(ignoreValueFields as any),
+            ...excludedFields,
+          ],
           });
         }
 
@@ -95,12 +106,11 @@ const EditItemForm = ({
           listName,
           itemId,
           fieldsToRender: groupFields,
-          notToRenderFields: [
-            ...allConditionalFieldsNames,
-            ...allTabFieldNames,
-            ...notToRenderFields,
-            ...ignoreValueFields,
-          ],
+          notToRenderFields: ([
+              ...(notToRenderFields || []),
+              ...(conditionalFields?.fieldsToRender || []),
+              ...(tabs?.fieldsToRender || []),
+            ] as any).flat(),
         });
       });
 
@@ -125,9 +135,9 @@ const EditItemForm = ({
         // If user chose new value for conditional field - it will be storred in createConditionalItems, othervise - we will take previous value
         const masterFieldSerializedValue =
           createConditionalItems?.[masterField.fieldName] ||
-          notRenderedFieldValues?.[masterField.fieldName];
+          (notRenderedFieldValues?.[masterField.fieldName] as any);
         const masterFieldValue = getDeserializedValue(
-          masterFieldSerializedValue,
+          masterFieldSerializedValue as any,
         );
 
         const conditionalSubfieldNames = getConditionalSubFieldsdNames(
@@ -143,9 +153,9 @@ const EditItemForm = ({
               fieldName !== masterField.fieldName &&
               !conditionalSubfieldNames.includes(fieldName),
           );
-        notDisplayedContidionalSubFieldNames.forEach((subfieldName) => {
+        notDisplayedContidionalSubFieldNames.forEach((subfieldName: string) => {
           // For ignored fields we shouldnt set any values (for example Virtual fiield)
-          if (ignoreValueFields.includes(subfieldName)) return;
+          if ((ignoreValueFields as string[]).includes(subfieldName)) return;
           conditionalFieldsValues[subfieldName] = "";
         });
 
@@ -154,7 +164,7 @@ const EditItemForm = ({
           // Set value for every Displayed subfield
           Object.keys(subFieldList).forEach((subfieldName) => {
             conditionalFieldsValues[subfieldName] = getDeserializedValue(
-              subFieldList[subfieldName],
+              subFieldList[subfieldName] as any,
             );
           });
         }
@@ -169,7 +179,7 @@ const EditItemForm = ({
     if (tabs && tabsList) {
       for (const [key, value] of Object.entries(tabsList)) {
         if (key === "id") continue;
-        tabFieldsValues[key] = getDeserializedValue(value);
+        tabFieldsValues[key] = getDeserializedValue(value as any);
       }
     }
 
@@ -254,7 +264,7 @@ const EditItemForm = ({
           fields={orderedFields}
           fieldModes={fieldsData.fieldModes}
           value={fieldsData.fieldsValue}
-          groups={list.groups}
+          groups={(list as any).groups}
           forceValidation={fieldsData.forceValidation}
           invalidFields={fieldsData.invalidFields}
           onChange={fieldsData.onFieldChange}

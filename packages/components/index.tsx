@@ -26,3 +26,23 @@ export * from './default/navigation/Link';
 export * from './default/navigation/MenuItem';
 export * from './default/common/Icons';
 
+import 'styled-components';
+import { baseTheme } from '@md/styles/themes';
+
+type TTheme = typeof baseTheme;
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends TTheme {
+    theme?: string;
+    effects?: any;
+    geometry?: any;
+    assets?: any;
+    fontFamily?: string;
+    shadows?: any;
+    glassEffect?: string;
+    borderRadius?: string;
+    labelBackground?: string;
+    labelText?: string;
+  }
+}
+

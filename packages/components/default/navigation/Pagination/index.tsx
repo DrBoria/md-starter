@@ -106,7 +106,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }, []);
 
   const renderPageNumbers = () => {
-    const pages = [];
+    const pages: React.ReactNode[] = [];
     const maxPagesToShow = isMobile ? 3 : 8;
 
     if (totalPages <= maxPagesToShow) {

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useToasts } from '@keystone-ui/toast';
 import { useApolloClient, gql } from '@apollo/client';
 import type { LoggerContextType, TToastData } from '../../../default/feedback/Logger';
-import { LoggerContext } from '../../../default/feedback/Logger';
+import { LoggerContext, useLogger } from '../../../default/feedback/Logger';
+export { useLogger };
 
 // Apollo mutations for logging toast actions
 const LOG_TOAST_ADDED = gql`

@@ -1,5 +1,5 @@
 import type { TSideBarModalData, IModalButton } from "@md/components";
-import type { ITabs, TConditionalField } from "../DynamicForms";
+import type { ITabs, TConditionalField } from "../../forms/DynamicForms";
 
 export type TSideBarModalDataKeystone = {
   type: "edit" | "dataSource" | "create" | "custom";

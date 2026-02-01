@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import React, { useEffect, useMemo } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
-import type { TValue } from "../../../../../types";
+import type { TValue } from "@md/types";
 import { Tabs } from "@md/components";
 import { useCreateItem } from "../../../common/utils/useCreateItem";
 import { useFieldsData } from "../../../common/utils/useFieldsData";
@@ -51,7 +51,7 @@ const TabsFields = ({
 
   const createItems = itemId
     ? fieldsData // Edit mode: no need for useCreateItem in edit mode
-    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list, true)); // Create mode
+    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list as any, true)); // Create mode
 
   const listFormGroups = useMemo(() => {
     if (!tabs) return [];

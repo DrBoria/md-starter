@@ -14,7 +14,7 @@ import {
   useInvalidFields,
 } from "@keystone-6/core/admin-ui/utils";
 
-import type { TValue } from "../../../types";
+import type { TValue } from "@md/types";
 import type { FlexibleItemData } from "./data-mapping/useItemDataGetter";
 import type { TOrderBy } from "./getNextSortOrder";
 import { fieldsToGQL } from "./data-mapping/fieldsToGQL";
@@ -23,7 +23,7 @@ import { filterAllowedKeys, filterNotAllowedKeys } from "./filterKeys";
 import { useQueryList, useQueryListItem, useUpdateMutation } from "@md/api/graphql";
 import type { QueryResult} from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
-import { useLogger } from "@md/components";
+import { useLogger } from "@md/components/keystone";
 
 interface TState {
   value: DeserializedValue;
@@ -105,7 +105,7 @@ const useFieldsData = <T extends FlexibleItemData>({
 
   const selectedFields = useMemo(() => fieldsToGQL(filteredFields), [filteredFields]);
 
-  const { update, loading } = useUpdateMutation({ ...list, fields: filteredFields }, selectedFields, useMutation);
+  const { update, loading } = useUpdateMutation({ ...list, fields: filteredFields } as any, selectedFields, useMutation);
 
   // memoize the data fetching operation depending on itemId
   const fetchData = useCallback(() => {

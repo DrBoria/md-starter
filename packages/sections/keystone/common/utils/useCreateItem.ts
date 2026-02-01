@@ -8,7 +8,7 @@ import { useKeystone } from "@keystone-6/core/admin-ui/context";
 import isDeepEqual from "fast-deep-equal";
 
 import { usePreventNavigation } from "./usePreventNavigation";
-import { useLogger } from "@md/components";
+import { useLogger } from "@md/components/keystone";
 
 type IValueWithoutServerSideErrors = Record<
   string,
@@ -175,7 +175,7 @@ export function useCreateItem(
         logger.add({
           title: "Failed to Create",
           tone: "negative",
-          message,
+          description: message,
         });
         return undefined;
       }
@@ -183,7 +183,7 @@ export function useCreateItem(
       const label = outputData.item.label || outputData.item.id;
       logger.add({
         title: label,
-        message: "Created Successfully",
+        description: "Created Successfully",
         tone: "positive",
       });
       return outputData.item;

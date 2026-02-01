@@ -1,4 +1,4 @@
-import type { TOperation } from "../../types";
+import type { TOperation } from "../../../types";
 
 const isAdmin: TOperation = ({ session }) => {
   if (!session?.itemId) return false;

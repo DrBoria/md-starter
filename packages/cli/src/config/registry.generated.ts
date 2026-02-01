@@ -85,90 +85,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "Avatar",
-        "label": "Avatar",
-        "files": [
-            "components/default/Avatar"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Badge",
-        "label": "Badge",
-        "files": [
-            "components/default/Badge"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Breadcrumbs",
-        "label": "Breadcrumbs",
-        "files": [
-            "components/default/Breadcrumbs"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Button",
-        "label": "Button",
-        "files": [
-            "components/default/Button"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Buttons",
-        "label": "Buttons",
-        "files": [
-            "components/default/Buttons"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Calendar",
-        "label": "Calendar",
-        "files": [
-            "components/default/Calendar"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Card",
-        "label": "Card",
-        "files": [
-            "components/default/Card"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Carousel",
-        "label": "Carousel",
-        "files": [
-            "components/default/Carousel"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Charts",
-        "label": "Charts (Recharts)",
-        "files": [
-            "components/default/Charts"
-        ],
-        "dependencies": [
-            "recharts",
-            "d3-scale"
-        ],
-        "group": "default"
-    },
-    {
         "id": "Cloud",
         "label": "Texture: Cloud",
         "files": [
@@ -178,40 +94,49 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "textures"
     },
     {
-        "id": "CodePreview",
-        "label": "CodePreview",
+        "id": "common",
+        "label": "common",
         "files": [
-            "components/default/CodePreview"
+            "components/default/common"
         ],
         "dependencies": [],
         "group": "default"
     },
     {
-        "id": "ConditionalWrapper",
-        "label": "ConditionalWrapper",
+        "id": "common",
+        "label": "Keystone: common",
         "files": [
-            "components/default/ConditionalWrapper"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Containers",
-        "label": "Containers",
-        "files": [
-            "components/default/Containers"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "DateTimePicker",
-        "label": "Keystone: DateTimePicker",
-        "files": [
-            "components/keystone/DateTimePicker"
+            "components/keystone/common"
         ],
         "dependencies": [],
         "group": "keystone"
+    },
+    {
+        "id": "data-display",
+        "label": "data-display",
+        "files": [
+            "components/default/data-display"
+        ],
+        "dependencies": [],
+        "group": "default"
+    },
+    {
+        "id": "data-display",
+        "label": "Keystone: data-display",
+        "files": [
+            "components/keystone/data-display"
+        ],
+        "dependencies": [],
+        "group": "keystone"
+    },
+    {
+        "id": "default",
+        "label": "default",
+        "files": [
+            "components/dist/default"
+        ],
+        "dependencies": [],
+        "group": "dist"
     },
     {
         "id": "eslint",
@@ -259,130 +184,55 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "Form",
-        "label": "Form",
+        "id": "feedback",
+        "label": "feedback",
         "files": [
-            "components/default/Form"
+            "components/default/feedback"
         ],
         "dependencies": [],
         "group": "default"
     },
     {
-        "id": "Form",
-        "label": "Keystone: Form",
+        "id": "feedback",
+        "label": "Keystone: feedback",
         "files": [
-            "components/keystone/Form"
+            "components/keystone/feedback"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "Header",
-        "label": "Header",
+        "id": "forms",
+        "label": "forms",
         "files": [
-            "components/default/Header"
+            "components/default/forms"
         ],
         "dependencies": [],
         "group": "default"
     },
     {
-        "id": "HtmlEditor",
-        "label": "Rich Text Editor",
+        "id": "forms",
+        "label": "Keystone: forms",
         "files": [
-            "components/default/HtmlEditor"
-        ],
-        "dependencies": [
-            "@tiptap/react",
-            "@tiptap/starter-kit"
-        ],
-        "group": "default"
-    },
-    {
-        "id": "Icons",
-        "label": "Icons",
-        "files": [
-            "components/default/Icons"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Icons",
-        "label": "Keystone: Icons",
-        "files": [
-            "components/keystone/Icons"
+            "components/keystone/forms"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "Images",
-        "label": "Images",
+        "id": "keystone",
+        "label": "keystone",
         "files": [
-            "components/default/Images"
+            "components/dist/keystone"
         ],
         "dependencies": [],
-        "group": "default"
+        "group": "dist"
     },
     {
-        "id": "Label",
-        "label": "Keystone: Label",
+        "id": "layout",
+        "label": "layout",
         "files": [
-            "components/keystone/Label"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "Link",
-        "label": "Link",
-        "files": [
-            "components/default/Link"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Loading",
-        "label": "Loading Indicators",
-        "files": [
-            "components/default/Loading"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "LoadingSpinner",
-        "label": "LoadingSpinner",
-        "files": [
-            "components/default/LoadingSpinner"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Logger",
-        "label": "Logger",
-        "files": [
-            "components/default/Logger"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Logger",
-        "label": "Keystone: Logger",
-        "files": [
-            "components/keystone/Logger"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "Logo",
-        "label": "Logo",
-        "files": [
-            "components/default/Logo"
+            "components/default/layout"
         ],
         "dependencies": [],
         "group": "default"
@@ -397,33 +247,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "MenuItem",
-        "label": "MenuItem",
-        "files": [
-            "components/default/MenuItem"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Modals",
-        "label": "Modals",
-        "files": [
-            "components/default/Modals"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Modals",
-        "label": "Keystone: Modals",
-        "files": [
-            "components/keystone/Modals"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
         "id": "moment",
         "label": "moment",
         "files": [
@@ -433,10 +256,19 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "NavItem",
-        "label": "Keystone: NavItem",
+        "id": "navigation",
+        "label": "navigation",
         "files": [
-            "components/keystone/NavItem"
+            "components/default/navigation"
+        ],
+        "dependencies": [],
+        "group": "default"
+    },
+    {
+        "id": "navigation",
+        "label": "Keystone: navigation",
+        "files": [
+            "components/keystone/navigation"
         ],
         "dependencies": [],
         "group": "keystone"
@@ -460,22 +292,22 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "Pagination",
-        "label": "Pagination",
+        "id": "overlays",
+        "label": "overlays",
         "files": [
-            "components/default/Pagination"
+            "components/default/overlays"
         ],
         "dependencies": [],
         "group": "default"
     },
     {
-        "id": "PaginationOld",
-        "label": "PaginationOld",
+        "id": "overlays",
+        "label": "Keystone: overlays",
         "files": [
-            "components/default/PaginationOld"
+            "components/keystone/overlays"
         ],
         "dependencies": [],
-        "group": "default"
+        "group": "keystone"
     },
     {
         "id": "Paper",
@@ -512,15 +344,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "node_modules"
-    },
-    {
-        "id": "ProgressBar",
-        "label": "ProgressBar",
-        "files": [
-            "components/default/ProgressBar"
-        ],
-        "dependencies": [],
-        "group": "default"
     },
     {
         "id": "react",
@@ -568,33 +391,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "Separator",
-        "label": "Separator",
-        "files": [
-            "components/default/Separator"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Spinner",
-        "label": "Spinner",
-        "files": [
-            "components/default/Spinner"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "StatusLabel",
-        "label": "StatusLabel",
-        "files": [
-            "components/default/StatusLabel"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
         "id": "styled-components",
         "label": "styled-components",
         "files": [
@@ -604,76 +400,13 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "Switch",
-        "label": "Switch",
+        "id": "textures",
+        "label": "textures",
         "files": [
-            "components/default/Switch"
+            "components/dist/textures"
         ],
         "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Table",
-        "label": "Table",
-        "files": [
-            "components/default/Table"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Tabs",
-        "label": "Tabs",
-        "files": [
-            "components/default/Tabs"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "TimestampValue",
-        "label": "TimestampValue",
-        "files": [
-            "components/default/TimestampValue"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Toggle",
-        "label": "Toggle",
-        "files": [
-            "components/default/Toggle"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Toggle",
-        "label": "Keystone: Toggle",
-        "files": [
-            "components/keystone/Toggle"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "TokenInputField",
-        "label": "TokenInputField",
-        "files": [
-            "components/default/TokenInputField"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Tooltip",
-        "label": "Tooltip",
-        "files": [
-            "components/default/Tooltip"
-        ],
-        "dependencies": [],
-        "group": "default"
+        "group": "dist"
     },
     {
         "id": "typescript",
@@ -683,33 +416,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "node_modules"
-    },
-    {
-        "id": "Typography",
-        "label": "Typography",
-        "files": [
-            "components/default/Typography"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "Validation",
-        "label": "Validation",
-        "files": [
-            "components/default/Validation"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "VerticalTabs",
-        "label": "VerticalTabs",
-        "files": [
-            "components/default/VerticalTabs"
-        ],
-        "dependencies": [],
-        "group": "default"
     }
 ];
 
@@ -796,55 +502,37 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "ActionButtons",
-        "label": "Keystone: ActionButtons",
+        "id": "apps",
+        "label": "apps",
         "files": [
-            "sections/keystone/ActionButtons"
+            "sections/dist/apps"
+        ],
+        "dependencies": [],
+        "group": "dist"
+    },
+    {
+        "id": "common",
+        "label": "Keystone: common",
+        "files": [
+            "sections/keystone/common"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "ButtonGroup",
-        "label": "Keystone: ButtonGroup",
+        "id": "CustomFields",
+        "label": "Keystone: CustomFields",
         "files": [
-            "sections/keystone/ButtonGroup"
+            "sections/keystone/CustomFields"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "ConditionalField",
-        "label": "Keystone: ConditionalField",
+        "id": "data-display",
+        "label": "Keystone: data-display",
         "files": [
-            "sections/keystone/ConditionalField"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "CreateItemForm",
-        "label": "Keystone: CreateItemForm",
-        "files": [
-            "sections/keystone/CreateItemForm"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "DynamicForms",
-        "label": "Keystone: DynamicForms",
-        "files": [
-            "sections/keystone/DynamicForms"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "EditItemForm",
-        "label": "Keystone: EditItemForm",
-        "files": [
-            "sections/keystone/EditItemForm"
+            "sections/keystone/data-display"
         ],
         "dependencies": [],
         "group": "keystone"
@@ -904,28 +592,37 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "HamburgerMenu",
-        "label": "HamburgerMenu",
+        "id": "feedback",
+        "label": "feedback",
         "files": [
-            "sections/default/HamburgerMenu"
+            "sections/default/feedback"
         ],
         "dependencies": [],
         "group": "default"
     },
     {
-        "id": "ItemsList",
-        "label": "Keystone: ItemsList",
+        "id": "feedback",
+        "label": "Keystone: feedback",
         "files": [
-            "sections/keystone/ItemsList"
+            "sections/keystone/feedback"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "Modals",
-        "label": "Keystone: Modals",
+        "id": "forms",
+        "label": "Keystone: forms",
         "files": [
-            "sections/keystone/Modals"
+            "sections/keystone/forms"
+        ],
+        "dependencies": [],
+        "group": "keystone"
+    },
+    {
+        "id": "layout",
+        "label": "Keystone: layout",
+        "files": [
+            "sections/keystone/layout"
         ],
         "dependencies": [],
         "group": "keystone"
@@ -938,6 +635,15 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "node_modules"
+    },
+    {
+        "id": "navigation",
+        "label": "navigation",
+        "files": [
+            "sections/default/navigation"
+        ],
+        "dependencies": [],
+        "group": "default"
     },
     {
         "id": "next",
@@ -958,31 +664,22 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "NotFoundSection",
-        "label": "NotFoundSection",
+        "id": "overlays",
+        "label": "Keystone: overlays",
         "files": [
-            "sections/default/NotFoundSection"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "NotFoundSection",
-        "label": "Keystone: NotFoundSection",
-        "files": [
-            "sections/keystone/NotFoundSection"
+            "sections/keystone/overlays"
         ],
         "dependencies": [],
         "group": "keystone"
     },
     {
-        "id": "PageContainer",
-        "label": "Keystone: PageContainer",
+        "id": "packages",
+        "label": "packages",
         "files": [
-            "sections/keystone/PageContainer"
+            "sections/dist/packages"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "dist"
     },
     {
         "id": "prettier",
@@ -1055,15 +752,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "node_modules"
-    },
-    {
-        "id": "SignInContainer",
-        "label": "Keystone: SignInContainer",
-        "files": [
-            "sections/keystone/SignInContainer"
-        ],
-        "dependencies": [],
-        "group": "keystone"
     },
     {
         "id": "styled-components",

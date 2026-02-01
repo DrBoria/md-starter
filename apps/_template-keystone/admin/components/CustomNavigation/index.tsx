@@ -13,7 +13,7 @@ import { Button, CentralModal, MenuItem } from "@md/components";
 import { Icons, Toggle } from "@md/components/keystone";
 import { NavigationContainerStyled } from "./styles";
 import { NavItem } from "@md/components/keystone";
-import { SideBarModal, useSignOut, useGetSessionData } from "@md/sections/keystone";
+import { useSignOut, useGetSessionData } from "@md/sections/keystone";
 
 
 const ClientNavigation = React.memo(
@@ -81,10 +81,6 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
             {"Sign out"}
           </Button>
         )}
-
-        <SideBarModal />
-
-        <CentralModal />
       </NavigationContainerStyled>
     </NavigationContainer>
   );

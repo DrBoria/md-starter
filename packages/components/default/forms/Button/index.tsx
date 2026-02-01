@@ -147,35 +147,38 @@ const StyledButton = styled.button<{
     }
 
     let sizeStyles = css``;
+    const getOffset = (val: string | number | undefined) => typeof val === 'number' ? val : parseInt(val || '8', 10);
+    const mobileOffset = getOffset(theme?.variables?.offsets?.elementContent?.mobile);
+
     switch (size) {
       case "small":
         sizeStyles = css`
-          padding: ${(theme?.variables?.offsets?.elementContent?.mobile || 8) / 2}px ${theme?.variables?.offsets?.elementContent?.mobile || 8}px;
+          padding: ${mobileOffset / 2}px ${mobileOffset}px;
           font-size: 12px;
         `;
         break;
       case "medium":
         sizeStyles = css`
-          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 2}px;
+          padding: ${mobileOffset}px ${mobileOffset * 2}px;
           font-size: 14px;
         `;
         break;
       case "large":
         sizeStyles = css`
-          padding: ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 1.5}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 3}px;
+          padding: ${mobileOffset * 1.5}px ${mobileOffset * 3}px;
           font-size: 16px;
         `;
         break;
       case "icon":
         sizeStyles = css`
-          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px;
+          padding: ${mobileOffset}px;
           width: 32px;
           height: 32px;
         `;
         break;
       default:
         sizeStyles = css`
-          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 2}px;
+          padding: ${mobileOffset}px ${mobileOffset * 2}px;
           font-size: 14px;
         `;
     }

@@ -34,7 +34,7 @@ const ButtonGroup = ({
         <Button
           weight="bold"
           tone={"active"}
-          isDisabled={isPristine}
+          disabled={isPristine}
           onClick={() => onUpdate()}
         >
           Save changes
@@ -43,7 +43,7 @@ const ButtonGroup = ({
         {!lessButtons && (
           <div>
             {isPristine ? (
-              <Button weight="none" isDisabled={true} onClick={() => onUpdate()}>
+              <Button weight="none" disabled={true} onClick={() => onUpdate()}>
                 No changes
               </Button>
             ) : (
@@ -55,15 +55,13 @@ const ButtonGroup = ({
             <Button
               tone={"negative"}
               onClick={() => {
-                setModalData({
-                  content: (
-                    <DeleteTemplate
-                      item={item}
-                      onCancel={() => setModalData(null)}
-                      onDelete={handleOnDelete}
-                    />
-                  ),
-                });
+                setModalData(
+                  <DeleteTemplate
+                    item={item}
+                    onCancel={() => setModalData(null)}
+                    onDelete={handleOnDelete}
+                  />
+                );
               }}
             >
               Delete

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import styled from "styled-components";
-import { SectionTitle } from "@md/components/default/Typography";
+import styled, { css } from "styled-components";
+import { SectionTitle } from "@md/components";
 
 const DashboardCardContainer = styled.div`
   min-width: 280px;
@@ -20,6 +20,35 @@ const DashboardCardContainer = styled.div`
       text-decoration: underline;
     }
   }
+
+  /* VIKING THEME OVERRIDE */
+  ${({ theme }) => theme.theme === 'viking' && css`
+    background-color: ${theme.colors.section};
+    background-image: ${theme.effects?.texture};
+    border: none;
+    border-radius: 0;
+    clip-path: ${theme.geometry?.card || theme.geometry?.ragged};
+    box-shadow: ${theme.effects?.depth?.outer?.medium};
+    padding: ${theme.variables?.offsets?.elementContent?.desktop || 20}px;
+
+    &:hover:not(:has(svg:hover)) {
+        box-shadow: ${theme.effects?.depth?.outer?.strong}, inset 0 0 0 1px ${theme.colors.highlighted};
+        transform: translateY(-2px);
+        transition: all 0.2s ease;
+    }
+
+    /* Knot Pattern Decoration */
+    &::before {
+        content: '';
+        display: block;
+        height: 10px;
+        width: 100%;
+        background-image: ${theme.assets?.knotPattern};
+        background-repeat: repeat-x;
+        opacity: 0.3;
+        margin-bottom: 10px;
+    }
+  `}
 `;
 
 const LinksContainer = styled.div`
@@ -49,6 +78,20 @@ const CreateLink = styled(Link)`
     stroke-linecap: round;
     stroke-width: 2;
   }
+
+  /* VIKING THEME OVERRIDE */
+  ${({ theme }) => theme.theme === 'viking' && css`
+    background-color: transparent;
+    border: 1px solid ${theme.colors.highlighted};
+    border-radius: 0;
+    color: ${theme.colors.highlighted};
+    
+    &:hover {
+        background-color: ${theme.colors.highlighted};
+        color: ${theme.colors.highlightedText};
+        box-shadow: ${theme.effects?.glow?.medium};
+    }
+  `}
 `;
 
 const CountText = styled.span`

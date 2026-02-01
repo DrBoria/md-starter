@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 import React, { useEffect, useState } from "react";
 
 // @ts-ignore
-import getApp from "../../../../../../apps/_template-keystone/admin/pages/_app";
+// import getApp from "../../../../../../apps/_template-keystone/admin/pages/_app";
+const getApp = null;
 
 import "./cssFixes.css";
 

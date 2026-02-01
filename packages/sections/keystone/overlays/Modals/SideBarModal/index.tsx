@@ -110,8 +110,13 @@ const TitleContainer = styled.div`
   padding: 7px 20px; // Alignment to the height of keystone header
 `;
 
+import type { TSideBarModalDataKeystone } from "../types";
+
+// ...
+
 export const SideBarModal = () => {
-  const { sideBarModalData, setSideBarModalData } = useModal();
+  const { sideBarModalData: rawSideBarModalData, setSideBarModalData } = useModal();
+  const sideBarModalData = rawSideBarModalData as TSideBarModalDataKeystone;
   const [$isClosing, setIsClosing] = React.useState(false);
 
   if (!sideBarModalData) return null;

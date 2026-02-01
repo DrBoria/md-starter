@@ -1,8 +1,6 @@
 export { HamburgerMenu } from './default';
+export * from './keystone';
 
 import type { baseTheme } from '@md/styles/themes';
 
-type TTheme = typeof baseTheme;
-declare module 'styled-components' {
-    export type DefaultTheme = TTheme
-}
+export type TTheme = typeof baseTheme;

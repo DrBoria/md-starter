@@ -1,7 +1,7 @@
 import type { FieldMeta } from "@keystone-6/core/types";
 import React from "react";
 
-import type { IOption } from "../../../../types";
+import type { IOption } from "@md/types";
 import type { TCondition } from "../../../common/utils/data-mapping/mapFilterParameters";
 import { Button, Input, Select } from "@md/components";
 import { toRelationSelect } from "../../../common/utils/data-mapping/toRelationSelect";

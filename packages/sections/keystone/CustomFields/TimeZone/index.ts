@@ -1,0 +1,1 @@
+import { text, select, relationship, timestamp } from '@keystone-6/core/fields'; export function TimeZone(config) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/TimeZone/views' }; return text({ ...config, ui }); }

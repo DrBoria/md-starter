@@ -19,6 +19,9 @@ export interface TSession {
       id: string;
       name: string;
     };
+    organization?: {
+      id: string;
+    };
   };
 }
 
@@ -52,7 +55,9 @@ export type TValue = Record<
   | { kind: "value"; value: unknown }
 >;
 
-export type { Lists } from '../../apps/keystone/node_modules/.keystone/types';
+// TODO: Update to use real keystone path
+// export type { Lists } from '../../apps/_template-keystone/node_modules/.keystone/types';
+export type Lists = any;
 export type { FieldMeta, ListMeta } from "@keystone-6/core/types";
 
 

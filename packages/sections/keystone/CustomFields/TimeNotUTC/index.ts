@@ -1,0 +1,1 @@
+import { text, select, relationship, timestamp } from '@keystone-6/core/fields'; export function TimeNotUTC(config) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/TimeNotUTC/views' }; return text({ ...config, ui }); }

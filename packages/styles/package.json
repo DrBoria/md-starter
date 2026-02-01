@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "description": "> Here lies global definition for styles in application and ThemeProviderWrapper > All global/reusable styles should be placed in this folder.",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,8 @@
     "@eslint/js": "^9.9.1",
     "@md/eslint": "workspace:*",
     "@md/types": "workspace:*",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
     "@types/node": "22.13.10",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",

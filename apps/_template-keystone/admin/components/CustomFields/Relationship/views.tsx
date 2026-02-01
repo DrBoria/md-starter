@@ -8,7 +8,8 @@ import { useList } from "@keystone-6/core/admin-ui/context";
 import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 
 import type { IOption, TSession } from "../../../../../../packages/types";
-import { BasicSection, DescriptionText, Label, Select, useModal } from "@md/components";
+import { BasicSection, DescriptionText, Label, Select } from "@md/components";
+import { useModal } from "@md/components/keystone";
 import { LinkInForm } from "@md/components";
 import { getWhereParameters } from "./utils";
 import { useQueryList, useQueryListItem } from "@md/api/graphql";

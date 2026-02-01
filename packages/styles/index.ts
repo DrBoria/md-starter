@@ -11,7 +11,9 @@ export {
     baseTheme,
     devices,
     getZIndex,
+    zIndexes,
 } from './themes';
+export type { ZIndexName } from './themes';
 // Helpers
 export {
     withFullWidth,

@@ -8,8 +8,10 @@ import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 type TTextCheckboxProps = {
   name: string;
   id: string;
+  label?: string;
 } & TWithBasicElementOffsets &
-  TFullWidth;
+  TFullWidth &
+  React.InputHTMLAttributes<HTMLInputElement>;
 
 const CheckboxContainer = styled.div<TWithBasicElementOffsets>`
   display: inline-block;
@@ -98,10 +100,10 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   `}
 `;
 
-const TextCheckbox = ({ name, id, $offsetBottom, $offsetRight, $fullWidth, ...props }: TTextCheckboxProps) => (
+const TextCheckbox = ({ name, id, label, $offsetBottom, $offsetRight, $fullWidth, ...props }: TTextCheckboxProps) => (
   <CheckboxContainer $offsetBottom={$offsetBottom} $offsetRight={$offsetRight}>
     <CheckboxInput id={id} name={name} type='checkbox' $fullWidth={$fullWidth} {...props} />
-    <label htmlFor={id}>{name}</label>
+    <label htmlFor={id}>{label || name}</label>
   </CheckboxContainer>
 );
 

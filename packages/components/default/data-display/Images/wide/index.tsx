@@ -1,4 +1,4 @@
-import type { ZIndexName} from '@md/styles';
+import type { ZIndexName } from '@md/styles';
 import { getZIndex } from '@md/styles';
 import Image from "next-image-export-optimizer";
 import React from 'react';
@@ -80,7 +80,7 @@ export const fadeInZoomedAnimation = css`
    ${fadeInZoomed} 0.2s linear forwards;
 `;
 
-const ImageWrapper = styled(Image).attrs<{ $layer?: 'back'| 'front'; $zIndex?: ZIndexName, $isHalfSize?: boolean, $alignment?: 'top' | 'bottom' | 'center', $blured?: boolean }>({})`
+const ImageWrapper = styled(Image as any).attrs<{ $layer?: 'back' | 'front'; $zIndex?: ZIndexName, $isHalfSize?: boolean, $alignment?: 'top' | 'bottom' | 'center', $blured?: boolean }>({})`
     position: absolute;
 
     bottom: 0;
@@ -95,20 +95,20 @@ const ImageWrapper = styled(Image).attrs<{ $layer?: 'back'| 'front'; $zIndex?: Z
     
     z-index: ${({ $zIndex = 'background' }) => getZIndex($zIndex)};
 
-    ${({hidden}) => hidden ?
+    ${({ hidden }) => hidden ?
         css`
             animation: ${fadeOutAnimation};
             animation-duration: 2s;
             animation-fill-mode: forwards;
         `
-            :
+        :
         css`
             animation: ${fadeInZoomedAnimation};
             animation-duration: 0.6s;
             animation-delay: 1.4s;
             animation-fill-mode: forwards;
         `
-        }
+    }
 
     ${({ $blured }) => $blured ? css`
         filter: blur(20px);
@@ -137,7 +137,7 @@ const ImageWrapper = styled(Image).attrs<{ $layer?: 'back'| 'front'; $zIndex?: Z
         `
     }[$alignment])};
     
-    ${({ $layer }) => $layer && 
+    ${({ $layer }) => $layer &&
         ({
             'front': css`
                     opacity: 1;

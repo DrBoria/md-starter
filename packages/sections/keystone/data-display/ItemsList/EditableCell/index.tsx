@@ -7,7 +7,7 @@ import type { ListMeta } from "@keystone-6/core/types";
 import React, { useMemo, useState } from "react";
 import { deserializeValue } from "@keystone-6/core/admin-ui/utils";
 
-import type { IGraphQLObject } from "../../../../types";
+import type { IGraphQLObject } from "@md/types";
 
 interface EditableCellProps {
   element: IGraphQLObject;

@@ -1,7 +1,7 @@
 import type { ListMeta } from "@keystone-6/core/types";
 import React from "react";
 
-import type { IGraphQLObject } from "../../../../types";
+import type { IGraphQLObject } from "@md/types";
 import { Link } from "@md/components";
 import { BodyCell } from "../styles";
 

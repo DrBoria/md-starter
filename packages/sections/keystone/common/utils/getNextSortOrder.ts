@@ -9,4 +9,5 @@ const getNextSortOrder = (name: string, currentSort?: TOrderBy): TSortOrder => {
   return "asc";
 };
 
-export { TSortOrder, TOrderBy, getNextSortOrder };
+export { getNextSortOrder };
+export type { TSortOrder, TOrderBy };

@@ -23,7 +23,7 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
-export const getZIndex = (name) => zIndexes[name];
+export const getZIndex = (name: any) => (zIndexes as any)[name];
 
 const base = {
   zIndex: zIndexes,

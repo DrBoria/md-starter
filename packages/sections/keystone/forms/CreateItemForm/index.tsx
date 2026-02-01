@@ -1,10 +1,10 @@
+import { FieldRenderer } from './components/FieldRenderer';
 import React, { useState } from "react";
-import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import { useRouter } from "next/router";
 
-import type { TValue } from "../../../types";
-import type { TConditionalField } from "../ConditionalField";
+import type { TValue } from "@md/types";
+import type { TConditionalField } from "../DynamicForms/ConditionalField";
 import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
 import { ConditionalField } from "../DynamicForms/ConditionalField";
 import {
@@ -74,9 +74,12 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
       ...notToRenderFields,
     ],
   });
-  const createItem = useCreateItem(fieldsData.list, false, defaultValues);
+  const createItem = useCreateItem(fieldsData.list as any, false, defaultValues);
 
   const fieldsDataArray = fieldGroups.map((groupFields, index) => {
+    // DEBUG: Log fields to inspect structure
+    console.log('CreateItemForm fields:', fieldsData.list.fields);
+
     // For groupFields === [] we should render all fields, except passed
     // Use it when you want dynamically render fields listed in schema without direct mentioning
     if (Array.isArray(groupFields) && groupFields.length === 0) {
@@ -221,16 +224,32 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
       }, {});
 
       return (
-        <Fields
-          key={`create-fields-group-${list.key}-${index}`}
-          fields={orderedFields}
-          fieldModes={createItem.props.fieldModes}
-          value={createItem.props.value}
-          groups={list.groups}
-          forceValidation={createItem.props.forceValidation}
-          invalidFields={createItem.props.invalidFields}
-          onChange={createItem.props.onChange}
-        />
+        <div key={`create-fields-group-${list.key}-${index}`}>
+          {Object.keys(orderedFields).map((fieldName) => {
+            const field = orderedFields[fieldName];
+            const value = createItem.props.value[fieldName];
+
+            const onChange = (newValue: any) => {
+              createItem.props.onChange((prev: any) => ({
+                ...prev,
+                [fieldName]: newValue
+              }));
+            };
+
+
+
+            // ... (inside component) ...
+
+            return (
+              <FieldRenderer
+                key={fieldName}
+                field={field}
+                value={value}
+                onChange={onChange}
+              />
+            );
+          })}
+        </div>
       );
     }),
 

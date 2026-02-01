@@ -99,14 +99,14 @@ const CloudContainer = styled.div<ICloudProps>`
     right: 20vw;
   `}
 
-  ${({ $isinitial }) => 
-  $isinitial ? css`
+  ${({ $isinitial }) =>
+    $isinitial ? css`
       transform: translateX(0vw);
       animation: ${moveInitialAnimationRule};
     `
-  : ''}
+      : ''}
 
-  ${({$manual, $top, $left, $direction}) => $manual ? css`
+  ${({ $manual, $top, $left, $direction }) => $manual ? css`
     top: ${$top || 0}px;
     left: ${$left || 0}px; 
     animation: ${$direction === 'right' ? moveRightInitialAnimationRule : moveInitialAnimationRule};
@@ -115,21 +115,21 @@ const CloudContainer = styled.div<ICloudProps>`
 `;
 
 // Cloud Layers
-const cloudLayerBaseCSS = `
+export const CloudLayerBaseCSS = `
   position: relative;
   border-radius: 50%;
 `;
 
-const CloudBase = styled.div`
-  ${cloudLayerBaseCSS}
+export const CloudBase = styled.div`
+  ${CloudLayerBaseCSS}
   width: 100%;
   height: 100%;
   filter: url('data:image/svg+xml;utf8,${encodedFilter}#filter-base');
   box-shadow: 200px 170px 19px 40px #66797f70;
 `;
 
-const CloudBack = styled.div`
-  ${cloudLayerBaseCSS}
+export const CloudBack = styled.div`
+  ${CloudLayerBaseCSS}
   margin-top: -90px;
   height: 35%;
   width: 80%;
@@ -137,8 +137,8 @@ const CloudBack = styled.div`
   box-shadow: 200px 200px 10px 40px #66797f10;
 `;
 
-const CloudMid = styled.div`
-  ${cloudLayerBaseCSS}
+export const CloudMid = styled.div`
+  ${CloudLayerBaseCSS}
   margin-top: -80px;
   width: 90%;
   height: 35%;
@@ -146,8 +146,8 @@ const CloudMid = styled.div`
   box-shadow: 210px 250px 28px 30px #667d8320;
 `;
 
-const CloudFront = styled.div`
-  ${cloudLayerBaseCSS}
+export const CloudFront = styled.div`
+  ${CloudLayerBaseCSS}
   margin-top: -75px;
   left: -20px;
   width: 100%;
@@ -158,7 +158,7 @@ const CloudFront = styled.div`
 
 export type ICloudProps = { $size?: 'small' | 'big' | 'medium', $position?: ('top' | 'left' | 'bottom' | 'right')[], $isinitial?: boolean, $top?: number, $left?: number, $manual?: boolean, $direction?: 'left' | 'right' };
 
-const Cloud = ({ $size, $position, $isinitial, $top, $left, $manual, $direction }: ICloudProps) => {
+export const Cloud = ({ $size, $position, $isinitial, $top, $left, $manual, $direction }: ICloudProps) => {
   return (
     <CloudContainer $size={$size} $position={$position} $isinitial={$isinitial} $manual={$manual} $direction={$direction} $top={$top} $left={$left}>
       <CloudBase />

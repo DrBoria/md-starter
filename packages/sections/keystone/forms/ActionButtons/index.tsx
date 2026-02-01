@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useModal } from "../../../../components/default/overlays/Modals";
-import { Button } from "../../../../components/default/forms/Button";
+import { Button } from "@md/components";
+import { useModal } from "@md/components/keystone";
 import { DeleteTemplate } from "../../overlays/Modals/templates";
 
 interface TActionButtonsProps {

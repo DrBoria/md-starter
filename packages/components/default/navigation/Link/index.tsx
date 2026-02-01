@@ -9,4 +9,14 @@ const LinkStyled = styled(Link)`
   }
 `;
 
-export { LinkStyled as Link };
+
+const LinkInForm = styled(Link)`
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.colors.highlighted};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export { LinkStyled as Link, LinkInForm };

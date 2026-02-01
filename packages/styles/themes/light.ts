@@ -12,6 +12,9 @@ export default {
   overlay: '#e6e6e6',       // Light overlay
   overlayActive: '#dcdcdc',       // Slightly darker active overlay
 
+  background: '#ffffff',
+  text: '#000000',
+
   highlighted: '#7d9b99',
   highlightedText: '#222f31',
 

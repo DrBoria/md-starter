@@ -5,7 +5,7 @@ import {
   makeVar,
   useReactiveVar,
 } from "@apollo/client";
-import type { ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "../../default/Modals";
+import type { ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "../../../default/overlays/Modals";
 import { ModalContext } from "../../../default/overlays/Modals";
 import { updateAndLog } from "./updateAndLog";
 

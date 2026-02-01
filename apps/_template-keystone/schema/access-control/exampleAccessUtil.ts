@@ -1,6 +1,6 @@
 import type { BaseListTypeInfo, MaybePromise } from "@keystone-6/core/types";
 
-import type { TSession } from "../../types";
+import type { TSession } from "../../../types";
 
 /*********************************************/
 /******** Use for all access options *********/

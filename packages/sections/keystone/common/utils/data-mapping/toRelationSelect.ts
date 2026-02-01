@@ -1,4 +1,4 @@
-import type { IOption } from "../../../../types";
+import type { IOption } from "@md/types";
 
 function toRelationSelect(input: unknown): IOption {
   // Exclude the __typename property and find the first key-value pair

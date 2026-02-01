@@ -1,4 +1,4 @@
-import type { TSession } from "../../types";
+import type { TSession } from "../../../types";
 import { isAdmin } from "./roles";
 
 export const isOnlyAdminCanSee = {

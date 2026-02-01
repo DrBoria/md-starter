@@ -15,6 +15,7 @@ type FieldType =
   | "object"
   | "date"
   | "relation"
+  | "select"
   | "unknown";
 
 const getFieldType = (field: FieldMeta): FieldType => {

@@ -3,10 +3,11 @@ import type { KeyboardEvent } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { Button, useLogger } from "@md/components";
+import { Button } from "@md/components";
+import { useLogger } from "@md/components/keystone";
 import { ArrowRightIcon } from "@keystone-ui/icons";
 
-import type { IGraphQLObject, IOption } from "../../../../types";
+import type { IGraphQLObject, IOption } from "@md/types";
 import type { TCondition } from "../../common/utils/data-mapping/mapFilterParameters";
 import type { TOrderBy } from "../../common/utils/getNextSortOrder";
 import { toKebabCase, lowerCaseFirstLetter } from "@md/utils";
@@ -198,14 +199,14 @@ export const ItemsList = ({
           element={element}
           itemGetter={itemGetter}
           onChange={onEditCell(element.id)}
-          list={list}
+          list={list as any}
         />
       ) : (
         <ViewCell
           key={gqlElement}
           gqlElement={gqlElement}
           element={element}
-          list={list}
+          list={list as any}
           linkTo={fieldsToDisplay.indexOf(gqlElement) === 0 ? linkToElement : ""}
         />
       );

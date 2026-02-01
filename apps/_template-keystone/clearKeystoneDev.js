@@ -1,4 +1,4 @@
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,43 +15,48 @@ function deleteGeneratedPages(dir) {
     if (file.isDirectory()) {
        if (PRESERVED_ROUTES.includes(file.name)) return;
        
-       // It's likely a list folder (e.g. 'users', 'posts').
-       // We want to DELETE it so that admin/pages/[listKey] handles it.
-       // UNLESS there is a manual override in apps/_template-keystone/admin/pages/{name}
-       // But wait, if there is a manual override, Next.js prefers the specific file anyway?
-       // Yes, Next.js priority: specific > dynamic.
-       // So if we have admin/pages/posts/index.tsx (which compiles to .keystone/.../posts/index.js??? No, user copies it? No, Keystone compiles from admin/pages mapping).
-       
-       // Actually, Keystone generates the pages. 
-       // If we simply delete the generated folder, Next.js falling back to [listKey] is correct behavior.
-       
        fs.rmSync(filePath, { recursive: true, force: true });
        console.log(`Deleted generated list generic folder to enable dynamic routing: ${filePath}`);
+    } else if (file.isFile() && file.name.endsWith('.js') && !file.name.endsWith('_original.js')) {
+      const tsxPath = filePath.replace(/\.js$/, '.tsx');
+      if (fs.existsSync(tsxPath)) {
+        const originalPath = filePath.replace(/\.js$/, '_original.js');
+        if (!fs.existsSync(originalPath)) {
+          fs.renameSync(filePath, originalPath);
+          console.log(`Renamed duplicate generated .js file to _original.js: ${filePath} (using .tsx override)`);
+        } else {
+          fs.unlinkSync(filePath);
+          console.log(`Deleted duplicate generated .js file (already have _original.js): ${filePath}`);
+        }
+      }
     }
   });
 }
 
-
 function runKeystoneDev() {
   return new Promise((resolve, reject) => {
-    const keystoneProcess = exec('keystone dev');
-
-    keystoneProcess.stdout.on('data', data => {
-      console.log(`Keystone: ${data}`);
-      
-      // Check for the specific line that indicates Keystone has started
-      if (data.includes('Admin UI ready') || data.includes('Keystone instance started')) {
-        resolve(keystoneProcess); // Keystone is ready, resolve the promise
-      }
+    const keystoneProcess = spawn('pnpm', ['keystone', 'dev'], {
+      env: { ...process.env, NODE_ENV: 'development' },
+      stdio: ['inherit', 'pipe', 'inherit']
     });
 
-    keystoneProcess.stderr.on('data', data => {
-      console.error(`Keystone Error: ${data}`);
+    keystoneProcess.stdout.on('data', data => {
+      const output = data.toString();
+      process.stdout.write(output);
+      
+      // Check for the specific line that indicates Keystone has started
+      if (output.includes('Admin UI ready') || output.includes('GraphQL API ready')) {
+        // Perform the cleanup once ready
+        const adminPagesDir = path.join(__dirname, '.keystone/admin/pages');
+        deleteGeneratedPages(adminPagesDir);
+        resolve(keystoneProcess);
+      }
     });
 
     keystoneProcess.on('exit', code => {
       if (code !== 0) {
-        reject(new Error(`Keystone process exited with code ${code}`));
+        console.error(`Keystone process exited with code ${code}`);
+        process.exit(code);
       }
     });
   });
@@ -59,19 +64,11 @@ function runKeystoneDev() {
 
 async function main() {
   try {
-    // Start keystone dev and wait for it to signal readiness
     await runKeystoneDev();
-
-    // Directory to check for duplicate .js and .tsx files
-    const adminPagesDir = './.keystone/admin/pages';
-
-    // Perform the cleanup to force dynamic routing
-    deleteGeneratedPages(adminPagesDir);
-
-    // Optional: Keep Keystone running, or kill it if you want to stop after cleanup
-    // keystoneProcess.kill();
+    console.log('Keystone is running and cleanup is done.');
   } catch (error) {
     console.error(`Error: ${error}`);
+    process.exit(1);
   }
 }
 

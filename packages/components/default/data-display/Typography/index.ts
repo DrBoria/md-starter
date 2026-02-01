@@ -107,16 +107,6 @@ const HeaderText = styled.h3`
   color: #111827; // same as in keystone
 `;
 
-const LinkInForm = styled(Link)`
-  color: #374151;
-  font-size: 14px;
-  font-weight: 600;
-  &:hover {
-    color: #2563eb;
-    text-decoration: underline;
-  }
-`;
-
 export {
   Label,
   Highlighted,
@@ -126,5 +116,4 @@ export {
   DescriptionText,
   PlainText,
   HeaderText,
-  LinkInForm,
 };

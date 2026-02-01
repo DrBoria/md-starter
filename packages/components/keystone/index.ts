@@ -9,7 +9,13 @@ export {
     TextArea
 } from './forms/Form';
 export { Toggle } from './forms/Toggle';
-export { LoggerProvider } from './feedback/Logger';
+export { LoggerProvider, useLogger } from './feedback/Logger';
+export { PageTitle, SubTitle } from '../default/data-display/Typography';
 export { ModalProvider } from './overlays/Modals';
+export {
+    useModal,
+    CentralModal,
+    FullScreenModal,
+} from '../default/overlays/Modals';
 
 export type { TTextAreaPlugins } from './forms/Form'

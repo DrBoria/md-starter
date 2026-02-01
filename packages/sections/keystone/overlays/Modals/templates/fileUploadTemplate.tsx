@@ -132,7 +132,7 @@ const FileUpload = ({
     }
 
     // Show error if required fields is not filled
-    const errors = [];
+    const errors: string[] = [];
     if (withName && !name) errors.push("Name");
     if (withDescription && !description) errors.push("Description");
 

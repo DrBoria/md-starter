@@ -4,13 +4,13 @@ import {
   text,
 } from "@keystone-6/core/fields";
 
-import type { Lists, PostWhereInput } from ".keystone/types";
+type Lists = any; type PostWhereInput = any;
 import { createdAt } from "./fields/createdAt";
 import { updatedAt } from "./fields/updatedAt";
 import { isAdmin } from "./access-control/roles";
-import { Text } from "../admin/components/CustomFields/Text";
+import { Text } from "@md/sections/keystone";
 
-export const Post = list<Lists.Post.TypeInfo>({
+export const Post = list<any>({
   access: {
     operation: {
       query: () => true,
@@ -34,7 +34,7 @@ export const Post = list<Lists.Post.TypeInfo>({
     map: "post",
   },
   fields: {
-    name: Text({
+    name: text({
       validation: { isRequired: true },
       isIndexed: "unique",
     }),

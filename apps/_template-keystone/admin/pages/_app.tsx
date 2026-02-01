@@ -1,8 +1,7 @@
 import React from 'react';
-import KeystoneAppModule from '../../.keystone/admin/pages/_app';
-import { LoggerProvider, ModalProvider } from '@md/components/keystone';
-import { CentralModal, FullScreenModal } from '@md/components';
-import { SideBarModal } from '@md/sections/keystone';
+import KeystoneAppModule from '../../.keystone/admin/pages/_app_original';
+import { LoggerProvider, ModalProvider, CentralModal, FullScreenModal } from '@md/components/keystone';
+import { SideBarModal } from '../components/Modals/SideBarModal';
 import { dark, viking, liquidGlass, ThemeProvider, GlobalStyles } from '@md/styles';
 import type { ApolloClient } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
@@ -15,7 +14,7 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
     // @ts-ignore
     const Wrapped = (props) => (
         <ApolloProvider client={apolloClient as unknown as ApolloClient<object>}>
-            <ThemeProvider theme={liquidGlass}>
+            <ThemeProvider theme={viking}>
                 <GlobalStyles />
                 <LoggerProvider>
                     <ModalProvider>
