@@ -9,7 +9,7 @@ const SpinnerContainer = styled.View`
   flex: 1;
 `;
 
-const LoadingSpinner = ({ size = 100, children }) => {
+const LoadingSpinner = ({ children }) => {
   const rotateValue = new Animated.Value(0);
 
   // Animation function

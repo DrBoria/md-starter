@@ -27,7 +27,7 @@ export const DuplicateButton: React.FC<DuplicateButtonProps> = ({
         tone="passive"
         onClick={onClick}
         $fullWidth={$fullWidth}
-        icon="FilePlusIcon"
+        icon="FilePlus"
         {...rest}
       >
         {children}

@@ -10,8 +10,9 @@ type TFormProps = {
   TFullWidth;
 
 const Form = styled.form<TFormProps>`
-  width: ${({ fullWidth }) => fullWidth && '100%'};
+  width: ${({ $fullWidth }) => $fullWidth && '100%'};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 `;
+/** @component */
 export default Form;

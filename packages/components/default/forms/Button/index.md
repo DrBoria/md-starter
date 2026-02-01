@@ -57,5 +57,5 @@ import { Button } from ".";
       </div>
     </div>
   </div>
-</>;
+</>
 ```

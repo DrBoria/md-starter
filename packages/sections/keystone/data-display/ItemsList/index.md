@@ -1,16 +1,14 @@
 ```jsx
 import { ItemsList } from ".";
-import { KeystoneProvider } from "../../common/utils/ui-kit/KeystoneProvider";
-
-// KeystoneProvider is only for UI-KIT
+import { KeystoneProvider } from "../../common/utils/ui-kit/KeystoneProvider"; // KeystoneProvider is only for UI-KIT
 // Don't use it in application
 <div>
-  <p style={{ marginBottom: "30px" }}>
+  <div style={{ marginBottom: "30px" }}>
     <h1>For more information visit: </h1>
     <b>
       <i>/keystone/schema/Example.ts</i>
     </b>
-  </p>
+  </div>
   <div style={{ overflowX: "auto" }}>
     <div
       style={{
@@ -40,5 +38,5 @@ import { KeystoneProvider } from "../../common/utils/ui-kit/KeystoneProvider";
       <ItemsList listName="Example" />
     </KeystoneProvider>
   </div>
-</div>;
+</div>
 ```

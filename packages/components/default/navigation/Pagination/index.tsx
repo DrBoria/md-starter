@@ -15,9 +15,9 @@ const PaginationContainer = styled.div`
 `;
 
 const PageNumber = styled.button<{ $active: boolean }>`
-  background-color: ${({ $active }) =>
-    $active ? "#007bff" : "var(--color-bg-secondary)"};
-  color: ${({ $active }) => ($active ? "#fff" : "#000")};
+  background-color: ${({ $active, theme }) =>
+    $active ? (theme?.colors?.highlighted || "#007bff") : (theme?.colors?.overlay || "var(--color-bg-secondary)")};
+  color: ${({ $active, theme }) => ($active ? (theme?.colors?.highlightedText || "#fff") : (theme?.colors?.sectionContent || "#000"))};
   border: 1px solid #ccc;
   margin: 0 5px;
   padding: 5px 10px;
@@ -26,14 +26,42 @@ const PageNumber = styled.button<{ $active: boolean }>`
   font-weight: ${({ $active }) => ($active ? "bold" : "normal")};
 
   &:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: ${({ theme }) => theme?.colors?.highlighted || "#007bff"};
+    color: ${({ theme }) => theme?.colors?.highlightedText || "#fff"};
   }
+
+  /* VIKING THEME */
+  ${({ theme, $active }) => theme?.theme === 'viking' && `
+    border-radius: 0;
+    clip-path: ${theme?.geometry?.ragged};
+    background-image: ${theme?.effects?.texture};
+    
+    /* Active state: Dark background with Glowing Green Digit */
+    background-color: ${$active ? theme?.colors?.overlayActive : theme?.colors?.overlay};
+    color: ${$active ? theme?.colors?.highlighted : theme?.colors?.sectionContent};
+    
+    border: none;
+    box-shadow: ${$active ? theme?.effects?.glow?.medium : theme?.effects?.depth?.inner?.medium};
+    height: ${theme?.elements?.form?.height};
+    min-width: ${theme?.elements?.form?.height};
+    font-family: ${theme?.font?.family?.text};
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: ${theme?.colors?.overlayActive};
+      color: ${theme?.colors?.highlighted};
+      box-shadow: ${theme?.effects?.glow?.medium};
+      filter: brightness(1.2);
+      text-shadow: 0 0 8px ${theme?.colors?.highlighted};
+    }
+  `}
 `;
 
 const ArrowButton = styled.button`
   background-color: transparent;
-  color: #007bff;
+  color: ${({ theme }) => theme?.colors?.highlighted || "#007bff"};
   border: none;
   margin: 0 10px;
   padding: 5px 10px;
@@ -41,13 +69,21 @@ const ArrowButton = styled.button`
   font-weight: bold;
 
   &:hover {
-    color: #0056b3;
+    color: ${({ theme }) => theme?.colors?.highlightedText || "#0056b3"};
+    text-shadow: 0 0 8px ${({ theme }) => theme?.colors?.highlighted || "transparent"};
   }
 
   &:disabled {
-    color: #ccc;
+    color: ${({ theme }) => theme?.colors?.disabled || "#ccc"};
     cursor: not-allowed;
   }
+
+  /* VIKING THEME */
+  ${({ theme }) => theme?.theme === 'viking' && `
+    font-family: ${theme?.font?.family?.text};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  `}
 `;
 
 const Dots = styled.span`
@@ -60,10 +96,11 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize(); // Initial check
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

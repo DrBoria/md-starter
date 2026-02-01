@@ -37,5 +37,5 @@ import { Pagination } from ".";
       );
     })()}
   </div>
-</>;
+</>
 ```

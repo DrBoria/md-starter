@@ -46,11 +46,12 @@ const StyledButton = styled.button<{
   border: none;
   cursor: pointer;
   width: ${(props) => (props.$fullWidth ? "100%" : "auto")};
+  height: ${({ theme }) => theme?.elements?.form?.height || 'auto'};
   gap: ${(props) =>
     props.$size !== "icon"
-      ? `${props.theme.variables.offsets.betweenElements.mobile}px`
+      ? `${props.theme?.variables?.offsets?.betweenElements?.mobile || 0}px`
       : "0"};
-  border-radius: ${({ theme }) => theme.border.radius}px;
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
 
   &:disabled {
     opacity: 0.5;
@@ -58,218 +59,224 @@ const StyledButton = styled.button<{
   }
 
   ${(props) => {
-    const { theme, $tone: tone, $weight: weight } = props;
+    const { theme, $tone: tone, $weight: weight, $size: size } = props;
 
+    // Стили для веса кнопки
+    let weightStyles = css``;
     const color = (() => {
       switch (tone) {
         case "active":
-          return theme.colors.highlighted;
+          return theme?.colors?.highlighted || 'blue';
         case "passive":
-          return theme.colors.section;
+          return theme?.colors?.section || 'gray';
         case "negative":
-          return theme.colors.errorBackground;
+          return theme?.colors?.errorBackground || 'red';
         case "neutral":
-          return theme.colors.labelBackground;
+          return theme?.colors?.labelBackground || 'lightgray';
         case "positive":
-          return theme.colors.successBackground;
+          return theme?.colors?.successBackground || 'green';
         case "warning":
-          return theme.colors.warningBackground;
+          return theme?.colors?.warningBackground || 'orange';
         case "help":
-          return theme.colors.overlayActive;
+          return theme?.colors?.overlayActive || 'lightblue';
         default:
-          return theme.colors.section;
+          return theme?.colors?.section || 'gray';
       }
     })();
 
     const colorText = (() => {
       switch (tone) {
         case "active":
-          return theme.colors.highlightedText;
+          return theme?.colors?.highlightedText || 'white';
         case "passive":
-          return theme.colors.sectionContent;
+          return theme?.colors?.sectionContent || 'black';
         case "negative":
-          return theme.colors.errorText;
+          return theme?.colors?.errorText || 'white';
         case "neutral":
-          return theme.colors.sectionContent;
+          return theme?.colors?.sectionContent || 'black';
         case "positive":
-          return theme.colors.successText;
+          return theme?.colors?.successText || 'white';
         case "warning":
-          return theme.colors.warningText;
+          return theme?.colors?.warningText || 'white';
         case "help":
-          return theme.colors.sectionContent;
+          return theme?.colors?.sectionContent || 'black';
         default:
-          return theme.colors.sectionContent;
+          return theme?.colors?.sectionContent || 'black';
       }
     })();
 
-    // Стили для веса кнопки
-    let weightStyles = "";
     switch (weight) {
       case "bold":
-        weightStyles = `
+        weightStyles = css`
           background-color: ${color};
           color: ${colorText};
         `;
         break;
       case "outline":
       case "hollow":
-        weightStyles = `
-          border: ${theme.variables.border.size}px solid ${colorText};
+        weightStyles = css`
+          border: ${theme?.variables?.border?.size || 1}px solid ${colorText};
           background-color: transparent;
           color: ${colorText};
         `;
         break;
       case "light":
-        weightStyles = `
+        weightStyles = css`
           background-color: transparent;
           color: ${colorText};
         `;
         break;
       case "link":
-        weightStyles = `
+        weightStyles = css`
           background-color: transparent;
           color: ${colorText};
           text-decoration: underline;
         `;
         break;
       case "none":
-        weightStyles = `
+        weightStyles = css`
           background-color: transparent;
           color: inherit;
         `;
         break;
       default:
-        weightStyles = `
+        weightStyles = css`
           background-color: ${color};
           color: ${colorText};
         `;
     }
 
-    let sizeStyles = "";
-    switch (props.$size) {
+    let sizeStyles = css``;
+    switch (size) {
       case "small":
-        sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile / 2}px ${theme.variables.offsets.elementContent.mobile
-          }px;
-          font-size: 12px; /* Можно заменить на theme.font.size с модификатором */
+        sizeStyles = css`
+          padding: ${(theme?.variables?.offsets?.elementContent?.mobile || 8) / 2}px ${theme?.variables?.offsets?.elementContent?.mobile || 8}px;
+          font-size: 12px;
         `;
         break;
       case "medium":
-        sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile}px ${theme.variables.offsets.elementContent.mobile * 2
-          }px;
-          font-size: 14px; /* Можно заменить на theme.font.size */
+        sizeStyles = css`
+          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 2}px;
+          font-size: 14px;
         `;
         break;
       case "large":
-        sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile * 1.5}px ${theme.variables.offsets.elementContent.mobile * 3
-          }px;
-          font-size: 16px; /* Можно заменить на theme.font.size с модификатором */
+        sizeStyles = css`
+          padding: ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 1.5}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 3}px;
+          font-size: 16px;
         `;
         break;
       case "icon":
-        sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile}px;
+        sizeStyles = css`
+          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px;
           width: 32px;
           height: 32px;
         `;
         break;
       default:
-        sizeStyles = `
-          padding: ${theme.variables.offsets.elementContent.mobile}px ${theme.variables.offsets.elementContent.mobile * 2
-          }px;
+        sizeStyles = css`
+          padding: ${theme?.variables?.offsets?.elementContent?.mobile || 8}px ${parseInt(theme?.variables?.offsets?.elementContent?.mobile || '8', 10) * 2}px;
           font-size: 14px;
         `;
     }
 
-    return `
+    return css`
       ${weightStyles}
       ${sizeStyles}
 
       /* Viking Theme Overrides */
-      /* Viking Theme Overrides */
-      ${({ theme, $tone }) => theme.theme === 'viking' && css`
-        /* VIKING THEME AUGMENTATION (North UI) */
-        /* 1. Geometry (Runes) */
+      ${theme?.theme === 'viking' && css`
+        /* VIKING THEME AUGMENTATION (Valhalla Style) */
+        /* 1. Geometry: Rough Stone */
         border-radius: 0;
-        ${theme.colors.geometry?.cut && `clip-path: ${theme.colors.geometry.cut};`}
+        ${theme?.geometry?.ragged && `clip-path: ${theme.geometry.ragged};`}
         
-        /* 2. Typography (Cinzel) */
-        font-family: ${theme.colors.fontFamily || 'serif'};
-        letter-spacing: 1px;
+        /* 2. Typography: Glow on hover */
+        font-family: ${theme?.colors?.fontFamily || theme?.fontFamily || theme?.font?.family?.text || 'serif'};
+        letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 700;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         
-        /* 3. Material (Etched Metal) */
-        /* Base: "Active" Gold (highlighted) or "Passive" Steel (labelBackground) */
-        background: linear-gradient(
-            180deg, 
-            ${theme.colors.highlighted} 0%, 
-            color-mix(in srgb, ${theme.colors.highlighted}, black 20%) 100%
-        );
-        color: ${theme.colors.highlightedText};
+        /* Ensure text is bright and can glow */
+        color: ${theme?.colors?.highlightedText || 'white'};
+        span {
+          color: inherit;
+          transition: text-shadow 0.2s ease;
+        }
+        
+        /* 3. Material: Etched Stone with Texture */
+        background: ${theme?.colors?.highlighted || 'gold'};
+        background-image: ${theme?.effects?.texture}; /* NOISE */
         border: none; 
 
-        /* 4. Volume (Highlight top, Shadow bottom) */
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 0 rgba(0,0,0,0.3);
+        /* 4. Volume: Highlight top, Shadow bottom */
+        box-shadow: 
+          inset 0 1px 0 rgba(255,255,255,0.4), 
+          0 4px 0 rgba(0,0,0,0.5),
+          ${theme?.effects?.glow?.soft};
 
         /* Tone Overrides */
-        ${$tone === 'passive' && css`
-          background: linear-gradient(
-            180deg, 
-            ${theme.colors.labelBackground} 0%, 
-            color-mix(in srgb, ${theme.colors.labelBackground}, black 30%) 100%
-          );
-          color: ${theme.colors.sectionContent}; 
+        ${tone === 'passive' && css`
+          background: ${theme?.colors?.labelBackground || 'gray'};
+          background-image: ${theme?.effects?.texture};
+          color: ${theme?.colors?.sectionContent || 'white'}; 
         `}
 
-        ${$tone === 'warning' && css`
-          background: linear-gradient(
-            180deg, 
-            ${theme.colors.warning} 0%, 
-            color-mix(in srgb, ${theme.colors.warning}, black 20%) 100%
-          );
-          color: ${theme.colors.warningText};
+        ${tone === 'warning' && css`
+          background: ${theme?.colors?.warning || 'orange'};
+          background-image: ${theme?.effects?.texture};
+          color: ${theme?.colors?.warningText || 'white'};
         `}
 
-        /* Interaction Physics */
+        /* 5. Interaction: Glow & Cracks */
         &:hover {
-          filter: brightness(1.1);
-          transform: translateY(-1px);
-          box-shadow: ${theme.colors.effects?.glow?.medium || `0 0 15px ${theme.colors.highlighted}60`};
+          filter: brightness(1.2);
+          transform: translateY(-2px);
+          box-shadow: 
+            inset 0 1px 0 rgba(255,255,255,0.5), 
+            0 6px 0 rgba(0,0,0,0.5),
+            ${theme?.effects?.glow?.medium};
+          
+          /* Text/Number glow - CRITICAL FIX */
+          span, svg {
+            color: ${theme?.colors?.highlightedText || 'white'};
+            filter: drop-shadow(0 0 5px ${theme?.colors?.highlighted || 'white'});
+            text-shadow: 0 0 10px ${theme?.colors?.highlighted || 'white'};
+          }
         }
 
         &:active {
           transform: translateY(2px);
-          box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); 
-          filter: brightness(0.95);
-        }
-
-        /* 5. Decorative Frame (Knotwork) */
-        &::after {
+          box-shadow: inset 0 2px 5px rgba(0,0,0,0.7); 
+          filter: brightness(0.8);
+          
+          /* Crack effect on click */
+          &::before {
             content: '';
             position: absolute;
             inset: 0;
+            background-image: ${theme?.effects?.cracks};
+            background-size: cover;
+            opacity: 0.6;
             pointer-events: none;
-            
-            /* Frame */
-            border: 2px solid ${theme.colors.highlighted};
-            opacity: 0.3;
-            
-            /* Cut corners for frame */
-            clip-path: polygon(
-                0 8px, 8px 0, 
-                calc(100% - 8px) 0, 100% 8px, 
-                100% calc(100% - 8px), calc(100% - 8px) 100%, 
-                8px 100%, 0 calc(100% - 8px)
-            );
+          }
         }
 
-        /* HOVER Frame */
+        /* 6. Decorative Frame (Simplified Knotwork) */
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            pointer-events: none;
+            border: 1px solid ${theme?.colors?.highlighted || 'gold'};
+            opacity: 0.2;
+            clip-path: ${theme?.geometry?.ragged};
+        }
+
         &:hover::after {
-            opacity: 1;
-            box-shadow: ${theme.colors.effects?.glow?.medium}; 
+            opacity: 0.6;
+            box-shadow: inset 0 0 10px ${theme?.colors?.highlighted || 'gold'}30;
         }
       `}
     `;
@@ -304,7 +311,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      {isLoading && <Loader size="small" />}
+      {isLoading && <Loader $size="small" />}
       {!isLoading && icon && iconPosition === "left" && (
         <LucideIcon name={icon} />
       )}

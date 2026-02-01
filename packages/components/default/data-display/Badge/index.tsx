@@ -9,40 +9,40 @@ interface BadgeProps {
 }
 
 export const BadgeContainer = styled.div<BadgeProps>`
-  padding: ${({ theme }) => theme.offsets.elementContent} calc(2 * ${({ theme }) =>
-    theme.offsets.elementContent});
-  border-radius: ${({ theme }) => theme.border.radius};
+  padding: ${({ theme }) => theme?.offsets?.elementContent || '0'} calc(2 * ${({ theme }) =>
+    theme?.offsets?.elementContent || '0'});
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
   font-weight: 500;
   text-transform: capitalize;
   height: fit-content;
   display: flex;
   align-items: center;
-  font-family: ${({ theme }) => theme.font.family.text};
-  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
+  gap: ${({ theme }) => theme?.variables?.offsets?.betweenElements?.mobile || 0}px;
 
   background-color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
-        return theme.colors.warningBackground;
+        return theme?.colors?.warningBackground || 'orange';
       case "success":
-        return theme.colors.successBackground;
+        return theme?.colors?.successBackground || 'green';
       case "failed":
-        return theme.colors.errorBackground;
+        return theme?.colors?.errorBackground || 'red';
       default:
-        return theme.colors.section;
+        return theme?.colors?.section || 'transparent';
     }
   }};
 
   color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
-        return theme.colors.warningText;
+        return theme?.colors?.warningText || 'white';
       case "success":
-        return theme.colors.successText;
+        return theme?.colors?.successText || 'white';
       case "failed":
-        return theme.colors.errorText;
+        return theme?.colors?.errorText || 'white';
       default:
-        return theme.colors.sectionContent;
+        return theme?.colors?.sectionContent || 'inherit';
     }
   }};
 `;
@@ -52,19 +52,19 @@ export const Badge: React.FC<BadgeProps & { children?: React.ReactNode }> = ({
   isLoading,
   children,
 }) => {
-  const theme = useTheme();
+  const theme = useTheme() as any;
 
 
   const getTextColor = () => {
     switch ($status) {
       case "approval":
-        return theme.colors.warningText;
+        return theme?.colors?.warningText || 'white';
       case "success":
-        return theme.colors.successText;
+        return theme?.colors?.successText || 'white';
       case "failed":
-        return theme.colors.errorText;
+        return theme?.colors?.errorText || 'white';
       default:
-        return theme.colors.sectionContent;
+        return theme?.colors?.sectionContent || 'black';
     }
   };
 
@@ -72,7 +72,7 @@ export const Badge: React.FC<BadgeProps & { children?: React.ReactNode }> = ({
 
   return (
     <BadgeContainer $status={$status}>
-      {isLoading && <Loader $offsetRight size="small" color={textColor} />}
+      {isLoading && <Loader $offsetRight $size="small" $color={textColor} />}
       {children}
     </BadgeContainer>
   );

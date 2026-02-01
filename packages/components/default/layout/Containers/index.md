@@ -13,5 +13,5 @@ import { dark } from '@md/styles';
         Content inside section
     </div>
   </BasicSection>
-</PageContainer>;
+</PageContainer>
 ```

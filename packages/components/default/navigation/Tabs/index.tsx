@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const TabsContainer = styled.div`
   width: 100%;
@@ -8,43 +8,42 @@ const TabsContainer = styled.div`
 const TabList = styled.div`
   display: flex;
   cursor: pointer;
-  role: tablist;
 `;
 
-const Tab = styled.button`
-  padding: ${({ theme }) => theme.offsets.elementContent} ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
-  background-color: ${({ theme }) => theme.colors.overlay};
-  color: ${({ theme }) => theme.colors.sectionContent};
-  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
-  border-bottom: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
-  margin-right: ${({ theme }) => theme.offsets.betweenElements};
+const Tab = styled.button<{ $active: boolean }>`
+  padding: ${({ theme }) => theme?.offsets?.elementContent || '8px'} ${({ theme }) => `calc(2 * ${theme?.offsets?.elementContent || '8px'})`};
+  background-color: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  border-bottom: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  margin-right: ${({ theme }) => theme?.offsets?.betweenElements || '0px'};
   top: 1px;
   position: relative;
   cursor: pointer;
-  font-size: ${({ theme }) => theme.font.size};
+  font-size: ${({ theme }) => theme?.font?.size || '1rem'};
   font-weight: 500;
-  border-top-right-radius: ${({ theme }) => theme.border.radius};
-  border-top-left-radius: ${({ theme }) => theme.border.radius};
+  border-top-right-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  border-top-left-radius: ${({ theme }) => theme?.border?.radius || 0}px;
 
   &[type="button"] {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  &[aria-selected="true"] {
-    background-color: ${({ theme }) => theme.colors.section};
-    color: ${({ theme }) => theme.colors.sectionContent};
+  ${({ $active, theme }) => $active && css`
+    background-color: ${theme?.colors?.section || 'white'};
+    color: ${theme?.colors?.sectionContent || 'black'};
     border-bottom: none;
     z-index: 1;
-  }
+  `}
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.sectionContent};
-    color: ${({ theme }) => theme.colors.section};
+    background-color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+    color: ${({ theme }) => theme?.colors?.section || 'white'};
   }
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.highlighted};
+    outline: 2px solid ${({ theme }) => theme?.colors?.highlighted || 'blue'};
     outline-offset: -2px;
 
     &::after {
@@ -55,16 +54,16 @@ const Tab = styled.button`
       right: -2px;
       height: 3px;
       margin: 0px 3px;
-      background-color: ${({ theme }) => theme.colors.highlightedText};
+      background-color: ${({ theme }) => theme?.colors?.highlightedText || 'white'};
     }
   }
 `;
 
 const TabPanel = styled.div`
-  padding: ${({ theme }) => theme.offsets.elementContent};
+  padding: ${({ theme }) => theme?.offsets?.elementContent || '8px'};
   margin-top: 0 !important;
-  border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
-  border-radius: ${({ theme }) => theme.border.radius};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
   border-top-left-radius: 0;
 `;
 
@@ -99,9 +98,9 @@ const Tabs: React.FC<{
         {tabs.map((tab, index) => (
           <Tab
             className="squared"
-            key={index}
+            key={tab.label}
             role="tab"
-            data-active={index === activeTab}
+            $active={index === activeTab}
             onClick={() => handleTabClick(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             id={`tab-${index}`}
@@ -116,7 +115,7 @@ const Tabs: React.FC<{
       {tabs.map((tab, index) => (
         <TabPanel
           style={containerStyle}
-          key={index}
+          key={tab.label}
           role="tabpanel"
           id={`panel-${index}`}
           aria-labelledby={`tab-${index}`}

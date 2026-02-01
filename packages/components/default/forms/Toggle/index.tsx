@@ -70,6 +70,7 @@ const Toggle: React.FC<ToggleProps> = ({
 };
 
 export { Toggle };
+export default Toggle;
 
 export const ArrowIcon = ({
   rotated,

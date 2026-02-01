@@ -4,41 +4,47 @@ import { FocusedContainer } from "../../../layout/Containers";
 import { Button } from "../../Button";
 
 const MenuButton = styled(Button)`
-  font-family: ${({ theme }) => theme.font.family.text};
-  font-size: ${({ theme }) => theme.font.size};
-  color: ${({ theme }) => theme.colors.highlighted};
-  background: ${({ theme }) => theme.colors.section};
-  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
+  font-size: ${({ theme }) => theme?.font?.size || 'inherit'};
+  color: ${({ theme }) => theme?.colors?.highlighted || 'inherit'};
+  background: ${({ theme }) => theme?.colors?.section || 'transparent'};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.section};
-    background: ${({ theme }) => theme.colors.highlighted};
-    border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme?.colors?.section || 'inherit'};
+    background: ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
+    border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
   }
 `;
 
 const LabelButton = styled(Button)`
-  font-family: ${({ theme }) => theme.font.family.text};
-  font-size: ${({ theme }) => theme.font.size};
-  color: ${({ theme }) => theme.colors.highlighted};
-  background: ${({ theme }) => theme.colors.section};
-  border-radius: 0;
+  padding: 10px;
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
+  border-radius: 4px;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.section};
-    background: ${({ theme }) => theme.colors.highlighted};
+    border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
   }
+`;
+
+const ActionsMenuButtonStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
+  border-radius: 8px;
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
 `;
 
 const Menu = styled.div<{ $isVisible: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: ${({ theme }) => theme.colors.section};
-  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
-  border-radius: ${({ theme }) => theme.border.radius}px;
+  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.highlighted || 'transparent'};
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  z-index: ${({ theme }) => theme.zIndex.overlay};
+  z-index: ${({ theme }) => theme?.zIndex?.overlay || 1000};
   display: ${(props) => (props.$isVisible ? "flex" : "none")};
   width: fit-content;
   flex-direction: column;

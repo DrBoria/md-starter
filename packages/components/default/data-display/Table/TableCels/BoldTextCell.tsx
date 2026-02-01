@@ -7,7 +7,7 @@ interface CellProps {
 
 const BoldTextCell: React.FC<CellProps> = ({ text, align = 'left', ...props }: CellProps) => {
   return (
-    <StyledTextCell align={align} {...props}>
+    <StyledTextCell $align={align}>
       <b>{text}</b>
     </StyledTextCell>
   );

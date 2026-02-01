@@ -37,5 +37,5 @@ import AreaChart from '.';
       yAxisTooltipName='yAxis'
     />
   </div>
-</>;
+</>
 ```

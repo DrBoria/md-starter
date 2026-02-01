@@ -1,53 +1,41 @@
 import styled from "styled-components/native";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 
-import { TFullWidth, TWithBasicElementOffsets, withFullWidth, withOffsetBottom, withOffsetsRight } from '../helpers';
+import { withFullWidth, withOffsetBottom, withOffsetsRight } from '../helpers';
 
-interface ColumnsContainerProps {
-  $colsRatio?: string[];
-}
+const { height: screenHeight } = Dimensions.get('window');
 
-type TContainersProps = {
-  style?: any;
-};
-
-type TSectionProps = {
-  noHeightLimit?: boolean;
-} & TContainersProps;
-
-/**
- * @visibleName Containers
- */
-
-const WithoutHeightLimit = (noHeightLimit?: boolean) =>
-  noHeightLimit ? {
+const WithoutHeightLimit = ($noHeightLimit) =>
+  $noHeightLimit ? {
     height: 'auto',
-    minHeight: 'calc(100% - HEADER_HEIGHT)', // Replace with dynamic value as necessary
+    minHeight: screenHeight, 
     maxHeight: undefined,
   } : {};
 
-export const BasicSection = styled(View)<TSectionProps>`
-  font-family: ${({theme}) => theme.font.family.text};
-  height: ${({ theme }) => `calc(${theme.screens.mobile.height}px - ${theme.elements.header.height})`};
-  max-height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
-  padding: ${({ theme: { offsets } }) => offsets.section}px;
+/** @component */
+export const BasicSection = styled(View)`
+  padding: ${({ theme: { offsets } }) => offsets?.section || 0}px;
   width: 100%;
+  min-height: ${({ theme }) => {
+    const screenH = theme?.screens?.mobile?.height || screenHeight;
+    const headerH = parseInt(theme?.elements?.header?.height || '0', 10);
+    return screenH - headerH;
+  }}px;
   
-  background-color: ${({ theme }) => theme.colors.section};
+  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
 
-  ${({ noHeightLimit }) => WithoutHeightLimit(noHeightLimit)}
+  ${({ $noHeightLimit }) => WithoutHeightLimit($noHeightLimit)}
 `;
 
 export const PageContainer = styled(View)`
-  font-family: ${({theme}) => theme.font.family.text};
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.offsets.section}px;
-  padding-top: ${({ theme }) => theme.elements.header.height};
+  min-height: ${screenHeight}px;
+  padding: ${({ theme }) => theme?.offsets?.section || 0}px;
+  padding-top: ${({ theme }) => theme?.elements?.header?.height || 0}px;
+  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
 `;
 
-export const HeadingContainer = styled(View)<TWithBasicElementOffsets & TFullWidth>`
+export const HeadingContainer = styled(View)`
   width: 40%;
-  text-align: left;
 
   ${withFullWidth}
   margin-right: ${withOffsetsRight};
@@ -58,37 +46,27 @@ const Column = styled(View)`
   flex-direction: column;
 `;
 
-const ColumnsContainer = styled(View)<ColumnsContainerProps>`
-  display: flex;
+const ColumnsContainer = styled(View)`
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: -8px; // Adjust according to your column gap
-  margin-right: -8px; // Adjust according to your column gap
 `;
 
 const DashboardCardsContainer = styled(View)`
-  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   padding: 24px 0;
 `;
 
 const FocusedContainer = styled(View)`
   position: relative;
-
-  &:hover > * {
-    color: #fff;
-    background: var(--action-color);
-    border: 1px solid var(--action-color);
-  }
 `;
 
-const OneLineContainer = styled(View)<{ width?: '1/2' | '1/3' }>`
+const OneLineContainer = styled(View)`
   flex-direction: row;
   align-items: center;
-  gap: 5px;
 
-  width: ${({ width }) => {
-    switch (width) {
+  width: ${({ $width }) => {
+    switch ($width) {
       case '1/2':
         return '50%';
       case '1/3':
@@ -100,22 +78,14 @@ const OneLineContainer = styled(View)<{ width?: '1/2' | '1/3' }>`
 `;
 
 const LinksContainer = styled(View)`
-  cursor: pointer;
 `;
 
 const MenuItemContainer = styled(View)`
-  display: flex;
   flex-direction: row;
-  gap: 1rem;
 `;
 
-type TSection = {
-  $direction: 'horizontal' | 'horizontal-reversed' | 'vertical';
-  $sectionSize: 'full' | 'medium' | 'half' | 'dot-section' | 'footsteps';
-} & TWithBasicElementOffsets;
 
-
-const Section = styled.View<TSection>`
+const Section = styled(View)`
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -126,24 +96,20 @@ const Section = styled.View<TSection>`
     switch ($direction) {
       case 'horizontal':
         return `
-          display: flex;
           align-items: center;
           flex-direction: row;
         `;
       case 'horizontal-reversed':
         return `
-          display: flex;
           align-items: center;
           flex-direction: row-reverse;
         `;
       case 'vertical':
         return `
-          display: flex;
           flex-direction: column;
         `;
       case 'top':
         return `
-          display: flex;
           flex-direction: column;
           justify-content: flex-start;
         `;
@@ -156,26 +122,25 @@ const Section = styled.View<TSection>`
     switch ($sectionSize) {
       case 'full':
         return `
-          height: 100vh;
-          z-index: 10;
+          height: ${screenHeight}px;
         `;
       case 'medium':
         return `
-          height: 75vh;
+          height: ${screenHeight * 0.75}px;
         `;
       case 'half':
         return `
-          height: 50vh;
+          height: ${screenHeight * 0.5}px;
         `;
       case 'dot-section':
         return `
-          height: 50vh;
+          height: ${screenHeight * 0.5}px;
         `;
       case 'footsteps':
         return `
           position: absolute;
           height: auto;
-          overflow: visible; // Use 'visible' instead of 'initial'
+          overflow: visible;
         `;
       default:
         return '';

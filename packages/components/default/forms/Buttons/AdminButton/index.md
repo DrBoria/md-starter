@@ -16,8 +16,8 @@ import { AdminButton } from "..";
   </AdminButton>
 
   {/* With Icon */}
-  <AdminButton onClick={console.log} icon="SettingsIcon">
+  <AdminButton onClick={console.log} icon="Settings">
     With Icon
   </AdminButton>
-</div>;
+</div>
 ```

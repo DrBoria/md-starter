@@ -31,8 +31,8 @@ const Variables: React.FC<TextAreaProps> = ({ onSelect, variables }) => {
 
   return (
     <VariablesList>
-      {variablesView.map((tag, index) => (
-        <Tag key={index} onClick={() => onSelect(tag)}>
+      {variablesView.map((tag) => (
+        <Tag key={tag} onClick={() => onSelect(tag)}>
           {tag}
         </Tag>
       ))}

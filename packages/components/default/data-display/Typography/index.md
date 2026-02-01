@@ -22,5 +22,5 @@ import { dark } from '@md/styles';
     <br />
     <Label>Label Text</Label>
   </BasicSection>
-</PageContainer>;
+</PageContainer>
 ```

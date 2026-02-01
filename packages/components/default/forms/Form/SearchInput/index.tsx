@@ -15,7 +15,7 @@ export type TSearchInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 } & TWithBasicElementOffsets &
   TFullWidth;
 
-const SearchInput = ({ id, name, value, onChangeValue, ...props }: TSearchInputProps) => {
+const SearchInput = ({ id, name, value, onChangeValue, $offsetBottom, $offsetRight, $fullWidth, ...props }: TSearchInputProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const handleChange = useCallback(
     (event: FormEvent<HTMLInputElement>) => {
@@ -33,11 +33,11 @@ const SearchInput = ({ id, name, value, onChangeValue, ...props }: TSearchInputP
   };
 
   return (
-    <Container $isOpen={isSearchOpen} {...props}>
+    <Container $isOpen={isSearchOpen} $offsetBottom={$offsetBottom} $offsetRight={$offsetRight}>
       {isSearchOpen && (
-        <Input placeholder='Search for an order' id={id} name={name} autoFocus value={value} onChange={handleChange} />
+        <Input placeholder='Search for an order' id={id} name={name} autoFocus value={value} onChange={handleChange} $fullWidth={$fullWidth} {...props} />
       )}
-      <ButtonWrapper onClick={handleOpenSearchInput}>
+      <ButtonWrapper onClick={handleOpenSearchInput} tone="active">
         <SearchIcon />
         <CrossIcon />
       </ButtonWrapper>

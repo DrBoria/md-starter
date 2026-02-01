@@ -35,13 +35,15 @@ export interface ICreateItemForm {
 }
 
 /**
+ * @component
  * @param {object} props
  * @property listName - name of shema / table that will be displayed
  * @property fieldsToRender - Fields can be grouped into arrays or passed as a single array. For string[][], the result will array of components grouped by fields within passed array. For filedToRender value [[]] we should render all fields, except passed. Use it when you want dynamically render fields listed in schema without direct mentioning
+ * @property resetExternalField // If function passed - external field is dirty. Pass funciton that will reset dirty external field
  * @property buttons - provide custom view for the buttons with custom actions. Buttons with button name "submit", "delete", "reset" will receive callbacks as first parameter
  * @returns
  */
-const CreateItemForm = ({
+const CreateItemForm: React.FC<ICreateItemForm> = ({
   listName,
   fieldsToRender = [],
   conditionalFields,
@@ -51,7 +53,7 @@ const CreateItemForm = ({
   buttons,
   redirectPrefix,
   GlobalVars
-}: ICreateItemForm) => {
+}) => {
   const router = useRouter();
   const allTabFieldNames = getAllTabsFieldsNames(tabs);
   const allConditionalFieldsNames =
@@ -275,7 +277,8 @@ const CreateItemForm = ({
     />,
   ];
 
-  return components;
+  return <>{components}</>;
 };
 
 export { CreateItemForm };
+export default CreateItemForm;

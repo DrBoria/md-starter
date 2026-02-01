@@ -12,7 +12,7 @@ export const DeleteButton = ({ isVertical, onDelete }: DeleteButtonProps) => (
     tone="negative"
     $fullWidth={isVertical}
     onClick={onDelete}
-    icon="TrashIcon"
+    icon="Trash"
     text="Delete"
   />
 );

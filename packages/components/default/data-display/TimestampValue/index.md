@@ -25,5 +25,5 @@ import { TimestampValue } from ".";
       <TimestampValue date="2024-03-15" time="18:45" />
     </div>
   </div>
-</>;
+</>
 ```

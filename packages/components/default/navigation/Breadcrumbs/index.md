@@ -17,5 +17,5 @@ import Breadcrumbs from '.';
       ]}
     />
   </div>
-</>;
+</>
 ```

@@ -12,7 +12,7 @@ import { ActionButtons } from ".";
     onReset={() => console.log("Reset clicked")}
     onDelete={() => console.log("Delete clicked")}
   />
-  ;{/* Pristine State */}
+  {/* Pristine State */}
   <ActionButtons
     isPristine={true}
     item="Example Item"
@@ -20,7 +20,7 @@ import { ActionButtons } from ".";
     onReset={() => console.log("Reset clicked")}
     onDelete={() => console.log("Delete clicked")}
   />
-  ;{/* Less Buttons Mode */}
+  {/* Less Buttons Mode */}
   <ActionButtons
     isPristine={false}
     item="Example Item"
@@ -29,5 +29,5 @@ import { ActionButtons } from ".";
     onDelete={() => console.log("Delete clicked")}
     lessButtons
   />
-</>;
+</>
 ```

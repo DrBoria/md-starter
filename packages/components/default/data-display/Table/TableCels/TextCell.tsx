@@ -9,7 +9,7 @@ interface TextCellProps {
 
 const TextCell: React.FC<TextCellProps> = ({ text, align }) => {
   return (
-    <StyledTextCell align={align}>
+    <StyledTextCell $align={align}>
       <PlainText>{text}</PlainText>
     </StyledTextCell>
   );

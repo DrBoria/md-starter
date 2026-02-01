@@ -11,7 +11,7 @@ type TTextCheckboxProps = {
 } & TWithBasicElementOffsets &
   TFullWidth;
 
-const CheckboxContainer = styled.div`
+const CheckboxContainer = styled.div<TWithBasicElementOffsets>`
   display: inline-block;
 
   margin-right: ${withOffsetsRight};
@@ -22,7 +22,7 @@ const CheckboxContainer = styled.div`
 
 const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   display: none;
-  width: ${({ fullWidth }) => fullWidth && '100%'};
+  width: ${({ $fullWidth }) => $fullWidth && '100%'};
 
   /* Default Theme Logic */
   &:checked + label {
@@ -34,9 +34,11 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
     display: flex;
     align-items: center;
     gap: 10px;
+    width: ${({ $fullWidth }) => $fullWidth && '100%'};
     height: ${({ theme }) => theme.elements.form.height};
     padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
     font: ${basicFont};
+    box-sizing: border-box;
     
     background: ${({ theme }) => theme.colors.overlay};
     border-radius: ${({ theme }) => theme.variables.border.radius}px;
@@ -53,7 +55,7 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
       &:checked + label {
          color: ${theme.colors.highlighted};
          background: transparent;
-         text-shadow: ${theme.colors.effects?.glow?.soft};
+         text-shadow: ${theme.effects?.glow?.soft};
 
          &::before {
              /* Active Rune */
@@ -61,7 +63,7 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
              font-size: 18px;
              color: ${theme.colors.highlightedText};
              background-color: ${theme.colors.highlighted};
-             box-shadow: ${theme.colors.effects?.glow?.medium};
+             box-shadow: ${theme.effects?.glow?.medium};
              border-color: ${theme.colors.highlighted};
          }
       }
@@ -78,10 +80,12 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
              width: 24px;
              height: 24px;
              
-             /* Material */
-             background-color: ${theme.colors.overlay}; /* Dark Stone */
-             box-shadow: ${theme.colors.effects?.depth?.inner?.medium}; /* Engraved */
+             /* Material: Rough Stone */
+             background-color: ${theme.colors.overlay};
+             background-image: ${theme.effects?.texture};
+             box-shadow: ${theme.effects?.depth?.inner?.medium};
              border: 1px solid ${theme.colors.disabled};
+             clip-path: ${theme.geometry?.ragged};
              
              transition: all 0.2s ease;
          }
@@ -94,9 +98,9 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   `}
 `;
 
-const TextCheckbox = ({ name, id, ...props }: TTextCheckboxProps) => (
-  <CheckboxContainer {...props}>
-    <CheckboxInput id={id} name={name} type='checkbox' />
+const TextCheckbox = ({ name, id, $offsetBottom, $offsetRight, $fullWidth, ...props }: TTextCheckboxProps) => (
+  <CheckboxContainer $offsetBottom={$offsetBottom} $offsetRight={$offsetRight}>
+    <CheckboxInput id={id} name={name} type='checkbox' $fullWidth={$fullWidth} {...props} />
     <label htmlFor={id}>{name}</label>
   </CheckboxContainer>
 );

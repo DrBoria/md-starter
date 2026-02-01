@@ -15,5 +15,5 @@ import { Badge } from '.';
       <Badge $status="failed">Failed</Badge>
     </div>
   </div>
-</>;
+</>
 ```

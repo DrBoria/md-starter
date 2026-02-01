@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon, XIcon } from "@keystone-ui/icons";
 import styled from "styled-components";
 
-import type { IOption } from "../../../../types";
+import type { IOption } from "@md/types";
 
 interface SelectProps {
   options: IOption[];
@@ -48,10 +48,10 @@ const Dropdown = styled.ul`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
 `;
 
-const DropdownItem = styled.li<{ highlighted: boolean }>`
+const DropdownItem = styled.li<{ $highlighted: boolean }>`
   padding: 10px 15px;
-  background-color: ${({ highlighted }) => (highlighted ? "#007bff" : "#fff")};
-  color: ${({ highlighted }) => (highlighted ? "#fff" : "#000")};
+  background-color: ${({ $highlighted }) => ($highlighted ? "#007bff" : "#fff")};
+  color: ${({ $highlighted }) => ($highlighted ? "#fff" : "#000")};
   font-size: 14px;
   cursor: pointer;
 
@@ -180,7 +180,7 @@ const Select: React.FC<SelectProps> = ({
             options.map((option, index) => (
               <DropdownItem
                 key={option.value}
-                highlighted={highlightedIndex === index}
+                $highlighted={highlightedIndex === index}
                 onClick={() => handleSelectOption(option)}
                 onMouseEnter={() => setHighlightedIndex(index)}
               >

@@ -8,12 +8,39 @@ function getComponentPathPatterns(basePath) {
     return null; // If folder doesn’t exist, return null
   }
 
-  const components = fs
-    .readdirSync(basePath)
-    .filter((folder) => fs.existsSync(path.join(basePath, folder, "index.md")))
-    .map((folder) => path.join(basePath, folder, "*.{tsx,ts}"));
+  const patterns = [];
+  const folders = fs.readdirSync(basePath);
 
-  return components.length > 0 ? components : null;
+  folders.forEach((folder) => {
+    const folderPath = path.join(basePath, folder);
+    
+    // Skip if not a directory
+    if (!fs.lstatSync(folderPath).isDirectory()) {
+      return;
+    }
+
+    const mdPath = path.join(folderPath, "index.md");
+
+    if (fs.existsSync(mdPath)) {
+      // Prioritize FolderName.tsx or FolderName.ts (Real component files)
+      if (fs.existsSync(path.join(folderPath, `${folder}.tsx`))) {
+        patterns.push(path.join(folderPath, `${folder}.tsx`));
+      }
+      else if (fs.existsSync(path.join(folderPath, `${folder}.ts`))) {
+        patterns.push(path.join(folderPath, `${folder}.ts`));
+      }
+      // Then check for index.tsx
+      else if (fs.existsSync(path.join(folderPath, "index.tsx"))) {
+        patterns.push(path.join(folderPath, "index.tsx"));
+      }
+      // Finally index.ts
+      else if (fs.existsSync(path.join(folderPath, "index.ts"))) {
+        patterns.push(path.join(folderPath, "index.ts"));
+      }
+    }
+  });
+
+  return patterns.length > 0 ? patterns : null;
 }
 
 const sections = [
@@ -148,15 +175,31 @@ module.exports = {
       },
     },
   },
-  tocMode: "collapse",
+  getExampleFilename(componentPath) {
+    return path.join(path.dirname(componentPath), 'index.md');
+  },
+  ignore: [
+    '**/__tests__/**',
+    '**/*.test.{js,jsx,ts,tsx}',
+    '**/*.spec.{js,jsx,ts,tsx}',
+    '**/*.d.ts',
+    '**/types.ts',
+    '**/styles.ts',
+    '**/use*.tsx',
+    '**/keystone/common/Icons/index.tsx',
+  ],
   moduleAliases: {
     components: path.resolve(__dirname, "../../packages/components"),
   },
+  context: {
+    useState: 'react',
+    useEffect: 'react',
+    useMemo: 'react',
+    useCallback: 'react',
+  },
+  tocMode: "collapse",
   dangerouslyUpdateWebpackConfig(webpackConfig) {
-    webpackConfig.stats = {
-      warnings: false,
-      errors: false,
-    };
+    webpackConfig.stats = 'none'; // Minimal logs to avoid clutter
     // Removed HotModuleReplacementPlugin to avoid duplication
     return webpackConfig;
   },

@@ -34,5 +34,5 @@ import { CodePreview } from ".";
       className="bg-gray-50 rounded-lg"
     />
   </div>
-</>;
+</>
 ```

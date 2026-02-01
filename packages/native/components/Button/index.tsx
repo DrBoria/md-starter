@@ -2,72 +2,48 @@ import React from 'react';
 import styled, { css } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
-import { withOffsetBottom, withOffsetsRight, TWithBasicElementOffsets, TFullWidth } from '../helpers';
-import { ReactNode } from 'react';
+import { withOffsetBottom, withOffsetsRight } from '../helpers';
 import { PlainText } from '../Typography';
 
-type TButtonTypes = 'navigation' | 'menu';
-
-type TButton = {
-  onClick?: () => void; // React Native buttons use a function instead of MouseEventHandler
-  className?: string;
-  type?: TButtonTypes;
-  children: ReactNode;
-}
-// & TWithBasicElementOffsets &
-//   TFullWidth;
-
-const ButtonTypes = (type?: TButtonTypes) => {
+const ButtonTypes = (type) => {
   switch (type) {
     case 'menu':
       return css`
-        color: ${({ theme }) => theme.colors.sectionContent};
-        text-transform: uppercase;
-        border: none;
+        background-color: transparent;
       `;
     case 'navigation':
     default:
       return css`
-        color: ${({ theme }) => theme.colors.sectionContent};
-        text-transform: uppercase;
-        border: ${({ theme }) => `${theme.border.size}px solid ${theme.colors.sectionContent}`};
+        border: ${({ theme }) => `${theme?.border?.size || 0}px solid ${theme?.colors?.sectionContent || 'transparent'}`};
       `;
   }
 };
 
-const StyledButton = styled(TouchableOpacity) <TButton>`
+const StyledButton = styled(TouchableOpacity)`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  margin-bottom: ${withOffsetBottom};
   padding: ${({ theme }) => {
-    if (!theme || !theme.offsets) console.error('Button theme missing offsets:', theme);
-    return theme.offsets ? theme.offsets.elementContent : 0;
+    return theme?.offsets?.elementContent || 0;
   }}px;
-  font-family: ${({ theme }) => theme.font.family.text};
 
-  background: transparent;
-  border-radius: ${({ theme }) => theme.border.radius}px;
-  outline: inherit;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background-color: transparent;
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
 
   ${({ type }) => ButtonTypes(type)}
-
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.overlay};
-    color: ${({ theme }) => theme.colors.sectionContent};
-  }
 `;
 
 // Define a functional component that wraps the styled button
-const Button: React.FC<TButton> = ({ onClick, children, type, ...props }) => {
+const Button = ({ onClick, children, type, ...props }) => {
   const isText = typeof children === "string";
 
   return (
-    <StyledButton onPress={onClick} {...props}>
-      {isText ? <PlainText>{children}</PlainText> : children}
+    <StyledButton onPress={onClick} type={type} {...props}>
+      {isText ? (
+        <PlainText style={{ textTransform: 'uppercase' }}>
+          {children}
+        </PlainText>
+      ) : children}
     </StyledButton>
   );
 };

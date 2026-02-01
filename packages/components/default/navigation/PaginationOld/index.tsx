@@ -14,34 +14,34 @@ type PaginationProps = {
 } & TWithBasicElementOffsets &
   TFullWidth;
 
-const Container = styled.div<TFullWidth>`
+const Container = styled.div<TWithBasicElementOffsets & TFullWidth>`
   display: flex;
   grid-gap: ${({ theme }) => theme.offsets.betweenElements};
   align-items: center;
   justify-content: center;
-  width: ${({ fullWidth }) => fullWidth && '100%'};
+  width: ${({ $fullWidth }) => $fullWidth && '100%'};
   height: ${({ theme }) => theme.elements.form.height};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 `;
 
-const Number = styled(Button) <{ active: boolean }>`
+const Number = styled(Button) <{ $active: boolean }>`
   font-weight: 700;
 
-  background: ${({ active, theme }) => (active ? theme.colors.overlayActive : theme.colors.overlay)};
+  background: ${({ $active, theme }) => ($active ? theme.colors.overlayActive : theme.colors.overlay)};
   border: none;
 `;
 
-const Pagination = ({ pagesCount, currentPage, onChangePage }: PaginationProps) => (
-  <Container>
+const Pagination = ({ pagesCount, currentPage, onChangePage, $fullWidth, $offsetBottom, $offsetRight }: PaginationProps) => (
+  <Container $fullWidth={$fullWidth} $offsetBottom={$offsetBottom} $offsetRight={$offsetRight}>
     <IoIosArrowBack />
     {Array.from({ length: pagesCount }, (_, i) => (
       <Number
-        key={i}
+        key={`page-${i}`}
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           onChangePage(event, i);
         }}
-        active={currentPage === i}
+        $active={currentPage === i}
       >
         {i + 1}
       </Number>

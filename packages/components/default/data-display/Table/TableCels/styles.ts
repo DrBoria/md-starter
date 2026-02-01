@@ -6,10 +6,10 @@ type TStyledCellProps = {
   align?: string;
 };
 
-export const StyledTextCell = styled.div<TStyledCellProps>`
+export const StyledTextCell = styled.div<{ $align?: string }>`
   padding: ${({ theme: { offsets } }) => offsets.elementContent};
 
-  text-align: ${({ align = 'center' }) => align};
+  text-align: ${({ $align = 'center' }) => $align};
 `;
 
 export const StyledHeaderCell = styled(StyledTextCell)`
@@ -26,13 +26,13 @@ export const OneLineCell = styled(StyledTextCell)`
   justify-content: space-around;
 `;
 
-export const Percentage = styled.div<{ trend?: boolean }>`
+export const Percentage = styled.div<{ $trend?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   ${PlainText} {
     margin-left: ${({ theme }) => theme.offsets.betweenElements};
 
-    color: ${({ trend, theme }) => (trend ? theme.colors.disabled : theme.colors.highlighted)};
+    color: ${({ $trend, theme }) => ($trend ? theme.colors.disabled : theme.colors.highlighted)};
   }
 `;

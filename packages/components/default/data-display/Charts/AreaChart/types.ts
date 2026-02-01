@@ -8,6 +8,6 @@ export type TProps = {
 };
 
 export type TComponentProps = {
-  variant: TProps['variant'];
-  referenceLine: TProps['referenceLine'];
+  $variant: TProps['variant'];
+  $referenceLine: TProps['referenceLine'];
 };

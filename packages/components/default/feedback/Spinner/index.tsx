@@ -36,14 +36,14 @@ const spinAnimation = keyframes`
 `;
 
 export const Loader = styled.div<
-  { color?: string; size: "small" | "large" } & TWithBasicElementOffsets
+  { $color?: string; $size: "small" | "large" } & TWithBasicElementOffsets
 >`
-  border-width: ${({ size }) => (size === "small" ? "0.25rem" : "0.5rem")};
+  border-width: ${({ $size }) => ($size === "small" ? "0.25rem" : "0.5rem")};
   border-style: solid;
-  border-color: ${({ color = "#9e9e9e" }) =>
-    `${color} ${color} ${color} #ddd`}; /* Custom color */
-  width: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")};
-  height: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")};
+  border-color: ${({ $color = "#9e9e9e" }) =>
+    `${$color} ${$color} ${$color} #ddd`}; /* Custom color */
+  width: ${({ $size }) => ($size === "small" ? "1rem" : "3.625rem")};
+  height: ${({ $size }) => ($size === "small" ? "1rem" : "3.625rem")};
   border-radius: 50%;
   position: relative;
   animation: ${spinAnimation} 1.5s linear infinite;
@@ -56,7 +56,7 @@ const LoadingSpinner = ({ text }: { text?: string | boolean }) => {
   return (
     <Container>
       {text && <SubTitle>{text}</SubTitle>}
-      <Loader size="large" />
+      <Loader $size="large" />
     </Container>
   );
 };

@@ -5,13 +5,7 @@ import styled from "styled-components";
 const PropertyContainer = styled.div`margin-bottom: 10px;`;
 const ColorInput = styled.input`width: 100px;`;
 
-const RenderInputs: React.FC<{
-  obj: any;
-  keyPath: string[];
-  onChange: (keyPath: string[], value: any) => void;
-  collapsedSections: Set<string>;
-  onToggleSection: (keyPathStr: string) => void;
-}> = ({ obj, keyPath, onChange, collapsedSections, onToggleSection }) => {
+const RenderInputs = ({ obj, keyPath, onChange, collapsedSections, onToggleSection }) => {
   if (!obj || typeof obj !== 'object') return null;
 
   return (
@@ -27,7 +21,13 @@ const RenderInputs: React.FC<{
               <Toggle
                 defaultState={false}
                 title={`${key}`}
-                onClick={() => onToggleSection(keyPathStr)}
+                setState={(isOpen) => {
+                  if (isOpen) {
+                    if (collapsedSections.has(keyPathStr)) onToggleSection(keyPathStr);
+                  } else {
+                    if (!collapsedSections.has(keyPathStr)) onToggleSection(keyPathStr);
+                  }
+                }}
               >
                 {!collapsedSections.has(keyPathStr) && (
                   <RenderInputs

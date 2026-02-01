@@ -861,5 +861,5 @@ import { Tooltip } from "../../../default/data-display/Tooltip";
   <Tooltip text="ZoomInIcon">
     <Icons.ZoomInIcon />
   </Tooltip>
-</div>;
+</div>
 ```

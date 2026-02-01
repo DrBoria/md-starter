@@ -3,7 +3,6 @@ import border from './border';
 import elements from './elements';
 import font from './font';
 import offsets from './offsets';
-import type { ZIndexName } from './zIndexes';
 import zIndexes from './zIndexes';
 
 const screens = {
@@ -24,7 +23,7 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
-export const getZIndex = (name: ZIndexName) => zIndexes[name];
+export const getZIndex = (name) => zIndexes[name];
 
 const base = {
   zIndex: zIndexes,

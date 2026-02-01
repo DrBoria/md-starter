@@ -13,7 +13,7 @@ const LineGraphic = ({
   ...props
 }: TProps) => {
   return (
-    <Wrapper variant={variant} referenceLine={referenceLine} {...props}>
+    <Wrapper $variant={variant} $referenceLine={referenceLine} {...props}>
       <AreaChart data={data}>
         <YAxis dataKey='yAxis' tick={false} />
 

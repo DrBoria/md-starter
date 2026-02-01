@@ -10,9 +10,9 @@ type TBrandCellProps = {
   align?: 'center' | 'left' | 'right';
 };
 
-const BrandCell = ({ text, src, alt, align, ...props }: TBrandCellProps) => {
+const BrandCell = ({ text, src, alt, align }: TBrandCellProps) => {
   return (
-    <OneLineCell align={align} {...props}>
+    <OneLineCell $align={align}>
       <Avatar src={src} alt={alt} />
       <PlainText>{text}</PlainText>
     </OneLineCell>

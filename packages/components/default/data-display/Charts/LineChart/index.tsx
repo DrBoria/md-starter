@@ -13,7 +13,7 @@ const LineGraphic = ({ data, referenceLine, variant, title, ...props }: TProps) 
     <Container>
       <YAxisMinMax />
       <SubTitle>{title}</SubTitle>
-      <Wrapper variant={variant} referenceLine={referenceLine} {...props}>
+      <Wrapper $variant={variant} $referenceLine={referenceLine} {...props}>
         <LineChart
           width={500}
           height={300}

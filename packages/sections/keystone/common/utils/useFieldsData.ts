@@ -79,23 +79,33 @@ const useFieldsData = <T extends FlexibleItemData>({
   const logger = useLogger();
   // Fields requred for keystone fields
   const [forceValidation, setForceValidation] = useState(false);
-  const list = { ...useList(listName) }; // This requires for filtering fields on the next lines
+  const listResult = useList(listName);
+  const list = useMemo(() => {
+    if (!listResult || !listResult.fields) {
+      return { fields: {}, key: listName, singular: listName, path: listName };
+    }
+    return { ...listResult };
+  }, [listResult, listName]);
 
   // Negative filter - leaves everything, but selected fields
-  if (notToRenderFields?.length) {
-    list.fields = filterNotAllowedKeys(list.fields, notToRenderFields);
-  }
+  const filteredFields = useMemo(() => {
+    let fields = { ...list.fields };
+    if (notToRenderFields?.length) {
+      fields = filterNotAllowedKeys(fields, notToRenderFields);
+    }
 
-  // Positive filter - leaves only selected fields in existed
-  if (fieldsToRender?.length) {
-    const requestedFields = [...fieldsToRender];
-    if (!requestedFields.includes("id")) requestedFields.push("id"); // NOTE: id is required field
-    list.fields = filterAllowedKeys(list.fields, requestedFields);
-  }
+    // Positive filter - leaves only selected fields in existed
+    if (fieldsToRender?.length) {
+      const requestedFields = [...fieldsToRender];
+      if (!requestedFields.includes("id")) requestedFields.push("id"); // NOTE: id is required field
+      fields = filterAllowedKeys(fields, requestedFields);
+    }
+    return fields;
+  }, [list.fields, notToRenderFields, fieldsToRender]);
 
-  const selectedFields = fieldsToGQL(list.fields);
+  const selectedFields = useMemo(() => fieldsToGQL(filteredFields), [filteredFields]);
 
-  const { update, loading } = useUpdateMutation(list, selectedFields, useMutation);
+  const { update, loading } = useUpdateMutation({ ...list, fields: filteredFields }, selectedFields, useMutation);
 
   // memoize the data fetching operation depending on itemId
   const fetchData = useCallback(() => {
@@ -126,13 +136,13 @@ const useFieldsData = <T extends FlexibleItemData>({
 
   // Reset state data to its initial state
   const resetState = useCallback(() => {
-    const initialValue = deserializeValue(list.fields, itemGetter);
+    const initialValue = deserializeValue(filteredFields, itemGetter);
     const newValue = { value: initialValue, item: itemGetter };
     setValue(newValue);
     setForceValidation(false);
 
     return newValue;
-  }, [list.fields, itemGetter]);
+  }, [filteredFields, itemGetter]);
 
   // Every Field got Edit mode.
   // Here we parse received keystone admin meta to get is it 'edit' 'read' or 'hidden' field
@@ -153,31 +163,31 @@ const useFieldsData = <T extends FlexibleItemData>({
   // Local state of form on the page
   // First we storing data in our state, than validate and send to BE
   const [state, setValue] = useState<TState>(() => {
-    const value = deserializeValue(list.fields, itemGetter);
+    const value = deserializeValue(filteredFields, itemGetter);
     return { value, item: itemGetter };
   });
 
   // Should component update analogue for value
   useEffect(() => {
     if (!loading && state.item.data !== itemGetter.data) {
-      const value = deserializeValue(list.fields, itemGetter);
+      const value = deserializeValue(filteredFields, itemGetter);
       setValue({ value, item: itemGetter });
     }
-  }, [itemGetter, list.fields, list.fields.length, loading, state.item.data]);
+  }, [itemGetter, filteredFields, loading, state.item.data]);
 
   let value = state.value;
   if (
     JSON.stringify(Object.keys(value)) !==
-    JSON.stringify(Object.keys(list.fields))
+    JSON.stringify(Object.keys(filteredFields))
   ) {
-    value = deserializeValue(list.fields, itemGetter);
+    value = deserializeValue(filteredFields, itemGetter);
     setValue({ value, item: itemGetter });
   }
 
   // Validation
-  const invalidFields = useInvalidFields(list.fields, value);
+  const invalidFields = useInvalidFields(filteredFields, value);
   const { changedFields, dataForUpdate } = useChangedFieldsAndDataForUpdate(
-    list.fields,
+    filteredFields,
     state.item,
     value,
   );
@@ -236,7 +246,7 @@ const useFieldsData = <T extends FlexibleItemData>({
   );
 
   return {
-    list,
+    list: { ...list, fields: filteredFields },
     loading: loadingData,
     refetch,
     fieldModes,

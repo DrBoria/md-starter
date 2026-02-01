@@ -24,5 +24,5 @@ import { NotFoundSection } from ".";
       onClick={() => console.log("Create clicked")}
     />
   </div>
-</>;
+</>
 ```

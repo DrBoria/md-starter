@@ -8,15 +8,15 @@ import "prismjs/components/prism-json";
 // Styled component for the code block
 export const CodeBlock = styled.pre`
   margin: 0;
-  background: ${({ theme }) => theme.colors.section}; // Use theme's section background color
+  background: ${({ theme }) => theme?.colors?.section || 'transparent'}; // Use theme's section background color
   height: 100%;
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
 
   code {
-    font-family: ${({ theme }) => theme.font.family.text}; // Use theme's text font family
-    font-size: ${({ theme }) => theme.font.size}; // Use theme's font size
+    font-family: ${({ theme }) => theme?.font?.family?.text || 'monospace'}; // Use theme's text font family
+    font-size: ${({ theme }) => theme?.font?.size || '1rem'}; // Use theme's font size
     line-height: 1.5;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;

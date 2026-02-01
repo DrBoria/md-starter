@@ -14,23 +14,21 @@ import { dark } from "@md/styles/themes";
 import ThemeProviderNative from "../../ThemeProviderNative";
 
 <ThemeProviderNative>
-  <PageContainer>
-    <BasicSection>
-      <PageTitle>
-        Page Title
-        <Highlighted> Page Title Highlighted </Highlighted>
-      </PageTitle>
-      <br />
-      <SectionTitle>Section Title</SectionTitle>
-      <br />
-      <SubTitle>
-        Sub Title <Highlighted> Sub Title Highlighted </Highlighted>
-      </SubTitle>
-      <br />
-      <PlainText>Plain Text</PlainText>
-      <br />
-      <Label>Label Text</Label>
-    </BasicSection>
-  </PageContainer>
-</ThemeProviderNative>;
+  <>
+    <PageContainer>
+      <BasicSection>
+        <PageTitle>
+          Page Title
+          <Highlighted> Page Title Highlighted </Highlighted>
+        </PageTitle>
+        <SectionTitle>Section Title</SectionTitle>
+        <SubTitle>
+          Sub Title <Highlighted> Sub Title Highlighted </Highlighted>
+        </SubTitle>
+        <PlainText>Plain Text</PlainText>
+        <Label>Label Text</Label>
+      </BasicSection>
+    </PageContainer>
+  </>
+</ThemeProviderNative>
 ```

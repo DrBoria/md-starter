@@ -6,7 +6,7 @@ import cors from "cors";
 import { Project, SyntaxKind } from "ts-morph";
 
 const app = express();
-const PORT = process.env.PORT || 6061;
+const PORT = process.env.PORT || 6063;
 const themesPath = "../../packages/styles/themes";
 
 app.use(cors({ origin: "http://localhost:6060", methods: ["GET", "POST"], credentials: true }));
@@ -113,20 +113,18 @@ async function updateThemeFile(filePath: string, updates: Record<string, any>) {
           applyUpdates(value, currentPath);
         } else {
           const pathSegments = currentPath.split(".");
-          let matchingNode = sourceFile;
+          let currentNode: any = sourceFile;
           for (const segment of pathSegments) {
-            // @ts-ignore
-            matchingNode = matchingNode
+            currentNode = currentNode
               .getDescendantsOfKind(SyntaxKind.PropertyAssignment)
-              .find((node) => node.getName() === segment);
-            if (!matchingNode) break;
+              .find((node: any) => node.getName() === segment);
+            if (!currentNode) break;
           }
-          if (matchingNode) {
+          if (currentNode && typeof currentNode.setInitializer === "function") {
             const shouldQuote =
               typeof value === "string" && !/^\d+(\.\d+)?$/.test(value) && !value.includes("basicOffset");
             const newValue = shouldQuote ? `'${value}'` : value;
-            // @ts-ignore
-            matchingNode.setInitializer(newValue);
+            currentNode.setInitializer(newValue);
           }
         }
       }
@@ -175,7 +173,7 @@ app.post("/themes", async (req: Request, res: Response) => {
 
 // POST request to create a new theme
 app.post("/themes/new", async (req: Request, res: Response) => {
-  const { name: nameToParse, data } = req.body;
+  const { name: nameToParse, data } = req.body as { name: string, data: Record<string, string> };
   if (!nameToParse || !data) {
     return res.status(400).json({ error: "Theme name and data are required" });
   }

@@ -10,13 +10,8 @@ const PropertyContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const ThemePropertiesEditor: React.FC<{
-    theme: any;
-    onChange: (keyPath: string[], value: any) => void;
-    collapsedSections: Set<string>;
-    onToggleSection: (key: string) => void;
-}> = ({ theme, onChange, collapsedSections, onToggleSection }) => {
-    const renderInputs = (obj: any, keyPath: string[] = []) => {
+const ThemePropertiesEditor = ({ theme, onChange, collapsedSections, onToggleSection }) => {
+    const renderInputs = (obj, keyPath = []) => {
         if (!obj || typeof obj !== "object") return null; // Guard against invalid input
 
         return Object.entries(obj).map(([key, value]) => {
@@ -29,7 +24,13 @@ const ThemePropertiesEditor: React.FC<{
                         <Toggle
                             defaultState={false}
                             title={`${key}`}
-                            onClick={() => onToggleSection(key)}
+                            setState={(isOpen) => {
+                                if (isOpen) {
+                                    if (collapsedSections.has(key)) onToggleSection(key);
+                                } else {
+                                    if (!collapsedSections.has(key)) onToggleSection(key);
+                                }
+                            }}
                         >
                             {!collapsedSections.has(key) && renderInputs(value, newKeyPath)}
                         </Toggle>

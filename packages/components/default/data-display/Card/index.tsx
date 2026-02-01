@@ -8,11 +8,11 @@ import { PlainText } from '../Typography';
 const CardContainer = styled.div<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  background-color: ${({ theme }) => theme.colors.section};
+  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
   border-radius: 10px;
-  box-shadow: 0 4px 6px ${({ theme }) => theme.colors.sectionContent};
+  box-shadow: 0 4px 6px ${({ theme }) => theme?.colors?.sectionContent || 'rgba(0,0,0,0.1)'};
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,6 +20,21 @@ const CardContainer = styled.div<TWithBasicElementOffsets>`
   &:hover {
     transform: translateY(-5px);
   }
+
+  /* VIKING THEME */
+  ${({ theme }) => theme?.theme === 'viking' && `
+    background-color: ${theme?.colors?.section};
+    background-image: ${theme?.effects?.texture};
+    border-radius: 0;
+    clip-path: ${theme?.geometry?.ragged};
+    box-shadow: ${theme?.effects?.depth?.outer?.medium};
+    border: none;
+
+    &:hover {
+      box-shadow: ${theme?.effects?.depth?.outer?.strong}, ${theme?.effects?.glow?.soft};
+      filter: brightness(1.1);
+    }
+  `}
 `;
 
 const Image = styled.img`
@@ -35,13 +50,13 @@ const Content = styled.div`
 const Title = styled.h3`
   font-size: 1.2rem;
   margin-bottom: 10px;
-  font-family: ${({ theme }) => theme.font.family.text};
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
 `;
 
 const Description = styled.p`
   font-size: 0.95rem;
-  color: ${({ theme }) => theme.colors.sectionContent};
-  font-family: ${({ theme }) => theme.font.family.text};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
   line-height: 1.5;
 `;
 
@@ -51,12 +66,12 @@ const Footer = styled.div`
   align-items: center;
   padding: 0 20px 20px;
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
 `;
 
 const ReadMore = styled(Link)`
-  font-family: ${({ theme }) => theme.font.family.text};
-  color: ${({ theme }) => theme.colors.highlighted};
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
+  color: ${({ theme }) => theme?.colors?.highlighted || 'inherit'};
   font-weight: bold;
   cursor: pointer;
 

@@ -36,7 +36,7 @@ const BarChart = ({ data, width = 300, height = 300 }: TProps) => {
         {data.map((item, index) => (
           <LegendRowContainer key={item.name}>
             <NameContainer>
-              <ColoredDot color={COLORS[index % COLORS.length]} />
+              <ColoredDot $color={COLORS[index % COLORS.length]} />
               <PlainText>{item.name}</PlainText>
             </NameContainer>
           </LegendRowContainer>

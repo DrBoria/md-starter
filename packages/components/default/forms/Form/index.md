@@ -1,77 +1,58 @@
 ```jsx
-import React, { useState } from 'react';
+const { Input, Select, Submit, FormLabel, Radio, TextCheckbox, SearchInput } = require('./index');
+const { BasicSection } = require('../../layout/Containers/index');
+const { SubTitle } = require('../../data-display/Typography/index');
 
-import { BasicSection } from "../../layout/Containers";
-import { Form, Submit, FormLabel, Radio, TextCheckbox, Select, Input, SearchInput } from '.';
-import { Button } from "../Button";
-import { SubTitle } from "../../data-display/Typography";
-import { dark } from '@md/styles';
+const FormExample = () => {
+  const [value, setValue] = useState('');
+  
+  return (
+    <Form onSubmit={(e) => e.preventDefault()}>
+      <BasicSection>
+        <SubTitle $offsetBottom>Radio Button</SubTitle>
+        <FormLabel htmlFor='radio1'>Option 1</FormLabel>
+        <Radio id='radio1' name='radio' value='1' />
+        <FormLabel htmlFor='radio2'>Option 2</FormLabel>
+        <Radio id='radio2' name='radio' value='2' />
+      </BasicSection>
 
-const [value, setValue] = useState('');
-const handleSubmit = (e) => {
-  e.preventDefault();
-  data;
-  cons;
-  const formData = new FormData(e.target);
-  const formValues = {
-    radio: formData.get('radio'),
-    TextCheckbox1: formData.get('TextCheckbox1'),
-    TextCheckbox2: formData.get('TextCheckbox2'),
-    TextCheckbox3: formData.get('TextCheckbox3'),
-    TextCheckbox4: formData.get('TextCheckbox4'),
-    select: formData.get('select'),
-  };
-  console.log(formValues);
+      <BasicSection>
+        <SubTitle $offsetBottom>Text Checkbox</SubTitle>
+        <TextCheckbox id='tc1' name='tc1' $offsetRight />
+        <TextCheckbox id='tc2' name='tc2' />
+      </BasicSection>
+
+      <BasicSection>
+        <SubTitle $offsetBottom>Inputs</SubTitle>
+        <FormLabel htmlFor='inp1'>Standard Input</FormLabel>
+        <Input id='inp1' name='inp1' placeholder="Type here..." $offsetBottom />
+        
+        <FormLabel htmlFor='txt1'>Textarea</FormLabel>
+        <Input as="textarea" id='txt1' name='txt1' rows={3} placeholder="Engraved stone..." />
+      </BasicSection>
+
+      <BasicSection>
+        <SubTitle $offsetBottom>Select</SubTitle>
+        <Select
+          id='sel1'
+          name='sel1'
+          options={[
+            { value: '1', label: 'Option 1' },
+            { value: '2', label: 'Option 2' },
+          ]}
+          onChange={() => {}}
+        />
+      </BasicSection>
+
+      <Submit value='Cast Rune (Submit)' />
+
+      <BasicSection>
+        <SubTitle $offsetBottom>Search</SubTitle>
+        <SearchInput value={value} onChangeValue={setValue} $fullWidth />
+      </BasicSection>
+    </Form>
+  );
 };
-<Form onSubmit={handleSubmit}>
-  {/* Name */}
-  <BasicSection>
-    <SubTitle $offsetBottom>Radio Button</SubTitle>
-    <FormLabel htmlFor='first'>Radio Label 1</FormLabel>
-    <Radio id='first' name='radio' value='1' />
-    <FormLabel htmlFor='second'>Radio Label 2</FormLabel>
-    <Radio id='second' name='radio' value='2' />
-  </BasicSection>
 
-  <BasicSection>
-    <SubTitle $offsetBottom>Text Checkbox Section</SubTitle>
-    <TextCheckbox id='textCheckbox1' name='TextCheckbox1' $offsetRight />
-    <TextCheckbox id='textCheckbox2' name='TextCheckbox2' $offsetRight />
-    <TextCheckbox id='textCheckbox3' name='TextCheckbox3' $offsetRight />
-    <TextCheckbox id='textCheckbox4' name='TextCheckbox4' />
-  </BasicSection>
-
-  <BasicSection>
-    <SubTitle $offsetBottom>Input Section</SubTitle>
-    <FormLabel htmlFor='Input1'>Input1</FormLabel>
-    <Input id='Input1' name='Input1' $offsetBottom />
-
-    <FormLabel htmlFor='Checkbox1'>Checkbox</FormLabel>
-
-    <FormLabel htmlFor='Input2'>Input2</FormLabel>
-    <Input id='Input2' name='Input2' $offsetBottom />
-
-    <FormLabel htmlFor='Textarea1'>Description (Viking Textarea)</FormLabel>
-    <p style={{ marginBottom: 8, fontSize: 12, opacity: 0.7 }}>Inspect styles to see engraved effect</p>
-    <Input as="textarea" rows={4} id='Textarea_as' name='Textarea_as' placeholder='Using Input as="textarea"...' $offsetBottom style={{ height: 'auto', paddingTop: 10 }} />
-  </BasicSection>
-
-  <BasicSection>
-    <SubTitle $offsetBottom>Select Section</SubTitle>
-    <Select
-      id='select'
-      name='select'
-      options={[
-        { value: '1', text: 'text 1' },
-        { value: '2', text: 'text 2' },
-      ]}
-    />
-  </BasicSection>
-
-  <Submit value='Next Step' />
-
-  <BasicSection>
-    <SearchInput value={value} onChangeValue={setValue} />
-  </BasicSection>
-</Form>;
+<FormExample />
 ```

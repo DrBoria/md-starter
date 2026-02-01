@@ -7,10 +7,6 @@ import "./index.css";
 
 import { useRouter } from "next/router";
 
-import type { TValue } from "../../../../types";
-import type { TConditionalField } from "../ConditionalField";
-import type { ITabs } from "../DynamicForms/TabsFields";
-import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
 import { toKebabCase } from "@md/utils";
 import { useDeleteMutation } from "@md/api/graphql";
 import { ConditionalField } from "../DynamicForms/ConditionalField";
@@ -23,29 +19,8 @@ import { getDeserializedValue } from "../../common/utils/data-mapping/getDeseria
 import { ButtonGroup } from "./buttonGroup";
 import { getAllTabsFieldsNames } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
-import type { IModalButton } from "@md/components";
 import { useLogger } from "@md/components";
 
-interface IEditItemForm {
-  listName: string;
-  itemId: string;
-  fieldsToRender?: null | string[] | string[][];
-  notToRenderFields?: string[];
-  ignoreValueFields?: string[];
-  tabs?: ITabs;
-  conditionalFields?: TConditionalField[];
-  buttons?: IModalButton[];
-}
-
-/**
- * @param {object} props
- * @property listName - name of shema / table that will be displayed
- * @property fieldsToRender - Fields can be grouped into arrays or passed as a single array. For string[][], the result will array of components grouped by fields within passed array. For filedToRender value [[]] we should render all fields, except passed. Use it when you want dynamically render fields listed in schema without direct mentioning
- * @property resetExternalField // If function passed - external field is dirty. Pass funciton that will reset dirty external field
- * @property buttons - provide custom view for the buttons with custom actions. Buttons with button name "submit", "delete", "reset" will receive callbacks as first parameter
- * @property ignoreValueFields - there will be no data sent on save for this values
- * @returns
- */
 const EditItemForm = ({
   listName,
   itemId,
@@ -55,11 +30,9 @@ const EditItemForm = ({
   notToRenderFields = [],
   ignoreValueFields = [],
   buttons,
-}: IEditItemForm) => {
-  const [resetStatesConditional, setResetStatesConditional] = useState<
-    (() => void)[]
-  >([]);
-  const [resetStatesTabs, setResetStatesTabs] = useState<(() => void)[]>();
+}) => {
+  const [resetStatesConditional, setResetStatesConditional] = useState([]);
+  const [resetStatesTabs, setResetStatesTabs] = useState();
   /**
    * State for Conditional Fields
    * Use it for create operation
@@ -70,9 +43,7 @@ const EditItemForm = ({
    * State for Tabs Fields
    * Use it for create operation
    */
-  const [tabsList, setTabsList] = useState<((newValue: TValue) => void) | null>(
-    null,
-  );
+  const [tabsList, setTabsList] = useState(null);
 
   const { deleteMutation } = useDeleteMutation(listName, useMutation);
 
@@ -87,8 +58,8 @@ const EditItemForm = ({
 
   // Handle multiple `fieldsToRender` groups if it's an array of arrays
   const fieldGroups = isArrayofArrays
-    ? (fieldsToRender as string[][])
-    : [fieldsToRender as string[]];
+    ? fieldsToRender
+    : [fieldsToRender];
 
   const fieldsData = useFieldsData({
     listName,
@@ -148,7 +119,7 @@ const EditItemForm = ({
      * Conditional Field
      * Read values set in external component to pass in global creation function
      */
-    const conditionalFieldsValues: Record<string, unknown> = {};
+    const conditionalFieldsValues = {};
     if (conditionalFields) {
       conditionalFields.forEach((masterField) => {
         // If user chose new value for conditional field - it will be storred in createConditionalItems, othervise - we will take previous value
@@ -156,7 +127,7 @@ const EditItemForm = ({
           createConditionalItems?.[masterField.fieldName] ||
           notRenderedFieldValues?.[masterField.fieldName];
         const masterFieldValue = getDeserializedValue(
-          masterFieldSerializedValue as unknown as ISerializedValue,
+          masterFieldSerializedValue,
         );
 
         const conditionalSubfieldNames = getConditionalSubFieldsdNames(
@@ -172,7 +143,7 @@ const EditItemForm = ({
               fieldName !== masterField.fieldName &&
               !conditionalSubfieldNames.includes(fieldName),
           );
-        notDisplayedContidionalSubFieldNames.forEach((subfieldName: string) => {
+        notDisplayedContidionalSubFieldNames.forEach((subfieldName) => {
           // For ignored fields we shouldnt set any values (for example Virtual fiield)
           if (ignoreValueFields.includes(subfieldName)) return;
           conditionalFieldsValues[subfieldName] = "";
@@ -181,7 +152,7 @@ const EditItemForm = ({
         // If user changed fields
         if (subFieldList) {
           // Set value for every Displayed subfield
-          Object.keys(subFieldList).forEach((subfieldName: string) => {
+          Object.keys(subFieldList).forEach((subfieldName) => {
             conditionalFieldsValues[subfieldName] = getDeserializedValue(
               subFieldList[subfieldName],
             );
@@ -194,11 +165,11 @@ const EditItemForm = ({
      * Tab Field
      * Read values set in external component to pass in global creation function
      */
-    const tabFieldsValues: Record<string, unknown> = {};
+    const tabFieldsValues = {};
     if (tabs && tabsList) {
       for (const [key, value] of Object.entries(tabsList)) {
         if (key === "id") continue;
-        tabFieldsValues[key] = getDeserializedValue(value as ISerializedValue);
+        tabFieldsValues[key] = getDeserializedValue(value);
       }
     }
 
@@ -231,7 +202,6 @@ const EditItemForm = ({
     try {
       const { data } = await deleteMutation([itemId]);
 
-      // @ts-ignore items exists
       if (data?.items.length) {
         logger.add({
           tone: "positive",
@@ -271,9 +241,7 @@ const EditItemForm = ({
       if (areAllHidden) return null;
 
       // Create an ordered fields object that maintains the original order
-      const orderedFields = renderedFields.reduce<
-        Record<string, (typeof list.fields)[keyof typeof list.fields]>
-      >((acc, fieldName) => {
+      const orderedFields = renderedFields.reduce((acc, fieldName) => {
         if (list.fields[fieldName]) {
           acc[fieldName] = list.fields[fieldName];
         }
@@ -331,7 +299,8 @@ const EditItemForm = ({
     />,
   ];
 
-  return components;
+  return <>{components}</>;
 };
 
 export { EditItemForm };
+export default EditItemForm;

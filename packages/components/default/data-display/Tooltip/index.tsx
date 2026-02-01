@@ -10,7 +10,7 @@ const ToolTipContainer = styled.div<{ $fullWidth?: boolean }>`
 `;
 
 // Styled text element for the tooltip
-const ToolTipText = styled.span<{ position: string }>`
+const ToolTipText = styled.span<{ $position: string }>`
   visibility: hidden;
   min-width: 120px;
   background-color: ${({ theme }) => theme.colors.sectionContent}; // Dark background from theme (#202020)
@@ -19,12 +19,12 @@ const ToolTipText = styled.span<{ position: string }>`
   border-radius: ${({ theme }) => theme.variables.border.radius}px; // Border radius from theme (4px)
   padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px; // Padding from theme (8px)
 
-  /* Position the tooltip based on the dynamic 'position' prop */
+  /* Position the tooltip based on the dynamic '$position' prop */
   position: absolute;
   z-index: ${({ theme }) => theme.zIndex.navigationElement}; // Z-index from theme (1000)
   left: 50%;
   margin-left: -60px;
-  ${({ position }) => (position === "top" ? "bottom: 100%;" : "top: 100%;")}
+  ${({ $position }) => ($position === "top" ? "bottom: 100%;" : "top: 100%;")}
 
   /* Fade in tooltip */
   opacity: 0;
@@ -79,7 +79,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       $fullWidth={$fullWidth}
     >
       {children}
-      {text && <ToolTipText position={position}>{text}</ToolTipText>}
+      {text && <ToolTipText $position={position}>{text}</ToolTipText>}
     </ToolTipContainer>
   );
 };

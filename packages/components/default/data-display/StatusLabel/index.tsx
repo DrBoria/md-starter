@@ -35,22 +35,22 @@ const stateColors: Record<StateValue, string> = {
   success: "#4caf50",
 };
 
-const StateContainer = styled.div<{ state: StateValue }>`
+const StateContainer = styled.div<{ $state: StateValue }>`
   display: flex;
   align-items: center;
   gap: 8px;
   position: relative;
 `;
 
-const StatusDot = styled.div<{ color: string }>`
+const StatusDot = styled.div<{ $color: string }>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: ${({ $color }) => $color};
   position: relative;
 
-  ${({ color }) =>
-    color === "#03a9f4" && // Light Blue (processing state) has a pulse effect
+  ${({ $color }) =>
+    $color === "#03a9f4" && // Light Blue (processing state) has a pulse effect
     css`
       animation: ${pulseAnimation} 1.5s infinite ease-in-out;
     `}
@@ -64,8 +64,8 @@ const StatusLabel: React.FC<{ state?: StateValue }> = ({
     "Unknown";
 
   return (
-    <StateContainer state={state}>
-      <StatusDot color={stateColors[state]} />
+    <StateContainer $state={state}>
+      <StatusDot $color={stateColors[state]} />
       {(state === "queued" || state === "processing") && (
         <LoaderImage src="/ouroboros.svg" alt="Loading..." priority width={20} height={20} />
       )}

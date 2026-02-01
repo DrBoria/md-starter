@@ -41,10 +41,10 @@ export const Table = styled.div`
   color: ${({theme}) => theme.colors.sectionContent};
 `;
 
-export const Row = styled.div<{ withFullSupport?: boolean }>`
+export const Row = styled.div<{ $withFullSupport?: boolean }>`
   display: grid;
-  grid-template-columns: ${({ withFullSupport }) =>
-    `${withFullSupport ? "60px" : ""} minmax(300px, 1fr) repeat(auto-fit, minmax(100px, 1fr)) 50px`};
+  grid-template-columns: ${({ $withFullSupport }) =>
+    `${$withFullSupport ? "60px" : ""} minmax(300px, 1fr) repeat(auto-fit, minmax(100px, 1fr)) 50px`};
   grid-template-rows: calc(var(--basic-padding) * 8);
   grid-auto-flow: column;
   gap: calc(var(--basic-padding) * 2);

@@ -35,5 +35,5 @@ import StackedBarChart from '.';
       title='Number of VRs + Physicals Trend'
     />
   </div>
-</>;
+</>
 ```

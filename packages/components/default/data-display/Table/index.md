@@ -635,5 +635,5 @@ const content = [
       <TextDisplayCell text={order.total} />
     </Fragment>
   ))}
-</TableContainer>;
+</TableContainer>
 ```

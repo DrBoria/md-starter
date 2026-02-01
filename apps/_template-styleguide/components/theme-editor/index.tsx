@@ -18,19 +18,19 @@ const NewThemeContainer = styled.div`
   padding-top: 20px;
 `;
 
-const ThemeEditor: React.FC = () => {
-  const [theme, setTheme] = useState<any>(null);
-  const [updatedTheme, setUpdatedTheme] = useState<any>(null);
-  const [selectedColorTheme, setSelectedColorTheme] = useState<string | null>(null);
+const ThemeEditor = () => {
+  const [theme, setTheme] = useState({ colors: {} });
+  const [updatedTheme, setUpdatedTheme] = useState({ colors: {} });
+  const [selectedColorTheme, setSelectedColorTheme] = useState(null);
   const [baseColor, setBaseColor] = useState('#ffffff');
   const [newThemeName, setNewThemeName] = useState('');
-  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(new Set());
-  const [palettes, setPalettes] = useState<any[]>([]);
+  const [collapsedSections, setCollapsedSections] = useState(new Set());
+  const [palettes, setPalettes] = useState([]);
 
   useEffect(() => {
     const fetchTheme = async () => {
       try {
-        const response = await fetch('http://localhost:6061/themes');
+        const response = await fetch('http://localhost:6063/themes');
         const data = await response.json();
         setTheme(data);
         setUpdatedTheme(data);
@@ -41,22 +41,24 @@ const ThemeEditor: React.FC = () => {
         console.error('Error fetching theme:', error);
       }
     };
-    fetchTheme();
+    void fetchTheme();
   }, []);
 
-  const handleInputChange = (section: string, keyPath: string[], value: any) => {
-    setUpdatedTheme((prev: any) => {
+  const handleInputChange = (section, keyPath, value) => {
+    setUpdatedTheme((prev) => {
       const newTheme = JSON.parse(JSON.stringify(prev));
-      let target = newTheme;
-      if (section === 'colors') {
-        target = target.colors[selectedColorTheme!];
-      } else {
-        target = target[section];
+      let current = newTheme;
+
+      // If we are in 'colors' section, we need to inject selectedColorTheme into the path
+      const fullPath = section === 'colors' 
+        ? [section, selectedColorTheme, ...keyPath.slice(1)] 
+        : keyPath;
+
+      for (let i = 0; i < fullPath.length - 1; i++) {
+        if (!current[fullPath[i]]) current[fullPath[i]] = {};
+        current = current[fullPath[i]];
       }
-      for (let i = 0; i < keyPath.length - 1; i++) {
-        target = target[keyPath[i]];
-      }
-      target[keyPath[keyPath.length - 1]] = value;
+      current[fullPath[fullPath.length - 1]] = value;
       return newTheme;
     });
   };
@@ -71,14 +73,15 @@ const ThemeEditor: React.FC = () => {
   };
 
   const saveTheme = async () => {
-    if (!selectedColorTheme) return;
+    if (!selectedColorTheme || !theme?.colors || !updatedTheme?.colors) return;
     const original = theme.colors[selectedColorTheme];
     const updated = updatedTheme.colors[selectedColorTheme];
+    if (!original || !updated) return;
     const changedValues = getChangedValues(original, updated);
     if (Object.keys(changedValues).length === 0) return;
 
     try {
-      await fetch('http://localhost:6061/themes', {
+      await fetch('http://localhost:6063/themes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ colors: { [selectedColorTheme]: changedValues } }),
@@ -90,9 +93,9 @@ const ThemeEditor: React.FC = () => {
     }
   };
 
-  const getChangedValues = (original: any, updated: any) => {
-    const changes: any = {};
-    const recurse = (orig: any, upd: any, path: string[] = []) => {
+  const getChangedValues = (original, updated) => {
+    const changes = {};
+    const recurse = (orig, upd, path = []) => {
       Object.keys(upd).forEach((key) => {
         const currentPath = [...path, key];
         const origValue = orig[key];
@@ -128,7 +131,7 @@ const ThemeEditor: React.FC = () => {
     setPalettes([palette1, palette2, palette3]);
   };
 
-  const saveAsNewTheme = async (palette: any) => {
+  const saveAsNewTheme = async (palette) => {
     if (!newThemeName) {
       alert('Please enter a name for the new theme');
       return;
@@ -137,19 +140,19 @@ const ThemeEditor: React.FC = () => {
     const newThemeData = { ...palette };
 
     try {
-      await fetch('http://localhost:6061/themes/new', {
+      await fetch('http://localhost:6063/themes/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newThemeName, data: newThemeData }),
       });
-      setTheme((prev: any) => ({
+      setTheme((prev) => ({
         ...prev,
         colors: {
           ...prev.colors,
           [newThemeName]: newThemeData,
         },
       }));
-      setUpdatedTheme((prev: any) => ({
+      setUpdatedTheme((prev) => ({
         ...prev,
         colors: {
           ...prev.colors,
@@ -166,36 +169,40 @@ const ThemeEditor: React.FC = () => {
     }
   };
 
-  const sections = ['colors', 'offsets', 'border', 'elements', 'font', 'zIndexes'];
+  const sections = React.useMemo(() => ['colors', 'offsets', 'border', 'elements', 'font', 'zIndexes'], []);
+  const isLoaded = Object.keys(theme.colors).length > 0;
 
-  return theme ? (
+  const tabs = React.useMemo(() => {
+    if (!selectedColorTheme) return [];
+    return sections.map((section) => ({
+      label: section.charAt(0).toUpperCase() + section.slice(1),
+      content: (
+        <>
+          {section === 'colors' && (
+            <ThemeSelector
+              themes={Object.keys(theme.colors)}
+              selectedTheme={selectedColorTheme}
+              onSelect={setSelectedColorTheme}
+            />
+          )}
+          <RenderInputs
+            obj={section === 'colors' ? updatedTheme.colors[selectedColorTheme] : updatedTheme[section]}
+            keyPath={[section]}
+            onChange={(keyPath, value) => handleInputChange(section, keyPath, value)}
+            collapsedSections={collapsedSections}
+            onToggleSection={toggleSection}
+          />
+        </>
+      ),
+    }));
+  }, [sections, theme.colors, selectedColorTheme, updatedTheme, collapsedSections, toggleSection]);
+
+  return isLoaded ? (
     <Container>
       <ThemeProvider>
         <h2>Theme Editor</h2>
         {selectedColorTheme && (
-          <Tabs
-            tabs={sections.map((section) => ({
-              label: section.charAt(0).toUpperCase() + section.slice(1),
-              content: (
-                <>
-                  {section === 'colors' && (
-                    <ThemeSelector
-                      themes={Object.keys(theme.colors)}
-                      selectedTheme={selectedColorTheme}
-                      onSelect={setSelectedColorTheme}
-                    />
-                  )}
-                  <RenderInputs
-                    obj={section === 'colors' ? updatedTheme.colors[selectedColorTheme] : updatedTheme[section]}
-                    keyPath={[section]}
-                    onChange={(keyPath, value) => handleInputChange(section, keyPath, value)}
-                    collapsedSections={collapsedSections}
-                    onToggleSection={toggleSection}
-                  />
-                </>
-              ),
-            }))}
-          />
+          <Tabs tabs={tabs} />
         )}
         <NewThemeContainer>
           <h3>Create New Theme</h3>
@@ -220,7 +227,7 @@ const ThemeEditor: React.FC = () => {
 };
 
 // Palette generation functions (unchanged)
-const generatePalette1 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean) => {
+const generatePalette1 = (color, baseHsl, isDark) => {
   // Section is the base background color
   const section = color.toHexString();
   const isSectionDark = tinycolor(section).isDark();
@@ -268,7 +275,7 @@ const generatePalette1 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
   };
 };
 
-const generatePalette2 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean) => {
+const generatePalette2 = (color, baseHsl, isDark) => {
   const sectionContent = color.toHexString();
   const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
   const section = tinycolor(sectionHsl).toHexString();
@@ -309,7 +316,7 @@ const generatePalette2 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
   };
 };
 
-const generatePalette3 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isDark: boolean)  => {
+const generatePalette3 = (color, baseHsl, isDark)  => {
   const highlighted = color.toHexString();
   const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
   const section = tinycolor(sectionHsl).toHexString();
@@ -351,7 +358,7 @@ const generatePalette3 = (color: tinycolor.Instance, baseHsl: tinycolor.HSL, isD
   };
 };
 
-const generateTextColor = (background: string) => {
+const generateTextColor = (background) => {
   const bg = tinycolor(background);
   const bgHsl = bg.toHsl();
   const textLuminance = bg.getLuminance() > 0.5 ? 0.1 : 0.9;

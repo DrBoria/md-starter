@@ -1,17 +1,8 @@
 import React from 'react';
 import { SectionTitle, Select } from "@md/components";
 
-export type TOption = {
-  label: string;
-  value: string | number;
-};
-
-const ThemeSelector: React.FC<{
-  themes: string[];
-  selectedTheme: string | null;
-  onSelect: (theme: string) => void;
-}> = ({ themes, selectedTheme, onSelect }) => {
-  const options: TOption[] = themes.map((theme) => ({
+const ThemeSelector = ({ themes, selectedTheme, onSelect }) => {
+  const options = themes.map((theme) => ({
     label: theme,
     value: theme,
   }));

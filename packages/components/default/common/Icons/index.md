@@ -2,7 +2,7 @@
 import { LucideIcon } from ".";
 import { Tooltip } from "../../data-display/Tooltip";
 
-<>
+<div>
   <div>
     <h2>Common UI Icons</h2>
     <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
@@ -24,7 +24,7 @@ import { Tooltip } from "../../data-display/Tooltip";
       <LucideIcon name="ChevronUp" />
       <LucideIcon name="ChevronDown" />
       <LucideIcon name="ArrowLeft" />
-      <LucideIcon name="ArrowRight" iconPosition="right" />
+      <LucideIcon name="ArrowRight" />
       <LucideIcon name="Home" />
     </div>
   </div>
@@ -96,10 +96,10 @@ import { Tooltip } from "../../data-display/Tooltip";
   <div>
     <h2>Different Sizes</h2>
     <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-      <LucideIcon name="User" size="small" />
-      <LucideIcon name="User" size="medium" />
-      <LucideIcon name="User" size="large" />
+      <LucideIcon name="User" size="sm" />
+      <LucideIcon name="User" size="md" />
+      <LucideIcon name="User" size="lg" />
     </div>
   </div>
-</>;
+</div>
 ```

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { basicFont } from '../../../data-display/Typography';
 
@@ -16,59 +16,59 @@ type TInputProps = {
 
 const Input = styled.input<TInputProps>`
   display: block;
-  width: ${({ fullWidth }) => fullWidth && '100%'};
-  height: ${({ theme }) => theme.elements.form.height};
+  width: ${({ $fullWidth }) => $fullWidth && '100%'};
+  height: ${({ theme }) => theme?.elements?.form?.height || '40px'};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  padding: ${({ theme }) => theme.offsets.elementContent};
+  padding: ${({ theme }) => theme?.offsets?.elementContent || '8px'};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
   font: ${basicFont};
 
-  background: ${({ theme }) => theme.colors.overlay};
-  border: ${({ theme }) => theme.border.size} solid transparent;
+  background: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
+  border: ${({ theme }) => theme?.border?.size || 1}px solid transparent;
   // Use theme.borders.radius (which is 0px in Viking)
-  border-radius: ${({ theme }) => theme.border.radius};
+  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
   
   // Viking Theme: Engraving Pattern
-  ${({ theme }) => theme.theme === 'viking' && `
-      background-color: ${theme.colors.overlay}; // Deep stone
+  ${({ theme }) => theme?.theme === 'viking' && css`
+      background-color: ${theme?.colors?.overlay || 'black'}; // Deep stone
+      background-image: ${theme?.effects?.texture}; /* NOISE */
       border: none; // No border, just depth
       border-radius: 0; // Cut stone
-      color: ${theme.colors.sectionContent}; // Light text
+      color: ${theme?.colors?.sectionContent || 'white'}; // Light text
       
       // The "Engraved" look driven by inner shadows
-      // Using generic shadow.inner (now effects.depth.inner.medium)
-      box-shadow: ${theme.colors.effects?.depth?.inner?.medium};
+      box-shadow: ${theme?.effects?.depth?.inner?.medium || 'none'};
       
-      // Ragged Edge (if configured)
-      ${theme.colors.geometry?.ragged && `clip-path: ${theme.colors.geometry.ragged};`}
-      border-bottom: 2px solid ${theme.colors.disabled};
+      // More organic ragged edge (torn paper/rough stone)
+      ${theme?.geometry?.ragged && `clip-path: ${theme.geometry.ragged};`}
+      border-bottom: 2px solid ${theme?.colors?.disabled || 'gray'};
 
       &::placeholder {
-          color: ${theme.colors.labelText}; // Muted text
+          color: ${theme?.colors?.labelText || 'lightgray'}; // Muted text
           opacity: 0.5;
       }
 
       &:focus {
-          // Glow from within, logic of "Molten Gold" or "Active Rune"
           outline: none;
-          color: ${theme.colors.highlighted}; // Gold text
-          border-bottom-color: ${theme.colors.highlighted};
+          color: ${theme?.colors?.highlighted || 'gold'}; // Gold text
+          border-bottom-color: ${theme?.colors?.highlighted || 'gold'};
           
-          box-shadow: ${theme.colors.effects?.glow?.strong};
-          caret-color: ${theme.colors.highlighted};
+          box-shadow: ${theme?.effects?.glow?.strong || 'none'}, ${theme?.effects?.depth?.inner?.strong || 'none'};
+          caret-color: ${theme?.colors?.highlighted || 'gold'};
+          filter: brightness(1.1);
       }
   `}
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.labelText};
+    color: ${({ theme }) => theme?.colors?.labelText || 'lightgray'};
     opacity: 0.5;
     font-style: italic;
   }
 
-  ${({ theme }) => theme.theme !== 'viking' && `
-     border: ${theme.variables.border.size}px solid ${theme.colors.sectionContent};
+  ${({ theme }) => theme?.theme !== 'viking' && `
+     border: ${theme?.variables?.border?.size || 1}px solid ${theme?.colors?.sectionContent || 'black'};
      backdrop-filter: var(--glass-effect);
   `}
 `;

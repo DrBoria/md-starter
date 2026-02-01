@@ -14,5 +14,5 @@ import { KeystoneProvider } from "../utils/ui-kit/KeystoneProvider";
   <KeystoneProvider>
     <Navigation />
   </KeystoneProvider>
-</>;
+</>
 ```

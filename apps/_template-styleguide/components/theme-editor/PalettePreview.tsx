@@ -1,14 +1,7 @@
 import React from 'react';
 import { BasicSection, Button, SectionTitle, SubTitle, Switch, Tabs, TokenInputField } from "@md/components";
 
-interface Palette {
-  colors: Record<string, string>;
-  typography?: Record<string, string>;
-  spacing?: Record<string, string | number>;
-  name: string;
-}
-
-const PalettePreview: React.FC<{ palette: Palette }> = ({ palette }) => (
+const PalettePreview = ({ palette }) => (
     <BasicSection>
         <SectionTitle>Preview</SectionTitle>
         <Tabs

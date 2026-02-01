@@ -1,5 +1,3 @@
-import { baseTheme } from '@md/styles';
-
 export * from './default/forms/Button';
 export * from './default/forms/Buttons';
 export * from './default/forms/Form';
@@ -27,10 +25,4 @@ export * from './default/data-display/Images';
 export * from './default/navigation/Link';
 export * from './default/navigation/MenuItem';
 export * from './default/common/Icons';
-
-
-type TTheme = typeof baseTheme;
-declare module 'styled-components' {
-    export interface DefaultTheme extends TTheme { }
-}
 

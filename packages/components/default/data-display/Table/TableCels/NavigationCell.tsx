@@ -10,7 +10,7 @@ type TNavigationCellProps = {
 
 const NavigationCell = ({ text, link, align, ...props }: TNavigationCellProps) => {
   return (
-    <StyledTextCell align={align} {...props}>
+    <StyledTextCell $align={align}>
       <PlainText>
         <a href={link}>{text}</a>
       </PlainText>

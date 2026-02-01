@@ -22,10 +22,10 @@ const SuggestionList = styled.ul<{ $suggestionsPosition: TPosition }>`
     `calc(${$suggestionsPosition.left} * 0.5rem + 10px)`};
 `;
 
-const SuggestionItem = styled.li<{ selected: boolean }>`
+const SuggestionItem = styled.li<{ $selected: boolean }>`
   padding: 8px 12px;
   cursor: pointer;
-  background-color: ${({ selected }) => (selected ? "#f5f5f5" : "white")};
+  background-color: ${({ $selected }) => ($selected ? "#f5f5f5" : "white")};
 `;
 
 interface TAutoComplete {
@@ -172,11 +172,11 @@ const AutoComplete: React.FC<TAutoComplete> = ({
         ref={suggestionsRef}
         $suggestionsPosition={suggestionsPosition}
       >
-        {suggestions.map((suggestion, index) => (
+        {suggestions.map((suggestion) => (
           <SuggestionItem
-            key={`${index} suggestion item`}
-            selected={index === selectedSuggestionIndex}
-            onMouseEnter={() => setSelectedSuggestionIndex(index)}
+            key={suggestion}
+            $selected={suggestions.indexOf(suggestion) === selectedSuggestionIndex}
+            onMouseEnter={() => setSelectedSuggestionIndex(suggestions.indexOf(suggestion))}
             onClick={() => {
               onSelect(suggestion, lastEnteredWord.length);
               setSuggestions([]);

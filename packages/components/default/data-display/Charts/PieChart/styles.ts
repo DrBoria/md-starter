@@ -7,11 +7,11 @@ export const NameContainer = styled.div`
   margin-right: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
-export const ColoredDot = styled.div`
+export const ColoredDot = styled.div<{ $color: string }>`
   width: ${({ theme }) => theme.elements.icons.width};
   height: ${({ theme }) => theme.elements.icons.height};
   margin-right: ${({ theme }) => theme.offsets.betweenElements};
 
-  background: ${({ theme }) => theme.colors.section};
+  background: ${({ $color }) => $color};
   border-radius: ${({ theme }) => theme.border.circle};
 `;

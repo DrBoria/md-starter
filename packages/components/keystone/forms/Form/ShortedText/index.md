@@ -1,11 +1,11 @@
 ```jsx
-import { Text } from "./index/Text";
+import { ShortedText } from ".";
 
 <div style={{ width: "200px" }}>
-  <Text text="activesdfsdfjsldkflkjflksdjflaskjf;alskdfjas;ldkfjsl;kdfjsdlkfja;slkdfjafygerwpofhierwofiehf" />
-  <Text
+  <ShortedText text="activesdfsdfjsldkflkjflksdjflaskjf;alskdfjas;ldkfjsl;kdfjsdlkfja;slkdfjafygerwpofhierwofiehf" />
+  <ShortedText
     withCopy
     text="activesdfsdfjsldkflkjflksdjflaskjf;alskdfjas;ldkfjsl;kdfjsdlkfja;slkdfjafygerwpofhierwofiehf"
   />
-</div>;
+</div>
 ```

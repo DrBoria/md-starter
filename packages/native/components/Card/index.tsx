@@ -22,32 +22,21 @@ const CardContainer = styled(TouchableOpacity)`
 const Title = styled(PlainText)`
   font-size: 18px;
   font-weight: 600;
-  font-family: ${({ theme }) => theme.font.family.title};
+  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
 `;
 
 const Footer = styled(View)`
   flex-direction: column;
   align-items: flex-start;
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
 const ReadMore = styled(PlainText)`
-  font-family: ${({ theme }) => theme.font.family.title};
-  color: ${({ theme }) => theme.colors.highlighted};
+  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  color: ${({ theme }) => theme?.colors?.highlighted || 'red'};
   font-weight: 600;
 `;
 
-interface ICard {
-  image?: string;
-  title: string;
-  description?: string;
-  date?: string;
-  readTime?: string;
-  onPress?: () => void;
-}
-
-const Card = ({ title, description, date, onPress }: ICard) => (
+const Card = ({ title, date, onPress }) => (
   <CardContainer onPress={onPress}>
     <Title $offsetBottom>{title}</Title>
     <Footer>

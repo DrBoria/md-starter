@@ -44,5 +44,5 @@ import { Toggle } from ".";
       </Toggle>
     </div>
   </div>
-</>;
+</>
 ```

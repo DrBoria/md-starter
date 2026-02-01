@@ -71,31 +71,31 @@ const CloudContainer = styled.div<ICloudProps>`
   animation: ${moveLeftAnimationRule190};
   margin: -150px;
 
-  ${({ size }) => size === 'small' ? css`
+  ${({ $size }) => $size === 'small' ? css`
     width: 15vw;
     max-width: 300px;
     animation: ${moveLeftAnimationRule140};
   ` : ''}
 
-  ${({ size }) => size === 'big' && css`
+  ${({ $size }) => $size === 'big' && css`
     width: 65vw;
     max-width: 700px;
     animation: ${moveLeftAnimationRule210};
   `}
 
-  ${({ position }) => position?.includes('top') && `
+  ${({ $position }) => $position?.includes('top') && `
     top: 10vh;
   `}
 
-  ${({ position }) => position?.includes('left') && `
+  ${({ $position }) => $position?.includes('left') && `
     left: 20vw;
   `}
 
-  ${({ position }) => position?.includes('bottom') && `
+  ${({ $position }) => $position?.includes('bottom') && `
     bottom: 40vh;
   `}
 
-  ${({ position }) => position?.includes('right') && `
+  ${({ $position }) => $position?.includes('right') && `
     right: 20vw;
   `}
 
@@ -106,10 +106,10 @@ const CloudContainer = styled.div<ICloudProps>`
     `
   : ''}
 
-  ${({$manual, top, left, direction}) => $manual ? css`
-    top: ${top || 0}px;
-    left: ${left || 0}px; 
-    animation: ${direction === 'right' ? moveRightInitialAnimationRule : moveInitialAnimationRule};
+  ${({$manual, $top, $left, $direction}) => $manual ? css`
+    top: ${$top || 0}px;
+    left: ${$left || 0}px; 
+    animation: ${$direction === 'right' ? moveRightInitialAnimationRule : moveInitialAnimationRule};
     transform: none;
   ` : ``}
 `;
@@ -156,11 +156,11 @@ const CloudFront = styled.div`
   box-shadow: 210px 272px 30px 0px #94a6a640;
 `;
 
-export type ICloudProps = { size?: 'small' | 'big' | 'medium', position?: ('top' | 'left' | 'bottom' | 'right')[], $isinitial?: boolean, top?: number, left?: number, $manual?: boolean, direction?: 'left' | 'right' };
+export type ICloudProps = { $size?: 'small' | 'big' | 'medium', $position?: ('top' | 'left' | 'bottom' | 'right')[], $isinitial?: boolean, $top?: number, $left?: number, $manual?: boolean, $direction?: 'left' | 'right' };
 
-const Cloud = ({ size, position, $isinitial, top, left, $manual, direction }: ICloudProps) => {
+const Cloud = ({ $size, $position, $isinitial, $top, $left, $manual, $direction }: ICloudProps) => {
   return (
-    <CloudContainer size={size} position={position} $isinitial={$isinitial} $manual={$manual} direction={direction} top={top} left={left}>
+    <CloudContainer $size={$size} $position={$position} $isinitial={$isinitial} $manual={$manual} $direction={$direction} $top={$top} $left={$left}>
       <CloudBase />
       <CloudBack />
       <CloudMid />

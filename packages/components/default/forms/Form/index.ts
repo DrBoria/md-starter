@@ -11,5 +11,7 @@ import { Textarea } from './Textarea';
 
 export { Form, Input, SearchInput, FormLabel, TextCheckbox, Select, Radio, Submit, Textarea };
 
+export default Form;
+
 // Types
 export type { TOption } from './Select';

@@ -17,7 +17,7 @@ type TTextareaProps = {
 
 const Textarea = styled.textarea<TTextareaProps>`
   display: block;
-  width: ${({ fullWidth }) => fullWidth && '100%'};
+  width: ${({ $fullWidth }) => $fullWidth && '100%'};
   min-height: ${({ theme }) => `calc(${theme.elements.form.height} * 3)`}; // Default roughly 3 rows
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
@@ -34,7 +34,7 @@ const Textarea = styled.textarea<TTextareaProps>`
   ${({ theme }) => theme.theme === 'viking' && css`
       /* 1. Material: Dark stone with noise */
       background-color: ${theme.colors.overlay};
-      background-image: ${theme.colors.effects?.texture}; /* NOISE */
+      background-image: ${theme.effects?.texture}; /* NOISE */
       color: ${theme.colors.sectionContent};
       
       border: none;
@@ -43,11 +43,11 @@ const Textarea = styled.textarea<TTextareaProps>`
       /* 2. Accent line bottom */
       border-bottom: 2px solid ${theme.colors.disabled};
 
-      /* 3. Shape: Ragged Top */
-      clip-path: ${theme.colors.geometry?.ragged || 'none'};
+      /* 3. Shape: Ragged Top (Torn stone slab) */
+      clip-path: ${theme.geometry?.ragged || 'none'};
       
       /* 4. Depth: Engraved */
-      box-shadow: ${theme.colors.effects?.depth?.inner?.medium};
+      box-shadow: ${theme.effects?.depth?.inner?.medium};
 
       &::placeholder {
           color: ${theme.colors.labelText};
@@ -60,9 +60,12 @@ const Textarea = styled.textarea<TTextareaProps>`
           color: ${theme.colors.highlighted};
           border-bottom-color: ${theme.colors.highlighted};
           
-          /* Strong glow */
-          box-shadow: ${theme.colors.effects?.glow?.strong}, ${theme.colors.effects?.depth?.inner?.strong};
+          /* Strong glow and crack texture imitation */
+          box-shadow: 
+            ${theme.effects?.glow?.strong}, 
+            ${theme.effects?.depth?.inner?.strong};
           caret-color: ${theme.colors.highlighted};
+          filter: brightness(1.1);
       }
   `}
 

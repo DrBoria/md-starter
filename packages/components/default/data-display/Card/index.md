@@ -11,5 +11,5 @@ import { Card } from ".";
     description="A short description goes here." // Replace with actual description if available
     link={`/`}
   />
-</>;
+</>
 ```

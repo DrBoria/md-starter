@@ -68,5 +68,5 @@ import { Tabs } from ".";
       onTabChange={(tabIndex) => console.log("Tab changed to:", tabIndex)}
     />
   </div>
-</>;
+</>
 ```

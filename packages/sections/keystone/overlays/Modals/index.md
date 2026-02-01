@@ -41,5 +41,5 @@ import { FileUpload } from "admin/sections/core/Modals/CentralModal/fileUploadTe
       withDescription
     />
   </div>
-</ApolloProvider>;
+</ApolloProvider>
 ```

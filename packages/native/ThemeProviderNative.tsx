@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
-import { light, baseTheme } from '@md/styles/themes';
+import { baseTheme } from '@md/styles/themes';
 import { mergeDeep } from '@md/utils/mapping/mergeDeep';
 
 // Get device screen width
@@ -27,21 +27,18 @@ const nativeBaseTheme = {
   },
 };
 
-const ThemeProviderNative = ({ children, theme={} }) => {
+const ThemeProviderNative = ({ children, theme={} }: { children: React.ReactNode, theme?: Record<string, boolean | object> }) => {
   // Merge baseTheme, nativeBaseTheme, and colorTheme
   const mergedTheme = {
     ...mergeDeep(baseTheme, nativeBaseTheme, theme),
   };
 
-  return <ThemeProvider theme={mergedTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={mergedTheme}>
+      <>{children}</>
+    </ThemeProvider>
+  );
 };
-
-type TTheme = typeof baseTheme;
-
-// Fix for typescript basic theme apply
-declare module 'styled-components/native' {
-  export interface DefaultTheme extends TTheme {}
-}
 
 export default ThemeProviderNative;
 

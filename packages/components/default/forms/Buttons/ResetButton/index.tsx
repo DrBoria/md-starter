@@ -12,7 +12,7 @@ export const ResetButton = ({ isVertical, onReset }: ResetButtonProps) => (
     weight="none"
     onClick={onReset}
     $fullWidth={isVertical}
-    icon="RotateCcwIcon"
+    icon="RotateCcw"
     text="Reset changes"
   />
 );

@@ -57,6 +57,7 @@ const resolveIconSize = (
  * // With custom color
  * <LucideIcon name="Heart" className="text-red" />
  */
+/** @component */
 export const LucideIcon: React.FC<LucideIconProps> = ({
   name,
   size,
@@ -68,6 +69,7 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
     return null;
   }
 
+  // Ensure name is valid key of LucideIcons
   const IconComponent = LucideIcons[name];
 
   if (!IconComponent) {
@@ -75,13 +77,35 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
     return null;
   }
 
+  // Ensure it is a valid React component
+  const isComponent = (val: unknown): val is React.ComponentType<unknown> => {
+    if (!val) return false;
+    if (typeof val === 'function') return true;
+    
+    const v = val as any;
+    if (typeof v === 'object' && (
+      v.$$typeof === Symbol.for('react.forward_ref') ||
+      v.$$typeof === Symbol.for('react.memo') ||
+      v.$$typeof === Symbol.for('react.lazy')
+    )) return true;
+    return false;
+  };
+
+  if (!isComponent(IconComponent)) {
+     console.warn(`Lucide export "${name}" is not a valid React component`);
+     return null;
+  }
+
   try {
+    const { name: _name, size: _size, color: _color, iconPosition: _iconPosition, ...rest } = props as Record<string, unknown>;
+    
+    // Only pass valid SVG/Lucide props to the icon component
     return React.createElement(
-      IconComponent as React.ComponentType<LucideProps>,
+      IconComponent as any,
       {
         size: resolveIconSize(size),
         color,
-        ...props,
+        ...rest,
       },
     );
   } catch (error) {
@@ -89,3 +113,5 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
     return null;
   }
 };
+
+export default LucideIcon;

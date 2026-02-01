@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { basicFont } from '../../../data-display/Typography';
@@ -9,71 +10,94 @@ type TRadioProps = {
   name: string;
   id?: string;
   value: string | number;
-  type: 'radio';
+  checked?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & TWithBasicElementOffsets &
   TFullWidth;
 
-const RadioInput = styled.input<TRadioProps>`
-  display: block;
-  height: ${({ theme }) => theme.elements.form.height};
-  padding: ${({ theme }) => theme.offsets.elementContent};
-
-  color: ${({ theme }) => theme.colors.sectionContent};
-  font: ${basicFont};
-
-  background: ${({ theme }) => theme.colors.overlay};
-  border: none;
-  border-radius: ${({ theme }) => theme.border.radius};
-  
-  /* VIKING THEME OVERRIDE */
-  ${({ theme }) => theme.theme === 'viking' && css`
-      appearance: none; /* Remove default radio */
-      display: grid;
-      place-items: center;
-      width: calc(${theme.elements.form.height} / 2);
-      height: calc(${theme.elements.form.height} / 2);
-      
-      background-color: #0b0e0f;
-      box-shadow: ${theme.colors.effects?.depth?.inner?.medium};
-      border: 1px solid ${theme.colors.disabled};
-      border-radius: 50%; /* Radios are round, even in Valhalla? Or maybe diamond? Let's stick to round for now or use diamond geometry */
-      clip-path: none;
-      
-      &::before {
-          content: '•';
-          color: transparent;
-          font-size: 24px;
-          line-height: 0;
-          transition: 0.2s;
-      }
-      
-      &:checked {
-          border-color: ${theme.colors.highlighted};
-          box-shadow: ${theme.colors.effects?.glow?.medium};
-          
-          &::before {
-              content: 'ᛟ'; /* Othala (Heritage) */
-              color: ${theme.colors.highlighted};
-              font-size: 16px;
-              text-shadow: ${theme.colors.effects?.glow?.soft};
-          }
-      }
-  `}
-`;
-
-const RadioContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
+const RadioContainer = styled.label<TWithBasicElementOffsets & TFullWidth>`
   display: flex;
   align-items: center;
-  width: ${({ fullWidth }) => fullWidth && '100%'};
-  height: ${({ theme }) => theme.elements.form.height};
-
+  justify-content: center;
+  width: ${({ theme }) => `calc(${theme.elements.form.height} / 1.5)`};
+  height: ${({ theme }) => `calc(${theme.elements.form.height} / 1.5)`};
+  
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
+  
+  cursor: pointer;
+  position: relative;
+  user-select: none;
 `;
 
-const Radio = ({ name, id = '0', value, ...props }: TRadioProps) => (
-  <RadioContainer {...props}>
-    <RadioInput type='radio' id={id} name={name} value={value} />
+const HiddenRadio = styled.input.attrs({ type: 'radio' })`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+`;
+
+const RadioMark = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  
+  background-color: ${({ theme }) => theme.colors.overlay};
+  border: 1px solid ${({ theme }) => theme.colors.disabled};
+  border-radius: 50%;
+  transition: all 0.2s ease;
+
+  /* VIKING THEME OVERRIDE */
+  ${({ theme }) => theme.theme === 'viking' && css`
+    border-radius: 0;
+    clip-path: ${theme.geometry?.ragged};
+    background-image: ${theme.effects?.texture};
+    box-shadow: ${theme.effects?.depth?.inner?.medium};
+    border: 1px solid ${theme.colors.disabled};
+    
+    &::before {
+      content: '';
+      color: ${theme.colors.highlighted};
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  `}
+
+  ${HiddenRadio}:checked + & {
+    background-color: ${({ theme }) => theme.colors.highlighted};
+    border-color: ${({ theme }) => theme.colors.highlighted};
+
+    ${({ theme }) => theme.theme === 'viking' && css`
+      background-color: ${theme.colors.overlayActive};
+      box-shadow: ${theme.effects?.glow?.medium};
+      border-color: ${theme.colors.highlighted};
+
+      &::before {
+        content: 'ᛟ'; /* Othala Rune */
+        opacity: 1;
+        transform: scale(1);
+        text-shadow: ${theme.effects?.glow?.soft};
+      }
+    `}
+  }
+`;
+
+const Radio = ({ name, id, value, checked, onChange, $offsetBottom, $offsetRight, $fullWidth, ...props }: TRadioProps) => (
+  <RadioContainer $offsetBottom={$offsetBottom} $offsetRight={$offsetRight} $fullWidth={$fullWidth}>
+    <HiddenRadio 
+      id={id} 
+      name={name} 
+      value={value} 
+      checked={checked} 
+      onChange={onChange} 
+      {...props} 
+    />
+    <RadioMark />
   </RadioContainer>
 );
 

@@ -47,9 +47,9 @@ const FilterFieldSelectPage = ({
       </div>
       {/* Filter options */}
       <div className="divide-y">
-        {filteredFields.map((field, index) => (
+        {filteredFields.map((field) => (
           <button
-            key={index}
+            key={field.path}
             onClick={() => onFilterFieldSelect(field)}
             className={
               "w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-100"

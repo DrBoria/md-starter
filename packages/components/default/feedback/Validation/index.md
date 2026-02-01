@@ -38,5 +38,5 @@ import {
       </div>
     </ErrorValidationContainer>
   </div>
-</>;
+</>
 ```

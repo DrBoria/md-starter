@@ -32,7 +32,7 @@ const PieChart = ({ data }: TProps) => {
         {data.map((item, index) => (
           <LegendRowContainer key={item.name}>
             <NameContainer>
-              <ColoredDot color={COLORS[index % COLORS.length]} />
+              <ColoredDot $color={COLORS[index % COLORS.length]} />
               <PlainText>{item.name}</PlainText>
             </NameContainer>
             <PlainText>{item.totalSales}</PlainText>

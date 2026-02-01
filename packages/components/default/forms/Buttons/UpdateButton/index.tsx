@@ -19,6 +19,6 @@ export const UpdateButton = ({
     onClick={onUpdate}
     className="save-button"
     $fullWidth={isVertical}
-    icon="SaveIcon"
+    icon="Save"
   />
 );

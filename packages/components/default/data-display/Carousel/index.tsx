@@ -142,9 +142,9 @@ const Carousel: FC<TCarouselProps> = ({ slides, reversed = false }) => {
         <Container>
             <CarouselButton $side='prev' onClick={() => onSlide('prev')} dangerouslySetInnerHTML={{ __html: ArrowIcon }} $isActive={currentSlideNumber > 0} />
             <CarouselPage ref={(el) => { carousel.current = el; }} onScroll={handleScroll} $slidsCount={slides.length} $isMobile={isMobile}>
-                {slides.map((slide, index) => (
+                {slides.map((slide) => (
                     <Slide
-                        key={index}
+                        key={slide.url}
                     >
                         <ConditionalWrapper Wrapper={isMobile ? Column : ColumnsContainer}>
                             {isMobile || reversed ? (

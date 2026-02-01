@@ -37,5 +37,5 @@ import { HtmlEditor } from ".";
       );
     })()}
   </div>
-</>;
+</>
 ```

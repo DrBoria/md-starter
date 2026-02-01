@@ -9,15 +9,15 @@ interface ContainerProps {
 }
 
 type TSectionProps = {
-  noHeightLimit?: boolean;
+  $noHeightLimit?: boolean;
 } & ContainerProps;
 
 /**
  * @visibleName Containers
  */
 
-const WithoutHeightLimit = (noHeightLimit?: boolean) =>
-  noHeightLimit &&
+const WithoutHeightLimit = ($noHeightLimit?: boolean) =>
+  $noHeightLimit &&
   css`
     height: auto;
     min-height: ${({ theme }) => `calc(${theme.screens.tablet.height} - ${theme.elements.header.height})`};
@@ -26,6 +26,7 @@ const WithoutHeightLimit = (noHeightLimit?: boolean) =>
 
 // Use this conteiner for wrapping any section on page
 // No usage restrictions
+/** @component */
 export const BasicSection = styled.div<TSectionProps>`
   padding: ${({ theme: { offsets } }) => offsets.section};
 
@@ -45,7 +46,7 @@ export const BasicSection = styled.div<TSectionProps>`
       border-bottom: 1px solid ${theme.colors.disabled};
   `}
 
-  ${({ noHeightLimit }) => WithoutHeightLimit(noHeightLimit)}
+  ${({ $noHeightLimit }) => WithoutHeightLimit($noHeightLimit)}
 `;
 
 // Use this container for wrapping all page content
@@ -111,14 +112,14 @@ const FocusedContainer = styled.div`
   }
 `;
 
-const OneLineContainer = styled.div<{ width?: '1/2' | '1/3' }>`
+const OneLineContainer = styled.div<{ $width?: '1/2' | '1/3' }>`
   display: flex;
   align-items: center;
   gap: 5px;
 
   /* Dynamically set width based on prop */
-  width: ${({ width }) => {
-    switch (width) {
+  width: ${({ $width }) => {
+    switch ($width) {
       case '1/2':
         return '50%';
       case '1/3':

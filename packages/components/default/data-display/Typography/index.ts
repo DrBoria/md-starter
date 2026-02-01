@@ -5,7 +5,7 @@ import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 
 export const basicFont = css`
-  ${({ theme }) => `500 ${theme.font.size} ${theme.fontFamily || theme.font.family.text}`}
+  ${({ theme }) => `500 ${theme?.font?.size || '1rem'} ${theme?.fontFamily || theme?.font?.family?.text || 'sans-serif'}`}
 `;
 
 /**
@@ -14,23 +14,23 @@ export const basicFont = css`
 
 const sizes = {
   PlainText: {
-    fontSize: '1.1rem;',
-    lineHeight: '1.5rem;',
+    fontSize: '1.1rem',
+    lineHeight: '1.5rem',
   },
 
   SubTitle: {
-    fontSize: '1.3rem;',
-    lineHeight: '1.8rem;',
+    fontSize: '1.3rem',
+    lineHeight: '1.8rem',
   },
 
   SectionTitle: {
-    fontSize: '1.6rem;',
-    lineHeight: '2rem;',
+    fontSize: '1.6rem',
+    lineHeight: '2rem',
   },
 
   PageTitle: {
-    fontSize: '2.5rem;',
-    lineHeight: '3rem;',
+    fontSize: '2.5rem',
+    lineHeight: '3rem',
   },
 };
 
@@ -38,11 +38,11 @@ const PageTitle = styled.h1<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent};
   font: ${basicFont};
   font-weight: 700;
   font-size: ${sizes.PageTitle.fontSize};
-  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.text};
+  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.text || 'inherit'};
   line-height: ${sizes.PageTitle.lineHeight};
   text-transform: capitalize;
 `;
@@ -51,10 +51,10 @@ const SubTitle = styled.h2<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent};
   font: ${basicFont};
   font-size: ${sizes.SubTitle.fontSize};
-  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.title};
+  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.title || 'inherit'};
   line-height: ${sizes.SubTitle.lineHeight};
 `;
 
@@ -62,11 +62,11 @@ const SectionTitle = styled.h3<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent};
   font: ${basicFont};
   font-weight: 700;
   font-size: ${sizes.SectionTitle.fontSize};
-  font-family: ${({ theme }) => theme.fontFamily || theme.font.family.title};
+  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.title || 'inherit'};
   line-height: ${sizes.SectionTitle.lineHeight};
   text-transform: capitalize;
 `;
@@ -75,24 +75,24 @@ const PlainText = styled.p<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent};
   font: ${basicFont};
   font-size: ${sizes.PlainText.fontSize};
   line-height: ${sizes.PlainText.lineHeight};
 `;
 
 const Highlighted = styled.span<TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme.colors.highlighted};
+  color: ${({ theme }) => theme?.colors?.highlighted};
 `;
 
 const Label = styled.label<TWithBasicElementOffsets>`
   display: inline-block;
-  padding: ${({ theme }) => `calc(${theme.offsets.elementContent} / 2)`};
+  padding: ${({ theme }) => theme?.offsets?.elementContent ? `calc(${theme.offsets.elementContent} / 2)` : '0'};
 
-  color: ${({ theme }) => theme.colors.labelText};
+  color: ${({ theme }) => theme?.colors?.labelText};
 
-  background-color: ${({ theme }) => theme.colors.labelBackground};
-  border-radius: ${({ theme }) => theme.borderRadius || theme.border.radius};
+  background-color: ${({ theme }) => theme?.colors?.labelBackground};
+  border-radius: ${({ theme }) => theme?.borderRadius || theme?.border?.radius || '0'};
 `;
 
 const DescriptionText = styled.h3`

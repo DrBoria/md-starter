@@ -88,5 +88,5 @@ import { Switch } from ".";
       </div>
     </div>
   </div>
-</>;
+</>
 ```

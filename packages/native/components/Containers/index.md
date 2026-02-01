@@ -6,16 +6,17 @@ import ThemeProviderNative from "../../ThemeProviderNative";
 import { dark } from "@md/styles/themes";
 
 <ThemeProviderNative>
-<PageContainer>
-  Page Container. Got offset equal to header height
-  <BasicSection>
-    Basic Section
-    <SectionTitle>Section Title</SectionTitle>
-    <PlainText>
-      Plain text. Page container got offset from top for header
-    </PlainText>
-  </BasicSection>
-</PageContainer>
+  <>
+    <PageContainer>
+      <PlainText>Page Container. Got offset equal to header height</PlainText>
+      <BasicSection>
+        <PlainText>Basic Section</PlainText>
+        <SectionTitle>Section Title</SectionTitle>
+        <PlainText>
+          Plain text. Page container got offset from top for header
+        </PlainText>
+      </BasicSection>
+    </PageContainer>
+  </>
 </ThemeProviderNative>
-;
 ```

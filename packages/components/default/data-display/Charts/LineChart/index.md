@@ -53,5 +53,5 @@ import LineChart from '.';
       title='Number of VRs + Physicals Trend'
     />
   </div>
-</>;
+</>
 ```

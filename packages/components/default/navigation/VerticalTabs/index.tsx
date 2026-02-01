@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 // Styled component for Badge
+/** @component */
 export const Badge = styled.span`
   background-color: ${({ theme }) => theme.colors.successBackground}; // Success background from theme
   color: ${({ theme }) => theme.colors.successText}; // Success text color from theme

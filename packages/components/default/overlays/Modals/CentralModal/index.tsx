@@ -1,7 +1,5 @@
-import type { FC } from "react";
 import React, { useState } from "react";
-import type { TWithBasicElementOffsets } from '@md/styles';
-import { withOffsetBottom, withOffsetsRight, withSpaceBetween } from '@md/styles';
+import { withSpaceBetween } from '@md/styles';
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
@@ -66,11 +64,11 @@ export const fadeOut = css`
   }
 
   opacity: 1;
-  animation: fadeOut 0.1 forwards;
+  animation: fadeOut 0.1s forwards;
 `;
 
 // Styled component for the modal container
-const ModalContainer = styled.div<{ $isClosing?: boolean }>`
+const ModalContainer = styled.div<{ $isClosing: boolean }>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -102,13 +100,13 @@ const ModalContainer = styled.div<{ $isClosing?: boolean }>`
 `;
 
 // Overlay styled component
-const Overlay = styled.div<{ $isClosing?: boolean }>`
+const Overlay = styled.div<{ $isClosing: boolean }>`
 position: fixed;
 top: 0;
 right: 0;
 bottom: 0;
 left: 0;
-background - color: rgba(0, 0, 0, 0.5);
+background-color: rgba(0, 0, 0, 0.5);
 cursor: pointer;
   ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
 `;
@@ -116,23 +114,23 @@ cursor: pointer;
 // Styled modal component
 const StyledModal = styled.div`
 background: transparent; // Let container background show through
-border - radius: inherit;
-width: 100 %;
-min - height: 100 %;
+border-radius: inherit;
+width: 100%;
+min-height: 100%;
 `;
 
 // Modal content container styled component
 const ModalContentContainer = styled.div`
 display: flex;
-flex - direction: column;
-align - items: flex - start;
+flex-direction: column;
+align-items: flex-start;
 gap: 1rem;
 padding: 24px; // same as in keystone
 `;
 
 // ModalProps interface
 
-export const CentralModal: FC = () => {
+export const CentralModal = () => {
   const { modalData, setModalData } = useModal();
   const [$isClosing, setIsClosing] = useState(false);
 

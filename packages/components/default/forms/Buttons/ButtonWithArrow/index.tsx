@@ -9,34 +9,58 @@ const ButtonWithArrowContainer = styled.div<{ $disabled?: boolean }>`
   display: flex;
   min-width: 300px;
   justify-content: space-between;
-  border: ${({ theme }) => `${theme.border.size}px solid ${theme.colors.overlay}`};
+  border: ${({ theme }) =>
+    `${theme?.border?.size || 1}px solid ${theme?.colors?.overlay || "gray"}`};
   border-radius: 12px;
-  padding: ${({ theme }) => theme.offsets.elementContent}; /* Using theme offset */
+  padding: ${({ theme }) =>
+    theme?.offsets?.elementContent || "8px"}; /* Using theme offset */
   cursor: pointer;
   color: ${({ $disabled, theme }) =>
-    $disabled ? theme.colors.disabled : theme.colors.sectionContent}; /* Text/icon color based on disabled state */
+    $disabled
+      ? theme?.colors?.disabled || "silver"
+      : theme?.colors?.sectionContent ||
+        "inherit"}; /* Text/icon color based on disabled state */
 
   /* Styles applied when the button is disabled */
   ${({ $disabled, theme }) =>
     $disabled &&
     `
-    border: ${theme.border.size}px solid ${theme.colors.overlayActive};
+    border: ${theme?.border?.size || 1}px solid ${theme?.colors?.overlayActive || "blue"};
     cursor: default;
   `}
 
   /* Hover styles */
   &:hover {
     text-decoration: underline;
-    border: ${({ theme }) => `${theme.border.size}px solid ${theme.colors.sectionContent}`};
+    border: ${({ theme }) =>
+      `${theme?.border?.size || 1}px solid ${theme?.colors?.sectionContent || "gold"}`};
 
     /* Override hover styles when disabled */
     ${({ $disabled, theme }) =>
-    $disabled &&
-    `
-    border: ${theme.border.size}px solid ${theme.colors.overlayActive};
+      $disabled &&
+      `
+    border: ${theme?.border?.size || 1}px solid ${theme?.colors?.overlayActive || "blue"};
     text-decoration: none;
   `}
   }
+
+  ${({ theme }) =>
+    theme?.theme === "viking" &&
+    `
+    border: ${theme?.border?.size || 1}px solid ${theme?.colors?.sectionContent || "gold"};
+    background-color: ${theme?.colors?.section || "black"};
+
+    span { color: ${theme?.colors?.sectionContent || "gold"}; }
+
+    &:hover {
+      border: ${theme?.border?.size || 1}px solid ${theme?.colors?.overlayActive || "white"};
+    }
+  `}
+`;
+
+const ArrowIcon = styled(LucideIcon)`
+  width: ${({ theme }) => (theme as any)?.elements?.buttons?.arrow?.size || 24}px;
+  height: ${({ theme }) => (theme as any)?.elements?.buttons?.arrow?.size || 24}px;
 `;
 
 interface ButtonWithArrowProps {
@@ -51,17 +75,11 @@ export const ButtonWithArrow: React.FC<ButtonWithArrowProps> = ({
   children,
   disabled,
 }) => {
-  const theme = useTheme(); // Access theme values
-
   return (
     <ButtonWithArrowContainer onClick={onClick} $disabled={disabled}>
       {children}
       {/* Icon with size from theme, color inherited from container */}
-      <LucideIcon
-        name="ChevronRight"
-        width={theme.elements.icons.width}
-        height={theme.elements.icons.height}
-      />
+      <ArrowIcon name="ChevronRight" />
     </ButtonWithArrowContainer>
   );
 };

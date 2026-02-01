@@ -8,4 +8,5 @@ const Avatar = styled.img`
   border-radius: ${({ theme }) => theme.border.circle};
 `;
 
+/** @component */
 export default Avatar;

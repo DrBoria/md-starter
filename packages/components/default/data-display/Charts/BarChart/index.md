@@ -43,5 +43,5 @@ import BarChart from '.';
       yAxisTooltipName='yAxis'
     />
   </div>
-</>;
+</>
 ```

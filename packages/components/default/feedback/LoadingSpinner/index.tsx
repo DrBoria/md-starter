@@ -37,15 +37,15 @@ const Container = styled.div`
 
 // Loader styled with theme values
 export const Loader = styled.div<
-  { color?: string; size: "small" | "large" } & TWithBasicElementOffsets
+  { $color?: string; $size: "small" | "large" } & TWithBasicElementOffsets
 >`
-  border-width: ${({ size }) => (size === "small" ? "0.25rem" : "0.5rem")}; // Size-specific border width
+  border-width: ${({ $size }) => ($size === "small" ? "0.25rem" : "0.5rem")}; // Size-specific border width
   border-style: solid;
-  border-color: ${({ color, theme }) =>
-    `${color || theme.colors.labelBackground} ${color || theme.colors.labelBackground} ${color || theme.colors.labelBackground} ${theme.colors.labelBackground
+  border-color: ${({ $color, theme }) =>
+    `${$color || theme.colors.labelBackground} ${$color || theme.colors.labelBackground} ${$color || theme.colors.labelBackground} ${theme.colors.labelBackground
     }33`}; // Theme-based color with transparency
-  width: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")}; // Size-specific width
-  height: ${({ size }) => (size === "small" ? "1rem" : "3.625rem")}; // Size-specific height
+  width: ${({ $size }) => ($size === "small" ? "1rem" : "3.625rem")}; // Size-specific width
+  height: ${({ $size }) => ($size === "small" ? "1rem" : "3.625rem")}; // Size-specific height
   border-radius: 50%;
   position: relative;
   animation: ${spinAnimation} 1.5s linear infinite; // Spin animation
@@ -58,7 +58,7 @@ const LoadingSpinner = ({ text }: { text?: string | boolean }) => {
   return (
     <Container>
       {text && <SubTitle>{text}</SubTitle>}
-      <Loader size="large" />
+      <Loader $size="large" />
     </Container>
   );
 };

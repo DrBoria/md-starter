@@ -13,5 +13,5 @@ import PieChart from '.';
       ]}
     />
   </div>
-</>;
+</>
 ```

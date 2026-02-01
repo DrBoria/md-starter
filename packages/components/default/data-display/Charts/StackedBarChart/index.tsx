@@ -5,7 +5,7 @@ import type { TProps } from './types';
 
 const StackedBarChart = ({ data, variant, referenceLine, ...props }: TProps) => {
   return (
-    <Wrapper variant={variant} referenceLine={referenceLine} {...props}>
+    <Wrapper $variant={variant} $referenceLine={referenceLine} {...props}>
       <BarChart width={500} height={300} data={data} layout='vertical'>
         <XAxis type='number' hide />
         <YAxis dataKey='name' type='category' />

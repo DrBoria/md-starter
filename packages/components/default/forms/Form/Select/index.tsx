@@ -13,7 +13,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
+const SelectedValueWrapper = styled.div<{ $readOnly: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,10 +24,10 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
   border-color: ${({ theme }) => theme.colors.labelBackground};
   color: ${({ theme }) => theme.colors.sectionContent};
   background-color: ${({ theme }) => theme.colors.section};
-  cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
+  cursor: ${({ $readOnly }) => ($readOnly ? "default" : "pointer")};
 
-  ${({ readOnly, theme }) =>
-    readOnly &&
+  ${({ $readOnly, theme }) =>
+    $readOnly &&
     `
     background-color: ${theme.colors.section};
     border-color: ${theme.colors.section};
@@ -37,20 +37,22 @@ const SelectedValueWrapper = styled.div<{ readOnly: boolean }>`
   /* VIKING THEME OVERRIDE */
   ${({ theme }) => theme.theme === 'viking' && css`
     background-color: ${theme.colors.section}; /* Stone lighter */
-    background-image: ${theme.colors.effects?.texture};
+    background-image: ${theme.effects?.texture};
     color: ${theme.colors.sectionContent};
     
-    /* Cut corners */
-    clip-path: ${theme.colors.geometry?.cut}; 
+    /* Ragged corners */
+    clip-path: ${theme.geometry?.ragged}; 
     
     /* Border implied by inset shadow */
-    box-shadow: inset 0 0 0 1px ${theme.colors.disabled};
+    box-shadow: 
+      inset 0 0 0 1px ${theme.colors.disabled},
+      ${theme.effects?.depth?.inner?.medium};
     
     border: none;
 
     &:hover {
-      /* Glow on hover */
-      box-shadow: inset 0 0 0 1px ${theme.colors.highlighted}, ${theme.colors.effects?.glow?.soft};
+      /* Subtle Glow on hover */
+      box-shadow: inset 0 0 0 1px ${theme.colors.highlighted}, ${theme.effects?.glow?.soft};
       color: ${theme.colors.highlighted};
     }
   `}
@@ -75,12 +77,12 @@ const Dropdown = styled.ul`
   /* VIKING THEME OVERRIDE */
   ${({ theme }) => theme.theme === 'viking' && css`
     background-color: ${theme.colors.section};
-    background-image: ${theme.colors.effects?.texture};
+    background-image: ${theme.effects?.texture};
     border: 1px solid ${theme.colors.disabled};
     border-top: none;
     
     /* Floating effect */
-    box-shadow: ${theme.colors.effects?.depth?.outer?.medium};
+    box-shadow: ${theme.effects?.depth?.outer?.medium};
     
     /* Decorative Knot Pattern Top */
     &::before {
@@ -88,7 +90,7 @@ const Dropdown = styled.ul`
         display: block;
         height: 6px;
         width: 100%;
-        background-image: ${theme.colors.assets?.knotPattern};
+        background-image: ${theme.assets?.knotPattern};
         background-repeat: repeat-x;
         opacity: 0.5;
         margin-bottom: 4px;
@@ -118,7 +120,7 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
     &:hover {
       background-color: ${theme.colors.highlighted};
       color: ${theme.colors.highlightedText};
-      box-shadow: ${theme.colors.effects?.glow?.medium};
+      box-shadow: ${theme.effects?.glow?.medium};
     }
   `}
 `;
@@ -135,13 +137,13 @@ const NoOptions = styled.li`
   color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
-const ClearButton = styled.button<{ readOnly: boolean }>`
+const ClearButton = styled.button<{ $readOnly: boolean }>`
   background: none;
   border: none;
-  cursor: ${({ readOnly }) => (readOnly ? "default" : "pointer")};
+  cursor: ${({ $readOnly }) => ($readOnly ? "default" : "pointer")};
   margin-left: 5px;
   font-size: 16px;
-  color: ${({ readOnly, theme }) => (readOnly ? theme.colors.labelBackground : "inherit")};
+  color: ${({ $readOnly, theme }) => ($readOnly ? theme.colors.labelBackground : "inherit")};
 `;
 
 const Separator = styled.div`
@@ -242,12 +244,12 @@ const Select: React.FC<SelectProps> = ({
         onClick={handleToggleDropdown}
         onKeyDown={handleKeyDown}
         tabIndex={0}
-        readOnly={readOnly}
+        $readOnly={readOnly}
       >
         {value ? value.label : <Placeholder>{placeholder}</Placeholder>}
         <IconsContainer>
           {isClearable && value && (
-            <ClearButton onClick={handleClear} readOnly={readOnly}>
+            <ClearButton onClick={handleClear} $readOnly={readOnly}>
               <LucideIcon name="X" />
             </ClearButton>
           )}
@@ -289,3 +291,4 @@ const Select: React.FC<SelectProps> = ({
 };
 
 export { Select };
+export default Select;

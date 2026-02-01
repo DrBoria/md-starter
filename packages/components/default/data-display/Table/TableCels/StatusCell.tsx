@@ -7,7 +7,7 @@ type TStatusCellProps = {
 
 const StatusCell = ({ status, align, ...props }: TStatusCellProps) => {
   return (
-    <StyledTextCell align={align} {...props}>
+    <StyledTextCell $align={align}>
       {status}
     </StyledTextCell>
   );

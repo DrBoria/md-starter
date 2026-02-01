@@ -9,17 +9,17 @@ const CodeEditor = dynamic(() => import("@uiw/react-textarea-code-editor"), {
   ssr: false,
 });
 
-const CodeEditorContainer = styled.div<{ $fullHeigh?: boolean }>`
+const CodeEditorContainer = styled.div<{ $fullHeight?: boolean }>`
   border-radius: 4px;
   margin-bottom: 4px;
   overflow: auto;
-  height: ${({ $fullHeigh }) => ($fullHeigh ? "100%" : "400px")};
+  height: ${({ $fullHeight }) => ($fullHeight ? "100%" : "400px")};
 
   pre {
     background-color: transparent;
   }
   div {
-    line-height: "1.9";
+    line-height: 1.9;
   }
 `;
 
@@ -68,7 +68,7 @@ const HtmlEditor = ({
 
   return (
     <>
-      <CodeEditorContainer $fullHeigh={fullHeight}>
+      <CodeEditorContainer $fullHeight={fullHeight}>
         <CodeEditor
           language="html"
           value={value}

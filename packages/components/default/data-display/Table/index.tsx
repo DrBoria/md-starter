@@ -44,10 +44,10 @@ const TableContainer = ({ children, headerCols, colsTemplate, pagination, rowsPe
 
   return (
     <div>
-      <Grid colsTemplate={colsTemplate}>
+      <Grid $colsTemplate={colsTemplate}>
         {/* Table Head */}
         {headerCols?.map(({ text, sort = () => { }, isSortable, align }) => (
-          <StyledHeaderCell key={text} onClick={sort} align={align}>
+          <StyledHeaderCell key={text} onClick={sort} $align={align}>
             <SubTitle>{text}</SubTitle>
             {isSortable && '⟠'}
           </StyledHeaderCell>

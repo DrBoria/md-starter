@@ -9,21 +9,21 @@ import { Link } from '../Link';
 
 const StyledLink = styled(Link) <TWithBasicElementOffsets>`
   background: transparent;
-  color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.offsets.betweenElements};
+  gap: ${({ theme }) => theme?.offsets?.betweenElements || '8px'};
   position: relative;
   text-decoration: none;
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  padding: ${({ theme }) => theme.offsets.elementContent};
-  border-bottom: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};
+  padding: ${({ theme }) => theme?.offsets?.elementContent || '8px'};
+  border-bottom: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
 
   &:hover {
     text-decoration: none;
-    background: ${({ theme }) => theme.colors.highlighted};
-    color: ${({ theme }) => theme.colors.highlightedText};
+    background: ${({ theme }) => theme?.colors?.highlighted || 'blue'};
+    color: ${({ theme }) => theme?.colors?.highlightedText || 'white'};
   }
 `;
 

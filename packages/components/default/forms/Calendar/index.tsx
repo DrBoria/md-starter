@@ -59,7 +59,7 @@ const Calendar = () => {
 
       // Add the cell to the calendar cells array
       calendarCells.push(
-        <DayCell key={index} className={cellClass}>
+        <DayCell key={currentDate.format('YYYY-MM-DD')} className={cellClass}>
           {formattedDate}
         </DayCell>
       );

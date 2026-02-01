@@ -186,14 +186,14 @@ export const ItemsList = ({
     };
 
     const fieldsToDisplay = fieldsToRender || getGQLFields(element);
-    const tableRow = fieldsToDisplay.map((gqlElement, index) => {
+    const tableRow = fieldsToDisplay.map((gqlElement) => {
       const linkToElement = linkPrefix
         ? `${linkPrefix}/${element.id}`
         : `/${toKebabCase(listName)}s/${element.id}`;
       // Switch between editable cell (on double click text becomes input with value) and non editable (plain text without options to edit on this page)
       return isEditable ? (
         <EditableCell
-          key={index}
+          key={gqlElement}
           gqlElement={gqlElement}
           element={element}
           itemGetter={itemGetter}
@@ -202,11 +202,11 @@ export const ItemsList = ({
         />
       ) : (
         <ViewCell
-          key={index}
+          key={gqlElement}
           gqlElement={gqlElement}
           element={element}
           list={list}
-          linkTo={index === 0 ? linkToElement : ""}
+          linkTo={fieldsToDisplay.indexOf(gqlElement) === 0 ? linkToElement : ""}
         />
       );
     });
@@ -406,7 +406,7 @@ export const ItemsList = ({
       <Table>
         <Loading hidden={!isLoading} />
         {/* TABLE HEADER */}
-        <Row withFullSupport={withFullSupport}>
+        <Row $withFullSupport={withFullSupport}>
           {/* GLOBAL SELECT */}
           {withFullSupport && (
             <Checkbox
@@ -419,7 +419,7 @@ export const ItemsList = ({
             </Checkbox>
           )}
 
-          {fieldsToRender?.map((element, index) => {
+          {fieldsToRender?.map((element) => {
             // It's not possible to sort relations, files etc.
             const fieldType = getFieldType(list.fields[element]);
             const isSortable = ["boolean", "number", "string", "date"].includes(
@@ -433,7 +433,7 @@ export const ItemsList = ({
 
             return (
               <HeaderCell
-                key={index}
+                key={element}
                 isSortable={isSortable}
                 sortOrder={orderBy?.[element]}
                 onSortChange={() => isSortable && handleOrderBy(element)}
@@ -445,7 +445,7 @@ export const ItemsList = ({
 
           {/* Empty header cell for arrow column */}
           {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
-          <HeaderCell isSortable={false} onSortChange={() => { }}>
+          <HeaderCell key="arrow-column" isSortable={false} onSortChange={() => { }}>
             {null}
           </HeaderCell>
         </Row>
@@ -453,7 +453,7 @@ export const ItemsList = ({
         {/* TABLE BODY */}
         {Array.isArray(tableData) && tableData.length ? (
           tableData.map((element: IGraphQLObject) => (
-            <Row key={element.id} withFullSupport={withFullSupport}>
+            <Row key={element.id} $withFullSupport={withFullSupport}>
               {/* SELECT CHECKBOX */}
               {withFullSupport && (
                 <Checkbox

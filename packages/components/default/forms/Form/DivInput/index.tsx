@@ -21,31 +21,31 @@ const InputWrapper = styled.div`
 `;
 
 // Контейнер для редактируемого инпута
-const StyledInputContainer = styled.div<{ isFocused: boolean }>`
+const StyledInputContainer = styled.div<{ $isFocused: boolean }>`
   position: absolute;
   overflow-x: hidden;
   width: 100%;
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
-  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.labelBackground};
-  font-size: ${({ theme }) => theme.font.size};
-  font-family: ${({ theme }) => theme.font.family.text};
+  padding: ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile || 8}px;
+  border-radius: ${({ theme }) => theme?.variables?.border?.radius || 4}px;
+  border: ${({ theme }) => theme?.variables?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
+  font-size: ${({ theme }) => theme?.font?.size || '1rem'};
+  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors.section};
-  color: ${({ theme }) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
+  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
   outline: none;
   transition: border-color 0.3s ease;
   cursor: text;
   white-space: nowrap;
 
   // Стили при фокусе
-  ${({ isFocused, theme }) =>
-    isFocused && `border-color: ${theme.colors.highlighted};`}
+  ${({ $isFocused, theme }) =>
+    $isFocused && `border-color: ${theme?.colors?.highlighted || 'blue'};`}
 
   // Стили плейсхолдера
   &:empty:before {
     content: attr(data-placeholder);
-    color: ${({ theme }) => theme.colors.labelBackground};
+    color: ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
   }
 
   // Маскировка пароля
@@ -80,7 +80,6 @@ const InputField: React.FC<InputFieldProps> = ({
   placeholder,
   style,
   readOnly,
-  ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -128,9 +127,8 @@ const InputField: React.FC<InputFieldProps> = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={onKeyDown}
-        isFocused={isFocused}
+        $isFocused={isFocused}
         style={style}
-        {...rest}
       />
     </InputWrapper>
   );

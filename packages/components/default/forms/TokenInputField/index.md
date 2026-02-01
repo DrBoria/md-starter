@@ -60,5 +60,5 @@ import { TokenInputField } from ".";
       );
     })()}
   </div>
-</>;
+</>
 ```

@@ -1,28 +1,45 @@
 import { ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
 
+import { basicFont } from '../../Typography';
+
 import type { TComponentProps } from './types';
 
+export const NameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: ${({ theme }) => theme.offsets.betweenElements};
+`;
+
+export const ColoredDot = styled.div`
+  ${({ theme: { border, offsets, colors } }) => `
+    background: ${colors.section};
+    border-radius: ${border.circle};
+    width: ${offsets.betweenElements};
+    height: ${offsets.betweenElements};
+    margin-right: ${offsets.betweenElements};
+  `}
+`;
+
 export const Wrapper = styled(({ $variant, $referenceLine, ...props }: any) => <ResponsiveContainer {...props} />)<TComponentProps>`
-  ${({ theme: { colors } }) => `
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
-  background: ${colors.section};
+  border-radius: ${({ theme }) => theme.border.radius};
+  background: ${({ theme }) => theme.colors.section};
 
   .recharts-surface {
-    padding: 2rem 0rem 1rem 1rem;
+    padding: ${({ theme }) => theme.offsets.betweenElements};
   }
 
   .recharts-cartesian-axis-line {
-    stroke: ${colors.sectionContent};
+    stroke: ${({ theme }) => theme.colors.sectionContent};
   }
 
   .recharts-text {
-    color: ${colors.sectionContent};
-    font-size: 1.0625rem;
-    line-height: 1.5rem;
+    font: ${basicFont};
+    color: ${({ theme }) => theme.colors.sectionContent};
   }
 
   .recharts-cartesian-axis-tick-line {
@@ -34,8 +51,7 @@ export const Wrapper = styled(({ $variant, $referenceLine, ...props }: any) => <
   }
 
   .recharts-reference-line text {
-    font-size: 1.0625rem;
-    line-height: 1.5rem;
+    font: ${basicFont};
     font-weight: 600;
     text-align: right;
   }
@@ -46,20 +62,18 @@ export const Wrapper = styled(({ $variant, $referenceLine, ...props }: any) => <
 
   circle {
     visibility: hidden;
+
     :first-child,
     :last-child {
       visibility: visible;
       r: 0.45rem;
       fill-opacity: 1;
       stroke-width: 2;
-      stroke: ${colors.section};
+      stroke: ${({ theme }) => theme.colors.section};
     }
   }
 
   .recharts-layer path {
     stroke-width: 0.25rem;
   }
-  `}
 `;
-
-export default Wrapper;

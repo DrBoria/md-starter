@@ -70,7 +70,7 @@ const Breadcrumbs: React.FC<{ items: Breadcrumb[] }> = ({ items }) => {
       {items.length >= 1 && <ChevronIcon name="ChevronRight" />}
 
       {items.map((item, index) => (
-        <React.Fragment key={index}>
+        <React.Fragment key={item.link || item.label}>
           {item.link ? (
             <BreadcrumbLink href={item.link}>{item.label}</BreadcrumbLink>
           ) : (

@@ -1,4 +1,3 @@
-import type { ReactElement} from "react";
 import React, { useState } from "react";
 import {
   FieldContainer,
@@ -6,69 +5,25 @@ import {
   FieldLabel,
 } from "@keystone-ui/fields";
 import styled from "styled-components";
-import type { JSONValue } from "@md/types";
 import { Input } from "../Form";
 import { Button } from "../Button";
-
-
-type FilterTypeDeclaration<Value extends JSONValue> = {
-  readonly label: string
-  readonly initialValue: Value
-}
-
-export type FilterTypeToFormat<Value extends JSONValue> = {
-  readonly type: string
-  readonly label: string
-  readonly value: Value
-}
-
-export type FieldController<FormState, FilterValue extends JSONValue = never> = {
-  path: string
-  label: string
-  description: string | null
-  graphqlSelection: string
-  defaultValue: FormState
-  deserialize: (item: unknown) => FormState
-  serialize: (formState: FormState) => unknown
-  validate?: (formState: FormState) => boolean
-  filter?: {
-    types: Record<string, FilterTypeDeclaration<FilterValue>>
-    graphql(type: { type: string, value: FilterValue }): Record<string, unknown>
-    Label(type: FilterTypeToFormat<FilterValue>): string | ReactElement | null
-    Filter(props: {
-      type: string
-      value: FilterValue
-      onChange(value: FilterValue): void
-      autoFocus?: boolean
-    }): ReactElement | null
-  }
-}
-
-
-interface TokenInputFieldProps {
-  field: FieldController<{ inner: { value: string } }, string>;
-  value?: string;
-  onChange?: (value: string) => void;
-  autoFocus?: boolean;
-  readOnly?: boolean;
-}
 
 const FlexContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const TokenInputField: React.FC<TokenInputFieldProps> = ({
+const TokenInputField = ({
   field,
   value,
   onChange,
   autoFocus,
   readOnly,
 }) => {
-  const [showSecret, setShowSecret] = useState<boolean>(false);
+  const [showSecret, setShowSecret] = useState(false);
   const toggleShowSecret = () => setShowSecret(!showSecret);
   const inputType = showSecret ? "text" : "password";
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event) => {
     onChange && onChange(event.target.value);
   };
 

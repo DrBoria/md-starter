@@ -1,5 +1,4 @@
-// NativeSidebarItem.tsx
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components/native';
 import { useLocation, useNavigate } from 'react-router-native';
 import { TouchableOpacity } from 'react-native';
@@ -17,7 +16,7 @@ const StyledTouchable = styled(TouchableOpacity)`
   width: 100%;
 `;
 
-const StyledText = styled(PlainText) <{ isSelected: boolean }>`
+const StyledText = styled(PlainText)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -28,8 +27,8 @@ const StyledText = styled(PlainText) <{ isSelected: boolean }>`
   border-bottom-width: ${({ theme }) => theme.border.size}px;
   border-bottom-color: ${({ theme }) => theme.colors.sectionContent};
   
-  ${({ theme, isSelected }) =>
-    isSelected ? css`
+  ${({ $isSelected }) =>
+    $isSelected ? css`
     background: ${({ theme }) => theme.colors.highlighted};
     color: ${({ theme }) => theme.colors.highlightedText};
     ` : css`
@@ -39,14 +38,7 @@ const StyledText = styled(PlainText) <{ isSelected: boolean }>`
   };
 `;
 
-type MenuItemProps = {
-  href: string;
-  onPress?: () => void;
-  children: ReactNode;
-  isSelected?: boolean;
-};
-
-export const MenuItem = ({ href, onPress, children, isSelected: _isSelected }: MenuItemProps) => {
+export const MenuItem = ({ href, onPress, children, isSelected: _isSelected }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -56,7 +48,7 @@ export const MenuItem = ({ href, onPress, children, isSelected: _isSelected }: M
 
   return (
     <StyledTouchable onPress={handlePress}>
-      <StyledText isSelected={isSelected}>
+      <StyledText $isSelected={isSelected}>
         {children}
       </StyledText>
     </StyledTouchable>

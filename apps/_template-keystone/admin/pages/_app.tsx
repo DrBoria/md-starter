@@ -1,5 +1,5 @@
 import React from 'react';
-import KeystoneApp from '../../.keystone/admin/pages/_app.js';
+import KeystoneAppModule from '../../.keystone/admin/pages/_app';
 import { LoggerProvider, ModalProvider } from '@md/components/keystone';
 import { CentralModal, FullScreenModal } from '@md/components';
 import { SideBarModal } from '@md/sections/keystone';
@@ -9,6 +9,8 @@ import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql';
 import type { AppProps } from 'next/app';
 
+const KeystoneApp = (KeystoneAppModule as { default?: React.ElementType }).default || (KeystoneAppModule as React.ElementType);
+
 function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
     // @ts-ignore
     const Wrapped = (props) => (
@@ -17,10 +19,12 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
                 <GlobalStyles />
                 <LoggerProvider>
                     <ModalProvider>
-                        <FullScreenModal />
-                        <SideBarModal />
-                        <CentralModal />
-                        <Component {...props} />
+                        <>
+                            <FullScreenModal />
+                            <SideBarModal />
+                            <CentralModal />
+                            <Component {...props} />
+                        </>
                     </ModalProvider>
                 </LoggerProvider>
             </ThemeProvider>

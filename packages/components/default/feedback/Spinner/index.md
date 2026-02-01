@@ -21,5 +21,5 @@ import { Loader } from ".";
     <h2>Custom Styled Loader</h2>
     <Loader size="medium" className="text-blue-500" />
   </div>
-</>;
+</>
 ```

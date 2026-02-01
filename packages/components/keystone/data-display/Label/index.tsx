@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { LucideIcon, type IconName } from "../../../default/common/Icons";
+import { LucideIcon } from "../../../default/common/Icons";
 
 const LabelContainer = styled.div`
   font-size: 0.875rem;
@@ -47,14 +47,7 @@ const CloseButton = styled.button`
   }
 `;
 
-interface LabelProps {
-  icon?: IconName;
-  children: React.ReactNode;
-  className?: string;
-  onClose?: () => void;
-}
-
-export const Label: React.FC<LabelProps> = ({
+export const Label = ({
   icon,
   children,
   className,
