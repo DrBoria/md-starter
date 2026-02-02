@@ -7,7 +7,7 @@ import { CustomNavigation } from './components/CustomNavigation';
 function CustomLogo() {
     return (
         <React.Fragment>
-            <Logo variant="light" />
+            <Logo />
             <H3>MD Admin</H3>
         </React.Fragment>
     );

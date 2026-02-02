@@ -1,10 +1,11 @@
 import { list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 
-type Lists = any;
+import type { TOperation } from "../types";
 import { ALLOW_ROLES_MANAGEMENT } from "../env";
-import { isAdmin, isOwner } from "./access-control/roles";
-import { createdAt } from "./fields/createdAt";
+
+import { isAdmin } from "./utils/access";
+import { createdAt } from "./utils/fields";
 
 export const Role = list<any>({
   access: {
@@ -26,11 +27,6 @@ export const Role = list<any>({
         if (ALLOW_ROLES_MANAGEMENT === "allow") return true;
 
         if (isAdmin(...context)) return true;
-
-        // Owner can see all but Admin roles
-        if (isOwner(...context)) {
-          return { name: { not: { equals: "Admin" } } };
-        }
 
         // The other people can't see roles
         return false;

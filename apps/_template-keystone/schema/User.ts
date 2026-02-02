@@ -6,40 +6,40 @@ import {
   text,
 } from "@keystone-6/core/fields";
 
-type Lists = any;
-import {
-  isAdmin,
-  isOwner,
-  isSameUser,
-  isViewer,
-} from "./access-control/roles";
-import { createdAt } from "./fields/createdAt";
+import type { TOperation } from "../types";
 import { ALLOW_ROLES_MANAGEMENT } from "../env";
+
+import { isAdmin, isSameUser, isBanned } from "./utils/access";
+
+import { paymentFields } from "./payments";
+import { createdAt } from "./utils/fields";
+
 
 // NOTE: If you change title of this table - change title in signin page - admin/pages/signin.tsx
 export const User = list<any>({
   access: {
     operation: {
       query: () => true,
-      create: (data) => !isViewer(data),
-      update: (data) => !isViewer(data),
-      delete: (data) => !isViewer(data),
+
+      create: () => true,
+      update: (data) => isAdmin(data) || isSameUser(data),
+      delete: (data) => isAdmin(data),
     },
     filter: {
       query: ({ session }) => {
         // Flag/Env variable to set first admin
         if (ALLOW_ROLES_MANAGEMENT === "allow") return true;
 
-        return isAdmin({ session }) || isOwner({ session });
+        return isAdmin({ session }) || isSameUser({ session });
       },
       update: ({ session }) => {
         // Flag/Env variable to set first admin
         if (ALLOW_ROLES_MANAGEMENT === "allow") return true;
 
-        return isAdmin({ session }) || isOwner({ session });
+        return isAdmin({ session }) || isSameUser({ session });
       },
       delete: ({ session }) => {
-        return isAdmin({ session }) || isOwner({ session });
+        return isAdmin({ session });
       },
     },
   },
@@ -62,15 +62,15 @@ export const User = list<any>({
       ui: {
         itemView: {
           fieldMode: (data) =>
-            isAdmin(data) || isOwner(data) ? "edit" : "hidden",
+            isAdmin(data) || isSameUser(data) ? "edit" : "hidden",
         },
       },
     }),
-    locked: checkbox({
+    banned: checkbox({
       ui: {
         itemView: {
           fieldMode: (data) =>
-            isAdmin(data) || isOwner(data) ? "edit" : "hidden",
+            isAdmin(data) ? "edit" : "hidden",
         },
       },
     }),
@@ -83,7 +83,6 @@ export const User = list<any>({
           fieldMode: (data) => {
             if (
               isAdmin(data) ||
-              isOwner(data) ||
               ALLOW_ROLES_MANAGEMENT === "allow"
             ) {
               // We don't want to allow same user change it's role
@@ -96,12 +95,13 @@ export const User = list<any>({
               }
               return "edit";
             }
-            // Non admin and non owner users can't see it's roles
+            // Non admin users can't see it's roles
             return "hidden";
           },
         },
       },
     }),
+    ...paymentFields,
     createdAt: createdAt(),
   },
 
@@ -109,7 +109,7 @@ export const User = list<any>({
     labelField: "email",
     itemView: {
       defaultFieldMode: (data) =>
-        !isAdmin(data) || !isOwner(data) ? "read" : "edit",
+        isAdmin(data) || isSameUser(data) ? "edit" : "read",
     },
   },
 });

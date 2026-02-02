@@ -1,14 +1,13 @@
 import { list } from "@keystone-6/core";
+import path from "path";
 import {
   checkbox,
   text,
 } from "@keystone-6/core/fields";
 
 type Lists = any; type PostWhereInput = any;
-import { createdAt } from "./fields/createdAt";
-import { updatedAt } from "./fields/updatedAt";
-import { isAdmin } from "./access-control/roles";
-import { Text } from "@md/sections/keystone";
+import { createdAt, updatedAt } from "./utils/fields";
+import { isAdmin } from "./utils/access";
 
 export const Post = list<any>({
   access: {
@@ -44,8 +43,12 @@ export const Post = list<any>({
       db: {
         map: "text_content",
       },
+      ui: {
+        views: path.resolve(__dirname, "../admin/components/CustomFields/Text/views"),
+      },
     }),
-    updateAt: updatedAt(),
+
+    updatedAt: updatedAt(),
     createdAt: createdAt(),
   },
   ui: {

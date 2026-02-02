@@ -7,17 +7,15 @@ async function seedDefaultRoles() {
     // Check if roles exist
     const existingRoles = await prisma.role.findMany();
     if (
-      !existingRoles.some((role) =>
-        ["Admin", "Owner", "Editor", "Viewer"].includes(role.name),
+        !existingRoles.some((role) =>
+        ["Admin", "User"].includes(role.name),
       )
     ) {
       // Insert default roles if they don't exist
       await prisma.role.createMany({
         data: [
           { name: "Admin" },
-          { name: "Owner" },
-          { name: "Editor" },
-          { name: "Viewer" },
+          { name: "User" },
         ],
       });
       console.log("Default roles seeded successfully.");

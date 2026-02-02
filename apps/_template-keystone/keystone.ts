@@ -1,4 +1,5 @@
 import path from "path";
+import * as fs from "fs";
 import { config, list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 import type { KeystoneContext } from '@keystone-6/core/types';
@@ -6,7 +7,7 @@ import { session, withAuth } from "./auth";
 import { APP_PORT, DATABASE_URL, APP_HOST } from "./env";
 import { lists } from "./schema";
 import express from "express";
-import { isLocked } from "./schema/access-control/isLocked";
+import { isBanned } from "./schema/utils/access";
 
 export default withAuth(
   config({
@@ -29,8 +30,10 @@ export default withAuth(
       provider: "postgresql",
       url: DATABASE_URL,
       enableLogging: ["error", "warn", "info", 'query'],
+      prismaSchemaPath: "schema/schema.prisma",
     },
     graphql: {
+      schemaPath: "schema/schema.graphql",
       apolloConfig: {
         allowBatchedHttpRequests: true,
       }
@@ -59,14 +62,18 @@ export default withAuth(
       }
     },
     ui: {
-      isAccessAllowed: (context) => !isLocked(context), // Disable admin view if user is locked
+      isAccessAllowed: (context) => !isBanned(context),
       getAdditionalFiles: [
         () => {
+          const localFavicon = path.join(process.cwd(), "public", "favicon.ico");
+          const defaultFavicon = path.join(process.cwd(), "../../packages/components/default/assets/favicon.ico");
+          const inputPath = fs.existsSync(localFavicon) ? localFavicon : defaultFavicon;
+
           return [
             {
               mode: "copy",
-              inputPath: path.join(__dirname, "..", "public", "favicon.ico"), // Path relative to current file
-              outputPath: "public/favicon.ico", // Output in the 'public' directory
+              inputPath,
+              outputPath: "public/favicon.ico",
             },
           ];
         },

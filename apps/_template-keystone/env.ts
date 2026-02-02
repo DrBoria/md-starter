@@ -23,7 +23,7 @@ const SITE_URL =
     ? `http://${APP_HOST}:${APP_PORT}`
     : `https://${APP_HOST}`;
 
-const DATABASE_URL = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_ENDPOINT}:${DB_PORT}/${DB_NAME}`;
+const DATABASE_URL = process.env.DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_ENDPOINT}:${DB_PORT}/${DB_NAME}`;
 
 // Export environment variables
 export {

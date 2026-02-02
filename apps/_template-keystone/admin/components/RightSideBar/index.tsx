@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
-import { PageTitle, SubTitle, useModal } from "@md/components/keystone";
+import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
+import type { TSideBarModalDataKeystone } from "../../../types";
 
 const slideInAnimation = css`
   @keyframes slideInAnimation {
@@ -65,7 +66,7 @@ export const fadeOut = css`
   animation: fadeOut 0.1 forwards;
 `;
 
-const SideBarModalContainer = styled.div<{ $isClosing?: boolean }>`
+const RightSideBarContainer = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
@@ -88,7 +89,7 @@ const Overlay = styled.div<{ $isClosing?: boolean }>`
   ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
 `;
 
-const StyledSideBarModal = styled.div`
+const StyledRightSideBar = styled.div`
   background: ${({ theme }) => theme.colors.section};
   border-radius: ${({ theme }) => theme.colors.borderRadius || '4px'};
   width: 100%;
@@ -96,7 +97,7 @@ const StyledSideBarModal = styled.div`
   backdrop-filter: var(--glass-effect);
 `;
 
-const SideBarModalContentContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -109,11 +110,7 @@ const TitleContainer = styled.div`
   padding: 7px 20px; // Alignment to the height of keystone header
 `;
 
-import type { TSideBarModalDataKeystone } from "@/admin/types";
-
-// ...
-
-export const SideBarModal = () => {
+export const RightSideBar = () => {
   const { sideBarModalData: rawSideBarModalData, setSideBarModalData } = useModal();
   const sideBarModalData = rawSideBarModalData as TSideBarModalDataKeystone;
   const [$isClosing, setIsClosing] = React.useState(false);
@@ -131,7 +128,7 @@ export const SideBarModal = () => {
 
   const modalViews: Record<string, React.ReactNode> = {
     create: (
-      <SideBarModalContentContainer>
+      <ContentContainer>
         {sideBarModalData.listName && (
           <CreateItemForm
             listName={sideBarModalData.listName}
@@ -143,10 +140,10 @@ export const SideBarModal = () => {
             buttons={sideBarModalData.buttons}
           />
         )}
-      </SideBarModalContentContainer>
+      </ContentContainer>
     ),
     edit: (
-      <SideBarModalContentContainer>
+      <ContentContainer>
         {sideBarModalData.listName && (
           <EditItemForm
             listName={sideBarModalData.listName}
@@ -158,39 +155,26 @@ export const SideBarModal = () => {
             tabs={sideBarModalData.tabs}
           />
         )}
-      </SideBarModalContentContainer>
-    ),
-    dataSource: (
-      <SideBarModalContentContainer>
-        <SubTitle>Select a source</SubTitle>
-        <span>
-          Choose where you want to import your contacts from.
-        </span>
-        {sideBarModalData.buttons?.map((button, idx) => (
-          <React.Fragment key={idx}>
-            {button.view?.()}
-          </React.Fragment>
-        ))}
-      </SideBarModalContentContainer>
+      </ContentContainer>
     ),
     custom: (
-      <SideBarModalContentContainer>
+      <ContentContainer>
         {sideBarModalData.children}
-      </SideBarModalContentContainer>
+      </ContentContainer>
     ),
   };
 
   return ReactDOM.createPortal(
     <>
       <Overlay onClick={onHide} $isClosing={$isClosing} />
-      <SideBarModalContainer $isClosing={$isClosing}>
-        <StyledSideBarModal>
+      <RightSideBarContainer $isClosing={$isClosing}>
+        <StyledRightSideBar>
           <TitleContainer>
             <PageTitle>{sideBarModalData.headerText}</PageTitle>
           </TitleContainer>
           {modalViews[sideBarModalData.type]}
-        </StyledSideBarModal>
-      </SideBarModalContainer>
+        </StyledRightSideBar>
+      </RightSideBarContainer>
     </>,
     document.body,
   );

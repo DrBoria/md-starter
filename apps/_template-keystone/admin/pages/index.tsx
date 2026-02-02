@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DashboardCard } from "../components/Cards/DashboardCard";
-import { DashboardCardsContainer } from "../components/Containers";
+import { DashboardCardsContainer } from "@md/components";
 import { PageTitle } from "@md/components";
 import { PageContainer } from "@md/sections/keystone";
 import { useQueryAdminMeta } from "@md/api/graphql";

@@ -80,14 +80,32 @@ const SafeNavigation = () => {
   }
 };
 
-const PageContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
+const LogoWrapper = styled.div`
+  height: 3rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+`;
+
+const PageContainer: React.FC<{ children: ReactNode; header?: ReactNode }> = ({ children, header }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <MDPageContainer>
       <PageWrapper>
         <Header>
-          <Logo />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <LogoWrapper>
+              <Logo />
+            </LogoWrapper>
+            {header}
+          </div>
           <HeaderToggle onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <XCircleIcon /> : <MenuIcon />}
           </HeaderToggle>

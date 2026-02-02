@@ -158,7 +158,7 @@ const pathToWhereParameters = (
 
   return Object.fromEntries(
     Object.entries(query)
-      .filter(([key]) => key !== "search")
+      .filter(([key]) => key !== "search" && key !== "listKey" && key !== "id")
       .map(([key, value]) => {
         const { field, condition } = parseConditionKey(key);
         if (!condition || !conditionMappingFunctions[condition]) {

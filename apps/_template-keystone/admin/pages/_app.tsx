@@ -1,7 +1,7 @@
 import React from 'react';
 import KeystoneAppModule from '../../.keystone/admin/pages/_app_original';
 import { LoggerProvider, ModalProvider, CentralModal, FullScreenModal } from '@md/components/keystone';
-import { SideBarModal } from '../components/Modals/SideBarModal';
+import { RightSideBar } from '../components/RightSideBar';
 import { dark, viking, liquidGlass, ThemeProvider, GlobalStyles } from '@md/styles';
 import type { ApolloClient } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
@@ -20,7 +20,7 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
                     <ModalProvider>
                         <>
                             <FullScreenModal />
-                            <SideBarModal />
+                            <RightSideBar />
                             <CentralModal />
                             <Component {...props} />
                         </>
@@ -42,7 +42,7 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
 //                 <LoggerProvider>
 //                     <ModalProvider>
 //                         <FullScreenModal />
-//                         <SideBarModal />
+//                         <RightSideBar />
 //                         <CentralModal />
 //                         <KeystoneApp {...props} />
 //                     </ModalProvider>
