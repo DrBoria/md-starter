@@ -70,7 +70,8 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
   }
 
   // Ensure name is valid key of LucideIcons
-  const IconComponent = LucideIcons[name];
+  // Ensure name is valid key of LucideIcons
+  const IconComponent = LucideIcons[name] as unknown as React.FC<LucideProps>;
 
   if (!IconComponent) {
     console.warn(`Lucide icon "${name}" not found`);
@@ -81,32 +82,34 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
   const isComponent = (val: unknown): val is React.ComponentType<unknown> => {
     if (!val) return false;
     if (typeof val === 'function') return true;
-    
-    const v = val as any;
-    if (typeof v === 'object' && (
-      v.$$typeof === Symbol.for('react.forward_ref') ||
-      v.$$typeof === Symbol.for('react.memo') ||
-      v.$$typeof === Symbol.for('react.lazy')
-    )) return true;
+
+    // Check for standard React component properties securely
+    if (typeof val === 'object' && val !== null) {
+      const v = val as { $$typeof?: symbol };
+      return (
+        v.$$typeof === Symbol.for('react.forward_ref') ||
+        v.$$typeof === Symbol.for('react.memo') ||
+        v.$$typeof === Symbol.for('react.lazy')
+      );
+    }
     return false;
   };
 
   if (!isComponent(IconComponent)) {
-     console.warn(`Lucide export "${name}" is not a valid React component`);
-     return null;
+    console.warn(`Lucide export "${name}" is not a valid React component`);
+    return null;
   }
 
   try {
     const { name: _name, size: _size, color: _color, iconPosition: _iconPosition, ...rest } = props as Record<string, unknown>;
-    
+
     // Only pass valid SVG/Lucide props to the icon component
-    return React.createElement(
-      IconComponent as any,
-      {
-        size: resolveIconSize(size),
-        color,
-        ...rest,
-      },
+    return (
+      <IconComponent
+        size={resolveIconSize(size)}
+        color={color}
+        {...rest}
+      />
     );
   } catch (error) {
     console.error(`Error rendering Lucide icon "${name}":`, error);

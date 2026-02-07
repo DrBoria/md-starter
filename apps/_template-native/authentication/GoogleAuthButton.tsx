@@ -1,6 +1,6 @@
 // GoogleAuthButton.tsx
 import React from 'react';
-import { Button } from '../../../packages/native';
+import { Button } from '@md/native';
 import { useGoogleAuth } from './useGoogleAuth';
 
 const GoogleAuthButton: React.FC = () => {
@@ -8,8 +8,8 @@ const GoogleAuthButton: React.FC = () => {
 
     return (
         <>
-            <Button onClick={signIn}>Google Sign In</Button>
-            <Button onClick={signOut}>Sign Out</Button>
+            <Button onClick={signIn} type="navigation">Google Sign In</Button>
+            <Button onClick={signOut} type="navigation">Sign Out</Button>
         </>
     );
 };

@@ -1,4 +1,6 @@
+
 import React, { useEffect, useRef, useState } from 'react';
+import type { TextInput } from 'react-native';
 import { SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { useAuthenticate } from '@md/api/graphql';
@@ -14,7 +16,7 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 const ErrorText = styled(SubTitle)`
-  color: red;
+  color: ${({ theme }) => theme.colors.error || 'red'};
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -31,7 +33,7 @@ const SigninPage = () => {
     useMutation
   });
 
-  const identityFieldRef = useRef(null);
+  const identityFieldRef = useRef<TextInput>(null);
 
   useEffect(() => {
     identityFieldRef.current?.focus();
@@ -84,11 +86,12 @@ const SigninPage = () => {
             onChangeText={(text) => setState({ ...state, secret: text })}
             secureTextEntry
           />
-          <Button onClick={onSubmit} disabled={loading}>Sign In</Button>
+          <Button onClick={onSubmit} disabled={loading} type="navigation">Sign In</Button>
         </BasicSection>
       </ContentContainer>
     </SafeAreaView>
   );
 };
+
 
 export default SigninPage;

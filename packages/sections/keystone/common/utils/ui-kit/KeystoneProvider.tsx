@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import React, { useEffect, useState } from "react";
 
-// @ts-ignore
-// import getApp from "../../../../../../apps/_template-keystone/admin/pages/_app";
+
 const getApp = null;
 
 import "./cssFixes.css";
@@ -61,17 +60,17 @@ const KeystoneProvider = ({ children }: TKeystoneProvider) => {
   const App = (() => {
     const rawApp = getApp as unknown;
     if (!rawApp) return null;
-    
-    const isComponent = (val: unknown): val is React.ElementType => 
+
+    const isComponent = (val: unknown): val is React.ElementType =>
       typeof val === 'function' || (!!val && typeof val === 'object' && 'render' in val);
 
     if (isComponent(rawApp)) return rawApp;
-    
+
     const moduleWithDefault = rawApp as { default?: unknown };
     if (moduleWithDefault.default && isComponent(moduleWithDefault.default)) {
       return moduleWithDefault.default;
     }
-    
+
     return null;
   })();
 
@@ -109,15 +108,15 @@ const KeystoneProvider = ({ children }: TKeystoneProvider) => {
       console.error('Keystone App component is missing or invalid:', getApp);
       return <>{child}</>;
     }
-    
+
     // Create a stable component for the child to avoid re-cloning on every render
     const Component = () => React.cloneElement(child as React.ReactElement);
-    
+
     return (
       <ErrorBoundary>
-        <App 
-          Component={Component} 
-          pageProps={childProps} 
+        <App
+          Component={Component}
+          pageProps={childProps}
         />
       </ErrorBoundary>
     );

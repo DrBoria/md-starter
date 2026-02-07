@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components/native';
 import { useLocation, useNavigate } from 'react-router-native';
 import { TouchableOpacity } from 'react-native';
-import { PlainText } from '../Typography';
-import { withOffsetBottom, withOffsetsRight } from '../helpers';
+import { PlainText } from '@md/native/components/Typography';
+import { withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
 
 const StyledTouchable = styled(TouchableOpacity)`
   background-color: transparent;
@@ -38,7 +38,7 @@ const StyledText = styled(PlainText)`
   };
 `;
 
-export const MenuItem = ({ href, onPress, children, isSelected: _isSelected }) => {
+export const MenuItem = ({ href, onPress, children, isSelected: _isSelected = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
 

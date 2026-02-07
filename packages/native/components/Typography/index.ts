@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 import styled from "styled-components/native";
-import type { TWithBasicElementOffsets} from "../helpers";
-import { withOffsetBottom, withOffsetsRight } from "../helpers";
+import type { TWithBasicElementOffsets } from "@md/native/components/helpers";
+import { withOffsetBottom, withOffsetsRight } from "@md/native/components/helpers";
 
 /**
  * @visibleName Typography
@@ -26,7 +26,7 @@ const sizes = {
   },
 };
 
-const PageTitle = styled(Text)<TWithBasicElementOffsets>`
+const PageTitle = styled(Text) <TWithBasicElementOffsets>`
   color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
   font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
   font-size: ${sizes.PageTitle.fontSize}px;
@@ -37,7 +37,7 @@ const PageTitle = styled(Text)<TWithBasicElementOffsets>`
   margin-bottom: ${withOffsetBottom}px;
 `;
 
-const SubTitle = styled(Text)<TWithBasicElementOffsets>`
+const SubTitle = styled(Text) <TWithBasicElementOffsets>`
   color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
   font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
   font-size: ${sizes.SubTitle.fontSize}px;
@@ -46,7 +46,7 @@ const SubTitle = styled(Text)<TWithBasicElementOffsets>`
   margin-bottom: ${withOffsetBottom}px;
 `;
 
-const SectionTitle = styled(Text)<TWithBasicElementOffsets>`
+const SectionTitle = styled(Text) <TWithBasicElementOffsets>`
   color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
   font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
   font-size: ${sizes.SectionTitle.fontSize}px;
@@ -57,7 +57,7 @@ const SectionTitle = styled(Text)<TWithBasicElementOffsets>`
   margin-bottom: ${withOffsetBottom}px;
 `;
 
-const PlainText = styled(Text)<TWithBasicElementOffsets>`
+const PlainText = styled(Text) <TWithBasicElementOffsets>`
   color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
   font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
   font-size: ${sizes.PlainText.fontSize}px;
@@ -66,12 +66,12 @@ const PlainText = styled(Text)<TWithBasicElementOffsets>`
   margin-bottom: ${withOffsetBottom}px;
 `;
 
-const Highlighted = styled(Text)<TWithBasicElementOffsets>`
+const Highlighted = styled(Text) <TWithBasicElementOffsets>`
   color: ${({ theme }) => theme?.colors?.highlighted || 'red'};
   font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
 `;
 
-const Label = styled(Text)<TWithBasicElementOffsets>`
+const Label = styled(Text) <TWithBasicElementOffsets>`
   font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
   padding: ${({ theme }) => (theme?.offsets?.elementContent ? theme.offsets.elementContent / 2 : 0)}px;
   color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};

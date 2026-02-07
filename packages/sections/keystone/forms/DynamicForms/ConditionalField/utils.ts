@@ -8,8 +8,7 @@ const getConditionalSubFieldsdNames = (
 ) => {
   if (!conditionalField || !value || !conditionalField[value]?.length)
     return [];
-  // @ts-ignore - TODO: fix after removing string from type
-  return conditionalField[value].map((subField) => subField.fieldName);
+  return (conditionalField[value] as Array<{ fieldName: string }>).map((subField) => subField.fieldName);
 };
 
 const getAllConditionalFieldsNames = (

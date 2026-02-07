@@ -1,17 +1,12 @@
 {
-    "extends": "./node.json",
+    "extends": "@md/tsconfig/base.json",
     "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "./*"
-            ]
-        },
-        "declaration": true,
-        "sourceMap": true
+        "outDir": "./dist",
+        "rootDir": "."
     },
     "include": [
-        "."
+        "**/*.ts",
+        "**/*.tsx"
     ],
     "exclude": [
         "node_modules",

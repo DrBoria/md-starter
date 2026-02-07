@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { useNavigate } from 'react-router-native';
-import { MenuItem } from '../MenuItem';
-import { SubTitle } from '../Typography';
+import { MenuItem } from '@md/native/components/MenuItem';
+import { SubTitle } from '@md/native/components/Typography';
 
 const { width, height } = Dimensions.get('window'); // Get screen dimensions
 

@@ -1,43 +1,28 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import styled from "styled-components";
-
-import { Button } from "../Button";
+import { Button } from "@md/components/default/forms/Button";
+import { CodeEditorContainer } from "./styles";
 
 // Dynamic import for CodeEditor to avoid SSR issues
 const CodeEditor = dynamic(() => import("@uiw/react-textarea-code-editor"), {
   ssr: false,
 });
 
-const CodeEditorContainer = styled.div<{ $fullHeight?: boolean }>`
-  border-radius: 4px;
-  margin-bottom: 4px;
-  overflow: auto;
-  height: ${({ $fullHeight }) => ($fullHeight ? "100%" : "400px")};
-
-  pre {
-    background-color: transparent;
-  }
-  div {
-    line-height: 1.9;
-  }
-`;
-
 type THtmlEditorProps = {
   initialValue: string;
   fullHeight?: boolean;
 } & (
-  | {
+    | {
       value?: string;
       setValue?: (newValue: string) => void;
-      onSave?: never; // Ensures onSave isn't used in this mode
+      onSave?: never;
     }
-  | {
+    | {
       onSave: (value: string) => void;
-      value?: never; // Ensures value/setValue aren't used in this mode
+      value?: never;
       setValue?: never;
     }
-);
+  );
 
 const HtmlEditor = ({
   initialValue,
@@ -62,7 +47,7 @@ const HtmlEditor = ({
   const handleSave = () => {
     onSave?.(value);
     if (!externalSetValue) {
-      setIsPristine(true); // Reset pristine state after saving
+      setIsPristine(true);
     }
   };
 

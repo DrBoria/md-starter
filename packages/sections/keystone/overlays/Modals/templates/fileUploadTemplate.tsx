@@ -8,7 +8,7 @@ import { TextArea } from "@md/components/keystone";
 import { HeaderText, PlainText } from "@md/components";
 
 const Dropzone = styled.div<{ $isDragActive: boolean }>`
-  border: 2px dashed #cccccc;
+  border: 2px dashed #ccc;
   background: #f9f9f9;
   padding: 40px;
   text-align: center;

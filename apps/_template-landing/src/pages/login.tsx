@@ -20,10 +20,12 @@ export default function Login() {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
-        const email = e.target.elements.email.value;
-        // @ts-ignore
-        const password = e.target.elements.password.value;
+        const target = e.target as typeof e.target & {
+            email: { value: string };
+            password: { value: string };
+        };
+        const email = target.email.value;
+        const password = target.password.value;
 
         const { data } = await authenticateMutation({
             email,

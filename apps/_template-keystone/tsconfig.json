@@ -1,26 +1,8 @@
 {
-  "extends": "@md/types/node.json",
+  "extends": "@md/tsconfig/next.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "outDir": "./dist",
     "baseUrl": ".",
-    "outDir": "dist",
     "paths": {
       "@/*": [
         "./*"
@@ -28,12 +10,8 @@
     }
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "admin/**/*.ts",
-    "admin/**/*.tsx",
-    ".keystone/**/*"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",

@@ -2,8 +2,10 @@ import type { CellComponent, FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
 
+// eslint-disable-next-line no-restricted-imports
 import type { Value } from "../utils/validate";
-import type { controller } from "../utils/viewStarter";
+// @ts-expect-error fix import path
+import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
 import {
@@ -14,7 +16,8 @@ import {
   Input,
   Label,
 } from "@md/components";
-import { validate } from "../utils/validate";
+// @ts-expect-error fix import path
+import { validate } from "@/admin/components/CustomFields/utils/validate";
 
 function Field({
   field,
@@ -37,7 +40,7 @@ function Field({
   const handleValidate = () => {
     const message = validate(
       value as unknown as Value,
-      // @ts-ignore remove ts-ignore after types fix in keystone
+      // @ts-expect-error remove ts-ignore after types fix in keystone
       field.validation,
       field.label,
     );

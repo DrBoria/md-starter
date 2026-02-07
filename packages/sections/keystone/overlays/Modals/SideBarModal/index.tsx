@@ -3,15 +3,16 @@ import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
 import { PageTitle, SubTitle, useModal } from "@md/components";
-import { CreateItemForm } from "../../../forms/CreateItemForm";
-import { EditItemForm } from "../../../forms/EditItemForm";
+import { CreateItemForm } from "@md/sections/keystone/forms/CreateItemForm";
+import { EditItemForm } from "@md/sections/keystone/forms/EditItemForm";
 
 const slideInAnimation = css`
-  @keyframes slideInAnimation {
+  @keyframes slide-in-animation {
     from {
       transform: translateX(100%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -19,15 +20,16 @@ const slideInAnimation = css`
   }
 
   opacity: 1;
-  animation: slideInAnimation 0.2s forwards;
+  animation: slide-in-animation 0.2s forwards;
 `;
 
 const slideOutAnimation = css`
-  @keyframes slideOutAnimation {
+  @keyframes slide-out-animation {
     from {
       transform: translateX(0);
       opacity: 1;
     }
+
     to {
       transform: translateX(100%);
       opacity: 0;
@@ -35,35 +37,37 @@ const slideOutAnimation = css`
   }
 
   opacity: 0;
-  animation: slideOutAnimation 0.2s forwards;
+  animation: slide-out-animation 0.2s forwards;
 `;
 
 export const fadeIn = css`
-  @keyframes fadeIn {
+  @keyframes fade-in {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
   }
 
   opacity: 0;
-  animation: fadeIn 0.2s forwards;
+  animation: fade-in 0.2s forwards;
 `;
 
 export const fadeOut = css`
-  @keyframes fadeOut {
+  @keyframes fade-out {
     from {
       opacity: 1;
     }
+
     to {
       opacity: 0;
     }
   }
 
   opacity: 1;
-  animation: fadeOut 0.1 forwards;
+  animation: fade-out 0.1 forwards;
 `;
 
 const SideBarModalContainer = styled.div<{ $isClosing?: boolean }>`
@@ -73,18 +77,15 @@ const SideBarModalContainer = styled.div<{ $isClosing?: boolean }>`
   width: 740px;
   height: 100%;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
   ${(props) =>
     props.$isClosing ? `${slideOutAnimation}` : `${slideInAnimation}`};
 `;
 
 const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
   cursor: pointer;
   ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
 `;
@@ -107,10 +108,10 @@ const SideBarModalContentContainer = styled.div`
 const TitleContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.highlighted || '#ccc'};
   width: 100%;
-  padding: 7px 20px; // Alignment to the height of keystone header
+  padding: 7px 20px; /* Alignment to the height of keystone header */
 `;
 
-import type { TSideBarModalDataKeystone } from "../types";
+import type { TSideBarModalDataKeystone } from "@md/sections/keystone/types";
 
 // ...
 

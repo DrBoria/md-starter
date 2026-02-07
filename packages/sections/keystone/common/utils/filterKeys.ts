@@ -1,8 +1,7 @@
-/* eslint-disable */
-const filterAllowedKeys = (
-  obj: Record<string, any>,
+const filterAllowedKeys = <T>(
+  obj: Record<string, T>,
   allowedKeys: string[],
-): Record<string, any> => {
+): Record<string, T> => {
   return Object.keys(obj).reduce(
     (acc, key) => {
       if (allowedKeys.includes(key)) {
@@ -10,14 +9,14 @@ const filterAllowedKeys = (
       }
       return acc;
     },
-    {} as Record<string, any>,
+    {} as Record<string, T>,
   );
 };
 
-const filterNotAllowedKeys = (
-  obj: Record<string, any>,
+const filterNotAllowedKeys = <T>(
+  obj: Record<string, T>,
   notAlowedKeys: string[],
-): Record<string, any> => {
+): Record<string, T> => {
   return Object.keys(obj).reduce(
     (acc, key) => {
       if (!notAlowedKeys.includes(key)) {
@@ -25,7 +24,7 @@ const filterNotAllowedKeys = (
       }
       return acc;
     },
-    {} as Record<string, any>,
+    {} as Record<string, T>,
   );
 };
 

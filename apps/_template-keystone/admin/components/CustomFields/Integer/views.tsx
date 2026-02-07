@@ -1,14 +1,17 @@
 import type { FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
 
-import type { Value } from "../utils/validate";
-import type { controller } from "../utils/viewStarter";
+// @ts-expect-error fix import path
+import type { Value } from "@/admin/components/CustomFields/utils/validate";
+// @ts-expect-error fix import path
+import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { BasicSection, DescriptionText, Input, Label } from "@md/components";
 import {
   ErrorValidationContainer,
   ErrorValidationMessage,
 } from "@md/components";
-import { validate } from "../utils/validate";
+// @ts-expect-error fix import path
+import { validate } from "@/admin/components/CustomFields/utils/validate";
 
 function Field({
   field,
@@ -29,7 +32,7 @@ function Field({
     // However, we should not prevent the user from entering other characters, as it may seem like the field is unresponsive.
     onChange &&
       onChange({
-        // @ts-ignore value.value used for integer types
+        // @ts-expect-error value.value used for integer types
         value: Number.isNaN(numberValue) ? updatedValue : Number(updatedValue),
       });
     setValidationMessage(null);
@@ -38,7 +41,7 @@ function Field({
   const handleValidate = () => {
     const message = validate(
       value as unknown as Value,
-      // @ts-ignore remove ts-ignore after types fix in keystone
+      // @ts-expect-error remove ts-ignore after types fix in keystone
       field.validation,
       field.label,
     );
@@ -52,28 +55,28 @@ function Field({
   }, [forceValidation]);
 
   return (
-      <BasicSection>
-        <Label>{field.label}</Label>
-        <DescriptionText id={`${field.path}-description`}>
-          {field.description}
-        </DescriptionText>
-        <div>
-          <ErrorValidationContainer $isError={!!validationMessage}>
-            <Input
-              // @ts-ignore remove ts-ignore after types fix in keystone
-              value={`${value?.value ?? ""}`}
-              onChange={handleChange}
-              onBlur={handleValidate}
-              readOnly={!onChange}
-              type="number"
-              data-test-id={`number-${field.label}`}
-            />
-          </ErrorValidationContainer>
-          {validationMessage && (
-            <ErrorValidationMessage>{validationMessage}</ErrorValidationMessage>
-          )}
-        </div>
-      </BasicSection>
+    <BasicSection>
+      <Label>{field.label}</Label>
+      <DescriptionText id={`${field.path}-description`}>
+        {field.description}
+      </DescriptionText>
+      <div>
+        <ErrorValidationContainer $isError={!!validationMessage}>
+          <Input
+            // @ts-expect-error remove ts-ignore after types fix in keystone
+            value={`${value?.value ?? ""}`}
+            onChange={handleChange}
+            onBlur={handleValidate}
+            readOnly={!onChange}
+            type="number"
+            data-test-id={`number-${field.label}`}
+          />
+        </ErrorValidationContainer>
+        {validationMessage && (
+          <ErrorValidationMessage>{validationMessage}</ErrorValidationMessage>
+        )}
+      </div>
+    </BasicSection>
   );
 }
 

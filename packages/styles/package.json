@@ -7,7 +7,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
+    "lint": "eslint . && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "build": "tsc"
   },
@@ -22,6 +22,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.9.1",
     "@md/eslint": "workspace:*",
+    "@md/tsconfig": "workspace:*",
     "@md/types": "workspace:*",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

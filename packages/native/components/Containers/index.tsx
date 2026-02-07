@@ -1,14 +1,14 @@
 import styled from "styled-components/native";
 import { View, Dimensions } from "react-native";
 
-import { withFullWidth, withOffsetBottom, withOffsetsRight } from '../helpers';
+import { withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
 
 const { height: screenHeight } = Dimensions.get('window');
 
 const WithoutHeightLimit = ($noHeightLimit) =>
   $noHeightLimit ? {
     height: 'auto',
-    minHeight: screenHeight, 
+    minHeight: screenHeight,
     maxHeight: undefined,
   } : {};
 

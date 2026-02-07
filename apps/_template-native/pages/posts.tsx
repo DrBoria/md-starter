@@ -6,11 +6,10 @@ import {
 import { Card } from '@md/native/components';
 import styled from 'styled-components/native';
 import { useQueryList } from '@md/api/graphql'; // Adjust the import according to your setup
-import { Section } from '../../../packages/native/components/Containers';
+import { Section } from '@md/native';
 import { useNavigate } from 'react-router-native';
-import type { QueryResult} from '@apollo/client';
+import type { QueryResult } from '@apollo/client';
 import { useQuery } from '@apollo/client';
-import type { Lists } from '@md/types';
 
 // Styled components
 const ContentContainer = styled(ScrollView)`
@@ -21,7 +20,8 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 function Posts() {
-    const { data, refetch } = useQueryList<QueryResult<{ items: Lists.Post.Item[] }>>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, refetch } = useQueryList<QueryResult<{ items: any[] }>>({
         listName: "Post",
         selectedFields: 'id name createdAt',
         useQuery

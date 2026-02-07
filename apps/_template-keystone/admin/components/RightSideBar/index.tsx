@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
-import type { TSideBarModalDataKeystone } from "../../../types";
+// import type { TOperation } from "@/types";
 
 const slideInAnimation = css`
   @keyframes slideInAnimation {

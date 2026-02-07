@@ -13,8 +13,8 @@ export const TableHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  background-color: ${({theme}) => theme.colors.section};
-  color: ${({theme}) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
   gap: calc(var(--basic-padding) * 2);
 `;
 
@@ -24,7 +24,7 @@ export const SearchBarContainer = styled.div`
   gap: calc(var(--basic-padding) * 2);
   width: 50%;
 
-  @media (max-width: 1024px) {
+  @media (width <= 1024px) {
     flex-grow: 1;
   }
 `;
@@ -37,8 +37,8 @@ export const Table = styled.div`
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   border-collapse: separate;
-  background-color: ${({theme}) => theme.colors.section};
-  color: ${({theme}) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
 `;
 
 export const Row = styled.div<{ $withFullSupport?: boolean }>`
@@ -51,8 +51,8 @@ export const Row = styled.div<{ $withFullSupport?: boolean }>`
   align-items: center;
   border-bottom: 1px solid var(--color-border);
   min-width: fit-content;
-  background-color: ${({theme}) => theme.colors.section};
-  color: ${({theme}) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.sectionContent};
 
   &:first-child {
     grid-template-rows: calc(var(--basic-padding) * 6);
@@ -89,7 +89,7 @@ export const Row = styled.div<{ $withFullSupport?: boolean }>`
     display: flex;
     align-items: center;
 
-    // Second column is the column with TITLE of list element. It has tooltip, so we need to
+    /* Second column is the column with TITLE of list element. It has tooltip, so we need to */
     &:nth-child(2) {
       overflow: initial;
     }
@@ -103,7 +103,7 @@ export const Row = styled.div<{ $withFullSupport?: boolean }>`
     }
   }
 
-  // Header Row
+  /* Header Row */
   &:first-child {
     background-color: var(--color-bg-secondary);
 
@@ -138,7 +138,7 @@ export const HeaderCellContainer = styled.div<{ $isSortable: boolean }>`
     padding-left: 8px;
   }
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     max-width: 100px;
   }
 `;
@@ -165,10 +165,12 @@ export const HeaderCell: React.FC<IHeaderCellProps> = ({
 
 export const BodyCell = styled.div<{ $type?: "default" | "email" | "subject" }>`
   margin: 0;
+
   /* Target Keystone's CellContainer specifically */
   & > [class^="css-"] {
     padding: 0;
   }
+
   &.arrow-cell {
     justify-content: flex-end;
   }

@@ -1,8 +1,6 @@
 export { default as ThemeProvider } from './ThemeProviderWrapper';
 
 export {
-    light,
-    dark,
     viking,
     liquidGlass
 } from './themes'

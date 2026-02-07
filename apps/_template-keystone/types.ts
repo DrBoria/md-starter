@@ -19,6 +19,10 @@ export interface TSession {
       id: string;
       name: string;
     };
+    organization?: {
+      id: string;
+      kind?: string;
+    };
   };
 }
 

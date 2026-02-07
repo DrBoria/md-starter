@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { HamburgerMenu, LoadingSpinner, ThemeProvider } from '@md/native/components';
 import { ApolloProvider } from '@apollo/client';
-import { dark, light } from '@md/styles/themes';
+import { viking, liquidGlass } from '@md/styles/themes';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import PostsScreen from './pages/posts';
 import IdPostPage from './pages/[id]';
@@ -46,7 +46,7 @@ function App(): React.JSX.Element {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={{ colors: isDarkMode ? dark : light }}>
+      <ThemeProvider theme={{ colors: isDarkMode ? viking : liquidGlass }}>
         <NativeRouter>
           {loading ? (
             <SpinnerContainer>

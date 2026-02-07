@@ -96,8 +96,8 @@ function SigninPage({
   useEffect(() => {
     if (!submitted) return;
 
-    // @ts-expect-error
-    if (rawKeystone.adminMeta?.error?.message === "Access denied") {
+    const adminMeta = rawKeystone.adminMeta;
+    if (adminMeta?.error?.message === "Access denied") {
       void router.push("/no-access");
       return;
     }

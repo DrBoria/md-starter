@@ -2,6 +2,6 @@
 import ThemeEditor from '.';
 
 <>
-      <ThemeEditor mode="light" />
+      <ThemeEditor mode="liquidGlass" />
 </>;
 ```

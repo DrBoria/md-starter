@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { Link as RouterLink } from 'react-router-native'; // Import Link from react-router-native
-import { PlainText } from '../Typography';
+import { PlainText } from '@md/native/components/Typography';
 
 const StyledLink = styled(RouterLink)`
   padding: 10px;

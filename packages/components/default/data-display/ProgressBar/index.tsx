@@ -10,7 +10,6 @@ const ProgressContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
     display: flex;
     align-items: center;
     border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
-
     margin-right: ${withOffsetsRight};
     margin-bottom: ${withOffsetBottom};
 `;

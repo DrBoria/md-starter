@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import type { TValue } from "@md/types";
-import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
+import type { CreateItemHookResult } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
 
 interface FieldValue {
@@ -13,18 +13,16 @@ interface FieldValue {
 
 interface TConditionalField {
   fieldName: string;
-  [key: string]: FieldValue[] | string; // TODO: find a way to remove | string type
+  [key: string]: FieldValue[] | string;
 }
 
 interface IConditionalFieldProps {
   listName: string;
   conditionalField: TConditionalField;
-  // Use it to get values of master field
-  // @ts-ignore - TODO: add types for createConditionalItems
-  onCreateConditionalItemsChange: (createConditionalItems) => void;
-  // Use it to get values of slave fields
-  // @ts-ignore - TODO: add types for subFieldsCreateList
-  onSubFieldListChange: (subFieldsCreateList) => void;
+  // Use it to get values of master field (state updater function)
+  onCreateConditionalItemsChange: (value: (value: TValue) => TValue) => void;
+  // Use it to get values of slave fields (state updater function)
+  onSubFieldListChange: (value: (value: TValue) => TValue) => void;
   itemId?: string;
   setResetStates?: (functions: (() => void)[]) => void;
 }
@@ -37,7 +35,7 @@ const ConditionalField = ({
   itemId,
   setResetStates,
 }: IConditionalFieldProps) => {
-  let createConditionalItems: CreateItemHookResult;
+  let createConditionalItems: CreateItemHookResult | undefined;
   /**
    * Logic for master fields
    */
@@ -50,20 +48,28 @@ const ConditionalField = ({
 
   if (!itemId) {
     // useCreateItem is only for Create Form
-    createConditionalItems = useCreateItem(conditionalFieldList.list as any, true);
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    createConditionalItems = useCreateItem(conditionalFieldList.list as never, true);
   }
-  const selectedValue = itemId
-    ? // @ts-ignore
-    conditionalFieldList.fieldsValue?.[conditionalField.fieldName]?.value
-      ?.value?.value
-    : // @ts-ignore - typescript didn't see if on row with "if (!itemId) {"
-    createConditionalItems?.props?.value?.[conditionalField.fieldName]?.value
-      ?.value?.value;
 
-  // @ts-ignore - TODO: fix after removing string from type
-  const subfieldsToRender = conditionalField[selectedValue]?.map(
+  const rawValue = itemId
+    ? conditionalFieldList.fieldsValue?.[conditionalField.fieldName]
+    : createConditionalItems?.props?.value?.[conditionalField.fieldName];
+
+  // Helper to extract value from TValue union
+  const extractValue = (val: unknown) => {
+    if (typeof val === 'object' && val !== null && 'kind' in val && (val as { kind: string }).kind === 'value') {
+      return (val as unknown as { value: string }).value;
+    }
+    return undefined;
+  };
+
+  const selectedValue = extractValue(rawValue) as { value: string } | undefined;
+  const resolvedValue = selectedValue?.value;
+
+  const subfieldsToRender = (resolvedValue && conditionalField[resolvedValue]) ? (conditionalField[resolvedValue] as FieldValue[]).map(
     (subField: FieldValue) => subField?.fieldName,
-  );
+  ) : [];
 
   /**
    * Sub field / Slave fields logic
@@ -75,16 +81,17 @@ const ConditionalField = ({
     itemId,
   });
 
-  let subFieldsCreateList: any;
+  let subFieldsCreateList: CreateItemHookResult | undefined;
   if (subFieldsList?.list) {
-    subFieldsCreateList = useCreateItem(subFieldsList?.list as any, true);
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    subFieldsCreateList = useCreateItem(subFieldsList?.list as never, true);
   }
 
   const handleOnChangeMasterField = (newValue: (value: TValue) => TValue) => {
     if (itemId) {
       conditionalFieldList.onFieldChange(newValue);
     } else {
-      createConditionalItems.props.onChange(newValue);
+      createConditionalItems?.props?.onChange(newValue);
     }
     // Pass the form value to the parent for future usage in update / create
     onCreateConditionalItemsChange(newValue);
@@ -94,8 +101,7 @@ const ConditionalField = ({
     if (itemId) {
       subFieldsList.onFieldChange(newValue);
     } else {
-      // @ts-ignore - typescript didn't see if on line above with 'if (!itemId) {'
-      subFieldsCreateList.props.onChange(newValue);
+      subFieldsCreateList?.props?.onChange(newValue);
     }
 
     // Pass the form value to the parent for future usage in update / create
@@ -142,15 +148,15 @@ const ConditionalField = ({
   // Create Form
   return (
     <ThemeProvider>
-      <Fields
-        // @ts-ignore typescript didn't see if on row above with 'if (itemId)'
-        {...createConditionalItems.props}
-        onChange={handleOnChangeMasterField}
-      />
+      {createConditionalItems?.props && (
+        <Fields
+          {...createConditionalItems.props}
+          onChange={handleOnChangeMasterField}
+        />
+      )}
       {subfieldsToRender?.length ? (
         <Fields
-          // @ts-ignore typescript didn't see if on row above with 'if (itemId)'
-          {...subFieldsCreateList.props}
+          {...subFieldsCreateList?.props}
           onChange={handleOnChangeSlaveField}
         />
       ) : null}

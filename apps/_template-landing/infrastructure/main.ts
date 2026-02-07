@@ -1,4 +1,4 @@
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import { App, TerraformStack } from "cdktf";
 import { AwsContainerApp as DeploymentStrategy } from "@md/infrastructure/src/constructs/aws-container";
 
@@ -15,3 +15,7 @@ class MyStack extends TerraformStack {
         });
     }
 }
+
+const app = new App();
+new MyStack(app, "template-landing");
+app.synth();

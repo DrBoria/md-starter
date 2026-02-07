@@ -1,1 +1,1 @@
-import { text } from '@keystone-6/core/fields'; export function RelationshipMany(config) { return text(config); }
+import type { TextFieldConfig } from '@keystone-6/core/fields'; import { text } from '@keystone-6/core/fields'; export function RelationshipMany(config: TextFieldConfig<never>) { return text(config); }

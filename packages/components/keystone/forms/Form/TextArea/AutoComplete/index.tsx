@@ -8,14 +8,14 @@ interface TPosition {
 }
 
 const SuggestionList = styled.ul<{ $suggestionsPosition: TPosition }>`
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
+  border: 1px solid ${({ theme }) => theme?.colors?.border};
+  border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
+  background-color: ${({ theme }) => theme?.colors?.background};
   position: absolute;
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme?.shadows?.small || "0 2px 10px rgba(0, 0, 0, 0.1)"};
   top: ${({ $suggestionsPosition }) =>
     `calc(${$suggestionsPosition.top} * 1.5rem + 10px)`};
   left: ${({ $suggestionsPosition }) =>
@@ -23,9 +23,10 @@ const SuggestionList = styled.ul<{ $suggestionsPosition: TPosition }>`
 `;
 
 const SuggestionItem = styled.li<{ $selected: boolean }>`
-  padding: 8px 12px;
+  padding: ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile}px ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile}px;
   cursor: pointer;
-  background-color: ${({ $selected }) => ($selected ? "#f5f5f5" : "white")};
+  background-color: ${({ $selected, theme }) =>
+    $selected ? theme?.colors?.highlight : theme?.colors?.background};
 `;
 
 interface TAutoComplete {

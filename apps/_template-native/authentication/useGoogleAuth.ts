@@ -1,19 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // useGoogleAuth.ts
 import { useCallback } from 'react';
 import { statusCodes } from '@react-native-google-signin/google-signin';
 import { GoogleSignin } from './oauth';
 
-interface GoogleUser {
-  id: string;
-  email: string;
-  name?: string;
-  photoUrl?: string;
-}
 
-interface GoogleError {
-  code: string;
-  message: string;
-}
 
 const useGoogleAuth = () => {
   const signIn = useCallback(async (): Promise<void> => {
@@ -25,7 +16,7 @@ const useGoogleAuth = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        handleSignInError(error);
+        handleSignInError(error as any);
       }
     }
   }, []);

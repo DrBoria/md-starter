@@ -4,20 +4,20 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import type { TValue } from "@md/types";
-import type { TConditionalField } from "../DynamicForms/ConditionalField";
-import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
-import { ConditionalField } from "../DynamicForms/ConditionalField";
+import type { TConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
+import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
+import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
 import {
   getAllConditionalFieldsNames,
   getConditionalSubFieldsdNames,
-} from "../DynamicForms/ConditionalField/utils";
-import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
-import { getNotDisplayedDefaultValues } from "../../common/utils/data-mapping/getNonDisplayedDefaultValues";
-import { useCreateItem } from "../../common/utils/useCreateItem";
-import { useFieldsData } from "../../common/utils/useFieldsData";
+} from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
+import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
+import { getNotDisplayedDefaultValues } from "@md/sections/keystone/common/utils/data-mapping/getNonDisplayedDefaultValues";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 import { ButtonGroup } from "./buttonGroup";
-import type { ITabs } from "../DynamicForms";
-import { getAllTabsFieldsNames, TabsFields } from "../DynamicForms";
+import type { ITabs } from "@md/sections/keystone/forms/DynamicForms";
+import { getAllTabsFieldsNames, TabsFields } from "@md/sections/keystone/forms/DynamicForms";
 import type { IModalButton } from "@md/components";
 
 export interface ICreateItemForm {
@@ -74,7 +74,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
       ...notToRenderFields,
     ],
   });
-  const createItem = useCreateItem(fieldsData.list as any, false, defaultValues);
+  const createItem = useCreateItem(fieldsData.list, false, defaultValues);
 
   const fieldsDataArray = fieldGroups.map((groupFields, index) => {
     // DEBUG: Log fields to inspect structure
@@ -229,10 +229,10 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
             const field = orderedFields[fieldName];
             const value = createItem.props.value[fieldName];
 
-            const onChange = (newValue: any) => {
-              createItem.props.onChange((prev: any) => ({
+            const onChange = (newValue: unknown) => {
+              createItem.props.onChange((prev) => ({
                 ...prev,
-                [fieldName]: newValue
+                [fieldName]: { kind: 'value', value: newValue }
               }));
             };
 

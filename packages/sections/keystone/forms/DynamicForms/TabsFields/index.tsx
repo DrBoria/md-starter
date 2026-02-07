@@ -4,8 +4,8 @@ import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import type { TValue } from "@md/types";
 import { Tabs } from "@md/components";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
 
 export interface ITabs {
@@ -51,7 +51,8 @@ const TabsFields = ({
 
   const createItems = itemId
     ? fieldsData // Edit mode: no need for useCreateItem in edit mode
-    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list as any, true)); // Create mode
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list as never, true)); // Create mode
 
   const listFormGroups = useMemo(() => {
     if (!tabs) return [];
@@ -110,11 +111,9 @@ const TabsFields = ({
               // Create Form
               fieldGroup?.createItem && (
                 <Fields
-                  // @ts-ignore - ts(2339) - props exists, error happens cause createItems could be with and without useCreateItem depending on passed or not itemId
-                  {...fieldGroup.createItem.props}
+                  {...(fieldGroup.createItem as { props: Record<string, unknown> }).props}
                   onChange={handleOnChange(
-                    // @ts-ignore same here
-                    fieldGroup?.createItem?.props.onChange,
+                    (fieldGroup?.createItem as { props: { onChange: TOnChangeTabValue } } | undefined)?.props.onChange,
                   )}
                 />
               )

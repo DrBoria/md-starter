@@ -1,8 +1,7 @@
 import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 import type { ListMeta } from "@keystone-6/core/types";
-import { useRouter } from "next/router";
 
-import type { TSession } from "../../../../../../packages/types";
+import type { TSession } from "@/types";
 
 interface IWhereParams {
   AND?: Array<{ agentType: { equals: "writer" | "reviewer" | "extractor" } }>;
@@ -17,8 +16,7 @@ const getWhereParameters = (
   itemValue?: DeserializedValue,
   session?: TSession["data"],
 ): IWhereParams => {
-  const router = useRouter();
-  const { pathname } = router;
+  // const router = useRouter(); // unused
 
   // Return early if the organization kind is 'error'
   if (itemValue?.organization?.kind === "error") return { OR: [] };

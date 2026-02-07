@@ -1,5 +1,5 @@
 {
-  "name": "@md/ui-kit",
+  "name": "template-styleguide",
   "version": "1.0.0",
   "main": "styleguide.config.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "dev:server": "ts-node themeServer.ts",
     "dev:server:debug": "node --inspect-brk -r ts-node/register themeServer.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint",
+    "lint": "eslint && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
     "lint:fix": "eslint --fix"
   },
   "author": "",

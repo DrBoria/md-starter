@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DeleteTemplate } from "../../overlays/Modals/templates";
+import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
 import { Button, ColumnsContainer } from "@md/components";
 import type { IModalButton } from "@md/components";
 

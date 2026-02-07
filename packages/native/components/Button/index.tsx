@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
-import { withOffsetBottom, withOffsetsRight } from '../helpers';
-import { PlainText } from '../Typography';
+import { withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
+import { PlainText } from '@md/native/components/Typography';
 
 const ButtonTypes = (type) => {
   switch (type) {

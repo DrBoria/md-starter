@@ -4,7 +4,7 @@ import type {
   DeserializedValue,
   ItemData,
 } from "@keystone-6/core/admin-ui/utils";
-import type { FieldMeta } from "@keystone-6/core/types";
+import type { ListMeta } from "@keystone-6/core/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { mergeDeep } from "@apollo/client/utilities";
 import { useList } from "@keystone-6/core/admin-ui/context";
@@ -44,7 +44,7 @@ interface IFieldsDataParams {
 }
 
 export interface IFieldsData<T extends FlexibleItemData> {
-  list: typeof useList; // or the specific type of the returned list object
+  list: ListMeta;
   loading: boolean;
   refetch: () => void;
   fieldModes: Record<string, "edit" | "read" | "hidden">;
@@ -81,10 +81,48 @@ const useFieldsData = <T extends FlexibleItemData>({
   const [forceValidation, setForceValidation] = useState(false);
   const listResult = useList(listName);
   const list = useMemo(() => {
-    if (!listResult || !listResult.fields) {
-      return { fields: {}, key: listName, singular: listName, path: listName };
+    if (!listResult?.fields) {
+      // Return a compliant ListMeta object with default values
+      const emptyListMeta: ListMeta = {
+        key: listName,
+        path: listName,
+        label: listName,
+        singular: listName,
+        plural: listName,
+        description: null,
+        initialColumns: [],
+        pageSize: 50,
+        labelField: 'id',
+        fields: {},
+        initialSort: null,
+        isSingleton: false,
+        groups: [],
+        gqlNames: {
+          outputTypeName: listName,
+          itemQueryName: listName,
+          listQueryName: `${listName}s`,
+          listQueryCountName: `${listName}sCount`,
+          listOrderName: `${listName}sOrderByInput`,
+          deleteMutationName: `delete${listName}`,
+          updateMutationName: `update${listName}`,
+          createMutationName: `create${listName}`,
+          deleteManyMutationName: `delete${listName}s`,
+          updateManyMutationName: `update${listName}s`,
+          createManyMutationName: `create${listName}s`,
+          whereInputName: `${listName}WhereInput`,
+          whereUniqueInputName: `${listName}WhereUniqueInput`,
+          updateInputName: `${listName}UpdateInput`,
+          createInputName: `${listName}CreateInput`,
+          updateManyInputName: `${listName}UpdateManyInput`,
+          relateToManyForCreateInputName: `${listName}RelateToManyForCreateInput`,
+          relateToOneForCreateInputName: `${listName}RelateToOneForCreateInput`,
+          relateToManyForUpdateInputName: `${listName}RelateToManyForUpdateInput`,
+          relateToOneForUpdateInputName: `${listName}RelateToOneForUpdateInput`,
+        },
+      };
+      return emptyListMeta;
     }
-    return { ...listResult };
+    return { ...listResult } as ListMeta; // Ensure compatibility without 'unknown'
   }, [listResult, listName]);
 
   // Negative filter - leaves everything, but selected fields
@@ -105,7 +143,7 @@ const useFieldsData = <T extends FlexibleItemData>({
 
   const selectedFields = useMemo(() => fieldsToGQL(filteredFields), [filteredFields]);
 
-  const { update, loading } = useUpdateMutation({ ...list, fields: filteredFields } as any, selectedFields, useMutation);
+  const { update, loading } = useUpdateMutation({ ...list, fields: filteredFields }, selectedFields, useMutation);
 
   // memoize the data fetching operation depending on itemId
   const fetchData = useCallback(() => {
@@ -151,10 +189,8 @@ const useFieldsData = <T extends FlexibleItemData>({
       string,
       "edit" | "read" | "hidden"
     > = {};
-    keystone?.data?.adminMeta?.list?.fields?.forEach((field: FieldMeta) => {
-      if (field === null) return;
-      if (field.path === null) return;
-      if (field?.itemView?.fieldMode == null) return;
+    keystone?.data?.adminMeta?.list?.fields?.forEach((field: { path: string; itemView?: { fieldMode: "edit" | "read" | "hidden" } }) => {
+      if (!field?.path || field.itemView?.fieldMode == null) return;
       itemViewFieldModesByField[field.path] = field.itemView.fieldMode;
     });
     return itemViewFieldModesByField;
@@ -207,7 +243,7 @@ const useFieldsData = <T extends FlexibleItemData>({
           },
         });
         const error = response.errors?.find(
-          (x) => !x.path || x.path.length === 1,
+          (x: { path?: ReadonlyArray<string | number> }) => !x.path || x.path.length === 1,
         );
         if (error) {
           logger.add({
@@ -220,8 +256,8 @@ const useFieldsData = <T extends FlexibleItemData>({
             title: "Saved Successfully",
           });
 
-          // @ts-ignore - we will always have item inside data for mutations if it was successfull
-          return response?.data?.item;
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          return (response?.data as unknown as { item: DeserializedValue })?.item;
         }
       } catch (err) {
         logger.add({

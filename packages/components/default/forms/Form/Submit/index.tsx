@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { basicFont } from '../../../data-display/Typography';
+import { basicFont } from '@md/components/default/data-display/Typography';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
@@ -20,13 +20,11 @@ const SubmitInput = styled.input<TSubmitProps>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
   padding: ${({ theme }) => `${theme.offsets.elementContent} calc(${theme.offsets.elementContent} * 2)`};
-
   color: ${({ theme }) => theme.colors.highlightedText};
   font: ${basicFont};
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-
   background: ${({ theme }) => theme.colors.highlighted};
   border: none;
   border-radius: ${({ theme }) => theme.border.radius};
@@ -40,24 +38,23 @@ const SubmitInput = styled.input<TSubmitProps>`
     clip-path: ${theme.geometry?.ragged};
     background-image: ${theme.effects?.texture};
     box-shadow: 
-      inset 0 1px 0 rgba(255,255,255,0.4), 
-      0 4px 0 rgba(0,0,0,0.5),
+      inset 0 1px 0 rgb(255 255 255 / 40%), 
+      0 4px 0 rgb(0 0 0 / 50%),
       ${theme.effects?.glow?.soft};
 
     &:hover {
       filter: brightness(1.2);
       transform: translateY(-2px);
       box-shadow: 
-        inset 0 1px 0 rgba(255,255,255,0.5), 
-        0 6px 0 rgba(0,0,0,0.5),
+        inset 0 1px 0 rgb(255 255 255 / 50%), 
+        0 6px 0 rgb(0 0 0 / 50%),
         ${theme.effects?.glow?.medium};
-      
       text-shadow: 0 0 10px ${theme.colors.highlighted || 'white'};
     }
 
     &:active {
       transform: translateY(2px);
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.7); 
+      box-shadow: inset 0 2px 5px rgb(0 0 0 / 70%); 
       filter: brightness(0.8);
     }
   `}

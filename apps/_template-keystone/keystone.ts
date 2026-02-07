@@ -1,7 +1,6 @@
 import path from "path";
 import * as fs from "fs";
-import { config, list } from "@keystone-6/core";
-import { text } from "@keystone-6/core/fields";
+import { config } from "@keystone-6/core";
 import type { KeystoneContext } from '@keystone-6/core/types';
 import { session, withAuth } from "./auth";
 import { APP_PORT, DATABASE_URL, APP_HOST } from "./env";
@@ -66,14 +65,15 @@ export default withAuth(
       getAdditionalFiles: [
         () => {
           const localFavicon = path.join(process.cwd(), "public", "favicon.ico");
-          const defaultFavicon = path.join(process.cwd(), "../../packages/components/default/assets/favicon.ico");
-          const inputPath = fs.existsSync(localFavicon) ? localFavicon : defaultFavicon;
+          const defaultFavicon = path.join(process.cwd(), "../../packages/components/default/common/assets/favicon.ico");
+          const inputPath = // eslint-disable-next-line security/detect-non-literal-fs-filename
+            fs.existsSync(localFavicon) ? localFavicon : defaultFavicon;
 
           return [
             {
               mode: "copy",
               inputPath,
-              outputPath: "public/favicon.ico",
+              outputPath: 'public/favicon.ico',
             },
           ];
         },

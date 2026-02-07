@@ -1,32 +1,8 @@
 {
-  "extends": "@md/types/node.json",
+  "extends": "@md/tsconfig/react.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": false,
-    "outDir": "dist",
-    "declaration": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+    "outDir": "./dist",
+    "rootDir": "."
   },
   "include": [
     "**/*.ts",

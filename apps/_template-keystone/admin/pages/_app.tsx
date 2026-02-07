@@ -1,8 +1,12 @@
 import React from 'react';
+// eslint-disable-next-line no-restricted-imports
 import KeystoneAppModule from '../../.keystone/admin/pages/_app_original';
 import { LoggerProvider, ModalProvider, CentralModal, FullScreenModal } from '@md/components/keystone';
-import { RightSideBar } from '../components/RightSideBar';
-import { dark, viking, liquidGlass, ThemeProvider, GlobalStyles } from '@md/styles';
+// eslint-disable-next-line no-restricted-imports
+// import { App } from "../../.keystone/admin/pages/_app_original";
+// eslint-disable-next-line no-restricted-imports
+import { RightSideBar } from "../components/RightSideBar";
+import { viking, ThemeProvider, GlobalStyles } from '@md/styles';
 import type { ApolloClient } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '@md/api/graphql';
@@ -11,7 +15,7 @@ import type { AppProps } from 'next/app';
 const KeystoneApp = (KeystoneAppModule as { default?: React.ElementType }).default || (KeystoneAppModule as React.ElementType);
 
 function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
-    // @ts-ignore
+    // @ts-expect-error App type mismatch with Keystone internals
     const Wrapped = (props) => (
         <ApolloProvider client={apolloClient as unknown as ApolloClient<object>}>
             <ThemeProvider theme={viking}>
@@ -38,7 +42,7 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
 // function WrappedApp(props) {
 //     return (
 //         <ApolloProvider client={apolloClient as unknown as ApolloClient<any>}>
-//             <ThemeProvider theme={dark}>
+//             <ThemeProvider theme={viking}>
 //                 <LoggerProvider>
 //                     <ModalProvider>
 //                         <FullScreenModal />

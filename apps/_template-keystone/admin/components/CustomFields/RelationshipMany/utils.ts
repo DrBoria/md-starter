@@ -2,7 +2,7 @@ import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 import type { ListMeta } from "@keystone-6/core/types";
 import { useRouter } from "next/router";
 
-import type { TSession } from "../../../../types";
+// import type { TOperation } from "@/types";
 
 interface IWhereParams {
   AND?: Array<{

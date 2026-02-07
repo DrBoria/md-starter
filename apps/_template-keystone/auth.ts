@@ -1,103 +1,37 @@
-// Welcome to some authentication for Keystone
-//
-// This is using @keystone-6/auth to add the following
-// - A sign-in page for your Admin UI
-// - A cookie-based stateless session strategy
-//    - Using a Contacts email as the identifier
-//    - 30 day cookie expiration
-//
-// This file does not configure what Contactss can do, and the default for this starter
-// project is to allow anyone - logged-in or not - to do anything.
-//
-// If you want to prevent random people on the internet from accessing your data,
-// you can find out how by reading https://keystonejs.com/docs/guides/auth-and-access-control
-//
-// If you want to learn more about how our out-of-the-box authentication works, please
-// read https://keystonejs.com/docs/apis/auth#authentication-api
 import { createAuth } from "@keystone-6/auth";
-// see https://keystonejs.com/docs/apis/session for the session docs
-import { statelessSessions, storedSessions } from "@keystone-6/core/session";
-import { createClient } from "@redis/client";
-import type { TSession } from "./types";
-import { REDIS_URL, SESSION_SECRET } from "./env";
-// import type { Context } from '.keystone/types';
-type Context = any;
+import { statelessSessions } from "@keystone-6/core/session";
+import { OAuth2Client } from "google-auth-library";
+import { SESSION_SECRET } from "./env";
+import type { KeystoneContext } from "@keystone-6/core/types";
 
-const { OAuth2Client } = require('google-auth-library');
 const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';
 const googleClient = new OAuth2Client(WebClientId);
-
-
-export const redis = createClient({
-  url: REDIS_URL,
-});
-redis.on("error", (err) => console.log("Redis Client Error", err));
 
 // statelessSessions uses cookies for session tracking
 // these cookies have an expiry, in seconds
 // we use an expiry of 30 days for this starter
 const sessionMaxAge = 60 * 60 * 24 * 30;
 
-function redisSessionStrategy() {
-  // you can find out more at https://keystonejs.com/docs/apis/session#session-api
-  return storedSessions<TSession>({
-    maxAge: sessionMaxAge,
-    secret: SESSION_SECRET,
-
-    store: ({ maxAge }) => ({
-      // Session could be TSession or SessionId
-      async get(session: string | TSession) {
-        let sessionId: string;
-        if (typeof session === "string") {
-          sessionId = session;
-        } else {
-          sessionId = session.itemId;
-        }
-
-        const result = await redis.get(sessionId);
-        console.log(`Redis GET result: ${result}`);
-        if (!result) {
-          console.log("No session found");
-          return;
-        }
-
-        return JSON.parse(result) as TSession;
-      },
-
-      async set(sessionId, data) {
-        // we use redis for our Session data, in JSON
-        await redis.setEx(sessionId, maxAge, JSON.stringify(data));
-        console.log(`Setting session with ID: ${sessionId}`);
-      },
-
-      async delete(sessionId) {
-        await redis.del(sessionId);
-        console.log(`Deleting session with ID: ${sessionId}`);
-      },
-    }),
-  });
-}
-
-const stateless = statelessSessions<TSession>({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const sessionStrategy: any = statelessSessions({
   maxAge: sessionMaxAge,
   secret: SESSION_SECRET,
 });
 
-
 const session = {
-  async get({ context }: { context: Context }) {
+  async get({ context }: { context: KeystoneContext }) {
     if (!context.req) return;
 
     const { idtoken } = context.req.headers;
 
     if (!idtoken) {
-      return stateless.get({ context });
+      return sessionStrategy.get({ context });
     }
 
     try {
       // Verify the ID token with Google
       const ticket = await googleClient.verifyIdToken({
-        idToken: idtoken,
+        idToken: idtoken as string,
         audience: WebClientId,
       });
 
@@ -105,12 +39,11 @@ const session = {
       const userEmail = payload?.email;
 
       // Check if the user exists in the Keystone database
-      let user = await context.db.User.findOne({ where: { email: userEmail } });
-      const role = await context.db.Role.findOne({ where: { id: user?.roleId } });
+      let user = await context.db.User.findOne({ where: { email: userEmail as string } });
+      const role = await context.db.Role.findOne({ where: { id: user?.roleId as string } });
 
       if (!user) {
         // Optionally, create a new user if they don't exist
-        // let defaultRole = await context.db.Role.findOne({ where: { name: 'Viewer' } });
         user = await context.db.User.createOne({ data: { email: userEmail } });
       }
 
@@ -129,8 +62,8 @@ const session = {
     }
   },
 
-  start: stateless.start,
-  end: stateless.end,
+  start: sessionStrategy.start,
+  end: sessionStrategy.end,
 };
 
 // withAuth is a function we can use to wrap our base configuration

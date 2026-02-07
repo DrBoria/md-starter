@@ -1,21 +1,22 @@
 import { list } from "@keystone-6/core";
 import path from "path";
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 import {
   checkbox,
   text,
 } from "@keystone-6/core/fields";
 
-type Lists = any; type PostWhereInput = any;
+// type PostWhereInput = any;
 import { createdAt, updatedAt } from "./utils/fields";
-import { isAdmin } from "./utils/access";
+import { isAdmin, isOwner } from "./utils/access";
 
-export const Post = list<any>({
+export const Post = list<BaseListTypeInfo>({
   access: {
     operation: {
       query: () => true,
       create: () => true,
-      update: (data) => isAdmin(data),
-      delete: (data) => isAdmin(data),
+      update: ({ session, item }) => isOwner({ session, item }),
+      delete: ({ session, item }) => isOwner({ session, item }),
     },
     filter: {
       query: ({ session }) => {

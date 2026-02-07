@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { AutoComplete } from "./AutoComplete";
 import { Variables } from "./Variables";
 import type {
-  TWithBasicElementOffsets} from "@md/styles";
+  TWithBasicElementOffsets
+} from "@md/styles";
 import {
   withOffsetBottom,
   withOffsetsRight,
@@ -21,15 +22,14 @@ const Container = styled.div<TWithBasicElementOffsets>`
   display: flex;
   flex-direction: column;
   position: relative;
-
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 `;
 
 const CodeEditorContainer = styled.div`
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  margin-bottom: 4px;
+  border: 1px solid ${({ theme }) => theme?.colors?.border};
+  border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
+  margin-bottom: ${({ theme }) => theme?.offsets?.elementContent};
 
   pre {
     background-color: transparent;
@@ -155,7 +155,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
             disabled={disabled}
             autoComplete="off"
             // Keystone for some reason did not expose the rows prop to their textarea component
-            // @ts-ignore
+            // @ts-expect-error: Keystone definition missing rows prop
             rows={rows}
           />
         )}

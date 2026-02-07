@@ -3,7 +3,6 @@ import React from "react";
 import type { IModalButton } from "@md/components";
 import { Button, OneLineContainer } from "@md/components";
 import { Icons } from "@md/components/keystone";
-import { ThemeProvider } from "@md/styles";
 
 interface TButtonGroupProps {
   singular: string;
@@ -24,7 +23,7 @@ const ButtonGroup = ({
 }: TButtonGroupProps) => {
   return (
     <div
-      className={`flex ${isVertical ? "flex-col gap-2" : "justify-between w-full"}`}
+      className={`flex ${isVertical ? "flex-col gap-2" : "justify-between w-full"} `}
     >
       {!buttons && (
         <>

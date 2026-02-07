@@ -1,7 +1,9 @@
+import type { Dispatch, SetStateAction } from "react";
 import React, { useState } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
+import type { TValue } from "@md/types";
 
-import { useFieldsData } from "../../common/utils/useFieldsData";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 
 import "./index.css";
 
@@ -9,28 +11,32 @@ import { useRouter } from "next/router";
 
 import { toKebabCase } from "@md/utils";
 import { useDeleteMutation } from "@md/api/graphql";
-import { ConditionalField } from "../DynamicForms/ConditionalField";
+import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
 import {
   getAllConditionalFieldsNames,
   getConditionalSubFieldsdNames,
-} from "../DynamicForms/ConditionalField/utils";
-import { TabsFields } from "../DynamicForms/TabsFields";
-import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+} from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
+import { TabsFields } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
+import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
+import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
 import { ButtonGroup } from "./buttonGroup";
-import { getAllTabsFieldsNames } from "../DynamicForms";
+import { getAllTabsFieldsNames } from "@md/sections/keystone/forms/DynamicForms";
+import type { ITabs, TConditionalField } from "@md/sections/keystone/forms/DynamicForms";
 import { useMutation } from "@apollo/client";
 import { useLogger } from "@md/components/keystone";
+import type { IModalButton } from "@md/components";
 
 interface IEditItemFormProps {
   listName: string;
   itemId: string;
   fieldsToRender?: string[] | string[][];
-  tabs?: any;
-  conditionalFields?: any;
+  tabs?: ITabs;
+  conditionalFields?: TConditionalField[];
   notToRenderFields?: string[];
   ignoreValueFields?: string[];
-  buttons?: any;
+  buttons?: IModalButton[];
 }
+
 
 const EditItemForm = ({
   listName,
@@ -48,13 +54,13 @@ const EditItemForm = ({
    * State for Conditional Fields
    * Use it for create operation
    */
-  const [createConditionalItems, setCreateConditionalItems] = useState(null);
-  const [subFieldList, setSubFieldList] = useState(null);
+  const [createConditionalItems, setCreateConditionalItems] = useState<TValue>({});
+  const [subFieldList, setSubFieldList] = useState<TValue>({});
   /**
    * State for Tabs Fields
    * Use it for create operation
    */
-  const [tabsList, setTabsList] = useState(null);
+  const [tabsList, setTabsList] = useState<TValue>({});
 
   const { deleteMutation } = useDeleteMutation(listName, useMutation);
 
@@ -92,12 +98,12 @@ const EditItemForm = ({
             listName,
             itemId,
             notToRenderFields: [
-            ...(allConditionalFieldsNames as any),
-            ...(allTabFieldNames as any),
-            ...(notToRenderFields as any),
-            ...(ignoreValueFields as any),
-            ...excludedFields,
-          ],
+              ...(allConditionalFieldsNames || []),
+              ...(allTabFieldNames || []),
+              ...(notToRenderFields || []),
+              ...(ignoreValueFields || []),
+              ...excludedFields,
+            ] as string[],
           });
         }
 
@@ -105,12 +111,12 @@ const EditItemForm = ({
         return useFieldsData({
           listName,
           itemId,
-          fieldsToRender: groupFields,
+          fieldsToRender: groupFields as string[],
           notToRenderFields: ([
-              ...(notToRenderFields || []),
-              ...(conditionalFields?.fieldsToRender || []),
-              ...(tabs?.fieldsToRender || []),
-            ] as any).flat(),
+            ...(notToRenderFields || []),
+            ...(allConditionalFieldsNames || []),
+            ...(allTabFieldNames || []),
+          ] as string[]).flat(),
         });
       });
 
@@ -129,15 +135,17 @@ const EditItemForm = ({
      * Conditional Field
      * Read values set in external component to pass in global creation function
      */
-    const conditionalFieldsValues = {};
+    const conditionalFieldsValues: Record<string, unknown> = {};
     if (conditionalFields) {
       conditionalFields.forEach((masterField) => {
         // If user chose new value for conditional field - it will be storred in createConditionalItems, othervise - we will take previous value
         const masterFieldSerializedValue =
           createConditionalItems?.[masterField.fieldName] ||
-          (notRenderedFieldValues?.[masterField.fieldName] as any);
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          (notRenderedFieldValues?.[masterField.fieldName] as unknown);
         const masterFieldValue = getDeserializedValue(
-          masterFieldSerializedValue as any,
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          masterFieldSerializedValue as ISerializedValue,
         );
 
         const conditionalSubfieldNames = getConditionalSubFieldsdNames(
@@ -164,7 +172,8 @@ const EditItemForm = ({
           // Set value for every Displayed subfield
           Object.keys(subFieldList).forEach((subfieldName) => {
             conditionalFieldsValues[subfieldName] = getDeserializedValue(
-              subFieldList[subfieldName] as any,
+              // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+              subFieldList[subfieldName] as unknown as ISerializedValue,
             );
           });
         }
@@ -175,11 +184,12 @@ const EditItemForm = ({
      * Tab Field
      * Read values set in external component to pass in global creation function
      */
-    const tabFieldsValues = {};
+    const tabFieldsValues: Record<string, unknown> = {};
     if (tabs && tabsList) {
       for (const [key, value] of Object.entries(tabsList)) {
         if (key === "id") continue;
-        tabFieldsValues[key] = getDeserializedValue(value as any);
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        tabFieldsValues[key] = getDeserializedValue(value as unknown as ISerializedValue);
       }
     }
 
@@ -196,9 +206,9 @@ const EditItemForm = ({
 
   const makeStatePersist = () => {
     // Clear state in all sub forms to make them pristine
-    setCreateConditionalItems(null);
-    setSubFieldList(null);
-    setTabsList(null);
+    setCreateConditionalItems({});
+    setSubFieldList({});
+    setTabsList({});
   };
 
   const resetAllState = () => {
@@ -264,7 +274,8 @@ const EditItemForm = ({
           fields={orderedFields}
           fieldModes={fieldsData.fieldModes}
           value={fieldsData.fieldsValue}
-          groups={(list as any).groups}
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          groups={list.groups}
           forceValidation={fieldsData.forceValidation}
           invalidFields={fieldsData.invalidFields}
           onChange={fieldsData.onFieldChange}
@@ -291,7 +302,8 @@ const EditItemForm = ({
         key="edit-tabs-fields"
         itemId={itemId}
         setResetStates={setResetStatesTabs}
-        onTabsFieldChange={setTabsList}
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        onTabsFieldChange={setTabsList as unknown as Dispatch<SetStateAction<null | ((newValue: TValue) => void)>>}
         listName={listName}
         tabs={tabs}
       />

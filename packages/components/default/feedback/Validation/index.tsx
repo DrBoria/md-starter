@@ -1,19 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-
-const StyledErrorValidationMessage = styled.div`
-  color: var(--color-error);
-`;
+import { StyledErrorValidationMessage, StyledErrorValidationContainer } from "./styles";
 
 /** @component */
 const ErrorValidationMessage: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => (
   <StyledErrorValidationMessage {...props} />
 );
 
-const ErrorValidationContainer = styled.div<{ $isError: boolean }>`
-  ${({ $isError }) =>
-    $isError ? "border-bottom: 1px solid var(--color-error)" : ""}
-`;
+const ErrorValidationContainer: React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { $isError: boolean }
+> = ({ $isError, ...props }) => (
+  <StyledErrorValidationContainer $isError={$isError} {...props} />
+);
 
 export { ErrorValidationMessage, ErrorValidationContainer };
 export default ErrorValidationMessage;

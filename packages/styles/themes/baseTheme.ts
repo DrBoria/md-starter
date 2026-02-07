@@ -1,4 +1,4 @@
-import light from './light';
+
 import border from './border';
 import elements from './elements';
 import font from './font';
@@ -23,7 +23,7 @@ export const devices = {
   desktop: `(min-width: ${screens.desktopWidth}px)`,
 };
 
-export const getZIndex = (name: any) => (zIndexes as any)[name];
+export const getZIndex = (name: keyof typeof zIndexes) => zIndexes[name];
 
 const base = {
   zIndex: zIndexes,
@@ -41,7 +41,12 @@ const base = {
       ${font.sizeMin}px + ${font.sizeMax - font.sizeMin} *
         ((100vw - ${screens.mobileWidth}px) / ${screens.desktopWidth - screens.mobileWidth})
     )`,
-    family: font.family
+    family: font.family,
+    sizes: {
+      small: "0.875rem",
+      regular: "1rem",
+      large: "1.25rem",
+    },
   },
 
   elements,
@@ -64,9 +69,7 @@ const base = {
     elementContent: 'var(--offset-element-content)',
   },
 
-  colors: {
-    ...light,
-  },
+  colors: {} as Record<string, string>,
 
   screens: {
     mobile: {

@@ -7,13 +7,13 @@ import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
 import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 
-import type { IOption, TSession } from "../../../../../../packages/types";
-import { BasicSection, DescriptionText, Label, Select } from "@md/components";
-import { useModal } from "@md/components/keystone";
+import type { TSession, IOption, TSideBarModalDataKeystone } from "@/types";
+import { BasicSection, DescriptionText, Label, Select, Button } from "@md/components";
+import { useModal } from "@md/components";
 import { LinkInForm } from "@md/components";
 import { getWhereParameters } from "./utils";
 import { useQueryList, useQueryListItem } from "@md/api/graphql";
-import type { QueryResult} from "@apollo/client";
+import type { QueryResult } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 
@@ -116,7 +116,7 @@ const Field = ({
 
   useEffect(() => {
     void refetch();
-    // @ts-ignore the issue with itemValue where kind:error will not be fired cause of ?
+    // @ts-expect-error the issue with itemValue where kind:error will not be fired cause of ?
   }, [itemValue?.organization?.value?.value?.id]);
 
   const handleChange = (newVal: IOption | null) => {
@@ -152,38 +152,38 @@ const Field = ({
       listName: field?.refListKey,
       headerText: `Create ${itemReadableName}`,
       type: "create",
-    });
+    } as TSideBarModalDataKeystone);
   };
 
   return (
-      <BasicSection>
-        <Label>{field.label}</Label>
-        <DescriptionText id={`${field.path}-description`}>
-          {field.description}
-        </DescriptionText>
-        <div>
-          <Select
-            options={items.map(mapToOutput) as IOption[]}
-            value={currentValue}
-            onChange={handleChange}
-            isClearable={!!value?.value}
-            readOnly={!onChange}
-            placeholder="Select..."
-          />
-          {!field.hideCreate && (
-            <div className="flex items-center gap-5 mt-4">
-              <Button onClick={handleCreateItemClick}>
-                Create related {itemReadableName}
-              </Button>
-              {value?.value?.id && (
-                <LinkInForm href={`/${list?.path}/${value.value.id}`}>
-                  View {itemReadableName} details
-                </LinkInForm>
-              )}
-            </div>
-          )}
-        </div>
-      </BasicSection>
+    <BasicSection>
+      <Label>{field.label}</Label>
+      <DescriptionText id={`${field.path}-description`}>
+        {field.description}
+      </DescriptionText>
+      <div>
+        <Select
+          options={items.map(mapToOutput) as IOption[]}
+          value={currentValue}
+          onChange={handleChange}
+          isClearable={!!value?.value}
+          readOnly={!onChange}
+          placeholder="Select..."
+        />
+        {!field.hideCreate && (
+          <div className="flex items-center gap-5 mt-4">
+            <Button onClick={handleCreateItemClick}>
+              Create related {itemReadableName}
+            </Button>
+            {value?.value?.id && (
+              <LinkInForm href={`/${list?.path}/${value.value.id}`}>
+                View {itemReadableName} details
+              </LinkInForm>
+            )}
+          </div>
+        )}
+      </div>
+    </BasicSection>
   );
 };
 

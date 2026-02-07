@@ -69,41 +69,40 @@ const zoomOutBack = keyframes`
 `;
 
 export const fadeInAnimation = css`
-   ${fadeIn} 0.2s linear forwards;
+   animation: ${fadeIn} 0.2s linear forwards;
 `;
 
 export const fadeOutAnimation = css`
-   ${fadeOut} 0.2s linear forwards;
+   animation: ${fadeOut} 0.2s linear forwards;
 `;
 
 export const fadeInZoomedAnimation = css`
-   ${fadeInZoomed} 0.2s linear forwards;
+   animation: ${fadeInZoomed} 0.2s linear forwards;
 `;
 
-const ImageWrapper = styled(Image as any).attrs<{ $layer?: 'back' | 'front'; $zIndex?: ZIndexName, $isHalfSize?: boolean, $alignment?: 'top' | 'bottom' | 'center', $blured?: boolean }>({})`
+const ImageWrapper = styled(Image) <{ $layer?: 'back' | 'front'; $zIndex?: ZIndexName; $isHalfSize?: boolean; $alignment?: 'top' | 'bottom' | 'center'; $blured?: boolean; hidden?: boolean }>`
     position: absolute;
-
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: auto;
     height: auto;
     opacity: 0;
-
     min-height: 100%;
     min-width: 100%;
-    
+    object-fit: cover;
+    border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
     z-index: ${({ $zIndex = 'background' }) => getZIndex($zIndex)};
 
     ${({ hidden }) => hidden ?
         css`
-            animation: ${fadeOutAnimation};
+            ${fadeOutAnimation}
             animation-duration: 2s;
             animation-fill-mode: forwards;
         `
         :
         css`
-            animation: ${fadeInZoomedAnimation};
+            ${fadeInZoomedAnimation}
             animation-duration: 0.6s;
             animation-delay: 1.4s;
             animation-fill-mode: forwards;
@@ -113,7 +112,7 @@ const ImageWrapper = styled(Image as any).attrs<{ $layer?: 'back' | 'front'; $zI
     ${({ $blured }) => $blured ? css`
         filter: blur(20px);
         transform: translateX(-50%) scale(1.3);
-        animation: ${fadeInAnimation};
+        ${fadeInAnimation}
     ` : ``}
 
     

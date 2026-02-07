@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { LucideIcon } from "../../../common/Icons";
-import { Input } from "../Input";
+import { LucideIcon } from "@md/components/default/common/Icons";
+import { Input } from "@md/components/default/forms/Form/Input";
 
 export type TOption = {
   label: string;
@@ -37,22 +37,21 @@ const SelectedValueWrapper = styled.div<{ $readOnly: boolean }>`
   /* VIKING THEME OVERRIDE */
   ${({ theme }) => theme.theme === 'viking' && css`
     background-color: ${theme.colors.section}; /* Stone lighter */
-    background-image: ${theme.effects?.texture};
+    background-image: ${theme.effects.texture};
     color: ${theme.colors.sectionContent};
     
     /* Ragged corners */
-    clip-path: ${theme.geometry?.ragged}; 
+    clip-path: ${theme.geometry.ragged}; 
     
     /* Border implied by inset shadow */
     box-shadow: 
       inset 0 0 0 1px ${theme.colors.disabled},
-      ${theme.effects?.depth?.inner?.medium};
-    
+      ${theme.effects.depth.inner.medium};
     border: none;
 
     &:hover {
       /* Subtle Glow on hover */
-      box-shadow: inset 0 0 0 1px ${theme.colors.highlighted}, ${theme.effects?.glow?.soft};
+      box-shadow: inset 0 0 0 1px ${theme.colors.highlighted}, ${theme.effects.glow.soft};
       color: ${theme.colors.highlighted};
     }
   `}
@@ -77,12 +76,12 @@ const Dropdown = styled.ul`
   /* VIKING THEME OVERRIDE */
   ${({ theme }) => theme.theme === 'viking' && css`
     background-color: ${theme.colors.section};
-    background-image: ${theme.effects?.texture};
+    background-image: ${theme.effects.texture};
     border: 1px solid ${theme.colors.disabled};
     border-top: none;
     
     /* Floating effect */
-    box-shadow: ${theme.effects?.depth?.outer?.medium};
+    box-shadow: ${theme.effects.depth.outer.medium};
     
     /* Decorative Knot Pattern Top */
     &::before {
@@ -90,7 +89,7 @@ const Dropdown = styled.ul`
         display: block;
         height: 6px;
         width: 100%;
-        background-image: ${theme.assets?.knotPattern};
+        background-image: ${theme?.assets?.knotPattern as string};
         background-repeat: repeat-x;
         opacity: 0.5;
         margin-bottom: 4px;
@@ -120,7 +119,7 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
     &:hover {
       background-color: ${theme.colors.highlighted};
       color: ${theme.colors.highlightedText};
-      box-shadow: ${theme.effects?.glow?.medium};
+      box-shadow: ${theme.effects.glow.medium};
     }
   `}
 `;
@@ -155,7 +154,7 @@ const Separator = styled.div`
 `;
 
 const Placeholder = styled.span`
-  color: ${({ theme }) => theme.colors.labelBackground};
+  color: ${({ theme }) => theme?.colors?.labelBackground};
 `;
 
 interface SelectProps {

@@ -1,0 +1,18 @@
+{
+    "name": "@md/stylelint-config",
+    "version": "0.0.0",
+    "main": "index.cjs",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "stylelint-config-standard": "^36.0.0",
+        "stylelint-order": "^6.0.4",
+        "stylelint-declaration-strict-value": "^1.10.6",
+        "postcss-styled-syntax": "^0.6.4"
+    },
+    "peerDependencies": {
+        "stylelint": "^16.2.0"
+    }
+}

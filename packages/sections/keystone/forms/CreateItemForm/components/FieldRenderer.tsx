@@ -4,12 +4,24 @@ import { TextCheckbox } from '@md/components/default/forms/Form/TextCheckbox';
 import { Select } from '@md/components/default/forms/Form/Select';
 import { FormLabel } from '@md/components/default/forms/Form/FormLabel';
 import { RelationshipSelect } from './RelationshipSelect';
-import { SubTitle } from '@md/components/default/data-display/Typography';
+
+
+import type { FieldMeta } from '@keystone-6/core/types';
+
+// Define a local type intersection that adds the properties we check for
+type FieldConfigMeta = {
+    refListKey?: string;
+    refLabelField?: string;
+    displayMode?: string;
+    options?: { label: string; value: string | number }[];
+    type?: string;
+    [key: string]: unknown;
+};
 
 interface FieldRendererProps {
-    field: any;
-    value: any;
-    onChange: (value: any) => void;
+    field: FieldMeta;
+    value: unknown;
+    onChange: (value: unknown) => void;
 }
 
 export const FieldRenderer: React.FC<FieldRendererProps> = ({
@@ -17,23 +29,38 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
     value,
     onChange,
 }) => {
-    const { path, label, fieldMeta, controller } = field;
+    // field.fieldMeta is JSONValue in Keystone types, so we cast it to our expected shape
+    const fieldMeta = field.fieldMeta as FieldConfigMeta | null;
+    const { path, label, controller } = field;
 
     // Handle Relationship Fields (e.g., Role)
-    if (fieldMeta?.refListKey) {
+    // Handle Relationship Fields (e.g., Role)
+    if (fieldMeta && typeof fieldMeta.refListKey === 'string') {
+        const relationshipField = {
+            ...field,
+            // Cast strictly for RelationshipSelect which expects specific shape
+            fieldMeta: {
+                ...fieldMeta,
+                refListKey: fieldMeta.refListKey,
+            }
+        };
+
         return (
             <RelationshipSelect
-                field={field}
-                value={value}
+                field={relationshipField}
+                value={value as { value: { id: string; label?: string } } | null}
                 onChange={onChange}
             />
         );
     }
 
     // Handle Boolean Fields (Checkbox)
-    if (fieldMeta?.type === 'Boolean' || controller?.type === 'Checkbox') {
+    // We cast controller to any to safely access 'type' property as it might not be strictly typed in FieldController
+    const controllerType = (controller as { type?: string } | undefined)?.type;
+
+    if (fieldMeta?.type === 'Boolean' || controllerType === 'Checkbox') {
         // Checkbox value usually comes as boolean directly or wrapped
-        const isChecked = value === true || value?.value === true;
+        const isChecked = value === true || (value as { value?: boolean })?.value === true;
 
         return (
             <div style={{ marginBottom: '1rem' }}>
@@ -49,14 +76,14 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
     }
 
     // Handle Select Fields (Enum)
-    if (fieldMeta?.displayMode === 'select' && fieldMeta?.options) {
-        const options = fieldMeta.options.map((opt: any) => ({
+    if (fieldMeta && 'displayMode' in fieldMeta && fieldMeta.displayMode === 'select' && 'options' in fieldMeta && Array.isArray(fieldMeta.options)) {
+        const options = (fieldMeta.options as { label: string; value: string | number }[]).map((opt) => ({
             label: opt.label,
             value: opt.value
         }));
 
         // Value might be simple string or object depending on controller
-        const selectedValue = options.find((opt: any) => opt.value === value?.value || opt.value === value);
+        const selectedValue = options.find((opt: { label: string; value: string | number }) => opt.value === (value as { value: string | number })?.value || opt.value === value);
 
         return (
             <div style={{ marginBottom: '1rem' }}>
@@ -71,14 +98,14 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
         );
     }
 
-    // Handle Text/String/Password/Number
     const isPassword = path.toLowerCase().includes('password');
-    const type = isPassword ? 'password' : (fieldMeta?.type === 'Integer' || fieldMeta?.type === 'Float' ? 'number' : 'text');
+    const fieldType = (fieldMeta && 'type' in fieldMeta) ? fieldMeta.type : undefined;
+    const type = isPassword ? 'password' : (fieldType === 'Integer' || fieldType === 'Float' ? 'number' : 'text');
 
     // Extract simple value
     let displayValue = "";
     if (value && typeof value === 'object' && 'value' in value) {
-        displayValue = value.value ?? "";
+        displayValue = (value as { value: string }).value ?? "";
     } else if (value !== undefined && value !== null) {
         if (typeof value === 'object') {
             // Fallback for unexpected objects to avoid [object Object]
@@ -99,7 +126,8 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                 onChange={(e) => {
                     const val = e.target.value;
                     // For numbers, we might need to cast? default controller usually handles string -> valid types
-                    onChange({ ...value, value: val });
+                    const params = (typeof value === "object" && value !== null) ? { ...value, value: val } : { value: val };
+                    onChange(params);
                 }}
                 placeholder={label}
                 $fullWidth

@@ -1,22 +1,18 @@
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 import { list } from "@keystone-6/core";
-import {
-  checkbox,
-  password,
-  relationship,
-  text,
-} from "@keystone-6/core/fields";
+import { text, password, checkbox, relationship } from "@keystone-6/core/fields";
 
-import type { TOperation } from "../types";
-import { ALLOW_ROLES_MANAGEMENT } from "../env";
+// import type { TOperation } from "@/types";
+import { ALLOW_ROLES_MANAGEMENT } from "@/env";
 
-import { isAdmin, isSameUser, isBanned } from "./utils/access";
+import { isAdmin, isSameUser } from "./utils/access";
 
 import { paymentFields } from "./payments";
 import { createdAt } from "./utils/fields";
 
 
 // NOTE: If you change title of this table - change title in signin page - admin/pages/signin.tsx
-export const User = list<any>({
+export const User = list<BaseListTypeInfo>({
   access: {
     operation: {
       query: () => true,

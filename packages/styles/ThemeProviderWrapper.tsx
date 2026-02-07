@@ -51,9 +51,9 @@ interface Theme {
   assets?: {
     knotPattern?: string;
   };
-  variables: any;
-  screens: any;
-  offsets: any;
+  variables: typeof baseTheme.variables & { glassEffect?: string };
+  screens: typeof baseTheme.screens;
+  offsets: typeof baseTheme.offsets;
 }
 
 const MediaProvider = styled.div`
@@ -116,10 +116,18 @@ const ThemeProviderWrapper = ({ children, theme: colorTheme }: ThemeProviderWrap
   // Merge base theme with color theme
   // We want effects, geometry, and assets at the top level for convenience
   const mergedTheme = React.useMemo(() => {
-    const colors = { ...base.colors, ...(colorTheme as any) };
+    const colors = { ...base.colors, ...(colorTheme as Record<string, unknown>) } as Record<string, string>;
+
+    // Deep merge font to preserve base sizes if specific theme doesn't provide them
+    const font = {
+      ...base.font,
+      ...((colorTheme as any)?.font || {})
+    };
+
     return {
       ...base,
       ...colors, // Spread colors to top level (includes effects, geometry, assets)
+      font,      // Override with merged font
       colors,
     };
   }, [base, colorTheme]);

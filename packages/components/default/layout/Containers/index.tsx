@@ -1,223 +1,29 @@
-import styled, { css } from "styled-components";
-import type { TFullWidth, TWithBasicElementOffsets } from '@md/styles';
-import { devices, withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
-
-interface ContainerProps {
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-type TSectionProps = {
-  $noHeightLimit?: boolean;
-} & ContainerProps;
-
-/**
- * @visibleName Containers
- */
-
-const WithoutHeightLimit = ($noHeightLimit?: boolean) =>
-  $noHeightLimit &&
-  css`
-    height: auto;
-    min-height: ${({ theme }) => `calc(${theme.screens.tablet.height} - ${theme.elements.header.height})`};
-    max-height: unset;
-  `;
-
-// Use this conteiner for wrapping any section on page
-// No usage restrictions
-/** @component */
-export const BasicSection = styled.div<TSectionProps>`
-  padding: ${({ theme: { offsets } }) => offsets.section};
-
-  background-color: ${({ theme }) => theme.colors.section};
-
-  @media ${devices.tablet} {
-    height: ${({ theme }) => `calc(${theme.screens.tablet.height} - ${theme.elements.header.height})`};
-  }
-  @media ${devices.desktop} {
-    height: ${({ theme }) => `calc(${theme.screens.desktop.height} - ${theme.elements.header.height})`};
-    padding: ${({ theme }) => `${theme.offsets.section} ${theme.offsets.section}`};
-  }
-
-  ${({ theme }) => theme.shadows?.outer && `
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.5); // Inner shadow for "cave" or "stone" feel
-      border-top: 1px solid ${theme.colors.disabled}; // Cold steel separator
-      border-bottom: 1px solid ${theme.colors.disabled};
-  `}
-
-  ${({ $noHeightLimit }) => WithoutHeightLimit($noHeightLimit)}
-`;
-
-// Use this container for wrapping all page content
-// Should be used only once per page
-export const PageContainer = styled.div`
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.offsets.section};
-  padding-top: ${({ theme }) => theme.elements.header.height};
-  background-color: ${({ theme }) => theme.colors.section};
-`;
-
-
-
-/* ********* APP SPECIFIC CONTAINERS ********** */
-
-// Got partial width
-export const HeadingContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
-  width: 40%;
-
-  text-align: left;
-
-  ${withFullWidth}
-  margin-right: ${withOffsetsRight};
-  margin-bottom: ${withOffsetBottom};
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-
-interface ColumnsContainerProps {
-  $colsRatio?: string[];
-}
-
-const ColumnsContainer = styled.div<ColumnsContainerProps & TWithBasicElementOffsets>`
-  display: grid;
-  grid-column-gap: 1rem;
-  grid-template-rows: 1fr;
-  grid-template-columns: ${({
-  $colsRatio = ["1fr", "1fr"], // By default 2 columns
-}: ColumnsContainerProps) => $colsRatio.map((col) => `${col}`).join(" ")};
-
-  margin-right: ${withOffsetsRight};
-  margin-bottom: ${withOffsetBottom};
-`;
-
-const DashboardCardsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 24px 0;
-`;
-
-const FocusedContainer = styled.div`
-  position: relative;
-
-  &:hover > * {
-    color: #fff;
-    background: var(--action-color);
-    border: 1px solid var(--action-color);
-  }
-`;
-
-const OneLineContainer = styled.div<{ $width?: '1/2' | '1/3' }>`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  /* Dynamically set width based on prop */
-  width: ${({ $width }) => {
-    switch ($width) {
-      case '1/2':
-        return '50%';
-      case '1/3':
-        return '33.33%';
-      default:
-        return '100%';
-    }
-  }};
-`;
-
-const LinksContainer = styled.div`
-  cursor: pointer;
-
-  div {
-    cursor: pointer;
-    color: var(--action-color);
-  }
-`;
-
-const MenuItemContainer = styled.div<TWithBasicElementOffsets>`
-  display: flex;
-  gap: 1rem;
-  margin-right: ${withOffsetsRight};
-  margin-bottom: ${withOffsetBottom};
-`;
-
-type TSection = {
-  $direction: 'horizontal' | 'horizontal-reversed' | 'vertical',
-  $sectionSize: 'full' | 'medium' | 'half' | 'dot-section' | 'footsteps'
-};
-
-
-const Section = styled.section<TSection>`
-  position: relative;
-  width: 100%;
-
-  ${({ $direction }) => ({
-    'horizontal': `
-        display: flex;
-        align-items: center;
-    `,
-    'horizontal-reversed': `
-        display: flex;
-        align-items: center;
-        flex-direction: row-reverse;
-    `,
-    'vertical': `
-        display: flex;
-        flex-direction: column
-    `,
-    'top': `
-      display: flex;
-      flex-direction: column
-      justify-content: flex-start;
-    `
-  }[$direction])};
-
-  ${({ $sectionSize }) => ({
-    'full': `
-        height: 100vh;
-        z-index: 10;
-    `,
-    'medium': `
-        height: 75vh;
-    `,
-    'half': `
-        height: 50vh;
-    `,
-    'dot-section': `
-        height: 50vh;
-    `,
-    'footsteps': `
-      position: absolute;
-      height: auto;
-      overflow: initial;
-    `
-  }[$sectionSize])};
-`;
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
-  height: 100%;
-  width: 50vw;
-  margin: 0 auto;
-`
-
-export {
-  TextContainer,
-  Section,
+import {
+  BasicSection,
+  PageContainer,
+  HeadingContainer,
   Column,
   ColumnsContainer,
   DashboardCardsContainer,
-  OneLineContainer,
   FocusedContainer,
+  OneLineContainer,
   LinksContainer,
   MenuItemContainer,
+  Section,
+  TextContainer,
+} from "./styles";
+
+export {
+  BasicSection,
+  PageContainer,
+  HeadingContainer,
+  Column,
+  ColumnsContainer,
+  DashboardCardsContainer,
+  FocusedContainer,
+  OneLineContainer,
+  LinksContainer,
+  MenuItemContainer,
+  Section,
+  TextContainer,
 };

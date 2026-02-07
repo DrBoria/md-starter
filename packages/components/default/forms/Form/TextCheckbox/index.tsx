@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { basicFont } from '../../../data-display/Typography';
+import { basicFont } from '@md/components/default/data-display/Typography';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
@@ -15,22 +15,14 @@ type TTextCheckboxProps = {
 
 const CheckboxContainer = styled.div<TWithBasicElementOffsets>`
   display: inline-block;
-
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  
   cursor: pointer;
 `;
 
 const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   display: none;
   width: ${({ $fullWidth }) => $fullWidth && '100%'};
-
-  /* Default Theme Logic */
-  &:checked + label {
-    color: ${({ theme }) => theme.colors.highlightedText};
-    background: ${({ theme }) => theme.colors.highlighted};
-  }
 
   & + label {
     display: flex;
@@ -41,35 +33,25 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
     padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
     font: ${basicFont};
     box-sizing: border-box;
-    
     background: ${({ theme }) => theme.colors.overlay};
     border-radius: ${({ theme }) => theme.variables.border.radius}px;
     cursor: pointer;
+  }
+
+  /* Default Theme Logic */
+  &:checked + label {
+    color: ${({ theme }) => theme.colors.highlightedText};
+    background: ${({ theme }) => theme.colors.highlighted};
   }
 
   & + label:hover {
     background: ${({ theme }) => theme.colors.overlayActive};
   }
 
-  /* VIKING THEME OVERRIDE (Runes) */
+      /* VIKING THEME OVERRIDE (Runes) */
   ${({ theme }) => theme.theme === 'viking' && css`
       /* Hide default background change, use rune tick instead */
-      &:checked + label {
-         color: ${theme.colors.highlighted};
-         background: transparent;
-         text-shadow: ${theme.effects?.glow?.soft};
-
-         &::before {
-             /* Active Rune */
-             content: 'ᚷ'; /* Gebo (Gift) */
-             font-size: 18px;
-             color: ${theme.colors.highlightedText};
-             background-color: ${theme.colors.highlighted};
-             box-shadow: ${theme.effects?.glow?.medium};
-             border-color: ${theme.colors.highlighted};
-         }
-      }
-
+      
       & + label {
          background-color: transparent;
          color: ${theme.colors.sectionContent};
@@ -88,8 +70,23 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
              box-shadow: ${theme.effects?.depth?.inner?.medium};
              border: 1px solid ${theme.colors.disabled};
              clip-path: ${theme.geometry?.ragged};
-             
              transition: all 0.2s ease;
+         }
+      }
+
+      &:checked + label {
+         color: ${theme.colors.highlighted};
+         background: transparent;
+         text-shadow: ${theme.effects?.glow?.soft};
+
+         &::before {
+             /* Active Rune */
+             content: 'ᚷ'; /* Gebo (Gift) */
+             font-size: 18px;
+             color: ${theme.colors.highlightedText};
+             background-color: ${theme.colors.highlighted};
+             box-shadow: ${theme.effects?.glow?.medium};
+             border-color: ${theme.colors.highlighted};
          }
       }
 

@@ -1,13 +1,14 @@
+import type { BaseListTypeInfo } from "@keystone-6/core/types";
 import { list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 
-import type { TOperation } from "../types";
-import { ALLOW_ROLES_MANAGEMENT } from "../env";
+// import type { TOperation } from "@/types";
+import { ALLOW_ROLES_MANAGEMENT } from "@/env";
 
 import { isAdmin } from "./utils/access";
 import { createdAt } from "./utils/fields";
 
-export const Role = list<any>({
+export const Role = list<BaseListTypeInfo>({
   access: {
     operation: {
       query: () => true,

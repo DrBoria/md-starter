@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { MMKV } from 'react-native-mmkv';
 import { GoogleSignin } from './authentication/oauth';
 
-let setCookieHeader: string | null;
+
 export const storage = new MMKV();
 const domain = 'http://localhost:3000';
 
@@ -19,14 +20,14 @@ const customFetch: typeof fetch = async (uri, options) => {
 
 
 // Function to check if token has expired
-const hasTokenExpired = (tokens) => {
+const hasTokenExpired = (tokens: any) => {
     const { expirationTime } = tokens; // Assume tokens have an expiration time
     return expirationTime < Date.now(); // Compare with current time
 };
 
 // Function to refresh tokens
 const refreshTokens = async () => {
-    const { idToken, accessToken } = await GoogleSignin.signInSilently();
+    const { idToken, accessToken } = await GoogleSignin.signInSilently() as any;
     return {
         idToken,
         accessToken,
@@ -40,7 +41,7 @@ const httpLink = new HttpLink({ uri: `${domain}/api/graphql`, fetch: customFetch
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
     const cookie = storage.getString(domain);
-    let tokens = await GoogleSignin.getTokens();
+    let tokens: any = await GoogleSignin.getTokens();
     console.log(tokens, 'hasTokenExpired? : ', hasTokenExpired(tokens))
     if (!tokens || hasTokenExpired(tokens)) {
         // Token is expired or doesn't exist, try to refresh

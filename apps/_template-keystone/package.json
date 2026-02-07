@@ -14,7 +14,7 @@
     "generate:roles": "node infrastructure/populateRoles.js",
     "format": "prettier --check",
     "format:fix": "prettier --write",
-    "lint": "eslint",
+    "lint": "eslint && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --esModuleInterop --skipLibCheck --noEmit --jsx react",
     "ci:postinstall": "pnpm prisma generate --schema schema/schema.prisma && pnpm keystone build --no-ui --no-server",

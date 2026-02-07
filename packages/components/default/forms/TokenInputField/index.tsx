@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import {
-  FieldContainer,
-  FieldDescription,
-  FieldLabel,
-} from "@keystone-ui/fields";
-import styled from "styled-components";
-import { Input } from "../Form";
-import { Button } from "../Button";
+import { Input } from "@md/components/default/forms/Form";
+import { Button } from "@md/components/default/forms/Button";
+import { FieldContainer, FlexContainer, FieldLabel, FieldDescription } from "./styles";
 
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
+interface TokenInputFieldProps {
+  field: {
+    label: string;
+    path: string;
+    description?: string;
+  };
+  value?: string;
+  onChange?: (value: string) => void;
+  autoFocus?: boolean;
+  readOnly?: boolean;
+}
 
-const TokenInputField = ({
+const TokenInputField: React.FC<TokenInputFieldProps> = ({
   field,
   value,
   onChange,
@@ -23,16 +25,19 @@ const TokenInputField = ({
   const [showSecret, setShowSecret] = useState(false);
   const toggleShowSecret = () => setShowSecret(!showSecret);
   const inputType = showSecret ? "text" : "password";
-  const handleChange = (event) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(event.target.value);
   };
 
   return (
-    <FieldContainer as="fieldset">
+    <FieldContainer>
       <FieldLabel>{field.label}</FieldLabel>
-      <FieldDescription id={`${field.path}-description`}>
-        {field.description}
-      </FieldDescription>
+      {field.description && (
+        <FieldDescription id={`${field.path}-description`}>
+          {field.description}
+        </FieldDescription>
+      )}
       <FlexContainer>
         <Input
           id={`${field.path}-input`}

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import type { TextInputProps } from 'react-native';
-import type { TWithBasicElementOffsets, TFullWidth } from '../../helpers';
-import { withOffsetBottom, withOffsetsRight } from '../../helpers';
+import type { TWithBasicElementOffsets, TFullWidth } from '@md/native/components/helpers';
+import { withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
 
 type TInputProps = TextInputProps & {
   name: string;

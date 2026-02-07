@@ -1,12 +1,12 @@
 {
-  "name": "landing",
+  "name": "template-landing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "[ -e .env ] && set -a && . ./.env; next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
     "lint:fix": "eslint --fix"
   },
   "dependencies": {

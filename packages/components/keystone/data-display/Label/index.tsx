@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { LucideIcon } from "../../../default/common/Icons";
+import type { IconName } from "@md/components/default/common/Icons";
+import { LucideIcon } from "@md/components/default/common/Icons";
 
 const LabelContainer = styled.div`
   font-size: 0.875rem;
@@ -11,7 +12,7 @@ const LabelContainer = styled.div`
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
   border-radius: 9999px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   background-color: ${({ theme }) => theme.colors.highlighted};
   color: ${({ theme }) => theme.colors.highlightedText};
 `;
@@ -48,7 +49,7 @@ const CloseButton = styled.button`
 `;
 
 interface ILabelProps {
-  icon?: any;
+  icon?: IconName;
   children: React.ReactNode;
   className?: string;
   onClose?: () => void;

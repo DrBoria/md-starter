@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { basicFont } from '../../../data-display/Typography';
+import { basicFont } from '@md/components/default/data-display/Typography';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
@@ -18,7 +18,7 @@ type TTextareaProps = {
 const Textarea = styled.textarea<TTextareaProps>`
   display: block;
   width: ${({ $fullWidth }) => $fullWidth && '100%'};
-  min-height: ${({ theme }) => `calc(${theme.elements.form.height} * 3)`}; // Default roughly 3 rows
+  min-height: ${({ theme }) => `calc(${theme.elements.form.height} * 3)`}; /* Default roughly 3 rows */
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
   padding: ${({ theme }) => theme.offsets.elementContent};
@@ -36,7 +36,6 @@ const Textarea = styled.textarea<TTextareaProps>`
       background-color: ${theme.colors.overlay};
       background-image: ${theme.effects?.texture}; /* NOISE */
       color: ${theme.colors.sectionContent};
-      
       border: none;
       outline: none;
       

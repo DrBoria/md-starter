@@ -98,6 +98,63 @@ module.exports = [
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unsafe-return": "off",
       "@typescript-eslint/no-redundant-type-constituents": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/ban-ts-comment": [
+        "error",
+        {
+          "ts-expect-error": "allow-with-description",
+          "ts-ignore": true,
+          "ts-nocheck": true,
+          "ts-check": false,
+          minimumDescriptionLength: 3,
+        },
+      ],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["../*"],
+              message: "Relative imports from parent directories are forbidden. Please use absolute imports (e.g. @md/...) or sibling imports (./)."
+            }
+          ]
+        }
+      ],
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "TSAsExpression[typeAnnotation.type='TSTypeReference'][typeAnnotation.typeName.name='unknown']",
+          message: "Do not use `as unknown`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/eslint-disable/]",
+            message: "Do not use `eslint-disable`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/eslint-disable-next-line/]",
+            message: "Do not use `eslint-disable-next-line`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/eslint-disable-line/]",
+            message: "Do not use `eslint-disable-line`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/ts-ignore/]",
+            message: "Do not use `ts-ignore`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/ts-nocheck/]",
+            message: "Do not use `ts-nocheck`. It is strictly forbidden."
+        },
+        {
+            selector: "Program > Comments[value=/ts-check/]",
+            message: "Do not use `ts-check`. It is strictly forbidden."
+        },
+         {
+            selector: "Program > Comments[value=/ts-expect-error/]",
+            message: "Do not use `ts-expect-error`. It is strictly forbidden."
+        }
+      ],
     },
   },
 ];

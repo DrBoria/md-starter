@@ -1,38 +1,36 @@
 import styled from 'styled-components';
 import type { FC, ReactNode } from 'react';
 import React, { useRef, useState } from 'react';
-import { Column, ColumnsContainer } from '../../layout/Containers';
-import { CircleImage } from '../Images';
-import { PlainText, SectionTitle } from '../Typography';
+import { Column, ColumnsContainer } from '@md/components/default/layout/Containers';
+import { CircleImage } from '@md/components/default/data-display/Images';
+import { PlainText, SectionTitle } from '@md/components/default/data-display/Typography';
 import { debounce, useIsMobile } from '@md/utils';
-import ConditionalWrapper from '../../layout/ConditionalWrapper';
+import ConditionalWrapper from '@md/components/default/layout/ConditionalWrapper';
 import ArrowIcon from './arrow.svg'
 
 const CarouselPage = styled.div<{ $isMobile: boolean | null, $slidsCount: number }>`
     position: relative;
     z-index: ${({ theme }) => theme.zIndex.content};
     height: 100%;
-    
     display: grid;
     grid-template-columns: repeat(${({ $slidsCount }) => $slidsCount}, 100%);
     grid-template-rows: 1fr;
-
     ${({ $isMobile }) => $isMobile ? `
             overflow-x: scroll;
         ` : `
             overflow-x: hidden;
     `}
-
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scrollbar-color: transparent transparent;
-    
-    // Analogue of smooth animations
+
+    /* Analogue of smooth animations */
     scroll-behavior: smooth;
 
     &.active {
         scroll-snap-type: unset;
     }
+
     &::-webkit-scrollbar { 
         display: none;  /* Safari and Chrome */
     }
@@ -47,12 +45,12 @@ const Container = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 `
 
 const CarouselButton = styled.div<{ $side: 'prev' | 'next', $isActive: boolean }>`
     z-index: ${({ theme }) => theme.zIndex.alert};
     position: absolute;
-
     top: 50%;
     bottom: 0;
     transform: translateY(-50%);
@@ -60,10 +58,10 @@ const CarouselButton = styled.div<{ $side: 'prev' | 'next', $isActive: boolean }
 
     ${({ $side, theme }) => ({
         'prev': `
-            left: ${theme.offsets.page};
+            left: ${theme.offsets.section};
         `,
         'next': `
-            right: ${theme.offsets.page};
+            right: ${theme.offsets.section};
             transform: translateY(-50%) scaleX(-1);
         `
     }[$side])};

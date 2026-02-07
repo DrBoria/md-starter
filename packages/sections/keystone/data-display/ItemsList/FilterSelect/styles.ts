@@ -21,7 +21,7 @@ export const FilterDropdown = styled.div`
   min-width: ${({ theme }) => theme.screens.mobile.width}px;
   padding: ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
   background-color: ${({ theme }) => theme.colors.section};
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   border-radius: ${({ theme }) => `calc(2 * ${theme.border.radius})`};
   z-index: ${({ theme }) => theme.zIndex.overlay};
 `;

@@ -1,1 +1,1 @@
-import { text, select, relationship, timestamp } from '@keystone-6/core/fields'; export function DynamicStatusLabel(config) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/DynamicStatusLabel/views' }; return text({ ...config, ui }); }
+import type { TextFieldConfig } from '@keystone-6/core/fields'; import { text } from '@keystone-6/core/fields'; export function DynamicStatusLabel(config: TextFieldConfig<never>) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/DynamicStatusLabel/views' }; return text({ ...config, ui }); }

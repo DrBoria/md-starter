@@ -8,10 +8,10 @@ import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
 import { BasicSection, Button, DescriptionText, Label } from "@md/components";
 
-import type { TSession } from "../../../../types";
+// import type { TOperation } from "@/types";
 import { getWhereParameters } from "./utils";
 import { useQueryList } from "@md/api/graphql";
-import type { QueryResult} from "@apollo/client";
+import type { QueryResult } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 import { useModal } from "@md/components/keystone";
@@ -124,7 +124,7 @@ const Field = ({
 
   useEffect(() => {
     void refetch();
-    // @ts-ignore it's have ? in case it's error type
+    // @ts-expect-error it's have ? in case it's error type
   }, [itemValue?.organization?.value?.value?.id]);
 
   // Update handleChange to handle multi-select
@@ -157,31 +157,31 @@ const Field = ({
   };
 
   return (
-      <BasicSection>
-        <Label>{field.label}</Label>
-        <DescriptionText id={`${field.path}-description`}>
-          {field.description}
-        </DescriptionText>
-        <div>
-          <MultiSelect
-            options={items.map(mapToOutput) as IOptionMultiSelect[]}
-            value={mapToValue(value)}
-            onChange={(selected) =>
-              handleChange(selected as IOptionMultiSelect[])
-            }
-            placeholder="Select..."
-            portalMenu
-          />
+    <BasicSection>
+      <Label>{field.label}</Label>
+      <DescriptionText id={`${field.path}-description`}>
+        {field.description}
+      </DescriptionText>
+      <div>
+        <MultiSelect
+          options={items.map(mapToOutput) as IOptionMultiSelect[]}
+          value={mapToValue(value)}
+          onChange={(selected) =>
+            handleChange(selected as IOptionMultiSelect[])
+          }
+          placeholder="Select..."
+          portalMenu
+        />
 
-          {!field.hideCreate && (
-            <div className="flex items-center gap-5 mt-4">
-              <Button onClick={handleCreateItemClick}>
-                Create related {itemReadableName}
-              </Button>
-            </div>
-          )}
-        </div>
-      </BasicSection>
+        {!field.hideCreate && (
+          <div className="flex items-center gap-5 mt-4">
+            <Button onClick={handleCreateItemClick}>
+              Create related {itemReadableName}
+            </Button>
+          </div>
+        )}
+      </div>
+    </BasicSection>
   );
 };
 

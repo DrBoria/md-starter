@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ColumnsContainer } from "../../../../default/layout/Containers";
-import { CopyButton } from "../../../../default/forms/Buttons";
+import { ColumnsContainer } from "@md/components/default/layout/Containers";
+import { CopyButton } from "@md/components/default/forms/Button";
 
 interface TShortedTextProps {
   text: string | null;
@@ -30,7 +30,7 @@ const ShortedText: React.FC<TShortedTextProps> = ({
       style={{ alignItems: "center" }}
     >
       <Container $maxWidth={maxWidth}>{text}</Container>
-      <CopyButton size="small" value={text} listName={text || ""} />
+      <CopyButton size="small" value={text || ""} listName={text || ""} />
     </ColumnsContainer>
   );
 };

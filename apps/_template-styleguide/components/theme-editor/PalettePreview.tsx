@@ -1,7 +1,7 @@
 import React from 'react';
 import { BasicSection, Button, SectionTitle, SubTitle, Switch, Tabs, TokenInputField } from "@md/components";
 
-const PalettePreview = ({ palette }) => (
+const PalettePreview = ({ palette: _palette }: { palette: unknown }) => (
     <BasicSection>
         <SectionTitle>Preview</SectionTitle>
         <Tabs

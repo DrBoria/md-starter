@@ -1,16 +1,17 @@
 import React from 'react';
 import * as colorThemes from '@md/styles/themes/colors';
 import { ModalProvider, LoggerProvider, PageTitle } from '@md/components';
-import { ThemeProvider, baseTheme } from '@md/styles';
+import { ThemeProvider } from '@md/styles';
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
     const childrenArray = React.useMemo(() => React.Children.toArray(children), [children]);
-    
+
     // Safer check for ThemeEditor example
     const isThemeEditorExample = childrenArray.some(
         (child) => {
-            const typeName = child?.type?.name || child?.type?.displayName || '';
-            const code = child?.props?.code || '';
+            if (!React.isValidElement(child)) return false;
+            const typeName = (child.type as { name?: string; displayName?: string })?.name || (child.type as { name?: string; displayName?: string })?.displayName || '';
+            const code = (child.props as { code?: string })?.code || '';
             return typeName.includes('ThemeEditor') || code.includes('ThemeEditor');
         }
     );
@@ -21,16 +22,16 @@ const Wrapper = ({ children }) => {
     }
 
     const validThemes = Object.entries(colorThemes).filter(
-        ([key, theme]) => typeof theme === 'object' && key !== 'default' && (theme as any).section
+        ([key, theme]) => typeof theme === 'object' && key !== 'default' && (theme as { section: string }).section
     );
 
     return (
-        <ThemeProvider key="root-theme-provider" theme={colorThemes.light}>
+        <ThemeProvider key="root-theme-provider" theme={colorThemes.viking}>
             <ModalProvider>
                 <LoggerProvider>
                     {validThemes.map(([themeName, theme]) => (
                         <ThemeProvider key={themeName} theme={theme}>
-                            <div style={{ background: `${(theme as any).section}`, marginBottom: '16px' }}>
+                            <div style={{ background: `${(theme as { section: string }).section}`, marginBottom: '16px' }}>
                                 <PageTitle>{themeName}</PageTitle>
                                 {children}
                             </div>

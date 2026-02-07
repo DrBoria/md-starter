@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
-import type { TOption } from '../../forms/Form';
-import { Select } from '../../forms/Form';
-import Pagination from '../../navigation/PaginationOld';
-import { SubTitle } from '../Typography';
+import type { TOption } from '@md/components/default/forms/Form';
+import { Select } from '@md/components/default/forms/Form';
+import { Pagination } from '@md/components/default/navigation/Pagination';
+import { SubTitle } from '@md/components/default/data-display/Typography';
 
 import { StyledHeaderCell } from './TableCels/styles';
 import { Grid, PaginationContainer } from './styles';
@@ -38,16 +38,14 @@ const TableContainer = ({ children, headerCols, colsTemplate, pagination, rowsPe
       rowsPerPage?.changeElementsPerPage(Number(option.value));
     }
   };
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPage: number) => {
-    pagination?.changePage(newPage);
-  };
+
 
   return (
     <div>
       <Grid $colsTemplate={colsTemplate}>
         {/* Table Head */}
         {headerCols?.map(({ text, sort = () => { }, isSortable, align }) => (
-          <StyledHeaderCell key={text} onClick={sort} $align={align}>
+          <StyledHeaderCell key={text} onClick={sort} $align={align} className="header-cell">
             <SubTitle>{text}</SubTitle>
             {isSortable && '⟠'}
           </StyledHeaderCell>
@@ -62,9 +60,9 @@ const TableContainer = ({ children, headerCols, colsTemplate, pagination, rowsPe
           {/* Pagination with arrows */}
           {pagination && (
             <Pagination
-              pagesCount={pagination.totalPages}
+              totalPages={pagination.totalPages}
               currentPage={pagination.current}
-              onChangePage={handleChangePage}
+              onPageChange={(curr) => pagination.changePage(curr)}
             />
           )}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { TouchableOpacity, View } from 'react-native';
-import { PlainText } from '../Typography';
+import { PlainText } from '@md/native/components/Typography';
 
 const CardContainer = styled(TouchableOpacity)`
   border-radius: 10px;

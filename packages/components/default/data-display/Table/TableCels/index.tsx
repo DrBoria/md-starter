@@ -1,7 +1,9 @@
-import BoldTextDisplayCell from './BoldTextCell';
-import BrandCell from './BrandCell';
-import NavigationCell from './NavigationCell';
-import StatusCell from './StatusCell';
-import TextDisplayCell from './TextCell';
+export { default as TextCell } from './TextCell';
+export { default as StatusCell } from './StatusCell';
+export { default as NavigationCell } from './NavigationCell';
+export { default as BrandCell } from './BrandCell';
 
-export { TextDisplayCell, StatusCell, NavigationCell, BoldTextDisplayCell, BrandCell };
+// Backward compatibility alias if needed, or just remove
+export { default as BoldTextDisplayCell } from './TextCell';
+export { default as TextDisplayCell } from './TextCell';
+

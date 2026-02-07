@@ -8,22 +8,22 @@ import { useLogger } from "@md/components/keystone";
 import { ArrowRightIcon } from "@keystone-ui/icons";
 
 import type { IGraphQLObject, IOption } from "@md/types";
-import type { TCondition } from "../../common/utils/data-mapping/mapFilterParameters";
-import type { TOrderBy } from "../../common/utils/getNextSortOrder";
+import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+import type { TOrderBy } from "@md/sections/keystone/common/utils/getNextSortOrder";
 import { toKebabCase, lowerCaseFirstLetter } from "@md/utils";
 import { Pagination, Loading, Input, Select, PlainText, SectionTitle, Link } from "@md/components";
 import { Label, Checkbox } from "@md/components/keystone";
 import { getFieldType, useDeleteMutation } from "@md/api/graphql";
-import { getGQLFields } from "../../common/utils/data-mapping/getGQLFields";
+import { getGQLFields } from "@md/sections/keystone/common/utils/data-mapping/getGQLFields";
 import {
   filterToPath,
   filterToWhereParameters,
   parseQuery,
   pathToFilter,
   pathToWhereParameters,
-} from "../../common/utils/data-mapping/mapFilterParameters";
-import { getNextSortOrder } from "../../common/utils/getNextSortOrder";
-import { useFieldsData } from "../../common/utils/useFieldsData";
+} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+import { getNextSortOrder } from "@md/sections/keystone/common/utils/getNextSortOrder";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 import { EditableCell } from "./EditableCell";
 import { FilterSelect } from "./FilterSelect";
 import {
@@ -36,8 +36,8 @@ import {
   TableHeader,
 } from "./styles";
 import { ViewCell } from "./ViewCell";
-import { DeleteTemplate } from "../../overlays/Modals/templates";
-import { NotFoundSection } from "../../feedback/NotFoundSection";
+import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
+import { NotFoundSection } from "@md/sections/keystone/feedback/NotFoundSection";
 import { useMutation } from "@apollo/client";
 
 interface FieldLabel {
@@ -199,14 +199,14 @@ export const ItemsList = ({
           element={element}
           itemGetter={itemGetter}
           onChange={onEditCell(element.id)}
-          list={list as any}
+          list={list}
         />
       ) : (
         <ViewCell
           key={gqlElement}
           gqlElement={gqlElement}
           element={element}
-          list={list as any}
+          list={list}
           linkTo={fieldsToDisplay.indexOf(gqlElement) === 0 ? linkToElement : ""}
         />
       );
@@ -343,7 +343,8 @@ export const ItemsList = ({
     void refetch();
   };
 
-  const itemsCount = listItemData?.itemsCount as unknown as number;
+  const countValue = listItemData?.itemsCount;
+  const itemsCount = typeof countValue === 'number' ? countValue : 0;
   const shouldShowPagination = withPagination && itemsCount > minLimit;
 
   return (
@@ -445,8 +446,7 @@ export const ItemsList = ({
           })}
 
           {/* Empty header cell for arrow column */}
-          {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
-          <HeaderCell key="arrow-column" isSortable={false} onSortChange={() => { }}>
+          <HeaderCell key="arrow-column" isSortable={false} onSortChange={() => undefined}>
             {null}
           </HeaderCell>
         </Row>

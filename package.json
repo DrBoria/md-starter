@@ -11,8 +11,15 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@md/tsconfig": "workspace:*",
+    "@md/stylelint-config": "workspace:*",
     "@types/styled-components": "5.1.34",
+    "postcss-styled-syntax": "^0.7.1",
     "prettier": "^3.3.3",
+    "stylelint-config-recommended": "^18.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-declaration-strict-value": "^1.10.11",
+    "stylelint-order": "^7.0.1",
     "ts-node": "^10.9.2",
     "turbo": "^2.8.1",
     "typescript": "^5.6.3"

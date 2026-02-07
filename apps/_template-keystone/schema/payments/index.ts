@@ -14,7 +14,7 @@ export const paymentFields = {
     }),
 };
 
-export const isPremium = ({ session, item }: { session?: any; item?: any }) => {
+export const isPremium = ({ session, item }: { session?: { data: { id: string; role?: { name: string }; paid?: boolean; expirationDate?: string } }; item?: { paid: boolean; expirationDate?: string }; context?: { query: { User: { findOne: (args: { where: { id: string }; query: string }) => Promise<{ stripeCustomerId: string }> } } } }) => {
     // Check if user is admin or if they have a valid payment
     if (session?.data?.role?.name === "Admin") return true;
 

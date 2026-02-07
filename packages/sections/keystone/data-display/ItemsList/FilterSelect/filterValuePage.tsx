@@ -2,9 +2,9 @@ import type { FieldMeta } from "@keystone-6/core/types";
 import React from "react";
 
 import type { IOption } from "@md/types";
-import type { TCondition } from "../../../common/utils/data-mapping/mapFilterParameters";
+import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
 import { Button, Input, Select } from "@md/components";
-import { toRelationSelect } from "../../../common/utils/data-mapping/toRelationSelect";
+import { toRelationSelect } from "@md/sections/keystone/common/utils/data-mapping/toRelationSelect";
 import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 import { upperCaseFirstLetter } from "@md/utils";
@@ -67,8 +67,7 @@ const FilterValuePage = ({
   }
 
   if (fieldType === "select") {
-    // @ts-ignore - FieldMeta got options property, which is not listed in keystone-6 types
-    selectOptions = field.fieldMeta?.options;
+    selectOptions = (field.fieldMeta as { options?: IOption[] } | undefined)?.options;
     selectValue = selectOptions?.filter(
       (option: IOption) => option.value === inputValues[fieldPath],
     )[0];
@@ -104,18 +103,15 @@ const FilterValuePage = ({
         {fieldType === "relation" && relationsOptions && (
           <Select
             value={relationsValue as IOption}
-            // @ts-ignore - StyledSelect expects (option: IOption) => void, and not string | IOption
-            onChange={handleRelationsChange}
+            onChange={handleRelationsChange as (option: IOption | null) => void}
             options={relationsOptions}
           />
         )}
         {fieldType === "select" && (
           <Select
             value={selectValue as IOption}
-            // @ts-ignore - StyledSelect expects (option: IOption) => void, and not string | IOption
-            onChange={onChange}
-            // @ts-ignore - FieldMeta got options property, which is not listed in keystone-6 types
-            options={field.fieldMeta?.options || []}
+            onChange={onChange as (option: IOption | null) => void}
+            options={(field.fieldMeta as { options?: IOption[] } | undefined)?.options || []}
           />
         )}
         <div className="flex justify-between pt-2">

@@ -1,1 +1,1 @@
-import { text, select, relationship, timestamp } from '@keystone-6/core/fields'; export function EquasionTextArea(config) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/EquasionTextArea/views' }; return text({ ...config, ui }); }
+import type { TextFieldConfig } from '@keystone-6/core/fields'; import { text } from '@keystone-6/core/fields'; export function EquasionTextArea(config: TextFieldConfig<never>) { const ui = { ...config.ui, views: '@md/sections/keystone/CustomFields/EquasionTextArea/views' }; return text({ ...config, ui }); }

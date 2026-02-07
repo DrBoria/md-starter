@@ -1,4 +1,4 @@
-import { PlainText } from '../../Typography';
+import { PlainText } from '@md/components/default/data-display/Typography';
 
 import { StyledTextCell } from './styles';
 
@@ -8,7 +8,7 @@ type TNavigationCellProps = {
   align?: 'center' | 'left' | 'right';
 };
 
-const NavigationCell = ({ text, link, align, ...props }: TNavigationCellProps) => {
+const NavigationCell = ({ text, link, align }: TNavigationCellProps) => {
   return (
     <StyledTextCell $align={align}>
       <PlainText>

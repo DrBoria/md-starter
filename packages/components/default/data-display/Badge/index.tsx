@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme } from "styled-components";
-import { Loader } from "../../feedback/Spinner";
+
+import { Loader } from "@md/components/default/feedback/Loading";
 import styled from "styled-components";
 
 interface BadgeProps {
@@ -19,7 +19,6 @@ export const BadgeContainer = styled.div<BadgeProps>`
   align-items: center;
   font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
   gap: ${({ theme }) => theme?.variables?.offsets?.betweenElements?.mobile || 0}px;
-
   background-color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
@@ -32,7 +31,6 @@ export const BadgeContainer = styled.div<BadgeProps>`
         return theme?.colors?.section || 'transparent';
     }
   }};
-
   color: ${({ theme, $status }) => {
     switch ($status) {
       case "approval":
@@ -52,27 +50,9 @@ export const Badge: React.FC<BadgeProps & { children?: React.ReactNode }> = ({
   isLoading,
   children,
 }) => {
-  const theme = useTheme() as any;
-
-
-  const getTextColor = () => {
-    switch ($status) {
-      case "approval":
-        return theme?.colors?.warningText || 'white';
-      case "success":
-        return theme?.colors?.successText || 'white';
-      case "failed":
-        return theme?.colors?.errorText || 'white';
-      default:
-        return theme?.colors?.sectionContent || 'black';
-    }
-  };
-
-  const textColor = getTextColor();
-
   return (
     <BadgeContainer $status={$status}>
-      {isLoading && <Loader $offsetRight $size="small" $color={textColor} />}
+      {isLoading && <Loader $size="small" className="mr-2" />}
       {children}
     </BadgeContainer>
   );

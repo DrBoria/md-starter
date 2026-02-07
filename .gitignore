@@ -115,3 +115,4 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+apps/_template-styleguide/styleguide

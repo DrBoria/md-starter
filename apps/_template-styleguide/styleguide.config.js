@@ -3,6 +3,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const path = require("path");
 const fs = require("fs");
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 function getComponentPathPatterns(basePath) {
   if (!fs.existsSync(basePath)) {
     return null; // If folder doesn’t exist, return null
@@ -224,6 +226,10 @@ module.exports = {
       alias: {
         "react-native$": "react-native-web",
         components: path.resolve(__dirname, "../../packages/components"),
+        "@md/native": path.resolve(__dirname, "../../packages/native"),
+        "@md/sections": path.resolve(__dirname, "../../packages/sections"),
+        "@md/components": path.resolve(__dirname, "../../packages/components"),
+        "@md/styles": path.resolve(__dirname, "../../packages/styles"),
       },
       modules: [
         path.resolve(__dirname, "../../node_modules"),
@@ -251,7 +257,9 @@ module.exports = {
                 "@babel/preset-flow",
                 "@babel/preset-typescript",
               ],
-              plugins: ["react-refresh/babel"],
+              plugins: [
+                isDevelopment && "react-refresh/babel"
+              ].filter(Boolean),
             },
           },
         },
@@ -277,9 +285,9 @@ module.exports = {
       new DefinePlugin({
         process: { env: {} },
       }),
-      new HotModuleReplacementPlugin(), // Enable HMR
-      new ReactRefreshWebpackPlugin(),  // Enable React Fast Refresh
-    ],
+      isDevelopment && new HotModuleReplacementPlugin(), // Enable HMR
+      isDevelopment && new ReactRefreshWebpackPlugin(),  // Enable React Fast Refresh
+    ].filter(Boolean),
   },
   sections,
   styleguideComponents: {

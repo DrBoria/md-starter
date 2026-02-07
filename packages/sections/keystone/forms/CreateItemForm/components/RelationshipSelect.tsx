@@ -4,12 +4,22 @@ import { useQuery } from '@apollo/client';
 import { Select } from '@md/components/default/forms/Form/Select';
 import type { TOption } from '@md/components/default/forms/Form/Select';
 import { FormLabel } from '@md/components/default/forms/Form/FormLabel';
-import { SubTitle } from '@md/components/default/data-display/Typography';
+
+interface FieldProps {
+    fieldMeta: {
+        refListKey: string;
+        refLabelField?: string;
+        [key: string]: unknown;
+    } | null;
+    path: string;
+    label: string;
+    [key: string]: unknown;
+}
 
 interface RelationshipSelectProps {
-    field: any;
-    value: any;
-    onChange: (value: any) => void;
+    field: FieldProps;
+    value: { value: { id: string; label?: string } } | null;
+    onChange: (value: unknown) => void;
 }
 
 export const RelationshipSelect: React.FC<RelationshipSelectProps> = ({
@@ -17,10 +27,10 @@ export const RelationshipSelect: React.FC<RelationshipSelectProps> = ({
     value,
     onChange,
 }) => {
-    const listName = field.fieldMeta.refListKey;
-    const labelField = field.fieldMeta.refLabelField || 'name';
+    const listName = field.fieldMeta?.refListKey || '';
+    const labelField = field.fieldMeta?.refLabelField || 'name';
 
-    const { data, loading } = useQueryList({
+    const { data } = useQueryList({
         listName,
         selectedFields: `id ${labelField}`,
         useQuery,
@@ -28,15 +38,15 @@ export const RelationshipSelect: React.FC<RelationshipSelectProps> = ({
 
     const options: TOption[] = useMemo(() => {
         if (!data?.items) return [];
-        return data.items.map((item: any) => ({
-            label: item[labelField] || item.id,
+        return data.items.map((item: { id: string;[key: string]: unknown }) => ({
+            label: (item[labelField] as string) || item.id,
             value: item.id,
         }));
     }, [data, labelField]);
 
     const selectedOption = useMemo(() => {
         if (!value?.value) return null;
-        return options.find((opt) => opt.value === value.value.id) || null;
+        return options.find((opt) => opt.value === value.value?.id) || null;
     }, [value, options]);
 
     const handleChange = (option: TOption | null) => {

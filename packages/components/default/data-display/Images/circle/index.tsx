@@ -10,15 +10,14 @@ type ICircleImageProps = {
     width?: number;
     height?: number;
     priority?: boolean;
-    zIndex?: ZIndexName,
+    zIndex?: ZIndexName;
 }
 
-const ImageWrapper = styled(Image as any).attrs<{ $zIndex?: ZIndexName, $isHalfSize?: boolean }>({})`
+const ImageWrapper = styled(Image) <{ $zIndex?: ZIndexName; $isHalfSize?: boolean }>`
     width: auto;
     height: auto;
     max-height: 100%;
     max-width: 100%;
-
     z-index: ${({ $zIndex = 'content' }) => getZIndex($zIndex)};
 `
 
@@ -29,7 +28,6 @@ const CircleImage = forwardRef<HTMLImageElement, ICircleImageProps>(({ src, alt 
         width={width}
         height={height}
         priority={priority}
-        // @ts-ignore
         $zIndex={zIndex}
         ref={ref}
     />

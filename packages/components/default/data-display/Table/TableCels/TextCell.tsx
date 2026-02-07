@@ -1,16 +1,21 @@
-import { PlainText } from '../../Typography';
-
+import React from 'react';
+import { PlainText } from '@md/components/default/data-display/Typography';
 import { StyledTextCell } from './styles';
 
 interface TextCellProps {
-  text: string | number;
+  text: string | number | React.ReactNode;
   align?: 'left' | 'center' | 'right';
+  weight?: 'bold' | 'regular';
 }
 
-const TextCell: React.FC<TextCellProps> = ({ text, align }) => {
+const TextCell: React.FC<TextCellProps> = ({ text, align, weight = 'regular' }) => {
   return (
     <StyledTextCell $align={align}>
-      <PlainText>{text}</PlainText>
+      {weight === 'bold' ? (
+        <PlainText><b>{text}</b></PlainText>
+      ) : (
+        <PlainText>{text}</PlainText>
+      )}
     </StyledTextCell>
   );
 };

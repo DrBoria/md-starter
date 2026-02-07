@@ -7,7 +7,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
+    "lint": "eslint . && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "build": "tsc && copyfiles -u 0 \"**/*.{svg,jpg,jpeg,png,webp,gif,ico,css}\" dist",
     "copy-assets": "copyfiles -u 0 \"**/*.{svg,jpg,jpeg,png,webp,gif,ico,css}\" dist"
@@ -46,6 +46,7 @@
     "@eslint/js": "^9.9.1",
     "@md/components": "workspace:*",
     "@md/eslint": "workspace:*",
+    "@md/tsconfig": "workspace:*",
     "@md/types": "workspace:*",
     "@types/node": "22.13.10",
     "@types/react": "^18.3.11",

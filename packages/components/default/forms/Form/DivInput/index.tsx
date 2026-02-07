@@ -38,21 +38,21 @@ const StyledInputContainer = styled.div<{ $isFocused: boolean }>`
   cursor: text;
   white-space: nowrap;
 
-  // Стили при фокусе
+  /* Стили при фокусе */
   ${({ $isFocused, theme }) =>
     $isFocused && `border-color: ${theme?.colors?.highlighted || 'blue'};`}
 
-  // Стили плейсхолдера
-  &:empty:before {
+  /* Стили плейсхолдера */
+  &:empty::before {
     content: attr(data-placeholder);
     color: ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
   }
 
-  // Маскировка пароля
+  /* Маскировка пароля */
   &.password {
     -webkit-text-security: disc;
-    -webkit-appearance: textfield;
-    -webkit-user-select: text;
+    appearance: textfield;
+    user-select: text;
   }
 `;
 

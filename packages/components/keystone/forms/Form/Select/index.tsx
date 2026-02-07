@@ -25,8 +25,8 @@ const SelectedValueWrapper = styled.div`
   border-radius: 6px;
   border-style: solid;
   border-width: 1px;
-  color: #374151;
-  background-color: #f9fafb;
+  color: ${({ theme }) => theme?.colors?.sectionContent || '#374151'};
+  background-color: ${({ theme }) => theme?.colors?.section || '#f9fafb'};
   cursor: pointer;
 `;
 
@@ -35,34 +35,34 @@ const Dropdown = styled.ul`
   top: 100%;
   left: 0;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme?.colors?.disabled || '#ccc'};
   max-height: 200px;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme?.colors?.surface || '#fff'};
   list-style-type: none;
   padding: 0;
   margin: 0;
   margin-top: 8px;
   border-radius: 8px;
   z-index: 1;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Adds shadow effect */
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`
   padding: 10px 15px;
-  background-color: ${({ $highlighted }) => ($highlighted ? "#007bff" : "#fff")};
-  color: ${({ $highlighted }) => ($highlighted ? "#fff" : "#000")};
+  background-color: ${({ $highlighted, theme }) => ($highlighted ? (theme?.colors?.highlighted || "#007bff") : (theme?.colors?.surface || "#fff"))};
+  color: ${({ $highlighted, theme }) => ($highlighted ? (theme?.colors?.highlightedText || "#fff") : (theme?.colors?.text || "#000"))};
   font-size: 14px;
   cursor: pointer;
 
   &:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: ${({ theme }) => theme?.colors?.highlighted || '#007bff'};
+    color: ${({ theme }) => theme?.colors?.highlightedText || '#fff'};
   }
 `;
 
 const IconsContainer = styled.div`
-  color: #b1b5b9;
+  color: ${({ theme }) => theme?.colors?.disabled || '#b1b5b9'};
   display: flex;
   gap: 0.5rem;
   padding-left: 0.5rem;
@@ -70,7 +70,7 @@ const IconsContainer = styled.div`
 
 const NoOptions = styled.li`
   padding: 10px;
-  color: #999;
+  color: ${({ theme }) => theme?.colors?.disabled || '#999'};
 `;
 
 const ClearButton = styled.button`
@@ -83,14 +83,14 @@ const ClearButton = styled.button`
 
 const Separator = styled.div`
   width: 1px;
-  background-color: hsl(0, 0%, 80%);
+  background-color: hsl(0deg 0% 80%);
   margin-bottom: 4px;
   margin-top: 4px;
   box-sizing: border-box;
 `;
 
 const Placeholder = styled.span`
-  color: #b4b8bc;
+  color: ${({ theme }) => theme?.colors?.disabled || '#b4b8bc'};
 `;
 const Select: React.FC<SelectProps> = ({
   options,
