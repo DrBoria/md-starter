@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "../Form";
-import { Button } from "../Button";
+import { Input, Button } from "@md/components/default/forms";
 import { FieldContainer, FlexContainer, FieldLabel, FieldDescription } from "./styles";
 
 interface TokenInputFieldProps {

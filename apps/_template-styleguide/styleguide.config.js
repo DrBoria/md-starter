@@ -198,7 +198,6 @@ module.exports = {
     useEffect: 'react',
     useMemo: 'react',
     useCallback: 'react',
-    require: 'require',
   },
   tocMode: "collapse",
   dangerouslyUpdateWebpackConfig(webpackConfig) {
@@ -231,6 +230,7 @@ module.exports = {
         "@md/sections": path.resolve(__dirname, "../../packages/sections"),
         "@md/components": path.resolve(__dirname, "../../packages/components"),
         "@md/styles": path.resolve(__dirname, "../../packages/styles"),
+        "@md/utils": path.resolve(__dirname, "../../packages/utils"),
       },
       modules: [
         path.resolve(__dirname, "../../node_modules"),

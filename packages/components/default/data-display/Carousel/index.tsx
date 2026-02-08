@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import type { FC, ReactNode } from 'react';
 import React, { useRef, useState } from 'react';
-import { Column, ColumnsContainer } from '../../layout/Containers';
-import { CircleImage } from '../Images';
-import { PlainText, SectionTitle } from '../Typography';
+import { Column, ColumnsContainer, ConditionalWrapper } from '@md/components/default/layout';
+import { CircleImage, PlainText, SectionTitle } from '@md/components/default/data-display';
 import { debounce, useIsMobile } from '@md/utils';
-import ConditionalWrapper from '../../layout/ConditionalWrapper';
 import ArrowIcon from './arrow.svg'
 
 const CarouselPage = styled.div<{ $isMobile: boolean | null, $slidsCount: number }>`

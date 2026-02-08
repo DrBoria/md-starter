@@ -3,6 +3,7 @@ import { list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 
 // import type { TOperation } from "@/types";
+// eslint-disable-next-line no-restricted-imports
 import { ALLOW_ROLES_MANAGEMENT } from "../env";
 
 import { isAdmin } from "./utils/access";

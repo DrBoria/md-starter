@@ -1,5 +1,4 @@
 import type { NavigationProps } from "@keystone-6/core/admin-ui/components";
-import type { ListMeta } from "@keystone-6/core/types";
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";

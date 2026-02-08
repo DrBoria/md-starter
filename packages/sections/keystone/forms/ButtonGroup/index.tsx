@@ -1,8 +1,9 @@
+/* eslint-disable no-restricted-imports */
 import React from "react";
 import { Button } from "@md/components";
+import { ThemeProvider } from "@md/styles";
 
 import { DeleteTemplate } from "../../overlays/Modals/templates";
-import { ThemeProvider } from "@md/styles";
 
 interface TButtonGroupProps {
   isPristine: boolean;

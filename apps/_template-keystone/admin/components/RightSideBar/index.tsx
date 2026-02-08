@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
 // import type { TOperation } from "@/types";
+// eslint-disable-next-line no-restricted-imports
 import type { TSideBarModalDataKeystone } from "../../../types";
 
 const slideInAnimation = css`

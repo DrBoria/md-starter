@@ -1,13 +1,14 @@
+/* eslint-disable no-restricted-imports */
 import type { Dispatch, SetStateAction } from "react";
 import React, { useEffect, useMemo } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import type { TValue } from "@md/types";
 import { Tabs } from "@md/components";
-import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
+import { useCreateItem } from "../../../common/utils/useCreateItem";
+import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
+import { useFieldsData } from "../../../common/utils/useFieldsData";
 
 export interface ITabs {
   // Names / Buttons that will be displayed to switch tabs

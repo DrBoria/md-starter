@@ -4,7 +4,6 @@ import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
 
 // eslint-disable-next-line no-restricted-imports
 import type { Value } from "../utils/validate";
-// @ts-expect-error fix import path
 import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
@@ -16,6 +15,7 @@ import {
   Input,
   Label,
 } from "@md/components";
+// eslint-disable-next-line no-restricted-imports
 import { validate } from "../utils/validate";
 
 function Field({

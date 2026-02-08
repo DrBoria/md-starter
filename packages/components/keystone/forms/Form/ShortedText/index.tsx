@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { LucideIcon } from "../../../../default/common/Icons";
-import { useLogger } from "../../../feedback/Logger";
-import { ColumnsContainer } from "../../../../default/layout/Containers";
+import { LucideIcon } from "@md/components/default/common";
+import { useLogger } from "@md/components/keystone";
+import { ColumnsContainer } from "@md/components/default/layout";
 
 interface TShortedTextProps {
   text: string | null;

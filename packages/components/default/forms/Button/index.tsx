@@ -1,7 +1,7 @@
 import React from "react";
-import type { IconName } from "../../common/Icons";
-import { LucideIcon } from "../../common/Icons";
-import { Loader } from "../../feedback/Loading";
+import type { IconName } from "@md/components/default/common";
+import { LucideIcon } from "@md/components/default/common";
+import { Loader } from "@md/components/default/feedback";
 import { StyledButton } from "./styles";
 
 export type ButtonSize = "small" | "medium" | "large" | "icon";

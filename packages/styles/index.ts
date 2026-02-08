@@ -18,6 +18,7 @@ export {
     withOffsetBottom,
     withOffsetsRight,
     withSpaceBetween,
+    basicFont,
 } from './helpers';
 export type { TFullWidth, TWithBasicElementOffsets, TWithSpaceBetween } from './helpers';
 

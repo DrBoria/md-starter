@@ -1,9 +1,11 @@
+/* eslint-disable no-restricted-imports */
 import type { FieldMeta } from "@keystone-6/core/types";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@md/components";
 import { ChevronDownIcon } from "@keystone-ui/icons";
-
+import { upperCaseFirstLetter } from "@md/utils";
 import type { IOption } from "@md/types";
+
 import type {
   ConditionType,
   TCondition,
@@ -15,7 +17,6 @@ import {
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
 import { FilterDropdown, FilterWrapper } from "./styles";
-import { upperCaseFirstLetter } from "@md/utils";
 
 interface IFilterSelectProps {
   fields: FieldMeta[];

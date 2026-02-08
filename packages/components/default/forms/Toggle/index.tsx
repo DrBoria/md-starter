@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LucideIcon } from "../../common/Icons";
+import { LucideIcon } from "@md/components/default/common";
 import { MainContainer, ToggleContent, Title, ArrowContainer, ChildrensContainer } from "./styles";
 
 interface ToggleProps {

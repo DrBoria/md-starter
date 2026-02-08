@@ -131,5 +131,5 @@ export interface ThemeInterface {
 }
 
 declare module 'styled-components' {
-    export interface DefaultTheme extends ThemeInterface { }
+    export type DefaultTheme = ThemeInterface
 }

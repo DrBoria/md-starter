@@ -1,12 +1,10 @@
 import styled, { css } from "styled-components";
 import type { TWithBasicElementOffsets } from '@md/styles';
-import { withOffsetBottom, withOffsetsRight } from '@md/styles';
+import { withOffsetBottom, withOffsetsRight, basicFont } from '@md/styles';
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
-export const basicFont = css`
-  ${({ theme }) => `500 ${theme?.font?.sizes?.regular || '1rem'} ${theme?.fontFamily || theme?.font?.family?.text || 'sans-serif'}`}
-`;
+export { basicFont };
 
 const sizes = {
   PlainText: { fontSize: '1.1rem', lineHeight: '1.5rem' },

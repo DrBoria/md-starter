@@ -4,5 +4,6 @@
       "mode": "auto"
     }
   ],
-  "CodeGPT.apiKey": "grok"
+  "CodeGPT.apiKey": "grok",
+  "mdSearch.prettier": true
 }

@@ -2,7 +2,7 @@
 /* stylelint-disable media-query-no-invalid */
 import styled from "styled-components";
 import Link from "next/link";
-import { LucideIcon } from "../../common/Icons";
+import { LucideIcon } from "@md/components/default/common";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 

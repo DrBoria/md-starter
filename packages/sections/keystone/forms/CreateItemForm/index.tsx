@@ -1,23 +1,24 @@
+/* eslint-disable no-restricted-imports */
 import { FieldRenderer } from './components/FieldRenderer';
 import React, { useState } from "react";
 
 import { useRouter } from "next/router";
 
 import type { TValue } from "@md/types";
-import type { TConditionalField } from "../DynamicForms/ConditionalField";
+import type { TConditionalField } from "../DynamicForms";  // Assuming export from index.ts
+import type { ITabs } from "../DynamicForms/TabsFields";
 import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+
 import { ConditionalField } from "../DynamicForms/ConditionalField";
-import {
-  getAllConditionalFieldsNames,
-  getConditionalSubFieldsdNames,
-} from "../DynamicForms/ConditionalField/utils";
+import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "../DynamicForms/ConditionalField/utils";
 import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
 import { getNotDisplayedDefaultValues } from "../../common/utils/data-mapping/getNonDisplayedDefaultValues";
 import { useCreateItem } from "../../common/utils/useCreateItem";
 import { useFieldsData } from "../../common/utils/useFieldsData";
+import { TabsFields } from "../DynamicForms/TabsFields";
+import { getAllTabsFieldsNames } from "../DynamicForms/TabsFields/utils";
+
 import { ButtonGroup } from "./buttonGroup";
-import type { ITabs } from "../DynamicForms";
-import { getAllTabsFieldsNames, TabsFields } from "../DynamicForms";
 import type { IModalButton } from "@md/components";
 
 export interface ICreateItemForm {

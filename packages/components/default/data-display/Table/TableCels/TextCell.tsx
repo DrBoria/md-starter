@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlainText } from '../../Typography';
+import { PlainText } from '@md/components/default/data-display';
 import { StyledTextCell } from './styles';
 
 interface TextCellProps {

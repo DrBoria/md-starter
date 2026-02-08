@@ -1,31 +1,30 @@
+/* eslint-disable no-restricted-imports */
 import type { FieldMeta } from "@keystone-6/core/types";
 import type { Dispatch, SetStateAction } from "react";
 import React, { useState } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 import type { TValue } from "@md/types";
-
-import { useFieldsData } from "../../common/utils/useFieldsData";
-
-import "./index.css";
-
-import { useRouter } from "next/router";
-
 import { toKebabCase } from "@md/utils";
 import { useDeleteMutation } from "@md/api/graphql";
-import { ConditionalField } from "../DynamicForms/ConditionalField";
-import {
-  getAllConditionalFieldsNames,
-  getConditionalSubFieldsdNames,
-} from "../DynamicForms/ConditionalField/utils";
-import { TabsFields } from "../DynamicForms/TabsFields";
-import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
-import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
-import { ButtonGroup } from "./buttonGroup";
-import { getAllTabsFieldsNames } from "../DynamicForms";
-import type { ITabs, TConditionalField } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useLogger } from "@md/components/keystone";
 import type { IModalButton } from "@md/components";
+
+import type { TConditionalField } from "../DynamicForms"; // Assuming export from index.ts
+import type { ITabs } from "../DynamicForms/TabsFields";
+import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+
+import { useFieldsData } from "../../common/utils/useFieldsData";
+import { ConditionalField } from "../DynamicForms/ConditionalField";
+import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "../DynamicForms/ConditionalField/utils";
+import { TabsFields } from "../DynamicForms/TabsFields";
+import { getAllTabsFieldsNames } from "../DynamicForms/TabsFields/utils";
+import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+
+import { ButtonGroup } from "./buttonGroup";
+
+import "./index.css";
 
 interface IEditItemFormProps {
   listName: string;

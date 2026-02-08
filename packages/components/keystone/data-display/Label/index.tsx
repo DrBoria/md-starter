@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import type { IconName } from "../../../default/common/Icons";
-import { LucideIcon } from "../../../default/common/Icons";
+import type { IconName } from "@md/components/default/common";
+import { LucideIcon } from "@md/components/default/common";
 
 const LabelContainer = styled.div`
   font-size: 0.875rem;

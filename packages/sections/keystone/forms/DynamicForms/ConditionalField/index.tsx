@@ -1,11 +1,11 @@
+/* eslint-disable no-restricted-imports */
 import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
-
 import type { TValue } from "@md/types";
-import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
+import { useCreateItem } from "../../../common/utils/useCreateItem";
+import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
+import { useFieldsData } from "../../../common/utils/useFieldsData";
 
 interface FieldValue {
   fieldName: string;

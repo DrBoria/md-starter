@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { LucideIcon } from "../../../common";
-import { Input } from "../Input";
+import { LucideIcon } from "@md/components/default/common";
+import { Input } from "@md/components/default/forms";
 
 export type TOption = {
   label: string;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Loader } from "../../feedback";
+import { Loader } from "@md/components/default/feedback";
 import styled from "styled-components";
 
 interface BadgeProps {

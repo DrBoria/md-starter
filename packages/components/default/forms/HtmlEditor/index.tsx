@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { Button } from "../Button";
+import { Button } from "@md/components/default/forms";
 import { CodeEditorContainer } from "./styles";
 
 // Dynamic import for CodeEditor to avoid SSR issues

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { useModal } from "../useModal";
-import { ModalContainer, Overlay, StyledModal, ModalContentContainer } from "..";
+import { useModal, ModalContainer, Overlay, StyledModal, ModalContentContainer } from "..";
 
 export const CentralModal = () => {
   const { modalData, setModalData } = useModal();

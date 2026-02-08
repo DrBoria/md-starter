@@ -1,19 +1,19 @@
+/* eslint-disable no-restricted-imports */
 import type { DeserializedValue, Value } from "@keystone-6/core/admin-ui/utils";
 import type { KeyboardEvent } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { Button } from "@md/components";
-import { useLogger } from "@md/components/keystone";
+import { Button, Pagination, Loading, Input, Select, PlainText, SectionTitle, Link } from "@md/components";
+import { useLogger, Label, Checkbox } from "@md/components/keystone";
 import { ArrowRightIcon } from "@keystone-ui/icons";
-
+import { toKebabCase, lowerCaseFirstLetter } from "@md/utils";
+import { getFieldType, useDeleteMutation } from "@md/api/graphql";
+import { useMutation } from "@apollo/client";
 import type { IGraphQLObject, IOption } from "@md/types";
+
 import type { TCondition } from "../../common/utils/data-mapping/mapFilterParameters";
 import type { TOrderBy } from "../../common/utils/getNextSortOrder";
-import { toKebabCase, lowerCaseFirstLetter } from "@md/utils";
-import { Pagination, Loading, Input, Select, PlainText, SectionTitle, Link } from "@md/components";
-import { Label, Checkbox } from "@md/components/keystone";
-import { getFieldType, useDeleteMutation } from "@md/api/graphql";
 import { getGQLFields } from "../../common/utils/data-mapping/getGQLFields";
 import {
   filterToPath,
@@ -24,6 +24,8 @@ import {
 } from "../../common/utils/data-mapping/mapFilterParameters";
 import { getNextSortOrder } from "../../common/utils/getNextSortOrder";
 import { useFieldsData } from "../../common/utils/useFieldsData";
+import { DeleteTemplate } from "../../overlays/Modals/templates";
+import { NotFoundSection } from "../../feedback/NotFoundSection";
 import { EditableCell } from "./EditableCell";
 import { FilterSelect } from "./FilterSelect";
 import {
@@ -36,9 +38,6 @@ import {
   TableHeader,
 } from "./styles";
 import { ViewCell } from "./ViewCell";
-import { DeleteTemplate } from "../../overlays/Modals/templates";
-import { NotFoundSection } from "../../feedback/NotFoundSection";
-import { useMutation } from "@apollo/client";
 
 interface FieldLabel {
   field: string;

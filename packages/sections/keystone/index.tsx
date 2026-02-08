@@ -26,10 +26,26 @@ export type { TConditionalField, ITabs } from './forms/DynamicForms'
 export { filterAllowedKeys, filterNotAllowedKeys } from './common/utils/filterKeys';
 export { getNextSortOrder } from './common/utils/getNextSortOrder';
 export { useCreateItem } from './common/utils/useCreateItem';
+export type { CreateItemHookResult } from './common/utils/useCreateItem';
 export { useFieldsData } from './common/utils/useFieldsData';
 export { useGetSessionData } from './common/utils/useGetSessionData';
 export { usePreventNavigation } from './common/utils/usePreventNavigation';
 export { useSignOut } from './common/utils/useSignOut';
+export { getDeserializedValue } from './common/utils/data-mapping/getDeserializedValue';
+export type { ISerializedValue } from './common/utils/data-mapping/getDeserializedValue';
+export { getNotDisplayedDefaultValues } from './common/utils/data-mapping/getNonDisplayedDefaultValues';
+export { getGQLFields } from './common/utils/data-mapping/getGQLFields';
+export {
+    filterToPath,
+    filterToWhereParameters,
+    parseQuery,
+    pathToFilter,
+    pathToWhereParameters,
+    whereParameterToCondition,
+    whereParameterToInput,
+} from './common/utils/data-mapping/mapFilterParameters';
+export type { TCondition, ConditionType } from './common/utils/data-mapping/mapFilterParameters';
+export type { TOrderBy } from './common/utils/getNextSortOrder';
 
 // Custom Fields (imported directly where needed in schema)
 // export * from './CustomFields/DynamicStatusLabel';

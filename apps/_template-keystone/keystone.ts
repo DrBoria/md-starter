@@ -64,6 +64,7 @@ export default withAuth(
     ui: {
       isAccessAllowed: (context) => !isBanned(context),
       getAdditionalFiles: [
+        // eslint-disable-next-line @typescript-eslint/require-await
         async () => [
           {
             mode: 'copy',
