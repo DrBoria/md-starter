@@ -20,8 +20,7 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 function Posts() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data, refetch } = useQueryList<QueryResult<{ items: any[] }>>({
+    const { data, refetch } = useQueryList<QueryResult<{ items: { id: string; name: string; createdAt: string }[] }>>({
         listName: "Post",
         selectedFields: 'id name createdAt',
         useQuery

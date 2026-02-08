@@ -12,8 +12,7 @@ const googleClient = new OAuth2Client(WebClientId);
 // we use an expiry of 30 days for this starter
 const sessionMaxAge = 60 * 60 * 24 * 30;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const sessionStrategy: any = statelessSessions({
+const sessionStrategy = statelessSessions({
   maxAge: sessionMaxAge,
   secret: SESSION_SECRET,
 });

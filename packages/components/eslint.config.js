@@ -1,3 +1,3 @@
 const reactConfig = require("@md/eslint/next");
 
-module.exports = reactConfig; 
+module.exports = reactConfig;

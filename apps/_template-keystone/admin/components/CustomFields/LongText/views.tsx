@@ -1,6 +1,5 @@
 import type { CellComponent, FieldProps } from "@keystone-6/core/types";
 import React from "react";
-// @ts-expect-error fix import path
 import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
 

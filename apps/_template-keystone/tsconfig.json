@@ -6,6 +6,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@_app_original": [
+        ".keystone/admin/pages/_app_original"
       ]
     }
   },

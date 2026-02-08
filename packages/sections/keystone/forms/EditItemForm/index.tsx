@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import type { FieldMeta } from "@keystone-6/core/types";
 import type { Dispatch, SetStateAction } from "react";
 import React, { useState } from "react";
@@ -11,16 +10,16 @@ import { useRouter } from "next/router";
 import { useLogger } from "@md/components/keystone";
 import type { IModalButton } from "@md/components";
 
-import type { TConditionalField } from "../DynamicForms"; // Assuming export from index.ts
-import type { ITabs } from "../DynamicForms/TabsFields";
-import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import type { TConditionalField } from "@md/sections/keystone/forms/DynamicForms";
+import type { ITabs } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
+import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
 
-import { useFieldsData } from "../../common/utils/useFieldsData";
-import { ConditionalField } from "../DynamicForms/ConditionalField";
-import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "../DynamicForms/ConditionalField/utils";
-import { TabsFields } from "../DynamicForms/TabsFields";
-import { getAllTabsFieldsNames } from "../DynamicForms/TabsFields/utils";
-import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
+import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
+import { TabsFields } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
+import { getAllTabsFieldsNames } from "@md/sections/keystone/forms/DynamicForms/TabsFields/utils";
+import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
 
 import { ButtonGroup } from "./buttonGroup";
 
@@ -141,16 +140,13 @@ const EditItemForm = ({
         // If user chose new value for conditional field - it will be storred in createConditionalItems, othervise - we will take previous value
         const masterFieldSerializedValue =
           createConditionalItems?.[masterField.fieldName] ||
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-          (notRenderedFieldValues?.[masterField.fieldName] as unknown);
+          (notRenderedFieldValues?.[masterField.fieldName] as ISerializedValue);
         const masterFieldValue = getDeserializedValue(
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           masterFieldSerializedValue as ISerializedValue,
         );
 
         const conditionalSubfieldNames = getConditionalSubFieldsdNames(
           masterField,
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           masterFieldValue as string,
         );
         conditionalFieldsValues[masterField.fieldName] = masterFieldValue;
@@ -173,8 +169,7 @@ const EditItemForm = ({
           // Set value for every Displayed subfield
           Object.keys(subFieldList).forEach((subfieldName) => {
             conditionalFieldsValues[subfieldName] = getDeserializedValue(
-              // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-              subFieldList[subfieldName] as unknown as ISerializedValue,
+              subFieldList[subfieldName] as ISerializedValue,
             );
           });
         }
@@ -189,8 +184,7 @@ const EditItemForm = ({
     if (tabs && tabsList) {
       for (const [key, value] of Object.entries(tabsList)) {
         if (key === "id") continue;
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        tabFieldsValues[key] = getDeserializedValue(value as unknown as ISerializedValue);
+        tabFieldsValues[key] = getDeserializedValue(value as ISerializedValue);
       }
     }
 
@@ -302,8 +296,7 @@ const EditItemForm = ({
         key="edit-tabs-fields"
         itemId={itemId}
         setResetStates={setResetStatesTabs}
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        onTabsFieldChange={setTabsList as unknown as Dispatch<SetStateAction<null | ((newValue: TValue) => void)>>}
+        onTabsFieldChange={setTabsList as Dispatch<SetStateAction<null | ((newValue: TValue) => void)>>}
         listName={listName}
         tabs={tabs}
       />
@@ -312,7 +305,7 @@ const EditItemForm = ({
     // buttons
     <ButtonGroup
       key="edit-button-group"
-      isPristine={isPristine}
+      isPristine={!!isPristine}
       listName={listName}
       onUpdate={handleOnUpdate}
       onReset={resetAllState}

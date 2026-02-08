@@ -1,22 +1,21 @@
-/* eslint-disable no-restricted-imports */
 import { FieldRenderer } from './components/FieldRenderer';
 import React, { useState } from "react";
 
 import { useRouter } from "next/router";
 
 import type { TValue } from "@md/types";
-import type { TConditionalField } from "../DynamicForms";  // Assuming export from index.ts
-import type { ITabs } from "../DynamicForms/TabsFields";
-import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import type { TConditionalField } from "@md/sections/keystone/forms/DynamicForms";  // Assuming export from index.ts
+import type { ITabs } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
+import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
 
-import { ConditionalField } from "../DynamicForms/ConditionalField";
-import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "../DynamicForms/ConditionalField/utils";
-import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
-import { getNotDisplayedDefaultValues } from "../../common/utils/data-mapping/getNonDisplayedDefaultValues";
-import { useCreateItem } from "../../common/utils/useCreateItem";
-import { useFieldsData } from "../../common/utils/useFieldsData";
-import { TabsFields } from "../DynamicForms/TabsFields";
-import { getAllTabsFieldsNames } from "../DynamicForms/TabsFields/utils";
+import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
+import { getAllConditionalFieldsNames, getConditionalSubFieldsdNames } from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
+import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
+import { getNotDisplayedDefaultValues } from "@md/sections/keystone/common/utils/data-mapping/getNonDisplayedDefaultValues";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import { TabsFields } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
+import { getAllTabsFieldsNames } from "@md/sections/keystone/forms/DynamicForms/TabsFields/utils";
 
 import { ButtonGroup } from "./buttonGroup";
 import type { IModalButton } from "@md/components";
@@ -78,8 +77,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
   const createItem = useCreateItem(fieldsData.list, false, defaultValues);
 
   const fieldsDataArray = fieldGroups.map((groupFields, index) => {
-    // DEBUG: Log fields to inspect structure
-    console.log('CreateItemForm fields:', fieldsData.list.fields);
+
 
     // For groupFields === [] we should render all fields, except passed
     // Use it when you want dynamically render fields listed in schema without direct mentioning
@@ -138,7 +136,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
         const masterFieldValue = getDeserializedValue(
           createConditionalItems?.[
           masterField.fieldName
-          ] as unknown as ISerializedValue,
+          ] as ISerializedValue,
         ) as string;
 
         // Set value for master field
@@ -153,7 +151,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
           if (subFieldList) {
             conditionalSubfieldNames.forEach((subfieldName: string) => {
               conditionalFieldsValues[subfieldName] = getDeserializedValue(
-                subFieldList[subfieldName] as unknown as ISerializedValue,
+                subFieldList[subfieldName] as ISerializedValue,
               );
             });
           }

@@ -37,9 +37,12 @@ const ShortedText: React.FC<TShortedTextProps> = ({
           description: text,
         });
       })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to copy text: ', error);
+      .catch((error: unknown) => {
+        add({
+          title: "Error copying text",
+          tone: "negative",
+          description: error instanceof Error ? error.message : "Unknown error",
+        });
       });
   };
 

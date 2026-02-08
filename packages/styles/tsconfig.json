@@ -2,7 +2,13 @@
   "extends": "@md/tsconfig/react.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@md/styles/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

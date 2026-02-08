@@ -1,11 +1,10 @@
-/* eslint-disable no-restricted-imports */
 import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 import type { TValue } from "@md/types";
 import { ThemeProvider } from "@md/styles";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import type { CreateItemHookResult } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 
 interface FieldValue {
   fieldName: string;
@@ -48,8 +47,7 @@ const ConditionalField = ({
 
   if (!itemId) {
     // useCreateItem is only for Create Form
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    createConditionalItems = useCreateItem(conditionalFieldList.list as never, true);
+    createConditionalItems = useCreateItem(conditionalFieldList.list, true);
   }
 
   const rawValue = itemId
@@ -59,7 +57,8 @@ const ConditionalField = ({
   // Helper to extract value from TValue union
   const extractValue = (val: unknown) => {
     if (typeof val === 'object' && val !== null && 'kind' in val && (val as { kind: string }).kind === 'value') {
-      return (val as unknown as { value: string }).value;
+      const v: unknown = val;
+      return (v as { value: string }).value;
     }
     return undefined;
   };
@@ -83,8 +82,7 @@ const ConditionalField = ({
 
   let subFieldsCreateList: CreateItemHookResult | undefined;
   if (subFieldsList?.list) {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    subFieldsCreateList = useCreateItem(subFieldsList?.list as never, true);
+    subFieldsCreateList = useCreateItem(subFieldsList.list, true);
   }
 
   const handleOnChangeMasterField = (newValue: (value: TValue) => TValue) => {

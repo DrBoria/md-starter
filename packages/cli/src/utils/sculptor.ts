@@ -54,7 +54,6 @@ export async function pruneComponents(targetDir: string, componentPkg: string, k
                         else if (node.getKind() === SyntaxKind.JsxElement) {
                             // JsxElement has openingElement and closingElement
                             // We check the opening element's tag name
-                            // @ts-ignore - checking methods dynamically or knowing types
                             const opening = (node as any).getOpeningElement() as JsxOpeningElement;
                             if (opening && removedNames.includes(opening.getTagNameNode().getText())) {
                                 nodesToRemove.push(node);

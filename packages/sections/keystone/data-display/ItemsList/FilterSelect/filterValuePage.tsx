@@ -1,11 +1,10 @@
-/* eslint-disable no-restricted-imports */
 import type { FieldMeta } from "@keystone-6/core/types";
 import React from "react";
 
 import type { IOption } from "@md/types";
-import type { TCondition } from "../../../common/utils/data-mapping/mapFilterParameters";
+import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
 import { Button, Input, Select } from "@md/components";
-import { toRelationSelect } from "../../../common/utils/data-mapping/toRelationSelect";
+import { toRelationSelect } from "@md/sections/keystone/common/utils/data-mapping/toRelationSelect";
 import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 import { upperCaseFirstLetter } from "@md/utils";
@@ -47,7 +46,8 @@ const FilterValuePage = ({
 
   const options = getOptionsByFilterType(field);
   const fieldType = getFieldType(field);
-  const controller = field.controller as unknown as IRelationFieldController;
+  const controllerVal: unknown = field.controller;
+  const controller = controllerVal as IRelationFieldController;
   const fieldLabel = field.label;
   const fieldPath = upperCaseFirstLetter(field.path);
 

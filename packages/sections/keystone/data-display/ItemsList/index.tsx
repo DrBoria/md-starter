@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import type { DeserializedValue, Value } from "@keystone-6/core/admin-ui/utils";
 import type { KeyboardEvent } from "react";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,20 +11,20 @@ import { getFieldType, useDeleteMutation } from "@md/api/graphql";
 import { useMutation } from "@apollo/client";
 import type { IGraphQLObject, IOption } from "@md/types";
 
-import type { TCondition } from "../../common/utils/data-mapping/mapFilterParameters";
-import type { TOrderBy } from "../../common/utils/getNextSortOrder";
-import { getGQLFields } from "../../common/utils/data-mapping/getGQLFields";
+import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+import type { TOrderBy } from "@md/sections/keystone/common/utils/getNextSortOrder";
+import { getGQLFields } from "@md/sections/keystone/common/utils/data-mapping/getGQLFields";
 import {
   filterToPath,
   filterToWhereParameters,
   parseQuery,
   pathToFilter,
   pathToWhereParameters,
-} from "../../common/utils/data-mapping/mapFilterParameters";
-import { getNextSortOrder } from "../../common/utils/getNextSortOrder";
-import { useFieldsData } from "../../common/utils/useFieldsData";
-import { DeleteTemplate } from "../../overlays/Modals/templates";
-import { NotFoundSection } from "../../feedback/NotFoundSection";
+} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+import { getNextSortOrder } from "@md/sections/keystone/common/utils/getNextSortOrder";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
+import { NotFoundSection } from "@md/sections/keystone/feedback/NotFoundSection";
 import { EditableCell } from "./EditableCell";
 import { FilterSelect } from "./FilterSelect";
 import {

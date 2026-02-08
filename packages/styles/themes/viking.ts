@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-restricted-imports
-import type { ThemeInterface } from '../types';
+import type { ThemeInterface } from '@md/styles/types';
 import baseTheme from './baseTheme';
 
 // 1. Assets (Data URI for optimization)

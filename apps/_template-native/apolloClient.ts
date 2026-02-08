@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { MMKV } from 'react-native-mmkv';
@@ -19,18 +19,25 @@ const customFetch: typeof fetch = async (uri, options) => {
 };
 
 
+interface TokenData {
+    idToken: string | null;
+    accessToken: string | null;
+    expirationTime: number;
+}
+
 // Function to check if token has expired
-const hasTokenExpired = (tokens: any) => {
+const hasTokenExpired = (tokens: TokenData) => {
     const { expirationTime } = tokens; // Assume tokens have an expiration time
     return expirationTime < Date.now(); // Compare with current time
 };
 
 // Function to refresh tokens
-const refreshTokens = async () => {
-    const { idToken, accessToken } = await GoogleSignin.signInSilently() as any;
+const refreshTokens = async (): Promise<TokenData> => {
+    const userInfo = await GoogleSignin.signInSilently() as unknown as TokenData | null;
+    const { idToken, accessToken } = userInfo || {};
     return {
-        idToken,
-        accessToken,
+        idToken: idToken || null,
+        accessToken: accessToken || null,
         expirationTime: Date.now() + 60 * 60 * 1000, // Example: 1 hour expiration
     };
 };
@@ -41,8 +48,8 @@ const httpLink = new HttpLink({ uri: `${domain}/api/graphql`, fetch: customFetch
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
     const cookie = storage.getString(domain);
-    let tokens: any = await GoogleSignin.getTokens();
-    console.log(tokens, 'hasTokenExpired? : ', hasTokenExpired(tokens))
+    let tokens: TokenData | null = (await GoogleSignin.getTokens()) as unknown as TokenData | null;
+    console.log(tokens, 'hasTokenExpired? : ', tokens ? hasTokenExpired(tokens) : 'No tokens')
     if (!tokens || hasTokenExpired(tokens)) {
         // Token is expired or doesn't exist, try to refresh
         try {

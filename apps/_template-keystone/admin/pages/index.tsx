@@ -1,6 +1,5 @@
 import React from "react";
 
-// eslint-disable-next-line no-restricted-imports
 import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "@md/components";
 import { PageTitle } from "@md/components";

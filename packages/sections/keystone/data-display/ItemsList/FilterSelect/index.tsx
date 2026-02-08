@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import type { FieldMeta } from "@keystone-6/core/types";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@md/components";
@@ -9,11 +8,11 @@ import type { IOption } from "@md/types";
 import type {
   ConditionType,
   TCondition,
-} from "../../../common/utils/data-mapping/mapFilterParameters";
+} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
 import {
   whereParameterToCondition,
   whereParameterToInput,
-} from "../../../common/utils/data-mapping/mapFilterParameters";
+} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
 import { FilterDropdown, FilterWrapper } from "./styles";

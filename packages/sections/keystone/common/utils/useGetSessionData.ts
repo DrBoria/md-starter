@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import type { TSession } from "@md/types";
 import { useQueryListItem } from "@md/api/graphql";
-import type { QueryResult} from "@apollo/client";
+import type { QueryResult } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 
 let isSessionSet = false;
@@ -35,7 +35,7 @@ const useGetSessionData = (
     console.error("Error getting Session Data", sessionError);
   }
 
-  return [session?.user] as unknown;
+  return [session?.user];
 };
 
 export { useGetSessionData };

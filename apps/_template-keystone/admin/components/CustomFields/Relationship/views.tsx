@@ -116,7 +116,6 @@ const Field = ({
 
   useEffect(() => {
     void refetch();
-    // @ts-expect-error the issue with itemValue where kind:error will not be fired cause of ?
   }, [itemValue?.organization?.value?.value?.id]);
 
   const handleChange = (newVal: IOption | null) => {

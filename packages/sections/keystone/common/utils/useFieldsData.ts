@@ -256,8 +256,8 @@ const useFieldsData = <T extends FlexibleItemData>({
             title: "Saved Successfully",
           });
 
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-          return (response?.data as unknown as { item: DeserializedValue })?.item;
+          const responseData: unknown = response?.data;
+          return (responseData as { item: DeserializedValue })?.item;
         }
       } catch (err) {
         logger.add({

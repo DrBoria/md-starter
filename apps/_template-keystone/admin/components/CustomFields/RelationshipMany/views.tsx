@@ -124,7 +124,6 @@ const Field = ({
 
   useEffect(() => {
     void refetch();
-    // @ts-expect-error it's have ? in case it's error type
   }, [itemValue?.organization?.value?.value?.id]);
 
   // Update handleChange to handle multi-select

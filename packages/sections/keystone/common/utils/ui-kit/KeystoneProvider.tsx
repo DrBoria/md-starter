@@ -22,15 +22,15 @@ const KeystoneProvider = ({ children }: TKeystoneProvider) => {
     query: {},
     push: () => Promise.resolve(true),
     replace: () => Promise.resolve(true),
-    reload: console.log,
-    back: console.log,
-    forward: console.log,
+    reload: () => { },
+    back: () => { },
+    forward: () => { },
     prefetch: () => Promise.resolve(),
-    beforePopState: console.log,
+    beforePopState: () => { },
     events: {
-      on: console.log,
-      off: console.log,
-      emit: console.log,
+      on: () => { },
+      off: () => { },
+      emit: () => { },
     },
     isFallback: false,
     isLocaleDomain: false,
@@ -58,7 +58,7 @@ const KeystoneProvider = ({ children }: TKeystoneProvider) => {
 
   // Robustly resolve the App component
   const App = (() => {
-    const rawApp = getApp as unknown;
+    const rawApp: unknown = getApp;
     if (!rawApp) return null;
 
     const isComponent = (val: unknown): val is React.ElementType =>

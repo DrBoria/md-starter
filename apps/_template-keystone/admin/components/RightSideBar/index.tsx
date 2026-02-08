@@ -5,8 +5,7 @@ import styled, { css } from "styled-components";
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
 // import type { TOperation } from "@/types";
-// eslint-disable-next-line no-restricted-imports
-import type { TSideBarModalDataKeystone } from "../../../types";
+import type { TSideBarModalDataKeystone } from "@/types";
 
 const slideInAnimation = css`
   @keyframes slideInAnimation {
@@ -93,7 +92,7 @@ const Overlay = styled.div<{ $isClosing?: boolean }>`
 
 const StyledRightSideBar = styled.div`
   background: ${({ theme }) => theme.colors.section};
-  border-radius: ${({ theme }) => theme.colors.borderRadius || '4px'};
+  border-radius: ${({ theme }) => theme.borderRadius || '4px'};
   width: 100%;
   min-height: 100%;
   backdrop-filter: var(--glass-effect);

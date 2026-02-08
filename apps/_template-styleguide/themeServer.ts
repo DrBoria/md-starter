@@ -16,7 +16,6 @@ app.use(express.json());
 // Retrieve the list of color themes from colors.ts
 const getColorThemes = async (): Promise<string[]> => {
   const colorsPath = path.join(__dirname, THEMES_REL_PATH, "colors.ts");
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   const colorsContent = await fs.readFile(colorsPath, "utf-8");
   const themeNames = colorsContent
     .split("\n")
@@ -76,7 +75,6 @@ const loadThemeFiles = async () => {
     const themeFile = `${themeName}.ts`;
     const themePath = path.join(__dirname, THEMES_REL_PATH, themeFile);
     try {
-      // eslint-disable-next-line security/detect-non-literal-fs-filename
       const fileContent = await fs.readFile(themePath, "utf-8");
       const themeData = extractThemeData(fileContent);
       if (themeData) {
@@ -92,7 +90,6 @@ const loadThemeFiles = async () => {
   for (const file of sharedFiles) {
     const filePath = path.join(__dirname, THEMES_REL_PATH, file);
     try {
-      // eslint-disable-next-line security/detect-non-literal-fs-filename
       const fileContent = await fs.readFile(filePath, "utf-8");
       const data = extractThemeData(fileContent);
       if (data) {
@@ -130,7 +127,6 @@ async function updateThemeFile(filePath: string, updates: Record<string, unknown
           if (currentNode && 'setInitializer' in currentNode && typeof currentNode.setInitializer === "function") {
             const valStr = String(value);
             const shouldQuote =
-              // eslint-disable-next-line security/detect-unsafe-regex
               typeof value === "string" && !/^\d+(\.\d+)?$/.test(valStr) && !valStr.includes("basicOffset");
             const newValue = shouldQuote ? `'${valStr}'` : valStr;
             currentNode.setInitializer(newValue);
@@ -139,7 +135,6 @@ async function updateThemeFile(filePath: string, updates: Record<string, unknown
       }
     };
     applyUpdates(updates);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     await fs.writeFile(filePath, sourceFile.getFullText(), "utf-8");
   } catch (error) {
     console.error(`Failed to update ${filePath}:`, error);
@@ -200,14 +195,11 @@ app.post("/themes/new", async (req: Request, res: Response) => {
     const themeContent = `export default {\n  theme: '${name}',\n${Object.entries(data)
       .map(([key, value]) => `  ${key}: '${value}',`)
       .join("\n")}\n};\n`;
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     await fs.writeFile(newThemePath, themeContent, "utf-8");
 
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     let indexContent = await fs.readFile(indexPath, "utf-8");
     if (!indexContent.includes(`export { default as ${name} } from './${name}'; `)) {
       indexContent += `export { default as ${name} } from './${name}'; \n`;
-      // eslint-disable-next-line security/detect-non-literal-fs-filename
       await fs.writeFile(indexPath, indexContent, "utf-8");
     }
 

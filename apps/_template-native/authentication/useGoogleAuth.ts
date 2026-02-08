@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // useGoogleAuth.ts
 import { useCallback } from 'react';
 import { statusCodes } from '@react-native-google-signin/google-signin';
@@ -16,7 +16,7 @@ const useGoogleAuth = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        handleSignInError(error as any);
+        handleSignInError(error as { code: string } & Error);
       }
     }
   }, []);

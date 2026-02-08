@@ -8,8 +8,7 @@ export const liquidGlassMixin = css`
 `;
 
 
-// eslint-disable-next-line no-restricted-imports
-import type { ThemeInterface } from '../types';
+import type { ThemeInterface } from '@md/styles/types';
 import baseTheme from './baseTheme';
 
 // The Theme Object (for Styleguide/ThemeProvider)

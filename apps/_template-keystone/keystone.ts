@@ -64,18 +64,17 @@ export default withAuth(
     ui: {
       isAccessAllowed: (context) => !isBanned(context),
       getAdditionalFiles: [
-        // eslint-disable-next-line @typescript-eslint/require-await
-        async () => [
+        () => [
           {
             mode: 'copy',
-            inputPath: path.join(process.cwd(), 'next.config.ts'),
-            outputPath: 'next.config.ts',
+            inputPath: path.join(process.cwd(), 'next.config.js'),
+            outputPath: 'next.config.js',
           },
         ],
         () => {
           const localFavicon = path.join(process.cwd(), "public", "favicon.ico");
           const defaultFavicon = path.join(process.cwd(), "../../packages/components/default/common/assets/favicon.ico");
-          const inputPath = // eslint-disable-next-line security/detect-non-literal-fs-filename
+          const inputPath =
             fs.existsSync(localFavicon) ? localFavicon : defaultFavicon;
 
           return [

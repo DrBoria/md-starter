@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import type { Dispatch, SetStateAction } from "react";
 import React, { useEffect, useMemo } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
@@ -6,9 +5,9 @@ import { Fields } from "@keystone-6/core/admin-ui/utils";
 import type { TValue } from "@md/types";
 import { Tabs } from "@md/components";
 import { ThemeProvider } from "@md/styles";
-import { useCreateItem } from "../../../common/utils/useCreateItem";
-import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
-import { useFieldsData } from "../../../common/utils/useFieldsData";
+import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
+import type { CreateItemHookResult } from "@md/sections/keystone/common/utils/useCreateItem";
+import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
 
 export interface ITabs {
   // Names / Buttons that will be displayed to switch tabs
@@ -53,8 +52,7 @@ const TabsFields = ({
 
   const createItems = itemId
     ? fieldsData // Edit mode: no need for useCreateItem in edit mode
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list as never, true)); // Create mode
+    : fieldsData?.map((fieldData) => useCreateItem(fieldData.list, true)); // Create mode
 
   const listFormGroups = useMemo(() => {
     if (!tabs) return [];
@@ -122,10 +120,7 @@ const TabsFields = ({
                   }
                   forceValidation={((fieldGroup.createItem as { props: { forceValidation: boolean } }).props.forceValidation || false)}
                   invalidFields={((fieldGroup.createItem as { props: { invalidFields: ReadonlySet<string> } }).props.invalidFields || new Set())}
-                  onChange={handleOnChange(
-                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-                    (fieldGroup?.createItem as unknown as { props: { onChange: TOnChangeTabValue } })?.props?.onChange || (() => { }),
-                  )}
+                  onChange={(fieldGroup.createItem as CreateItemHookResult).props.onChange as TOnChangeTabValue}
                 />
               )
             ),

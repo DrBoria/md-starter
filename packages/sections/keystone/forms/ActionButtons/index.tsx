@@ -1,8 +1,7 @@
-/* eslint-disable no-restricted-imports */
 import React from "react";
 
 import { Button, useModal } from "@md/components";
-import { DeleteTemplate } from "../../overlays/Modals/templates";
+import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
 
 interface TActionButtonsProps {
   isPristine: boolean;

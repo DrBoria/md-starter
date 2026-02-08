@@ -25,6 +25,7 @@ module.exports = [
       "**/.keystone",
       "**/dist",
       "**/yanm-lock.yaml",
+      "**/*.js",
     ],
   },
   // Extend recommended configurations
@@ -125,36 +126,23 @@ module.exports = [
         {
           selector: "TSAsExpression[typeAnnotation.type='TSTypeReference'][typeAnnotation.typeName.name='unknown']",
           message: "Do not use `as unknown`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/eslint-disable/]",
-            message: "Do not use `eslint-disable`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/eslint-disable-next-line/]",
-            message: "Do not use `eslint-disable-next-line`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/eslint-disable-line/]",
-            message: "Do not use `eslint-disable-line`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/ts-ignore/]",
-            message: "Do not use `ts-ignore`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/ts-nocheck/]",
-            message: "Do not use `ts-nocheck`. It is strictly forbidden."
-        },
-        {
-            selector: "Program > Comments[value=/ts-check/]",
-            message: "Do not use `ts-check`. It is strictly forbidden."
-        },
-         {
-            selector: "Program > Comments[value=/ts-expect-error/]",
-            message: "Do not use `ts-expect-error`. It is strictly forbidden."
         }
       ],
+      "no-warning-comments": [
+        "error",
+        {
+          terms: [
+            "eslint-disable",
+            "eslint-disable-next-line",
+            "eslint-disable-line",
+            "ts-ignore",
+            "ts-nocheck",
+            "ts-check",
+            "ts-expect-error"
+          ],
+          location: "anywhere"
+        }
+      ]
     },
   },
 ];

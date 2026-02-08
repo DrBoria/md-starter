@@ -1,11 +1,10 @@
-/* eslint-disable no-restricted-imports */
 import React from 'react';
 import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
 import { PageTitle, SubTitle, useModal } from "@md/components";
-import { CreateItemForm } from "../../../forms/CreateItemForm";
-import { EditItemForm } from "../../../forms/EditItemForm";
+import { CreateItemForm } from "@md/sections/keystone/forms/CreateItemForm";
+import { EditItemForm } from "@md/sections/keystone/forms/EditItemForm";
 
 const slideInAnimation = css`
   @keyframes slide-in-animation {

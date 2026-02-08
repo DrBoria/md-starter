@@ -19,8 +19,7 @@ const PostPage = () => {
     const { id } = useParams(); // Extract the ID from the URL parameters
 
     // Fetch the specific post based on the ID from the URL
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data } = useQueryListItem<QueryResult<{ post: any }>>({
+    const { data } = useQueryListItem<QueryResult<{ post: { name: string; textContent: string } }>>({
         listName: "Post",
         selectedFields: 'id name textContent', // Adjust fields as needed
         itemId: id, // Use the ID from the URL parameters

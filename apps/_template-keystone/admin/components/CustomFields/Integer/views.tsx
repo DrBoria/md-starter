@@ -1,16 +1,13 @@
 import type { FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
 
-// @ts-expect-error fix import path
 import type { Value } from "@/admin/components/CustomFields/utils/validate";
-// @ts-expect-error fix import path
 import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { BasicSection, DescriptionText, Input, Label } from "@md/components";
 import {
   ErrorValidationContainer,
   ErrorValidationMessage,
 } from "@md/components";
-// @ts-expect-error fix import path
 import { validate } from "@/admin/components/CustomFields/utils/validate";
 
 function Field({
@@ -32,7 +29,6 @@ function Field({
     // However, we should not prevent the user from entering other characters, as it may seem like the field is unresponsive.
     onChange &&
       onChange({
-        // @ts-expect-error value.value used for integer types
         value: Number.isNaN(numberValue) ? updatedValue : Number(updatedValue),
       });
     setValidationMessage(null);
@@ -41,7 +37,6 @@ function Field({
   const handleValidate = () => {
     const message = validate(
       value as unknown as Value,
-      // @ts-expect-error remove ts-ignore after types fix in keystone
       field.validation,
       field.label,
     );
@@ -63,7 +58,6 @@ function Field({
       <div>
         <ErrorValidationContainer $isError={!!validationMessage}>
           <Input
-            // @ts-expect-error remove ts-ignore after types fix in keystone
             value={`${value?.value ?? ""}`}
             onChange={handleChange}
             onBlur={handleValidate}
