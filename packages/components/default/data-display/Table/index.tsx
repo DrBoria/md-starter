@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
-import type { TOption } from '@md/components/default/forms/Form';
-import { Select } from '@md/components/default/forms/Form';
-import { Pagination } from '@md/components/default/navigation/Pagination';
-import { SubTitle } from '@md/components/default/data-display/Typography';
+import type { TOption } from '../../forms/Form';
+import { Select } from '../../forms/Form';
+import { Pagination } from '../../navigation/Pagination';
+import { SubTitle } from '../../data-display/Typography';
 
 import { StyledHeaderCell } from './TableCels/styles';
 import { Grid, PaginationContainer } from './styles';

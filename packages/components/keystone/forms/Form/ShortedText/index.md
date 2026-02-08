@@ -1,5 +1,5 @@
 ```jsx
-import { ShortedText } from ".";
+const { ShortedText } = require(".");
 
 <div style={{ width: "200px" }}>
   <ShortedText text="activesdfsdfjsldkflkjflksdjflaskjf;alskdfjas;ldkfjsl;kdfjsdlkfja;slkdfjafygerwpofhierwofiehf" />

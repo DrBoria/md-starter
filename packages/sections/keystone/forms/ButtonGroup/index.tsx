@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@md/components";
 
-import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
+import { DeleteTemplate } from "../../overlays/Modals/templates";
 import { ThemeProvider } from "@md/styles";
 
 interface TButtonGroupProps {

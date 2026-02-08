@@ -1,9 +1,10 @@
+import type { FieldMeta } from "@keystone-6/core/types";
 import type { Dispatch, SetStateAction } from "react";
 import React, { useState } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 import type { TValue } from "@md/types";
 
-import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import { useFieldsData } from "../../common/utils/useFieldsData";
 
 import "./index.css";
 
@@ -11,17 +12,17 @@ import { useRouter } from "next/router";
 
 import { toKebabCase } from "@md/utils";
 import { useDeleteMutation } from "@md/api/graphql";
-import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
+import { ConditionalField } from "../DynamicForms/ConditionalField";
 import {
   getAllConditionalFieldsNames,
   getConditionalSubFieldsdNames,
-} from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
-import { TabsFields } from "@md/sections/keystone/forms/DynamicForms/TabsFields";
-import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
-import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
+} from "../DynamicForms/ConditionalField/utils";
+import { TabsFields } from "../DynamicForms/TabsFields";
+import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
 import { ButtonGroup } from "./buttonGroup";
-import { getAllTabsFieldsNames } from "@md/sections/keystone/forms/DynamicForms";
-import type { ITabs, TConditionalField } from "@md/sections/keystone/forms/DynamicForms";
+import { getAllTabsFieldsNames } from "../DynamicForms";
+import type { ITabs, TConditionalField } from "../DynamicForms";
 import { useMutation } from "@apollo/client";
 import { useLogger } from "@md/components/keystone";
 import type { IModalButton } from "@md/components";
@@ -150,7 +151,8 @@ const EditItemForm = ({
 
         const conditionalSubfieldNames = getConditionalSubFieldsdNames(
           masterField,
-          masterFieldValue,
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          masterFieldValue as string,
         );
         conditionalFieldsValues[masterField.fieldName] = masterFieldValue;
 
@@ -261,7 +263,7 @@ const EditItemForm = ({
       if (areAllHidden) return null;
 
       // Create an ordered fields object that maintains the original order
-      const orderedFields = renderedFields.reduce((acc, fieldName) => {
+      const orderedFields = renderedFields.reduce<Record<string, FieldMeta>>((acc, fieldName) => {
         if (list.fields[fieldName]) {
           acc[fieldName] = list.fields[fieldName];
         }
@@ -274,7 +276,6 @@ const EditItemForm = ({
           fields={orderedFields}
           fieldModes={fieldsData.fieldModes}
           value={fieldsData.fieldsValue}
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           groups={list.groups}
           forceValidation={fieldsData.forceValidation}
           invalidFields={fieldsData.invalidFields}

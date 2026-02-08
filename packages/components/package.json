@@ -4,6 +4,17 @@
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./default/common": "./dist/default/common/index.js",
+    "./default/data-display": "./dist/default/data-display/index.js",
+    "./default/feedback": "./dist/default/feedback/index.js",
+    "./default/forms": "./dist/default/forms/index.js",
+    "./default/layout": "./dist/default/layout/index.js",
+    "./default/navigation": "./dist/default/navigation/index.js",
+    "./default/overlays": "./dist/default/overlays/index.js",
+    "./keystone": "./dist/keystone/index.js"
+  },
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

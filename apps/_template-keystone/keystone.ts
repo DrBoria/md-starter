@@ -1,3 +1,4 @@
+
 import path from "path";
 import * as fs from "fs";
 import { config } from "@keystone-6/core";
@@ -63,6 +64,13 @@ export default withAuth(
     ui: {
       isAccessAllowed: (context) => !isBanned(context),
       getAdditionalFiles: [
+        async () => [
+          {
+            mode: 'copy',
+            inputPath: path.join(process.cwd(), 'next.config.ts'),
+            outputPath: 'next.config.ts',
+          },
+        ],
         () => {
           const localFavicon = path.join(process.cwd(), "public", "favicon.ico");
           const defaultFavicon = path.join(process.cwd(), "../../packages/components/default/common/assets/favicon.ico");

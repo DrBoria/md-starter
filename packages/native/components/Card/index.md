@@ -5,9 +5,9 @@ The `Card` component is a touchable card element with an optional image, title, 
 ## Usage
 
 ```jsx
-import React from "react";
-import { Card } from ".";
-import ThemeProviderNative from "../../ThemeProviderNative";
+const React = require("react").default || require("react");
+const { Card } = require(".");
+const ThemeProviderNative = require("../../ThemeProviderNative").default || require("../../ThemeProviderNative");
 
 // Example function for handling press events
 const handlePress = () => {

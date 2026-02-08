@@ -1,5 +1,5 @@
-import Avatar from '@md/components/default/data-display/Avatar';
-import { PlainText } from '@md/components/default/data-display/Typography';
+import Avatar from '../../Avatar';
+import { PlainText } from '../../Typography';
 
 import { OneLineCell } from './styles';
 

@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useQueryList } from '@md/api/graphql';
 import { useQuery } from '@apollo/client';
-import { Select } from '@md/components/default/forms/Form/Select';
-import type { TOption } from '@md/components/default/forms/Form/Select';
-import { FormLabel } from '@md/components/default/forms/Form/FormLabel';
+import { Select } from '@md/components/default/forms';
+import type { TOption } from '@md/components/default/forms';
+import { FormLabel } from '@md/components/default/forms';
 
 interface FieldProps {
     fieldMeta: {

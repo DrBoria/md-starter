@@ -1,6 +1,6 @@
 ```jsx
-import { useState } from "react";
-import { Pagination } from ".";
+// const { useState  } = require("react");
+// const { Pagination  } = require(".");
 
 <>
   <div>

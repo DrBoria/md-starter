@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '@md/components/default/navigation/Link';
+import { Link } from '@md/components/default/navigation';
 import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
-import { PlainText } from '@md/components/default/data-display/Typography';
+import { PlainText } from '@md/components/default/data-display';
 
 const CardContainer = styled.div<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};

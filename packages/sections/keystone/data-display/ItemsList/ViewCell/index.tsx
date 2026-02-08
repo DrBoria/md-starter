@@ -3,7 +3,7 @@ import React from "react";
 
 import type { IGraphQLObject } from "@md/types";
 import { Link } from "@md/components";
-import { BodyCell } from "@md/sections/keystone/styles";
+import { BodyCell } from "../../../styles";
 
 interface ViewCellProps {
   element: IGraphQLObject;

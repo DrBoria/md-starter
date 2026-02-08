@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useToasts } from '@keystone-ui/toast';
 import { useApolloClient, gql } from '@apollo/client';
-import type { ToastsContextType as LoggerContextType, TToastData } from '@md/components/default/feedback/Toasts';
-import { ToastsContext as LoggerContext, useToasts as useLogger } from '@md/components/default/feedback/Toasts';
+import type { ToastsContextType as LoggerContextType, TToastData } from '../../../default/feedback/Toasts';
+import { ToastsContext as LoggerContext, useToasts as useLogger } from '../../../default/feedback/Toasts';
 export { useLogger };
 
 // Apollo mutations for logging toast actions
@@ -53,8 +53,8 @@ export const LoggerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const toastData = { id, ...toast };
 
       toasts.addToast({
-        ...toastData,
-        message: toastData.description,
+        title: toastData.title || "Log",
+        message: toastData.description || "No message",
         tone: toastData.tone || "positive"
       });
 

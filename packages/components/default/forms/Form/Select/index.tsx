@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { LucideIcon } from "@md/components/default/common/Icons";
-import { Input } from "@md/components/default/forms/Form/Input";
+import { LucideIcon } from "../../../common";
+import { Input } from "../Input";
 
 export type TOption = {
   label: string;
@@ -82,18 +82,6 @@ const Dropdown = styled.ul`
     
     /* Floating effect */
     box-shadow: ${theme.effects.depth.outer.medium};
-    
-    /* Decorative Knot Pattern Top */
-    &::before {
-        content: '';
-        display: block;
-        height: 6px;
-        width: 100%;
-        background-image: ${theme?.assets?.knotPattern as string};
-        background-repeat: repeat-x;
-        opacity: 0.5;
-        margin-bottom: 4px;
-    }
   `}
 `;
 
@@ -103,7 +91,7 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
     $highlighted ? theme.colors.highlighted : theme.colors.section};
   color: ${({ $highlighted, theme }) =>
     $highlighted ? theme.colors.highlightedText : theme.colors.sectionContent};
-  font-size: ${({ theme }) => theme.font.size};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
   cursor: pointer;
 
   &:hover {
@@ -265,7 +253,7 @@ const Select: React.FC<SelectProps> = ({
               type="text"
               value={searchTerm}
               onKeyDown={handleKeyDown}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
               placeholder="Search..."
             />
           )}

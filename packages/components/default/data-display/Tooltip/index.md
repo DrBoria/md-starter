@@ -1,5 +1,5 @@
 ```jsx
-import { Tooltip } from ".";
+const { Tooltip } = require(".");
 
 <>
   <Tooltip text="tooltip value">

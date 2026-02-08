@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Link } from '@md/components/default/navigation/Link';
+import { Link } from '../../../default/navigation/Link';
 import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 

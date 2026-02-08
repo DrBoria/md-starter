@@ -51,9 +51,9 @@ export function useCreateItem(
         // Support for custom default values
         value: defaultValue?.[fieldPath]
           ? {
-              kind: "create",
-              inner: { kind: "value", value: defaultValue[fieldPath] },
-            }
+            kind: "create",
+            inner: { kind: "value", value: defaultValue[fieldPath] },
+          }
           : list.fields[fieldPath]?.controller.defaultValue,
       };
     });

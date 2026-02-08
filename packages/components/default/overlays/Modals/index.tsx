@@ -58,3 +58,4 @@ export { ModalContext };
 export { CentralModal } from './CentralModal';
 export { FullScreenModal } from './FullScreenModal';
 export { useModal } from './useModal'
+export * from './styles';

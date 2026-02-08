@@ -10,11 +10,13 @@ export {
 } from './forms/Form';
 export { Toggle } from './forms/Toggle';
 export { LoggerProvider, useLogger } from './feedback/Logger';
-export { PageTitle, SubTitle } from '@md/components/default/data-display/Typography';
+export { PageTitle, SubTitle } from '../default/data-display/Typography';
 export {
     ModalContext,
     FullScreenModal,
     CentralModal,
-} from '@md/components/default/overlays/Modals';
+    useModal,
+    ModalProvider,
+} from '../default/overlays/Modals';
 
 export type { TTextAreaPlugins } from './forms/Form'

@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import LogoImage from "./logo.jpg";
 
 export function Logo() {

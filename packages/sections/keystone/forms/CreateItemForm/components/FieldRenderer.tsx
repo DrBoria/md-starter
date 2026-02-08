@@ -1,8 +1,5 @@
 import React from 'react';
-import { Input } from '@md/components/default/forms/Form/Input';
-import { TextCheckbox } from '@md/components/default/forms/Form/TextCheckbox';
-import { Select } from '@md/components/default/forms/Form/Select';
-import { FormLabel } from '@md/components/default/forms/Form/FormLabel';
+import { Input, TextCheckbox, Select, FormLabel } from '@md/components';
 import { RelationshipSelect } from './RelationshipSelect';
 
 

@@ -1,5 +1,5 @@
 ```jsx
-import { Card } from ".";
+const { Card } = require(".");
 
 <>
   {/* Basic Tones */}

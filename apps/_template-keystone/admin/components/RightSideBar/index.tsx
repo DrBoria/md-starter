@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
 // import type { TOperation } from "@/types";
+import type { TSideBarModalDataKeystone } from "../../../types";
 
 const slideInAnimation = css`
   @keyframes slideInAnimation {
@@ -114,8 +115,13 @@ export const RightSideBar = () => {
   const { sideBarModalData: rawSideBarModalData, setSideBarModalData } = useModal();
   const sideBarModalData = rawSideBarModalData as TSideBarModalDataKeystone;
   const [$isClosing, setIsClosing] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
-  if (!sideBarModalData) return null;
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !sideBarModalData) return null;
 
 
   const onHide = () => {

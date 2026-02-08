@@ -4,8 +4,9 @@ import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import type { TValue } from "@md/types";
 import { Tabs } from "@md/components";
-import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
-import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
+import { useCreateItem } from "../../../common/utils/useCreateItem";
+import { useFieldsData } from "../../../common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
 
 export interface ITabs {
@@ -111,9 +112,18 @@ const TabsFields = ({
               // Create Form
               fieldGroup?.createItem && (
                 <Fields
-                  {...(fieldGroup.createItem as { props: Record<string, unknown> }).props}
+                  {...(fieldGroup.createItem as CreateItemHookResult).props}
+                  fields={
+                    (fieldGroup.createItem as CreateItemHookResult).props.fields ?? {}
+                  }
+                  value={
+                    (fieldGroup.createItem as CreateItemHookResult).props.value ?? {}
+                  }
+                  forceValidation={((fieldGroup.createItem as { props: { forceValidation: boolean } }).props.forceValidation || false)}
+                  invalidFields={((fieldGroup.createItem as { props: { invalidFields: ReadonlySet<string> } }).props.invalidFields || new Set())}
                   onChange={handleOnChange(
-                    (fieldGroup?.createItem as { props: { onChange: TOnChangeTabValue } } | undefined)?.props.onChange,
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                    (fieldGroup?.createItem as unknown as { props: { onChange: TOnChangeTabValue } })?.props?.onChange || (() => { }),
                   )}
                 />
               )

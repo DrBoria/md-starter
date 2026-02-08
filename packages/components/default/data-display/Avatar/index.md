@@ -1,5 +1,5 @@
 ```jsx
-import Avatar from '.';
+const Avatar = require(".").default || require(".");
 
 <>
   <div style={{ display: 'flex' }}>

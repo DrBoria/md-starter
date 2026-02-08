@@ -16,8 +16,7 @@ import {
   Input,
   Label,
 } from "@md/components";
-// @ts-expect-error fix import path
-import { validate } from "@/admin/components/CustomFields/utils/validate";
+import { validate } from "../utils/validate";
 
 function Field({
   field,

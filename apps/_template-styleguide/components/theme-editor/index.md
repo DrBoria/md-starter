@@ -1,5 +1,5 @@
 ```jsx
-import ThemeEditor from '.';
+const ThemeEditor = require(".").default || require(".");
 
 <>
       <ThemeEditor mode="liquidGlass" />

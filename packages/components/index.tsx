@@ -56,9 +56,6 @@ declare module 'styled-components' {
           strong: string;
           [key: string]: string | undefined;
         };
-        engraved: string;
-        floating: string;
-        [key: string]: string | object | undefined;
       };
       interaction: {
         hover: string;
@@ -76,14 +73,8 @@ declare module 'styled-components' {
       [key: string]: unknown;
     };
 
-    assets?: {
-      knotPattern?: string;
-      [key: string]: unknown;
-    };
-
     fontFamily?: string;
     shadows?: Record<string, string>;
-    glassEffect?: string;
     borderRadius?: string;
     labelBackground?: string;
     labelText?: string;
@@ -106,12 +97,14 @@ declare module 'styled-components' {
 
     // Screens - Assume required if baseTheme provides them
     screens: {
-      tablet: { height: string; device: string };
-      desktop: { height: string; device: string };
+      mobile: { height: string; width: number; device: string };
+      tablet: { height: string; width: number; device: string };
+      desktop: { height: string; width: number; device: string };
     };
     elements: {
       header: { height: string };
       form: { height: string };
+      icons: { height: string; width: string; radius: string };
     };
     offsets: {
       section: string;
@@ -125,7 +118,6 @@ declare module 'styled-components' {
       radius: number;
     };
     font: {
-      size: string;
       family?: { text: string; title: string };
       sizes: { small: string; regular: string; large: string };
     };

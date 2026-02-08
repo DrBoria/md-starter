@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 
 import { PageTitle, SubTitle, useModal } from "@md/components";
-import { CreateItemForm } from "@md/sections/keystone/forms/CreateItemForm";
-import { EditItemForm } from "@md/sections/keystone/forms/EditItemForm";
+import { CreateItemForm } from "../../../forms/CreateItemForm";
+import { EditItemForm } from "../../../forms/EditItemForm";
 
 const slideInAnimation = css`
   @keyframes slide-in-animation {
@@ -111,7 +111,7 @@ const TitleContainer = styled.div`
   padding: 7px 20px; /* Alignment to the height of keystone header */
 `;
 
-import type { TSideBarModalDataKeystone } from "@md/sections/keystone/types";
+import type { TSideBarModalDataKeystone } from "@md/sections/keystone/overlays/Modals/types";
 
 // ...
 

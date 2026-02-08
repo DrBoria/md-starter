@@ -201,7 +201,13 @@ module.exports = {
   },
   tocMode: "collapse",
   dangerouslyUpdateWebpackConfig(webpackConfig) {
-    webpackConfig.stats = 'none'; // Minimal logs to avoid clutter
+    webpackConfig.stats = 'errors-only'; // Show only errors
+    webpackConfig.infrastructureLogging = {
+      level: 'error', // Show only errors in infrastructure logs
+    };
+    webpackConfig.watchOptions = {
+      ignored: /node_modules|(\.git)/,
+    };
     // Removed HotModuleReplacementPlugin to avoid duplication
     return webpackConfig;
   },
@@ -247,6 +253,18 @@ module.exports = {
       rules: [
         {
           test: /\.(js|ts)x?$/,
+
+          include: [
+            path.resolve(__dirname),
+            path.resolve(__dirname, "components"),
+            path.resolve(__dirname, "../../packages/components"),
+            path.resolve(__dirname, "../../packages/sections"),
+            path.resolve(__dirname, "../../packages/native"),
+            path.resolve(__dirname, "../../packages/utils"),
+            path.resolve(__dirname, "../../packages/styles"),
+            path.resolve(__dirname, "../../packages/api"),
+            path.resolve(__dirname, "../../packages/types"),
+          ],
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",

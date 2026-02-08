@@ -4,7 +4,7 @@ import React from "react";
 import type { IOption } from "@md/types";
 import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
 import { Button, Input, Select } from "@md/components";
-import { toRelationSelect } from "@md/sections/keystone/common/utils/data-mapping/toRelationSelect";
+import { toRelationSelect } from "../../../common/utils/data-mapping/toRelationSelect";
 import { BackButton, FilterTitle } from "./styles";
 import { getOptionsByFilterType } from "./utils";
 import { upperCaseFirstLetter } from "@md/utils";

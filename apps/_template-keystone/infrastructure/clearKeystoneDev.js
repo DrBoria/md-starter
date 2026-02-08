@@ -195,16 +195,16 @@ function debounce(func, wait) {
   };
 }
 
-function runKeystoneDev() {
-  return new Promise((resolve, reject) => {
+async function runKeystoneDev() {
+  return new Promise(async (resolve, reject) => {
     const adminPagesDir = path.join(__dirname, '../.keystone/admin/pages');
     
     // Ensure directory exists for watcher
-    ensureDummyFiles(adminPagesDir);
+    await ensureDummyFiles(adminPagesDir);
 
     // Initial cleanup to remove stale files or fix state before start
     console.log('Running initial cleanup...');
-    deleteGeneratedPages(adminPagesDir);
+    await deleteGeneratedPages(adminPagesDir);
 
     // Watch for file changes (generation)
     // Debounce to batch multiple file writes into one cleanup pass

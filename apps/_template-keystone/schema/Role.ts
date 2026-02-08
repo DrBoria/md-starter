@@ -3,7 +3,7 @@ import { list } from "@keystone-6/core";
 import { text } from "@keystone-6/core/fields";
 
 // import type { TOperation } from "@/types";
-import { ALLOW_ROLES_MANAGEMENT } from "@/env";
+import { ALLOW_ROLES_MANAGEMENT } from "../env";
 
 import { isAdmin } from "./utils/access";
 import { createdAt } from "./utils/fields";
@@ -23,11 +23,11 @@ export const Role = list<BaseListTypeInfo>({
       delete: () => false,
     },
     filter: {
-      query: (...context) => {
+      query: (context) => {
         // Flag/Env variable to set first admin
         if (ALLOW_ROLES_MANAGEMENT === "allow") return true;
 
-        if (isAdmin(...context)) return true;
+        if (isAdmin(context)) return true;
 
         // The other people can't see roles
         return false;

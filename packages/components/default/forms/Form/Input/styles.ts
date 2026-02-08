@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { basicFont } from '@md/components/default/data-display/Typography';
+import { basicFont } from '../../../data-display/Typography';
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
 import { vikingTheme } from './themes/viking';
@@ -24,8 +24,8 @@ export const StyledInput = styled.input<TInputProps>`
   color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
   font: ${basicFont};
   background: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
-  border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  border: ${({ theme }) => theme?.variables?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  border-radius: ${({ theme }) => theme?.variables?.border?.radius || 0}px;
   
   &::placeholder {
     color: ${({ theme }) => theme?.colors?.labelText || 'lightgray'};

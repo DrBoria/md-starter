@@ -97,7 +97,7 @@ function SigninPage({
     if (!submitted) return;
 
     const adminMeta = rawKeystone.adminMeta;
-    if (adminMeta?.error?.message === "Access denied") {
+    if (adminMeta?.state === "error" && adminMeta?.error?.message === "Access denied") {
       void router.push("/no-access");
       return;
     }

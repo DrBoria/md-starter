@@ -1,7 +1,7 @@
 import { FiX, FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 
-import { Button } from '@md/components/default/forms/Button';
+import { Button } from '../../Button';
 
 import type { TWithBasicElementOffsets } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';

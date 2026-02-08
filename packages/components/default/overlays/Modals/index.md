@@ -1,10 +1,10 @@
 # Modal Windows
 ```jsx
-import { Button } from "../../forms/Button";
-import { ModalProvider } from ".";
-import { FullScreenModal } from "./FullScreenModal";
-import { CentralModal } from "./CentralModal";
-import { useModal } from "./useModal";
+const { Button } = require("../../forms/Button");
+const { ModalProvider } = require(".");
+const { FullScreenModal } = require("./FullScreenModal");
+const { CentralModal } = require("./CentralModal");
+const { useModal } = require("./useModal");
 
 const { setModalData, setFullScreenData } = useModal();
 

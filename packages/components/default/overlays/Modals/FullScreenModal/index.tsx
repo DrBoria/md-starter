@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { LucideIcon } from "@md/components/default/common/Icons";
-import { useModal } from "@md/components/default/overlays/Modals/useModal";
-import { ModalContainer, Overlay, CloseButton, StyledModal, ModalContentContainer } from "@md/components/default/overlays/Modals/styles";
+import { LucideIcon } from "../../../common/Icons";
+import { useModal } from "../useModal";
+import { ModalContainer, Overlay, CloseButton, StyledModal, ModalContentContainer } from "../styles";
 
 export const FullScreenModal: React.FC = () => {
   const { fullScreenData, setFullScreenData } = useModal();

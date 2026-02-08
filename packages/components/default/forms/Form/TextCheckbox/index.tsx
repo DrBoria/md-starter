@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { basicFont } from '@md/components/default/data-display/Typography';
+import { basicFont } from '../../../data-display/Typography';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';

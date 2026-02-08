@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Fields } from "@keystone-6/core/admin-ui/utils";
 
 import type { TValue } from "@md/types";
-import type { CreateItemHookResult } from "@md/sections/keystone/common/utils/useCreateItem";
-import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
-import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+import type { CreateItemHookResult } from "../../../common/utils/useCreateItem";
+import { useCreateItem } from "../../../common/utils/useCreateItem";
+import { useFieldsData } from "../../../common/utils/useFieldsData";
 import { ThemeProvider } from "@md/styles";
 
 interface FieldValue {
@@ -151,12 +151,20 @@ const ConditionalField = ({
       {createConditionalItems?.props && (
         <Fields
           {...createConditionalItems.props}
+          fields={createConditionalItems.props.fields || {}}
+          value={createConditionalItems.props.value || {}}
+          forceValidation={createConditionalItems.props.forceValidation || false}
+          invalidFields={createConditionalItems.props.invalidFields || new Set()}
           onChange={handleOnChangeMasterField}
         />
       )}
       {subfieldsToRender?.length ? (
         <Fields
           {...subFieldsCreateList?.props}
+          fields={subFieldsCreateList?.props?.fields || {}}
+          value={subFieldsCreateList?.props?.value || {}}
+          forceValidation={subFieldsCreateList?.props?.forceValidation || false}
+          invalidFields={subFieldsCreateList?.props?.invalidFields || new Set()}
           onChange={handleOnChangeSlaveField}
         />
       ) : null}

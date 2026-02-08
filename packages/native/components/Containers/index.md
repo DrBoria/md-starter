@@ -1,9 +1,8 @@
 ```jsx
-import { PageContainer, BasicSection, HeadingContainer } from ".";
-import { PlainText, SectionTitle } from "../Typography";
-import ThemeProviderNative from "../../ThemeProviderNative";
-
-import { dark } from "@md/styles/themes";
+// import { PageContainer, BasicSection, HeadingContainer } from ".";
+const { PlainText, SectionTitle } = require("../Typography");
+const ThemeProviderNative = require("../../ThemeProviderNative").default || require("../../ThemeProviderNative");
+const { dark } = require("@md/styles/themes");
 
 <ThemeProviderNative>
   <>

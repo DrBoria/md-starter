@@ -23,7 +23,7 @@ pnpm add @md/infrastructure
 This library exports high-level constructs that implement the `Construct` interface from `constructs` (CDKTF).
 
 ```typescript
-import { AwsFargateApp } from '@md/infrastructure'; // or GcpCloudRunApp, AzureContainerApp
+const { AwsFargateApp  } = require("@md/infrastructure"); // or GcpCloudRunApp, AzureContainerApp
 
 new AwsFargateApp(this, 'my-app', {
     appName: 'my-cool-app',

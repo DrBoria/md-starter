@@ -1,5 +1,5 @@
 ```jsx
-import { Toggle } from ".";
+const { Toggle } = require(".");
 
 <>
   <div>

@@ -1,5 +1,5 @@
 ```jsx
-import { CodePreview } from ".";
+const { CodePreview } = require(".");
 
 <>
   <div>

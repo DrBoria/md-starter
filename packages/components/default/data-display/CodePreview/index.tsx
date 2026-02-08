@@ -16,7 +16,7 @@ export const CodeBlock = styled.pre`
 
   code {
     font-family: ${({ theme }) => theme?.font?.family?.text || 'monospace'}; /* Use theme's text font family */
-    font-size: ${({ theme }) => theme?.font?.size || '1rem'}; /* Use theme's font size */
+    font-size: ${({ theme }) => theme?.font?.sizes?.regular || '1rem'}; /* Use theme's font size */
     line-height: 1.5;
     white-space: pre-wrap;
     overflow-wrap: break-word;

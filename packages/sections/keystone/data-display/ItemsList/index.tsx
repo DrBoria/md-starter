@@ -8,22 +8,22 @@ import { useLogger } from "@md/components/keystone";
 import { ArrowRightIcon } from "@keystone-ui/icons";
 
 import type { IGraphQLObject, IOption } from "@md/types";
-import type { TCondition } from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
-import type { TOrderBy } from "@md/sections/keystone/common/utils/getNextSortOrder";
+import type { TCondition } from "../../common/utils/data-mapping/mapFilterParameters";
+import type { TOrderBy } from "../../common/utils/getNextSortOrder";
 import { toKebabCase, lowerCaseFirstLetter } from "@md/utils";
 import { Pagination, Loading, Input, Select, PlainText, SectionTitle, Link } from "@md/components";
 import { Label, Checkbox } from "@md/components/keystone";
 import { getFieldType, useDeleteMutation } from "@md/api/graphql";
-import { getGQLFields } from "@md/sections/keystone/common/utils/data-mapping/getGQLFields";
+import { getGQLFields } from "../../common/utils/data-mapping/getGQLFields";
 import {
   filterToPath,
   filterToWhereParameters,
   parseQuery,
   pathToFilter,
   pathToWhereParameters,
-} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
-import { getNextSortOrder } from "@md/sections/keystone/common/utils/getNextSortOrder";
-import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+} from "../../common/utils/data-mapping/mapFilterParameters";
+import { getNextSortOrder } from "../../common/utils/getNextSortOrder";
+import { useFieldsData } from "../../common/utils/useFieldsData";
 import { EditableCell } from "./EditableCell";
 import { FilterSelect } from "./FilterSelect";
 import {
@@ -36,8 +36,8 @@ import {
   TableHeader,
 } from "./styles";
 import { ViewCell } from "./ViewCell";
-import { DeleteTemplate } from "@md/sections/keystone/overlays/Modals/templates";
-import { NotFoundSection } from "@md/sections/keystone/feedback/NotFoundSection";
+import { DeleteTemplate } from "../../overlays/Modals/templates";
+import { NotFoundSection } from "../../feedback/NotFoundSection";
 import { useMutation } from "@apollo/client";
 
 interface FieldLabel {

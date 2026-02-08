@@ -1,6 +1,6 @@
 ```jsx
-import { useState } from "react";
-import { TokenInputField } from ".";
+const { useState } = require("react");
+const { TokenInputField } = require(".");
 
 <>
   <div>

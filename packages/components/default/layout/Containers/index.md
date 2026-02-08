@@ -1,8 +1,7 @@
 ```jsx
-import { PageContainer, BasicSection, HeadingContainer } from '.';
-import { PlainText, SectionTitle } from '../../data-display/Typography';
-
-import { dark } from '@md/styles';
+const { PageContainer, BasicSection, HeadingContainer } = require(".");
+const { PlainText, SectionTitle } = require("../../data-display/Typography");
+const { dark } = require("@md/styles");
 
 <PageContainer>
   Page Container (Viking Background)

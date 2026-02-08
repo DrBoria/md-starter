@@ -1,8 +1,5 @@
 ```jsx
-import {
-  ErrorValidationContainer,
-  ErrorValidationMessage,
-} from ".";
+const { ErrorValidationContainer, ErrorValidationMessage, } = require(".");
 
 <>
   <div>

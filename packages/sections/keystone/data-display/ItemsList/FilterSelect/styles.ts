@@ -5,7 +5,7 @@ export const FilterButton = styled.button`
   background-color: ${({ theme }) => theme.colors.highlighted};
   color: white;
   border: none;
-  border-radius: ${({ theme }) => theme.border.radius};
+  border-radius: ${({ theme }) => `${theme.variables.border.radius}px`};
   cursor: pointer;
 `;
 
@@ -22,14 +22,14 @@ export const FilterDropdown = styled.div`
   padding: ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
   background-color: ${({ theme }) => theme.colors.section};
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
-  border-radius: ${({ theme }) => `calc(2 * ${theme.border.radius})`};
+  border-radius: ${({ theme }) => `calc(2 * ${theme.variables.border.radius}px)`};
   z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 
 export const FilterTitle = styled.h3`
-  font-size: ${({ theme }) => theme.font.size};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
   font-weight: 600;
-  font-family: ${({ theme }) => theme.font.family.title};
+  font-family: ${({ theme }) => theme.font?.family?.title};
 `;
 
 export const BackButton = styled.button`
@@ -37,6 +37,6 @@ export const BackButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.highlighted};
   cursor: pointer;
-  font-size: ${({ theme }) => theme.font.size};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
   margin-bottom: ${({ theme }) => theme.offsets.betweenElements};
 `;

@@ -1,4 +1,4 @@
-import { PlainText } from '@md/components/default/data-display/Typography';
+import { PlainText } from '../../Typography';
 
 import { StyledTextCell } from './styles';
 

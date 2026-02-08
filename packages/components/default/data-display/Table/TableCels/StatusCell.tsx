@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledTextCell } from './styles';
-import type { StatusLabelProps } from '@md/components/default/data-display/StatusLabel';
-import { StatusLabel } from '@md/components/default/data-display/StatusLabel';
+import type { StatusLabelProps } from '../../StatusLabel';
+import { StatusLabel } from '../../StatusLabel';
 
 interface StatusCellProps extends StatusLabelProps {
   align?: 'center' | 'left' | 'right';

@@ -1,17 +1,17 @@
 ### Typography:
 
 ```jsx
-import { PageContainer, BasicSection } from "../Containers";
-import {
-  PageTitle,
-  Highlighted,
-  SubTitle,
-  SectionTitle,
-  PlainText,
-  Label,
-} from ".";
-import { dark } from "@md/styles/themes";
-import ThemeProviderNative from "../../ThemeProviderNative";
+// import { PageContainer, BasicSection } from "../Containers";
+// import {
+//   PageTitle,
+//   Highlighted,
+//   SubTitle,
+//   SectionTitle,
+//   PlainText,
+//   Label,
+// } from ".";
+const { dark } = require("@md/styles/themes");
+const ThemeProviderNative = require("../../ThemeProviderNative").default || require("../../ThemeProviderNative");
 
 <ThemeProviderNative>
   <>

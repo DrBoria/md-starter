@@ -2,14 +2,14 @@
 /* stylelint-disable media-query-no-invalid */
 import styled from "styled-components";
 import Link from "next/link";
-import { LucideIcon } from "@md/components/default/common/Icons";
+import { LucideIcon } from "../../common/Icons";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export const BreadcrumbContainer = styled.div`
   display: flex;
   align-items: center;
-  font-size: ${({ theme }) => theme?.font?.size || '1rem'};
+  font-size: ${({ theme }) => theme?.font?.sizes?.regular || '1rem'};
   color: ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
   gap: ${({ theme }) => (theme?.variables?.offsets?.betweenElements?.mobile || 8) + "px"};
 

@@ -5,8 +5,8 @@ import {
   makeVar,
   useReactiveVar,
 } from "@apollo/client";
-import type { ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "@md/components/default/overlays/Modals";
-import { ModalContext } from "@md/components/default/overlays/Modals";
+import type { ModalContextType, TFullScreenData, TModalData, TSideBarModalData } from "../../../default/overlays/Modals";
+import { ModalContext } from "../../../default/overlays/Modals";
 import { updateAndLog } from "./updateAndLog";
 
 // Define reactive variables with initial null values

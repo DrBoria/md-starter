@@ -1,7 +1,7 @@
 import React from "react";
-import type { IconName } from "@md/components/default/common/Icons";
-import { LucideIcon } from "@md/components/default/common/Icons";
-import { Loader } from "@md/components/default/feedback/Loading";
+import type { IconName } from "../../common/Icons";
+import { LucideIcon } from "../../common/Icons";
+import { Loader } from "../../feedback/Loading";
 import { StyledButton } from "./styles";
 
 export type ButtonSize = "small" | "medium" | "large" | "icon";
@@ -94,4 +94,4 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 export { Button };
-export { CopyButton } from './CopyButton';
+

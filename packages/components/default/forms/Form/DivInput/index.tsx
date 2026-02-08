@@ -28,7 +28,7 @@ const StyledInputContainer = styled.div<{ $isFocused: boolean }>`
   padding: ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile || 8}px;
   border-radius: ${({ theme }) => theme?.variables?.border?.radius || 4}px;
   border: ${({ theme }) => theme?.variables?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
-  font-size: ${({ theme }) => theme?.font?.size || '1rem'};
+  font-size: ${({ theme }) => theme?.font?.sizes?.regular || '1rem'};
   font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
   box-sizing: border-box;
   background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};

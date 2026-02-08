@@ -5,7 +5,7 @@ import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export const basicFont = css`
-  ${({ theme }) => `500 ${theme?.font?.size || '1rem'} ${theme?.fontFamily || theme?.font?.family?.text || 'sans-serif'}`}
+  ${({ theme }) => `500 ${theme?.font?.sizes?.regular || '1rem'} ${theme?.fontFamily || theme?.font?.family?.text || 'sans-serif'}`}
 `;
 
 const sizes = {

@@ -1,10 +1,7 @@
 ```jsx
-import { Button } from "admin/components/core/Button";
-import {
-  DeleteTemplate,
-  SubmitTemplate,
-} from "admin/components/core/Modals/CentralModal";
-import { FileUpload } from "admin/sections/core/Modals/CentralModal/fileUploadTemplate";
+const { Button } = require("admin/components/core/Button");
+const { DeleteTemplate, SubmitTemplate, } = require("admin/components/core/Modals/CentralModal");
+const { FileUpload } = require("admin/sections/core/Modals/CentralModal/fileUploadTemplate");
 
 // Note: The actual modal components (CentralModal, FullScreenModal, SideBarModal)
 // cannot be demonstrated here as they need to be mounted to document.body

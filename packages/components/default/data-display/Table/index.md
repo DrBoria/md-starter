@@ -1,9 +1,8 @@
 ```jsx
-import { Fragment } from 'react';
-
-import TableContainer from '.';
-import { TextDisplayCell, BoldTextDisplayCell, StatusCell, NavigationCell } from './TableCels';
-import { withPagination } from '@md/utils';
+const { Fragment } = require("react");
+const TableContainer = require(".").default || require(".");
+const { TextDisplayCell, BoldTextDisplayCell, StatusCell, NavigationCell } = require("./TableCels");
+const { withPagination } = require("@md/utils");
 const headerCols = [
   { text: 'Order Id' },
   { text: 'Client Name' },

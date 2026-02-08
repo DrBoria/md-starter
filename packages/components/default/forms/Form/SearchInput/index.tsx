@@ -1,7 +1,7 @@
 import type { FormEvent } from 'react';
 import React, { useCallback, useState } from 'react';
 
-import { Input } from '@md/components/default/forms/Form/Input';
+import { Input } from '../Input';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ColumnsContainer } from "@md/components/default/layout/Containers";
-import { CopyButton } from "@md/components/default/forms/Button";
+import { LucideIcon } from "../../../../default/common/Icons";
+import { useLogger } from "../../../feedback/Logger";
+import { ColumnsContainer } from "../../../../default/layout/Containers";
 
 interface TShortedTextProps {
   text: string | null;
@@ -22,15 +23,35 @@ const ShortedText: React.FC<TShortedTextProps> = ({
   withCopy,
   maxWidth,
 }) => {
+  const { add } = useLogger();
+
   if (!withCopy) return <Container $maxWidth={maxWidth}>{text}</Container>;
+
+  const handleCopy = () => {
+    if (!text) return;
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        add({
+          title: "Copied",
+          tone: "positive",
+          description: text,
+        });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Failed to copy text: ', error);
+      });
+  };
 
   return (
     <ColumnsContainer
-      $colsRatio={["1fr", "50px"]}
-      style={{ alignItems: "center" }}
+      $colsRatio={["1fr", "auto"]}
+      style={{ alignItems: "center", gap: "8px" }}
     >
       <Container $maxWidth={maxWidth}>{text}</Container>
-      <CopyButton size="small" value={text || ""} listName={text || ""} />
+      <div onClick={handleCopy} style={{ cursor: "pointer", display: "flex" }}>
+        <LucideIcon name="Copy" size={16} />
+      </div>
     </ColumnsContainer>
   );
 };

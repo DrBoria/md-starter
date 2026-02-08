@@ -27,7 +27,7 @@ const DashboardCardContainer = styled.div`
     background-image: ${theme.effects?.texture};
     border: none;
     border-radius: 0;
-    clip-path: ${theme.geometry?.card || theme.geometry?.ragged};
+    clip-path: ${(theme.geometry?.card || theme.geometry?.ragged) as string};
     box-shadow: ${theme.effects?.depth?.outer?.medium};
     padding: ${theme.variables?.offsets?.elementContent?.desktop || 20}px;
 
@@ -35,18 +35,6 @@ const DashboardCardContainer = styled.div`
         box-shadow: ${theme.effects?.depth?.outer?.strong}, inset 0 0 0 1px ${theme.colors.highlighted};
         transform: translateY(-2px);
         transition: all 0.2s ease;
-    }
-
-    /* Knot Pattern Decoration */
-    &::before {
-        content: '';
-        display: block;
-        height: 10px;
-        width: 100%;
-        background-image: ${theme.assets?.knotPattern};
-        background-repeat: repeat-x;
-        opacity: 0.3;
-        margin-bottom: 10px;
     }
   `}
 `;

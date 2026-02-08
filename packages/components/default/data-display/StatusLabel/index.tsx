@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader } from "@md/components/default/feedback/Loading";
+import { Loader } from "../../feedback/Loading";
 import { StateContainer, StatusDot } from "./styles";
 
 /**

@@ -1,6 +1,6 @@
 ```jsx
-import { useState } from "react";
-import { Switch } from ".";
+const { useState } = require("react");
+const { Switch } = require(".");
 
 <>
   <div>

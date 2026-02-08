@@ -7,11 +7,11 @@ import type { IOption } from "@md/types";
 import type {
   ConditionType,
   TCondition,
-} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+} from "../../../common/utils/data-mapping/mapFilterParameters";
 import {
   whereParameterToCondition,
   whereParameterToInput,
-} from "@md/sections/keystone/common/utils/data-mapping/mapFilterParameters";
+} from "../../../common/utils/data-mapping/mapFilterParameters";
 import FilterFieldSelectPage from "./filterFieldSelectPage";
 import { FilterValuePage } from "./filterValuePage";
 import { FilterDropdown, FilterWrapper } from "./styles";

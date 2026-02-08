@@ -4,20 +4,20 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import type { TValue } from "@md/types";
-import type { TConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
-import type { ISerializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
-import { ConditionalField } from "@md/sections/keystone/forms/DynamicForms/ConditionalField";
+import type { TConditionalField } from "../DynamicForms/ConditionalField";
+import type { ISerializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import { ConditionalField } from "../DynamicForms/ConditionalField";
 import {
   getAllConditionalFieldsNames,
   getConditionalSubFieldsdNames,
-} from "@md/sections/keystone/forms/DynamicForms/ConditionalField/utils";
-import { getDeserializedValue } from "@md/sections/keystone/common/utils/data-mapping/getDeserializedValue";
-import { getNotDisplayedDefaultValues } from "@md/sections/keystone/common/utils/data-mapping/getNonDisplayedDefaultValues";
-import { useCreateItem } from "@md/sections/keystone/common/utils/useCreateItem";
-import { useFieldsData } from "@md/sections/keystone/common/utils/useFieldsData";
+} from "../DynamicForms/ConditionalField/utils";
+import { getDeserializedValue } from "../../common/utils/data-mapping/getDeserializedValue";
+import { getNotDisplayedDefaultValues } from "../../common/utils/data-mapping/getNonDisplayedDefaultValues";
+import { useCreateItem } from "../../common/utils/useCreateItem";
+import { useFieldsData } from "../../common/utils/useFieldsData";
 import { ButtonGroup } from "./buttonGroup";
-import type { ITabs } from "@md/sections/keystone/forms/DynamicForms";
-import { getAllTabsFieldsNames, TabsFields } from "@md/sections/keystone/forms/DynamicForms";
+import type { ITabs } from "../DynamicForms";
+import { getAllTabsFieldsNames, TabsFields } from "../DynamicForms";
 import type { IModalButton } from "@md/components";
 
 export interface ICreateItemForm {
@@ -114,8 +114,8 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
    * State for Conditional Fields
    * Use it for create operation
    */
-  const [subFieldList, setSubFieldList] = useState(null);
-  const [createConditionalItems, setCreateConditionalItems] = useState(null);
+  const [subFieldList, setSubFieldList] = useState<TValue>({} as TValue);
+  const [createConditionalItems, setCreateConditionalItems] = useState<TValue>({} as TValue);
 
   /**
    * State for Tabs Fields
@@ -138,7 +138,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
           createConditionalItems?.[
           masterField.fieldName
           ] as unknown as ISerializedValue,
-        );
+        ) as string;
 
         // Set value for master field
         if (masterFieldValue) {
@@ -152,7 +152,7 @@ const CreateItemForm: React.FC<ICreateItemForm> = ({
           if (subFieldList) {
             conditionalSubfieldNames.forEach((subfieldName: string) => {
               conditionalFieldsValues[subfieldName] = getDeserializedValue(
-                subFieldList[subfieldName],
+                subFieldList[subfieldName] as unknown as ISerializedValue,
               );
             });
           }
