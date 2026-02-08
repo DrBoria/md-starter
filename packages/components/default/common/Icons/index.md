@@ -1,6 +1,6 @@
 ```jsx
-const { LucideIcon } = require(".");
-const { Tooltip } = require("../../data-display/Tooltip");
+import { LucideIcon } from ".";
+import { Tooltip } from "../../data-display/Tooltip";
 
 <div>
   <div>

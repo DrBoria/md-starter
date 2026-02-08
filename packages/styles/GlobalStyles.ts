@@ -13,8 +13,8 @@ export const GlobalStyles = createGlobalStyle`
   body {
     line-height: 1;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background-color: ${({ theme }) => theme.colors?.background || '#ffffff'};
-    color: ${({ theme }) => theme.colors?.text || '#000000'};
+    background-color: ${({ theme }) => theme.colors?.section || '#ffffff'};
+    color: ${({ theme }) => theme.colors?.sectionContent || '#000000'};
   }
 
   ol, ul {

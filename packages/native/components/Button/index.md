@@ -1,7 +1,7 @@
 ```jsx
-const { Button } = require(".");
-const { PlainText } = require("../Typography");
-const ThemeProviderNative = require("../../ThemeProviderNative").default || require("../../ThemeProviderNative");
+import { Button } from ".";
+import { PlainText } from "../Typography";
+import ThemeProviderNative from "../../ThemeProviderNative";
 
 <ThemeProviderNative>
   <>

@@ -22,7 +22,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
     }
 
     const validThemes = Object.entries(colorThemes).filter(
-        ([key, theme]) => typeof theme === 'object' && key !== 'default' && (theme as { section: string }).section
+        ([key, theme]) => typeof theme === 'object' && key !== 'default' && (theme as { colors: { section: string } }).colors?.section
     );
 
     return (
@@ -31,7 +31,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
                 <LoggerProvider>
                     {validThemes.map(([themeName, theme]) => (
                         <ThemeProvider key={themeName} theme={theme}>
-                            <div style={{ background: `${(theme as { section: string }).section}`, marginBottom: '16px' }}>
+                            <div style={{ background: `${(theme as { colors: { section: string } }).colors.section}`, marginBottom: '16px' }}>
                                 <PageTitle>{themeName}</PageTitle>
                                 {children}
                             </div>

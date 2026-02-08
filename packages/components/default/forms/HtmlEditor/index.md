@@ -1,6 +1,6 @@
 ```jsx
-const { useState } = require("react");
-const { HtmlEditor } = require(".");
+import { useState } from "react";
+import { HtmlEditor } from ".";
 
 <>
   <div>

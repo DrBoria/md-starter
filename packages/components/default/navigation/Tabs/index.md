@@ -1,5 +1,5 @@
 ```jsx
-const { Tabs } = require(".");
+import { Tabs } from ".";
 
 <>
   <div>

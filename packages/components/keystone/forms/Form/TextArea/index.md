@@ -1,6 +1,6 @@
 ```jsx
-const { useState } = require("react");
-const { TextArea } = require(".");
+import { useState } from "react";
+import { TextArea } from ".";
 
 const [text, setText] = useState("");
 

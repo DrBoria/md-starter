@@ -1,5 +1,5 @@
 ```jsx
-const { NotFoundSection } = require(".");
+import { NotFoundSection } from ".";
 
 <>
   <div>

@@ -23,3 +23,5 @@ export type { TFullWidth, TWithBasicElementOffsets, TWithSpaceBetween } from './
 
 // GlobalStyles
 export { GlobalStyles } from './GlobalStyles';
+// Types
+export type { ThemeInterface } from './types';

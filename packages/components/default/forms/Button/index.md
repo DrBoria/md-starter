@@ -1,5 +1,5 @@
 ```jsx
-const { Button } = require(".");
+import { Button } from ".";
 
 <>
   <div className="space-y-8">

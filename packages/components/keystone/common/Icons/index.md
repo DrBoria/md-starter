@@ -1,6 +1,6 @@
 ```jsx
-const { Icons } = require(".");
-const { Tooltip } = require("../../../default/data-display/Tooltip");
+import { Icons } from ".";
+import { Tooltip } from "../../../default/data-display/Tooltip";
 
 <div style={{ display: "flex", flexWrap: "wrap" }}>
   <Tooltip text="ActivityIcon">

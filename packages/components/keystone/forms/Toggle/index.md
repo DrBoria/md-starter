@@ -1,5 +1,5 @@
 ```jsx
-const { Toggle } = require(".");
+import { Toggle } from ".";
 
 <div style={{ width: '200px', border: '1px solid black' }}>
   <Toggle title="Toggle Title">

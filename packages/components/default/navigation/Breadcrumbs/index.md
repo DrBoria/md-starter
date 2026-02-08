@@ -1,5 +1,5 @@
 ```jsx
-const Breadcrumbs = require(".").default || require(".");
+import Breadcrumbs from ".";
 
 <>
   <div>

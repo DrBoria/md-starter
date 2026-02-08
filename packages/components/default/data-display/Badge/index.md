@@ -1,5 +1,5 @@
 ```jsx
-const { Badge } = require(".");
+import { Badge } from ".";
 
 <>
   <div>

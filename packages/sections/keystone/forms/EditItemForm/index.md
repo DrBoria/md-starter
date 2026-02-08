@@ -1,6 +1,6 @@
 ```jsx
-const { EditItemForm } = require(".");
-const { KeystoneProvider } = require("../../common/utils/ui-kit/KeystoneProvider"); // KeystoneProvider is only for UI-KIT
+import { EditItemForm } from ".";
+import { KeystoneProvider } from "../../common/utils/ui-kit/KeystoneProvider"; // KeystoneProvider is only for UI-KIT
 // Don't use it in application
 
 <div>

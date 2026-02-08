@@ -26,6 +26,7 @@ export const devices = {
 export const getZIndex = (name: keyof typeof zIndexes) => zIndexes[name];
 
 const base = {
+  theme: 'base',
   zIndex: zIndexes,
   animation: {
     speed: {
@@ -36,11 +37,6 @@ const base = {
     }
   },
   font: {
-    // font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
-    size: `calc(
-      ${font.sizeMin}px + ${font.sizeMax - font.sizeMin} *
-        ((100vw - ${screens.mobileWidth}px) / ${screens.desktopWidth - screens.mobileWidth})
-    )`,
     family: font.family,
     sizes: {
       small: "0.875rem",
@@ -69,7 +65,24 @@ const base = {
     elementContent: 'var(--offset-element-content)',
   },
 
-  colors: {} as Record<string, string>,
+  colors: {
+    section: '#fff',
+    sectionContent: '#000',
+    overlay: 'rgba(0,0,0,0.1)',
+    overlayActive: 'rgba(0,0,0,0.2)',
+    highlighted: '#00f',
+    highlightedText: '#fff',
+    disabled: '#ccc',
+    warningBackground: '#fff',
+    warningText: '#000',
+    errorBackground: '#fff',
+    errorText: '#000',
+    successBackground: '#fff',
+    successText: '#000',
+    // Fallbacks
+    labelBackground: '#eee',
+    labelText: '#333',
+  },
 
   screens: {
     mobile: {
@@ -88,6 +101,24 @@ const base = {
       width: screens.desktopWidth,
     },
   },
+
+  effects: {
+    texture: 'none',
+    glow: { soft: 'none', medium: 'none', strong: 'none' },
+    depth: {
+      inner: { soft: 'none', medium: 'none', strong: 'none' },
+      outer: { soft: 'none', medium: 'none', strong: 'none' },
+    },
+    interaction: { hover: 'none', active: 'none' },
+  },
+
+  geometry: {
+    radius: '0px',
+    ragged: 'none',
+    cut: 'none',
+  },
+
+  // Legacy/Compat
 
   /* ******************************************************* */
   /* ******************** Variables ************************ */

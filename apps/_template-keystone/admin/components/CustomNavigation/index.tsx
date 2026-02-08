@@ -4,53 +4,79 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
-  ListNavItems,
   NavigationContainer,
 } from "@keystone-6/core/admin-ui/components";
 
 import { transformPathToReadableFormat } from "@md/utils";
-import { Button, MenuItem } from "@md/components";
+import { Button } from "@md/components";
 import { Icons, Toggle } from "@md/components/keystone";
 import { NavigationContainerStyled } from "./styles";
 import { NavItem } from "@md/components/keystone";
 import { useSignOut, useGetSessionData } from "@md/sections/keystone";
 
+const USERS_LIST_KEY = "Users";
 
-const ClientNavigation = React.memo(
-  ({ isAdminOwner }: { lists: ListMeta[]; isAdminOwner: boolean }) => {
+const LIST_ICONS = {
+  Users: Icons.UsersIcon,
+  Role: Icons.KeyIcon,
+  Post: Icons.FileTextIcon,
+};
+
+const getIconForList = (listKey) => {
+  const IconComponent = LIST_ICONS[listKey];
+  return IconComponent ? <IconComponent /> : <Icons.BoxIcon />;
+};
+
+const renderListItem = (list, isAdmin, currentUserId) => {
+  if (list.key === USERS_LIST_KEY) {
+    if (isAdmin) {
+      return (
+        <NavItem key={list.key} href="/users">
+          <Icons.UsersIcon />
+          Users
+        </NavItem>
+      );
+    }
     return (
-      <>
-        <MenuItem href="/" $offsetBottom>
-          <Icons.HomeIcon />
-          Dashboard
-        </MenuItem>
-        <MenuItem href="/examples" $offsetBottom>
-          <Icons.SettingsIcon />
-          Examples
-        </MenuItem>
-        {/* Show only for admin and owner */}
-        {isAdminOwner && (
-          <NavItem href="/users">
-            <Icons.UsersIcon />
-            Users
-          </NavItem>
-        )}
-      </>
+      <NavItem
+        key={list.key}
+        href={currentUserId ? `/users/${currentUserId}` : "/users"}
+      >
+        <Icons.SettingsIcon />
+        Settings
+      </NavItem>
     );
-  },
-);
+  }
+
+  return (
+    <NavItem key={list.key} href={`/${list.path}`}>
+      {getIconForList(list.key)}
+      {list.label}
+    </NavItem>
+  );
+};
 
 const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
   const [signOut] = useSignOut();
   const router = useRouter();
-  // Define access rights
   const sessionData = useGetSessionData(authenticatedItem);
   const session = sessionData?.length ? sessionData[0] : null;
 
   const isAdmin = session?.role?.name === "Admin";
-  const isOwner = session?.role?.name === "Owner";
+  const currentUserId = session?.id || null;
 
   const readablePath = transformPathToReadableFormat(router.pathname);
+
+  const clientNavigation = (
+    <>
+      <NavItem href="/">
+        <Icons.HomeIcon />
+        Dashboard
+      </NavItem>
+      {lists.map((list) => renderListItem(list, isAdmin, currentUserId))}
+    </>
+  );
+
   return (
     <NavigationContainer>
       <Head>
@@ -59,21 +85,21 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
 
       <NavigationContainerStyled>
         {isAdmin ? (
-          // Admin Navigation
           <>
             <Toggle title="SuperAdmin Pages">
-              <ListNavItems lists={lists} />
+              {lists.map((list) => (
+                <NavItem key={list.key} href={`/${list.path}`}>
+                  {getIconForList(list.key)}
+                  {list.label}
+                </NavItem>
+              ))}
             </Toggle>
             <Toggle title="Client Pages">
-              <ClientNavigation
-                lists={lists}
-                isAdminOwner={isAdmin || isOwner}
-              />
+              {clientNavigation}
             </Toggle>
           </>
         ) : (
-          // Contact Navigation
-          <ClientNavigation lists={lists} isAdminOwner={isAdmin || isOwner} />
+          clientNavigation
         )}
 
         {authenticatedItem.state === "authenticated" && (

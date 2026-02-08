@@ -1,9 +1,9 @@
 ### Typography:
 
 ```jsx
-const { PageContainer, BasicSection } = require("../../layout/Containers");
-const { PageTitle, Highlighted, SubTitle, SectionTitle, PlainText, Label } = require(".");
-const { dark } = require("@md/styles");
+import { PageContainer, BasicSection } from "../../layout/Containers";
+import { PageTitle, Highlighted, SubTitle, SectionTitle, PlainText, Label } from ".";
+import { viking } from "@md/styles";
 
 <PageContainer>
   <BasicSection>

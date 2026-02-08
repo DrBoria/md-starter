@@ -1,7 +1,7 @@
 ```jsx
-const { Input, Select, Submit, FormLabel, Radio, TextCheckbox, SearchInput } = require('./index');
-const { BasicSection } = require('../../layout/Containers/index');
-const { SubTitle } = require('../../data-display/Typography/index');
+import { Input, Select, Submit, FormLabel, Radio, TextCheckbox, SearchInput } from "./index";
+import { BasicSection } from "../../layout/Containers/index";
+import { SubTitle } from "../../data-display/Typography/index";
 
 const FormExample = () => {
   const [value, setValue] = useState('');

@@ -1,7 +1,7 @@
 # ActionButtons
 
 ```jsx
-const { ActionButtons } = require(".");
+import { ActionButtons } from ".";
 
 <>
   {/* Basic Action Buttons */}

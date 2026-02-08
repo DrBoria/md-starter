@@ -10,8 +10,8 @@
 //   PlainText,
 //   Label,
 // } from ".";
-const { dark } = require("@md/styles/themes");
-const ThemeProviderNative = require("../../ThemeProviderNative").default || require("../../ThemeProviderNative");
+import { viking } from "@md/styles/themes";
+import ThemeProviderNative from "../../ThemeProviderNative";
 
 <ThemeProviderNative>
   <>

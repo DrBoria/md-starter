@@ -1,47 +1,31 @@
 import React from "react";
 
-// eslint-disable-next-line no-restricted-imports
 import { DashboardCard } from "../components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "@md/components";
 import { PageTitle } from "@md/components";
 import { PageContainer } from "@md/sections/keystone";
 import { useQueryAdminMeta } from "@md/api/graphql";
-import type { QueryResult } from "@apollo/client";
 import { useQuery } from "@apollo/client";
-
-interface TAdminMeta {
-  Contact: number;
-  Campaign: number;
-  AgentReviewer: number;
-  AgentWriter: number;
-  Offer: number;
-  Email: number;
-}
-
-export const DashboardSubPages = [
-  "Users",
-  "Posts",
-];
+import { useKeystone } from "@keystone-6/core/admin-ui/context";
 
 const DashboardPage = () => {
-  const { data: adminMeta } = useQueryAdminMeta<QueryResult<TAdminMeta>>(DashboardSubPages, useQuery);
+  const { adminMeta } = useKeystone();
+  const lists = Object.values(adminMeta?.lists || {});
+  const listKeys = lists.map((list) => list.key);
+
+  const { data: countsData } = useQueryAdminMeta(listKeys, useQuery);
 
   return (
-    <PageContainer header={<PageTitle>Header</PageTitle>}>
+    <PageContainer header={<PageTitle>Dashboard</PageTitle>}>
       <DashboardCardsContainer>
-        <DashboardCard
-          title="Posts"
-          link="posts"
-          itemCount={
-            (adminMeta?.AgentReviewer || 0) + (adminMeta?.AgentWriter || 0)
-          }
-          noCreate
-        />
-        <DashboardCard
-          title="Users"
-          link="users"
-          itemCount={adminMeta?.Campaign}
-        />
+        {lists.map((list) => (
+          <DashboardCard
+            key={list.key}
+            title={list.label}
+            link={list.path}
+            itemCount={countsData?.[list.key] || 0}
+          />
+        ))}
       </DashboardCardsContainer>
     </PageContainer>
   );
