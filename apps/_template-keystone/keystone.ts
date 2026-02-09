@@ -4,7 +4,7 @@ import * as fs from "fs";
 import { config } from "@keystone-6/core";
 import type { KeystoneContext } from '@keystone-6/core/types';
 import { session, withAuth } from "./auth";
-import { APP_PORT, DATABASE_URL, APP_HOST } from "./env";
+import { APP_PORT, DATABASE_URL, APP_HOST } from "./schema/env";
 import { lists } from "./schema";
 import express from "express";
 import { isBanned } from "./schema/utils/access";

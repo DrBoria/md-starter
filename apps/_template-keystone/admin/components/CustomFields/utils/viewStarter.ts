@@ -1,5 +1,5 @@
 import type { FieldController, FieldControllerConfig } from "@keystone-6/core/types";
-import type { Value, Validation } from "@/admin/components/CustomFields/utils/validate";
+import type { Value, Validation } from "./validate";
 
 export type { Value, Validation };
 

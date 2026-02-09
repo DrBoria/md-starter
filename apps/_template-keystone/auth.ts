@@ -1,7 +1,7 @@
 import { createAuth } from "@keystone-6/auth";
 import { statelessSessions } from "@keystone-6/core/session";
 import { OAuth2Client } from "google-auth-library";
-import { SESSION_SECRET } from "./env";
+import { SESSION_SECRET } from "./schema/env";
 import type { KeystoneContext } from "@keystone-6/core/types";
 
 const WebClientId = '219402392863-r749djotop4lrj514evfvpdhr9m575k3.apps.googleusercontent.com';
