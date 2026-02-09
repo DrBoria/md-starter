@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { TextArea as KeystoneTextAreaOrig } from "@keystone-ui/fields";
-const KeystoneTextArea = KeystoneTextAreaOrig as unknown as React.FC<
+const KeystoneTextArea = KeystoneTextAreaOrig as React.FC<
   React.ComponentProps<typeof KeystoneTextAreaOrig> & { rows?: number }
 >;
 import styled from "styled-components";

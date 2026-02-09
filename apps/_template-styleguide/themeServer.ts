@@ -78,7 +78,8 @@ const loadThemeFiles = async () => {
       const fileContent = await fs.readFile(themePath, "utf-8");
       const themeData = extractThemeData(fileContent);
       if (themeData) {
-        (themes["colors"] as unknown as Record<string, ThemeData>)[themeName] = themeData;
+        const colors = themes["colors"] as Record<string, ThemeData>;
+        colors[themeName] = themeData;
       }
     } catch (err) {
       console.error(`Error loading theme file: ${themeFile}`, err);

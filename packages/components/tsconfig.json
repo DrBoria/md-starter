@@ -16,7 +16,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "images.d.ts"
+    "images.d.ts",
+    "styled.d.ts"
   ],
   "exclude": [
     "node_modules",

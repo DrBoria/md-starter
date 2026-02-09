@@ -47,7 +47,7 @@ function App(): React.JSX.Element {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={{ colors: isDarkMode ? viking : liquidGlass }}>
+      <ThemeProvider theme={isDarkMode ? viking : liquidGlass}>
         <NativeRouter>
           {loading ? (
             <SpinnerContainer>

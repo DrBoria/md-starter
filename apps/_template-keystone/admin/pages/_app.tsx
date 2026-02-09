@@ -13,7 +13,7 @@ const KeystoneApp = (KeystoneAppModule as { default?: React.ElementType }).defau
 
 function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
     const Wrapped = (props: AppProps) => (
-        <ApolloProvider client={apolloClient as unknown as ApolloClient<object>}>
+        <ApolloProvider client={apolloClient as ApolloClient<object>}>
             <ThemeProvider theme={viking}>
                 <GlobalStyles />
                 <LoggerProvider>
@@ -36,7 +36,7 @@ function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
 // NOTE: Option 2, our wrapper above keystone wrapper
 // function WrappedApp(props) {
 //     return (
-//         <ApolloProvider client={apolloClient as unknown as ApolloClient<any>}>
+//         <ApolloProvider client={apolloClient as ApolloClient<any>}>
 //             <ThemeProvider theme={viking}>
 //                 <LoggerProvider>
 //                     <ModalProvider>

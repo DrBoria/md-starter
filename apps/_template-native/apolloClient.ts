@@ -33,12 +33,21 @@ const hasTokenExpired = (tokens: TokenData) => {
 
 // Function to refresh tokens
 const refreshTokens = async (): Promise<TokenData> => {
-    const userInfo = await GoogleSignin.signInSilently() as unknown as TokenData | null;
-    const { idToken, accessToken } = userInfo || {};
+    const userInfo = await GoogleSignin.signInSilently();
+
+    if (!userInfo || typeof userInfo !== 'object' || !('idToken' in userInfo)) {
+        return {
+            idToken: null,
+            accessToken: null,
+            expirationTime: 0
+        }
+    }
+
+    const userData = userInfo as { idToken?: string | null; accessToken?: string | null };
     return {
-        idToken: idToken || null,
-        accessToken: accessToken || null,
-        expirationTime: Date.now() + 60 * 60 * 1000, // Example: 1 hour expiration
+        idToken: userData.idToken || null,
+        accessToken: userData.accessToken || null,
+        expirationTime: Date.now() + 60 * 60 * 1000,
     };
 };
 
@@ -48,7 +57,7 @@ const httpLink = new HttpLink({ uri: `${domain}/api/graphql`, fetch: customFetch
 // Middleware to attach cookies from storage
 const authLink = setContext(async (_, { headers }) => {
     const cookie = storage.getString(domain);
-    let tokens: TokenData | null = (await GoogleSignin.getTokens()) as unknown as TokenData | null;
+    let tokens: TokenData | null = (await GoogleSignin.getTokens()) as TokenData | null;
     console.log(tokens, 'hasTokenExpired? : ', tokens ? hasTokenExpired(tokens) : 'No tokens')
     if (!tokens || hasTokenExpired(tokens)) {
         // Token is expired or doesn't exist, try to refresh

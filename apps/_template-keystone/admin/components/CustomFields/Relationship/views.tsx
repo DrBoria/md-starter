@@ -125,7 +125,7 @@ const Field = ({
 
   useEffect(() => {
     void refetch();
-  }, [(itemValue as unknown as IItemValue)?.organization?.value?.value?.id]);
+  }, [itemValue && typeof itemValue === 'object' && 'organization' in itemValue ? (itemValue as IItemValue).organization?.value?.value?.id : undefined]);
 
   const handleChange = (newVal: IOption | null) => {
     const localValue = value as ISelectValue;

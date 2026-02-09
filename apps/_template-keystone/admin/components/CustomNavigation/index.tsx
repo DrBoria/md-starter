@@ -7,8 +7,8 @@ import {
 } from "@keystone-6/core/admin-ui/components";
 
 import { transformPathToReadableFormat } from "@md/utils";
-import { Button } from "@md/components";
-import { Icons, Toggle } from "@md/components/keystone";
+import { Button, Toggle } from "@md/components";
+import { Icons } from "@md/components/keystone";
 import { NavigationContainerStyled } from "./styles";
 import { NavItem } from "@md/components/keystone";
 import { useSignOut, useGetSessionData } from "@md/sections/keystone";

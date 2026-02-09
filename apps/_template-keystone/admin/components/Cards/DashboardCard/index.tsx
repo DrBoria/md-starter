@@ -27,7 +27,7 @@ const DashboardCardContainer = styled.div`
     background-image: ${theme.effects?.texture};
     border: none;
     border-radius: 0;
-    clip-path: ${(theme.geometry as unknown as Record<string, string>)?.card || (theme.geometry as unknown as Record<string, string>)?.ragged};
+    clip-path: ${theme.geometry?.ragged};
     box-shadow: ${theme.effects?.depth?.outer?.medium};
     padding: ${theme.variables?.offsets?.elementContent?.desktop || 20}px;
 

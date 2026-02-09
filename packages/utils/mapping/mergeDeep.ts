@@ -12,9 +12,9 @@ export function isObject(obj: unknown): boolean {
  * objects (immutable) and merges arrays via concatenation.
  *
  * @param {...object} objects - Objects to merge
- * @returns {object} New object with merged key/values
+ * @returns {T} New object with merged key/values
  */
-export function mergeDeep(...objects: Record<string, unknown>[]) {
+export function mergeDeep<T = Record<string, unknown>>(...objects: Record<string, unknown>[]): T {
   return objects.reduce((prev: Record<string, unknown>, obj: Record<string, unknown>) => {
     if (!obj) {
       return prev;
@@ -37,5 +37,5 @@ export function mergeDeep(...objects: Record<string, unknown>[]) {
     });
 
     return prev;
-  }, {});
+  }, {}) as T;
 }

@@ -7,6 +7,7 @@ import type {
 import React, { useEffect } from "react";
 import { useList } from "@keystone-6/core/admin-ui/context";
 import { BasicSection, Button, DescriptionText, Label } from "@md/components";
+import type { TSideBarModalData } from "@md/components";
 
 // import type { TOperation } from "@/types";
 import { getWhereParameters } from "./utils";
@@ -16,7 +17,7 @@ import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 import { useModal } from "@md/components/keystone";
 // import { MultiSelect } from "@keystone-ui/fields";
-import type { TSession } from "../../../../schema/utils/access";
+import type { TSession } from "@/schema/utils/access";
 
 export interface IListName {
   listName: string;
@@ -134,7 +135,7 @@ const Field = ({
       listName: field?.refListKey,
       headerText: `Create ${itemReadableName}`,
       type: "create",
-    });
+    } as TSideBarModalData);
   };
 
   return (

@@ -71,7 +71,7 @@ export const LucideIcon: React.FC<LucideIconProps> = ({
 
   // Ensure name is valid key of LucideIcons
   // Ensure name is valid key of LucideIcons
-  const IconComponent = LucideIcons[name] as unknown as React.FC<LucideProps>;
+  const IconComponent = LucideIcons[name];
 
   if (!IconComponent) {
     console.warn(`Lucide icon "${name}" not found`);

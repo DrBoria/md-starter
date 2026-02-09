@@ -2,7 +2,7 @@ import type { CellComponent, FieldProps } from "@keystone-6/core/types";
 import React, { useEffect, useState } from "react";
 import { CellContainer, CellLink } from "@keystone-6/core/admin-ui/components";
 
-import type { Value } from "@/admin/components/CustomFields/utils/validate";
+
 import type { controller } from "@/admin/components/CustomFields/utils/viewStarter";
 import { ShortedText } from "@md/components/keystone";
 import { TextArea } from "@md/components/keystone";
@@ -42,7 +42,7 @@ function Field({
 
   const handleValidate = () => {
     const message = validate(
-      value as unknown as Value,
+      value,
       field.validation,
       field.label,
     );

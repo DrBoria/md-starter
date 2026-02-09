@@ -1,8 +1,8 @@
 import 'styled-components';
-import { ThemeInterface } from '@md/styles';
+import type { ThemeInterface } from '@md/styles';
 
 declare module 'styled-components' {
     export interface DefaultTheme extends ThemeInterface {
-        _brand?: 'components';
+        _brand?: 'styleguide';
     }
 }

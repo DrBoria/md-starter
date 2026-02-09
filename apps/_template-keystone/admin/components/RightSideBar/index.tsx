@@ -6,7 +6,7 @@ import styled, { keyframes } from "styled-components";
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
 // import type { TOperation } from "@/types";
-import type { TSideBarModalDataKeystone } from "../../../types";
+import type { TSideBarModalDataKeystone } from "@/types";
 
 
 

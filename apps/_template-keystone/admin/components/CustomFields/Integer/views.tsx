@@ -40,7 +40,7 @@ function Field({
 
   const handleValidate = () => {
     const message = validate(
-      value as unknown as Value,
+      value,
       field.validation,
       field.label,
     );

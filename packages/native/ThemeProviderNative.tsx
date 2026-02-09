@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import type { DefaultTheme } from 'styled-components/native';
 import { ThemeProvider } from 'styled-components/native';
 import { baseTheme } from '@md/styles/themes';
 import { mergeDeep } from '@md/utils/mapping/mergeDeep';
+import type { ThemeInterface } from '@md/styles/themes/types';
 
 // Get device screen width
 const { width: screenWidth } = Dimensions.get('window');
@@ -28,14 +28,16 @@ const nativeBaseTheme = {
   },
 };
 
-const ThemeProviderNative = ({ children, theme = {} }: { children: React.ReactNode, theme?: Record<string, boolean | object> }) => {
-  // Merge baseTheme, nativeBaseTheme, and colorTheme
-  const mergedTheme = {
-    ...mergeDeep(baseTheme, nativeBaseTheme, theme),
-  };
+const ThemeProviderNative = ({ children, theme = {} }: { children: React.ReactNode, theme?: Partial<ThemeInterface> }) => {
+  // Deep merge baseTheme with native overrides and custom theme
+  const mergedTheme = mergeDeep<ThemeInterface>(
+    baseTheme,
+    nativeBaseTheme,
+    theme
+  );
 
   return (
-    <ThemeProvider theme={mergedTheme as unknown as DefaultTheme}>
+    <ThemeProvider theme={mergedTheme}>
       <>{children}</>
     </ThemeProvider>
   );
