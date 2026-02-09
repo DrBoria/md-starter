@@ -6,7 +6,7 @@ const pulseAnimation = keyframes`
   100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 `;
 
-export const liquidGlassTheme = css`
+export const liquidGlassTheme = css<{ $tone?: string }>`
   /* LIQUID GLASS THEME: Floating Pills */
   background: rgb(255 255 255 / 10%);
   backdrop-filter: blur(5px);

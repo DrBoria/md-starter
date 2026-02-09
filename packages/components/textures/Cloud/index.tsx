@@ -1,4 +1,3 @@
-/* stylelint-disable color-no-hex, length-zero-no-unit */
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import cloudFilter from './clouds.svg'

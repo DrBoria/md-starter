@@ -1,3 +1,4 @@
+import './styled';
 export { default as ThemeProvider } from './ThemeProviderWrapper';
 
 export {

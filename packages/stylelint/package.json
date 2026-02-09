@@ -9,7 +9,7 @@
     "dependencies": {
         "stylelint-config-standard": "^36.0.0",
         "stylelint-order": "^6.0.4",
-        "stylelint-declaration-strict-value": "^1.10.6",
+        "stylelint-declaration-strict-value": "^1.10.11",
         "postcss-styled-syntax": "^0.6.4"
     },
     "peerDependencies": {

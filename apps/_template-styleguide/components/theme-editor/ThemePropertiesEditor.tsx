@@ -3,15 +3,19 @@ import { Toggle, Input, SectionTitle } from "@md/components";
 import styled from "styled-components";
 
 const ColorInput = styled.input`
-  width: 100px;
+  width: ${({ theme }) => theme.space?.[12] || '100px'};
 `;
 
 const PropertyContainer = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: ${({ theme }) => theme.space?.[2] || '10px'};
 `;
 
+type ThemeDictionary = {
+    [key: string]: string | number | ThemeDictionary;
+};
+
 const ThemePropertiesEditor = ({ theme, onChange, collapsedSections, onToggleSection }) => {
-    const renderInputs = (obj, keyPath = []) => {
+    const renderInputs = (obj: ThemeDictionary, keyPath: string[] = []) => {
         if (!obj || typeof obj !== "object") return null; // Guard against invalid input
 
         return Object.entries(obj).map(([key, value]) => {

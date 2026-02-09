@@ -223,7 +223,7 @@ const FileUpload = ({
           <Input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             placeholder="Enter Name"
             $offsetBottom
           />
@@ -232,7 +232,7 @@ const FileUpload = ({
           <TextArea
             $offsetBottom
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
             placeholder="Enter Description"
           />
         )}

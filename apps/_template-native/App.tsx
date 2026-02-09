@@ -5,6 +5,7 @@
  * @format
  */
 
+import type { } from './styled.d.ts';
 import React, { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { HamburgerMenu, LoadingSpinner, ThemeProvider } from '@md/native/components';

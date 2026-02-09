@@ -22,7 +22,7 @@ const CardContainer = styled(TouchableOpacity)`
 const Title = styled(PlainText)`
   font-size: 18px;
   font-weight: 600;
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  font-family: ${({ theme }) => theme.font.family.title};
 `;
 
 const Footer = styled(View)`
@@ -31,12 +31,18 @@ const Footer = styled(View)`
 `;
 
 const ReadMore = styled(PlainText)`
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
-  color: ${({ theme }) => theme?.colors?.highlighted || 'red'};
+  font-family: ${({ theme }) => theme.font.family.title};
+  color: ${({ theme }) => theme.colors.highlighted || 'red'};
   font-weight: 600;
 `;
 
-const Card = ({ title, date, onPress }) => (
+interface CardProps {
+  title: string;
+  date?: string;
+  onPress?: () => void;
+}
+
+const Card: React.FC<CardProps> = ({ title, date, onPress }) => (
   <CardContainer onPress={onPress}>
     <Title $offsetBottom>{title}</Title>
     <Footer>

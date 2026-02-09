@@ -1,9 +1,19 @@
 import React from 'react';
-import { Input, SectionTitle, Toggle } from "@md/components";
+import { Input, Toggle } from "@md/components";
 import styled from "styled-components";
 
-const PropertyContainer = styled.div`margin-bottom: 10px;`;
-const ColorInput = styled.input`width: 100px;`;
+const InputContainer = styled.div`
+  margin-bottom: ${({ theme }) => theme.space?.[2] || '10px'};
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: ${({ theme }) => theme.space?.[1] || '5px'};
+`;
+
+const ColorInput = styled.input`
+  width: 100px;
+`;
 
 const RenderInputs = ({ obj, keyPath, onChange, collapsedSections, onToggleSection }) => {
   if (!obj || typeof obj !== 'object') return null;

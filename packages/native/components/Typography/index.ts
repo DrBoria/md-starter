@@ -27,8 +27,8 @@ const sizes = {
 };
 
 const PageTitle = styled(Text) <TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.font.family.title};
   font-size: ${sizes.PageTitle.fontSize}px;
   line-height: ${sizes.PageTitle.lineHeight}px;
   font-weight: 600;
@@ -38,8 +38,8 @@ const PageTitle = styled(Text) <TWithBasicElementOffsets>`
 `;
 
 const SubTitle = styled(Text) <TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.font.family.title};
   font-size: ${sizes.SubTitle.fontSize}px;
   line-height: ${sizes.SubTitle.lineHeight}px;
   margin-right: ${withOffsetsRight}px;
@@ -47,8 +47,8 @@ const SubTitle = styled(Text) <TWithBasicElementOffsets>`
 `;
 
 const SectionTitle = styled(Text) <TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.font.family.title};
   font-size: ${sizes.SectionTitle.fontSize}px;
   line-height: ${sizes.SectionTitle.lineHeight}px;
   font-weight: 600;
@@ -58,8 +58,8 @@ const SectionTitle = styled(Text) <TWithBasicElementOffsets>`
 `;
 
 const PlainText = styled(Text) <TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.font.family.text};
   font-size: ${sizes.PlainText.fontSize}px;
   line-height: ${sizes.PlainText.lineHeight}px;
   margin-right: ${withOffsetsRight}px;
@@ -67,34 +67,34 @@ const PlainText = styled(Text) <TWithBasicElementOffsets>`
 `;
 
 const Highlighted = styled(Text) <TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.highlighted || 'red'};
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  color: ${({ theme }) => theme.colors.highlighted};
+  font-family: ${({ theme }) => theme.font.family.title};
 `;
 
 const Label = styled(Text) <TWithBasicElementOffsets>`
-  font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
-  padding: ${({ theme }) => (theme?.offsets?.elementContent ? theme.offsets.elementContent / 2 : 0)}px;
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  background-color: ${({ theme }) => theme?.colors?.labelBackground || 'transparent'};
-  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  font-family: ${({ theme }) => theme.font.family.text};
+  padding: ${({ theme }) => (theme.variables.offsets.elementContent?.mobile ? theme.variables.offsets.elementContent.mobile / 2 : 0)}px;
+  color: ${({ theme }) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.labelBackground};
+  border-radius: ${({ theme }) => theme.border.radius}px;
 `;
 
 const DescriptionText = styled(Text)`
-  font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
+  font-family: ${({ theme }) => theme.font.family.text};
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
 `;
 
 const HeaderText = styled(Text)`
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  font-family: ${({ theme }) => theme.font.family.title};
   font-weight: 600;
   font-size: 20px; // same as in keystone
   color: #111827; // same as in keystone
 `;
 
 const LinkInForm = styled(Text)`
-  font-family: ${({ theme }) => theme?.font?.family?.title || 'System'};
+  font-family: ${({ theme }) => theme.font.family.title};
   color: #374151;
   font-size: 14px;
   font-weight: 600;

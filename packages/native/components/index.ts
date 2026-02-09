@@ -1,3 +1,4 @@
+import type { } from './styled.d.ts';
 export { default as ThemeProvider } from '@md/native/ThemeProviderNative';
 export { Card } from './Card';
 export { Button } from './Button';

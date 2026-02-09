@@ -15,11 +15,39 @@
     "./default/overlays": "./dist/default/overlays/index.js",
     "./keystone": "./dist/keystone/index.js"
   },
+  "typesVersions": {
+    "*": {
+      "default/common": [
+        "./dist/default/common/index.d.ts"
+      ],
+      "default/data-display": [
+        "./dist/default/data-display/index.d.ts"
+      ],
+      "default/feedback": [
+        "./dist/default/feedback/index.d.ts"
+      ],
+      "default/forms": [
+        "./dist/default/forms/index.d.ts"
+      ],
+      "default/layout": [
+        "./dist/default/layout/index.d.ts"
+      ],
+      "default/navigation": [
+        "./dist/default/navigation/index.d.ts"
+      ],
+      "default/overlays": [
+        "./dist/default/overlays/index.d.ts"
+      ],
+      "keystone": [
+        "./dist/keystone/index.d.ts"
+      ]
+    }
+  },
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix && stylelint '**/*.{css,ts,tsx}' --fix",
     "build": "tsc && copyfiles -u 0 \"**/*.{svg,jpg,jpeg,png,webp,gif,ico}\" dist"
   },
   "keywords": [],
@@ -46,7 +74,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "recharts": "^2.13.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^6.3.9"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",

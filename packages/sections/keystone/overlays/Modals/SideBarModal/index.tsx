@@ -92,7 +92,7 @@ const Overlay = styled.div<{ $isClosing?: boolean }>`
 
 const StyledSideBarModal = styled.div`
   background: ${({ theme }) => theme.colors.section};
-  border-radius: ${({ theme }) => theme.colors.borderRadius || '4px'};
+  border-radius: ${({ theme }) => theme.borderRadius || '4px'};
   width: 100%;
   min-height: 100%;
   backdrop-filter: var(--glass-effect);

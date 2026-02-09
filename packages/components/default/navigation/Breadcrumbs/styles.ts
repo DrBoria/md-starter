@@ -1,5 +1,3 @@
-/* stylelint-disable media-query-no-invalid */
-/* stylelint-disable media-query-no-invalid */
 import styled from "styled-components";
 import Link from "next/link";
 import { LucideIcon } from "@md/components/default/common";
@@ -13,12 +11,10 @@ export const BreadcrumbContainer = styled.div`
   color: ${({ theme }) => theme?.colors?.labelBackground || 'gray'};
   gap: ${({ theme }) => (theme?.variables?.offsets?.betweenElements?.mobile || 8) + "px"};
 
-  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${({ theme }) => theme?.screens?.tablet?.device || '(min-width: 768px)'} {
     gap: ${({ theme }) => (theme?.variables?.offsets?.betweenElements?.tablet || 12) + "px"};
   }
 
-  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${({ theme }) => theme?.screens?.desktop?.device || '(min-width: 1024px)'} {
     gap: ${({ theme }) => (theme?.variables?.offsets?.betweenElements?.desktop || 16) + "px"};
   }

@@ -9,13 +9,13 @@ import { NewThemeCreator } from './NewThemeCreator';
 import { RenderInputs } from './RenderInputs';
 
 const Container = styled.div`
-  padding: 20px;
+  padding: ${({ theme }) => theme.space?.[5] || '20px'};
 `;
 
 const NewThemeContainer = styled.div`
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
+  margin-top: ${({ theme }) => theme.space?.[5] || '20px'};
+  border-top: 1px solid ${({ theme }) => theme.colors?.neutral?.[300] || 'black'};
+  padding-top: ${({ theme }) => theme.space?.[5] || '20px'};
 `;
 
 const ThemeEditor = () => {
@@ -50,8 +50,8 @@ const ThemeEditor = () => {
       let current = newTheme;
 
       // If we are in 'colors' section, we need to inject selectedColorTheme into the path
-      const fullPath = section === 'colors' 
-        ? [section, selectedColorTheme, ...keyPath.slice(1)] 
+      const fullPath = section === 'colors'
+        ? [section, selectedColorTheme, ...keyPath.slice(1)]
         : keyPath;
 
       for (let i = 0; i < fullPath.length - 1; i++) {
@@ -95,7 +95,12 @@ const ThemeEditor = () => {
 
   const getChangedValues = (original, updated) => {
     const changes = {};
-    const recurse = (orig, upd, path = []) => {
+
+    type ThemeDictionary = {
+      [key: string]: string | number | ThemeDictionary;
+    };
+
+    const recurse = (orig: ThemeDictionary, upd: ThemeDictionary, path: string[] = []) => {
       Object.keys(upd).forEach((key) => {
         const currentPath = [...path, key];
         const origValue = orig[key];
@@ -316,7 +321,7 @@ const generatePalette2 = (color, baseHsl, isDark) => {
   };
 };
 
-const generatePalette3 = (color, baseHsl, isDark)  => {
+const generatePalette3 = (color, baseHsl, isDark) => {
   const highlighted = color.toHexString();
   const sectionHsl = { ...baseHsl, l: isDark ? 0.95 : 0.05 };
   const section = tinycolor(sectionHsl).toHexString();

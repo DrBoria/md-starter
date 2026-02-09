@@ -98,7 +98,7 @@ const FilterValuePage = ({
           <Input
             placeholder={`Enter ${fieldLabel}`}
             value={inputValues[fieldPath]!}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
           />
         )}
         {fieldType === "relation" && relationsOptions && (

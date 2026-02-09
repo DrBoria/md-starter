@@ -411,7 +411,7 @@ export const ItemsList = ({
           {withFullSupport && (
             <Checkbox
               checked={allChecked}
-              onChange={(e) => handleCheckboxChange(null, e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckboxChange(null, e.target.checked)}
               className="ml-4"
               data-test-id="global-checkbox"
             >
@@ -457,7 +457,7 @@ export const ItemsList = ({
               {withFullSupport && (
                 <Checkbox
                   checked={selectedForDelete.includes(element.id)}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleCheckboxChange(element.id, e.target.checked)
                   }
                   className="ml-4"

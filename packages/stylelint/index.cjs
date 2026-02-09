@@ -40,6 +40,8 @@ module.exports = {
         ignoreValues: [
           "0",
           "1px",
+          "1rem",
+          "50%",
           "100%",
           "auto",
           "none",
@@ -67,13 +69,24 @@ module.exports = {
           "flex-end",
           "baseline",
           "stretch",
-          "/^calc/",
-          "/fr$/"
+          "/^calc\\((?:(?!\\d+(?:px|em|rem|%|vw|vh|vmin|vmax)).)*\\)$/",
+          "/fr$/",
+          "100vh",
+          "100vw",
+          "50vh",
+          "50vw",
+          "/^(?!.*(\\d+(px|em|rem|%|vw|vh)|#|['\"])).*$/",
+          "/^-?\\d+(\\.5)?$/",
+          "1"
         ],
+        ignoreVariables: false,
+        ignoreFunctions: false,
         expandShorthand: true,
-        message: "Use theme variables or allowed exceptions (0, 1px, 100%)"
+        disableFix: true,
+        message: "Use theme variables or allowed exceptions (0, 1px, 100%, ${({ theme }) => theme....ETC})"
       }
     ],
+    "function-disallowed-list": ["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch"],
     "color-no-hex": true,
     "color-named": "never",
     "property-no-unknown": [
@@ -91,6 +104,13 @@ module.exports = {
           "/^\\$/"
         ]
       }
+    ],
+    "media-query-no-invalid": null,
+    "comment-pattern": [
+      "^((?!stylelint-disable)[\\s\\S])*$",
+      {
+        "message": "stylelint-disable comments are not allowed."
+      }
     ]
   },
   overrides: [
@@ -98,55 +118,14 @@ module.exports = {
       files: [
         "**/*.{js,jsx,ts,tsx}"
       ],
-      customSyntax: "postcss-styled-syntax"
     },
-    {
-      files: [
-        "packages/styles/**/*",
-        "**/*theme*.ts",
-        "**/*Theme*.ts",
-        "**/themes/**/*.{ts,tsx}"
-      ],
-      rules: {
-        "scale-unlimited/declaration-strict-value": null,
-        "color-no-hex": null,
-        "color-named": null
-      }
-    },
-    {
-      files: [
-        "apps/_template-native/**/*.{ts,tsx}"
-      ],
-      rules: {
-        "scale-unlimited/declaration-strict-value": null
-      }
-    },
-    {
-      files: [
-        "packages/components/**/*.{ts,tsx}"
-      ],
-      rules: {
-        "scale-unlimited/declaration-strict-value": null
-      }
-    },
-    {
-      files: [
-        "packages/sections/**/*.{ts,tsx}"
-      ],
-      rules: {
-        "scale-unlimited/declaration-strict-value": null,
-        "color-no-hex": null,
-        "color-named": null,
-        "no-duplicate-selectors": null
-      }
-    }
   ],
   ignoreFiles: [
     "dist/**/*",
     "coverage/**/*",
     "node_modules/**/*",
     "**/*.d.ts",
-    "packages/styles/themes/**/*",
+  "packages/styles/themes/**/*",
     ".next/**/*",
     ".turbo/**/*"
   ]

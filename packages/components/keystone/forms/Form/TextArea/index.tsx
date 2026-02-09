@@ -30,7 +30,7 @@ const Container = styled.div<TWithBasicElementOffsets>`
 `;
 
 const CodeEditorContainer = styled.div`
-  border: 1px solid ${({ theme }) => theme?.colors?.border};
+  border: 1px solid ${({ theme }) => theme?.colors?.disabled};
   border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
   margin-bottom: ${({ theme }) => theme?.offsets?.elementContent};
 

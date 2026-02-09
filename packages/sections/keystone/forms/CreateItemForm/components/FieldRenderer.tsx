@@ -65,7 +65,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                     id={path}
                     name={path}
                     checked={isChecked}
-                    onChange={(e) => onChange(e.target.checked)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.checked)}
                     label={label}
                 />
             </div>
@@ -120,7 +120,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                 name={path}
                 type={type}
                 value={displayValue}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const val = e.target.value;
                     // For numbers, we might need to cast? default controller usually handles string -> valid types
                     const params = (typeof value === "object" && value !== null) ? { ...value, value: val } : { value: val };

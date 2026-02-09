@@ -8,7 +8,7 @@ interface TPosition {
 }
 
 const SuggestionList = styled.ul<{ $suggestionsPosition: TPosition }>`
-  border: 1px solid ${({ theme }) => theme?.colors?.border};
+  border: 1px solid ${({ theme }) => theme?.colors?.disabled};
   border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
   background-color: ${({ theme }) => theme?.colors?.background};
   position: absolute;

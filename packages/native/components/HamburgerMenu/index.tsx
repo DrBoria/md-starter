@@ -7,14 +7,14 @@ import { SubTitle } from '@md/native/components/Typography';
 
 const { width, height } = Dimensions.get('window'); // Get screen dimensions
 
-const SidebarContainer = styled(Animated.View) <{ $isOpen: boolean }>`
+const SidebarContainer = styled(Animated.View)`
   position: absolute;
   top: 0;
   right: 0;
   height: ${height}px;
   width: ${width};
   background-color: ${({ theme }) => theme.colors.section};
-  padding: ${({ theme }) => theme.offsets.section / 2}px ${({ theme }) => theme.offsets.section * 2}px;
+  padding: ${({ theme }) => theme.variables.offsets.section.mobile / 2}px ${({ theme }) => theme.variables.offsets.section.mobile * 2}px;
   z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 

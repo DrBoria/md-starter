@@ -1,5 +1,3 @@
-/* stylelint-disable media-query-no-invalid */
-/* stylelint-disable media-query-no-invalid */
 import styled, { css } from "styled-components";
 import type { TFullWidth, TWithBasicElementOffsets } from '@md/styles';
 import { withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/styles';
@@ -28,12 +26,10 @@ export const BasicSection = styled.div<TSectionProps>`
   padding: ${({ theme }) => theme?.offsets?.section || '20px'};
   background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
 
-  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${({ theme }) => theme?.screens?.tablet?.device || '(min-width: 768px)'} {
     height: ${({ theme }) => `calc(${theme?.screens?.tablet?.height || '100vh'} - ${theme?.elements?.header?.height || '60px'})`};
   }
 
-  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${({ theme }) => theme?.screens?.desktop?.device || '(min-width: 1024px)'} {
     height: ${({ theme }) => `calc(${theme?.screens?.desktop?.height || '100vh'} - ${theme?.elements?.header?.height || '60px'})`};
     padding: ${({ theme }) => `${theme?.offsets?.section || '20px'} ${theme?.offsets?.section || '20px'}`};

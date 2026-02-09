@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint . && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix && stylelint '**/*.{css,ts,tsx}' --fix",
     "start": "react-native start",
     "dev": "react-native run-android",
     "clean": "cd ./android && ./gradlew clean && cd ..",
@@ -38,7 +38,7 @@
     "react-native-screens": "^3.35.0",
     "react-native-svg": "^15.8.0",
     "react-router-native": "^6.27.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^6.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

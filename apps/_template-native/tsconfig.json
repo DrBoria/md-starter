@@ -2,11 +2,24 @@
   "extends": "@md/tsconfig/react-native.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "."
+    "baseUrl": ".",
+    "paths": {
+      "@md/native/*": [
+        "../../packages/native/*"
+      ],
+      "@md/styles": [
+        "../../packages/styles"
+      ],
+      "@md/styles/*": [
+        "../../packages/styles/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "styled.d.ts",
+    "images.d.ts"
   ],
   "exclude": [
     "node_modules",

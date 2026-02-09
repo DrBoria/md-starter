@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const liquidGlassTheme = css`
+export const liquidGlassTheme = css<{ $active?: boolean }>`
   /* LIQUID GLASS THEME: Pagination */
   background: rgb(255 255 255 / 10%);
   backdrop-filter: blur(4px);
@@ -12,7 +12,7 @@ export const liquidGlassTheme = css`
   align-items: center;
   justify-content: center;
   
-  ${({ $active }: { $active: boolean }) => $active && css`
+  ${({ $active }) => $active && css`
       background: rgb(255 255 255 / 30%);
       box-shadow: 0 0 10px rgb(255 255 255 / 40%);
       border-color: white;

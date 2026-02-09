@@ -3,8 +3,8 @@
  * @param obj
  * @returns {boolean}
  */
-export function isObject(obj: object | boolean): boolean {
-  return obj && typeof obj === "object";
+export function isObject(obj: unknown): boolean {
+  return obj !== null && typeof obj === 'object';
 }
 
 /**
@@ -14,8 +14,12 @@ export function isObject(obj: object | boolean): boolean {
  * @param {...object} objects - Objects to merge
  * @returns {object} New object with merged key/values
  */
-export function mergeDeep(...objects: Record<string, object | boolean>[]) {
-  return objects.reduce((prev, obj) => {
+export function mergeDeep(...objects: Record<string, unknown>[]) {
+  return objects.reduce((prev: Record<string, unknown>, obj: Record<string, unknown>) => {
+    if (!obj) {
+      return prev;
+    }
+
     Object.keys(obj).forEach((key) => {
       const pVal = prev[key];
       const oVal = obj[key];
@@ -24,8 +28,8 @@ export function mergeDeep(...objects: Record<string, object | boolean>[]) {
         prev[key] = pVal.concat(...oVal);
       } else if (isObject(pVal) && isObject(oVal)) {
         prev[key] = mergeDeep(
-          pVal as Record<string, object>,
-          oVal as Record<string, object>,
+          pVal as Record<string, unknown>,
+          oVal as Record<string, unknown>,
         );
       } else {
         prev[key] = oVal;

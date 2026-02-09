@@ -1,34 +1,54 @@
 import { css } from 'styled-components';
 
-// The mixin (keep generic export for direct usage)
+const GLASS_BLUR = 'blur(10px)';
+const GLASS_BG = 'rgb(255 255 255 / 20%)';
+const GLASS_SHADOW = '0 4px 30px rgb(0 0 0 / 10%)';
+
 export const liquidGlassMixin = css`
-  backdrop-filter: blur(10px);
-    background: rgb(255 255 255 / 20%);
-    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+  backdrop-filter: ${GLASS_BLUR};
+  background: ${GLASS_BG};
+  box-shadow: ${GLASS_SHADOW};
 `;
 
 
-import type { ThemeInterface } from '@md/styles/types';
+import type { ThemeInterface } from './types';
 import baseTheme from './baseTheme';
 
-// The Theme Object (for Styleguide/ThemeProvider)
 const liquidGlass: ThemeInterface = {
   theme: 'liquidGlass',
 
-  colors: {
-    // --- PALETTE (Light Glass) ---
-    section: 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
-    sectionContent: '#1f2937', // Dark gray text
+  fontFamily: '"Inter", sans-serif',
+  borderRadius: 12,
+  zIndex: {
+    content: 1,
+    alert: 100,
+    animatedElements: 10,
+  },
+  border: {
+    radius: 12,
+    size: 1,
+    cut: 'none',
+  },
+  shadows: {
+    small: '0 2px 4px rgba(0,0,0,0.1)',
+    medium: '0 4px 8px rgba(0,0,0,0.15)',
+    large: '0 8px 16px rgba(0,0,0,0.2)',
+  },
 
+  colors: {
+    section: 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
+    sectionContent: '#1f2937',
     overlay: 'rgba(0, 0, 0, 0.05)',
     overlayActive: 'rgba(0, 0, 0, 0.1)',
-
-    highlighted: '#3b82f6',    // Blue
+    highlighted: '#3b82f6',
     highlightedText: '#ffffff',
+    disabled: '#9ca3af',
 
-    disabled: '#9ca3af',       // Gray
+    surface: '#ffffff',
+    text: '#1f2937',
+    background: '#f0f2f5',
+    highlight: '#3b82f6',
 
-    // Statuses
     warningBackground: '#fffbeb',
     warningText: '#92400e',
     errorBackground: '#fef2f2',
@@ -36,18 +56,23 @@ const liquidGlass: ThemeInterface = {
     successBackground: '#ecfdf5',
     successText: '#065f46',
 
-    // Fallbacks
     labelBackground: '#f3f4f6',
     labelText: '#374151',
+
+    success: '#065f46',
+    error: '#b91c1c',
+    warning: '#92400e',
+    info: '#3b82f6',
   },
 
-  // --- PHYSICS & EFFECTS (Glassy) ---
   effects: {
     texture: 'blur(10px)',
+    cracks: 'none',
     glow: {
       soft: '0 0 10px rgba(59, 130, 246, 0.2)',
       medium: '0 0 20px rgba(59, 130, 246, 0.4)',
       strong: '0 0 30px rgba(59, 130, 246, 0.6)',
+      small: '0 0 5px rgba(59, 130, 246, 0.15)',
     },
     depth: {
       inner: {
@@ -81,7 +106,6 @@ const liquidGlass: ThemeInterface = {
     cut: 'none',
   },
 
-  // Legacy/Compat
   font: {
     family: {
       text: '"Inter", sans-serif',
@@ -90,7 +114,6 @@ const liquidGlass: ThemeInterface = {
     sizes: baseTheme.font.sizes,
   },
 
-  // System properties from baseTheme
   variables: baseTheme.variables,
   screens: baseTheme.screens,
   offsets: baseTheme.offsets,

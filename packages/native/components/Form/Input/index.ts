@@ -1,26 +1,26 @@
 import styled from 'styled-components/native';
-import type { TextInputProps } from 'react-native';
+import { TextInput } from 'react-native';
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/native/components/helpers';
 import { withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
 
-type TInputProps = TextInputProps & {
+type TInputProps = {
   name: string;
   fullWidth?: boolean;
 } & TWithBasicElementOffsets &
   TFullWidth;
 
-const Input = styled.TextInput<TInputProps>`
-  font-family: ${({ theme }) => theme?.font?.family?.text || 'System'};
+const Input = styled(TextInput) <TInputProps>`
+  font-family: ${({ theme }) => theme.font.family.text};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  height: ${({ theme }) => theme?.elements?.form?.height || 40}px;
+  height: ${({ theme }) => theme.elements.form?.height}px;
   margin-right: ${withOffsetsRight}px;
   margin-bottom: ${withOffsetBottom}px;
-  padding: ${({ theme }) => theme?.offsets?.elementContent || 8}px;
+  padding: ${({ theme }) => theme.offsets.elementContent}px;
 
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'black'};
+  color: ${({ theme }) => theme.colors.sectionContent};
 
-  background-color: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
-  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  background-color: ${({ theme }) => theme.colors.overlay};
+  border-radius: ${({ theme }) => theme.border.radius}px;
 `;
 
 export { Input };

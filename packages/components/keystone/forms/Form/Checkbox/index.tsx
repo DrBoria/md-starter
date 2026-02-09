@@ -6,7 +6,7 @@ const Checkbox = styled(KeystoneCheckbox)`
         background-color: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
         color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
         border: ${({ theme }) => theme?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-        border-radius: ${({ theme }) => theme?.colors?.borderRadius || theme?.border?.radius || 0}px;
+        border-radius: ${({ theme }) => theme?.borderRadius || theme?.border?.radius || 0}px;
         backdrop-filter: var(--glass-effect);
     }
 `

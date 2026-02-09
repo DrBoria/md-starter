@@ -1,17 +1,16 @@
-import type { DefaultTheme } from "styled-components";
 import { css } from "styled-components";
 
-export const vikingTheme = css`
+export const vikingTheme = css<{ $active?: boolean }>`
   /* VIKING THEME: PageNumber (Runestones) */
   border-radius: 0;
   clip-path: ${({ theme }) => theme?.geometry?.ragged};
   background-image: ${({ theme }) => theme?.effects?.texture};
   
   /* Active state: Dark background with Glowing Green Digit */
-  background-color: ${({ $active, theme }: { $active: boolean; theme: DefaultTheme }) => $active ? theme.colors.overlayActive : theme.colors.overlay};
-  color: ${({ $active, theme }: { $active: boolean; theme: DefaultTheme }) => $active ? (theme?.colors?.highlighted || 'gold') : (theme?.colors?.sectionContent || '#ccc')};
+  background-color: ${({ $active, theme }) => $active ? theme.colors.overlayActive : theme.colors.overlay};
+  color: ${({ $active, theme }) => $active ? (theme?.colors?.highlighted || 'gold') : (theme?.colors?.sectionContent || '#ccc')};
   border: none;
-  box-shadow: ${({ $active, theme }: { $active: boolean; theme: DefaultTheme }) => $active ? (theme?.effects?.glow?.medium) : (theme?.effects?.depth?.inner?.medium)};
+  box-shadow: ${({ $active, theme }) => $active ? (theme?.effects?.glow?.medium) : (theme?.effects?.depth?.inner?.medium)};
   height: ${({ theme }) => theme?.elements?.form?.height || '40px'};
   min-width: ${({ theme }) => theme?.elements?.form?.height || '40px'};
   font-family: ${({ theme }) => theme?.font?.family?.text || 'serif'};

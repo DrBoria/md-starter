@@ -1,7 +1,6 @@
-import type { DefaultTheme } from "styled-components";
 import { css } from "styled-components";
 
-export const liquidGlassTheme = css`
+export const liquidGlassTheme = css<{ $tone?: string }>`
   /* LIQUID GLASS THEME */
   border-radius: ${({ theme }) => theme?.borderRadius || '12px'};
   backdrop-filter: blur(10px);
@@ -12,7 +11,7 @@ export const liquidGlassTheme = css`
   font-family: ${({ theme }) => theme?.fontFamily || 'sans-serif'};
   
   /* Glass gradient based on tone */
-  ${({ $tone, theme }: { $tone: string; theme: DefaultTheme }) => {
+  ${({ $tone, theme }) => {
     switch ($tone) {
       case "active":
         return css`background: linear-gradient(135deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 5%) 100%); border-color: ${theme?.colors?.highlighted || 'rgba(0,123,255,0.5)'}; color: ${theme?.colors?.highlighted || 'black'};`;

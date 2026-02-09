@@ -18,7 +18,12 @@ const LinkText = styled(PlainText)`
   }
 `;
 
-const Link = ({ children, to }) => { // Use 'to' prop for the route
+interface LinkProps {
+  children: React.ReactNode;
+  to: string;
+}
+
+const Link: React.FC<LinkProps> = ({ children, to }) => { // Use 'to' prop for the route
   return (
     <StyledLink to={to}>
       <LinkText>{children}</LinkText>

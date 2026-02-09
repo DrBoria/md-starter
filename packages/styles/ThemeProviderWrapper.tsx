@@ -51,14 +51,15 @@ body {
   margin: 0;
   padding: 0;
   font-weight: 500;
-  font-size: ${({ theme }: { theme: Theme }) => theme?.font?.sizes?.regular || '1rem'};
-  font-family: ${({ theme }: { theme: Theme }) => theme?.font?.family?.text || 'serif'};
-  background-color: ${({ theme }: { theme: Theme }) => theme?.colors?.section || 'white'};
+  font-size: ${({ theme }: { theme: Theme }) => theme.font.sizes.regular};
+  font-family: ${({ theme }: { theme: Theme }) => theme.font.family.text};
+  background-color: ${({ theme }: { theme: Theme }) => theme.colors.section};
 }
 
 * {
   box-sizing: border-box;
-  letter-spacing: 1.5px;}
+  letter-spacing: calc(0.1em);
+}
 `;
 
 interface ThemeProviderWrapperProps {

@@ -49,6 +49,7 @@ module.exports = [
     },
     linterOptions: {
       reportUnusedDisableDirectives: false,
+      noInlineConfig: true,
     },
     languageOptions: {
       parser: tsParser,
@@ -103,10 +104,10 @@ module.exports = [
       "@typescript-eslint/ban-ts-comment": [
         "error",
         {
-          "ts-expect-error": "allow-with-description",
+          "ts-expect-error": true,
           "ts-ignore": true,
           "ts-nocheck": true,
-          "ts-check": false,
+          "ts-check": true,
           minimumDescriptionLength: 3,
         },
       ],
@@ -126,6 +127,14 @@ module.exports = [
         {
           selector: "TSAsExpression[typeAnnotation.type='TSTypeReference'][typeAnnotation.typeName.name='unknown']",
           message: "Do not use `as unknown`. It is strictly forbidden."
+        },
+        {
+          selector: "VariableDeclarator[id.name=/^[A-Z][A-Z0-9_]*$/][init.type='Literal'][init.value=/^#([0-9a-fA-F]{3}){1,2}$/]",
+          message: "Do not define hex color constants. Use theme variables instead."
+        },
+        {
+          selector: "VariableDeclarator[id.name=/^[A-Z][A-Z0-9_]*$/][init.type='Literal'][init.value=/^-?\\d+(\\.\\d+)?(px|rem|em|vh|vw|%)$/]",
+          message: "Do not define CSS unit constants. Use theme variables instead."
         }
       ],
       "no-warning-comments": [
@@ -135,6 +144,11 @@ module.exports = [
             "eslint-disable",
             "eslint-disable-next-line",
             "eslint-disable-line",
+            "eslint-enable",
+            "stylelint-disable",
+            "stylelint-disable-next-line",
+            "stylelint-disable-line",
+            "prettier-ignore",
             "ts-ignore",
             "ts-nocheck",
             "ts-check",

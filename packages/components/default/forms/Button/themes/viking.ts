@@ -1,14 +1,13 @@
-import type { DefaultTheme } from "styled-components";
 import { css } from "styled-components";
 
-export const vikingTheme = css`
+export const vikingTheme = css<{ $tone?: string }>`
   /* VIKING THEME AUGMENTATION (Valhalla Style) */
 
   /* 1. Geometry: Rough Stone */
   border-radius: 0;
   ${({ theme }) => theme?.geometry?.ragged && `clip-path: ${theme.geometry.ragged};`}
   /* 2. Typography: Glow on hover */
-  font-family: ${({ theme }) => theme?.colors?.fontFamily || theme?.fontFamily || theme?.font?.family?.text || 'serif'};
+  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.text || 'serif'};
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
@@ -36,13 +35,13 @@ export const vikingTheme = css`
   /* Tone Overrides */
 
   /* Tone Overrides */
-  ${({ $tone, theme }: { $tone: string; theme: DefaultTheme }) => $tone === 'passive' && css`
+  ${({ $tone, theme }) => $tone === 'passive' && css`
     background: ${theme?.colors?.labelBackground || 'gray'};
     background-image: ${theme?.effects?.texture};
     color: ${theme?.colors?.sectionContent || 'white'}; 
   `}
 
-  ${({ $tone, theme }: { $tone: string; theme: DefaultTheme }) => $tone === 'warning' && css`
+  ${({ $tone, theme }) => $tone === 'warning' && css`
     background: ${theme?.colors?.warning || 'orange'};
     background-image: ${theme?.effects?.texture};
     color: ${theme?.colors?.warningText || 'white'};

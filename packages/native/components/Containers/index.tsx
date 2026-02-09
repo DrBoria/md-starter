@@ -2,10 +2,16 @@ import styled from "styled-components/native";
 import { View, Dimensions } from "react-native";
 
 import { withFullWidth, withOffsetBottom, withOffsetsRight } from '@md/native/components/helpers';
+import type { TFullWidth } from '@md/native/components/helpers';
+
+// ... (lines 6-36 skipped in replacement content, but I will target the import line and the component line separately if possible, or use replace_file_content for the whole block)
+// Actually, I can do it in one go if lines are close, but they are far.
+// I will do 2 replaces.
+
 
 const { height: screenHeight } = Dimensions.get('window');
 
-const WithoutHeightLimit = ($noHeightLimit) =>
+const WithoutHeightLimit = ($noHeightLimit: boolean | undefined) =>
   $noHeightLimit ? {
     height: 'auto',
     minHeight: screenHeight,
@@ -13,28 +19,28 @@ const WithoutHeightLimit = ($noHeightLimit) =>
   } : {};
 
 /** @component */
-export const BasicSection = styled(View)`
-  padding: ${({ theme: { offsets } }) => offsets?.section || 0}px;
+export const BasicSection = styled(View) <{ $noHeightLimit?: boolean }>`
+  padding: ${({ theme: { offsets } }) => offsets.section}px;
   width: 100%;
   min-height: ${({ theme }) => {
-    const screenH = theme?.screens?.mobile?.height || screenHeight;
-    const headerH = parseInt(theme?.elements?.header?.height || '0', 10);
+    const screenH = theme.screens.mobile?.height || screenHeight;
+    const headerH = parseInt(theme.elements.header?.height || '0', 10);
     return screenH - headerH;
   }}px;
   
-  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
+  background-color: ${({ theme }) => theme.colors.section};
 
   ${({ $noHeightLimit }) => WithoutHeightLimit($noHeightLimit)}
 `;
 
 export const PageContainer = styled(View)`
   min-height: ${screenHeight}px;
-  padding: ${({ theme }) => theme?.offsets?.section || 0}px;
-  padding-top: ${({ theme }) => theme?.elements?.header?.height || 0}px;
-  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
+  padding: ${({ theme }) => theme.offsets.section}px;
+  padding-top: ${({ theme }) => theme.elements.header?.height}px;
+  background-color: ${({ theme }) => theme.colors.section};
 `;
 
-export const HeadingContainer = styled(View)`
+export const HeadingContainer = styled(View) <TFullWidth>`
   width: 40%;
 
   ${withFullWidth}
@@ -61,7 +67,7 @@ const FocusedContainer = styled(View)`
   position: relative;
 `;
 
-const OneLineContainer = styled(View)`
+const OneLineContainer = styled(View) <{ $width?: '1/2' | '1/3' }>`
   flex-direction: row;
   align-items: center;
 
@@ -85,7 +91,7 @@ const MenuItemContainer = styled(View)`
 `;
 
 
-const Section = styled(View)`
+const Section = styled(View) <{ $direction?: 'horizontal' | 'horizontal-reversed' | 'vertical' | 'top'; $sectionSize?: 'full' | 'medium' | 'half' | 'dot-section' | 'footsteps' }>`
   position: relative;
   width: 100%;
   overflow: hidden;

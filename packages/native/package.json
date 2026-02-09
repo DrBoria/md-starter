@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint . --fix && stylelint '**/*.{css,ts,tsx}' --fix"
   },
   "keywords": [],
   "author": "",
@@ -14,17 +14,16 @@
   "dependencies": {
     "@md/styles": "workspace:*",
     "@md/utils": "workspace:*",
-    "@types/react": "^18.3.11",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-native": "0.76.0",
-    "react-router-native": "^6.27.0",
-    "styled-components": "^5.3.11"
+    "@types/react": "^19.2.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-native": "0.83.1",
+    "react-router-native": "^6.30.0",
+    "styled-components": "^6.3.9"
   },
   "devDependencies": {
-    "@md/types": "workspace:*",
     "@md/eslint": "workspace:*",
-    "@react-native-community/cli": "^15.0.0",
-    "react-native-svg-transformer": "^1.5.0"
+    "@react-native-community/cli": "^20.1.1",
+    "react-native-svg-transformer": "^1.5.3"
   }
 }

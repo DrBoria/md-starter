@@ -1,4 +1,3 @@
-/* stylelint-disable color-no-hex, font-family-no-missing-generic-family-keyword */
 import styled from 'styled-components';
 
 export const Paper = styled.div`

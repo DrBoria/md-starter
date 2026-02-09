@@ -16,7 +16,7 @@ const StyledTouchable = styled(TouchableOpacity)`
   width: 100%;
 `;
 
-const StyledText = styled(PlainText)`
+const StyledText = styled(PlainText) <{ $isSelected: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -38,7 +38,14 @@ const StyledText = styled(PlainText)`
   };
 `;
 
-export const MenuItem = ({ href, onPress, children, isSelected: _isSelected = false }) => {
+interface MenuItemProps {
+  href: string;
+  children: React.ReactNode;
+  onPress?: () => void;
+  isSelected?: boolean;
+}
+
+export const MenuItem: React.FC<MenuItemProps> = ({ href, onPress, children, isSelected: _isSelected = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
 

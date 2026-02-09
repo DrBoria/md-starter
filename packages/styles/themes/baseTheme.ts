@@ -6,12 +6,10 @@ import offsets from './offsets';
 import zIndexes from './zIndexes';
 
 const screens = {
-  // Width
   mobileWidth: 320,
   tabletWidth: 600,
   desktopWidth: 1600,
 
-  // Height
   mobileHeight: 640,
   tabletHeight: 720,
   desktopHeight: 980,
@@ -27,7 +25,21 @@ export const getZIndex = (name: keyof typeof zIndexes) => zIndexes[name];
 
 const base = {
   theme: 'base',
+
+  fontFamily: 'sans-serif',
+  borderRadius: 0,
   zIndex: zIndexes,
+  border: {
+    radius: 'var(--border-radius)',
+    size: 'var(--border-size)',
+    cut: 'none',
+  },
+  shadows: {
+    small: '0 2px 4px rgba(0,0,0,0.1)',
+    medium: '0 4px 8px rgba(0,0,0,0.15)',
+    large: '0 8px 16px rgba(0,0,0,0.2)',
+  },
+
   animation: {
     speed: {
       container: 2,
@@ -47,21 +59,10 @@ const base = {
 
   elements,
 
-  border: {
-    radius: 'var(--border-radius)',
-    size: 'var(--border-size)',
-    circle: '50%',
-  },
-
-  // Offsets - from the biggest to smallest
   offsets: {
-    // Padding in page - from the borders of the page and to content
     page: 'var(--page-offset)',
-    // Padding inside section (between border of the section and content) and between sections
     section: 'var(--offset-section)',
-    // Padding between elements inside section
     betweenElements: 'var(--offset-between-elements)',
-    // Padding inside elements - between element content and border of elements
     elementContent: 'var(--offset-element-content)',
   },
 
@@ -73,15 +74,26 @@ const base = {
     highlighted: '#00f',
     highlightedText: '#fff',
     disabled: '#ccc',
+
+    surface: '#fff',
+    text: '#000',
+    background: '#f5f5f5',
+    highlight: '#00f',
+
     warningBackground: '#fff',
     warningText: '#000',
     errorBackground: '#fff',
     errorText: '#000',
     successBackground: '#fff',
     successText: '#000',
-    // Fallbacks
+
     labelBackground: '#eee',
     labelText: '#333',
+
+    success: '#0a0',
+    error: '#a00',
+    warning: '#aa0',
+    info: '#00a',
   },
 
   screens: {
@@ -104,7 +116,8 @@ const base = {
 
   effects: {
     texture: 'none',
-    glow: { soft: 'none', medium: 'none', strong: 'none' },
+    cracks: 'none',
+    glow: { soft: 'none', medium: 'none', strong: 'none', small: 'none' },
     depth: {
       inner: { soft: 'none', medium: 'none', strong: 'none' },
       outer: { soft: 'none', medium: 'none', strong: 'none' },
@@ -117,13 +130,6 @@ const base = {
     ragged: 'none',
     cut: 'none',
   },
-
-  // Legacy/Compat
-
-  /* ******************************************************* */
-  /* ******************** Variables ************************ */
-  /* ***************** Do not use in app ******************* */
-  /* ******************************************************* */
 
   variables: {
     border,

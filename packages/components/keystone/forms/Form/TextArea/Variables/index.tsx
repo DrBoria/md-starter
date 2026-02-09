@@ -10,7 +10,7 @@ const VariablesList = styled.div`
 
 const Tag = styled.span`
   padding: 2px 8px;
-  border: 1px solid ${({ theme }) => theme?.colors?.border};
+  border: 1px solid ${({ theme }) => theme?.colors?.disabled};
   border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
   cursor: pointer;
   user-select: none;

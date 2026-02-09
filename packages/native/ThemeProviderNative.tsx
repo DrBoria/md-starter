@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
+import type { DefaultTheme } from 'styled-components/native';
 import { ThemeProvider } from 'styled-components/native';
 import { baseTheme } from '@md/styles/themes';
 import { mergeDeep } from '@md/utils/mapping/mergeDeep';
@@ -27,14 +28,14 @@ const nativeBaseTheme = {
   },
 };
 
-const ThemeProviderNative = ({ children, theme={} }: { children: React.ReactNode, theme?: Record<string, boolean | object> }) => {
+const ThemeProviderNative = ({ children, theme = {} }: { children: React.ReactNode, theme?: Record<string, boolean | object> }) => {
   // Merge baseTheme, nativeBaseTheme, and colorTheme
   const mergedTheme = {
     ...mergeDeep(baseTheme, nativeBaseTheme, theme),
   };
 
   return (
-    <ThemeProvider theme={mergedTheme}>
+    <ThemeProvider theme={mergedTheme as unknown as DefaultTheme}>
       <>{children}</>
     </ThemeProvider>
   );

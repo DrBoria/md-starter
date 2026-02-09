@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DashboardCard } from "../components/Cards/DashboardCard";
+import { DashboardCard } from "@/admin/components/Cards/DashboardCard";
 import { DashboardCardsContainer } from "@md/components";
 import { PageTitle } from "@md/components";
 import { PageContainer } from "@md/sections/keystone";

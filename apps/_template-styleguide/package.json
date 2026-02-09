@@ -9,7 +9,7 @@
     "dev:server:debug": "node --inspect-brk -r ts-node/register themeServer.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint && stylelint '**/*.{css,ts,tsx}' && tsc --noEmit",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix && stylelint '**/*.{css,ts,tsx}' --fix"
   },
   "author": "",
   "license": "ISC",
@@ -61,7 +61,7 @@
     "react-native-web": "^0.19.13",
     "react-router-dom": "^7.3.0",
     "stream-browserify": "^3.0.0",
-    "styled-components": "^5.3.11",
+    "styled-components": "^6.3.9",
     "tinycolor2": "^1.6.0",
     "ts-morph": "^24.0.0",
     "ts-node": "^10.9.2",

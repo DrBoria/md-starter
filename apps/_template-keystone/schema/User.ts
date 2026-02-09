@@ -3,7 +3,7 @@ import { list } from "@keystone-6/core";
 import { text, password, checkbox, relationship } from "@keystone-6/core/fields";
 
 // import type { TOperation } from "@/types";
-import { ALLOW_ROLES_MANAGEMENT } from "../env";
+import { ALLOW_ROLES_MANAGEMENT } from "@/env";
 
 import { isAdmin, isSameUser } from "./utils/access";
 

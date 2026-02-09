@@ -1,3 +1,8 @@
 const baseConfig = require("@md/eslint/base");
 
-module.exports = baseConfig;
+module.exports = [
+  ...baseConfig,
+  {
+    ignores: ["**/*.d.ts"],
+  }
+];

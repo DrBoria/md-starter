@@ -10,12 +10,12 @@ export type TWithBasicElementOffsets = {
 
 export const withOffsetsRight = css`
   ${({ $offsetRight, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => {
-    return $offsetRight && theme?.offsets?.betweenElements;
+    return $offsetRight && theme.offsets.betweenElements;
   }}
 `;
 
 export const withOffsetBottom = css`
   ${({ $offsetBottom, theme }: TWithBasicElementOffsets & { theme: DefaultTheme }) => {
-    return $offsetBottom && theme?.offsets?.betweenElements;
+    return $offsetBottom && theme.offsets.betweenElements;
   }
   }`

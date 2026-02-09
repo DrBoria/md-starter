@@ -1,8 +1,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import type { TextInput } from 'react-native';
+import { Alert } from 'react-native';
 import { SafeAreaView, ScrollView } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import { useAuthenticate } from '@md/api/graphql';
 import { BasicSection, Button, Input, PageTitle, SubTitle } from '@md/native/components';
 import { useNavigate } from 'react-router-native';
@@ -16,12 +16,14 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 const ErrorText = styled(SubTitle)`
-  color: ${({ theme }) => theme.colors.error || 'red'};
-  margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.error};
+  margin-bottom: calc(1.25em);
   text-align: center;
 `;
 
 const SigninPage = () => {
+  const theme = useTheme();
+  const identityFieldRef = useRef<React.ElementRef<typeof Input>>(null);
   const [state, setState] = useState({ identity: '', secret: '' });
   const navigate = useNavigate();
 
@@ -32,8 +34,6 @@ const SigninPage = () => {
     successTypename: 'UserAuthenticationWithPasswordSuccess',
     useMutation
   });
-
-  const identityFieldRef = useRef<TextInput>(null);
 
   useEffect(() => {
     identityFieldRef.current?.focus();
@@ -53,16 +53,15 @@ const SigninPage = () => {
       };
     } catch (e) {
       console.error(e);
-      return;
+      Alert.alert('Error', 'Invalid credentials');
     }
   };
 
-
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <ContentContainer
         contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{ alignItems: 'center' }} // Move alignItems here
+        contentContainerStyle={{ alignItems: 'center' }}
       >
         <BasicSection>
           <PageTitle>Sign In</PageTitle>
@@ -70,11 +69,10 @@ const SigninPage = () => {
           {data?.item?.__typename === 'UserAuthenticationWithPasswordFailure' && (
             <ErrorText>{data?.item.message}</ErrorText>
           )}
-        </BasicSection>
-        <BasicSection>
           <Input
             $offsetBottom
             placeholder="Email"
+            name="identity"
             value={state.identity}
             onChangeText={(text) => setState({ ...state, identity: text })}
             ref={identityFieldRef}
@@ -82,6 +80,7 @@ const SigninPage = () => {
           <Input
             $offsetBottom
             placeholder="Password"
+            name="password"
             value={state.secret}
             onChangeText={(text) => setState({ ...state, secret: text })}
             secureTextEntry
@@ -92,6 +91,5 @@ const SigninPage = () => {
     </SafeAreaView>
   );
 };
-
 
 export default SigninPage;
