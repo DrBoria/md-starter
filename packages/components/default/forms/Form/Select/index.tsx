@@ -17,10 +17,10 @@ const SelectedValueWrapper = styled.div<{ $readOnly: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   border-style: solid;
-  border-width: ${({ theme }) => theme.variables.border.size}px;
+  border-width: ${({ theme }) => theme.border.size}px;
   border-color: ${({ theme }) => theme.colors.labelBackground};
   color: ${({ theme }) => theme.colors.sectionContent};
   background-color: ${({ theme }) => theme.colors.section};
@@ -62,15 +62,15 @@ const Dropdown = styled.ul`
   top: 100%;
   left: 0;
   width: 100%; /* Ensure full width */
-  border: ${({ theme }) => theme.variables.border.size}px solid ${({ theme }) => theme.colors.labelBackground};
-  max-height: 200px;
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.labelBackground};
+  max-height: calc(${({ theme }) => theme.elements.form.height} * 6);
   overflow-y: auto;
   background-color: ${({ theme }) => theme.colors.section};
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  margin-top: ${({ theme }) => theme.offsets.betweenElements};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   z-index: 100;
 
   /* VIKING THEME OVERRIDE */
@@ -86,7 +86,7 @@ const Dropdown = styled.ul`
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
   background-color: ${({ $highlighted, theme }) =>
     $highlighted ? theme.colors.highlighted : theme.colors.section};
   color: ${({ $highlighted, theme }) =>
@@ -102,7 +102,7 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
   /* VIKING THEME ITEM */
   ${({ theme, $highlighted }) => theme.theme === 'viking' && css`
     color: ${$highlighted ? theme.colors.highlightedText : theme.colors.sectionContent};
-    background-color: ${$highlighted ? theme.colors.highlighted : 'transparent'};
+    background-color: ${$highlighted ? theme.colors.highlighted : theme.colors.section};
     
     &:hover {
       background-color: ${theme.colors.highlighted};
@@ -115,12 +115,12 @@ const DropdownItem = styled.li<{ $highlighted: boolean }>`
 const IconsContainer = styled.div`
   color: ${({ theme }) => theme.colors.labelBackground};
   display: flex;
-  gap: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
-  padding-left: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  padding-left: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 const NoOptions = styled.li`
-  padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
   color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
@@ -128,16 +128,16 @@ const ClearButton = styled.button<{ $readOnly: boolean }>`
   background: none;
   border: none;
   cursor: ${({ $readOnly }) => ($readOnly ? "default" : "pointer")};
-  margin-left: 5px;
-  font-size: 16px;
-  color: ${({ $readOnly, theme }) => ($readOnly ? theme.colors.labelBackground : "inherit")};
+  margin-left: ${({ theme }) => theme.offsets.betweenElements};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
+  color: ${({ $readOnly, theme }) => ($readOnly ? theme.colors.labelBackground : theme.colors.sectionContent)};
 `;
 
 const Separator = styled.div`
-  width: 1px;
+  width: ${({ theme }) => theme.border.size}px;
   background-color: ${({ theme }) => theme.colors.labelBackground};
-  margin-bottom: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
-  margin-top: ${({ theme }) => theme.variables.offsets.betweenElements.mobile}px;
+  margin-bottom: ${({ theme }) => theme.offsets.betweenElements};
+  margin-top: ${({ theme }) => theme.offsets.betweenElements};
   box-sizing: border-box;
 `;
 

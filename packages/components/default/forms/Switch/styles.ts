@@ -5,11 +5,11 @@ import { liquidGlassTheme } from "./themes/liquid-glass";
 export const SwitchLabel = styled.label<{ $size?: "small" | "default" }>`
   position: relative;
   display: inline-block;
-  width: ${(props) => (props.$size === "small" ? "32px" : "50px")};
-  height: ${(props) => (props.$size === "small" ? "18px" : "28px")};
+  width: calc(${({ theme }) => theme.elements.form.height} * 0.88);
+  height: calc(${({ theme }) => theme.elements.form.height} * 0.48);
   cursor: pointer;
-  background-color: ${({ theme }) => theme?.colors?.section || theme?.colors?.disabled || '#ccc'};
-  border-radius: 34px;
+  background-color: ${({ theme }) => theme.colors.disabled};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   transition: 0.4s;
 
   /* Theme Support */
@@ -23,16 +23,16 @@ export const SwitchInput = styled.input<{ $size?: "small" | "default" }>`
   height: 0;
 
   &:checked + .switch-slider {
-    background-color: ${({ theme }) => theme?.colors?.highlighted || '#2196F3'};
+    background-color: ${({ theme }) => theme.colors.highlighted};
   }
 
   &:focus + .switch-slider {
-    box-shadow: 0 0 1px ${({ theme }) => theme?.colors?.highlighted || '#2196F3'};
+    box-shadow: ${({ theme }) => theme.shadows.small};
   }
 
   &:checked + .switch-slider::before {
     transform: translateX(
-      ${(props) => (props.$size === "small" ? "14px" : "22px")}
+      calc(${({ theme }) => theme.elements.form.height} * 0.4)
     );
   }
 `;
@@ -40,19 +40,19 @@ export const SwitchInput = styled.input<{ $size?: "small" | "default" }>`
 export const Slider = styled.span<{ $size?: "small" | "default" }>`
   position: absolute;
   inset: 0;
-  background-color: transparent; /* Handled by Label or Input:checked */
+  background-color: transparent;
   transition: 0.4s;
-  border-radius: 34px;
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
   /* The Knob */
   &::before {
     position: absolute;
     content: "";
-    height: ${(props) => (props.$size === "small" ? "14px" : "22px")};
-    width: ${(props) => (props.$size === "small" ? "14px" : "22px")};
-    left: ${(props) => (props.$size === "small" ? "2px" : "3px")}; /* Adjusted for standard alignment */
-    bottom: ${(props) => (props.$size === "small" ? "2px" : "3px")};
-    background-color: ${({ theme }) => theme?.colors?.sectionContent || 'white'};
+    height: calc(${({ theme }) => theme.elements.form.height} * 0.4);
+    width: calc(${({ theme }) => theme.elements.form.height} * 0.4);
+    left: ${({ theme }) => theme.offsets.elementContent};
+    bottom: ${({ theme }) => theme.offsets.elementContent};
+    background-color: ${({ theme }) => theme.colors.sectionContent};
     transition: 0.4s;
     border-radius: 50%;
   }
@@ -61,10 +61,10 @@ export const Slider = styled.span<{ $size?: "small" | "default" }>`
 export const SwitchContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 export const Label = styled.span`
-  font-size: 14px;
-  color: ${({ theme }) => theme?.colors?.labelBackground || '#777'};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
+  color: ${({ theme }) => theme.colors.labelBackground};
 `;

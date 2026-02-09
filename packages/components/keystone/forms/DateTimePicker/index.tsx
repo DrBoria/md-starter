@@ -6,8 +6,8 @@ import styled from "styled-components";
 const DateTimePickerContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
-  font-size: 1rem;
+  gap: ${({ theme }) => theme.offsets.elementContent};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
   font-weight: 500;
 `;
 
@@ -16,12 +16,12 @@ const StyledDatePicker = styled.div`
 `;
 
 const TimePicker = styled.input`
-  width: 100px;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-bg-secondary);
-  border-radius: 6px;
+  width: ${({ theme }) => theme.elements.form.minWidth};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
+  background-color: ${({ theme }) => theme.colors.section};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   text-align: center;
 `;
 

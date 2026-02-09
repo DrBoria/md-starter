@@ -11,7 +11,7 @@ const sessionData =
   "id createdAt role { id name }";
 const useGetSessionData = (
   authenticatedItem: AuthenticatedItem,
-): unknown => {
+): TSession["data"][] | null => {
   if (authenticatedItem.state !== "authenticated") return null;
 
   const { data: session, error: sessionError } = useQueryListItem<QueryResult<{
@@ -35,7 +35,8 @@ const useGetSessionData = (
     console.error("Error getting Session Data", sessionError);
   }
 
-  return [session?.user];
+  if (!session?.user) return null;
+  return [session.user];
 };
 
 export { useGetSessionData };

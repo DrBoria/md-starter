@@ -6,40 +6,38 @@ const slideIn = keyframes`
 `;
 
 export const vikingTheme = css`
-  /* VIKING THEME: Message Scroll */
-  background: ${({ theme }) => theme.colors.surface};
-  border: 2px solid ${({ theme }) => theme?.colors?.highlighted || 'gold'};
-  color: ${({ theme }) => theme?.colors?.text || 'white'};
-  font-family: ${({ theme }) => theme?.fontFamily || 'serif'};
-  border-radius: 0;
-  box-shadow: 5px 5px 0 rgb(0 0 0 / 50%);
+  background: ${({ theme }) => theme.colors.section};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.fontFamily};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  box-shadow: ${({ theme }) => theme.effects.depth.outer.medium};
   animation: ${slideIn} 0.3s ease-out forwards;
   
-  /* Paper/Scroll texture simulation */
   &::before {
     content: '';
     position: absolute;
     inset: 5px;
-    border: 1px dashed ${({ theme }) => theme?.colors?.sectionContent || '#555'};
+    border: ${({ theme }) => theme.border.size}px dashed ${({ theme }) => theme.colors.sectionContent};
     pointer-events: none;
   }
 
   h4 {
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: ${({ theme }) => theme?.colors?.highlighted || 'gold'};
+    letter-spacing: ${({ theme }) => theme.font.spacing};
+    color: ${({ theme }) => theme.colors.highlighted};
   }
 
   button {
     background: transparent;
-    border: 1px solid ${({ theme }) => theme?.colors?.text || 'white'};
-    color: ${({ theme }) => theme?.colors?.text || 'white'};
+    border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
+    color: ${({ theme }) => theme.colors.sectionContent};
     cursor: pointer;
-    padding: 2px 8px;
+    padding: ${({ theme }) => theme.offsets.elementContent};
 
     &:hover {
-      background: ${({ theme }) => theme?.colors?.highlighted || 'gold'};
-      color: black;
+      background: ${({ theme }) => theme.colors.highlighted};
+      color: ${({ theme }) => theme.colors.highlightedText};
     }
   }
 `;

@@ -4,19 +4,19 @@ import styled from "styled-components";
 const VariablesList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${({ theme }) => theme?.variables?.offsets?.betweenElements?.mobile}px;
-  margin-top: ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile}px;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  margin-top: ${({ theme }) => theme.offsets.elementContent};
 `;
 
 const Tag = styled.span`
-  padding: 2px 8px;
-  border: 1px solid ${({ theme }) => theme?.colors?.disabled};
-  border-radius: ${({ theme }) => theme?.variables?.border?.radius}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.background};
+    background-color: ${({ theme }) => theme.colors.overlay};
   }
 `;
 

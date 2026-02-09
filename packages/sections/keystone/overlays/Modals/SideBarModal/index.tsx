@@ -74,10 +74,10 @@ const SideBarModalContainer = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
-  width: 740px;
+  width: ${({ theme }) => theme.elements.modal.width};
   height: 100%;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  box-shadow: ${({ theme }) => theme.shadows.medium};
   ${(props) =>
     props.$isClosing ? `${slideOutAnimation}` : `${slideInAnimation}`};
 `;
@@ -85,14 +85,14 @@ const SideBarModalContainer = styled.div<{ $isClosing?: boolean }>`
 const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   inset: 0;
-  background-color: rgb(0 0 0 / 50%);
+  background-color: ${({ theme }) => theme.colors.overlay};
   cursor: pointer;
   ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
 `;
 
 const StyledSideBarModal = styled.div`
   background: ${({ theme }) => theme.colors.section};
-  border-radius: ${({ theme }) => theme.borderRadius || '4px'};
+  border-radius: ${({ theme }) => theme.borderRadius || `${theme.variables.border.radius}px`};
   width: 100%;
   min-height: 100%;
   backdrop-filter: var(--glass-effect);
@@ -101,14 +101,14 @@ const StyledSideBarModal = styled.div`
 const SideBarModalContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 20px;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  padding: ${({ theme }) => theme.offsets.elementContent};
 `;
 
 const TitleContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.highlighted || '#ccc'};
   width: 100%;
-  padding: 7px 20px; /* Alignment to the height of keystone header */
+  padding: ${({ theme }) => `${theme.offsets.elementContent}`}; /* Alignment to the height of keystone header */
 `;
 
 import type { TSideBarModalDataKeystone } from "@md/sections/keystone/overlays/Modals/types";

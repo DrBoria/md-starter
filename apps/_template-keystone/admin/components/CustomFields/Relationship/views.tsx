@@ -113,10 +113,19 @@ const Field = ({
       value: id,
     };
   }
+  interface IItemValue {
+    organization?: {
+      value?: {
+        value?: {
+          id?: string;
+        };
+      };
+    };
+  }
 
   useEffect(() => {
     void refetch();
-  }, [itemValue?.organization?.value?.value?.id]);
+  }, [(itemValue as unknown as IItemValue)?.organization?.value?.value?.id]);
 
   const handleChange = (newVal: IOption | null) => {
     const localValue = value as ISelectValue;

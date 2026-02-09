@@ -6,7 +6,7 @@ import {
   text,
 } from "@keystone-6/core/fields";
 
-// type PostWhereInput = any;
+type PostWhereInput = Record<string, unknown>;
 import { createdAt, updatedAt } from "./utils/fields";
 import { isAdmin, isOwner } from "./utils/access";
 
@@ -15,10 +15,12 @@ export const Post = list<BaseListTypeInfo>({
     operation: {
       query: () => true,
       create: () => true,
-      update: ({ session, item }) => isOwner({ session, item }),
-      delete: ({ session, item }) => isOwner({ session, item }),
+      update: () => true, // Access controlled by filter
+      delete: () => true, // Access controlled by filter
     },
     filter: {
+      update: ({ session }) => isOwner({ session }),
+      delete: ({ session }) => isOwner({ session }),
       query: ({ session }) => {
         if (isAdmin({ session })) {
           // Admins can see all posts, including premium ones

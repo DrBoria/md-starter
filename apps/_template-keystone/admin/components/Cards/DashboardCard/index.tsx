@@ -4,14 +4,14 @@ import styled, { css } from "styled-components";
 import { SectionTitle } from "@md/components";
 
 const DashboardCardContainer = styled.div`
-  min-width: 280px;
+  min-width: ${({ theme }) => theme.elements.form.minWidth};
   text-decoration: none;
   width: fit-content;
   padding: ${({ theme }) => theme.offsets.elementContent};
   border: ${({ theme }) => theme.border.size} solid ${({ theme }) => theme.colors.sectionContent};;
   border-radius: ${({ theme }) => theme.border.radius};
 
-  // Fix to not display hover on create link
+  /* Fix to not display hover on create link */
   &:hover:not(:has(svg:hover)) {
     cursor: pointer;
     border-color: ${({ theme }) => theme.colors.highlighted};
@@ -27,7 +27,7 @@ const DashboardCardContainer = styled.div`
     background-image: ${theme.effects?.texture};
     border: none;
     border-radius: 0;
-    clip-path: ${(theme.geometry?.card || theme.geometry?.ragged) as string};
+    clip-path: ${(theme.geometry as unknown as Record<string, string>)?.card || (theme.geometry as unknown as Record<string, string>)?.ragged};
     box-shadow: ${theme.effects?.depth?.outer?.medium};
     padding: ${theme.variables?.offsets?.elementContent?.desktop || 20}px;
 
@@ -51,7 +51,7 @@ const TitleLink = styled(Link)`
 
 const CreateLink = styled(Link)`
   background-color: ${({ theme }) => theme.colors.section};
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.border.radius};
   color: ${({ theme }) => theme.colors.sectionContent};
   transition: background-color 80ms linear;
 
@@ -59,9 +59,10 @@ const CreateLink = styled(Link)`
     color: ${({ theme }) => theme.colors.highlightedText};
     background-color: ${({ theme }) => theme.colors.highlighted};
   }
+
   svg {
     fill: none;
-    stroke: currentColor;
+    stroke: currentcolor;
     stroke-linejoin: round;
     stroke-linecap: round;
     stroke-width: 2;

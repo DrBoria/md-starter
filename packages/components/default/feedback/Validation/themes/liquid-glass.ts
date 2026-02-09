@@ -1,14 +1,13 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Red Alert */
-  background: rgb(244 67 54 / 10%);
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid rgb(244 67 54 / 20%);
-  color: ${({ theme }) => theme?.colors?.errorText || '#ff6b6b'};
-  backdrop-filter: blur(4px);
-  margin-top: 4px;
-  font-size: 0.85rem;
-  box-shadow: 0 2px 4px rgb(244 67 54 / 10%);
+  background: ${({ theme }) => theme.colors.errorBackground};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.errorText};
+  color: ${({ theme }) => theme.colors.errorText};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  margin-top: ${({ theme }) => theme.offsets.elementContent};
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  box-shadow: ${({ theme }) => theme.shadows.small};
 `;

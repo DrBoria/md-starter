@@ -12,7 +12,7 @@ import type { AppProps } from 'next/app';
 const KeystoneApp = (KeystoneAppModule as { default?: React.ElementType }).default || (KeystoneAppModule as React.ElementType);
 
 function WrappedApp({ Component, pageProps, ...otherProps }: AppProps) {
-    const Wrapped = (props) => (
+    const Wrapped = (props: AppProps) => (
         <ApolloProvider client={apolloClient as unknown as ApolloClient<object>}>
             <ThemeProvider theme={viking}>
                 <GlobalStyles />

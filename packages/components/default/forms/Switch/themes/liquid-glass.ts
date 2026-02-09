@@ -1,23 +1,21 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Switch (Glass Pill) */
-  
-  background-color: rgb(255 255 255 / 10%);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 20px;
+  background-color: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
   .switch-slider {
      background-color: transparent;
      
      &::before {
-        box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-        background: white;
+        box-shadow: ${({ theme }) => theme.shadows.small};
+        background: ${({ theme }) => theme.colors.highlightedText};
      }
   }
 
   input:checked + .switch-slider {
-     background-color: rgb(0 255 0 / 20%); /* Green tint */
+     background-color: ${({ theme }) => theme.colors.successBackground};
   }
 `;

@@ -1,8 +1,7 @@
-import type { ZIndexName } from '@md/styles';
-import { getZIndex } from '@md/styles';
 import Image from "next-image-export-optimizer";
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
+import type { ThemeInterface, ZIndexName } from '@md/styles';
 
 type IWideImageProps = {
     src: string;
@@ -80,7 +79,9 @@ export const fadeInZoomedAnimation = css`
    animation: ${fadeInZoomed} 0.2s linear forwards;
 `;
 
-const ImageWrapper = styled(Image) <{ $layer?: 'back' | 'front'; $zIndex?: ZIndexName; $isHalfSize?: boolean; $alignment?: 'top' | 'bottom' | 'center'; $blured?: boolean; hidden?: boolean }>`
+// type import removed
+
+const ImageWrapper = styled(Image) <{ $layer?: 'back' | 'front'; $zIndex?: ZIndexName; $isHalfSize?: boolean; $alignment?: 'top' | 'bottom' | 'center'; $blured?: boolean; hidden?: boolean; theme: ThemeInterface }>`
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -91,8 +92,8 @@ const ImageWrapper = styled(Image) <{ $layer?: 'back' | 'front'; $zIndex?: ZInde
     min-height: 100%;
     min-width: 100%;
     object-fit: cover;
-    border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
-    z-index: ${({ $zIndex = 'background' }) => getZIndex($zIndex)};
+    border-radius: ${({ theme }) => theme.border.radius};
+    z-index: ${({ theme, $zIndex }: { theme: ThemeInterface, $zIndex?: ZIndexName }) => $zIndex ? theme.zIndex[$zIndex] : theme.zIndex.background};
 
     ${({ hidden }) => hidden ?
         css`

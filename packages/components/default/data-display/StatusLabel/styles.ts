@@ -11,9 +11,9 @@ const pulseAnimation = keyframes`
 export const StateContainer = styled.div<{ $tone?: string }>`
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.offsets.elementContent};
   position: relative;
-  border-radius: 4px; /* Default */
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
   /* Theme Overrides */
   ${({ theme }) => theme?.theme === 'viking' && vikingTheme}
@@ -21,16 +21,16 @@ export const StateContainer = styled.div<{ $tone?: string }>`
 `;
 
 export const StatusDot = styled.div<{ $color: string; $animate?: boolean }>`
-  width: 8px;
-  height: 8px;
+  width: ${({ theme }) => theme.elements.icons.width};
+  height: ${({ theme }) => theme.elements.icons.height};
   border-radius: 50%;
   background-color: ${({ $color }) => $color};
   position: relative;
   flex-shrink: 0;
 
   ${({ $animate }) =>
-        $animate &&
-        css`
+    $animate &&
+    css`
       animation: ${pulseAnimation} 1.5s infinite ease-in-out;
     `}
 `;

@@ -2,7 +2,7 @@ import type { DeserializedValue } from "@keystone-6/core/admin-ui/utils";
 import type { ListMeta } from "@keystone-6/core/types";
 import { useRouter } from "next/router";
 
-// import type { TOperation } from "@/types";
+import type { TSession } from "../../../../schema/utils/access";
 
 interface IWhereParams {
   AND?: Array<{
@@ -33,7 +33,7 @@ const getWhereParameters = (
 
   // Handling organization filtering based on user role
   if (list.fields.organization) {
-    let OrgId = session?.organization?.id;
+    let OrgId = (session as { organization?: { id: string } })?.organization?.id;
 
     // Admins can have an item-based organization ID or session-based
     if (session?.role?.name === "Admin") {

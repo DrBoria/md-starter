@@ -5,14 +5,14 @@ import type { IconName } from "@md/components/default/common";
 import { LucideIcon } from "@md/components/default/common";
 
 const LabelContainer = styled.div`
-  font-size: 0.875rem;
+  font-size: ${({ theme }) => theme.font.sizes.small};
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 9999px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  box-shadow: ${({ theme }) => theme.shadows.small};
   background-color: ${({ theme }) => theme.colors.highlighted};
   color: ${({ theme }) => theme.colors.highlightedText};
 `;
@@ -22,8 +22,8 @@ const IconWrapper = styled.div`
   align-items: center;
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: ${({ theme }) => theme.elements.icons.width};
+    height: ${({ theme }) => theme.elements.icons.height};
   }
 `;
 
@@ -36,15 +36,15 @@ const CloseButton = styled.button`
   padding: 0;
   margin-left: auto;
   cursor: pointer;
-  color: var(--color-icon); /* Adjust color as needed */
+  color: ${({ theme }) => theme.colors.sectionContent};
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: ${({ theme }) => theme.elements.icons.width};
+    height: ${({ theme }) => theme.elements.icons.height};
   }
 
   &:hover {
-    color: var(--color-icon-hover); /* Add hover effect if needed */
+    color: ${({ theme }) => theme.colors.highlighted};
   }
 `;
 

@@ -15,26 +15,18 @@ export const Grid = styled.div<{ $colsTemplate: string }>`
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 20px 0;
-  gap: 20px;
+  padding: ${({ theme }) => theme.offsets.elementContent} 0;
+  gap: ${({ theme }) => theme.offsets.elementContent};
   align-items: center;
 `;
 
-/* Moving header styles here to share with themes */
 export const StyledHeaderCell = styled.div<{ $align?: 'left' | 'center' | 'right' }>`
   display: flex;
   align-items: center;
   justify-content: ${({ $align }) =>
     $align === 'center' ? 'center' : $align === 'right' ? 'flex-end' : 'flex-start'};
-  padding: 10px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
   font-weight: bold;
   cursor: pointer;
-  
-  /* Class for theme targeting */
-  &.header-cell {
-    /* Theme targeting */
-  }
-  
-  /* Default styles if no theme overrides */
-  color: ${({ theme }) => theme?.colors?.text || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
 `;

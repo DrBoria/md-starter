@@ -30,7 +30,13 @@ function Field({
     HTMLInputElement | HTMLTextAreaElement
   > = (e) => {
     const updatedValue: string = e.target.value;
-    onChange && onChange({ inner: { value: updatedValue } });
+    onChange && onChange({
+      kind: "editing",
+      value: updatedValue,
+      isSet: true,
+      inner: { value: updatedValue },
+      confirm: updatedValue
+    });
     setValidationMessage(null);
   };
 
@@ -61,7 +67,7 @@ function Field({
             <TextArea
               onChange={handleChange}
               disabled={field.isReadOnly || !onChange} // If on change not passed - permissions do not allow this user change this value
-              value={value?.inner?.value ?? ""}
+              value={value.kind !== 'initial' ? value.inner?.value : ""}
               testId={`text-area-${field.label}`}
             />
           </ErrorValidationContainer>
@@ -72,12 +78,12 @@ function Field({
       ) : (
         <div>
           {field.isReadOnly ? (
-            <ShortedText text={value?.inner?.value ?? ""} withCopy />
+            <ShortedText text={value.kind !== 'initial' ? value.value : ""} withCopy />
           ) : (
             <>
               <ErrorValidationContainer $isError={!!validationMessage}>
                 <Input
-                  value={value?.inner?.value ?? ""}
+                  value={value.kind !== 'initial' ? value.value : ""}
                   onChange={handleChange}
                   onBlur={handleValidate}
                   readOnly={!onChange}

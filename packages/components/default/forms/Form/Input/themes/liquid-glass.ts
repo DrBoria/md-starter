@@ -1,22 +1,21 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Glass Field */
-  background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 8px;
-  color: ${({ theme }) => theme?.colors?.text || 'white'};
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  color: ${({ theme }) => theme.colors.sectionContent};
   transition: all 0.3s ease;
   
   &::placeholder {
-      color: rgb(255 255 255 / 40%);
+      color: ${({ theme }) => theme.colors.disabled};
   }
 
   &:focus {
       outline: none;
-      background: rgb(255 255 255 / 10%);
-      border-color: rgb(255 255 255 / 40%);
-      box-shadow: 0 0 15px rgb(255 255 255 / 10%);
+      background: ${({ theme }) => theme.colors.overlayActive};
+      border-color: ${({ theme }) => theme.colors.highlighted};
+      box-shadow: ${({ theme }) => theme.effects.glow.soft};
   }
 `;

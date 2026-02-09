@@ -26,7 +26,6 @@ export const fadeOutAnimation = css`
    animation: ${fadeOut} 0.2s linear forwards;
 `;
 
-// Full Screen Wrapper
 export const LoadingWrapper = styled.div<{ $hidden: boolean }>`
     display: flex;
     justify-content: center;
@@ -34,8 +33,8 @@ export const LoadingWrapper = styled.div<{ $hidden: boolean }>`
     position: absolute;
     inset: 0;
     opacity: 0;
-    z-index: ${({ theme }) => theme?.zIndex?.animatedElements || 100};
-    background: ${({ theme }) => theme?.colors?.background || 'rgba(0,0,0,0.5)'};
+    z-index: ${({ theme }) => theme.zIndex.animatedElements};
+    background: ${({ theme }) => theme.colors.overlay};
 
     ${({ $hidden }) => $hidden ?
     css`${fadeOutAnimation} pointer-events: none;` :
@@ -43,17 +42,16 @@ export const LoadingWrapper = styled.div<{ $hidden: boolean }>`
   }
 `;
 
-// Generic Loader Container (for inline usage)
 export const LoaderContainer = styled.div<{ $size?: 'small' | 'medium' | 'large' }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   
-  ${({ $size }) => {
+  ${({ $size, theme }) => {
     switch ($size) {
-      case 'small': return css`width: 20px; height: 20px;`;
-      case 'large': return css`width: 64px; height: 64px;`;
-      default: return css`width: 32px; height: 32px;`;
+      case 'small': return css`width: ${theme.elements.icons.width}; height: ${theme.elements.icons.height};`;
+      case 'large': return css`width: calc(${theme.elements.icons.width} * 3); height: calc(${theme.elements.icons.height} * 3);`;
+      default: return css`width: calc(${theme.elements.icons.width} * 1.5); height: calc(${theme.elements.icons.height} * 1.5);`;
     }
   }}
 
@@ -62,11 +60,8 @@ export const LoaderContainer = styled.div<{ $size?: 'small' | 'medium' | 'large'
   ${({ theme }) => theme?.theme === 'liquid-glass' && liquidGlassTheme}
 `;
 
-// Image Styling
 export const StyledLoaderImage = styled(Image)`
   animation: ${rotate} 2s linear infinite;
-  
-  /* Ensure generic style doesn't conflict with theme specifics too much */
   width: 100%;
   height: 100%;
 `;

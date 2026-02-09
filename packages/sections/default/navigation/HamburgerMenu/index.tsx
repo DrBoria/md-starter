@@ -1,12 +1,13 @@
 // Sidebar.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
-  right: 0;
+  width: ${({ $isOpen, theme }) => ($isOpen ? theme.elements.sidebar.width : 0)};
   height: 100%;
-  width: ${({ $isOpen }) => ($isOpen ? '250px' : '0')};
+  right: 0;
   background-color: ${({ theme }) => theme.colors.section};
   overflow-x: hidden;
   transition: 0.3s;
@@ -53,8 +54,8 @@ const HamburgerMenu: React.FC = () => {
       <Overlay $isOpen={$isOpen} onClick={toggleSidebar} />
 
       <SidebarContainer $isOpen={$isOpen}>
-        
-        
+
+
       </SidebarContainer>
     </>
   );

@@ -1,4 +1,4 @@
-type TSession = {
+export type TSession = {
     itemId?: string;
     data?: {
         id?: string;
@@ -7,12 +7,12 @@ type TSession = {
     };
 };
 
-type TItem = {
-    id?: string;
+export type TItem = {
+    id?: string | { toString(): string };
     userId?: string;
 };
 
-type TOperation = (args: { session?: TSession; item?: TItem }) => boolean;
+export type TOperation = (args: { session?: TSession; item?: TItem }) => boolean;
 
 export const isAdmin: TOperation = ({ session }) => session?.data?.role?.name === "Admin";
 export const isUser: TOperation = ({ session }) => session?.data?.role?.name === "User";

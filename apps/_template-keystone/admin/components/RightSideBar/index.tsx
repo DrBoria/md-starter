@@ -1,98 +1,83 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import styled, { css } from "styled-components";
+import styled, { keyframes } from "styled-components";
+
 
 import { PageTitle, useModal } from "@md/components/keystone";
 import { CreateItemForm, EditItemForm } from "@md/sections";
 // import type { TOperation } from "@/types";
-import type { TSideBarModalDataKeystone } from "@/types";
+import type { TSideBarModalDataKeystone } from "../../../types";
 
-const slideInAnimation = css`
-  @keyframes slideInAnimation {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+
+
+
+
+const slideInAnimation = keyframes`
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
 
-  opacity: 1;
-  animation: slideInAnimation 0.2s forwards;
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 `;
 
-const slideOutAnimation = css`
-  @keyframes slideOutAnimation {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
+const slideOutAnimation = keyframes`
+  from {
+    transform: translateX(0);
+    opacity: 1;
   }
 
-  opacity: 0;
-  animation: slideOutAnimation 0.2s forwards;
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 `;
 
-export const fadeIn = css`
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+export const fadeIn = keyframes`
+  from {
+    opacity: 0;
   }
 
-  opacity: 0;
-  animation: fadeIn 0.2s forwards;
+  to {
+    opacity: 1;
+  }
 `;
 
-export const fadeOut = css`
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+export const fadeOut = keyframes`
+  from {
+    opacity: 1;
   }
 
-  opacity: 1;
-  animation: fadeOut 0.1 forwards;
+  to {
+    opacity: 0;
+  }
 `;
 
 const RightSideBarContainer = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
-  width: 740px;
+  width: ${({ theme }) => theme.elements.sidebar.width}; /* 740px approx */
   height: 100%;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  ${(props) =>
-    props.$isClosing ? `${slideOutAnimation}` : `${slideInAnimation}`};
+  box-shadow: ${({ theme }) => theme.shadows.medium};
+  animation: ${({ $isClosing }) => ($isClosing ? slideOutAnimation : slideInAnimation)} 0.2s forwards;
 `;
 
 const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: ${({ theme }) => theme.colors.overlayBackground};
   cursor: pointer;
-  ${(props) => (props.$isClosing ? `${fadeOut}` : `${fadeIn}`)};
+  animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.2s forwards;
 `;
 
 const StyledRightSideBar = styled.div`
   background: ${({ theme }) => theme.colors.section};
-  border-radius: ${({ theme }) => theme.borderRadius || '4px'};
+  border-radius: ${({ theme }) => theme.border.radius};
   width: 100%;
   min-height: 100%;
   backdrop-filter: var(--glass-effect);
@@ -102,13 +87,13 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 20px;
+  padding: ${({ theme }) => theme.offsets.section};
 `;
 
 const TitleContainer = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.highlighted || '#ccc'};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.highlighted};
   width: 100%;
-  padding: 7px 20px; // Alignment to the height of keystone header
+  padding: ${({ theme }) => theme.offsets.elementContent}; /* Was 7px 20px, approximating */
 `;
 
 export const RightSideBar = () => {
@@ -134,7 +119,7 @@ export const RightSideBar = () => {
 
   const modalViews: Record<string, React.ReactNode> = {
     create: (
-      <ContentContainer>
+      <ContentContainer style={{ padding: 'var(--offset-section)' }}>
         {sideBarModalData.listName && (
           <CreateItemForm
             listName={sideBarModalData.listName}
@@ -149,7 +134,7 @@ export const RightSideBar = () => {
       </ContentContainer>
     ),
     edit: (
-      <ContentContainer>
+      <ContentContainer style={{ padding: 'var(--offset-section)' }}>
         {sideBarModalData.listName && (
           <EditItemForm
             listName={sideBarModalData.listName}
@@ -164,7 +149,7 @@ export const RightSideBar = () => {
       </ContentContainer>
     ),
     custom: (
-      <ContentContainer>
+      <ContentContainer style={{ padding: 'var(--offset-section)' }}>
         {sideBarModalData.children}
       </ContentContainer>
     ),

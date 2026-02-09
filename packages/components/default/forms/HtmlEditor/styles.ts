@@ -1,20 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export const CodeEditorContainer = styled.div<{ $fullHeight?: boolean }>`
-  border-radius: 4px;
-  margin-bottom: 4px;
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  margin-bottom: ${({ theme }) => theme.offsets.elementContent};
   overflow: auto;
-  height: ${({ $fullHeight }) => ($fullHeight ? "100%" : "400px")};
-  border: 1px solid ${({ theme }) => theme?.colors?.disabled || '#ccc'}; /* Default border */
+  ${({ $fullHeight, theme }) => $fullHeight
+    ? css`height: 100%;`
+    : css`height: ${theme.elements.form.height};`}
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
 
   pre {
     background-color: transparent;
   }
 
   div {
-    line-height: 1.9;
+    line-height: 1.5;
   }
   
   /* Theme Support */

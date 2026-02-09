@@ -20,14 +20,18 @@ function Field({ field, value, onChange }: FieldProps<typeof controller>) {
             rows={8}
             onChange={(e) => {
               onChange?.({
+                kind: "editing",
+                value: e.target.value,
+                isSet: true,
                 inner: { value: e.target.value },
+                confirm: e.target.value
               });
             }}
-            value={value?.inner?.value ?? ""}
+            value={value.kind !== 'initial' ? value.value : ""}
             disabled={!onChange}
           />
         ) : (
-          <ShortedText text={value?.inner?.value ?? ""} withCopy />
+          <ShortedText text={value.kind !== 'initial' ? value.value : ""} withCopy />
         )}
       </div>
     </BasicSection>

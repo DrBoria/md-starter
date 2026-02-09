@@ -1,8 +1,7 @@
-import type { ZIndexName } from '@md/styles';
-import { getZIndex } from '@md/styles';
 import Image from "next-image-export-optimizer";
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import type { ThemeInterface, ZIndexName } from '@md/styles';
 
 type ICircleImageProps = {
     src: string;
@@ -13,12 +12,14 @@ type ICircleImageProps = {
     zIndex?: ZIndexName;
 }
 
-const ImageWrapper = styled(Image) <{ $zIndex?: ZIndexName; $isHalfSize?: boolean }>`
+
+
+const ImageWrapper = styled(Image) <{ $zIndex?: ZIndexName; $isHalfSize?: boolean; theme: ThemeInterface }>`
     width: auto;
     height: auto;
     max-height: 100%;
     max-width: 100%;
-    z-index: ${({ $zIndex = 'content' }) => getZIndex($zIndex)};
+    z-index: ${({ theme, $zIndex }: { theme: ThemeInterface, $zIndex?: ZIndexName }) => $zIndex ? theme.zIndex[$zIndex] : theme.zIndex.content};
 `
 
 const CircleImage = forwardRef<HTMLImageElement, ICircleImageProps>(({ src, alt = 'huge image of landscape on background', width = 2040, height = 1152, priority = false, zIndex }, ref) => (

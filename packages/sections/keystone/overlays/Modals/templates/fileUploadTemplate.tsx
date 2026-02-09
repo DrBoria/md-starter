@@ -8,27 +8,27 @@ import { TextArea } from "@md/components/keystone";
 import { HeaderText, PlainText } from "@md/components";
 
 const Dropzone = styled.div<{ $isDragActive: boolean }>`
-  border: 2px dashed #ccc;
-  background: #f9f9f9;
-  padding: 40px;
+  border: ${({ theme }) => `calc(${theme.variables.border.size}px * 2)`} dashed ${({ theme }) => theme.colors.disabled};
+  background: ${({ theme }) => theme.colors.section};
+  padding: ${({ theme }) => `calc(${theme.offsets.elementContent} * 2)`};
   text-align: center;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => `${theme.variables.border.radius}px`};
   transition: background-color 0.3s ease-in-out;
-  margin-bottom: 1rem;
+  margin-bottom: ${({ theme }) => theme.offsets.betweenElements};
 
-  ${({ $isDragActive }) =>
+  ${({ $isDragActive, theme }) =>
     $isDragActive &&
     `
-      background-color: #e6f7ff;
-      border-color: #1890ff;
+      background-color: ${theme.colors.highlighted};
+      border-color: ${theme.colors.highlighted};
     `};
 `;
 
 const Message = styled.p<{ $error: boolean }>`
-  color: ${(props) => (props.$error ? "#ff4d4f" : "#52c41a")};
-  font-size: 14px;
-  margin-top: 10px;
+  color: ${(props) => (props.$error ? props.theme.colors.errorText : props.theme.colors.successText)};
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  margin-top: ${({ theme }) => theme.offsets.betweenElements};
 `;
 
 const mapExtensionsToMime = (extensions: string[]) => {

@@ -5,18 +5,17 @@ import styled from "styled-components";
 import "prism-themes/themes/prism-one-light.css";
 import "prismjs/components/prism-json";
 
-// Styled component for the code block
 export const CodeBlock = styled.pre`
   margin: 0;
-  background: ${({ theme }) => theme?.colors?.section || 'transparent'}; /* Use theme's section background color */
+  background: ${({ theme }) => theme.colors.section};
   height: 100%;
   overflow: auto;
   white-space: pre-wrap;
   overflow-wrap: break-word;
 
   code {
-    font-family: ${({ theme }) => theme?.font?.family?.text || 'monospace'}; /* Use theme's text font family */
-    font-size: ${({ theme }) => theme?.font?.sizes?.regular || '1rem'}; /* Use theme's font size */
+    font-family: ${({ theme }) => theme.font.family.text};
+    font-size: ${({ theme }) => theme.font.sizes.regular};
     line-height: 1.5;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -25,7 +24,6 @@ export const CodeBlock = styled.pre`
   }
 `;
 
-// CodePreview component
 export const CodePreview: React.FC<{ rawValue?: string | object; className?: string }> = ({ rawValue, className }) => {
   if (!rawValue) return null;
 

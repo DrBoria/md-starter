@@ -15,7 +15,8 @@ import type { QueryResult } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { toReadablePascalCase } from "@md/utils";
 import { useModal } from "@md/components/keystone";
-import { MultiSelect } from "@keystone-ui/fields";
+// import { MultiSelect } from "@keystone-ui/fields";
+import type { TSession } from "../../../../schema/utils/access";
 
 export interface IListName {
   listName: string;
@@ -91,40 +92,21 @@ const Field = ({
 
   const items = data?.items || [];
 
-  function mapToOutput(input: IField): IOptionMultiSelect | null {
-    if (!input) return null;
 
-    const { id, title, name, service, filename } = input;
-    const labelField = title || name || service || filename || "";
 
-    return {
-      label: labelField,
-      value: id,
+  interface IItemValue {
+    organization?: {
+      value?: {
+        value?: {
+          id?: string;
+        };
+      };
     };
-  }
-
-  function mapToValue(input: ISelectValue) {
-    if (!input?.currentIds?.size) return [];
-
-    // Map the currentIds to the matching items from the query result
-    const mappedValues = Array.from(input.currentIds)
-      .map((itemId) => {
-        const matchingItem = items.find((item) => item.id === itemId);
-        return matchingItem
-          ? {
-            label: matchingItem.name || matchingItem.filename || "",
-            value: matchingItem.id,
-          } // Map to IOptionMultiSelect format
-          : null;
-      })
-      .filter(Boolean) as IOptionMultiSelect[]; // Filter out null values
-
-    return mappedValues;
   }
 
   useEffect(() => {
     void refetch();
-  }, [itemValue?.organization?.value?.value?.id]);
+  }, [(itemValue as IItemValue)?.organization?.value?.value?.id]);
 
   // Update handleChange to handle multi-select
   const handleChange = (newVal: IOptionMultiSelect[] | null) => {
@@ -162,15 +144,21 @@ const Field = ({
         {field.description}
       </DescriptionText>
       <div>
-        <MultiSelect
-          options={items.map(mapToOutput) as IOptionMultiSelect[]}
-          value={mapToValue(value)}
-          onChange={(selected) =>
-            handleChange(selected as IOptionMultiSelect[])
-          }
-          placeholder="Select..."
-          portalMenu
-        />
+        <select
+          multiple
+          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          value={Array.from(value.currentIds)}
+          onChange={(e) => {
+            const selectedOptions = Array.from(e.target.selectedOptions).map(option => ({ label: option.text, value: option.value }));
+            handleChange(selectedOptions);
+          }}
+        >
+          {items.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name || item.filename || item.title || item.id}
+            </option>
+          ))}
+        </select>
 
         {!field.hideCreate && (
           <div className="flex items-center gap-5 mt-4">

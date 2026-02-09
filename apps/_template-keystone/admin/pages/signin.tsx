@@ -147,7 +147,7 @@ function SigninPage({
             id="identity"
             name="identity"
             value={state.identity}
-            onChange={(e) => setState({ ...state, identity: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState({ ...state, identity: e.target.value })}
             placeholder={identityField}
             ref={identityFieldRef}
           />
@@ -160,7 +160,7 @@ function SigninPage({
                 id="password"
                 name="password"
                 value={state.secret}
-                onChange={(e) => setState({ ...state, secret: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState({ ...state, secret: e.target.value })}
                 placeholder={secretField}
                 type="password"
               />

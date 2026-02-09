@@ -1,54 +1,44 @@
 import { css } from "styled-components";
 
 export const vikingTheme = css`
-  /* VIKING THEME: Stone Tabs */
-  
-  /* Container overrides */
   &[data-orientation="vertical"] {
-     border: 4px solid ${({ theme }) => theme?.colors?.sectionContent || '#555'};
-     border-image: linear-gradient(to bottom, #8B4513, #555) 1;
-     background: ${({ theme }) => theme?.colors?.section || '#222'};
+     border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
+     background: ${({ theme }) => theme.colors.section};
   }
 
-  &[data-orientation="horizontal"] {
-     /* Horizontal specific */
-  }
-
-  /* List overrides */
   .tab-list {
      background: ${({ theme }) => theme.colors.overlay};
      
      &[data-orientation="vertical"] {
-        border-right: 2px solid ${({ theme }) => theme?.colors?.sectionContent || '#555'};
+        border-right: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
      }
   }
 
-  /* Tab Item */
   .tab-button {
-     font-family: ${({ theme }) => theme?.fontFamily || 'serif'};
+     font-family: ${({ theme }) => theme.fontFamily};
      text-transform: uppercase;
      background: transparent;
-     color: ${({ theme }) => theme?.colors?.sectionContent || '#aaa'};
+     color: ${({ theme }) => theme.colors.sectionContent};
      border: none;
      border-radius: 0;
      margin: 0;
      
      &:hover {
-         color: ${({ theme }) => theme?.colors?.highlighted || 'gold'};
-         text-shadow: 0 0 5px ${({ theme }) => theme?.colors?.highlighted || 'gold'};
+         color: ${({ theme }) => theme.colors.highlighted};
+         text-shadow: ${({ theme }) => theme.effects.glow.small};
      }
 
      &[data-state="active"] {
-         background: ${({ theme }) => theme?.colors?.section || '#222'};
-         color: ${({ theme }) => theme?.colors?.highlighted || 'gold'};
+         background: ${({ theme }) => theme.colors.section};
+         color: ${({ theme }) => theme.colors.highlighted};
          
          &[data-orientation="horizontal"] {
-            border-bottom: 3px solid ${({ theme }) => theme?.colors?.highlighted || 'gold'};
+            border-bottom: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
          }
          
          &[data-orientation="vertical"] {
-            border-left: 4px solid ${({ theme }) => theme?.colors?.highlighted || 'gold'};
-            background: linear-gradient(90deg, rgb(255 215 0 / 10%), transparent);
+            border-left: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
+            background: ${({ theme }) => theme.colors.overlayActive};
          }
      }
   }

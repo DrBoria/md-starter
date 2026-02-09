@@ -13,20 +13,20 @@ export interface EditingValue {
 
 export type Value = InitialValue | EditingValue;
 
-export interface Validation {
+export type Validation = {
   isRequired: boolean;
   rejectCommon: boolean;
   max?: number;
   min?: number;
   match: {
-    regex: RegExp;
+    regex: string;
     explanation: string;
   } | null;
   length: {
     min: number;
     max: number | null;
   };
-}
+};
 
 export const validate = (
   value: Value,
@@ -64,7 +64,7 @@ export const validate = (
     ) {
       return `${fieldLabel} must be no longer than ${validation.length.max} characters`;
     }
-    if (validation.match && !validation.match.regex.test(val)) {
+    if (validation.match && !new RegExp(validation.match.regex).test(val)) {
       return validation.match.explanation;
     }
   }

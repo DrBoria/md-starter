@@ -7,36 +7,34 @@ const floatUp = keyframes`
 `;
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Floating Bubble */
-  background: rgb(255 255 255 / 10%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 15%);
-  color: ${({ theme }) => theme?.colors?.text || 'white'};
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  box-shadow: ${({ theme }) => theme.effects.depth.outer.medium};
+  color: ${({ theme }) => theme.colors.sectionContent};
   animation: ${floatUp} 0.4s ease-out forwards;
 
   ${({ $tone, theme }: { $tone?: string; theme: DefaultTheme }) => $tone === 'positive' && css`
-    border-left: 4px solid ${theme?.colors?.success || 'green'};
-    background: linear-gradient(90deg, rgb(76 175 80 / 10%) 0%, rgb(255 255 255 / 5%) 100%);
+    border-left: calc(${theme.border.size} * 4) solid ${theme.colors.successText};
   `}
-  
+
   ${({ $tone, theme }: { $tone?: string; theme: DefaultTheme }) => $tone === 'negative' && css`
-    border-left: 4px solid ${theme?.colors?.error || 'red'};
-    background: linear-gradient(90deg, rgb(244 67 54 / 10%) 0%, rgb(255 255 255 / 5%) 100%);
+    border-left: calc(${theme.border.size} * 4) solid ${theme.colors.errorText};
+    background: ${theme.colors.errorBackground};
   `}
 
   button {
-    background: rgb(255 255 255 / 10%);
+    background: ${({ theme }) => theme.colors.overlay};
     border: none;
     border-radius: 50%;
-    width: 24px; 
-    height: 24px;
+    width: ${({ theme }) => theme.elements.icons.width}; 
+    height: ${({ theme }) => theme.elements.icons.height};
     display: flex; 
     align-items: center; 
     justify-content: center;
     cursor: pointer;
     color: inherit;
-    &:hover { background: rgb(255 255 255 / 30%); }
+    &:hover { background: ${({ theme }) => theme.colors.overlayActive}; }
   }
 `;

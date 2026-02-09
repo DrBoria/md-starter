@@ -15,36 +15,26 @@ type TTextareaProps = {
 
 const Textarea = styled.textarea<TTextareaProps>`
   display: block;
-  width: ${({ $fullWidth }) => $fullWidth && '100%'};
-  min-height: ${({ theme }) => `calc(${theme.elements.form.height} * 3)`}; /* Default roughly 3 rows */
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
+  min-height: ${({ theme }) => `calc(${theme.elements.form.height} * 3)`};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
   padding: ${({ theme }) => theme.offsets.elementContent};
   resize: vertical;
   font: ${basicFont};
-
-  /* Default Theme Base */
   color: ${({ theme }) => theme.colors.sectionContent};
   background: ${({ theme }) => theme.colors.overlay};
-  border-radius: ${({ theme }) => theme.variables.border.radius}px;
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
-  /* VIKING THEME OVERRIDE */
   ${({ theme }) => theme.theme === 'viking' && css`
-      /* 1. Material: Dark stone with noise */
       background-color: ${theme.colors.overlay};
-      background-image: ${theme.effects?.texture}; /* NOISE */
+      background-image: ${theme.effects.texture};
       color: ${theme.colors.sectionContent};
       border: none;
       outline: none;
-      
-      /* 2. Accent line bottom */
-      border-bottom: 2px solid ${theme.colors.disabled};
-
-      /* 3. Shape: Ragged Top (Torn stone slab) */
-      clip-path: ${theme.geometry?.ragged || 'none'};
-      
-      /* 4. Depth: Engraved */
-      box-shadow: ${theme.effects?.depth?.inner?.medium};
+      border-bottom: ${theme.border.size} solid ${theme.colors.disabled};
+      clip-path: ${theme.geometry.ragged};
+      box-shadow: ${theme.effects.depth.inner.medium};
 
       &::placeholder {
           color: ${theme.colors.labelText};
@@ -52,23 +42,20 @@ const Textarea = styled.textarea<TTextareaProps>`
           font-style: italic;
       }
 
-      /* 5. States: Glow & Magic */
       &:focus {
           color: ${theme.colors.highlighted};
           border-bottom-color: ${theme.colors.highlighted};
-          
-          /* Strong glow and crack texture imitation */
           box-shadow: 
-            ${theme.effects?.glow?.strong}, 
-            ${theme.effects?.depth?.inner?.strong};
+            ${theme.effects.glow.strong}, 
+            ${theme.effects.depth.inner.strong};
           caret-color: ${theme.colors.highlighted};
           filter: brightness(1.1);
       }
   `}
 
   ${({ theme }) => theme.theme !== 'viking' && css`
-     border: ${theme.variables.border.size}px solid ${theme.colors.sectionContent};
-     backdrop-filter: var(--glass-effect);
+     border: ${theme.border.size} solid ${theme.colors.sectionContent};
+     backdrop-filter: ${theme.effects.texture};
   `}
 `;
 

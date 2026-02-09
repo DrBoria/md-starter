@@ -6,25 +6,25 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
-  flex-wrap: wrap; /* Handle small screens */
-  gap: 4px;
+  padding: ${({ theme }) => theme.offsets.elementContent} 0;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.offsets.elementContent};
 `;
 
 export const PageNumber = styled.button<{ $active: boolean }>`
   background-color: ${({ $active, theme }) =>
-    $active ? (theme?.colors?.highlighted || "#007bff") : (theme?.colors?.overlay || "var(--color-bg-secondary)")};
-  color: ${({ $active, theme }) => ($active ? (theme?.colors?.highlightedText || "#fff") : (theme?.colors?.sectionContent || "#000"))};
-  border: 1px solid ${({ theme }) => theme?.colors?.disabled || 'rgb(204 204 204)'};
-  margin: 0 5px;
-  padding: 5px 10px;
+    $active ? theme.colors.highlighted : theme.colors.overlay};
+  color: ${({ $active, theme }) => ($active ? theme.colors.highlightedText : theme.colors.sectionContent)};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
+  margin: 0 ${({ theme }) => theme.offsets.elementContent};
+  padding: ${({ theme }) => theme.offsets.elementContent};
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: ${({ theme }) => theme.border.radius}px;
   font-weight: ${({ $active }) => ($active ? "bold" : "normal")};
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.highlighted || "#007bff"};
-    color: ${({ theme }) => theme?.colors?.highlightedText || "#fff"};
+    background-color: ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme.colors.highlightedText};
   }
 
   /* Theme Support */
@@ -34,33 +34,33 @@ export const PageNumber = styled.button<{ $active: boolean }>`
 
 export const ArrowButton = styled.button`
   background-color: transparent;
-  color: ${({ theme }) => theme?.colors?.highlighted || "#007bff"};
+  color: ${({ theme }) => theme.colors.highlighted};
   border: none;
-  margin: 0 10px;
-  padding: 5px 10px;
+  margin: 0 ${({ theme }) => theme.offsets.elementContent};
+  padding: ${({ theme }) => theme.offsets.elementContent};
   cursor: pointer;
   font-weight: bold;
 
   &:hover {
-    color: ${({ theme }) => theme?.colors?.highlightedText || "#0056b3"};
-    text-shadow: 0 0 8px ${({ theme }) => theme?.colors?.highlighted || "transparent"};
+    color: ${({ theme }) => theme.colors.highlightedText};
+    text-shadow: ${({ theme }) => theme.shadows.small};
   }
 
   &:disabled {
-  border: 1px solid ${({ theme }) => theme?.colors?.disabled || 'rgb(204 204 204)'};
-    color: ${({ theme }) => theme?.colors?.disabled || "#ccc"};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
+    color: ${({ theme }) => theme.colors.disabled};
     cursor: not-allowed;
   }
 
   /* Theme Support - Arrow Specific */
   ${({ theme }) => theme?.theme === 'viking' && css`
-    font-family: ${theme?.font?.family?.text || 'inherit'};
+    font-family: ${theme.font.family.text};
     text-transform: uppercase;
     letter-spacing: 1px;
   `}
 `;
 
 export const Dots = styled.span`
-  margin: 0 5px;
+  margin: 0 ${({ theme }) => theme.offsets.elementContent};
   font-weight: bold;
 `;

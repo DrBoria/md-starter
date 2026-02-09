@@ -20,19 +20,19 @@ const CheckboxContainer = styled.div<TWithBasicElementOffsets>`
 
 const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
   display: none;
-  width: ${({ $fullWidth }) => $fullWidth && '100%'};
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
 
   & + label {
     display: flex;
     align-items: center;
-    gap: 10px;
-    width: ${({ $fullWidth }) => $fullWidth && '100%'};
+    gap: ${({ theme }) => theme.offsets.elementContent};
+    ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
     height: ${({ theme }) => theme.elements.form.height};
-    padding: ${({ theme }) => theme.variables.offsets.elementContent.mobile}px;
+    padding: ${({ theme }) => theme.offsets.elementContent};
     font: ${basicFont};
     box-sizing: border-box;
     background: ${({ theme }) => theme.colors.overlay};
-    border-radius: ${({ theme }) => theme.variables.border.radius}px;
+    border-radius: ${({ theme }) => theme.border.radius}px;
     cursor: pointer;
   }
 
@@ -59,8 +59,8 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
              content: '';
              display: grid;
              place-items: center;
-             width: 24px;
-             height: 24px;
+             width: ${({ theme }) => theme.elements.icons.width};
+             height: ${({ theme }) => theme.elements.icons.height};
              
              /* Material: Rough Stone */
              background-color: ${theme.colors.overlay};
@@ -80,7 +80,7 @@ const CheckboxInput = styled.input<TWithBasicElementOffsets & TFullWidth>`
          &::before {
              /* Active Rune */
              content: 'ᚷ'; /* Gebo (Gift) */
-             font-size: 18px;
+             font-size: ${({ theme }) => theme.font.sizes.large};
              color: ${theme.colors.highlightedText};
              background-color: ${theme.colors.highlighted};
              box-shadow: ${theme.effects?.glow?.medium};

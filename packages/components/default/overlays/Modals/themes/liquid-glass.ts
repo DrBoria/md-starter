@@ -1,19 +1,18 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Modal */
-  background: rgb(40 40 40 / 70%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgb(0 0 0 / 30%);
-  color: white;
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  box-shadow: ${({ theme }) => theme.effects.depth.outer.strong};
+  color: ${({ theme }) => theme.colors.sectionContent};
   
   .close-button {
-      background: rgb(255 255 255 / 10%);
+      background: ${({ theme }) => theme.colors.overlay};
 
       &:hover {
-          background: rgb(255 255 255 / 20%);
+          background: ${({ theme }) => theme.colors.overlayActive};
           transform: rotate(90deg);
       }
   }

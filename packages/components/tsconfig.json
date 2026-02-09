@@ -9,7 +9,7 @@
         "./*"
       ],
       "@md/styles/*": [
-        "../styles/dist/*"
+        "../styles/*"
       ]
     }
   },

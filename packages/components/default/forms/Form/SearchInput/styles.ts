@@ -1,5 +1,5 @@
 import { FiX, FiSearch } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Button } from '@md/components/default/forms';
 
@@ -26,7 +26,7 @@ export const Container = styled.div<TWithBasicElementOffsets & { $isOpen: boolea
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: ${({ $isOpen, theme }) => $isOpen ? '100%' : theme.elements.form.height};
+  ${({ $isOpen, theme }) => $isOpen ? css`width: 100%;` : css`width: ${theme.elements.form.height};`}
   height: ${({ theme }) => theme.elements.form.height};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};

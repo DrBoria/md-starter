@@ -14,13 +14,9 @@ export const StyledButton = styled.button<{
   justify-content: center;
   border: none;
   cursor: pointer;
-  width: ${(props) => (props.$fullWidth ? "100%" : "auto")};
-  height: ${({ theme }) => theme?.elements?.form?.height || 'auto'};
-  gap: ${(props) =>
-        props.$size !== "icon"
-            ? `${props.theme?.variables?.offsets?.betweenElements?.mobile || 0}px`
-            : "0"};
-  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
+  height: ${({ theme }) => theme.elements.form.height};
+  ${({ $size, theme }) => $size !== "icon" && css`gap: ${theme.offsets.betweenElements};`}
 
   &:disabled {
     opacity: 0.5;
@@ -35,42 +31,42 @@ export const StyledButton = styled.button<{
         const color = (() => {
             switch (tone) {
                 case "active":
-                    return theme?.colors?.highlighted || 'blue';
+                    return theme.colors.highlighted;
                 case "passive":
-                    return theme?.colors?.section || 'gray';
+                    return theme.colors.section;
                 case "negative":
-                    return theme?.colors?.errorBackground || 'red';
+                    return theme.colors.errorBackground;
                 case "neutral":
-                    return theme?.colors?.labelBackground || 'lightgray';
+                    return theme.colors.labelBackground;
                 case "positive":
-                    return theme?.colors?.successBackground || 'green';
+                    return theme.colors.successBackground;
                 case "warning":
-                    return theme?.colors?.warningBackground || 'orange';
+                    return theme.colors.warningBackground;
                 case "help":
-                    return theme?.colors?.overlayActive || 'lightblue';
+                    return theme.colors.overlayActive;
                 default:
-                    return theme?.colors?.section || 'gray';
+                    return theme.colors.section;
             }
         })();
 
         const colorText = (() => {
             switch (tone) {
                 case "active":
-                    return theme?.colors?.highlightedText || 'white';
+                    return theme.colors.highlightedText;
                 case "passive":
-                    return theme?.colors?.sectionContent || 'black';
+                    return theme.colors.sectionContent;
                 case "negative":
-                    return theme?.colors?.errorText || 'white';
+                    return theme.colors.errorText;
                 case "neutral":
-                    return theme?.colors?.sectionContent || 'black';
+                    return theme.colors.sectionContent;
                 case "positive":
-                    return theme?.colors?.successText || 'white';
+                    return theme.colors.successText;
                 case "warning":
-                    return theme?.colors?.warningText || 'white';
+                    return theme.colors.warningText;
                 case "help":
-                    return theme?.colors?.sectionContent || 'black';
+                    return theme.colors.sectionContent;
                 default:
-                    return theme?.colors?.sectionContent || 'black';
+                    return theme.colors.sectionContent;
             }
         })();
 
@@ -84,7 +80,7 @@ export const StyledButton = styled.button<{
             case "outline":
             case "hollow":
                 weightStyles = css`
-          border: ${theme?.variables?.border?.size || 1}px solid ${colorText};
+          border: ${theme.border.size} solid ${colorText};
           background-color: transparent;
           color: ${colorText};
         `;
@@ -116,39 +112,37 @@ export const StyledButton = styled.button<{
         }
 
         let sizeStyles = css`/* empty */`;
-        const getOffset = (val: string | number | undefined) => typeof val === 'number' ? val : parseInt(val || '8', 10);
-        const mobileOffset = getOffset(theme?.variables?.offsets?.elementContent?.mobile);
 
         switch (size) {
             case "small":
                 sizeStyles = css`
-          padding: ${mobileOffset / 2}px ${mobileOffset}px;
-          font-size: 12px;
+          padding: ${theme.offsets.elementContent};
+          font-size: ${theme.font.sizes.small};
         `;
                 break;
             case "medium":
                 sizeStyles = css`
-          padding: ${mobileOffset}px ${mobileOffset * 2}px;
-          font-size: 14px;
+          padding: ${theme.offsets.elementContent};
+          font-size: ${theme.font.sizes.regular};
         `;
                 break;
             case "large":
                 sizeStyles = css`
-          padding: ${mobileOffset * 1.5}px ${mobileOffset * 3}px;
-          font-size: 16px;
+          padding: ${theme.offsets.section};
+          font-size: ${theme.font.sizes.regular};
         `;
                 break;
             case "icon":
                 sizeStyles = css`
-          padding: ${mobileOffset}px;
-          width: 32px;
-          height: 32px;
+          padding: ${theme.offsets.elementContent};
+          width: ${theme.elements.icons.width};
+          height: ${theme.elements.icons.height};
         `;
                 break;
             default:
                 sizeStyles = css`
-          padding: ${mobileOffset}px ${mobileOffset * 2}px;
-          font-size: 14px;
+          padding: ${theme.offsets.elementContent};
+          font-size: ${theme.font.sizes.regular};
         `;
         }
 

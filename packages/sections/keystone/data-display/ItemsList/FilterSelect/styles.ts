@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FilterButton = styled.button`
   padding: ${({ theme }) => theme.offsets.elementContent};
   background-color: ${({ theme }) => theme.colors.highlighted};
-  color: white;
+  color: ${({ theme }) => theme.colors.highlightedText};
   border: none;
   border-radius: ${({ theme }) => `${theme.variables.border.radius}px`};
   cursor: pointer;
@@ -16,12 +16,12 @@ export const FilterWrapper = styled.div`
 
 export const FilterDropdown = styled.div`
   position: absolute;
-  top: 40px;
+  top: 100%;
   right: 0;
   min-width: ${({ theme }) => theme.screens.mobile.width}px;
   padding: ${({ theme }) => `calc(2 * ${theme.offsets.elementContent})`};
   background-color: ${({ theme }) => theme.colors.section};
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  box-shadow: ${({ theme }) => theme.shadows.medium};
   border-radius: ${({ theme }) => `calc(2 * ${theme.variables.border.radius}px)`};
   z-index: ${({ theme }) => theme.zIndex.overlay};
 `;

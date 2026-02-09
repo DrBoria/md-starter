@@ -21,12 +21,12 @@ const LIST_ICONS = {
   Post: Icons.FileTextIcon,
 };
 
-const getIconForList = (listKey) => {
+const getIconForList = (listKey: keyof typeof LIST_ICONS) => {
   const IconComponent = LIST_ICONS[listKey];
   return IconComponent ? <IconComponent /> : <Icons.BoxIcon />;
 };
 
-const renderListItem = (list, isAdmin, currentUserId) => {
+const renderListItem = (list: NavigationProps['lists'][0], isAdmin: boolean, currentUserId: string | null) => {
   if (list.key === USERS_LIST_KEY) {
     if (isAdmin) {
       return (
@@ -49,7 +49,7 @@ const renderListItem = (list, isAdmin, currentUserId) => {
 
   return (
     <NavItem key={list.key} href={`/${list.path}`}>
-      {getIconForList(list.key)}
+      {getIconForList(list.key as keyof typeof LIST_ICONS)}
       {list.label}
     </NavItem>
   );
@@ -88,7 +88,7 @@ const CustomNavigation = ({ lists, authenticatedItem }: NavigationProps) => {
             <Toggle title="SuperAdmin Pages">
               {lists.map((list) => (
                 <NavItem key={list.key} href={`/${list.path}`}>
-                  {getIconForList(list.key)}
+                  {getIconForList(list.key as "Users" | "Role" | "Post")}
                   {list.label}
                 </NavItem>
               ))}

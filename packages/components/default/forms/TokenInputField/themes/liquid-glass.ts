@@ -1,17 +1,16 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Field Container */
-  background: rgb(255 255 255 / 5%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 12px;
-  padding: 16px;
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  padding: ${({ theme }) => theme.offsets.section};
   
   label {
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    font-size: ${({ theme }) => theme.font.sizes.small};
+    letter-spacing: ${({ theme }) => theme.font.spacing};
     opacity: 0.8;
   }
 `;

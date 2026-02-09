@@ -7,11 +7,8 @@ const liquidPulse = keyframes`
 `;
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Pulsing Orb */
-  
-  /* We might want a different SVG for liquid glass, but we'll apply effects to the existing one */
   img, svg {
-    filter: blur(1px) drop-shadow(0 0 5px rgb(255 255 255 / 50%));
+    filter: drop-shadow(${({ theme }) => theme.effects.glow.soft});
     animation: ${liquidPulse} 1.5s ease-in-out infinite;
   }
 `;

@@ -1,17 +1,16 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Link */
-  color: ${({ theme }) => theme?.colors?.text || 'white'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   text-decoration: none;
-  border-bottom: 1px dotted rgb(255 255 255 / 50%);
+  border-bottom: ${({ theme }) => theme.border.size}px dotted ${({ theme }) => theme.colors.overlayActive};
   transition: all 0.2s;
   
   &:hover {
-    border-bottom: 1px solid white;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
-    background: rgb(255 255 255 / 5%);
-    border-radius: 4px;
-    padding: 0 2px;
+    border-bottom: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
+    box-shadow: ${({ theme }) => theme.shadows.small};
+    background: ${({ theme }) => theme.colors.overlay};
+    border-radius: ${({ theme }) => theme.border.radius}px;
+    padding: 0 ${({ theme }) => theme.offsets.elementContent};
   }
 `;

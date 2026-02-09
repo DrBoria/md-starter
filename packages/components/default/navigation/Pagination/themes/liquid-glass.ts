@@ -1,25 +1,24 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css<{ $active?: boolean }>`
-  /* LIQUID GLASS THEME: Pagination */
-  background: rgb(255 255 255 / 10%);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgb(255 255 255 / 20%);
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: ${({ theme }) => theme.elements.icons.width};
+  height: ${({ theme }) => theme.elements.icons.height};
   display: flex;
   align-items: center;
   justify-content: center;
   
-  ${({ $active }) => $active && css`
-      background: rgb(255 255 255 / 30%);
-      box-shadow: 0 0 10px rgb(255 255 255 / 40%);
-      border-color: white;
+  ${({ $active, theme }) => $active && css`
+      background: ${theme.colors.overlayActive};
+      box-shadow: ${theme.effects.glow.soft};
+      border-color: ${theme.colors.sectionContent};
   `}
 
   &:hover {
-      background: rgb(255 255 255 / 20%);
+      background: ${({ theme }) => theme.colors.overlayActive};
       transform: scale(1.1);
   }
 `;

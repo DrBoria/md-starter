@@ -77,7 +77,7 @@ const SafeNavigation = () => {
 };
 
 const LogoWrapper = styled.div`
-  height: 3rem;
+  height: ${({ theme }) => theme.elements.form.height};
   width: auto;
   display: flex;
   align-items: center;

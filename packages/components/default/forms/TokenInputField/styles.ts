@@ -5,10 +5,10 @@ import { liquidGlassTheme } from "./themes/liquid-glass";
 export const FieldContainer = styled.fieldset`
   border: none;
   padding: 0;
-  margin: 0 0 16px;
+  margin: 0 0 ${({ theme }) => theme.offsets.betweenElements};
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme }) => theme.offsets.elementContent};
 
   /* Theme Support */
   ${({ theme }) => theme?.theme === 'viking' && vikingTheme}
@@ -22,12 +22,12 @@ export const FlexContainer = styled.div`
 
 export const FieldLabel = styled.label`
   font-weight: 500;
-  margin-bottom: 4px;
-  color: ${({ theme }) => theme?.colors?.labelBackground || 'inherit'};
+  margin-bottom: ${({ theme }) => theme.offsets.elementContent};
+  color: ${({ theme }) => theme.colors.labelBackground};
 `;
 
 export const FieldDescription = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme?.colors?.labelText || 'gray'};
-  margin-bottom: 8px;
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  color: ${({ theme }) => theme.colors.labelText};
+  margin-bottom: ${({ theme }) => theme.offsets.elementContent};
 `;

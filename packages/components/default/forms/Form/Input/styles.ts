@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import type React from 'react';
+import styled, { css } from 'styled-components';
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight, basicFont } from '@md/styles';
 import { vikingTheme } from './themes/viking';
@@ -15,19 +16,19 @@ export type TInputProps = {
 
 export const StyledInput = styled.input<TInputProps>`
   display: block;
-  width: ${({ $fullWidth }) => $fullWidth && '100%'};
-  height: ${({ theme }) => theme?.elements?.form?.height || '40px'};
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
+  height: ${({ theme }) => theme.elements.form.height};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  padding: ${({ theme }) => theme?.offsets?.elementContent || '8px'};
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
-  background: ${({ theme }) => theme?.colors?.overlay || 'transparent'};
-  border: ${({ theme }) => theme?.variables?.border?.size || 1}px solid ${({ theme }) => theme?.colors?.sectionContent || 'black'};
-  border-radius: ${({ theme }) => theme?.variables?.border?.radius || 0}px;
+  background: ${({ theme }) => theme.colors.overlay};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.labelText || 'lightgray'};
+    color: ${({ theme }) => theme.colors.labelText};
     opacity: 0.5;
     font-style: italic;
   }

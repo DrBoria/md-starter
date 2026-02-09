@@ -1,6 +1,6 @@
 import type { Construct } from "constructs";
 import { App, TerraformStack } from "cdktf";
-import { AwsContainerApp as DeploymentStrategy } from "@md/infrastructure/src/constructs/aws-container";
+import { AwsFargateApp as DeploymentStrategy } from "@md/infrastructure";
 
 class MyStack extends TerraformStack {
     constructor(scope: Construct, id: string) {

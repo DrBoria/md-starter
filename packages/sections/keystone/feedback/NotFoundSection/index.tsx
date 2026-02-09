@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { Button } from "@md/components";
 
 const StyledButton = styled(Button)`
-  background-color: #3172f5;
-  color: #fff;
+  background-color: ${({ theme }) => theme.colors.highlighted};
+  color: ${({ theme }) => theme.colors.highlightedText};
 
   &:hover {
-    background-color: #3172f5;
-    color: #fff;
+    background-color: ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme.colors.highlightedText};
     text-decoration: underline;
   }
 `;
@@ -18,8 +18,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  min-height: 400px;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  min-height: 50vh;
   justify-content: center;
 `;
 

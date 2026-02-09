@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Loader } from "@md/components/default/feedback";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface BadgeProps {
   $status?: string;
@@ -9,40 +9,31 @@ interface BadgeProps {
 }
 
 export const BadgeContainer = styled.div<BadgeProps>`
-  padding: ${({ theme }) => theme?.offsets?.elementContent || '0'} calc(2 * ${({ theme }) =>
-    theme?.offsets?.elementContent || '0'});
-  border-radius: ${({ theme }) => theme?.border?.radius || 0}px;
+  padding: ${({ theme }) => theme.offsets.elementContent} calc(2 * ${({ theme }) => theme.offsets.elementContent});
+  border-radius: ${({ theme }) => theme.border.radius}px;
   font-weight: 500;
   text-transform: capitalize;
   height: fit-content;
   display: flex;
   align-items: center;
-  font-family: ${({ theme }) => theme?.font?.family?.text || 'inherit'};
-  gap: ${({ theme }) => theme?.variables?.offsets?.betweenElements?.mobile || 0}px;
-  background-color: ${({ theme, $status }) => {
+  font-family: ${({ theme }) => theme.font.family.text};
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  ${({ $status, theme }) => {
     switch ($status) {
-      case "approval":
-        return theme?.colors?.warningBackground || 'orange';
-      case "success":
-        return theme?.colors?.successBackground || 'green';
-      case "failed":
-        return theme?.colors?.errorBackground || 'red';
-      default:
-        return theme?.colors?.section || 'transparent';
+      case "approval": return css`background-color: ${theme.colors.warningBackground};`;
+      case "success": return css`background-color: ${theme.colors.successBackground};`;
+      case "failed": return css`background-color: ${theme.colors.errorBackground};`;
+      default: return css`background-color: ${theme.colors.section};`;
     }
-  }};
-  color: ${({ theme, $status }) => {
+  }}
+  ${({ $status, theme }) => {
     switch ($status) {
-      case "approval":
-        return theme?.colors?.warningText || 'white';
-      case "success":
-        return theme?.colors?.successText || 'white';
-      case "failed":
-        return theme?.colors?.errorText || 'white';
-      default:
-        return theme?.colors?.sectionContent || 'inherit';
+      case "approval": return css`color: ${theme.colors.warningText};`;
+      case "success": return css`color: ${theme.colors.successText};`;
+      case "failed": return css`color: ${theme.colors.errorText};`;
+      default: return css`color: ${theme.colors.sectionContent};`;
     }
-  }};
+  }}
 `;
 
 export const Badge: React.FC<BadgeProps & { children?: React.ReactNode }> = ({

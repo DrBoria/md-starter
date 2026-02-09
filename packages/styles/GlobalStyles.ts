@@ -3,6 +3,13 @@ import reset from 'styled-reset';
 
 export const GlobalStyles = createGlobalStyle`
   ${reset}
+  
+  :root {
+    --sidebar-width: 250px;
+    --modal-width: 740px;
+    --height-header: 64px;
+    --min-width-form: 320px;
+  }
 
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 

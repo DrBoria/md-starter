@@ -3,11 +3,11 @@ import { Toggle, Input, SectionTitle } from "@md/components";
 import styled from "styled-components";
 
 const ColorInput = styled.input`
-  width: ${({ theme }) => theme.space?.[12] || '100px'};
+  width: ${({ theme }) => theme.elements?.form?.minWidth};
 `;
 
 const PropertyContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.space?.[2] || '10px'};
+  margin-bottom: ${({ theme }) => theme.offsets?.elementContent};
 `;
 
 type ThemeDictionary = {

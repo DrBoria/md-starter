@@ -8,11 +8,11 @@ export const ItemsTableContainer = styled.div`
 `;
 
 export const TableHeader = styled.div`
-  padding: 0.25rem 0;
+  padding: ${({ theme }) => `${theme.offsets.elementContent} 0`};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: ${({ theme }) => theme.offsets.betweenElements};
   background-color: ${({ theme }) => theme.colors.section};
   color: ${({ theme }) => theme.colors.sectionContent};
   gap: calc(var(--basic-padding) * 2);
@@ -56,6 +56,11 @@ export const Row = styled.div<{ $withFullSupport?: boolean }>`
 
   &:first-child {
     grid-template-rows: calc(var(--basic-padding) * 6);
+    background-color: var(--color-bg-secondary);
+
+    & > label {
+      background-color: var(--color-bg-secondary);
+    }
   }
 
   &:last-child {
@@ -99,18 +104,11 @@ export const Row = styled.div<{ $withFullSupport?: boolean }>`
       z-index: 2;
       right: 0;
       grid-column: -1;
-      min-width: 50px;
+      min-width: ${({ theme }) => theme.elements.form.height};
     }
   }
 
-  /* Header Row */
-  &:first-child {
-    background-color: var(--color-bg-secondary);
 
-    & > label {
-      background-color: var(--color-bg-secondary);
-    }
-  }
 `;
 
 type TSortOrder = "asc" | "desc";
@@ -127,25 +125,25 @@ export const HeaderCellContainer = styled.div<{ $isSortable: boolean }>`
   display: flex;
   align-items: center;
   cursor: ${({ $isSortable }) => ($isSortable ? "pointer" : "default")};
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.font.sizes.small};
   color: var(--color-label);
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-width: 300px;
+  max-width: ${({ theme }) => `${theme.screens.mobile.width}px`};
 
   &:first-of-type {
-    padding-left: 8px;
+    padding-left: ${({ theme }) => theme.offsets.elementContent};
   }
 
   @media (width <= 768px) {
-    max-width: 100px;
+    max-width: ${({ theme }) => `calc(${theme.screens.mobile.width}px / 3)`};
   }
 `;
 
 export const Arrow = styled.span`
-  margin-left: 8px;
-  font-size: 0.8rem;
+  margin-left: ${({ theme }) => theme.offsets.betweenElements};
+  font-size: ${({ theme }) => theme.font.sizes.small};
 `;
 
 export const HeaderCell: React.FC<IHeaderCellProps> = ({

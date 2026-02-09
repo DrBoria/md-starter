@@ -1,5 +1,5 @@
 import type { FormEventHandler } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import type { TWithBasicElementOffsets, TFullWidth } from '@md/styles';
 import { withOffsetBottom, withOffsetsRight } from '@md/styles';
@@ -10,7 +10,7 @@ type TFormProps = {
   TFullWidth;
 
 const Form = styled.form<TFormProps>`
-  width: ${({ $fullWidth }) => $fullWidth && '100%'};
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 `;

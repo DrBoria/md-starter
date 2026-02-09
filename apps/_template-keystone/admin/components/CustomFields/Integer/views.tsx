@@ -29,8 +29,12 @@ function Field({
     // However, we should not prevent the user from entering other characters, as it may seem like the field is unresponsive.
     onChange &&
       onChange({
-        value: Number.isNaN(numberValue) ? updatedValue : Number(updatedValue),
-      });
+        kind: "editing",
+        value: Number.isNaN(numberValue) ? updatedValue : Number(updatedValue).toString(),
+        isSet: true,
+        inner: { value: updatedValue },
+        confirm: updatedValue // Assuming confirm logic matches value for simplicity or is handled elsewhere
+      } as Value);
     setValidationMessage(null);
   };
 
@@ -58,7 +62,7 @@ function Field({
       <div>
         <ErrorValidationContainer $isError={!!validationMessage}>
           <Input
-            value={`${value?.value ?? ""}`}
+            value={`${value.kind === 'initial' ? '' : value.value}`}
             onChange={handleChange}
             onBlur={handleValidate}
             readOnly={!onChange}

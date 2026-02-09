@@ -1,31 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
-// Styled container for the tooltip
 export const ToolTipContainer = styled.div<{ $fullWidth?: boolean }>`
   position: relative;
   display: inline-block;
-  ${({ $fullWidth }) => ($fullWidth ? "width: 100%;" : "")}
+  ${({ $fullWidth }) => $fullWidth && css`width: 100%;`}
 `;
 
-// Styled text element for the tooltip
 export const ToolTipText = styled.span<{ $position: string }>`
   visibility: hidden;
-  min-width: 120px;
-  background-color: ${({ theme }) => theme?.colors?.sectionContent || '#202020'};
-  color: ${({ theme }) => theme?.colors?.overlay || '#e6e6e6'};
+  min-width: ${({ theme }) => theme.elements.form.minWidth};
+  background-color: ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme.colors.section};
   text-align: center;
-  border-radius: ${({ theme }) => theme?.variables?.border?.radius || 4}px;
-  padding: ${({ theme }) => theme?.variables?.offsets?.elementContent?.mobile || 8}px;
-
-  /* Position the tooltip based on the dynamic '$position' prop */
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
   position: absolute;
-  z-index: ${({ theme }) => theme?.zIndex?.navigationElement || 1000};
+  z-index: ${({ theme }) => theme.zIndex.navigationElement};
   left: 50%;
-  margin-left: -60px; /* Half of min-width */
-  ${({ $position }) => ($position === "top" ? "bottom: 100%; margin-bottom: 8px;" : "top: 100%; margin-top: 8px;")}
-  /* Fade in tooltip */
+  margin-left: ${({ theme }) => `calc(-${theme.elements.form.minWidth} / 2)`};
+  ${({ $position, theme }) => $position === "top"
+    ? css`bottom: 100%; margin-bottom: ${theme.offsets.elementContent};`
+    : css`top: 100%; margin-top: ${theme.offsets.elementContent};`}
   opacity: 0;
   transition: opacity 0.3s;
 

@@ -125,7 +125,7 @@ module.exports = [
       "no-restricted-syntax": [
         "error",
         {
-          selector: "TSAsExpression[typeAnnotation.type='TSTypeReference'][typeAnnotation.typeName.name='unknown']",
+          selector: "TSAsExpression[typeAnnotation.type='TSTypeReference'][typeAnnotation.typeName.name='unknown'], TSAsExpression[typeAnnotation.type='TSUnknownKeyword']",
           message: "Do not use `as unknown`. It is strictly forbidden."
         },
         {

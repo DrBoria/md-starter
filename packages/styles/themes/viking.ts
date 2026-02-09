@@ -30,11 +30,7 @@ const viking: ThemeInterface = {
         highlighted: '#30d5c8',
         highlightedText: '#081a18',
         disabled: '#374b4e',
-
-        surface: '#182022',
-        text: '#ecf0f1',
-        background: '#0b0e0f',
-        highlight: '#30d5c8',
+        disabledText: '#5a7377',
 
         warningBackground: '#3e2723',
         warningText: '#ffccbc',
@@ -45,16 +41,12 @@ const viking: ThemeInterface = {
 
         labelBackground: '#2c3e50',
         labelText: '#bdc3c7',
-
-        success: '#a3e4b3',
-        error: '#ffb3b3',
-        warning: '#ffccbc',
-        info: '#30d5c8',
+        overlayBackground: 'rgba(0, 0, 0, 0.7)',
     },
 
     effects: {
         texture: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E")`,
-        cracks: 'none',
+
         glow: {
             soft: '0 0 10px rgba(48, 213, 200, 0.2)',
             medium: '0 0 15px rgba(48, 213, 200, 0.5), 0 0 30px rgba(48, 213, 200, 0.2)',
@@ -96,9 +88,11 @@ const viking: ThemeInterface = {
     font: {
         family: {
             text: '"Cinzel", serif',
-            title: '"Cinzel", serif'
+            title: '"Cinzel", serif',
+            code: 'monospace',
         },
         sizes: baseTheme.font.sizes,
+        spacing: 'normal',
     },
 
     variables: baseTheme.variables,

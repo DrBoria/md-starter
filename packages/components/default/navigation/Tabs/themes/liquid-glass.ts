@@ -1,48 +1,39 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Glass Tabs */
-  
-  /* Container */
   &[data-orientation="vertical"] {
-     background: rgb(255 255 255 / 5%);
-     backdrop-filter: blur(10px);
-     border: 1px solid rgb(255 255 255 / 10%);
-     border-radius: 16px;
+     background: ${({ theme }) => theme.colors.overlay};
+     backdrop-filter: ${({ theme }) => theme.effects.texture};
+     border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+     border-radius: ${({ theme }) => theme.border.radius}px;
   }
 
-  /* List */
   .tab-list {
-     background: rgb(0 0 0 / 10%);
+     background: ${({ theme }) => theme.colors.overlayActive};
      
      &[data-orientation="vertical"] {
-        border-right: 1px solid rgb(255 255 255 / 10%);
+        border-right: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlay};
      }
   }
 
-  /* Tab Item */
   .tab-button {
      transition: all 0.3s ease;
      opacity: 0.7;
-     border-radius: 8px;
-     margin: 4px;
+     border-radius: ${({ theme }) => theme.border.radius}px;
+     margin: ${({ theme }) => theme.offsets.elementContent};
      
      &:hover {
-         background: rgb(255 255 255 / 10%);
+         background: ${({ theme }) => theme.colors.overlay};
          opacity: 1;
      }
 
      &[data-state="active"] {
          opacity: 1;
-         background: rgb(255 255 255 / 20%);
-         box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
-         
-         &[data-orientation="horizontal"] {
-            /* Pill style already handled */
-         }
+         background: ${({ theme }) => theme.colors.overlayActive};
+         box-shadow: ${({ theme }) => theme.shadows.small};
          
          &[data-orientation="vertical"] {
-            border-left: 2px solid white;
+            border-left: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
          }
      }
   }

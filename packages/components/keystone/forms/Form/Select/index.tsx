@@ -12,7 +12,6 @@ interface SelectProps {
   placeholder?: string;
 }
 
-// Styled components
 const Container = styled.div`
   position: relative;
 `;
@@ -21,12 +20,12 @@ const SelectedValueWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 6px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   border-style: solid;
-  border-width: 1px;
-  color: ${({ theme }) => theme?.colors?.sectionContent || '#374151'};
-  background-color: ${({ theme }) => theme?.colors?.section || '#f9fafb'};
+  border-width: ${({ theme }) => theme.border.size}px;
+  color: ${({ theme }) => theme.colors.sectionContent};
+  background-color: ${({ theme }) => theme.colors.section};
   cursor: pointer;
 `;
 
@@ -35,62 +34,62 @@ const Dropdown = styled.ul`
   top: 100%;
   left: 0;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme?.colors?.disabled || '#ccc'};
-  max-height: 200px;
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.disabled};
+  max-height: ${({ theme }) => theme.elements.form.height};
   overflow-y: auto;
-  background-color: ${({ theme }) => theme?.colors?.surface || '#fff'};
+  background-color: ${({ theme }) => theme.colors.section};
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-top: 8px;
-  border-radius: 8px;
+  margin-top: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   z-index: 1;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Adds shadow effect */
+  box-shadow: ${({ theme }) => theme.shadows.small};
 `;
 
 const DropdownItem = styled.li<{ $highlighted: boolean }>`
-  padding: 10px 15px;
-  background-color: ${({ $highlighted, theme }) => ($highlighted ? (theme?.colors?.highlighted || "#007bff") : (theme?.colors?.surface || "#fff"))};
-  color: ${({ $highlighted, theme }) => ($highlighted ? (theme?.colors?.highlightedText || "#fff") : (theme?.colors?.text || "#000"))};
-  font-size: 14px;
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  background-color: ${({ $highlighted, theme }) => ($highlighted ? theme.colors.highlighted : theme.colors.section)};
+  color: ${({ $highlighted, theme }) => ($highlighted ? theme.colors.highlightedText : theme.colors.sectionContent)};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.highlighted || '#007bff'};
-    color: ${({ theme }) => theme?.colors?.highlightedText || '#fff'};
+    background-color: ${({ theme }) => theme.colors.highlighted};
+    color: ${({ theme }) => theme.colors.highlightedText};
   }
 `;
 
 const IconsContainer = styled.div`
-  color: ${({ theme }) => theme?.colors?.disabled || '#b1b5b9'};
+  color: ${({ theme }) => theme.colors.disabled};
   display: flex;
-  gap: 0.5rem;
-  padding-left: 0.5rem;
+  gap: ${({ theme }) => theme.offsets.elementContent};
+  padding-left: ${({ theme }) => theme.offsets.elementContent};
 `;
 
 const NoOptions = styled.li`
-  padding: 10px;
-  color: ${({ theme }) => theme?.colors?.disabled || '#999'};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  color: ${({ theme }) => theme.colors.disabled};
 `;
 
 const ClearButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: 5px;
-  font-size: 16px;
+  margin-left: ${({ theme }) => theme.offsets.elementContent};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
 `;
 
 const Separator = styled.div`
-  width: 1px;
-  background-color: hsl(0deg 0% 80%);
-  margin-bottom: 4px;
-  margin-top: 4px;
+  width: ${({ theme }) => theme.border.size}px;
+  background-color: ${({ theme }) => theme.colors.disabled};
+  margin-bottom: ${({ theme }) => theme.offsets.elementContent};
+  margin-top: ${({ theme }) => theme.offsets.elementContent};
   box-sizing: border-box;
 `;
 
 const Placeholder = styled.span`
-  color: ${({ theme }) => theme?.colors?.disabled || '#b4b8bc'};
+  color: ${({ theme }) => theme.colors.disabled};
 `;
 const Select: React.FC<SelectProps> = ({
   options,
@@ -112,7 +111,6 @@ const Select: React.FC<SelectProps> = ({
     setIsOpen(false);
   };
 
-  // Handle key navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
       case "ArrowDown":
@@ -134,14 +132,12 @@ const Select: React.FC<SelectProps> = ({
     }
   };
 
-  // Clear the selected option
   const handleClear = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent click from bubbling to open dropdown
+    e.stopPropagation();
     onChange(null);
     setIsOpen(false);
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -160,8 +156,8 @@ const Select: React.FC<SelectProps> = ({
     <Container ref={containerRef}>
       <SelectedValueWrapper
         onClick={handleToggleDropdown}
-        onKeyDown={handleKeyDown} // Now handling keydown events
-        tabIndex={0} // Make it focusable for key events
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
       >
         {value ? value.label : <Placeholder>{placeholder}</Placeholder>}
         <IconsContainer>

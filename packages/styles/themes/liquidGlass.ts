@@ -1,15 +1,3 @@
-import { css } from 'styled-components';
-
-const GLASS_BLUR = 'blur(10px)';
-const GLASS_BG = 'rgb(255 255 255 / 20%)';
-const GLASS_SHADOW = '0 4px 30px rgb(0 0 0 / 10%)';
-
-export const liquidGlassMixin = css`
-  backdrop-filter: ${GLASS_BLUR};
-  background: ${GLASS_BG};
-  box-shadow: ${GLASS_SHADOW};
-`;
-
 
 import type { ThemeInterface } from './types';
 import baseTheme from './baseTheme';
@@ -36,18 +24,14 @@ const liquidGlass: ThemeInterface = {
   },
 
   colors: {
-    section: 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
+    section: 'rgb(255 255 255 / 20%)',
     sectionContent: '#1f2937',
     overlay: 'rgba(0, 0, 0, 0.05)',
     overlayActive: 'rgba(0, 0, 0, 0.1)',
     highlighted: '#3b82f6',
     highlightedText: '#ffffff',
     disabled: '#9ca3af',
-
-    surface: '#ffffff',
-    text: '#1f2937',
-    background: '#f0f2f5',
-    highlight: '#3b82f6',
+    disabledText: '#6b7280',
 
     warningBackground: '#fffbeb',
     warningText: '#92400e',
@@ -58,16 +42,11 @@ const liquidGlass: ThemeInterface = {
 
     labelBackground: '#f3f4f6',
     labelText: '#374151',
-
-    success: '#065f46',
-    error: '#b91c1c',
-    warning: '#92400e',
-    info: '#3b82f6',
+    overlayBackground: 'rgba(0, 0, 0, 0.5)',
   },
 
   effects: {
     texture: 'blur(10px)',
-    cracks: 'none',
     glow: {
       soft: '0 0 10px rgba(59, 130, 246, 0.2)',
       medium: '0 0 20px rgba(59, 130, 246, 0.4)',
@@ -109,9 +88,11 @@ const liquidGlass: ThemeInterface = {
   font: {
     family: {
       text: '"Inter", sans-serif',
-      title: '"Inter", sans-serif'
+      title: '"Inter", sans-serif',
+      code: 'monospace',
     },
     sizes: baseTheme.font.sizes,
+    spacing: 'normal',
   },
 
   variables: baseTheme.variables,
@@ -119,5 +100,7 @@ const liquidGlass: ThemeInterface = {
   offsets: baseTheme.offsets,
   elements: baseTheme.elements,
 };
+
+
 
 export default liquidGlass;

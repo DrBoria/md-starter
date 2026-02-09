@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
@@ -22,7 +22,7 @@ export const ToggleContent = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  padding: 8px 0;
+  padding: ${({ theme }) => theme.offsets.elementContent} 0;
 `;
 
 export const Title = styled.span`
@@ -30,9 +30,13 @@ export const Title = styled.span`
 `;
 
 export const ChildrensContainer = styled.div<{ $showContent: boolean }>`
-  padding-left: 15px;
-  max-height: ${({ $showContent }) => ($showContent ? "2000px" : "0")};
-  opacity: ${({ $showContent }) => ($showContent ? "1" : "0")};
+  padding-left: ${({ theme }) => theme.offsets.elementContent};
+  ${({ $showContent, theme }) => $showContent
+    ? css`max-height: calc(${theme.elements.form.height} * 6);`
+    : css`max-height: 0;`}
+  ${({ $showContent }) => $showContent
+    ? css`opacity: 1;`
+    : css`opacity: 0;`}
   overflow: hidden;
   transition: all 0.3s ease-in-out;
 `;

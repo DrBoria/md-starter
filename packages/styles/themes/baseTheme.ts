@@ -49,12 +49,16 @@ const base = {
     }
   },
   font: {
-    family: font.family,
+    family: {
+      ...font.family,
+      code: 'monospace',
+    },
     sizes: {
       small: "0.875rem",
       regular: "1rem",
       large: "1.25rem",
     },
+    spacing: '0.1em',
   },
 
   elements,
@@ -74,11 +78,7 @@ const base = {
     highlighted: '#00f',
     highlightedText: '#fff',
     disabled: '#ccc',
-
-    surface: '#fff',
-    text: '#000',
-    background: '#f5f5f5',
-    highlight: '#00f',
+    disabledText: '#999',
 
     warningBackground: '#fff',
     warningText: '#000',
@@ -89,11 +89,7 @@ const base = {
 
     labelBackground: '#eee',
     labelText: '#333',
-
-    success: '#0a0',
-    error: '#a00',
-    warning: '#aa0',
-    info: '#00a',
+    overlayBackground: 'rgba(0,0,0,0.5)',
   },
 
   screens: {
@@ -116,7 +112,7 @@ const base = {
 
   effects: {
     texture: 'none',
-    cracks: 'none',
+
     glow: { soft: 'none', medium: 'none', strong: 'none', small: 'none' },
     depth: {
       inner: { soft: 'none', medium: 'none', strong: 'none' },
@@ -140,7 +136,10 @@ const base = {
         desktop: 100,
       },
     },
-    offsets,
+
+    offsets: {
+      ...offsets,
+    },
   },
 };
 

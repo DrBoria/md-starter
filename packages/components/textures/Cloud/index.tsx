@@ -4,7 +4,6 @@ import cloudFilter from './clouds.svg'
 
 const encodedFilter = encodeURIComponent(cloudFilter).replace(/'/g, '%27').replace(/"/g, '%22');
 
-// Keyframes for animations
 const moveLeft = keyframes`
   from {
     transform: translateX(0);
@@ -60,26 +59,29 @@ const moveRightInitialAnimationRule = css`
     animation: ${moveRightFromCenter} 210s linear forwards;
 `
 
-// Main Cloud component using styled-components
-const CloudContainer = styled.div<ICloudProps>`
+const CLOUD_WIDTH_FACTOR = 5;
+
+import type { ThemeInterface } from '@md/styles';
+
+const CloudContainer = styled.div<ICloudProps & { theme: ThemeInterface }>`
   position: absolute;
   z-index: ${({ theme }) => theme.zIndex.animatedElements};
-  width: 35vw;
-  max-width: 400px;
-  height: 100px;
+  width: calc(${({ theme }) => theme.elements.form.height} * ${CLOUD_WIDTH_FACTOR} * 1.5);
+  max-width: 50vw;
+  height: ${({ theme }) => theme.elements.form.height};
   transform: translateX(100vw);
   ${moveLeftAnimationRule190}
-  margin: -150px;
+  margin: calc(${({ theme }) => theme.elements.form.height} * -3);
 
-  ${({ $size }) => $size === 'small' ? css`
-    width: 15vw;
-    max-width: 300px;
+  ${({ $size, theme }) => $size === 'small' && css`
+    width: calc(${theme.elements.form.height} * 5 * 0.5);
+    max-width: 50vw;
     ${moveLeftAnimationRule140}
-  ` : ''}
+  `}
 
-  ${({ $size }) => $size === 'big' && css`
-    width: 65vw;
-    max-width: 700px;
+  ${({ $size, theme }) => $size === 'big' && css`
+    width: calc(${theme.elements.form.height} * 5 * 2.5);
+    max-width: 50vw;
     ${moveLeftAnimationRule210}
   `}
 
@@ -106,15 +108,14 @@ const CloudContainer = styled.div<ICloudProps>`
     `
       : ''}
 
-  ${({ $manual, $top, $left, $direction }) => $manual ? css`
-    top: ${$top || 0}px;
-    left: ${$left || 0}px; 
+  ${({ $manual, $top, $left, $direction, theme }) => $manual ? css`
+    top: calc(${theme.elements.form.height} * ${$top || 0} / 50);
+    left: calc(${theme.elements.form.height} * ${$left || 0} / 50); 
     ${$direction === 'right' ? moveRightInitialAnimationRule : moveInitialAnimationRule}
     transform: none;
   ` : ``}
 `;
 
-// Cloud Layers
 export const CloudLayerBaseCSS = `
   position: relative;
   border-radius: 50%;
@@ -125,35 +126,35 @@ export const CloudBase = styled.div`
   width: 100%;
   height: 100%;
   filter: url('data:image/svg+xml;utf8,${encodedFilter}#filter-base');
-  box-shadow: 200px 170px 19px 40px rgb(102 121 127 / 44%);
+  box-shadow: ${({ theme }) => theme.shadows.large};
 `;
 
 export const CloudBack = styled.div`
   ${CloudLayerBaseCSS}
-  margin-top: -90px;
-  height: 35%;
-  width: 80%;
+  margin-top: calc(${({ theme }) => theme.elements.form.height} * -2);
+  height: 50%;
+  width: 100%;
   filter: url('data:image/svg+xml;utf8,${encodedFilter}#filter-back');
-  box-shadow: 200px 200px 10px 40px rgb(102 121 127 / 6%);
+  box-shadow: ${({ theme }) => theme.shadows.small};
 `;
 
 export const CloudMid = styled.div`
   ${CloudLayerBaseCSS}
-  margin-top: -80px;
-  width: 90%;
-  height: 35%;
+  margin-top: calc(${({ theme }) => theme.elements.form.height} * -1.5);
+  width: 100%;
+  height: 50%;
   filter: url('data:image/svg+xml;utf8,${encodedFilter}#filter-mid');
-  box-shadow: 210px 250px 28px 30px rgb(102 125 131 / 13%);
+  box-shadow: ${({ theme }) => theme.shadows.medium};
 `;
 
 export const CloudFront = styled.div`
   ${CloudLayerBaseCSS}
-  margin-top: -75px;
-  left: -20px;
+  margin-top: calc(${({ theme }) => theme.elements.form.height} * -1.5);
+  left: calc(${({ theme }) => theme.elements.icons.width} * -1);
   width: 100%;
-  height: 40%;
+  height: 50%;
   filter: url('data:image/svg+xml;utf8,${encodedFilter}#filter-front');
-  box-shadow: 210px 272px 30px 0 rgb(148 166 166 / 25%);
+  box-shadow: ${({ theme }) => theme.shadows.large};
 `;
 
 export type ICloudProps = { $size?: 'small' | 'big' | 'medium', $position?: ('top' | 'left' | 'bottom' | 'right')[], $isinitial?: boolean, $top?: number, $left?: number, $manual?: boolean, $direction?: 'left' | 'right' };

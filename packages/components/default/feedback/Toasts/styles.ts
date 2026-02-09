@@ -4,44 +4,42 @@ import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export const ToastContainer = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  bottom: ${({ theme }) => theme.offsets.section};
+  right: ${({ theme }) => theme.offsets.section};
+  z-index: ${({ theme }) => theme.zIndex.alert};
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: ${({ theme }) => theme.offsets.elementContent};
 `;
 
 export const ToastItem = styled.div<{ $tone?: 'positive' | 'negative' | 'warning' }>`
-  min-width: 300px;
-  max-width: 400px;
-  padding: 16px;
-  background: ${({ theme }) => theme?.colors?.sectionContent || 'white'}; /* Default fallback */
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  min-width: ${({ theme }) => theme.elements.form.minWidth};
+  max-width: ${({ theme }) => `calc(${theme.elements.form.minWidth} * 3)`};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  background: ${({ theme }) => theme.colors.sectionContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  box-shadow: ${({ theme }) => theme.shadows.medium};
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme }) => theme.offsets.elementContent};
   position: relative;
   
   h4 {
     margin: 0;
-    font-size: 1rem;
+    font-size: ${({ theme }) => theme.font.sizes.regular};
     font-weight: 600;
   }
   
   p {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: ${({ theme }) => theme.font.sizes.small};
     opacity: 0.8;
   }
   
   .close-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-
-    /* Styles handled by theme usually, but default here */
+    top: ${({ theme }) => theme.offsets.elementContent};
+    right: ${({ theme }) => theme.offsets.elementContent};
   }
 
   /* Theme Support */

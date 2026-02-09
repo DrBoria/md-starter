@@ -9,13 +9,13 @@ import { NewThemeCreator } from './NewThemeCreator';
 import { RenderInputs } from './RenderInputs';
 
 const Container = styled.div`
-  padding: ${({ theme }) => theme.space?.[5] || '20px'};
+  padding: ${({ theme }) => theme.offsets?.section};
 `;
 
 const NewThemeContainer = styled.div`
-  margin-top: ${({ theme }) => theme.space?.[5] || '20px'};
-  border-top: 1px solid ${({ theme }) => theme.colors?.neutral?.[300] || 'black'};
-  padding-top: ${({ theme }) => theme.space?.[5] || '20px'};
+  margin-top: ${({ theme }) => theme.offsets?.section};
+  border-top: 1px solid ${({ theme }) => theme.colors?.sectionContent};
+  padding-top: ${({ theme }) => theme.offsets?.section};
 `;
 
 const ThemeEditor = () => {

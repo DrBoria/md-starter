@@ -16,8 +16,8 @@ const ContentContainer = styled(ScrollView)`
 `;
 
 const ErrorText = styled(SubTitle)`
-  color: ${({ theme }) => theme.colors.error};
-  margin-bottom: calc(1.25em);
+  color: ${({ theme }) => theme.colors.errorText};
+  margin-bottom: ${({ theme }) => theme.font.sizes.large};
   text-align: center;
 `;
 
@@ -58,7 +58,7 @@ const SigninPage = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.section }}>
       <ContentContainer
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ alignItems: 'center' }}

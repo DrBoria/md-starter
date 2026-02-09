@@ -7,17 +7,16 @@ const shake = keyframes`
 `;
 
 export const vikingTheme = css`
-  /* VIKING THEME: Warning Rune */
-  color: ${({ theme }) => theme?.colors?.errorText || "red"};
-  font-family: ${({ theme }) => theme?.fontFamily || "serif"};
+  color: ${({ theme }) => theme.colors.errorText};
+  font-family: ${({ theme }) => theme.fontFamily};
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: ${({ theme }) => theme.font.spacing};
 
   &::before {
     content: "⚠";
-    margin-right: ${({ theme }) => theme?.offsets?.elementContent || "8px"};
-    font-size: 1.2em;
-    color: ${({ theme }) => theme?.colors?.error || "red"};
+    margin-right: ${({ theme }) => theme.offsets.elementContent};
+    font-size: ${({ theme }) => theme.font.sizes.large};
+    color: ${({ theme }) => theme.colors.errorText};
   }
 
   animation: ${shake} 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export const NavigationContainerStyled = styled.div`
-  padding: 24px;
+  padding: ${({ theme }) => theme.offsets.section};
 `;

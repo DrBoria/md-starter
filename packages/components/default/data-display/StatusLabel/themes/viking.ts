@@ -8,36 +8,34 @@ const pulseAnimation = keyframes`
 `;
 
 export const vikingTheme = css`
-  /* VIKING THEME: Rune Stone Markers */
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme?.colors?.sectionContent || '#555'};
-  color: ${({ theme }) => theme?.colors?.text || '#eee'};
-  font-family: ${({ theme }) => theme?.fontFamily || 'serif'};
+  background: ${({ theme }) => theme.colors.section};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.sectionContent};
+  color: ${({ theme }) => theme.colors.sectionContent};
+  font-family: ${({ theme }) => theme.fontFamily};
   text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 4px 12px;
-  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); /* Rough cut */
+  letter-spacing: ${({ theme }) => theme.font.spacing};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
   
-  /* Status Dot becomes a Rune Glow */
   .status-dot {
-    box-shadow: 0 0 5px currentcolor;
-    border-radius: 0; /* Square rune */
+    box-shadow: ${({ theme }) => theme.effects.glow.small};
+    border-radius: 0;
     transform: rotate(45deg);
   }
 
   ${({ $tone, theme }: { $tone?: string; theme: DefaultTheme }) => $tone === 'processing' && css`
-     border-color: ${theme?.colors?.highlighted || 'cyan'};
-     color: ${theme?.colors?.highlighted || 'cyan'};
+     border-color: ${theme.colors.highlighted};
+     color: ${theme.colors.highlighted};
      .status-dot { animation: ${pulseAnimation} 2s infinite; }
   `}
 
   ${({ $tone, theme }: { $tone?: string; theme: DefaultTheme }) => $tone === 'success' && css`
-     border-color: ${theme?.colors?.success || 'green'};
-     color: ${theme?.colors?.successText || 'green'};
+     border-color: ${theme.colors.successText};
+     color: ${theme.colors.successText};
   `}
 
   ${({ $tone, theme }: { $tone?: string; theme: DefaultTheme }) => $tone === 'failed' && css`
-     border-color: ${theme?.colors?.error || 'red'};
-     color: ${theme?.colors?.errorText || 'red'};
+     border-color: ${theme.colors.errorText};
+     color: ${theme.colors.errorText};
   `}
 `;

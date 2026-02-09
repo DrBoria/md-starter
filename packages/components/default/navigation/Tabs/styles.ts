@@ -2,20 +2,26 @@ import styled, { css } from "styled-components";
 import { vikingTheme } from "./themes/viking";
 import { liquidGlassTheme } from "./themes/liquid-glass";
 
-export const TabsContainer = styled.div<{ $orientation: 'horizontal' | 'vertical', $expanded?: boolean }>`
+import type { ThemeInterface } from '@md/styles';
+
+export const TabsContainer = styled.div<{ $orientation: 'horizontal' | 'vertical', $expanded?: boolean; theme: ThemeInterface }>`
   width: 100%;
   display: flex;
   flex-direction: ${({ $orientation }) => $orientation === 'vertical' ? 'row' : 'column'};
   
   /* Vertical Specific Layout */
-  ${({ $orientation, $expanded }) => $orientation === 'vertical' && css`
+  ${({ $orientation, $expanded, theme }) => $orientation === 'vertical' && css`
       display: grid;
-      grid-template-columns: 300px 1fr;
-      height: ${$expanded ? "calc(100vh - 200px)" : "100%"};
+      grid-template-columns: calc(${theme.elements.form.height} * 5) 1fr;
+      ${$expanded && css`
+        height: 100vh;
+        padding-top: ${theme.elements.header?.height};
+        box-sizing: border-box;
+      `}
       min-height: 0;
-      border: 1px solid ${({ theme }) => theme?.colors?.sectionContent || '#ccc'};
-      border-radius: 4px;
-      background: ${({ theme }) => theme?.colors?.section || 'white'};
+      border: ${theme.border.size} solid ${theme.colors.sectionContent};
+      border-radius: ${theme.border.radius}px;
+      background: ${theme.colors.section};
       overflow: hidden;
   `}
 
@@ -28,34 +34,34 @@ export const TabList = styled.div<{ $orientation: 'horizontal' | 'vertical' }>`
   display: flex;
   flex-direction: ${({ $orientation }) => $orientation === 'vertical' ? 'column' : 'row'};
   
-  ${({ $orientation }) => $orientation === 'vertical' && css`
-      border-right: 1px solid ${({ theme }) => theme?.colors?.sectionContent || '#ccc'};
-      background: ${({ theme }) => theme?.colors?.overlay || '#f9f9f9'};
+  ${({ $orientation, theme }) => $orientation === 'vertical' && css`
+      border-right: ${theme.border.size} solid ${theme.colors.sectionContent};
+      background: ${theme.colors.overlay};
       overflow-y: auto;
       height: 100%;
-      min-width: 300px;
+      min-width: calc(${theme.elements.form.height} * 5);
   `}
 
-  ${({ $orientation }) => $orientation === 'horizontal' && css`
-      border-bottom: 1px solid ${({ theme }) => theme?.colors?.sectionContent || '#ccc'};
+  ${({ $orientation, theme }) => $orientation === 'horizontal' && css`
+      border-bottom: ${theme.border.size} solid ${theme.colors.sectionContent};
   `}
 `;
 
 export const TabButton = styled.button<{ $active: boolean, $orientation: 'horizontal' | 'vertical' }>`
   cursor: pointer;
-  padding: ${({ theme }) => theme?.offsets?.elementContent || '12px'};
+  padding: ${({ theme }) => theme.offsets.elementContent};
   background-color: transparent;
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   border: none;
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: ${({ $orientation }) => $orientation === 'vertical' ? 'flex-start' : 'center'};
-  min-width: ${({ $orientation }) => $orientation === 'horizontal' ? '120px' : 'auto'};
+  ${({ $orientation, theme }) => $orientation === 'horizontal' && css`min-width: ${theme.elements.form.minWidth};`}
   
   /* Generic Hover */
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.overlayActive || 'rgba(0,0,0,0.05)'};
+    background-color: ${({ theme }) => theme.colors.overlayActive};
   }
 
   /* Active State Logic */
@@ -63,20 +69,20 @@ export const TabButton = styled.button<{ $active: boolean, $orientation: 'horizo
       font-weight: bold;
       
       ${$orientation === 'horizontal' && css`
-          border-bottom: 2px solid ${theme?.colors?.highlighted || 'blue'};
-          color: ${theme?.colors?.highlighted || 'blue'};
+          border-bottom: calc(${theme.border.size} * 2) solid ${theme.colors.highlighted};
+          color: ${theme.colors.highlighted};
       `}
       
       ${$orientation === 'vertical' && css`
-          background-color: ${theme?.colors?.section || 'white'};
-          border-left: 3px solid ${theme?.colors?.highlighted || 'blue'};
-          color: ${theme?.colors?.highlighted || 'blue'};
+          background-color: ${theme.colors.section};
+          border-left: calc(${theme.border.size} * 3) solid ${theme.colors.highlighted};
+          color: ${theme.colors.highlighted};
       `}
   `}
 `;
 
 export const TabPanel = styled.div<{ $orientation: 'horizontal' | 'vertical' }>`
-  padding: ${({ theme }) => theme?.offsets?.elementContent || '16px'};
+  padding: ${({ theme }) => theme.offsets.elementContent};
   flex: 1;
   overflow: auto;
   

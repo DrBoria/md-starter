@@ -6,12 +6,11 @@ const floatUp = keyframes`
 `;
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Float Bubble */
-  background: rgb(255 255 255 / 10%);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 12px;
-  color: ${({ theme }) => theme?.colors?.text || 'white'};
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  background: ${({ theme }) => theme.colors.overlay};
+  backdrop-filter: ${({ theme }) => theme.effects.texture};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  color: ${({ theme }) => theme.colors.sectionContent};
+  box-shadow: ${({ theme }) => theme.shadows.small};
   animation: ${floatUp} 0.3s ease-out forwards;
 `;

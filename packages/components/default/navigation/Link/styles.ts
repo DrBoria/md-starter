@@ -5,7 +5,7 @@ import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export const LinkStyled = styled(Link)`
   &:hover {
-    color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+    color: ${({ theme }) => theme.colors.sectionContent};
     text-decoration: underline;
   }
 
@@ -15,8 +15,8 @@ export const LinkStyled = styled(Link)`
 `;
 
 export const LinkInForm = styled(Link)`
-  font-size: 0.875rem;
-  color: ${({ theme }) => theme?.colors?.highlighted || 'blue'};
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  color: ${({ theme }) => theme.colors.highlighted};
   text-decoration: none;
 
   &:hover {

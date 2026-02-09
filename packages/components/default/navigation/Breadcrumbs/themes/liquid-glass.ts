@@ -1,9 +1,8 @@
 import { css } from "styled-components";
 
 export const liquidGlassTheme = css`
-  /* LIQUID GLASS THEME: Breadcrumbs */
-  background: rgb(255 255 255 / 5%);
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid rgb(255 255 255 / 10%);
+  background: ${({ theme }) => theme.colors.overlay};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  border-radius: ${({ theme }) => theme.border.radius}px;
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.overlayActive};
 `;

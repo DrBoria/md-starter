@@ -6,14 +6,6 @@ import { liquidGlassTheme } from "./themes/liquid-glass";
 
 export { basicFont };
 
-const sizes = {
-  PlainText: { fontSize: '1.1rem', lineHeight: '1.5rem' },
-  SubTitle: { fontSize: '1.3rem', lineHeight: '1.8rem' },
-  SectionTitle: { fontSize: '1.6rem', lineHeight: '2rem' },
-  PageTitle: { fontSize: '2.5rem', lineHeight: '3rem' },
-};
-
-// Generic Theme Mixin
 const themeStyles = css`
   ${({ theme }) => theme?.theme === 'viking' && vikingTheme}
   ${({ theme }) => theme?.theme === 'liquid-glass' && liquidGlassTheme}
@@ -22,12 +14,12 @@ const themeStyles = css`
 export const StyledPageTitle = styled.h1<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
   font-weight: 700;
-  font-size: ${sizes.PageTitle.fontSize};
-  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.text || 'inherit'};
-  line-height: ${sizes.PageTitle.lineHeight};
+  font-size: ${({ theme }) => theme.font.sizes.large};
+  font-family: ${({ theme }) => theme.font.family.title};
+  line-height: 1.2;
   text-transform: capitalize;
   
   ${themeStyles}
@@ -36,11 +28,11 @@ export const StyledPageTitle = styled.h1<TWithBasicElementOffsets>`
 export const StyledSubTitle = styled.h2<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
-  font-size: ${sizes.SubTitle.fontSize};
-  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.title || 'inherit'};
-  line-height: ${sizes.SubTitle.lineHeight};
+  font-size: ${({ theme }) => theme.font.sizes.large};
+  font-family: ${({ theme }) => theme.font.family.title};
+  line-height: 1.3;
 
   ${themeStyles}
 `;
@@ -48,12 +40,12 @@ export const StyledSubTitle = styled.h2<TWithBasicElementOffsets>`
 export const StyledSectionTitle = styled.h3<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
   font-weight: 700;
-  font-size: ${sizes.SectionTitle.fontSize};
-  font-family: ${({ theme }) => theme?.fontFamily || theme?.font?.family?.title || 'inherit'};
-  line-height: ${sizes.SectionTitle.lineHeight};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
+  font-family: ${({ theme }) => theme.font.family.title};
+  line-height: 1.4;
   text-transform: capitalize;
 
   ${themeStyles}
@@ -62,39 +54,39 @@ export const StyledSectionTitle = styled.h3<TWithBasicElementOffsets>`
 export const StyledPlainText = styled.p<TWithBasicElementOffsets>`
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
-  color: ${({ theme }) => theme?.colors?.sectionContent || 'inherit'};
+  color: ${({ theme }) => theme.colors.sectionContent};
   font: ${basicFont};
-  font-size: ${sizes.PlainText.fontSize};
-  line-height: ${sizes.PlainText.lineHeight};
+  font-size: ${({ theme }) => theme.font.sizes.regular};
+  line-height: 1.5;
 
   ${themeStyles}
 `;
 
 export const StyledHighlighted = styled.span<TWithBasicElementOffsets>`
-  color: ${({ theme }) => theme?.colors?.highlighted || 'inherit'};
+  color: ${({ theme }) => theme.colors.highlighted};
   ${themeStyles}
 `;
 
 export const StyledLabel = styled.label<TWithBasicElementOffsets>`
   display: inline-block;
-  padding: ${({ theme }) => theme?.offsets?.elementContent ? `calc(${theme.offsets.elementContent} / 2)` : '0'};
-  color: ${({ theme }) => theme?.colors?.labelText || 'inherit'};
-  background-color: ${({ theme }) => theme?.colors?.labelBackground || 'transparent'};
-  border-radius: ${({ theme }) => theme?.borderRadius || theme?.border?.radius || '0'};
+  padding: ${({ theme }) => theme.offsets.elementContent};
+  color: ${({ theme }) => theme.colors.labelText};
+  background-color: ${({ theme }) => theme.colors.labelBackground};
+  border-radius: ${({ theme }) => theme.border.radius}px;
   
   ${themeStyles}
 `;
 
 export const StyledDescriptionText = styled.h3`
   font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  line-height: 1.25;
   ${themeStyles}
 `;
 
 export const StyledHeaderText = styled.h3`
   font-weight: 700;
-  font-size: 20px;
-  color: ${({ theme }) => theme?.colors?.sectionContent || '#111827'};
+  font-size: ${({ theme }) => theme.font.sizes.large};
+  color: ${({ theme }) => theme.colors.sectionContent};
   ${themeStyles}
 `;

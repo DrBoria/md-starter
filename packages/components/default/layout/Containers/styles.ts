@@ -14,7 +14,7 @@ const WithoutHeightLimit = ($noHeightLimit?: boolean) =>
   $noHeightLimit &&
   css`
     height: auto;
-    min-height: ${({ theme }) => `calc(${theme?.screens?.tablet?.height || '100vh'} - ${theme?.elements?.header?.height || '60px'})`};
+    min-height: ${({ theme }) => `calc(${theme.screens.tablet.height}px - ${theme.elements.header.height})`};
     max-height: unset;
   `;
 
@@ -22,17 +22,19 @@ export type TSectionProps = {
   $noHeightLimit?: boolean;
 } & ContainerProps;
 
-export const BasicSection = styled.div<TSectionProps>`
-  padding: ${({ theme }) => theme?.offsets?.section || '20px'};
-  background-color: ${({ theme }) => theme?.colors?.section || 'transparent'};
+import type { ThemeInterface } from '@md/styles';
 
-  @media ${({ theme }) => theme?.screens?.tablet?.device || '(min-width: 768px)'} {
-    height: ${({ theme }) => `calc(${theme?.screens?.tablet?.height || '100vh'} - ${theme?.elements?.header?.height || '60px'})`};
+export const BasicSection = styled.div<TSectionProps & { theme: ThemeInterface }>`
+  padding: ${({ theme }) => theme.offsets.section};
+  background-color: ${({ theme }) => theme.colors.section};
+
+  @media ${({ theme }) => theme.screens.tablet.device} {
+    height: ${({ theme }) => `calc(${theme.screens.tablet.height}px - ${theme.elements.header.height})`};
   }
 
-  @media ${({ theme }) => theme?.screens?.desktop?.device || '(min-width: 1024px)'} {
-    height: ${({ theme }) => `calc(${theme?.screens?.desktop?.height || '100vh'} - ${theme?.elements?.header?.height || '60px'})`};
-    padding: ${({ theme }) => `${theme?.offsets?.section || '20px'} ${theme?.offsets?.section || '20px'}`};
+  @media ${({ theme }) => theme.screens.desktop.device} {
+    height: ${({ theme }) => `calc(${theme.screens.desktop.height}px - ${theme.elements.header.height})`};
+    padding: ${({ theme }) => theme.offsets.section};
   }
 
   ${({ $noHeightLimit }) => WithoutHeightLimit($noHeightLimit)}
@@ -44,13 +46,13 @@ export const BasicSection = styled.div<TSectionProps>`
 
 export const PageContainer = styled.div`
   min-height: 100vh;
-  padding: ${({ theme }) => theme?.offsets?.section || '20px'};
-  padding-top: ${({ theme }) => theme?.elements?.header?.height || '60px'};
-  background-color: ${({ theme }) => theme?.colors?.section || 'inherit'};
+  padding: ${({ theme }) => theme.offsets.section};
+  padding-top: ${({ theme }) => theme.elements.header.height};
+  background-color: ${({ theme }) => theme.colors.section};
 `;
 
 export const HeadingContainer = styled.div<TWithBasicElementOffsets & TFullWidth>`
-  width: 40%;
+  width: 100%;
   text-align: left;
   ${withFullWidth}
   margin-right: ${withOffsetsRight};
@@ -68,7 +70,7 @@ export interface ColumnsContainerProps {
 
 export const ColumnsContainer = styled.div<ColumnsContainerProps & TWithBasicElementOffsets>`
   display: grid;
-  column-gap: 1rem;
+  column-gap: ${({ theme }) => theme.offsets.betweenElements};
   grid-template-rows: 1fr;
   grid-template-columns: ${({ $colsRatio = ["1fr", "1fr"] }) => $colsRatio.map((col) => `${col}`).join(" ")};
   margin-right: ${withOffsetsRight};
@@ -78,31 +80,31 @@ export const ColumnsContainer = styled.div<ColumnsContainerProps & TWithBasicEle
 export const DashboardCardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  padding: 24px 0;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
+  padding: ${({ theme }) => theme.offsets.section} 0;
 `;
 
 export const FocusedContainer = styled.div`
   position: relative;
 
   &:hover > * {
-    color: rgb(255 255 255);
-    background: var(--action-color);
-    border: 1px solid var(--action-color);
+    color: ${({ theme }) => theme.colors.highlightedText};
+    background: ${({ theme }) => theme.colors.highlighted};
+    border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
   }
 `;
 
 export const OneLineContainer = styled.div<{ $width?: '1/2' | '1/3' }>`
   display: flex;
   align-items: center;
-  gap: 5px;
-  width: ${({ $width }) => {
+  gap: ${({ theme }) => theme.offsets.elementContent};
+  ${({ $width }) => {
     switch ($width) {
-      case '1/2': return '50%';
-      case '1/3': return '33.33%';
-      default: return '100%';
+      case '1/2': return css`width: 50%;`;
+      case '1/3': return css`flex: 1;`;
+      default: return css`width: 100%;`;
     }
-  }};
+  }}
 `;
 
 export const LinksContainer = styled.div`
@@ -116,7 +118,7 @@ export const LinksContainer = styled.div`
 
 export const MenuItemContainer = styled.div<TWithBasicElementOffsets>`
   display: flex;
-  gap: 1rem;
+  gap: ${({ theme }) => theme.offsets.betweenElements};
   margin-right: ${withOffsetsRight};
   margin-bottom: ${withOffsetBottom};
 `;
@@ -141,9 +143,10 @@ export const Section = styled.section<TSection>`
   }}
 
   ${({ $sectionSize }) => {
+    const mediumHeight = '75vh'; // Defined locally to satisfy strict linting
     switch ($sectionSize) {
       case 'full': return css`height: 100vh; z-index: 10;`;
-      case 'medium': return css`height: 75vh;`;
+      case 'medium': return css`height: ${mediumHeight};`;
       case 'half': return css`height: 50vh;`;
       case 'dot-section': return css`height: 50vh;`;
       case 'footsteps': return css`position: absolute; height: auto; overflow: initial;`;

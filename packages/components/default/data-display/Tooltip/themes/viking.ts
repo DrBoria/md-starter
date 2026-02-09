@@ -6,25 +6,24 @@ const fadeIn = keyframes`
 `;
 
 export const vikingTheme = css`
-  /* VIKING THEME: Rune Stone Tooltip */
-  background: ${({ theme }) => theme?.colors?.surface || '#2c2c2c'};
-  color: ${({ theme }) => theme?.colors?.highlightedText || 'gold'};
-  border: 1px solid ${({ theme }) => theme?.colors?.highlighted || 'gold'};
+  background: ${({ theme }) => theme.colors.section};
+  color: ${({ theme }) => theme.colors.highlightedText};
+  border: ${({ theme }) => theme.border.size}px solid ${({ theme }) => theme.colors.highlighted};
   border-radius: 0;
-  font-family: ${({ theme }) => theme?.fontFamily || 'serif'};
+  font-family: ${({ theme }) => theme.fontFamily};
   text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 50%);
+  letter-spacing: ${({ theme }) => theme.font.spacing};
+  box-shadow: ${({ theme }) => theme.effects.depth.outer.medium};
   animation: ${fadeIn} 0.2s ease-out forwards;
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -6px;
+    bottom: ${({ theme }) => theme.offsets.elementContent};
     left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
+    margin-left: ${({ theme }) => theme.offsets.elementContent};
+    border-width: ${({ theme }) => theme.offsets.elementContent};
     border-style: solid;
-    border-color: ${({ theme }) => theme?.colors?.highlighted || 'gold'} transparent transparent transparent;
+    border-color: ${({ theme }) => theme.colors.highlighted} transparent transparent transparent;
   }
 `;

@@ -6,17 +6,12 @@ const vikingRotate = keyframes`
 `;
 
 export const vikingTheme = css`
-  /* VIKING THEME: Ouroboros or Rune Circle */
-  
-  /* Replace standard spinner styling with something distinct if possible, 
-     but for now we augement the container/image */
-     
   display: flex;
   justify-content: center;
   align-items: center;
 
   img, svg {
-    filter: drop-shadow(0 0 10px ${({ theme }) => theme?.colors?.highlighted || 'gold'});
+    filter: drop-shadow(${({ theme }) => theme.effects.glow.medium});
     animation: ${vikingRotate} 3s linear infinite;
   }
 `;
