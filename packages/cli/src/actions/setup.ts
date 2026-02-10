@@ -1,8 +1,7 @@
 import * as path from 'path';
-import { SyntaxKind } from 'ts-morph';
+import { Project, SyntaxKind } from 'ts-morph';
 import { DeployConfig } from '../config/deployments';
 import { remove, writeFile, exists } from '../utils/filesystem';
-import { createProject } from '../utils/ast';
 
 /**
  * Configures the infrastructure package based on selected provider/strategy.
@@ -26,7 +25,7 @@ export async function configureInfrastructure(targetDir: string, projectName: st
         const infraPath = path.join(targetDir, 'infrastructure', 'main.ts');
 
         if (await exists(infraPath)) {
-            const project = createProject(path.join(targetDir, 'tsconfig.json'));
+            const project = new Project({ tsConfigFilePath: path.join(targetDir, 'tsconfig.json') });
             const mainFile = project.addSourceFileAtPath(infraPath);
 
             const imports = mainFile.getImportDeclarations();

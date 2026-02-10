@@ -20,14 +20,14 @@ export const FEATURES: FeatureDef[] = [
         label: 'ESLint Linting (@md/eslint)',
         category: 'core',
         packageJsonKeys: ['@md/eslint', 'eslint-config-prettier', 'eslint'],
-        filesToRemove: ['packages/eslint', '.eslintrc.js', 'eslint.config.js']
+        filesToRemove: ['packages/eslint']
     },
     {
         id: 'stylelint',
         label: 'Style Linting (@md/stylelint)',
         category: 'core',
         packageJsonKeys: ['@md/stylelint', 'stylelint'],
-        filesToRemove: ['packages/stylelint', '.stylelintrc.js']
+        filesToRemove: ['packages/stylelint']
     },
     {
         id: 'tsconfig',

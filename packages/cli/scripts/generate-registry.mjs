@@ -122,17 +122,14 @@ async function scanDirectory(baseDir, type) {
                         // Verify it's a component (has index.ts/tsx)
                         if (!await isComponent(subPath)) continue;
 
-                        const id = sub;
-                        const override = OVERRIDES[id] || {}; // ID might be 'Button'
-                        // Label: Use override or ID. 
-                        // Note: If ID is 'Button', label is 'Button'. 
-                        // User wants clean tree, so just 'Button' is fine.
-                        // Prefixes (Keystone:) were for flat list. We don't need them if we have structure.
+                        const simpleId = sub;
+                        const id = `${group}-${category}-${simpleId}`; // Scoped ID
+                        const override = OVERRIDES[simpleId] || {}; 
                         
                         const def = {
                             id: id,
-                            label: override.label || id,
-                            files: [`${type}/${group}/${category}/${id}`], // Deep path
+                            label: override.label || simpleId,
+                            files: [`${type}/${group}/${category}/${simpleId}`], // Deep path
                             dependencies: override.dependencies || [],
                             group: group,
                             category: category
@@ -142,18 +139,15 @@ async function scanDirectory(baseDir, type) {
                 } else {
                     // Treat 'item' as Component (e.g. valid component directly in group, or 'Cloud')
                     // Verify it is a component
-                    if (await isComponent(itemPath)) {
-                        const id = item;
-                        const override = OVERRIDES[id] || {};
-                        
-                        // Prefixes for flat list were: Keystone: ..., Texture: ...
-                        // Now we store 'group', so UI can decide to prefix or group.
-                        // We'll keep clean label.
+                     if (await isComponent(itemPath)) {
+                        const simpleId = item;
+                        const id = `${group}-${simpleId}`; // Scoped ID
+                        const override = OVERRIDES[simpleId] || {};
                         
                         const def = {
                             id: id,
-                            label: override.label || id,
-                            files: [`${type}/${group}/${id}`],
+                            label: override.label || simpleId,
+                            files: [`${type}/${group}/${simpleId}`],
                             dependencies: override.dependencies || [],
                             group: group,
                             category: undefined

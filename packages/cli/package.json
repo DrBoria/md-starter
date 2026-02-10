@@ -1,6 +1,6 @@
 {
     "name": "md-starter",
-    "version": "1.1.3",
+    "version": "1.2.0",
     "description": "CLI generator for MD Starter using the Sculptor approach",
     "main": "dist/index.js",
     "bin": {
@@ -16,7 +16,8 @@
     "scripts": {
         "clean": "rm -rf dist",
         "generate:registry": "node scripts/generate-registry.mjs",
-        "build": "npm run generate:registry && tsc",
+        "sync:templates": "node scripts/sync-templates.mjs",
+        "build": "npm run sync:templates && npm run generate:registry && tsc",
         "dev": "tsc -w",
         "bundle:templates": "ts-node scripts/bundle-templates.ts",
         "prepublishOnly": "npm run build && npm run bundle:templates",

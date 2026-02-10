@@ -14,7 +14,7 @@ export interface ComponentDef {
 
 export const GENERATED_COMPONENTS: ComponentDef[] = [
     {
-        "id": "Icons",
+        "id": "default-common-Icons",
         "label": "Icons",
         "files": [
             "components/default/common/Icons"
@@ -24,7 +24,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "common"
     },
     {
-        "id": "Logo",
+        "id": "default-common-Logo",
         "label": "Logo",
         "files": [
             "components/default/common/Logo"
@@ -34,7 +34,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "common"
     },
     {
-        "id": "Avatar",
+        "id": "default-data-display-Avatar",
         "label": "Avatar",
         "files": [
             "components/default/data-display/Avatar"
@@ -44,7 +44,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Badge",
+        "id": "default-data-display-Badge",
         "label": "Badge",
         "files": [
             "components/default/data-display/Badge"
@@ -54,7 +54,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Card",
+        "id": "default-data-display-Card",
         "label": "Card",
         "files": [
             "components/default/data-display/Card"
@@ -64,7 +64,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Carousel",
+        "id": "default-data-display-Carousel",
         "label": "Carousel",
         "files": [
             "components/default/data-display/Carousel"
@@ -74,7 +74,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "CodePreview",
+        "id": "default-data-display-CodePreview",
         "label": "CodePreview",
         "files": [
             "components/default/data-display/CodePreview"
@@ -84,7 +84,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Images",
+        "id": "default-data-display-Images",
         "label": "Images",
         "files": [
             "components/default/data-display/Images"
@@ -94,7 +94,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "ProgressBar",
+        "id": "default-data-display-ProgressBar",
         "label": "ProgressBar",
         "files": [
             "components/default/data-display/ProgressBar"
@@ -104,7 +104,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "StatusLabel",
+        "id": "default-data-display-StatusLabel",
         "label": "StatusLabel",
         "files": [
             "components/default/data-display/StatusLabel"
@@ -114,7 +114,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Table",
+        "id": "default-data-display-Table",
         "label": "Table",
         "files": [
             "components/default/data-display/Table"
@@ -124,7 +124,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Tooltip",
+        "id": "default-data-display-Tooltip",
         "label": "Tooltip",
         "files": [
             "components/default/data-display/Tooltip"
@@ -134,7 +134,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Typography",
+        "id": "default-data-display-Typography",
         "label": "Typography",
         "files": [
             "components/default/data-display/Typography"
@@ -144,7 +144,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Loading",
+        "id": "default-feedback-Loading",
         "label": "Loading Indicators",
         "files": [
             "components/default/feedback/Loading"
@@ -154,7 +154,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "Toasts",
+        "id": "default-feedback-Toasts",
         "label": "Toasts",
         "files": [
             "components/default/feedback/Toasts"
@@ -164,7 +164,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "Validation",
+        "id": "default-feedback-Validation",
         "label": "Validation",
         "files": [
             "components/default/feedback/Validation"
@@ -174,7 +174,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "Button",
+        "id": "default-forms-Button",
         "label": "Button",
         "files": [
             "components/default/forms/Button"
@@ -184,7 +184,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Calendar",
+        "id": "default-forms-Calendar",
         "label": "Calendar",
         "files": [
             "components/default/forms/Calendar"
@@ -194,7 +194,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Form",
+        "id": "default-forms-Form",
         "label": "Form",
         "files": [
             "components/default/forms/Form"
@@ -204,7 +204,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "HtmlEditor",
+        "id": "default-forms-HtmlEditor",
         "label": "Rich Text Editor",
         "files": [
             "components/default/forms/HtmlEditor"
@@ -217,7 +217,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Switch",
+        "id": "default-forms-Switch",
         "label": "Switch",
         "files": [
             "components/default/forms/Switch"
@@ -227,7 +227,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Toggle",
+        "id": "default-forms-Toggle",
         "label": "Toggle",
         "files": [
             "components/default/forms/Toggle"
@@ -237,7 +237,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "TokenInputField",
+        "id": "default-forms-TokenInputField",
         "label": "TokenInputField",
         "files": [
             "components/default/forms/TokenInputField"
@@ -247,7 +247,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "ConditionalWrapper",
+        "id": "default-layout-ConditionalWrapper",
         "label": "ConditionalWrapper",
         "files": [
             "components/default/layout/ConditionalWrapper"
@@ -257,7 +257,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "layout"
     },
     {
-        "id": "Containers",
+        "id": "default-layout-Containers",
         "label": "Containers",
         "files": [
             "components/default/layout/Containers"
@@ -267,7 +267,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "layout"
     },
     {
-        "id": "Separator",
+        "id": "default-layout-Separator",
         "label": "Separator",
         "files": [
             "components/default/layout/Separator"
@@ -277,7 +277,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "layout"
     },
     {
-        "id": "Breadcrumbs",
+        "id": "default-navigation-Breadcrumbs",
         "label": "Breadcrumbs",
         "files": [
             "components/default/navigation/Breadcrumbs"
@@ -287,7 +287,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Header",
+        "id": "default-navigation-Header",
         "label": "Header",
         "files": [
             "components/default/navigation/Header"
@@ -297,7 +297,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Link",
+        "id": "default-navigation-Link",
         "label": "Link",
         "files": [
             "components/default/navigation/Link"
@@ -307,7 +307,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Pagination",
+        "id": "default-navigation-Pagination",
         "label": "Pagination",
         "files": [
             "components/default/navigation/Pagination"
@@ -317,7 +317,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Tabs",
+        "id": "default-navigation-Tabs",
         "label": "Tabs",
         "files": [
             "components/default/navigation/Tabs"
@@ -327,7 +327,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Modals",
+        "id": "default-overlays-Modals",
         "label": "Modals",
         "files": [
             "components/default/overlays/Modals"
@@ -337,7 +337,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "overlays"
     },
     {
-        "id": "Icons",
+        "id": "keystone-common-Icons",
         "label": "Icons",
         "files": [
             "components/keystone/common/Icons"
@@ -347,7 +347,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "common"
     },
     {
-        "id": "Label",
+        "id": "keystone-data-display-Label",
         "label": "Label",
         "files": [
             "components/keystone/data-display/Label"
@@ -357,7 +357,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "Logger",
+        "id": "keystone-feedback-Logger",
         "label": "Logger",
         "files": [
             "components/keystone/feedback/Logger"
@@ -367,7 +367,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "DateTimePicker",
+        "id": "keystone-forms-DateTimePicker",
         "label": "DateTimePicker",
         "files": [
             "components/keystone/forms/DateTimePicker"
@@ -377,7 +377,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Form",
+        "id": "keystone-forms-Form",
         "label": "Form",
         "files": [
             "components/keystone/forms/Form"
@@ -387,7 +387,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "Toggle",
+        "id": "keystone-forms-Toggle",
         "label": "Toggle",
         "files": [
             "components/keystone/forms/Toggle"
@@ -397,7 +397,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "NavItem",
+        "id": "keystone-navigation-NavItem",
         "label": "NavItem",
         "files": [
             "components/keystone/navigation/NavItem"
@@ -407,7 +407,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "Modals",
+        "id": "keystone-overlays-Modals",
         "label": "Modals",
         "files": [
             "components/keystone/overlays/Modals"
@@ -417,7 +417,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "category": "overlays"
     },
     {
-        "id": "Cloud",
+        "id": "textures-Cloud",
         "label": "Cloud",
         "files": [
             "components/textures/Cloud"
@@ -426,7 +426,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "textures"
     },
     {
-        "id": "Paper",
+        "id": "textures-Paper",
         "label": "Paper",
         "files": [
             "components/textures/Paper"
@@ -438,7 +438,7 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
 
 export const GENERATED_SECTIONS: ComponentDef[] = [
     {
-        "id": "NotFoundSection",
+        "id": "default-feedback-NotFoundSection",
         "label": "NotFoundSection",
         "files": [
             "sections/default/feedback/NotFoundSection"
@@ -448,7 +448,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "HamburgerMenu",
+        "id": "default-navigation-HamburgerMenu",
         "label": "HamburgerMenu",
         "files": [
             "sections/default/navigation/HamburgerMenu"
@@ -458,7 +458,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "navigation"
     },
     {
-        "id": "DynamicStatusLabel",
+        "id": "keystone-CustomFields-DynamicStatusLabel",
         "label": "DynamicStatusLabel",
         "files": [
             "sections/keystone/CustomFields/DynamicStatusLabel"
@@ -468,7 +468,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "EquasionTextArea",
+        "id": "keystone-CustomFields-EquasionTextArea",
         "label": "EquasionTextArea",
         "files": [
             "sections/keystone/CustomFields/EquasionTextArea"
@@ -478,7 +478,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "HiddenInput",
+        "id": "keystone-CustomFields-HiddenInput",
         "label": "HiddenInput",
         "files": [
             "sections/keystone/CustomFields/HiddenInput"
@@ -488,7 +488,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "Integer",
+        "id": "keystone-CustomFields-Integer",
         "label": "Integer",
         "files": [
             "sections/keystone/CustomFields/Integer"
@@ -498,7 +498,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "LongText",
+        "id": "keystone-CustomFields-LongText",
         "label": "LongText",
         "files": [
             "sections/keystone/CustomFields/LongText"
@@ -508,7 +508,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "Relationship",
+        "id": "keystone-CustomFields-Relationship",
         "label": "Relationship",
         "files": [
             "sections/keystone/CustomFields/Relationship"
@@ -518,7 +518,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "RelationshipMany",
+        "id": "keystone-CustomFields-RelationshipMany",
         "label": "RelationshipMany",
         "files": [
             "sections/keystone/CustomFields/RelationshipMany"
@@ -528,7 +528,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "Text",
+        "id": "keystone-CustomFields-Text",
         "label": "Text",
         "files": [
             "sections/keystone/CustomFields/Text"
@@ -538,7 +538,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "TimeNotUTC",
+        "id": "keystone-CustomFields-TimeNotUTC",
         "label": "TimeNotUTC",
         "files": [
             "sections/keystone/CustomFields/TimeNotUTC"
@@ -548,7 +548,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "TimeZone",
+        "id": "keystone-CustomFields-TimeZone",
         "label": "TimeZone",
         "files": [
             "sections/keystone/CustomFields/TimeZone"
@@ -558,7 +558,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "Title",
+        "id": "keystone-CustomFields-Title",
         "label": "Title",
         "files": [
             "sections/keystone/CustomFields/Title"
@@ -568,7 +568,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "CustomFields"
     },
     {
-        "id": "ItemsList",
+        "id": "keystone-data-display-ItemsList",
         "label": "ItemsList",
         "files": [
             "sections/keystone/data-display/ItemsList"
@@ -578,7 +578,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "data-display"
     },
     {
-        "id": "NotFoundSection",
+        "id": "keystone-feedback-NotFoundSection",
         "label": "NotFoundSection",
         "files": [
             "sections/keystone/feedback/NotFoundSection"
@@ -588,7 +588,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "feedback"
     },
     {
-        "id": "ActionButtons",
+        "id": "keystone-forms-ActionButtons",
         "label": "ActionButtons",
         "files": [
             "sections/keystone/forms/ActionButtons"
@@ -598,7 +598,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "ButtonGroup",
+        "id": "keystone-forms-ButtonGroup",
         "label": "ButtonGroup",
         "files": [
             "sections/keystone/forms/ButtonGroup"
@@ -608,7 +608,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "CreateItemForm",
+        "id": "keystone-forms-CreateItemForm",
         "label": "CreateItemForm",
         "files": [
             "sections/keystone/forms/CreateItemForm"
@@ -618,7 +618,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "DynamicForms",
+        "id": "keystone-forms-DynamicForms",
         "label": "DynamicForms",
         "files": [
             "sections/keystone/forms/DynamicForms"
@@ -628,7 +628,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "EditItemForm",
+        "id": "keystone-forms-EditItemForm",
         "label": "EditItemForm",
         "files": [
             "sections/keystone/forms/EditItemForm"
@@ -638,7 +638,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "SignInContainer",
+        "id": "keystone-forms-SignInContainer",
         "label": "SignInContainer",
         "files": [
             "sections/keystone/forms/SignInContainer"
@@ -648,7 +648,7 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "category": "forms"
     },
     {
-        "id": "PageContainer",
+        "id": "keystone-layout-PageContainer",
         "label": "PageContainer",
         "files": [
             "sections/keystone/layout/PageContainer"

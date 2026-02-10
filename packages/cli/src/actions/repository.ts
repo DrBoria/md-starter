@@ -8,7 +8,9 @@ import { copy, exists, remove } from '../utils/filesystem';
 export async function isDirectoryEmpty(targetDir: string): Promise<boolean> {
     if (!await exists(targetDir)) return true;
     const files = await fs.readdir(targetDir);
-    return files.length === 0;
+    const ignoredFiles = ['.DS_Store', '.git', '.idea', '.vscode', 'Thumbs.db'];
+    const validFiles = files.filter(f => !ignoredFiles.includes(f));
+    return validFiles.length === 0;
 }
 
 /**

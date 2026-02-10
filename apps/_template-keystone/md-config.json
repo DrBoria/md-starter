@@ -12,9 +12,22 @@
     ],
     "allowedFeatures": [
         "eslint",
+        "stylelint",
         "api",
         "utils",
         "components",
-        "sections"
+        "sections",
+        "tsconfig",
+        "types",
+        "styles"
+    ],
+    "requiredFeatures": [
+        "api",
+        "utils",
+        "components",
+        "sections",
+        "tsconfig",
+        "types",
+        "styles"
     ]
 }

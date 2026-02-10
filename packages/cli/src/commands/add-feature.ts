@@ -1,40 +1,21 @@
 import { multiselect, spinner } from '@clack/prompts';
 import * as path from 'path';
 import chalk from 'chalk';
-import { FEATURES, COMPONENTS, ComponentDef } from '../config/features';
-import { getRootTemplatePath } from '../utils/paths';
-import { installFeature } from '../actions/install';
-import { exists, readJson } from '../utils/filesystem';
-import { pruneComponentLibrary } from '../actions/prune'; // from actions/prune, unrelated to sculpt.ts
+import { FEATURES } from '../config/features';
+import { exists } from '../utils/filesystem';
+import { sculptMonorepo } from '../actions/sculpting';
 
 export async function addFeature() {
     console.log(chalk.cyan('MD Starter - Add Feature'));
 
     const projectRoot = process.cwd();
-    // Verify we are in a valid project
     if (!await exists(path.join(projectRoot, 'package.json'))) {
         console.error(chalk.red('No package.json found. Are you in the project root?'));
         return;
     }
 
-    // 1. SCAN INSTALLED FEATURES
-    const pkgPath = path.join(projectRoot, 'package.json');
-    const pkg = await readJson(pkgPath);
-
-    if (!pkg) {
-        console.error(chalk.red('Could not read package.json'));
-        return;
-    }
-
-    const missingFeatures = FEATURES.filter(f => {
-        // Simple check: Check first file in filesToRemove.
-        // We need async check, so we filter later.
-        return true;
-    });
-
-    // Async filter
     const availableFeatures = [];
-    for (const f of missingFeatures) {
+    for (const f of FEATURES) {
         let installed = false;
         for (const file of f.filesToRemove) {
             if (await exists(path.join(projectRoot, file))) {
@@ -52,7 +33,6 @@ export async function addFeature() {
         return;
     }
 
-    // 2. PROMPT USER
     const selectedIds = await multiselect({
         message: 'Select features to add:',
         options: availableFeatures.map(f => ({
@@ -63,44 +43,14 @@ export async function addFeature() {
         required: true
     }) as string[];
 
-    // 3. SPECIAL HANDLING: COMPONENTS
-    let selectedComponents: ComponentDef[] = [];
-    if (selectedIds.includes('components')) {
-        // COMPONENTS is imported from config/features
-        const selection = await multiselect({
-            message: 'Select components to include (others will be pruned from fresh set):',
-            options: COMPONENTS.map(c => ({ value: c.id, label: c.label })),
-            required: true
-        }) as string[];
-
-        selectedComponents = COMPONENTS.filter((c: any) => selection.includes(c.id));
-    }
-
     const s = spinner();
-    s.start('Installing features...');
+    s.start('Sculpting monorepo...');
 
     try {
-        const templateRoot = getRootTemplatePath();
-
-        for (const id of selectedIds) {
-            const feature = FEATURES.find(f => f.id === id);
-            if (!feature) continue;
-
-            s.message(`Installing ${feature.label}...`);
-            await installFeature(projectRoot, templateRoot, feature);
-
-            // Post-install steps
-            if (id === 'components') {
-                s.message('Sculpting components...');
-                const componentsDir = path.join(projectRoot, 'packages/components');
-                // Pruning the SHARED LIBRARY using actions/prune.ts
-                await pruneComponentLibrary(componentsDir, selectedComponents, COMPONENTS);
-            }
-        }
-
-        s.stop('Features installed successfully.');
+        // Sculptor reads all apps' md-config.json and prunes accordingly
+        await sculptMonorepo(projectRoot);
+        s.stop('Done.');
         console.log(chalk.green('\nDon\'t forget to run pnpm install!'));
-
     } catch (e) {
         s.stop('Failed.');
         console.error(e);

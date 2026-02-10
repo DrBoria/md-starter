@@ -11,7 +11,19 @@
     "allowedFeatures": [
         "native",
         "eslint",
+        "stylelint",
         "api",
-        "utils"
+        "utils",
+        "tsconfig",
+        "types",
+        "styles"
+    ],
+    "requiredFeatures": [
+        "native",
+        "api",
+        "utils",
+        "tsconfig",
+        "types",
+        "styles"
     ]
 }
