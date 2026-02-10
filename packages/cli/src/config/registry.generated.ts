@@ -13,78 +13,6 @@ export interface ComponentDef {
 
 export const GENERATED_COMPONENTS: ComponentDef[] = [
     {
-        "id": ".bin",
-        "label": ".bin",
-        "files": [
-            "components/node_modules/.bin"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@apollo",
-        "label": "@apollo",
-        "files": [
-            "components/node_modules/@apollo"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@eslint",
-        "label": "@eslint",
-        "files": [
-            "components/node_modules/@eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@keystone-ui",
-        "label": "@keystone-ui",
-        "files": [
-            "components/node_modules/@keystone-ui"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@md",
-        "label": "@md",
-        "files": [
-            "components/node_modules/@md"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@types",
-        "label": "@types",
-        "files": [
-            "components/node_modules/@types"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@typescript-eslint",
-        "label": "@typescript-eslint",
-        "files": [
-            "components/node_modules/@typescript-eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@uiw",
-        "label": "@uiw",
-        "files": [
-            "components/node_modules/@uiw"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
         "id": "Cloud",
         "label": "Texture: Cloud",
         "files": [
@@ -112,15 +40,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "keystone"
     },
     {
-        "id": "copyfiles",
-        "label": "copyfiles",
-        "files": [
-            "components/node_modules/copyfiles"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
         "id": "data-display",
         "label": "data-display",
         "files": [
@@ -137,69 +56,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "default",
-        "label": "default",
-        "files": [
-            "components/dist/default"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
-        "id": "dist",
-        "label": "dist",
-        "files": [
-            "components/dist/dist"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
-        "id": "eslint",
-        "label": "eslint",
-        "files": [
-            "components/node_modules/eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-import",
-        "label": "eslint-plugin-import",
-        "files": [
-            "components/node_modules/eslint-plugin-import"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-jsx-a11y",
-        "label": "eslint-plugin-jsx-a11y",
-        "files": [
-            "components/node_modules/eslint-plugin-jsx-a11y"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-react",
-        "label": "eslint-plugin-react",
-        "files": [
-            "components/node_modules/eslint-plugin-react"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-react-hooks",
-        "label": "eslint-plugin-react-hooks",
-        "files": [
-            "components/node_modules/eslint-plugin-react-hooks"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "feedback",
@@ -238,15 +94,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "keystone"
     },
     {
-        "id": "keystone",
-        "label": "keystone",
-        "files": [
-            "components/dist/keystone"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
         "id": "layout",
         "label": "layout",
         "files": [
@@ -254,24 +101,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "default"
-    },
-    {
-        "id": "lucide-react",
-        "label": "lucide-react",
-        "files": [
-            "components/node_modules/lucide-react"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "moment",
-        "label": "moment",
-        "files": [
-            "components/node_modules/moment"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "navigation",
@@ -290,24 +119,6 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "next",
-        "label": "next",
-        "files": [
-            "components/node_modules/next"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "next-image-export-optimizer",
-        "label": "next-image-export-optimizer",
-        "files": [
-            "components/node_modules/next-image-export-optimizer"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "overlays",
@@ -335,190 +146,10 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "textures"
-    },
-    {
-        "id": "prettier",
-        "label": "prettier",
-        "files": [
-            "components/node_modules/prettier"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "prism-themes",
-        "label": "prism-themes",
-        "files": [
-            "components/node_modules/prism-themes"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "prismjs",
-        "label": "prismjs",
-        "files": [
-            "components/node_modules/prismjs"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react",
-        "label": "react",
-        "files": [
-            "components/node_modules/react"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-color",
-        "label": "react-color",
-        "files": [
-            "components/node_modules/react-color"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-dom",
-        "label": "react-dom",
-        "files": [
-            "components/node_modules/react-dom"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-icons",
-        "label": "react-icons",
-        "files": [
-            "components/node_modules/react-icons"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "recharts",
-        "label": "recharts",
-        "files": [
-            "components/node_modules/recharts"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "styled-components",
-        "label": "styled-components",
-        "files": [
-            "components/node_modules/styled-components"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "textures",
-        "label": "textures",
-        "files": [
-            "components/dist/textures"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
-        "id": "typescript",
-        "label": "typescript",
-        "files": [
-            "components/node_modules/typescript"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     }
 ];
 
 export const GENERATED_SECTIONS: ComponentDef[] = [
-    {
-        "id": ".bin",
-        "label": ".bin",
-        "files": [
-            "sections/node_modules/.bin"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@apollo",
-        "label": "@apollo",
-        "files": [
-            "sections/node_modules/@apollo"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@eslint",
-        "label": "@eslint",
-        "files": [
-            "sections/node_modules/@eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@keystone-6",
-        "label": "@keystone-6",
-        "files": [
-            "sections/node_modules/@keystone-6"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@keystone-ui",
-        "label": "@keystone-ui",
-        "files": [
-            "sections/node_modules/@keystone-ui"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@md",
-        "label": "@md",
-        "files": [
-            "sections/node_modules/@md"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@types",
-        "label": "@types",
-        "files": [
-            "sections/node_modules/@types"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@typescript-eslint",
-        "label": "@typescript-eslint",
-        "files": [
-            "sections/node_modules/@typescript-eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "@uiw",
-        "label": "@uiw",
-        "files": [
-            "sections/node_modules/@uiw"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
     {
         "id": "common",
         "label": "Keystone: common",
@@ -527,15 +158,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "copyfiles",
-        "label": "copyfiles",
-        "files": [
-            "sections/node_modules/copyfiles"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "CustomFields",
@@ -554,78 +176,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "default",
-        "label": "default",
-        "files": [
-            "sections/dist/default"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
-        "id": "dist",
-        "label": "dist",
-        "files": [
-            "sections/dist/dist"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
-        "id": "eslint",
-        "label": "eslint",
-        "files": [
-            "sections/node_modules/eslint"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-import",
-        "label": "eslint-plugin-import",
-        "files": [
-            "sections/node_modules/eslint-plugin-import"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-jsx-a11y",
-        "label": "eslint-plugin-jsx-a11y",
-        "files": [
-            "sections/node_modules/eslint-plugin-jsx-a11y"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-react",
-        "label": "eslint-plugin-react",
-        "files": [
-            "sections/node_modules/eslint-plugin-react"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "eslint-plugin-react-hooks",
-        "label": "eslint-plugin-react-hooks",
-        "files": [
-            "sections/node_modules/eslint-plugin-react-hooks"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "fast-deep-equal",
-        "label": "fast-deep-equal",
-        "files": [
-            "sections/node_modules/fast-deep-equal"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "feedback",
@@ -655,15 +205,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "keystone"
     },
     {
-        "id": "keystone",
-        "label": "keystone",
-        "files": [
-            "sections/dist/keystone"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
         "id": "layout",
         "label": "Keystone: layout",
         "files": [
@@ -671,15 +212,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "moment",
-        "label": "moment",
-        "files": [
-            "sections/node_modules/moment"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     },
     {
         "id": "navigation",
@@ -691,33 +223,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "default"
     },
     {
-        "id": "next",
-        "label": "next",
-        "files": [
-            "sections/node_modules/next"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "next-image-export-optimizer",
-        "label": "next-image-export-optimizer",
-        "files": [
-            "sections/node_modules/next-image-export-optimizer"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "node_modules",
-        "label": "node_modules",
-        "files": [
-            "sections/dist/node_modules"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
         "id": "overlays",
         "label": "Keystone: overlays",
         "files": [
@@ -725,95 +230,5 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "prettier",
-        "label": "prettier",
-        "files": [
-            "sections/node_modules/prettier"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react",
-        "label": "react",
-        "files": [
-            "sections/node_modules/react"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-color",
-        "label": "react-color",
-        "files": [
-            "sections/node_modules/react-color"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-dom",
-        "label": "react-dom",
-        "files": [
-            "sections/node_modules/react-dom"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-dropzone",
-        "label": "react-dropzone",
-        "files": [
-            "sections/node_modules/react-dropzone"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-icons",
-        "label": "react-icons",
-        "files": [
-            "sections/node_modules/react-icons"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "react-timezone-select",
-        "label": "react-timezone-select",
-        "files": [
-            "sections/node_modules/react-timezone-select"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "recharts",
-        "label": "recharts",
-        "files": [
-            "sections/node_modules/recharts"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "styled-components",
-        "label": "styled-components",
-        "files": [
-            "sections/node_modules/styled-components"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
-    },
-    {
-        "id": "typescript",
-        "label": "typescript",
-        "files": [
-            "sections/node_modules/typescript"
-        ],
-        "dependencies": [],
-        "group": "node_modules"
     }
 ];
