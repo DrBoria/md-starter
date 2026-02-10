@@ -215,10 +215,24 @@ export async function init(projectName?: string) {
 
         console.log(chalk.green('\nSuccess! Monorepo foundation created and sculpted.'));
 
-        // 3. Chain "Add App" (Sculptor)
+        // 3. Chain "Add App" (Sculptor) — loop to add multiple apps
         if (shouldAddApp && appName && selectedTemplateKey) {
-            // We pass the already collected info
             await create(appName, selectedTemplateKey as any);
+
+            let addMore = true;
+            while (addMore) {
+                const shouldAddAnother = await confirm({
+                    message: 'Do you want to add another application?',
+                    initialValue: false
+                });
+
+                if (!shouldAddAnother || typeof shouldAddAnother === 'symbol') {
+                    addMore = false;
+                    break;
+                }
+
+                await create();
+            }
         } else {
             console.log(`\nNext steps:`);
             console.log(`  ${chalk.cyan('cd ' + path.relative(process.cwd(), targetDir))}`);
