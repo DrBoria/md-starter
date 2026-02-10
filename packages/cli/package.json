@@ -1,11 +1,11 @@
 {
     "name": "md-starter",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "CLI generator for MD Starter using the Sculptor approach",
     "main": "dist/index.js",
     "bin": {
         "md-starter": "./bin/cli.js",
-        "create-md-stack": "./bin/cli.js"
+        "create-md-starter": "./bin/cli.js"
     },
     "files": [
         "dist",

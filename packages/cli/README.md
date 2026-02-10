@@ -1,4 +1,4 @@
-# Create MD Stack (`create-md-stack`)
+# MD Starter (`md-starter`)
 
 The Ultimate Monorepo Generator "Sculptor". Start your project with a production-ready foundation.
 
@@ -6,16 +6,16 @@ The Ultimate Monorepo Generator "Sculptor". Start your project with a production
 
 ### Initialize a new project
 ```bash
-npx create-md-stack init <project-name>
+npx create-md-starter init <project-name>
 # or
-npm init md-stack <project-name>
+npm init md-starter <project-name>
 ```
 Follow the interactive prompts to set up your monorepo.
 
 ### Add a new application
 Inside your monorepo:
 ```bash
-npx create-md-stack add
+npx create-md-starter add
 ```
 Select from available templates:
 *   **Landing**: Next.js marketing site.

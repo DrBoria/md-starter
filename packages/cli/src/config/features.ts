@@ -17,10 +17,45 @@ export const FEATURES: FeatureDef[] = [
     // --- CORE PACKAGES ---
     {
         id: 'eslint',
-        label: 'Shared Linting (@md/eslint)',
+        label: 'ESLint Linting (@md/eslint)',
         category: 'core',
         packageJsonKeys: ['@md/eslint', 'eslint-config-prettier', 'eslint'],
         filesToRemove: ['packages/eslint', '.eslintrc.js', 'eslint.config.js']
+    },
+    {
+        id: 'stylelint',
+        label: 'Style Linting (@md/stylelint)',
+        category: 'core',
+        packageJsonKeys: ['@md/stylelint', 'stylelint'],
+        filesToRemove: ['packages/stylelint', '.stylelintrc.js']
+    },
+    {
+        id: 'tsconfig',
+        label: 'TypeScript Config (@md/tsconfig)',
+        category: 'core',
+        packageJsonKeys: ['@md/tsconfig'],
+        filesToRemove: ['packages/tsconfig']
+    },
+    {
+        id: 'types',
+        label: 'Types (@md/types)',
+        category: 'core',
+        packageJsonKeys: ['@md/types'],
+        filesToRemove: ['packages/types']
+    },
+    {
+        id: 'styles',
+        label: 'Styles & Themes (@md/styles)',
+        category: 'core',
+        packageJsonKeys: ['@md/styles'],
+        filesToRemove: ['packages/styles']
+    },
+    {
+        id: 'infrastructure',
+        label: 'Infrastructure (@md/infrastructure)',
+        category: 'infra',
+        packageJsonKeys: ['@md/infrastructure'],
+        filesToRemove: ['packages/infrastructure']
     },
     {
         id: 'api',
@@ -31,7 +66,7 @@ export const FEATURES: FeatureDef[] = [
     },
     {
         id: 'utils',
-        label: 'Shared Utils (@md/utils)',
+        label: 'Utils (@md/utils)',
         category: 'logic',
         packageJsonKeys: ['@md/utils'],
         filesToRemove: ['packages/utils']

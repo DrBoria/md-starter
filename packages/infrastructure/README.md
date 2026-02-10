@@ -4,7 +4,7 @@ A polymorphic infrastructure library for the Ultimate Monorepo. Define your app'
 
 ## 📦 Installation
 
-This package is typically installed automatically by `create-md-stack` in your generated `apps/*/infrastructure` folder.
+This package is typically installed automatically by `create-md-starter` in your generated `apps/*/infrastructure` folder.
 
 ```bash
 pnpm add @md/infrastructure

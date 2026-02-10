@@ -9,18 +9,17 @@ It includes a **Polymorphic Infrastructure** layer, allowing you to deploy the s
 Initialize a new monorepo:
 
 ```bash
-npx create-md-stack init my-stack
-cd my-stack
+npx create-md-starter init my-project
+cd my-project
 pnpm install
 ```
 
 ## 🏗️ Creating Apps
 
-The `md-starter` (aliased as `create-md-stack`) CLI allows you to add full-stack applications to your monorepo.
+The `md-starter` CLI allows you to add full-stack applications to your monorepo.
 
 ```bash
-# General usage
-npx create-md-stack add
+npx create-md-starter add
 ```
 
 ### 📦 Available Templates
@@ -72,7 +71,7 @@ This will automatically:
 ## 🛠️ Architecture
 
 ```plaintext
-my-stack/
+my-project/
 ├── apps/
 │   ├── _template-landing/    <-- Source of Truth (Next.js)
 │   ├── _template-keystone/   <-- Source of Truth (CMS)
