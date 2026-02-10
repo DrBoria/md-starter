@@ -1,12 +1,13 @@
 import { text, confirm, multiselect, select, spinner } from '@clack/prompts';
-import * as fs from 'fs-extra';
-import * as path from 'path'; // Restored
-import chalk from 'chalk'; // Restored
+import * as path from 'path';
+import chalk from 'chalk';
 import { TEMPLATES, TemplateKey } from '../config/templates';
-import { pruneComponents } from '../utils/sculptor';
-import { configureInfrastructure } from '../transformers/infra';
-import { pruneUiKitConfig } from '../transformers/ui-kit';
 import { DEPLOYMENT_REGISTRY, DeployConfig } from '../config/deployments';
+import { cloneTemplate } from '../actions/repository';
+import { setProjectName } from '../actions/project';
+import { pruneComponents, pruneUiKitConfig } from '../actions/sculpt';
+import { configureInfrastructure } from '../actions/setup';
+import { remove } from '../utils/filesystem';
 
 export async function create(initialProjectName?: string, initialTemplateKey?: TemplateKey) {
     console.log(chalk.bold.cyan('MD Starter - Create New App'));
@@ -43,13 +44,27 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
     // 3. COMPONENT SELECTION
     let selectedComponents: string[] = [];
     if (templateConfig.componentPkg) {
-        const availableComponents = [
-            'Button', 'Card', 'Charts', 'HeroSimple', 'HeroVideo', 'FooterStandard', 'Header'
-        ];
+        // TODO: This list should come from a config or scanned, user mentioned hardcoding is bad.
+        // For now, let's assume we can fetch it? Or keep hardcoded for this specific step as allowed options?
+        // User said: "no hardcode, check generics".
+        // But TEMPLATES configuration defines 'componentPkg'. 
+        // We don't have a manifest of components in the CLI unless we import FEATURES/COMPONENTS?
+        // The previous code had a hardcoded list. 
+        // Let's iterate available components from config/features.ts if possible.
+        // Or scan the template? 
+        // Let's import COMPONENTS from feature config.
+        const { COMPONENTS } = require('../config/features');
+
+        // Filter components that belong to the template's package?
+        // componentsPkg is usually '@md/components'.
+
+        const availableComponents = COMPONENTS.map((c: any) => c.label); // Or IDs?
+        // Actually, previous code used simple names: 'Button', 'Card'.
+        // Let's use IDs from COMPONENTS.
 
         const selection = await multiselect({
             message: `Select components from ${templateConfig.componentPkg} to keep:`,
-            options: availableComponents.map(c => ({ value: c, label: c })),
+            options: COMPONENTS.map((c: any) => ({ value: c.id, label: c.label })),
             required: false
         });
 
@@ -68,7 +83,6 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
         }) as boolean;
 
         if (includeInfra) {
-            // 1. Select Strategy
             strategy = await select({
                 message: 'Select Deployment Strategy:',
                 options: Object.keys(DEPLOYMENT_REGISTRY).map(key => ({
@@ -77,7 +91,6 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
                 }))
             }) as string;
 
-            // 2. Select Provider
             const providers = DEPLOYMENT_REGISTRY[strategy];
             provider = await select({
                 message: `Select Provider for ${strategy}:`,
@@ -98,25 +111,15 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
         const templateDir = templateConfig.dir;
         const targetDir = path.resolve(process.cwd(), 'apps', projectName);
 
-        // --- CHECK TEMPLATE ---
-        if (!fs.existsSync(templateDir)) {
-            throw new Error(`Template source not found at: ${templateDir}`);
-        }
-
-        // --- CLONE ---
+        // --- ACTION: CLONE ---
         s.message('Cloning template...');
-        await fs.copy(templateDir, targetDir);
+        await cloneTemplate(templateDir, targetDir);
 
-        // --- RENAME (Metadata) ---
+        // --- ACTION: PROJECT METADATA ---
         s.message('Updating package.json...');
-        const pkgPath = path.join(targetDir, 'package.json');
-        if (await fs.pathExists(pkgPath)) {
-            const pkg = await fs.readJson(pkgPath);
-            pkg.name = projectName;
-            await fs.writeJson(pkgPath, pkg, { spaces: 2 });
-        }
+        await setProjectName(targetDir, projectName);
 
-        // --- SCULPT: COMPONENT PRUNING ---
+        // --- ACTION: SCULPT COMPONENTS ---
         if (templateConfig.componentPkg) {
             s.message(`Pruning unused components from ${templateConfig.componentPkg}...`);
             await pruneComponents(targetDir, templateConfig.componentPkg, selectedComponents);
@@ -125,25 +128,16 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
         if (templateKey === 'styleguide') {
             s.message('Configuring UI Kit...');
             const styleguideConfigPath = path.join(targetDir, 'styleguide.config.js');
-            if (await fs.pathExists(styleguideConfigPath)) {
-                await pruneUiKitConfig(styleguideConfigPath, selectedComponents);
-            }
+            await pruneUiKitConfig(styleguideConfigPath, selectedComponents);
         }
 
-        // --- SCULPT: INFRASTRUCTURE ---
+        // --- ACTION: SETUP INFRA ---
         if (includeInfra && selectedConfig) {
             s.message(`Configuring infrastructure (${strategy} / ${provider})...`);
-            s.message(`Configuring infrastructure (${strategy} / ${provider})...`);
-            // Cast selectedConfig to any because `transformers/infra` expects RegistryConfig which is compatible but TS might complain if imports differ
-            // Actually they are the same structure. 
-            await configureInfrastructure(targetDir, projectName, selectedConfig as any);
+            await configureInfrastructure(targetDir, projectName, selectedConfig);
         } else {
-            // Remove infra folder if not selected OR if template has no infraType
             const infraDir = path.join(targetDir, 'infrastructure');
-            if (await fs.pathExists(infraDir)) {
-                s.message('Removing infrastructure...');
-                await fs.remove(infraDir);
-            }
+            await remove(infraDir);
         }
 
         s.stop(`Successfully created ${chalk.cyan(projectName)}!`);

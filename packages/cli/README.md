@@ -15,13 +15,17 @@ Follow the interactive prompts to set up your monorepo.
 ### Add a new application
 Inside your monorepo:
 ```bash
-npx create-md-starter add
+npx md-starter add
 ```
-Select from available templates:
-*   **Landing**: Next.js marketing site.
-*   **Keystone**: Headless CMS & Backend.
-*   **Native**: Expo / React Native mobile app.
-*   **UI Kit**: Styleguidist library.
+Select what to add:
+1.  **New Application**:
+    *   **Landing**: Next.js marketing site.
+    *   **Keystone**: Headless CMS & Backend.
+    *   **Native**: Expo / React Native mobile app.
+    *   **UI Kit**: Styleguidist library.
+2.  **Shared Package / Feature**:
+    *   Add or update shared libraries like `@md/components`, `@md/utils`, `@md/ui-kit` (Native), etc.
+
 
 ## ✨ Features
 
