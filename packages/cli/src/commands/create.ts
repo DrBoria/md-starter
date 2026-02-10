@@ -1,4 +1,5 @@
 import { text, confirm, multiselect, select, spinner } from '@clack/prompts';
+import { checkCancel, selectComponents } from '../utils/prompts';
 import * as path from 'path';
 import chalk from 'chalk';
 import { TEMPLATES, TemplateKey } from '../config/templates';
@@ -29,13 +30,15 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
     // 2. TEMPLATE SELECTION
     let templateKey = initialTemplateKey;
     if (!templateKey) {
-        templateKey = await select({
+        const templateSelection = await select({
             message: 'Select a template:',
             options: Object.entries(TEMPLATES).map(([key, config]) => ({
                 value: key,
                 label: config.label
-            })) as any
-        }) as TemplateKey;
+            }))
+        });
+        checkCancel(templateSelection);
+        templateKey = templateSelection as TemplateKey;
     }
 
     if (!templateKey) return;
@@ -44,31 +47,8 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
     // 3. COMPONENT SELECTION
     let selectedComponents: string[] = [];
     if (templateConfig.componentPkg) {
-        // TODO: This list should come from a config or scanned, user mentioned hardcoding is bad.
-        // For now, let's assume we can fetch it? Or keep hardcoded for this specific step as allowed options?
-        // User said: "no hardcode, check generics".
-        // But TEMPLATES configuration defines 'componentPkg'. 
-        // We don't have a manifest of components in the CLI unless we import FEATURES/COMPONENTS?
-        // The previous code had a hardcoded list. 
-        // Let's iterate available components from config/features.ts if possible.
-        // Or scan the template? 
-        // Let's import COMPONENTS from feature config.
         const { COMPONENTS } = require('../config/features');
-
-        // Filter components that belong to the template's package?
-        // componentsPkg is usually '@md/components'.
-
-        const availableComponents = COMPONENTS.map((c: any) => c.label); // Or IDs?
-        // Actually, previous code used simple names: 'Button', 'Card'.
-        // Let's use IDs from COMPONENTS.
-
-        const selection = await multiselect({
-            message: `Select components from ${templateConfig.componentPkg} to keep:`,
-            options: COMPONENTS.map((c: any) => ({ value: c.id, label: c.label })),
-            required: false
-        });
-
-        if (Array.isArray(selection)) selectedComponents = selection as string[];
+        selectedComponents = await selectComponents(COMPONENTS);
     }
 
     // 4. INFRASTRUCTURE 
@@ -78,27 +58,33 @@ export async function create(initialProjectName?: string, initialTemplateKey?: T
     let provider = '';
 
     if (templateConfig.infraType) {
-        includeInfra = await confirm({
+        const includeInfraPrompt = await confirm({
             message: 'Include infrastructure configuration?'
-        }) as boolean;
+        });
+        checkCancel(includeInfraPrompt);
+        includeInfra = includeInfraPrompt as boolean;
 
         if (includeInfra) {
-            strategy = await select({
+            const strategySelection = await select({
                 message: 'Select Deployment Strategy:',
                 options: Object.keys(DEPLOYMENT_REGISTRY).map(key => ({
                     value: key,
                     label: key.charAt(0).toUpperCase() + key.slice(1)
                 }))
-            }) as string;
+            });
+            checkCancel(strategySelection);
+            strategy = strategySelection as string;
 
             const providers = DEPLOYMENT_REGISTRY[strategy];
-            provider = await select({
+            const providerSelection = await select({
                 message: `Select Provider for ${strategy}:`,
                 options: Object.entries(providers).map(([key, cfg]) => ({
                     value: key,
                     label: cfg.label
                 }))
-            }) as string;
+            });
+            checkCancel(providerSelection);
+            provider = providerSelection as string;
 
             selectedConfig = providers[provider];
         }

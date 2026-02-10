@@ -49,6 +49,7 @@ export interface ComponentDef {
     files: string[];
     dependencies: string[];
     group: string; // 'default', 'keystone', 'textures'
+    category?: string; // e.g. 'forms', 'data-display'
 }
 
 export const GENERATED_COMPONENTS: ComponentDef[] = ${JSON.stringify(components, null, 4)};
@@ -64,65 +65,115 @@ export const GENERATED_SECTIONS: ComponentDef[] = ${JSON.stringify(sections, nul
     }
 }
 
+async function isComponent(dirPath) {
+    try {
+        const items = await readdir(dirPath);
+        return items.includes('index.ts') || items.includes('index.tsx') || items.includes('package.json');
+    } catch {
+        return false;
+    }
+}
+
 async function scanDirectory(baseDir, type) {
     const results = [];
 
     try {
-        // Check if dir exists
-        try {
-            await stat(baseDir);
-        } catch (e) {
-            return [];
-        }
+        try { await stat(baseDir); } catch { return []; }
 
         const groups = await readdir(baseDir);
 
         for (const group of groups) {
             if (EXCLUDES.includes(group)) continue;
             const groupDir = path.join(baseDir, group);
-            
             if (!(await stat(groupDir)).isDirectory()) continue;
 
             const items = await readdir(groupDir);
             for (const item of items) {
                 if (EXCLUDES.includes(item)) continue;
-
                 const itemPath = path.join(groupDir, item);
-                if (!(await stat(itemPath)).isDirectory()) {
-                    continue;
+                if (!(await stat(itemPath)).isDirectory()) continue;
+
+                // Check if 'item' is a Category or a Component
+                const children = await readdir(itemPath);
+                let isCategory = false;
+                
+                // Heuristic: If it has sub-directories that are components, it's a Category.
+                for (const child of children) {
+                   if (EXCLUDES.includes(child)) continue;
+                   const childPath = path.join(itemPath, child);
+                   try {
+                       if ((await stat(childPath)).isDirectory() && await isComponent(childPath)) {
+                           isCategory = true;
+                           break;
+                       }
+                   } catch {}
                 }
 
-                // ID is the folder name
-                const id = item;
+                if (isCategory) {
+                    // Treat 'item' as Category (e.g. forms)
+                    const category = item;
+                    const subItems = children;
 
-                // Check overrides
-                const override = OVERRIDES[id] || {};
+                    for (const sub of subItems) {
+                        if (EXCLUDES.includes(sub)) continue;
+                        const subPath = path.join(itemPath, sub);
+                        if (!(await stat(subPath)).isDirectory()) continue;
 
-                // Label
-                let label = override.label || id;
+                        // Verify it's a component (has index.ts/tsx)
+                        if (!await isComponent(subPath)) continue;
 
-                // Prefix Keystone components
-                if (group === 'keystone' && !label.startsWith('Keystone:')) {
-                    label = `Keystone: ${label}`;
+                        const id = sub;
+                        const override = OVERRIDES[id] || {}; // ID might be 'Button'
+                        // Label: Use override or ID. 
+                        // Note: If ID is 'Button', label is 'Button'. 
+                        // User wants clean tree, so just 'Button' is fine.
+                        // Prefixes (Keystone:) were for flat list. We don't need them if we have structure.
+                        
+                        const def = {
+                            id: id,
+                            label: override.label || id,
+                            files: [`${type}/${group}/${category}/${id}`], // Deep path
+                            dependencies: override.dependencies || [],
+                            group: group,
+                            category: category
+                        };
+                        results.push(def);
+                    }
+                } else {
+                    // Treat 'item' as Component (e.g. valid component directly in group, or 'Cloud')
+                    // Verify it is a component
+                    if (await isComponent(itemPath)) {
+                        const id = item;
+                        const override = OVERRIDES[id] || {};
+                        
+                        // Prefixes for flat list were: Keystone: ..., Texture: ...
+                        // Now we store 'group', so UI can decide to prefix or group.
+                        // We'll keep clean label.
+                        
+                        const def = {
+                            id: id,
+                            label: override.label || id,
+                            files: [`${type}/${group}/${id}`],
+                            dependencies: override.dependencies || [],
+                            group: group,
+                            category: undefined
+                        };
+                        results.push(def);
+                    }
                 }
-                if (group === 'textures' && !label.startsWith('Texture:')) {
-                    label = `Texture: ${label}`;
-                }
-
-                const def = {
-                    id: id,
-                    label: label,
-                    files: [`${type}/${group}/${id}`],
-                    dependencies: override.dependencies || [],
-                    group: group
-                };
-
-                results.push(def);
             }
         }
 
-        // Sort by ID
-        return results.sort((a, b) => a.id.localeCompare(b.id));
+        return results.sort((a, b) => {
+            // Sort by group, then category, then id?
+            if (a.group !== b.group) return a.group.localeCompare(b.group);
+            if (a.category !== b.category) {
+                if (!a.category) return -1;
+                if (!b.category) return 1;
+                return a.category.localeCompare(b.category);
+            }
+            return a.id.localeCompare(b.id);
+        });
     } catch (e) {
         console.error(`Error scanning ${baseDir}:`, e);
         return [];

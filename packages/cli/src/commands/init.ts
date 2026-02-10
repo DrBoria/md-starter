@@ -1,4 +1,5 @@
 import { text, confirm, multiselect, select, spinner } from '@clack/prompts';
+import { checkCancel, selectComponents } from '../utils/prompts';
 import * as path from 'path';
 import chalk from 'chalk';
 import { FEATURES, FeatureDef, ComponentDef } from '../config/features';
@@ -14,13 +15,15 @@ export async function init() {
     console.log(chalk.bold.cyan('MD Starter - Initialize Monorepo'));
 
     // 1. PROJECT NAME
-    const projectName = await text({
+    const projectNamePrompt = await text({
         message: 'What is the name of your monorepo?',
         placeholder: 'my-monorepo',
         validate: (value) => {
             if (!value) return 'Name is required';
         }
-    }) as string;
+    });
+    checkCancel(projectNamePrompt);
+    const projectName = projectNamePrompt as string;
 
     if (!projectName) return;
 
@@ -34,7 +37,8 @@ export async function init() {
     }
 
     // 3. FEATURE SELECTION
-    const selectedFeatureIds = await multiselect({
+    // 3. FEATURE SELECTION
+    const featureSelection = await multiselect({
         message: 'Select features to include:',
         options: FEATURES.map(f => ({
             value: f.id,
@@ -42,64 +46,48 @@ export async function init() {
             hint: f.category
         })),
         required: false // Allow minimal
-    }) as string[];
+    });
+    checkCancel(featureSelection);
+    const selectedFeatureIds = featureSelection as string[];
 
     // 4. SHARED COMPONENT SELECTION (if 'components' feature selected)
-    // We need to know which components are available.
-    // Assuming FEATURES includes component definition or we can import it.
-    // config/features.ts has both FEATURES and COMPONENTS (if exported)
-    // Let's import COMPONENTS. 
-
-    // We need to dynamic require to get COMPONENTS if not exported directly from FeatureDef 
-    // (Wait, FEATURES is exported, ComponentDef is a type. COMPONENTS is likely exported too).
-    // Let's assume COMPONENTS is exported.
-
     let selectedComponents: ComponentDef[] = [];
-    // We only ask for component selection if the 'components' feature is selected (id='components' usually?)
-    // In FEATURES list, 'components' might be there.
-    // Let's check if 'components' (UI library) is in selectedFeatureIds.
-    // Code snippet 1202 shows 'ui-components' category but valid IDs like 'shadcn', 'tailwind'.
-    // If user selected the component library feature (let's assume ID is 'components' or similar from previous `init.ts`).
-    // Actually, looking at `init.ts` previous code logic (viewed earlier):
-    // It checked `features.find(f => f.id === 'components')`.
-
-    const componentFeature = FEATURES.find(f => f.id === 'components'); // 'components' is likely the ID for shared lib
-    let componentSelection: string[] = [];
 
     if (selectedFeatureIds.includes('components')) {
-        // Import COMPONENTS
         const { COMPONENTS } = require('../config/features');
         const comps = COMPONENTS as ComponentDef[];
 
-        componentSelection = await multiselect({
-            message: 'Select shared components to include in @md/components:',
-            options: comps.map(c => ({ value: c.id, label: c.label })),
-            required: true
-        }) as string[];
-
-        selectedComponents = comps.filter(c => componentSelection.includes(c.id));
+        const selectedIds = await selectComponents(comps);
+        selectedComponents = comps.filter(c => selectedIds.includes(c.id));
     }
 
     // 5. APP CREATION PROMPT
-    const shouldAddApp = await confirm({
+    // 5. APP CREATION PROMPT
+    const shouldAddAppPrompt = await confirm({
         message: 'Do you want to add your first application now?',
         initialValue: true
     });
+    checkCancel(shouldAddAppPrompt);
+    const shouldAddApp = shouldAddAppPrompt as boolean;
 
     let firstAppName = '';
     let firstAppTemplate = '';
 
     if (shouldAddApp) {
-        firstAppName = await text({
+        const namePrompt = await text({
             message: 'Application Name:',
             placeholder: 'web-app',
             validate: (value) => !value ? 'Name required' : undefined
-        }) as string;
+        });
+        checkCancel(namePrompt);
+        firstAppName = namePrompt as string;
 
-        firstAppTemplate = await select({
+        const templatePrompt = await select({
             message: 'Select Template:',
             options: Object.entries(TEMPLATES).map(([key, cfg]) => ({ value: key, label: cfg.label }))
-        }) as string;
+        });
+        checkCancel(templatePrompt);
+        firstAppTemplate = templatePrompt as string;
     }
 
     // --- EXECUTION ---

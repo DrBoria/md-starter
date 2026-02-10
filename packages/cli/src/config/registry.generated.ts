@@ -9,12 +9,416 @@ export interface ComponentDef {
     files: string[];
     dependencies: string[];
     group: string; // 'default', 'keystone', 'textures'
+    category?: string; // e.g. 'forms', 'data-display'
 }
 
 export const GENERATED_COMPONENTS: ComponentDef[] = [
     {
+        "id": "Icons",
+        "label": "Icons",
+        "files": [
+            "components/default/common/Icons"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "common"
+    },
+    {
+        "id": "Logo",
+        "label": "Logo",
+        "files": [
+            "components/default/common/Logo"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "common"
+    },
+    {
+        "id": "Avatar",
+        "label": "Avatar",
+        "files": [
+            "components/default/data-display/Avatar"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Badge",
+        "label": "Badge",
+        "files": [
+            "components/default/data-display/Badge"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Card",
+        "label": "Card",
+        "files": [
+            "components/default/data-display/Card"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Carousel",
+        "label": "Carousel",
+        "files": [
+            "components/default/data-display/Carousel"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "CodePreview",
+        "label": "CodePreview",
+        "files": [
+            "components/default/data-display/CodePreview"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Images",
+        "label": "Images",
+        "files": [
+            "components/default/data-display/Images"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "ProgressBar",
+        "label": "ProgressBar",
+        "files": [
+            "components/default/data-display/ProgressBar"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "StatusLabel",
+        "label": "StatusLabel",
+        "files": [
+            "components/default/data-display/StatusLabel"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Table",
+        "label": "Table",
+        "files": [
+            "components/default/data-display/Table"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Tooltip",
+        "label": "Tooltip",
+        "files": [
+            "components/default/data-display/Tooltip"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Typography",
+        "label": "Typography",
+        "files": [
+            "components/default/data-display/Typography"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "data-display"
+    },
+    {
+        "id": "Loading",
+        "label": "Loading Indicators",
+        "files": [
+            "components/default/feedback/Loading"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "feedback"
+    },
+    {
+        "id": "Toasts",
+        "label": "Toasts",
+        "files": [
+            "components/default/feedback/Toasts"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "feedback"
+    },
+    {
+        "id": "Validation",
+        "label": "Validation",
+        "files": [
+            "components/default/feedback/Validation"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "feedback"
+    },
+    {
+        "id": "Button",
+        "label": "Button",
+        "files": [
+            "components/default/forms/Button"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "Calendar",
+        "label": "Calendar",
+        "files": [
+            "components/default/forms/Calendar"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "Form",
+        "label": "Form",
+        "files": [
+            "components/default/forms/Form"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "HtmlEditor",
+        "label": "Rich Text Editor",
+        "files": [
+            "components/default/forms/HtmlEditor"
+        ],
+        "dependencies": [
+            "@tiptap/react",
+            "@tiptap/starter-kit"
+        ],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "Switch",
+        "label": "Switch",
+        "files": [
+            "components/default/forms/Switch"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "Toggle",
+        "label": "Toggle",
+        "files": [
+            "components/default/forms/Toggle"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "TokenInputField",
+        "label": "TokenInputField",
+        "files": [
+            "components/default/forms/TokenInputField"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "forms"
+    },
+    {
+        "id": "ConditionalWrapper",
+        "label": "ConditionalWrapper",
+        "files": [
+            "components/default/layout/ConditionalWrapper"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "layout"
+    },
+    {
+        "id": "Containers",
+        "label": "Containers",
+        "files": [
+            "components/default/layout/Containers"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "layout"
+    },
+    {
+        "id": "Separator",
+        "label": "Separator",
+        "files": [
+            "components/default/layout/Separator"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "layout"
+    },
+    {
+        "id": "Breadcrumbs",
+        "label": "Breadcrumbs",
+        "files": [
+            "components/default/navigation/Breadcrumbs"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "navigation"
+    },
+    {
+        "id": "Header",
+        "label": "Header",
+        "files": [
+            "components/default/navigation/Header"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "navigation"
+    },
+    {
+        "id": "Link",
+        "label": "Link",
+        "files": [
+            "components/default/navigation/Link"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "navigation"
+    },
+    {
+        "id": "Pagination",
+        "label": "Pagination",
+        "files": [
+            "components/default/navigation/Pagination"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "navigation"
+    },
+    {
+        "id": "Tabs",
+        "label": "Tabs",
+        "files": [
+            "components/default/navigation/Tabs"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "navigation"
+    },
+    {
+        "id": "Modals",
+        "label": "Modals",
+        "files": [
+            "components/default/overlays/Modals"
+        ],
+        "dependencies": [],
+        "group": "default",
+        "category": "overlays"
+    },
+    {
+        "id": "Icons",
+        "label": "Icons",
+        "files": [
+            "components/keystone/common/Icons"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "common"
+    },
+    {
+        "id": "Label",
+        "label": "Label",
+        "files": [
+            "components/keystone/data-display/Label"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "data-display"
+    },
+    {
+        "id": "Logger",
+        "label": "Logger",
+        "files": [
+            "components/keystone/feedback/Logger"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "feedback"
+    },
+    {
+        "id": "DateTimePicker",
+        "label": "DateTimePicker",
+        "files": [
+            "components/keystone/forms/DateTimePicker"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "Form",
+        "label": "Form",
+        "files": [
+            "components/keystone/forms/Form"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "Toggle",
+        "label": "Toggle",
+        "files": [
+            "components/keystone/forms/Toggle"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "NavItem",
+        "label": "NavItem",
+        "files": [
+            "components/keystone/navigation/NavItem"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "navigation"
+    },
+    {
+        "id": "Modals",
+        "label": "Modals",
+        "files": [
+            "components/keystone/overlays/Modals"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "overlays"
+    },
+    {
         "id": "Cloud",
-        "label": "Texture: Cloud",
+        "label": "Cloud",
         "files": [
             "components/textures/Cloud"
         ],
@@ -22,125 +426,8 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "textures"
     },
     {
-        "id": "common",
-        "label": "common",
-        "files": [
-            "components/default/common"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "common",
-        "label": "Keystone: common",
-        "files": [
-            "components/keystone/common"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "data-display",
-        "label": "data-display",
-        "files": [
-            "components/default/data-display"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "data-display",
-        "label": "Keystone: data-display",
-        "files": [
-            "components/keystone/data-display"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "feedback",
-        "label": "feedback",
-        "files": [
-            "components/default/feedback"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "feedback",
-        "label": "Keystone: feedback",
-        "files": [
-            "components/keystone/feedback"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "forms",
-        "label": "forms",
-        "files": [
-            "components/default/forms"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "forms",
-        "label": "Keystone: forms",
-        "files": [
-            "components/keystone/forms"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "layout",
-        "label": "layout",
-        "files": [
-            "components/default/layout"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "navigation",
-        "label": "navigation",
-        "files": [
-            "components/default/navigation"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "navigation",
-        "label": "Keystone: navigation",
-        "files": [
-            "components/keystone/navigation"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
-        "id": "overlays",
-        "label": "overlays",
-        "files": [
-            "components/default/overlays"
-        ],
-        "dependencies": [],
-        "group": "default"
-    },
-    {
-        "id": "overlays",
-        "label": "Keystone: overlays",
-        "files": [
-            "components/keystone/overlays"
-        ],
-        "dependencies": [],
-        "group": "keystone"
-    },
-    {
         "id": "Paper",
-        "label": "Texture: Paper",
+        "label": "Paper",
         "files": [
             "components/textures/Paper"
         ],
@@ -151,84 +438,223 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
 
 export const GENERATED_SECTIONS: ComponentDef[] = [
     {
-        "id": "common",
-        "label": "Keystone: common",
+        "id": "NotFoundSection",
+        "label": "NotFoundSection",
         "files": [
-            "sections/keystone/common"
+            "sections/default/feedback/NotFoundSection"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "default",
+        "category": "feedback"
     },
     {
-        "id": "CustomFields",
-        "label": "Keystone: CustomFields",
+        "id": "HamburgerMenu",
+        "label": "HamburgerMenu",
         "files": [
-            "sections/keystone/CustomFields"
+            "sections/default/navigation/HamburgerMenu"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "default",
+        "category": "navigation"
     },
     {
-        "id": "data-display",
-        "label": "Keystone: data-display",
+        "id": "DynamicStatusLabel",
+        "label": "DynamicStatusLabel",
         "files": [
-            "sections/keystone/data-display"
+            "sections/keystone/CustomFields/DynamicStatusLabel"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "feedback",
-        "label": "feedback",
+        "id": "EquasionTextArea",
+        "label": "EquasionTextArea",
         "files": [
-            "sections/default/feedback"
+            "sections/keystone/CustomFields/EquasionTextArea"
         ],
         "dependencies": [],
-        "group": "default"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "feedback",
-        "label": "Keystone: feedback",
+        "id": "HiddenInput",
+        "label": "HiddenInput",
         "files": [
-            "sections/keystone/feedback"
+            "sections/keystone/CustomFields/HiddenInput"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "forms",
-        "label": "Keystone: forms",
+        "id": "Integer",
+        "label": "Integer",
         "files": [
-            "sections/keystone/forms"
+            "sections/keystone/CustomFields/Integer"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "layout",
-        "label": "Keystone: layout",
+        "id": "LongText",
+        "label": "LongText",
         "files": [
-            "sections/keystone/layout"
+            "sections/keystone/CustomFields/LongText"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "navigation",
-        "label": "navigation",
+        "id": "Relationship",
+        "label": "Relationship",
         "files": [
-            "sections/default/navigation"
+            "sections/keystone/CustomFields/Relationship"
         ],
         "dependencies": [],
-        "group": "default"
+        "group": "keystone",
+        "category": "CustomFields"
     },
     {
-        "id": "overlays",
-        "label": "Keystone: overlays",
+        "id": "RelationshipMany",
+        "label": "RelationshipMany",
         "files": [
-            "sections/keystone/overlays"
+            "sections/keystone/CustomFields/RelationshipMany"
         ],
         "dependencies": [],
-        "group": "keystone"
+        "group": "keystone",
+        "category": "CustomFields"
+    },
+    {
+        "id": "Text",
+        "label": "Text",
+        "files": [
+            "sections/keystone/CustomFields/Text"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "CustomFields"
+    },
+    {
+        "id": "TimeNotUTC",
+        "label": "TimeNotUTC",
+        "files": [
+            "sections/keystone/CustomFields/TimeNotUTC"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "CustomFields"
+    },
+    {
+        "id": "TimeZone",
+        "label": "TimeZone",
+        "files": [
+            "sections/keystone/CustomFields/TimeZone"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "CustomFields"
+    },
+    {
+        "id": "Title",
+        "label": "Title",
+        "files": [
+            "sections/keystone/CustomFields/Title"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "CustomFields"
+    },
+    {
+        "id": "ItemsList",
+        "label": "ItemsList",
+        "files": [
+            "sections/keystone/data-display/ItemsList"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "data-display"
+    },
+    {
+        "id": "NotFoundSection",
+        "label": "NotFoundSection",
+        "files": [
+            "sections/keystone/feedback/NotFoundSection"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "feedback"
+    },
+    {
+        "id": "ActionButtons",
+        "label": "ActionButtons",
+        "files": [
+            "sections/keystone/forms/ActionButtons"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "ButtonGroup",
+        "label": "ButtonGroup",
+        "files": [
+            "sections/keystone/forms/ButtonGroup"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "CreateItemForm",
+        "label": "CreateItemForm",
+        "files": [
+            "sections/keystone/forms/CreateItemForm"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "DynamicForms",
+        "label": "DynamicForms",
+        "files": [
+            "sections/keystone/forms/DynamicForms"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "EditItemForm",
+        "label": "EditItemForm",
+        "files": [
+            "sections/keystone/forms/EditItemForm"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "SignInContainer",
+        "label": "SignInContainer",
+        "files": [
+            "sections/keystone/forms/SignInContainer"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "forms"
+    },
+    {
+        "id": "PageContainer",
+        "label": "PageContainer",
+        "files": [
+            "sections/keystone/layout/PageContainer"
+        ],
+        "dependencies": [],
+        "group": "keystone",
+        "category": "layout"
     }
 ];
