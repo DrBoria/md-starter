@@ -231,6 +231,7 @@ module.exports = {
         "@md/components": path.resolve(__dirname, "../../packages/components"),
         "@md/styles": path.resolve(__dirname, "../../packages/styles"),
         "@md/utils": path.resolve(__dirname, "../../packages/utils"),
+        "@md/api": path.resolve(__dirname, "../../packages/api"),
       },
       modules: [
         path.resolve(__dirname, "../../node_modules"),
@@ -248,7 +249,16 @@ module.exports = {
       rules: [
         {
           test: /\.(js|ts)x?$/,
-          exclude: /node_modules/,
+          include: [
+            path.resolve(__dirname),
+            path.resolve(__dirname, "../../packages/components"),
+            path.resolve(__dirname, "../../packages/sections"),
+            path.resolve(__dirname, "../../packages/native"),
+            path.resolve(__dirname, "../../packages/utils"),
+            path.resolve(__dirname, "../../packages/styles"),
+            path.resolve(__dirname, "../../packages/api"),
+            path.resolve(__dirname, "../../packages/types"),
+          ],
           use: {
             loader: "babel-loader",
             options: {

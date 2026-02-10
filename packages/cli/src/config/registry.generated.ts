@@ -112,6 +112,15 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "group": "keystone"
     },
     {
+        "id": "copyfiles",
+        "label": "copyfiles",
+        "files": [
+            "components/node_modules/copyfiles"
+        ],
+        "dependencies": [],
+        "group": "node_modules"
+    },
+    {
         "id": "data-display",
         "label": "data-display",
         "files": [
@@ -134,6 +143,15 @@ export const GENERATED_COMPONENTS: ComponentDef[] = [
         "label": "default",
         "files": [
             "components/dist/default"
+        ],
+        "dependencies": [],
+        "group": "dist"
+    },
+    {
+        "id": "dist",
+        "label": "dist",
+        "files": [
+            "components/dist/dist"
         ],
         "dependencies": [],
         "group": "dist"
@@ -502,15 +520,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
-        "id": "apps",
-        "label": "apps",
-        "files": [
-            "sections/dist/apps"
-        ],
-        "dependencies": [],
-        "group": "dist"
-    },
-    {
         "id": "common",
         "label": "Keystone: common",
         "files": [
@@ -518,6 +527,15 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
+    },
+    {
+        "id": "copyfiles",
+        "label": "copyfiles",
+        "files": [
+            "sections/node_modules/copyfiles"
+        ],
+        "dependencies": [],
+        "group": "node_modules"
     },
     {
         "id": "CustomFields",
@@ -536,6 +554,24 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
+    },
+    {
+        "id": "default",
+        "label": "default",
+        "files": [
+            "sections/dist/default"
+        ],
+        "dependencies": [],
+        "group": "dist"
+    },
+    {
+        "id": "dist",
+        "label": "dist",
+        "files": [
+            "sections/dist/dist"
+        ],
+        "dependencies": [],
+        "group": "dist"
     },
     {
         "id": "eslint",
@@ -619,6 +655,15 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "keystone"
     },
     {
+        "id": "keystone",
+        "label": "keystone",
+        "files": [
+            "sections/dist/keystone"
+        ],
+        "dependencies": [],
+        "group": "dist"
+    },
+    {
         "id": "layout",
         "label": "Keystone: layout",
         "files": [
@@ -664,6 +709,15 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         "group": "node_modules"
     },
     {
+        "id": "node_modules",
+        "label": "node_modules",
+        "files": [
+            "sections/dist/node_modules"
+        ],
+        "dependencies": [],
+        "group": "dist"
+    },
+    {
         "id": "overlays",
         "label": "Keystone: overlays",
         "files": [
@@ -671,15 +725,6 @@ export const GENERATED_SECTIONS: ComponentDef[] = [
         ],
         "dependencies": [],
         "group": "keystone"
-    },
-    {
-        "id": "packages",
-        "label": "packages",
-        "files": [
-            "sections/dist/packages"
-        ],
-        "dependencies": [],
-        "group": "dist"
     },
     {
         "id": "prettier",

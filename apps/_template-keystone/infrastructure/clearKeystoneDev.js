@@ -7,30 +7,33 @@ const keystoneDir = path.join(__dirname, '../.keystone');
 const schemaPath = path.join(keystoneDir, 'schema.graphql');
 const typesPath = path.join(keystoneDir, 'types.ts');
 const adminPath = path.join(keystoneDir, 'admin');
-
-if (!fsSync.existsSync(keystoneDir)) { // Using fsSync for initial check
-  fsSync.mkdirSync(keystoneDir); // Using fsSync for initial creation
+if (!fsSync.existsSync(keystoneDir)) {
+  fsSync.mkdirSync(keystoneDir, { recursive: true });
 }
 
-const clearKeystoneDev = async () => { // Made async
-    if (fsSync.existsSync(schemaPath)) { // Using fsSync for initial check
-        await fs.writeFile(schemaPath, ''); // Using fs/promises
+const adminPagesPath = path.join(adminPath, 'pages');
+if (!fsSync.existsSync(adminPagesPath)) {
+  fsSync.mkdirSync(adminPagesPath, { recursive: true });
+}
+
+const clearKeystoneDev = async () => {
+    if (fsSync.existsSync(schemaPath)) {
+        await fs.writeFile(schemaPath, '');
     }
 
-    if (fsSync.existsSync(typesPath)) { // Using fsSync for initial check
-         await fs.writeFile(typesPath, ''); // Using fs/promises
+    if (fsSync.existsSync(typesPath)) {
+         await fs.writeFile(typesPath, '');
     }
 
-    if (fsSync.existsSync(adminPath)) { // Using fsSync for initial check
-        const files = await fs.readdir(adminPath, { withFileTypes: true }); // Using fs/promises
+    if (fsSync.existsSync(adminPath)) {
+        const files = await fs.readdir(adminPath, { withFileTypes: true });
         for (const file of files) {
             const filePath = path.join(adminPath, file.name);
              
             if (file.isDirectory()) {
-                  
-                await fs.rm(filePath, { recursive: true, force: true }); // Using fs/promises
+                await fs.rm(filePath, { recursive: true, force: true });
             } else {
-                await fs.unlink(filePath); // Using fs/promises
+                await fs.unlink(filePath);
             }
         }
     }
